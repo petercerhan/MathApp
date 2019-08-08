@@ -12,4 +12,15 @@ import XCTest
 
 class HomeSceneTests: XCTestCase {
     
+    func test_UIComponents_connected() {
+        let vc = HomeViewController()
+        
+        vc.loadViewIfNeeded()
+        
+        XCTAssertNotNil(vc.questionLabel)
+        XCTAssertNotNil(vc.answer1Button)
+        XCTAssertNotNil(vc.answer2Button)
+        XCTAssertNotNil(vc.answer3Button)
+    }
+    
 }

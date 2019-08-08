@@ -10,6 +10,13 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
+    //MARK: - UI Components
+    
+    @IBOutlet private(set) var questionLabel: UILabel!
+    @IBOutlet private(set) var answer1Button: UIButton!
+    @IBOutlet private(set) var answer2Button: UIButton!
+    @IBOutlet private(set) var answer3Button: UIButton!
+    
     //MARK: - Initialization
     
     init() {
