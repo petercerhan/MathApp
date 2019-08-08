@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import iosMath
 
 class HomeViewController: UIViewController {
     
@@ -25,6 +26,18 @@ class HomeViewController: UIViewController {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("cannot initialize with init(coder:)")
+    }
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let label = MTMathUILabel(frame: CGRect(x: 1, y: 1, width: 1, height: 1))
+        label.latex = "x = \\frac{-b \\pm \\sqrt{b^2-4ac}}{2a}"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(label)
+        label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
 
 }

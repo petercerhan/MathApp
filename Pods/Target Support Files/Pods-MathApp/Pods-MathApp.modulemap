@@ -1,0 +1,6 @@
+framework module Pods_MathApp {
+  umbrella header "Pods-MathApp-umbrella.h"
+
+  export *
+  module * { export * }
+}

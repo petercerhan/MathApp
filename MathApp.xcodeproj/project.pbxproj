@@ -16,6 +16,8 @@
 		6E557C3F22FBA3F400270F07 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E557C3D22FBA3F400270F07 /* HomeViewController.swift */; };
 		6E557C4022FBA3F400270F07 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E557C3E22FBA3F400270F07 /* HomeViewController.xib */; };
 		6E557C4622FBA79000270F07 /* HomeSceneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E557C4522FBA79000270F07 /* HomeSceneTests.swift */; };
+		BCB14F255178DFA21D82194D /* Pods_MathAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE993BEBDF1A3B96DC4714AA /* Pods_MathAppTests.framework */; };
+		C99DA79539000A5618FB589C /* Pods_MathApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1CE43285555BFADE6DC3070 /* Pods_MathApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +31,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5D09B98DEB05D4438C6DF54D /* Pods-MathAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MathAppTests.debug.xcconfig"; path = "Target Support Files/Pods-MathAppTests/Pods-MathAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6E557C1322FB9DCB00270F07 /* MathApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MathApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E557C1622FB9DCB00270F07 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6E557C1D22FB9DCC00270F07 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -42,6 +45,11 @@
 		6E557C3D22FBA3F400270F07 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		6E557C3E22FBA3F400270F07 /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
 		6E557C4522FBA79000270F07 /* HomeSceneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSceneTests.swift; sourceTree = "<group>"; };
+		9BCF43D90809ABFC7320F5BB /* Pods-MathApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MathApp.release.xcconfig"; path = "Target Support Files/Pods-MathApp/Pods-MathApp.release.xcconfig"; sourceTree = "<group>"; };
+		A1CE43285555BFADE6DC3070 /* Pods_MathApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MathApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ACC8CBE54D6FE6BB00980A70 /* Pods-MathApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MathApp.debug.xcconfig"; path = "Target Support Files/Pods-MathApp/Pods-MathApp.debug.xcconfig"; sourceTree = "<group>"; };
+		D78E7824CF595603FD9FDFEE /* Pods-MathAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MathAppTests.release.xcconfig"; path = "Target Support Files/Pods-MathAppTests/Pods-MathAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		FE993BEBDF1A3B96DC4714AA /* Pods_MathAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MathAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C99DA79539000A5618FB589C /* Pods_MathApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,18 +65,33 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCB14F255178DFA21D82194D /* Pods_MathAppTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6888B47EC6158547BCAFFFF5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				ACC8CBE54D6FE6BB00980A70 /* Pods-MathApp.debug.xcconfig */,
+				9BCF43D90809ABFC7320F5BB /* Pods-MathApp.release.xcconfig */,
+				5D09B98DEB05D4438C6DF54D /* Pods-MathAppTests.debug.xcconfig */,
+				D78E7824CF595603FD9FDFEE /* Pods-MathAppTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		6E557C0A22FB9DCB00270F07 = {
 			isa = PBXGroup;
 			children = (
 				6E557C1522FB9DCB00270F07 /* MathApp */,
 				6E557C2A22FB9DCD00270F07 /* MathAppTests */,
 				6E557C1422FB9DCB00270F07 /* Products */,
+				6888B47EC6158547BCAFFFF5 /* Pods */,
+				F76851D247041C4492AC41F1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -113,6 +137,15 @@
 			path = HomeScene;
 			sourceTree = "<group>";
 		};
+		F76851D247041C4492AC41F1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A1CE43285555BFADE6DC3070 /* Pods_MathApp.framework */,
+				FE993BEBDF1A3B96DC4714AA /* Pods_MathAppTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -120,9 +153,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6E557C3022FB9DCD00270F07 /* Build configuration list for PBXNativeTarget "MathApp" */;
 			buildPhases = (
+				D4B6E2299CAA75DA6B448EDE /* [CP] Check Pods Manifest.lock */,
 				6E557C0F22FB9DCB00270F07 /* Sources */,
 				6E557C1022FB9DCB00270F07 /* Frameworks */,
 				6E557C1122FB9DCB00270F07 /* Resources */,
+				981B16F1D27F58E78CE0CDF5 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -137,9 +172,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6E557C3322FB9DCD00270F07 /* Build configuration list for PBXNativeTarget "MathAppTests" */;
 			buildPhases = (
+				9A9B0CDB83B81244DDBD5248 /* [CP] Check Pods Manifest.lock */,
 				6E557C2322FB9DCD00270F07 /* Sources */,
 				6E557C2422FB9DCD00270F07 /* Frameworks */,
 				6E557C2522FB9DCD00270F07 /* Resources */,
+				34EF72461EB73F434E19F5C5 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -208,6 +245,87 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		34EF72461EB73F434E19F5C5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MathAppTests/Pods-MathAppTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MathAppTests/Pods-MathAppTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MathAppTests/Pods-MathAppTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		981B16F1D27F58E78CE0CDF5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MathApp/Pods-MathApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MathApp/Pods-MathApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MathApp/Pods-MathApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9A9B0CDB83B81244DDBD5248 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MathAppTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D4B6E2299CAA75DA6B448EDE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MathApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6E557C0F22FB9DCB00270F07 /* Sources */ = {
@@ -370,6 +488,7 @@
 		};
 		6E557C3122FB9DCD00270F07 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ACC8CBE54D6FE6BB00980A70 /* Pods-MathApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -388,6 +507,7 @@
 		};
 		6E557C3222FB9DCD00270F07 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9BCF43D90809ABFC7320F5BB /* Pods-MathApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -406,6 +526,7 @@
 		};
 		6E557C3422FB9DCD00270F07 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5D09B98DEB05D4438C6DF54D /* Pods-MathAppTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -427,6 +548,7 @@
 		};
 		6E557C3522FB9DCD00270F07 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D78E7824CF595603FD9FDFEE /* Pods-MathAppTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
