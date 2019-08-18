@@ -18,6 +18,8 @@ class CompositionRoot {
         return UIWindow(frame: UIScreen.main.bounds)
     }
     
+    //Home sequence
+    
     func composeHomeScene() -> UIViewController {
         return HomeViewController()
     }
