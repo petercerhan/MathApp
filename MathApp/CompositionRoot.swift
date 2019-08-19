@@ -11,14 +11,18 @@ import UIKit
 class CompositionRoot {
     
     func composeRootCoordinator() -> Coordinator {
-        return RootCoordinator(compositionRoot: self)
+        return RootCoordinator(compositionRoot: self, containerVC: ContainerViewController())
     }
     
     func composeWindow() -> UIWindow {
         return UIWindow(frame: UIScreen.main.bounds)
     }
     
-    //Home sequence
+    //MARK: - Exercise sequence
+    
+    func composeExerciseCoordinator() -> ExerciseCoordinator {
+        return ExerciseCoordinator(compositionRoot: self, containerVC: ContainerViewController())
+    }
     
     func composeHomeScene() -> UIViewController {
         return HomeViewController()

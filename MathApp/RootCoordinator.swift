@@ -13,20 +13,29 @@ class RootCoordinator: Coordinator {
     //MARK: - Dependencies
     
     private let compositionRoot: CompositionRoot
+    private let containerVC: ContainerViewController
+    
+    //MARK: - State
+    
+    private(set) var childCoordinator: Coordinator?
     
     //MARK: - Initialization
     
-    init(compositionRoot: CompositionRoot) {
+    init(compositionRoot: CompositionRoot, containerVC: ContainerViewController) {
         self.compositionRoot = compositionRoot
+        self.containerVC = containerVC
     }
     
     //MARK: - Coordinator Interface
 
     var containerViewController: UIViewController {
-        return compositionRoot.composeHomeScene()
+        return containerVC
     }
     
     func start() {
-        
+        let coordinator = compositionRoot.composeExerciseCoordinator()
+        containerVC.show(viewController: coordinator.containerViewController, animation: .none)
+        coordinator.start()
+        childCoordinator = coordinator
     }
 }

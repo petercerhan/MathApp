@@ -22,6 +22,7 @@
 		6EBE4E8F230A13D80047A880 /* ExerciseCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBE4E8E230A13D80047A880 /* ExerciseCoordinatorTests.swift */; };
 		6EBE4E91230A14A70047A880 /* FakeContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBE4E90230A14A70047A880 /* FakeContainerViewController.swift */; };
 		6EBE4E94230A16170047A880 /* ExerciseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBE4E93230A16170047A880 /* ExerciseCoordinator.swift */; };
+		6EBE4E97230A1B7C0047A880 /* RootCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBE4E96230A1B7C0047A880 /* RootCoordinatorTests.swift */; };
 		BCB14F255178DFA21D82194D /* Pods_MathAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE993BEBDF1A3B96DC4714AA /* Pods_MathAppTests.framework */; };
 		C99DA79539000A5618FB589C /* Pods_MathApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1CE43285555BFADE6DC3070 /* Pods_MathApp.framework */; };
 /* End PBXBuildFile section */
@@ -57,6 +58,7 @@
 		6EBE4E8E230A13D80047A880 /* ExerciseCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCoordinatorTests.swift; sourceTree = "<group>"; };
 		6EBE4E90230A14A70047A880 /* FakeContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeContainerViewController.swift; sourceTree = "<group>"; };
 		6EBE4E93230A16170047A880 /* ExerciseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCoordinator.swift; sourceTree = "<group>"; };
+		6EBE4E96230A1B7C0047A880 /* RootCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCoordinatorTests.swift; sourceTree = "<group>"; };
 		9BCF43D90809ABFC7320F5BB /* Pods-MathApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MathApp.release.xcconfig"; path = "Target Support Files/Pods-MathApp/Pods-MathApp.release.xcconfig"; sourceTree = "<group>"; };
 		A1CE43285555BFADE6DC3070 /* Pods_MathApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MathApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACC8CBE54D6FE6BB00980A70 /* Pods-MathApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MathApp.debug.xcconfig"; path = "Target Support Files/Pods-MathApp/Pods-MathApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 		6E557C2A22FB9DCD00270F07 /* MathAppTests */ = {
 			isa = PBXGroup;
 			children = (
+				6EBE4E95230A1B620047A880 /* RootCoordinator */,
 				6EBE4E8D230A13AD0047A880 /* ExerciseSequence */,
 				6E557C4522FBA79000270F07 /* HomeSceneTests.swift */,
 				6E1E6B3022FFA8A000AFB7A0 /* Containers */,
@@ -184,6 +187,14 @@
 				6EBE4E93230A16170047A880 /* ExerciseCoordinator.swift */,
 			);
 			path = ExerciseSequence;
+			sourceTree = "<group>";
+		};
+		6EBE4E95230A1B620047A880 /* RootCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				6EBE4E96230A1B7C0047A880 /* RootCoordinatorTests.swift */,
+			);
+			path = RootCoordinator;
 			sourceTree = "<group>";
 		};
 		F76851D247041C4492AC41F1 /* Frameworks */ = {
@@ -399,6 +410,7 @@
 				6EBE4E8F230A13D80047A880 /* ExerciseCoordinatorTests.swift in Sources */,
 				6E1E6B3222FFA8BD00AFB7A0 /* ContainerViewControllerTests.swift in Sources */,
 				6E557C4622FBA79000270F07 /* HomeSceneTests.swift in Sources */,
+				6EBE4E97230A1B7C0047A880 /* RootCoordinatorTests.swift in Sources */,
 				6EBE4E91230A14A70047A880 /* FakeContainerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
