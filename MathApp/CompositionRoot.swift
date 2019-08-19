@@ -24,6 +24,10 @@ class CompositionRoot {
         return ExerciseCoordinator(compositionRoot: self, containerVC: ContainerViewController())
     }
     
+    func composeExerciseScene() -> UIViewController {
+        return ExerciseViewController()
+    }
+    
     func composeHomeScene() -> UIViewController {
         return HomeViewController()
     }

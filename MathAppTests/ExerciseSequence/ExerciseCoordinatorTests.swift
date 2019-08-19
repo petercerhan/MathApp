@@ -12,13 +12,13 @@ import XCTest
 
 class ExerciseCoordinatorTests: XCTestCase {
     
-    func test_start_showsHomeScene() {
-        let fakeContainerVC = FakeContainerViewController()
-        let coordinator = ExerciseCoordinator(compositionRoot: CompositionRoot(), containerVC: fakeContainerVC)
+    func test_start_shouldShowExerciseScene() {
+        let mockContainerVC = FakeContainerViewController()
+        let coordinator = ExerciseCoordinator(compositionRoot: CompositionRoot(), containerVC: mockContainerVC)
         
         coordinator.start()
         
-        fakeContainerVC.verifyDidShow(viewControllerType: HomeViewController.self)
+        mockContainerVC.verifyDidShow(viewControllerType: ExerciseViewController.self)
     }
     
 }

@@ -30,7 +30,7 @@ class ExerciseCoordinator: Coordinator {
     }
     
     func start() {
-        let vc = compositionRoot.composeHomeScene()
+        let vc = compositionRoot.composeExerciseScene()
         containerVC.show(viewController: vc, animation: .none)
     }
 
