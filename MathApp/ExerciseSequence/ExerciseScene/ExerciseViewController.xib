@@ -12,9 +12,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ExerciseViewController" customModule="MathApp" customModuleProvider="target">
             <connections>
-                <outlet property="choice1Button" destination="gNc-Sk-NzP" id="hFP-jf-eEo"/>
-                <outlet property="choice2Button" destination="7Ik-g2-G0h" id="HGq-7q-LnO"/>
-                <outlet property="choice3Button" destination="Fwp-a4-VrV" id="cCv-yw-V8B"/>
+                <outlet property="choice1Button" destination="1Vv-Al-hDk" id="qsP-8w-1jM"/>
+                <outlet property="choice1Label" destination="Brh-4h-VRh" id="WIA-jy-bw4"/>
+                <outlet property="choice2Button" destination="ccN-ZU-cbe" id="fIw-1U-32p"/>
+                <outlet property="choice2Label" destination="z7N-Ir-Ceu" id="3fY-ns-q60"/>
+                <outlet property="choice3Button" destination="80s-Yk-2zt" id="4x2-fk-WsZ"/>
+                <outlet property="choice3Label" destination="bz7-39-x30" id="Lte-Q5-t8P"/>
                 <outlet property="questionLabel" destination="cTR-iQ-8gP" id="j6n-eD-sSO"/>
                 <outlet property="questionLatexLabel" destination="KZH-gX-XGC" id="Lde-ey-JWO"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -25,30 +28,6 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gNc-Sk-NzP">
-                    <rect key="frame" x="24" y="469" width="327" height="50"/>
-                    <color key="backgroundColor" red="0.67450980390000004" green="0.87450980389999999" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="50" id="161-VQ-AGd"/>
-                    </constraints>
-                    <state key="normal" title="Choice 1"/>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fwp-a4-VrV">
-                    <rect key="frame" x="24" y="593" width="327" height="50"/>
-                    <color key="backgroundColor" red="0.67450980390000004" green="0.87450980389999999" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="50" id="QlE-om-nPF"/>
-                    </constraints>
-                    <state key="normal" title="Choice 3"/>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ik-g2-G0h">
-                    <rect key="frame" x="24" y="531" width="327" height="50"/>
-                    <color key="backgroundColor" red="0.67450980390000004" green="0.87450980389999999" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="50" id="j2L-YF-E1d"/>
-                    </constraints>
-                    <state key="normal" title="Choice 2"/>
-                </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cTR-iQ-8gP">
                     <rect key="frame" x="153" y="55" width="69" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -65,24 +44,125 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="80s-Yk-2zt" customClass="AnimatedButton" customModule="MathApp" customModuleProvider="target">
+                    <rect key="frame" x="24" y="593" width="327" height="50"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bz7-39-x30" customClass="MTMathUILabel">
+                            <rect key="frame" x="156.5" y="19.5" width="14" height="11"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="latex" value="x"/>
+                                <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
+                                    <real key="value" value="25"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="bz7-39-x30" firstAttribute="centerY" secondItem="80s-Yk-2zt" secondAttribute="centerY" id="pvV-tN-83U"/>
+                        <constraint firstItem="bz7-39-x30" firstAttribute="centerX" secondItem="80s-Yk-2zt" secondAttribute="centerX" id="vfb-bI-e2c"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                            <color key="value" red="0.16670436834418823" green="0.72732793112498184" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                            <real key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="8"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="hasShadow" value="NO"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ccN-ZU-cbe" customClass="AnimatedButton" customModule="MathApp" customModuleProvider="target">
+                    <rect key="frame" x="24" y="531" width="327" height="50"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z7N-Ir-Ceu" customClass="MTMathUILabel">
+                            <rect key="frame" x="156.5" y="19.5" width="14" height="11"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="latex" value="x"/>
+                                <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
+                                    <real key="value" value="25"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="z7N-Ir-Ceu" firstAttribute="centerX" secondItem="ccN-ZU-cbe" secondAttribute="centerX" id="Gsm-4U-Dvm"/>
+                        <constraint firstItem="z7N-Ir-Ceu" firstAttribute="centerY" secondItem="ccN-ZU-cbe" secondAttribute="centerY" id="XD2-WG-qyY"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                            <color key="value" red="0.16670436829999999" green="0.72732793110000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                            <real key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="8"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="hasShadow" value="NO"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Vv-Al-hDk" customClass="AnimatedButton" customModule="MathApp" customModuleProvider="target">
+                    <rect key="frame" x="24" y="469" width="327" height="50"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Brh-4h-VRh" customClass="MTMathUILabel">
+                            <rect key="frame" x="156.5" y="19.5" width="14" height="11"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="latex" value="x"/>
+                                <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
+                                    <real key="value" value="25"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="1xA-Jo-zVw"/>
+                        <constraint firstItem="Brh-4h-VRh" firstAttribute="centerY" secondItem="1Vv-Al-hDk" secondAttribute="centerY" id="CdR-ly-OrT"/>
+                        <constraint firstItem="Brh-4h-VRh" firstAttribute="centerX" secondItem="1Vv-Al-hDk" secondAttribute="centerX" id="Zhw-1y-2ii"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                            <color key="value" red="0.16670436829999999" green="0.72732793110000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                            <real key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="8"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="hasShadow" value="NO"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Fwp-a4-VrV" secondAttribute="bottom" constant="24" id="K33-qc-QH2"/>
-                <constraint firstItem="Fwp-a4-VrV" firstAttribute="top" secondItem="7Ik-g2-G0h" secondAttribute="bottom" constant="12" id="Llk-wq-hay"/>
-                <constraint firstItem="Fwp-a4-VrV" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="TGt-qE-TRx"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="gNc-Sk-NzP" secondAttribute="trailing" constant="24" id="Wlh-KA-G05"/>
+                <constraint firstItem="80s-Yk-2zt" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="1nq-Nu-Cbw"/>
+                <constraint firstItem="ccN-ZU-cbe" firstAttribute="height" secondItem="1Vv-Al-hDk" secondAttribute="height" id="EWo-Sa-ouw"/>
+                <constraint firstItem="80s-Yk-2zt" firstAttribute="height" secondItem="1Vv-Al-hDk" secondAttribute="height" id="KCo-So-0mS"/>
+                <constraint firstItem="1Vv-Al-hDk" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="LQi-jz-hXJ"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="80s-Yk-2zt" secondAttribute="trailing" constant="24" id="M42-B5-xAk"/>
+                <constraint firstItem="ccN-ZU-cbe" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="RCp-9U-8g4"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="80s-Yk-2zt" secondAttribute="bottom" constant="24" id="Ulf-3r-oxw"/>
+                <constraint firstItem="ccN-ZU-cbe" firstAttribute="top" secondItem="1Vv-Al-hDk" secondAttribute="bottom" constant="12" id="WJE-EG-07e"/>
                 <constraint firstItem="KZH-gX-XGC" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="X5p-xX-MHW"/>
-                <constraint firstItem="7Ik-g2-G0h" firstAttribute="top" secondItem="gNc-Sk-NzP" secondAttribute="bottom" constant="12" id="Z4B-jM-NEm"/>
-                <constraint firstItem="7Ik-g2-G0h" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="fb6-PQ-W4S"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ccN-ZU-cbe" secondAttribute="trailing" constant="24" id="XUb-3b-LF9"/>
+                <constraint firstItem="ccN-ZU-cbe" firstAttribute="top" secondItem="1Vv-Al-hDk" secondAttribute="bottom" constant="12" id="aQ8-HN-3MV"/>
+                <constraint firstItem="80s-Yk-2zt" firstAttribute="top" secondItem="ccN-ZU-cbe" secondAttribute="bottom" constant="12" id="abi-KG-TXw"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="1Vv-Al-hDk" secondAttribute="trailing" constant="24" id="anU-O9-PAh"/>
                 <constraint firstItem="cTR-iQ-8gP" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="hpd-Co-Si4"/>
-                <constraint firstItem="gNc-Sk-NzP" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="lOx-cX-cm0"/>
                 <constraint firstItem="cTR-iQ-8gP" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="35" id="oAt-wR-M3h"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="7Ik-g2-G0h" secondAttribute="trailing" constant="24" id="sCB-Dc-NZ6"/>
                 <constraint firstItem="KZH-gX-XGC" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="vQ6-5N-bN7"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Fwp-a4-VrV" secondAttribute="trailing" constant="24" id="ywf-p7-geM"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="40.799999999999997" y="46.326836581709152"/>
         </view>
     </objects>
 </document>

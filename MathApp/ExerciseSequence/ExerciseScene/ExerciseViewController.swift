@@ -21,9 +21,13 @@ class ExerciseViewController: UIViewController {
     
     @IBOutlet private(set) var questionLabel: UILabel!
     @IBOutlet private(set) var questionLatexLabel: MTMathUILabel!
+    
     @IBOutlet private(set) var choice1Button: UIButton!
+    @IBOutlet private(set) var choice1Label: MTMathUILabel!
     @IBOutlet private(set) var choice2Button: UIButton!
+    @IBOutlet private(set) var choice2Label: MTMathUILabel!
     @IBOutlet private(set) var choice3Button: UIButton!
+    @IBOutlet private(set) var choice3Label: MTMathUILabel!
     
     //MARK: - Rx
     
@@ -44,7 +48,14 @@ class ExerciseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureUI()
         bindUI()
+    }
+    
+    private func configureUI() {
+        choice1Label.contentInsets = UIEdgeInsets(top: 2.0, left: 0.0, bottom: 2.0, right: 0.0)
+        choice2Label.contentInsets = UIEdgeInsets(top: 2.0, left: 0.0, bottom: 2.0, right: 0.0)
+        choice3Label.contentInsets = UIEdgeInsets(top: 2.0, left: 0.0, bottom: 2.0, right: 0.0)
     }
     
     private func bindUI() {
@@ -74,21 +85,27 @@ class ExerciseViewController: UIViewController {
     private func bindChoice1() {
         viewModel.choice1
             .observeOn(MainScheduler.instance)
-            .bind(to: choice1Button.rx.title(for: .normal))
+            .subscribe(onNext: { [unowned self] text in
+                self.choice1Label.latex = text
+            })
             .disposed(by: disposeBag)
     }
     
     private func bindChoice2() {
         viewModel.choice2
             .observeOn(MainScheduler.instance)
-            .bind(to: choice2Button.rx.title(for: .normal))
+            .subscribe(onNext: { [unowned self] text in
+                self.choice2Label.latex = text
+            })
             .disposed(by: disposeBag)
     }
     
     private func bindChoice3() {
         viewModel.choice3
             .observeOn(MainScheduler.instance)
-            .bind(to: choice3Button.rx.title(for: .normal))
+            .subscribe(onNext: { [unowned self] text in
+                self.choice3Label.latex = text
+            })
             .disposed(by: disposeBag)
     }
 

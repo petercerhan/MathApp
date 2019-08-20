@@ -21,6 +21,7 @@ class ExerciseSceneTests: XCTestCase {
         XCTAssertNotNil(vc.choice1Button)
         XCTAssertNotNil(vc.choice2Button)
         XCTAssertNotNil(vc.choice3Button)
+        XCTAssertNotNil(vc.choice3Label)
     }
     
     func test_exercise1_noAnswerMixing_shouldDisplayExercise1() {
@@ -29,10 +30,10 @@ class ExerciseSceneTests: XCTestCase {
         vc.loadViewIfNeeded()
         
         XCTAssertEqual(vc.questionLabel.text, "Solve for x")
-        XCTAssertEqual(vc.questionLatexLabel.latex, "\sqrt{x}")
-        XCTAssertEqual(vc.choice1Button.titleLabel?.text, "x")
-        XCTAssertEqual(vc.choice2Button.titleLabel?.text, "y")
-        XCTAssertEqual(vc.choice3Button.titleLabel?.text, "z")
+        XCTAssertEqual(vc.questionLatexLabel.latex, "\\sqrt{x^2}")
+        XCTAssertEqual(vc.choice1Label.latex, "x")
+        XCTAssertEqual(vc.choice2Label.latex, "y")
+        XCTAssertEqual(vc.choice3Label.latex, "z")
     }
     
     //MARK: - SUT Composition
