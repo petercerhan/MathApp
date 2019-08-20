@@ -15,6 +15,8 @@
                 <outlet property="choice1Button" destination="gNc-Sk-NzP" id="hFP-jf-eEo"/>
                 <outlet property="choice2Button" destination="7Ik-g2-G0h" id="HGq-7q-LnO"/>
                 <outlet property="choice3Button" destination="Fwp-a4-VrV" id="cCv-yw-V8B"/>
+                <outlet property="questionLabel" destination="cTR-iQ-8gP" id="j6n-eD-sSO"/>
+                <outlet property="questionLatexLabel" destination="Lb4-r4-pzX" id="ZcO-KF-KSd"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -47,6 +49,18 @@
                     </constraints>
                     <state key="normal" title="Choice 2"/>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cTR-iQ-8gP">
+                    <rect key="frame" x="153" y="55" width="69" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lb4-r4-pzX">
+                    <rect key="frame" x="153" y="323" width="69" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -56,9 +70,13 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="gNc-Sk-NzP" secondAttribute="trailing" constant="24" id="Wlh-KA-G05"/>
                 <constraint firstItem="7Ik-g2-G0h" firstAttribute="top" secondItem="gNc-Sk-NzP" secondAttribute="bottom" constant="12" id="Z4B-jM-NEm"/>
                 <constraint firstItem="7Ik-g2-G0h" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="fb6-PQ-W4S"/>
+                <constraint firstItem="cTR-iQ-8gP" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="hpd-Co-Si4"/>
                 <constraint firstItem="gNc-Sk-NzP" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="lOx-cX-cm0"/>
+                <constraint firstItem="Lb4-r4-pzX" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="mvJ-RH-Cty"/>
+                <constraint firstItem="cTR-iQ-8gP" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="35" id="oAt-wR-M3h"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="7Ik-g2-G0h" secondAttribute="trailing" constant="24" id="sCB-Dc-NZ6"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Fwp-a4-VrV" secondAttribute="trailing" constant="24" id="ywf-p7-geM"/>
+                <constraint firstItem="Lb4-r4-pzX" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="zW5-76-xNq"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
         </view>

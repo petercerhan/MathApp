@@ -21,6 +21,14 @@ class ExerciseViewModel {
         self.exercise = exercise
     }
     
+    private(set) lazy var question: Observable<String> = {
+        Observable.just(exercise.questionText ?? "")
+    }()
+    
+    private(set) lazy var questionLatex: Observable<String> = {
+        Observable.just(exercise.questionLatex)
+    }()
+    
     private(set) lazy var choice1: Observable<String> = {
         Observable.just(exercise.answer)
     }()

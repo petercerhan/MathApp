@@ -12,7 +12,7 @@ extension Exercise {
     static var exercise1: Exercise {
         return Exercise(id: 1,
                         questionText: "Solve for x",
-                        questionLaTeX: "sqrt{x}",
+                        questionLatex: "sqrt{x}",
                         answer: "x",
                         falseAnswer1: "y",
                         falseAnswer2: "z",

@@ -18,6 +18,8 @@ class ExerciseViewController: UIViewController {
     
     //MARK: - UI Components
     
+    @IBOutlet private(set) var questionLabel: UILabel!
+    @IBOutlet private(set) var questionLatexLabel: UILabel!
     @IBOutlet private(set) var choice1Button: UIButton!
     @IBOutlet private(set) var choice2Button: UIButton!
     @IBOutlet private(set) var choice3Button: UIButton!
@@ -45,16 +47,42 @@ class ExerciseViewController: UIViewController {
     }
     
     private func bindUI() {
+        bindQuestionText()
+        bindQuestionLatex()
+        bindChoice1()
+        bindChoice2()
+        bindChoice3()
+    }
+    
+    private func bindQuestionText() {
+        viewModel.question
+            .observeOn(MainScheduler.instance)
+            .bind(to: questionLabel.rx.text)
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindQuestionLatex() {
+        viewModel.questionLatex
+            .observeOn(MainScheduler.instance)
+            .bind(to: questionLatexLabel.rx.text)
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindChoice1() {
         viewModel.choice1
             .observeOn(MainScheduler.instance)
             .bind(to: choice1Button.rx.title(for: .normal))
             .disposed(by: disposeBag)
-        
+    }
+    
+    private func bindChoice2() {
         viewModel.choice2
             .observeOn(MainScheduler.instance)
             .bind(to: choice2Button.rx.title(for: .normal))
             .disposed(by: disposeBag)
-        
+    }
+    
+    private func bindChoice3() {
         viewModel.choice3
             .observeOn(MainScheduler.instance)
             .bind(to: choice3Button.rx.title(for: .normal))
