@@ -25,7 +25,8 @@ class CompositionRoot {
     }
     
     func composeExerciseScene() -> UIViewController {
-        return ExerciseViewController()
+        let vm = ExerciseViewModel(exercise: Exercise.exercise1)
+        return ExerciseViewController(viewModel: vm)
     }
     
     func composeHomeScene() -> UIViewController {
