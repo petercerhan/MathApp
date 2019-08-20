@@ -29,7 +29,7 @@ class ExerciseSceneTests: XCTestCase {
         vc.loadViewIfNeeded()
         
         XCTAssertEqual(vc.questionLabel.text, "Solve for x")
-        XCTAssertEqual(vc.questionLatexLabel.text, "sqrt{x}")
+        XCTAssertEqual(vc.questionLatexLabel.latex, "\sqrt{x}")
         XCTAssertEqual(vc.choice1Button.titleLabel?.text, "x")
         XCTAssertEqual(vc.choice2Button.titleLabel?.text, "y")
         XCTAssertEqual(vc.choice3Button.titleLabel?.text, "z")

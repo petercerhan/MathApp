@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import iosMath
 import RxSwift
 import RxCocoa
 
@@ -19,7 +20,7 @@ class ExerciseViewController: UIViewController {
     //MARK: - UI Components
     
     @IBOutlet private(set) var questionLabel: UILabel!
-    @IBOutlet private(set) var questionLatexLabel: UILabel!
+    @IBOutlet private(set) var questionLatexLabel: MTMathUILabel!
     @IBOutlet private(set) var choice1Button: UIButton!
     @IBOutlet private(set) var choice2Button: UIButton!
     @IBOutlet private(set) var choice3Button: UIButton!
@@ -64,7 +65,9 @@ class ExerciseViewController: UIViewController {
     private func bindQuestionLatex() {
         viewModel.questionLatex
             .observeOn(MainScheduler.instance)
-            .bind(to: questionLatexLabel.rx.text)
+            .subscribe(onNext: { [unowned self] text in
+                self.questionLatexLabel.latex = text
+            })
             .disposed(by: disposeBag)
     }
     
