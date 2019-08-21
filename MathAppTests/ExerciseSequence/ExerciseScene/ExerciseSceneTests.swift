@@ -22,6 +22,20 @@ class ExerciseSceneTests: XCTestCase {
         XCTAssertNotNil(vc.choice2Button)
         XCTAssertNotNil(vc.choice3Button)
         XCTAssertNotNil(vc.choice3Label)
+        
+        XCTAssertNotNil(vc.choice1GradeImageView)
+        XCTAssertNotNil(vc.choice2GradeImageView)
+        XCTAssertNotNil(vc.choice3GradeImageView)
+    }
+    
+    func test_initialState_gradeImagesHidden() {
+        let vc = composeSUT()
+        
+        vc.loadViewIfNeeded()
+        
+        XCTAssertEqual(vc.choice1GradeImageView.isHidden, true)
+        XCTAssertEqual(vc.choice2GradeImageView.isHidden, true)
+        XCTAssertEqual(vc.choice3GradeImageView.isHidden, true)
     }
     
     func test_exercise1_noAnswerMixing_shouldDisplayExercise1() {
@@ -36,10 +50,22 @@ class ExerciseSceneTests: XCTestCase {
         XCTAssertEqual(vc.choice3Label.latex, "z")
     }
     
+    func test_firstChoicePressed_firstChoiceCorrect_showsFirstCorrectImage() {
+        let vc = composeSUT()
+        
+        vc.loadViewIfNeeded()
+        vc.choice1Button.sendActions(for: .touchUpInside)
+        
+        XCTAssertEqual(vc.choice1GradeImageView.isHidden, false)
+        XCTAssertEqual(vc.choice1GradeImageView.isCorrect, true)
+    }
+    
+    
+    
     //MARK: - SUT Composition
     
     func composeSUT() -> ExerciseViewController {
-        let vm = ExerciseViewModel(exercise: Exercise.exercise1)
+        let vm = ExerciseViewModelImpl(exercise: Exercise.exercise1)
         return ExerciseViewController(viewModel: vm)
     }
 

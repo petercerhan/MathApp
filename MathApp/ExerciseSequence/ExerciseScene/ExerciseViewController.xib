@@ -13,10 +13,13 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ExerciseViewController" customModule="MathApp" customModuleProvider="target">
             <connections>
                 <outlet property="choice1Button" destination="1Vv-Al-hDk" id="qsP-8w-1jM"/>
+                <outlet property="choice1GradeImageView" destination="G9I-iO-sF9" id="vaH-n7-Dh7"/>
                 <outlet property="choice1Label" destination="Brh-4h-VRh" id="WIA-jy-bw4"/>
                 <outlet property="choice2Button" destination="ccN-ZU-cbe" id="fIw-1U-32p"/>
+                <outlet property="choice2GradeImageView" destination="Ye8-eJ-Iao" id="hxi-nW-dge"/>
                 <outlet property="choice2Label" destination="z7N-Ir-Ceu" id="3fY-ns-q60"/>
                 <outlet property="choice3Button" destination="80s-Yk-2zt" id="4x2-fk-WsZ"/>
+                <outlet property="choice3GradeImageView" destination="FTe-nw-pNM" id="Jn4-Wy-faB"/>
                 <outlet property="choice3Label" destination="bz7-39-x30" id="Lte-Q5-t8P"/>
                 <outlet property="questionLabel" destination="cTR-iQ-8gP" id="j6n-eD-sSO"/>
                 <outlet property="questionLatexLabel" destination="KZH-gX-XGC" id="Lde-ey-JWO"/>
@@ -57,9 +60,18 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </view>
+                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="FTe-nw-pNM" customClass="CheckmarkImageView" customModule="MathApp" customModuleProvider="target">
+                            <rect key="frame" x="290" y="12.5" width="25" height="25"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="25" id="0p9-Gf-Y32"/>
+                                <constraint firstAttribute="height" constant="25" id="dxn-1x-Vq0"/>
+                            </constraints>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="FTe-nw-pNM" secondAttribute="trailing" constant="12" id="UoP-iQ-dcW"/>
+                        <constraint firstItem="FTe-nw-pNM" firstAttribute="centerY" secondItem="80s-Yk-2zt" secondAttribute="centerY" id="czV-q0-mJ9"/>
                         <constraint firstItem="bz7-39-x30" firstAttribute="centerY" secondItem="80s-Yk-2zt" secondAttribute="centerY" id="pvV-tN-83U"/>
                         <constraint firstItem="bz7-39-x30" firstAttribute="centerX" secondItem="80s-Yk-2zt" secondAttribute="centerX" id="vfb-bI-e2c"/>
                     </constraints>
@@ -89,11 +101,20 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </view>
+                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="Ye8-eJ-Iao" customClass="CheckmarkImageView" customModule="MathApp" customModuleProvider="target">
+                            <rect key="frame" x="290" y="12.5" width="25" height="25"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="25" id="Zag-Yh-ayx"/>
+                                <constraint firstAttribute="height" constant="25" id="nPl-PA-qSF"/>
+                            </constraints>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="z7N-Ir-Ceu" firstAttribute="centerX" secondItem="ccN-ZU-cbe" secondAttribute="centerX" id="Gsm-4U-Dvm"/>
+                        <constraint firstItem="Ye8-eJ-Iao" firstAttribute="centerY" secondItem="ccN-ZU-cbe" secondAttribute="centerY" id="I6x-ud-Xx9"/>
                         <constraint firstItem="z7N-Ir-Ceu" firstAttribute="centerY" secondItem="ccN-ZU-cbe" secondAttribute="centerY" id="XD2-WG-qyY"/>
+                        <constraint firstAttribute="trailing" secondItem="Ye8-eJ-Iao" secondAttribute="trailing" constant="12" id="hge-8F-KTP"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
@@ -121,11 +142,20 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </view>
+                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="G9I-iO-sF9" customClass="CheckmarkImageView" customModule="MathApp" customModuleProvider="target">
+                            <rect key="frame" x="290" y="12.5" width="25" height="25"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="25" id="EAx-fR-sNb"/>
+                                <constraint firstAttribute="width" constant="25" id="WMC-rc-xzn"/>
+                            </constraints>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="1xA-Jo-zVw"/>
+                        <constraint firstAttribute="trailing" secondItem="G9I-iO-sF9" secondAttribute="trailing" constant="12" id="ADs-Ot-Phc"/>
                         <constraint firstItem="Brh-4h-VRh" firstAttribute="centerY" secondItem="1Vv-Al-hDk" secondAttribute="centerY" id="CdR-ly-OrT"/>
+                        <constraint firstItem="G9I-iO-sF9" firstAttribute="centerY" secondItem="1Vv-Al-hDk" secondAttribute="centerY" id="JIo-9A-W0V"/>
                         <constraint firstItem="Brh-4h-VRh" firstAttribute="centerX" secondItem="1Vv-Al-hDk" secondAttribute="centerX" id="Zhw-1y-2ii"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
@@ -165,4 +195,7 @@
             <point key="canvasLocation" x="40.799999999999997" y="46.326836581709152"/>
         </view>
     </objects>
+    <resources>
+        <image name="Checkmark" width="208" height="212"/>
+    </resources>
 </document>

@@ -24,10 +24,17 @@ class ExerciseViewController: UIViewController {
     
     @IBOutlet private(set) var choice1Button: UIButton!
     @IBOutlet private(set) var choice1Label: MTMathUILabel!
+    @IBOutlet private(set) var choice1GradeImageView: CheckmarkImageView!
+    
     @IBOutlet private(set) var choice2Button: UIButton!
     @IBOutlet private(set) var choice2Label: MTMathUILabel!
+    @IBOutlet private(set) var choice2GradeImageView: CheckmarkImageView!
+    
     @IBOutlet private(set) var choice3Button: UIButton!
     @IBOutlet private(set) var choice3Label: MTMathUILabel!
+    @IBOutlet private(set) var choice3GradeImageView: CheckmarkImageView!
+    
+    
     
     //MARK: - Rx
     
@@ -50,6 +57,7 @@ class ExerciseViewController: UIViewController {
         super.viewDidLoad()
         configureUI()
         bindUI()
+        bindActions()
     }
     
     private func configureUI() {
@@ -64,6 +72,7 @@ class ExerciseViewController: UIViewController {
         bindChoice1()
         bindChoice2()
         bindChoice3()
+        bindChoice1CorrectStatus()
     }
     
     private func bindQuestionText() {
@@ -105,6 +114,24 @@ class ExerciseViewController: UIViewController {
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [unowned self] text in
                 self.choice3Label.latex = text
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindChoice1CorrectStatus() {
+        viewModel.choice1Correct
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] correct in
+                self.choice1GradeImageView.isHidden = false
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindActions() {
+        choice1Button.rx.tap
+            .throttle(.milliseconds(500), latest: false, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in
+                self.viewModel.dispatch(action: .choice1)
             })
             .disposed(by: disposeBag)
     }

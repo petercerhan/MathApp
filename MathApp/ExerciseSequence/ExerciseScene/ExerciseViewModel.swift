@@ -9,7 +9,28 @@
 import Foundation
 import RxSwift
 
-class ExerciseViewModel {
+enum ExerciseAction {
+    case choice1
+}
+
+protocol ExerciseViewModel {
+    var question: Observable<String> { get }
+    var questionLatex: Observable<String> { get }
+    var choice1: Observable<String> { get }
+    var choice2: Observable<String> { get }
+    var choice3: Observable<String> { get }
+    var choice1Correct: Observable<Bool> { get }
+    
+    func dispatch(action: ExerciseAction)
+}
+
+extension ExerciseViewModel where Self: ExerciseViewModelImpl {
+    var choice1Correct: Observable<Bool> {
+        return choice1CorrectSubject.asObservable()
+    }
+}
+
+class ExerciseViewModelImpl: ExerciseViewModel {
     
     //MARK: - Config
     
@@ -40,5 +61,20 @@ class ExerciseViewModel {
     private(set) lazy var choice3: Observable<String> = {
         Observable.just(exercise.falseAnswer2)
     }()
+    
+    let choice1CorrectSubject = PublishSubject<Bool>()
+    
+    //MARK: - ExerciseViewModel Interface
+    
+    func dispatch(action: ExerciseAction) {
+        switch action {
+        case .choice1:
+            handle_choice1()
+        }
+    }
+    
+    private func handle_choice1() {
+        choice1CorrectSubject.onNext(true)
+    }
     
 }

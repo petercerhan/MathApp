@@ -21,6 +21,7 @@
 		6E557C4622FBA79000270F07 /* HomeSceneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E557C4522FBA79000270F07 /* HomeSceneTests.swift */; };
 		6EBA303A230CADCB00E6DC54 /* AnimatedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBA3039230CADCB00E6DC54 /* AnimatedButton.swift */; };
 		6EBA303C230CAED200E6DC54 /* UIView+addShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBA303B230CAED200E6DC54 /* UIView+addShadow.swift */; };
+		6EBA304F230E07AE00E6DC54 /* CheckmarkImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBA304E230E07AE00E6DC54 /* CheckmarkImageView.swift */; };
 		6EBE4E8F230A13D80047A880 /* ExerciseCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBE4E8E230A13D80047A880 /* ExerciseCoordinatorTests.swift */; };
 		6EBE4E91230A14A70047A880 /* FakeContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBE4E90230A14A70047A880 /* FakeContainerViewController.swift */; };
 		6EBE4E94230A16170047A880 /* ExerciseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBE4E93230A16170047A880 /* ExerciseCoordinator.swift */; };
@@ -65,6 +66,7 @@
 		6E557C4522FBA79000270F07 /* HomeSceneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSceneTests.swift; sourceTree = "<group>"; };
 		6EBA3039230CADCB00E6DC54 /* AnimatedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedButton.swift; sourceTree = "<group>"; };
 		6EBA303B230CAED200E6DC54 /* UIView+addShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+addShadow.swift"; sourceTree = "<group>"; };
+		6EBA304E230E07AE00E6DC54 /* CheckmarkImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmarkImageView.swift; sourceTree = "<group>"; };
 		6EBE4E8E230A13D80047A880 /* ExerciseCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCoordinatorTests.swift; sourceTree = "<group>"; };
 		6EBE4E90230A14A70047A880 /* FakeContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeContainerViewController.swift; sourceTree = "<group>"; };
 		6EBE4E93230A16170047A880 /* ExerciseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCoordinator.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 			children = (
 				6EBA3039230CADCB00E6DC54 /* AnimatedButton.swift */,
 				6EBA303B230CAED200E6DC54 /* UIView+addShadow.swift */,
+				6EBA304E230E07AE00E6DC54 /* CheckmarkImageView.swift */,
 			);
 			path = InterfaceControls;
 			sourceTree = "<group>";
@@ -463,6 +466,7 @@
 				6EBE4E9B230B614B0047A880 /* ExerciseViewController.swift in Sources */,
 				6E557C3F22FBA3F400270F07 /* HomeViewController.swift in Sources */,
 				6EBA303A230CADCB00E6DC54 /* AnimatedButton.swift in Sources */,
+				6EBA304F230E07AE00E6DC54 /* CheckmarkImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
