@@ -73,6 +73,7 @@ class ExerciseViewController: UIViewController {
         bindChoice2()
         bindChoice3()
         bindChoice1CorrectStatus()
+        bindChoice2CorrectStatus()
     }
     
     private func bindQuestionText() {
@@ -121,17 +122,42 @@ class ExerciseViewController: UIViewController {
     private func bindChoice1CorrectStatus() {
         viewModel.choice1Correct
             .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [unowned self] correct in
+            .subscribe(onNext: { [unowned self] isCorrect in
                 self.choice1GradeImageView.isHidden = false
+                self.choice1GradeImageView.setIsCorrect(isCorrect)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindChoice2CorrectStatus() {
+        viewModel.choice2Correct
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] isCorrect in
+                self.choice2GradeImageView.isHidden = false
+                self.choice2GradeImageView.setIsCorrect(isCorrect)
             })
             .disposed(by: disposeBag)
     }
     
     private func bindActions() {
+        bindChoice1Action()
+        bindChoice2Action()
+    }
+    
+    private func bindChoice1Action() {
         choice1Button.rx.tap
             .throttle(.milliseconds(500), latest: false, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] in
                 self.viewModel.dispatch(action: .choice1)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindChoice2Action() {
+        choice2Button.rx.tap
+            .throttle(.milliseconds(500), latest: false, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in
+                self.viewModel.dispatch(action: .choice2)
             })
             .disposed(by: disposeBag)
     }

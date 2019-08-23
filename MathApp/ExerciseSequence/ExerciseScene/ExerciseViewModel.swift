@@ -11,6 +11,7 @@ import RxSwift
 
 enum ExerciseAction {
     case choice1
+    case choice2
 }
 
 protocol ExerciseViewModel {
@@ -20,6 +21,7 @@ protocol ExerciseViewModel {
     var choice2: Observable<String> { get }
     var choice3: Observable<String> { get }
     var choice1Correct: Observable<Bool> { get }
+    var choice2Correct: Observable<Bool> { get }
     
     func dispatch(action: ExerciseAction)
 }
@@ -28,6 +30,9 @@ extension ExerciseViewModel where Self: ExerciseViewModelImpl {
     var choice1Correct: Observable<Bool> {
         return choice1CorrectSubject.asObservable()
     }
+    var choice2Correct: Observable<Bool> {
+        return choice2CorrectSubject.asObservable()
+    }
 }
 
 class ExerciseViewModelImpl: ExerciseViewModel {
@@ -35,11 +40,29 @@ class ExerciseViewModelImpl: ExerciseViewModel {
     //MARK: - Config
     
     private let exercise: Exercise
+    private let choiceConfiguration: ExerciseChoiceConfiguration
+    private let choices: [String]
     
     //MARK: - Initialization
     
-    init(exercise: Exercise) {
+    init(exercise: Exercise, choiceConfiguration: ExerciseChoiceConfiguration) {
         self.exercise = exercise
+        self.choiceConfiguration = choiceConfiguration
+        
+        let falseChoices = [exercise.falseAnswer1, exercise.falseAnswer2, exercise.falseAnswer3]
+        let correctAnswer = exercise.answer
+        
+        var choices = [falseChoices[choiceConfiguration.firstFalseChoice - 1], falseChoices[choiceConfiguration.secondFalseChoice - 1]]
+        switch choiceConfiguration.correctPosition {
+        case 1:
+            choices.insert(correctAnswer, at: 0)
+        case 2:
+            choices.insert(correctAnswer, at: 1)
+        default:
+            choices.insert(correctAnswer, at: 2)
+        }
+        
+        self.choices = choices
     }
     
     private(set) lazy var question: Observable<String> = {
@@ -51,18 +74,19 @@ class ExerciseViewModelImpl: ExerciseViewModel {
     }()
     
     private(set) lazy var choice1: Observable<String> = {
-        Observable.just(exercise.answer)
+        Observable.just(choices[0])
     }()
     
     private(set) lazy var choice2: Observable<String> = {
-        Observable.just(exercise.falseAnswer1)
+        Observable.just(choices[1])
     }()
     
     private(set) lazy var choice3: Observable<String> = {
-        Observable.just(exercise.falseAnswer2)
+        Observable.just(choices[2])
     }()
     
     let choice1CorrectSubject = PublishSubject<Bool>()
+    let choice2CorrectSubject = PublishSubject<Bool>()
     
     //MARK: - ExerciseViewModel Interface
     
@@ -70,11 +94,35 @@ class ExerciseViewModelImpl: ExerciseViewModel {
         switch action {
         case .choice1:
             handle_choice1()
+        case .choice2:
+            handle_choice2()
         }
     }
     
     private func handle_choice1() {
-        choice1CorrectSubject.onNext(true)
+        if choiceConfiguration.correctPosition == 1 {
+            choice1CorrectSubject.onNext(true)
+        } else {
+            choice1CorrectSubject.onNext(false)
+            if choiceConfiguration.correctPosition == 2 {
+                choice2CorrectSubject.onNext(true)
+            } else {
+                
+            }
+        }
+    }
+    
+    private func handle_choice2() {
+        if choiceConfiguration.correctPosition == 2 {
+            choice2CorrectSubject.onNext(true)
+        } else {
+            choice2CorrectSubject.onNext(false)
+            if choiceConfiguration.correctPosition == 1 {
+                choice1CorrectSubject.onNext(true)
+            } else {
+                
+            }
+        }
     }
     
 }

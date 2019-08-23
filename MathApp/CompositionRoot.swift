@@ -25,7 +25,7 @@ class CompositionRoot {
     }
     
     func composeExerciseScene() -> UIViewController {
-        let vm = ExerciseViewModelImpl(exercise: Exercise.exercise1)
+        let vm = ExerciseViewModelImpl(exercise: Exercise.exercise1, choiceConfiguration: ExerciseChoiceConfiguration(correctPosition: 1, firstFalseChoice: 1, secondFalseChoice: 2))
         return ExerciseViewController(viewModel: vm)
     }
     

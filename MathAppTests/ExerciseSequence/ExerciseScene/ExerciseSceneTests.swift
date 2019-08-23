@@ -50,7 +50,7 @@ class ExerciseSceneTests: XCTestCase {
         XCTAssertEqual(vc.choice3Label.latex, "z")
     }
     
-    func test_firstChoicePressed_firstChoiceCorrect_showsFirstCorrectImage() {
+    func test_firstChoiceSelected_firstChoiceCorrect_showsFirstCorrectImage() {
         let vc = composeSUT()
         
         vc.loadViewIfNeeded()
@@ -60,12 +60,37 @@ class ExerciseSceneTests: XCTestCase {
         XCTAssertEqual(vc.choice1GradeImageView.isCorrect, true)
     }
     
+    func test_secondChoiceSelected_firstChoiceCorrect_showsFirstCorrectAndSecondIncorrect() {
+        let vc = composeSUT()
+        
+        vc.loadViewIfNeeded()
+        vc.choice2Button.sendActions(for: .touchUpInside)
+        
+        XCTAssertEqual(vc.choice1GradeImageView.isHidden, false)
+        XCTAssertEqual(vc.choice1GradeImageView.isCorrect, true)
+        XCTAssertEqual(vc.choice2GradeImageView.isHidden, false)
+        XCTAssertEqual(vc.choice2GradeImageView.isCorrect, false)
+    }
+    
+    func test_firstChoiceSelected_secondChoiceCorrect_showsFirstIncorrectAndSecondCorrect() {
+        let choiceConfiguration = ExerciseChoiceConfiguration(correctPosition: 2, firstFalseChoice: 1, secondFalseChoice: 3)
+        let vc = composeSUT(choiceConfiguration: choiceConfiguration)
+        
+        vc.loadViewIfNeeded()
+        vc.choice1Button.sendActions(for: .touchUpInside)
+        
+        XCTAssertEqual(vc.choice1GradeImageView.isHidden, false)
+        XCTAssertEqual(vc.choice1GradeImageView.isCorrect, false)
+        XCTAssertEqual(vc.choice2GradeImageView.isHidden, false)
+        XCTAssertEqual(vc.choice2GradeImageView.isCorrect, true)
+    }
     
     
     //MARK: - SUT Composition
     
-    func composeSUT() -> ExerciseViewController {
-        let vm = ExerciseViewModelImpl(exercise: Exercise.exercise1)
+    func composeSUT(choiceConfiguration: ExerciseChoiceConfiguration? = nil) -> ExerciseViewController {
+        let configuration = choiceConfiguration ?? ExerciseChoiceConfiguration(correctPosition: 1, firstFalseChoice: 1, secondFalseChoice: 2)
+        let vm = ExerciseViewModelImpl(exercise: Exercise.exercise1, choiceConfiguration: configuration)
         return ExerciseViewController(viewModel: vm)
     }
 
