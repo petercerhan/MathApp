@@ -100,28 +100,26 @@ class ExerciseViewModelImpl: ExerciseViewModel {
     }
     
     private func handle_choice1() {
-        if choiceConfiguration.correctPosition == 1 {
-            choice1CorrectSubject.onNext(true)
-        } else {
+        showCorrectAnswer()
+        
+        if choiceConfiguration.correctPosition != 1 {
             choice1CorrectSubject.onNext(false)
-            if choiceConfiguration.correctPosition == 2 {
-                choice2CorrectSubject.onNext(true)
-            } else {
-                
-            }
         }
     }
     
     private func handle_choice2() {
-        if choiceConfiguration.correctPosition == 2 {
-            choice2CorrectSubject.onNext(true)
-        } else {
+        showCorrectAnswer()
+        
+        if choiceConfiguration.correctPosition != 2 {
             choice2CorrectSubject.onNext(false)
-            if choiceConfiguration.correctPosition == 1 {
-                choice1CorrectSubject.onNext(true)
-            } else {
-                
-            }
+        }
+    }
+    
+    private func showCorrectAnswer() {
+        if choiceConfiguration.correctPosition == 1 {
+            choice1CorrectSubject.onNext(true)
+        } else if choiceConfiguration.correctPosition == 2 {
+            choice2CorrectSubject.onNext(true)
         }
     }
     

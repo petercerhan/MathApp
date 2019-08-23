@@ -56,8 +56,7 @@ class ExerciseSceneTests: XCTestCase {
         vc.loadViewIfNeeded()
         vc.choice1Button.sendActions(for: .touchUpInside)
         
-        XCTAssertEqual(vc.choice1GradeImageView.isHidden, false)
-        XCTAssertEqual(vc.choice1GradeImageView.isCorrect, true)
+        assertFirstChoiceShowsCorrect(true, vc: vc)
     }
     
     func test_secondChoiceSelected_firstChoiceCorrect_showsFirstCorrectAndSecondIncorrect() {
@@ -66,10 +65,8 @@ class ExerciseSceneTests: XCTestCase {
         vc.loadViewIfNeeded()
         vc.choice2Button.sendActions(for: .touchUpInside)
         
-        XCTAssertEqual(vc.choice1GradeImageView.isHidden, false)
-        XCTAssertEqual(vc.choice1GradeImageView.isCorrect, true)
-        XCTAssertEqual(vc.choice2GradeImageView.isHidden, false)
-        XCTAssertEqual(vc.choice2GradeImageView.isCorrect, false)
+        assertFirstChoiceShowsCorrect(true, vc: vc)
+        assertSecondChoiceShowsCorrect(false, vc: vc)
     }
     
     func test_firstChoiceSelected_secondChoiceCorrect_showsFirstIncorrectAndSecondCorrect() {
@@ -79,12 +76,21 @@ class ExerciseSceneTests: XCTestCase {
         vc.loadViewIfNeeded()
         vc.choice1Button.sendActions(for: .touchUpInside)
         
-        XCTAssertEqual(vc.choice1GradeImageView.isHidden, false)
-        XCTAssertEqual(vc.choice1GradeImageView.isCorrect, false)
-        XCTAssertEqual(vc.choice2GradeImageView.isHidden, false)
-        XCTAssertEqual(vc.choice2GradeImageView.isCorrect, true)
+        assertFirstChoiceShowsCorrect(false, vc: vc)
+        assertSecondChoiceShowsCorrect(true, vc: vc)
     }
     
+    //MARK: - Assertions
+    
+    func assertFirstChoiceShowsCorrect(_ isCorrect: Bool, vc: ExerciseViewController, file: StaticString = #file, line: UInt = #line) {
+        XCTAssertEqual(vc.choice1GradeImageView.isHidden, false, file: file, line: line)
+        XCTAssertEqual(vc.choice1GradeImageView.isCorrect, isCorrect, file: file, line: line)
+    }
+    
+    func assertSecondChoiceShowsCorrect(_ isCorrect: Bool, vc: ExerciseViewController, file: StaticString = #file, line: UInt = #line) {
+        XCTAssertEqual(vc.choice2GradeImageView.isHidden, false, file: file, line: line)
+        XCTAssertEqual(vc.choice2GradeImageView.isCorrect, isCorrect, file: file, line: line)
+    }
     
     //MARK: - SUT Composition
     
