@@ -11,6 +11,11 @@ import iosMath
 import RxSwift
 import RxCocoa
 
+enum ExerciseVCDisplayState {
+    case question
+    case answer
+}
+
 class ExerciseViewController: UIViewController {
     
     //MARK: - Dependencies
@@ -34,7 +39,15 @@ class ExerciseViewController: UIViewController {
     @IBOutlet private(set) var choice3Label: MTMathUILabel!
     @IBOutlet private(set) var choice3GradeImageView: CheckmarkImageView!
     
+    @IBOutlet private(set) var correctFrame: UIView!
     
+    
+    @IBOutlet private var choice2BottomSpace: NSLayoutConstraint!
+    @IBOutlet private var choice3BottomSpace: NSLayoutConstraint!
+    
+    //MARK: - State
+    
+    private(set) var displayState: ExerciseVCDisplayState = .question
     
     //MARK: - Rx
     
@@ -74,6 +87,8 @@ class ExerciseViewController: UIViewController {
         bindChoice3()
         bindChoice1CorrectStatus()
         bindChoice2CorrectStatus()
+        bindChoice3CorrectStatus()
+        bindDisplayState()
     }
     
     private func bindQuestionText() {
@@ -139,9 +154,20 @@ class ExerciseViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
+    private func bindChoice3CorrectStatus() {
+        viewModel.choice3Correct
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] isCorrect in
+                self.choice3GradeImageView.isHidden = false
+                self.choice3GradeImageView.setIsCorrect(isCorrect)
+            })
+            .disposed(by: disposeBag)
+    }
+    
     private func bindActions() {
         bindChoice1Action()
         bindChoice2Action()
+        bindChoice3Action()
     }
     
     private func bindChoice1Action() {
@@ -149,6 +175,7 @@ class ExerciseViewController: UIViewController {
             .throttle(.milliseconds(500), latest: false, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] in
                 self.viewModel.dispatch(action: .choice1)
+                self.disableChoiceButtons()
             })
             .disposed(by: disposeBag)
     }
@@ -158,8 +185,62 @@ class ExerciseViewController: UIViewController {
             .throttle(.milliseconds(500), latest: false, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] in
                 self.viewModel.dispatch(action: .choice2)
+                self.disableChoiceButtons()
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func bindChoice3Action() {
+        choice3Button.rx.tap
+            .throttle(.milliseconds(500), latest: false, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in
+                self.viewModel.dispatch(action: .choice3)
+                self.disableChoiceButtons()
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func disableChoiceButtons() {
+        choice1Button.isEnabled = false
+        choice2Button.isEnabled = false
+        choice3Button.isEnabled = false
+    }
+    
+    private func bindDisplayState() {
+        viewModel.displayState
+            .observeOn(MainScheduler.instance)
+            .delay(.milliseconds(500), scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] displayState in
+                self.displayState = displayState
+                self.updateUIForDisplayState(displayState)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func updateUIForDisplayState(_ displayState: ExerciseVCDisplayState) {
+        if displayState == .question {
+            return
+        }
+        
+        choice2BottomSpace.isActive = false
+        choice3BottomSpace.isActive = false
+        
+        let firstCorrect = latestValue(of: viewModel.choice1Correct, disposeBag: disposeBag) ?? false
+        
+        view.bringSubviewToFront(choice3Button)
+        
+        choice3Button.centerYAnchor.constraint(equalTo: correctFrame.centerYAnchor).isActive = true
+        
+        
+        let newButtonConstant = choice2Button.frame.minY
+        let newButtonContraint = choice2Button.topAnchor.constraint(equalTo: view.topAnchor, constant: newButtonConstant).isActive = true
+        
+        
+        UIView.animate(withDuration: 0.3) { [unowned self] in
+            self.choice1Button.alpha = 0
+            self.choice2Button.alpha = 0
+            self.view.layoutIfNeeded()
+        }
     }
 
 }

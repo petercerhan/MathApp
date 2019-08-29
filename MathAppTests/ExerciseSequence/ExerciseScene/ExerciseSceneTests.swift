@@ -80,6 +80,97 @@ class ExerciseSceneTests: XCTestCase {
         assertSecondChoiceShowsCorrect(true, vc: vc)
     }
     
+    func test_secondChoiceSelected_secondChoiceCorrect_showsSecondCorrect() {
+        let choiceConfiguration = ExerciseChoiceConfiguration(correctPosition: 2, firstFalseChoice: 1, secondFalseChoice: 3)
+        let vc = composeSUT(choiceConfiguration: choiceConfiguration)
+        
+        vc.loadViewIfNeeded()
+        vc.choice2Button.sendActions(for: .touchUpInside)
+        
+        assertSecondChoiceShowsCorrect(true, vc: vc)
+    }
+    
+    func test_thirdChoiceSelected_firstChoiceCorrect_showsFirstCorrectThirdIncorrect() {
+        let choiceConfiguration = ExerciseChoiceConfiguration(correctPosition: 1, firstFalseChoice: 1, secondFalseChoice: 3)
+        let vc = composeSUT(choiceConfiguration: choiceConfiguration)
+        
+        vc.loadViewIfNeeded()
+        vc.choice3Button.sendActions(for: .touchUpInside)
+        
+        assertFirstChoiceShowsCorrect(true, vc: vc)
+        assertThirdChoiceShowsCorrect(false, vc: vc)
+    }
+    
+    func test_thirdChoiceSelected_thirdChoiceCorrect_showsThirdCorrect() {
+        let choiceConfiguration = ExerciseChoiceConfiguration(correctPosition: 3, firstFalseChoice: 1, secondFalseChoice: 3)
+        let vc = composeSUT(choiceConfiguration: choiceConfiguration)
+        
+        vc.loadViewIfNeeded()
+        vc.choice3Button.sendActions(for: .touchUpInside)
+        
+        assertThirdChoiceShowsCorrect(true, vc: vc)
+    }
+    
+    func test_choice1Selected_allChoicesDisabled() {
+        let vc = composeSUT()
+        
+        vc.loadViewIfNeeded()
+        vc.choice1Button.sendActions(for: .touchUpInside)
+        
+        XCTAssertFalse(vc.choice1Button.isEnabled)
+        XCTAssertFalse(vc.choice2Button.isEnabled)
+        XCTAssertFalse(vc.choice3Button.isEnabled)
+    }
+    
+    func test_choice2Selected_allChoicesDisabled() {
+        let vc = composeSUT()
+        
+        vc.loadViewIfNeeded()
+        vc.choice2Button.sendActions(for: .touchUpInside)
+        
+        XCTAssertFalse(vc.choice1Button.isEnabled)
+        XCTAssertFalse(vc.choice2Button.isEnabled)
+        XCTAssertFalse(vc.choice3Button.isEnabled)
+    }
+    
+    func test_choice3Selected_allChoicesDisabled() {
+        let vc = composeSUT()
+        
+        vc.loadViewIfNeeded()
+        vc.choice3Button.sendActions(for: .touchUpInside)
+        
+        XCTAssertFalse(vc.choice1Button.isEnabled)
+        XCTAssertFalse(vc.choice2Button.isEnabled)
+        XCTAssertFalse(vc.choice3Button.isEnabled)
+    }
+    
+    func test_choice1Selected_entersAnswerState() {
+        let vc = composeSUT()
+        
+        vc.loadViewIfNeeded()
+        vc.choice1Button.sendActions(for: .touchUpInside)
+        
+        XCTAssertEqual(vc.displayState, .answer)
+    }
+    
+    func test_choice2Selected_entersAnswerState() {
+        let vc = composeSUT()
+        
+        vc.loadViewIfNeeded()
+        vc.choice2Button.sendActions(for: .touchUpInside)
+        
+        XCTAssertEqual(vc.displayState, .answer)
+    }
+    
+    func test_choice3Selected_entersAnswerState() {
+        let vc = composeSUT()
+        
+        vc.loadViewIfNeeded()
+        vc.choice3Button.sendActions(for: .touchUpInside)
+        
+        XCTAssertEqual(vc.displayState, .answer)
+    }
+    
     //MARK: - Assertions
     
     func assertFirstChoiceShowsCorrect(_ isCorrect: Bool, vc: ExerciseViewController, file: StaticString = #file, line: UInt = #line) {
@@ -90,6 +181,11 @@ class ExerciseSceneTests: XCTestCase {
     func assertSecondChoiceShowsCorrect(_ isCorrect: Bool, vc: ExerciseViewController, file: StaticString = #file, line: UInt = #line) {
         XCTAssertEqual(vc.choice2GradeImageView.isHidden, false, file: file, line: line)
         XCTAssertEqual(vc.choice2GradeImageView.isCorrect, isCorrect, file: file, line: line)
+    }
+    
+    func assertThirdChoiceShowsCorrect(_ isCorrect: Bool, vc: ExerciseViewController, file: StaticString = #file, line: UInt = #line) {
+        XCTAssertEqual(vc.choice3GradeImageView.isHidden, false, file: file, line: line)
+        XCTAssertEqual(vc.choice3GradeImageView.isCorrect, isCorrect, file: file, line: line)
     }
     
     //MARK: - SUT Composition

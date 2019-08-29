@@ -12,6 +12,7 @@ import RxSwift
 enum ExerciseAction {
     case choice1
     case choice2
+    case choice3
 }
 
 protocol ExerciseViewModel {
@@ -22,6 +23,8 @@ protocol ExerciseViewModel {
     var choice3: Observable<String> { get }
     var choice1Correct: Observable<Bool> { get }
     var choice2Correct: Observable<Bool> { get }
+    var choice3Correct: Observable<Bool> { get }
+    var displayState: Observable<ExerciseVCDisplayState> { get }
     
     func dispatch(action: ExerciseAction)
 }
@@ -32,6 +35,12 @@ extension ExerciseViewModel where Self: ExerciseViewModelImpl {
     }
     var choice2Correct: Observable<Bool> {
         return choice2CorrectSubject.asObservable()
+    }
+    var choice3Correct: Observable<Bool> {
+        return choice3CorrectSubject.asObservable()
+    }
+    var displayState: Observable<ExerciseVCDisplayState> {
+        return displayStateSubject.asObservable()
     }
 }
 
@@ -87,6 +96,8 @@ class ExerciseViewModelImpl: ExerciseViewModel {
     
     let choice1CorrectSubject = PublishSubject<Bool>()
     let choice2CorrectSubject = PublishSubject<Bool>()
+    let choice3CorrectSubject = PublishSubject<Bool>()
+    let displayStateSubject = BehaviorSubject<ExerciseVCDisplayState>(value: .question)
     
     //MARK: - ExerciseViewModel Interface
     
@@ -96,23 +107,33 @@ class ExerciseViewModelImpl: ExerciseViewModel {
             handle_choice1()
         case .choice2:
             handle_choice2()
+        case .choice3:
+            handle_choice3()
         }
     }
     
     private func handle_choice1() {
         showCorrectAnswer()
-        
         if choiceConfiguration.correctPosition != 1 {
             choice1CorrectSubject.onNext(false)
         }
+        displayStateSubject.onNext(.answer)
     }
     
     private func handle_choice2() {
         showCorrectAnswer()
-        
         if choiceConfiguration.correctPosition != 2 {
             choice2CorrectSubject.onNext(false)
         }
+        displayStateSubject.onNext(.answer)
+    }
+    
+    private func handle_choice3() {
+        showCorrectAnswer()
+        if choiceConfiguration.correctPosition != 3 {
+            choice3CorrectSubject.onNext(false)
+        }
+        displayStateSubject.onNext(.answer)
     }
     
     private func showCorrectAnswer() {
@@ -120,6 +141,8 @@ class ExerciseViewModelImpl: ExerciseViewModel {
             choice1CorrectSubject.onNext(true)
         } else if choiceConfiguration.correctPosition == 2 {
             choice2CorrectSubject.onNext(true)
+        } else {
+            choice3CorrectSubject.onNext(true)
         }
     }
     
