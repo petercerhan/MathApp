@@ -44,8 +44,8 @@
                     <state key="normal" title="Next"/>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cTR-iQ-8gP">
-                    <rect key="frame" x="153" y="55" width="69" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <rect key="frame" x="146" y="55" width="83" height="25.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -62,7 +62,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="80s-Yk-2zt" customClass="AnimatedButton" customModule="MathApp" customModuleProvider="target">
                     <rect key="frame" x="24" y="593" width="327" height="50"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bz7-39-x30" customClass="MTMathUILabel">
+                        <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bz7-39-x30" customClass="MTMathUILabel">
                             <rect key="frame" x="156.5" y="19.5" width="14" height="11"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <userDefinedRuntimeAttributes>
@@ -103,7 +103,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ccN-ZU-cbe" customClass="AnimatedButton" customModule="MathApp" customModuleProvider="target">
                     <rect key="frame" x="24" y="531" width="327" height="50"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z7N-Ir-Ceu" customClass="MTMathUILabel">
+                        <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z7N-Ir-Ceu" customClass="MTMathUILabel">
                             <rect key="frame" x="156.5" y="19.5" width="14" height="11"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <userDefinedRuntimeAttributes>
@@ -144,7 +144,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Vv-Al-hDk" customClass="AnimatedButton" customModule="MathApp" customModuleProvider="target">
                     <rect key="frame" x="24" y="469" width="327" height="50"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Brh-4h-VRh" customClass="MTMathUILabel">
+                        <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Brh-4h-VRh" customClass="MTMathUILabel">
                             <rect key="frame" x="156.5" y="19.5" width="14" height="11"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <userDefinedRuntimeAttributes>
