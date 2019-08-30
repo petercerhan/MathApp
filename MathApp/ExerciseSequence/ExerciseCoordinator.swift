@@ -30,8 +30,18 @@ class ExerciseCoordinator: Coordinator {
     }
     
     func start() {
-        let vc = compositionRoot.composeExerciseScene(delegate: self)
+        let vc = getNextExerciseScene()
         containerVC.show(viewController: vc, animation: .none)
+    }
+    
+    private var correctPositionIndex = 0
+    
+    private func getNextExerciseScene() -> UIViewController {
+        let choiceConfiguration = ExerciseChoiceConfiguration(correctPosition: correctPositionIndex + 1, firstFalseChoice: 1, secondFalseChoice: 2)
+        
+        correctPositionIndex = (correctPositionIndex + 1) % 3
+        
+        return compositionRoot.composeExerciseScene(delegate: self, choiceConfiguration: choiceConfiguration)
     }
 
 }
@@ -40,7 +50,7 @@ class ExerciseCoordinator: Coordinator {
 
 extension ExerciseCoordinator: ExerciseViewModelDelegate {
     func next(_ exerciseViewModel: ExerciseViewModel) {
-        let vc = compositionRoot.composeExerciseScene(delegate: self)
+        let vc = getNextExerciseScene()
         containerVC.show(viewController: vc, animation: .fadeIn)
     }
 }

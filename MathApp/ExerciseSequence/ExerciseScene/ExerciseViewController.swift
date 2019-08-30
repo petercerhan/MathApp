@@ -303,8 +303,8 @@ class ExerciseViewController: UIViewController {
         choice3Button.centerYAnchor.constraint(equalTo: correctFrame.centerYAnchor).isActive = true
         
         UIView.animate(withDuration: 0.25) { [unowned self] in
+            self.choice1Button.alpha = 0
             self.choice2Button.alpha = 0
-            self.choice3Button.alpha = 0
             self.view.layoutIfNeeded()
         }
         
@@ -323,10 +323,12 @@ class ExerciseViewController: UIViewController {
         nextButton.topAnchor.constraint(equalTo: view.topAnchor, constant: nextButton.frame.minY).isActive = true
         correctFrame.topAnchor.constraint(equalTo: view.topAnchor, constant: correctFrame.frame.minY).isActive = true
         choice1ButtonIndependentYPositionConstraint = choice1Button.topAnchor.constraint(equalTo: view.topAnchor, constant: choice1Button.frame.minY)
-        choice2Button.topAnchor.constraint(equalTo: view.topAnchor, constant: choice2Button.frame.minY).isActive = true
-        choice3Button.topAnchor.constraint(equalTo: view.topAnchor, constant: choice3Button.frame.minY).isActive = true
+        choice2ButtonIndependentYPositionConstraint = choice2Button.topAnchor.constraint(equalTo: view.topAnchor, constant: choice2Button.frame.minY)
+        choice3ButtonIndependentYPositionConstraint = choice3Button.topAnchor.constraint(equalTo: view.topAnchor, constant: choice3Button.frame.minY)
         
         choice1ButtonIndependentYPositionConstraint?.isActive = true
+        choice2ButtonIndependentYPositionConstraint?.isActive = true
+        choice3ButtonIndependentYPositionConstraint?.isActive = true
     }
     
     private func animateNextButtonVisible() {
