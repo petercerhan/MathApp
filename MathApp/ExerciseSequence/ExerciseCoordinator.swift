@@ -40,6 +40,7 @@ class ExerciseCoordinator: Coordinator {
 
 extension ExerciseCoordinator: ExerciseViewModelDelegate {
     func next(_ exerciseViewModel: ExerciseViewModel) {
-        
+        let vc = compositionRoot.composeExerciseScene(delegate: self)
+        containerVC.show(viewController: vc, animation: .fadeIn)
     }
 }
