@@ -24,6 +24,8 @@
                 <outlet property="choice3GradeImageView" destination="FTe-nw-pNM" id="Jn4-Wy-faB"/>
                 <outlet property="choice3Label" destination="bz7-39-x30" id="Lte-Q5-t8P"/>
                 <outlet property="correctFrame" destination="Phy-8J-YXb" id="hGm-s5-erL"/>
+                <outlet property="nextButton" destination="5eq-Kp-SoS" id="0ub-E5-xRs"/>
+                <outlet property="nextButtonCenter" destination="WT9-uj-3mZ" id="1Ge-Jd-oyK"/>
                 <outlet property="questionLabel" destination="cTR-iQ-8gP" id="j6n-eD-sSO"/>
                 <outlet property="questionLatexLabel" destination="KZH-gX-XGC" id="Lde-ey-JWO"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -178,6 +180,11 @@
                     <rect key="frame" x="24" y="407" width="327" height="50"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5eq-Kp-SoS">
+                    <rect key="frame" x="167" y="538" width="41" height="36"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <state key="normal" title="Next"/>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -186,9 +193,11 @@
                 <constraint firstItem="ccN-ZU-cbe" firstAttribute="height" secondItem="1Vv-Al-hDk" secondAttribute="height" id="EWo-Sa-ouw"/>
                 <constraint firstItem="80s-Yk-2zt" firstAttribute="height" secondItem="1Vv-Al-hDk" secondAttribute="height" id="KCo-So-0mS"/>
                 <constraint firstItem="1Vv-Al-hDk" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="LQi-jz-hXJ"/>
+                <constraint firstItem="5eq-Kp-SoS" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Luy-0v-Ha2"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="80s-Yk-2zt" secondAttribute="trailing" constant="24" id="M42-B5-xAk"/>
                 <constraint firstItem="ccN-ZU-cbe" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="RCp-9U-8g4"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="80s-Yk-2zt" secondAttribute="bottom" constant="24" id="Ulf-3r-oxw"/>
+                <constraint firstItem="5eq-Kp-SoS" firstAttribute="centerY" secondItem="ccN-ZU-cbe" secondAttribute="centerY" id="WT9-uj-3mZ"/>
                 <constraint firstItem="KZH-gX-XGC" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="X5p-xX-MHW"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ccN-ZU-cbe" secondAttribute="trailing" constant="24" id="XUb-3b-LF9"/>
                 <constraint firstItem="ccN-ZU-cbe" firstAttribute="top" secondItem="1Vv-Al-hDk" secondAttribute="bottom" constant="12" id="aQ8-HN-3MV"/>

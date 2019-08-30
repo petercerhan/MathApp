@@ -41,7 +41,9 @@ class ExerciseViewController: UIViewController {
     
     @IBOutlet private(set) var correctFrame: UIView!
     
+    @IBOutlet private(set) var nextButton: UIButton!
     
+    @IBOutlet private var nextButtonCenter: NSLayoutConstraint!
     @IBOutlet private var choice2BottomSpace: NSLayoutConstraint!
     @IBOutlet private var choice3BottomSpace: NSLayoutConstraint!
     
@@ -221,7 +223,11 @@ class ExerciseViewController: UIViewController {
         if displayState == .question {
             return
         }
+
+        nextButton.alpha = 0.0
+        nextButton.isHidden = false
         
+        nextButtonCenter.isActive = false
         choice2BottomSpace.isActive = false
         choice3BottomSpace.isActive = false
         
@@ -235,10 +241,12 @@ class ExerciseViewController: UIViewController {
         let newButtonConstant = choice2Button.frame.minY
         let newButtonContraint = choice2Button.topAnchor.constraint(equalTo: view.topAnchor, constant: newButtonConstant).isActive = true
         
+        nextButton.topAnchor.constraint(equalTo: view.topAnchor, constant: nextButton.frame.minY).isActive = true
         
         UIView.animate(withDuration: 0.3) { [unowned self] in
             self.choice1Button.alpha = 0
             self.choice2Button.alpha = 0
+            self.nextButton.alpha = 1.0
             self.view.layoutIfNeeded()
         }
     }
