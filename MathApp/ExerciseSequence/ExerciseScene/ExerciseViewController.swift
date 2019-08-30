@@ -44,8 +44,14 @@ class ExerciseViewController: UIViewController {
     @IBOutlet private(set) var nextButton: UIButton!
     
     @IBOutlet private var nextButtonCenter: NSLayoutConstraint!
+    @IBOutlet private var correctFrameBottomSpace: NSLayoutConstraint!
+    @IBOutlet private var choice1BottomSpace: NSLayoutConstraint!
     @IBOutlet private var choice2BottomSpace: NSLayoutConstraint!
     @IBOutlet private var choice3BottomSpace: NSLayoutConstraint!
+    
+    private var choice1ButtonIndependentYPositionConstraint: NSLayoutConstraint?
+    private var choice2ButtonIndependentYPositionConstraint: NSLayoutConstraint?
+    private var choice3ButtonIndependentYPositionConstraint: NSLayoutConstraint?
     
     //MARK: - State
     
@@ -166,6 +172,16 @@ class ExerciseViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
+    private func bindDisplayState() {
+        viewModel.displayState
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] displayState in
+                self.displayState = displayState
+                self.updateUIForDisplayState(displayState)
+            })
+            .disposed(by: disposeBag)
+    }
+    
     private func bindActions() {
         bindChoice1Action()
         bindChoice2Action()
@@ -218,45 +234,107 @@ class ExerciseViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    private func bindDisplayState() {
-        viewModel.displayState
-            .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [unowned self] displayState in
-                self.displayState = displayState
-                self.updateUIForDisplayState(displayState)
-            })
-            .disposed(by: disposeBag)
-    }
-    
     private func updateUIForDisplayState(_ displayState: ExerciseVCDisplayState) {
         if displayState == .question {
             return
         }
-
-        nextButton.alpha = 0.0
-        nextButton.isHidden = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            self?.updateUIForAnswerState()
+        }
+    }
+    
+    private func updateUIForAnswerState() {
+        switch viewModel.correctChoice {
+        case 1:
+            updateUIForAnswerChoice1()
+        case 2:
+            updateUIForAnswerChoice2()
+        case 3:
+            updateUIForAnswerChoice3()
+        default:
+            break
+        }
+    }
+    
+    private func updateUIForAnswerChoice1() {
+        view.bringSubviewToFront(choice1Button)
         
+        convertToIndependentButtonLayoutConstraints()
+        
+        choice1ButtonIndependentYPositionConstraint?.isActive = false
+        choice1Button.centerYAnchor.constraint(equalTo: correctFrame.centerYAnchor).isActive = true
+        
+        UIView.animate(withDuration: 0.25) { [unowned self] in
+            self.choice2Button.alpha = 0
+            self.choice3Button.alpha = 0
+            self.view.layoutIfNeeded()
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            self?.animateNextButtonVisible()
+        }
+    }
+    
+    private func updateUIForAnswerChoice2() {
+        view.bringSubviewToFront(choice2Button)
+        
+        convertToIndependentButtonLayoutConstraints()
+        
+        choice2ButtonIndependentYPositionConstraint?.isActive = false
+        choice2Button.centerYAnchor.constraint(equalTo: correctFrame.centerYAnchor).isActive = true
+        
+        UIView.animate(withDuration: 0.25) { [unowned self] in
+            self.choice1Button.alpha = 0
+            self.choice3Button.alpha = 0
+            self.view.layoutIfNeeded()
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            self?.animateNextButtonVisible()
+        }
+    }
+    
+    private func updateUIForAnswerChoice3() {
+        view.bringSubviewToFront(choice3Button)
+        
+        convertToIndependentButtonLayoutConstraints()
+        
+        choice3ButtonIndependentYPositionConstraint?.isActive = false
+        choice3Button.centerYAnchor.constraint(equalTo: correctFrame.centerYAnchor).isActive = true
+        
+        UIView.animate(withDuration: 0.25) { [unowned self] in
+            self.choice2Button.alpha = 0
+            self.choice3Button.alpha = 0
+            self.view.layoutIfNeeded()
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            self?.animateNextButtonVisible()
+        }
+    }
+    
+    private func convertToIndependentButtonLayoutConstraints() {
         nextButtonCenter.isActive = false
+        correctFrameBottomSpace.isActive = false
+        choice1BottomSpace.isActive = false
         choice2BottomSpace.isActive = false
         choice3BottomSpace.isActive = false
         
-        let firstCorrect = latestValue(of: viewModel.choice1Correct, disposeBag: disposeBag) ?? false
-        
-        view.bringSubviewToFront(choice3Button)
-        
-        choice3Button.centerYAnchor.constraint(equalTo: correctFrame.centerYAnchor).isActive = true
-        
-        
-        let newButtonConstant = choice2Button.frame.minY
-        let newButtonContraint = choice2Button.topAnchor.constraint(equalTo: view.topAnchor, constant: newButtonConstant).isActive = true
-        
         nextButton.topAnchor.constraint(equalTo: view.topAnchor, constant: nextButton.frame.minY).isActive = true
+        correctFrame.topAnchor.constraint(equalTo: view.topAnchor, constant: correctFrame.frame.minY).isActive = true
+        choice1ButtonIndependentYPositionConstraint = choice1Button.topAnchor.constraint(equalTo: view.topAnchor, constant: choice1Button.frame.minY)
+        choice2Button.topAnchor.constraint(equalTo: view.topAnchor, constant: choice2Button.frame.minY).isActive = true
+        choice3Button.topAnchor.constraint(equalTo: view.topAnchor, constant: choice3Button.frame.minY).isActive = true
         
-        UIView.animate(withDuration: 0.3) { [unowned self] in
-            self.choice1Button.alpha = 0
-            self.choice2Button.alpha = 0
+        choice1ButtonIndependentYPositionConstraint?.isActive = true
+    }
+    
+    private func animateNextButtonVisible() {
+        nextButton.alpha = 0.0
+        nextButton.isHidden = false
+        
+        UIView.animate(withDuration: 0.35) { [unowned self] in
             self.nextButton.alpha = 1.0
-            self.view.layoutIfNeeded()
         }
     }
 

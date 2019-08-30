@@ -18,6 +18,7 @@ protocol ExerciseViewModel {
     var choice1Correct: Observable<Bool> { get }
     var choice2Correct: Observable<Bool> { get }
     var choice3Correct: Observable<Bool> { get }
+    var correctChoice: Int { get }
     var displayState: Observable<ExerciseVCDisplayState> { get }
     
     func dispatch(action: ExerciseAction)
@@ -67,6 +68,7 @@ class ExerciseViewModelImpl: ExerciseViewModel {
         self.delegate = delegate
         self.exercise = exercise
         self.choiceConfiguration = choiceConfiguration
+        correctChoice = choiceConfiguration.correctPosition
         
         let falseChoices = [exercise.falseAnswer1, exercise.falseAnswer2, exercise.falseAnswer3]
         let correctAnswer = exercise.answer
@@ -103,6 +105,8 @@ class ExerciseViewModelImpl: ExerciseViewModel {
     private(set) lazy var choice3: Observable<String> = {
         Observable.just(choices[2])
     }()
+    
+    let correctChoice: Int
     
     let choice1CorrectSubject = PublishSubject<Bool>()
     let choice2CorrectSubject = PublishSubject<Bool>()

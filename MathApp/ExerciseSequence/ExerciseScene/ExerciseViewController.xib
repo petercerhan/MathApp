@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ExerciseViewController" customModule="MathApp" customModuleProvider="target">
             <connections>
+                <outlet property="choice1BottomSpace" destination="aQ8-HN-3MV" id="cR4-tP-WSB"/>
                 <outlet property="choice1Button" destination="1Vv-Al-hDk" id="qsP-8w-1jM"/>
                 <outlet property="choice1GradeImageView" destination="G9I-iO-sF9" id="vaH-n7-Dh7"/>
                 <outlet property="choice1Label" destination="Brh-4h-VRh" id="WIA-jy-bw4"/>
@@ -24,6 +25,7 @@
                 <outlet property="choice3GradeImageView" destination="FTe-nw-pNM" id="Jn4-Wy-faB"/>
                 <outlet property="choice3Label" destination="bz7-39-x30" id="Lte-Q5-t8P"/>
                 <outlet property="correctFrame" destination="Phy-8J-YXb" id="hGm-s5-erL"/>
+                <outlet property="correctFrameBottomSpace" destination="4mn-aR-XyL" id="akz-In-jZn"/>
                 <outlet property="nextButton" destination="5eq-Kp-SoS" id="0ub-E5-xRs"/>
                 <outlet property="nextButtonCenter" destination="WT9-uj-3mZ" id="1Ge-Jd-oyK"/>
                 <outlet property="questionLabel" destination="cTR-iQ-8gP" id="j6n-eD-sSO"/>
