@@ -21,7 +21,9 @@ class CompositionRoot {
     //MARK: - Exercise sequence
     
     func composeExerciseCoordinator() -> ExerciseCoordinator {
-        return ExerciseCoordinator(compositionRoot: self, containerVC: ContainerViewController())
+        return ExerciseCoordinator(compositionRoot: self,
+                                   containerVC: ContainerViewController(),
+                                   randomizationService: RandomizationServiceImpl())
     }
     
     func composeExerciseScene(delegate: ExerciseViewModelDelegate, choiceConfiguration: ExerciseChoiceConfiguration) -> UIViewController {

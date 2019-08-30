@@ -14,7 +14,7 @@ class ExerciseCoordinatorTests: XCTestCase {
     
     func test_start_shouldShowExerciseScene() {
         let mockContainerVC = FakeContainerViewController()
-        let coordinator = ExerciseCoordinator(compositionRoot: CompositionRoot(), containerVC: mockContainerVC)
+        let coordinator = composeSUT(fakeContainerViewController: mockContainerVC)
         
         coordinator.start()
         
@@ -23,13 +23,19 @@ class ExerciseCoordinatorTests: XCTestCase {
     
     func test_exerciseSceneRequestsNext_shouldShowNextExercise() {
         let mockContainerVC = FakeContainerViewController()
-        let coordinator = ExerciseCoordinator(compositionRoot: CompositionRoot(), containerVC: mockContainerVC)
+        let coordinator = composeSUT(fakeContainerViewController: mockContainerVC)
 
         coordinator.start()
         coordinator.next(TestExerciseViewModel())
         
         XCTAssertEqual(mockContainerVC.show_callCount, 2)
         mockContainerVC.verifyDidShow(viewControllerType: ExerciseViewController.self)
+    }
+    
+    //MARK: - SUT Composition
+    
+    func composeSUT(fakeContainerViewController: ContainerViewController) -> ExerciseCoordinator {
+        return ExerciseCoordinator(compositionRoot: CompositionRoot(), containerVC: fakeContainerViewController, randomizationService: RandomizationServiceImpl())
     }
     
 }
