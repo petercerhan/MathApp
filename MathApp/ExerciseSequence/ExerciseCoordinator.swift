@@ -30,8 +30,16 @@ class ExerciseCoordinator: Coordinator {
     }
     
     func start() {
-        let vc = compositionRoot.composeExerciseScene()
+        let vc = compositionRoot.composeExerciseScene(delegate: self)
         containerVC.show(viewController: vc, animation: .none)
     }
 
+}
+
+//MARK: - ExerciseViewModelDelegate
+
+extension ExerciseCoordinator: ExerciseViewModelDelegate {
+    func next(_ exerciseViewModel: ExerciseViewModel) {
+        
+    }
 }

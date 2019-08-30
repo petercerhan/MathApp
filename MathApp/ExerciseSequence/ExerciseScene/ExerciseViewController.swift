@@ -170,6 +170,7 @@ class ExerciseViewController: UIViewController {
         bindChoice1Action()
         bindChoice2Action()
         bindChoice3Action()
+        bindNextAction()
     }
     
     private func bindChoice1Action() {
@@ -208,10 +209,18 @@ class ExerciseViewController: UIViewController {
         choice3Button.isEnabled = false
     }
     
+    private func bindNextAction() {
+        nextButton.rx.tap
+            .throttle(.milliseconds(500), latest: false, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in
+                self.viewModel.dispatch(action: .next)
+            })
+            .disposed(by: disposeBag)
+    }
+    
     private func bindDisplayState() {
         viewModel.displayState
             .observeOn(MainScheduler.instance)
-            .delay(.milliseconds(500), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] displayState in
                 self.displayState = displayState
                 self.updateUIForDisplayState(displayState)

@@ -171,6 +171,16 @@ class ExerciseSceneTests: XCTestCase {
         XCTAssertEqual(vc.displayState, .answer)
     }
     
+    func test_next_requestsNext() {
+        let mockDelegate = FakeExerciseViewModelDelegate()
+        let vc = composeSUT(fakeDelegate: mockDelegate)
+        
+        vc.loadViewIfNeeded()
+        vc.nextButton.sendActions(for: .touchUpInside)
+        
+        XCTAssertEqual(mockDelegate.next_callCount, 1)
+    }
+    
     //MARK: - Assertions
     
     func assertFirstChoiceShowsCorrect(_ isCorrect: Bool, vc: ExerciseViewController, file: StaticString = #file, line: UInt = #line) {
@@ -190,9 +200,10 @@ class ExerciseSceneTests: XCTestCase {
     
     //MARK: - SUT Composition
     
-    func composeSUT(choiceConfiguration: ExerciseChoiceConfiguration? = nil) -> ExerciseViewController {
+    func composeSUT(fakeDelegate: FakeExerciseViewModelDelegate? = nil, choiceConfiguration: ExerciseChoiceConfiguration? = nil) -> ExerciseViewController {
         let configuration = choiceConfiguration ?? ExerciseChoiceConfiguration(correctPosition: 1, firstFalseChoice: 1, secondFalseChoice: 2)
-        let vm = ExerciseViewModelImpl(exercise: Exercise.exercise1, choiceConfiguration: configuration)
+        let delegate = fakeDelegate ?? FakeExerciseViewModelDelegate()
+        let vm = ExerciseViewModelImpl(delegate:delegate, exercise: Exercise.exercise1, choiceConfiguration: configuration)
         return ExerciseViewController(viewModel: vm)
     }
 

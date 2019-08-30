@@ -33,7 +33,7 @@ class RxLatestValueTests: XCTestCase {
     
     func test_latestValue_error_returnsNil() {
         let disposeBag = DisposeBag()
-        let observable = Observable<String>.error(NetworkRequestError.invalidData)
+        let observable = Observable<String>.error(GeneralError.unhandledError)
         
         var value: String? = "Hello"
         value = latestValue(of: observable, disposeBag: disposeBag)

@@ -9,12 +9,6 @@
 import Foundation
 import RxSwift
 
-enum ExerciseAction {
-    case choice1
-    case choice2
-    case choice3
-}
-
 protocol ExerciseViewModel {
     var question: Observable<String> { get }
     var questionLatex: Observable<String> { get }
@@ -27,6 +21,17 @@ protocol ExerciseViewModel {
     var displayState: Observable<ExerciseVCDisplayState> { get }
     
     func dispatch(action: ExerciseAction)
+}
+
+protocol ExerciseViewModelDelegate: class {
+    func next(_ exerciseViewModel: ExerciseViewModel)
+}
+
+enum ExerciseAction {
+    case choice1
+    case choice2
+    case choice3
+    case next
 }
 
 extension ExerciseViewModel where Self: ExerciseViewModelImpl {
@@ -46,6 +51,10 @@ extension ExerciseViewModel where Self: ExerciseViewModelImpl {
 
 class ExerciseViewModelImpl: ExerciseViewModel {
     
+    //MARK: - Dependencies
+    
+    private weak var delegate: ExerciseViewModelDelegate?
+    
     //MARK: - Config
     
     private let exercise: Exercise
@@ -54,7 +63,8 @@ class ExerciseViewModelImpl: ExerciseViewModel {
     
     //MARK: - Initialization
     
-    init(exercise: Exercise, choiceConfiguration: ExerciseChoiceConfiguration) {
+    init(delegate: ExerciseViewModelDelegate, exercise: Exercise, choiceConfiguration: ExerciseChoiceConfiguration) {
+        self.delegate = delegate
         self.exercise = exercise
         self.choiceConfiguration = choiceConfiguration
         
@@ -109,6 +119,8 @@ class ExerciseViewModelImpl: ExerciseViewModel {
             handle_choice2()
         case .choice3:
             handle_choice3()
+        case .next:
+            handle_next()
         }
     }
     
@@ -144,6 +156,10 @@ class ExerciseViewModelImpl: ExerciseViewModel {
         } else {
             choice3CorrectSubject.onNext(true)
         }
+    }
+    
+    private func handle_next() {
+        delegate?.next(self)
     }
     
 }
