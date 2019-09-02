@@ -22,7 +22,7 @@ class CompositionRoot {
     
     func composeExerciseCoordinator() -> ExerciseCoordinator {
         return ExerciseCoordinator(compositionRoot: self,
-                                   containerVC: ContainerViewController(),
+                                   containerVC: FeedContainerViewController(),
                                    randomizationService: RandomizationServiceImpl())
     }
     

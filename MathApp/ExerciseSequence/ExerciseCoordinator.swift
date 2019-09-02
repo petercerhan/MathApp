@@ -35,6 +35,7 @@ class ExerciseCoordinator: Coordinator {
     }
     
     func start() {
+        containerVC.loadViewIfNeeded()
         let vc = getNextExerciseScene()
         containerVC.show(viewController: vc, animation: .none)
     }

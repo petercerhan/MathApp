@@ -21,6 +21,9 @@
 		6E74FD442318B0A400730AEB /* GeneralError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E74FD432318B0A400730AEB /* GeneralError.swift */; };
 		6E74FD472318B53F00730AEB /* ExerciseChoiceConfiguration+stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E74FD462318B53F00730AEB /* ExerciseChoiceConfiguration+stubs.swift */; };
 		6E74FD4B2318CBAC00730AEB /* RandomizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E74FD4A2318CBAC00730AEB /* RandomizationService.swift */; };
+		6E74FD4E231C86FC00730AEB /* FeedContainerViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E74FD4D231C86FC00730AEB /* FeedContainerViewControllerTests.swift */; };
+		6E74FD52231C87F800730AEB /* FeedContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E74FD50231C87F800730AEB /* FeedContainerViewController.swift */; };
+		6E74FD53231C87F800730AEB /* FeedContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E74FD51231C87F800730AEB /* FeedContainerViewController.xib */; };
 		6EBA303A230CADCB00E6DC54 /* AnimatedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBA3039230CADCB00E6DC54 /* AnimatedButton.swift */; };
 		6EBA303C230CAED200E6DC54 /* UIView+addShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBA303B230CAED200E6DC54 /* UIView+addShadow.swift */; };
 		6EBA304F230E07AE00E6DC54 /* CheckmarkImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBA304E230E07AE00E6DC54 /* CheckmarkImageView.swift */; };
@@ -71,6 +74,9 @@
 		6E74FD432318B0A400730AEB /* GeneralError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralError.swift; sourceTree = "<group>"; };
 		6E74FD462318B53F00730AEB /* ExerciseChoiceConfiguration+stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExerciseChoiceConfiguration+stubs.swift"; sourceTree = "<group>"; };
 		6E74FD4A2318CBAC00730AEB /* RandomizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomizationService.swift; sourceTree = "<group>"; };
+		6E74FD4D231C86FC00730AEB /* FeedContainerViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedContainerViewControllerTests.swift; sourceTree = "<group>"; };
+		6E74FD50231C87F800730AEB /* FeedContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedContainerViewController.swift; sourceTree = "<group>"; };
+		6E74FD51231C87F800730AEB /* FeedContainerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedContainerViewController.xib; sourceTree = "<group>"; };
 		6EBA3039230CADCB00E6DC54 /* AnimatedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedButton.swift; sourceTree = "<group>"; };
 		6EBA303B230CAED200E6DC54 /* UIView+addShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+addShadow.swift"; sourceTree = "<group>"; };
 		6EBA304E230E07AE00E6DC54 /* CheckmarkImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmarkImageView.swift; sourceTree = "<group>"; };
@@ -130,6 +136,7 @@
 			children = (
 				6E1E6B3122FFA8BD00AFB7A0 /* ContainerViewControllerTests.swift */,
 				6EBE4E90230A14A70047A880 /* FakeContainerViewController.swift */,
+				6E74FD4C231C866F00730AEB /* FeedContainer */,
 			);
 			path = Containers;
 			sourceTree = "<group>";
@@ -139,6 +146,7 @@
 			children = (
 				6E1E6B3422FFA95100AFB7A0 /* ContainerViewController.swift */,
 				6E1E6B3622FFA97800AFB7A0 /* TransitionAnimation.swift */,
+				6E74FD4F231C87DA00730AEB /* FeedContainerViewController */,
 			);
 			path = ContainerViewControllers;
 			sourceTree = "<group>";
@@ -217,6 +225,23 @@
 				6E74FD4A2318CBAC00730AEB /* RandomizationService.swift */,
 			);
 			path = RandomizationService;
+			sourceTree = "<group>";
+		};
+		6E74FD4C231C866F00730AEB /* FeedContainer */ = {
+			isa = PBXGroup;
+			children = (
+				6E74FD4D231C86FC00730AEB /* FeedContainerViewControllerTests.swift */,
+			);
+			path = FeedContainer;
+			sourceTree = "<group>";
+		};
+		6E74FD4F231C87DA00730AEB /* FeedContainerViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6E74FD50231C87F800730AEB /* FeedContainerViewController.swift */,
+				6E74FD51231C87F800730AEB /* FeedContainerViewController.xib */,
+			);
+			path = FeedContainerViewController;
 			sourceTree = "<group>";
 		};
 		6EBA3038230CADBF00E6DC54 /* InterfaceControls */ = {
@@ -399,6 +424,7 @@
 			files = (
 				6E557C2122FB9DCC00270F07 /* LaunchScreen.storyboard in Resources */,
 				6E557C1E22FB9DCC00270F07 /* Assets.xcassets in Resources */,
+				6E74FD53231C87F800730AEB /* FeedContainerViewController.xib in Resources */,
 				6EBE4E9C230B614B0047A880 /* ExerciseViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -501,6 +527,7 @@
 				6EBA303C230CAED200E6DC54 /* UIView+addShadow.swift in Sources */,
 				6EBE4E94230A16170047A880 /* ExerciseCoordinator.swift in Sources */,
 				6E557C3922FBA0AE00270F07 /* Coordinator.swift in Sources */,
+				6E74FD52231C87F800730AEB /* FeedContainerViewController.swift in Sources */,
 				6E557C3B22FBA0DC00270F07 /* RootCoordinator.swift in Sources */,
 				6E557C3722FB9EEB00270F07 /* CompositionRoot.swift in Sources */,
 				6EBA305E231098F600E6DC54 /* ExerciseChoiceConfiguration.swift in Sources */,
@@ -531,6 +558,7 @@
 				6EBA306D2314D4AB00E6DC54 /* RxLatestValueTests.swift in Sources */,
 				6EBE4E97230A1B7C0047A880 /* RootCoordinatorTests.swift in Sources */,
 				6EBE4E91230A14A70047A880 /* FakeContainerViewController.swift in Sources */,
+				6E74FD4E231C86FC00730AEB /* FeedContainerViewControllerTests.swift in Sources */,
 				6E74FD472318B53F00730AEB /* ExerciseChoiceConfiguration+stubs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
