@@ -49,15 +49,25 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KZH-gX-XGC" customClass="MTMathUILabel">
-                    <rect key="frame" x="151.5" y="324" width="72" height="19.5"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fBP-vm-RCi" userLabel="QuestionLatexFrame">
+                    <rect key="frame" x="0.0" y="80.5" width="375" height="326.5"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KZH-gX-XGC" customClass="MTMathUILabel">
+                            <rect key="frame" x="151.5" y="153.5" width="72" height="19.5"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="latex" value="x = y"/>
+                                <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
+                                    <real key="value" value="30"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                    </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="latex" value="x = y"/>
-                        <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
-                            <real key="value" value="30"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
+                    <constraints>
+                        <constraint firstItem="KZH-gX-XGC" firstAttribute="centerY" secondItem="fBP-vm-RCi" secondAttribute="centerY" id="1Pf-sm-0sf"/>
+                        <constraint firstItem="KZH-gX-XGC" firstAttribute="centerX" secondItem="fBP-vm-RCi" secondAttribute="centerX" id="YFD-2M-gij"/>
+                    </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="80s-Yk-2zt" customClass="AnimatedButton" customModule="MathApp" customModuleProvider="target">
                     <rect key="frame" x="24" y="593" width="327" height="50"/>
@@ -185,7 +195,6 @@
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Phy-8J-YXb">
                     <rect key="frame" x="24" y="407" width="327" height="50"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -193,6 +202,7 @@
                 <constraint firstItem="80s-Yk-2zt" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="1nq-Nu-Cbw"/>
                 <constraint firstItem="1Vv-Al-hDk" firstAttribute="top" secondItem="Phy-8J-YXb" secondAttribute="bottom" constant="12" id="4mn-aR-XyL"/>
                 <constraint firstItem="ccN-ZU-cbe" firstAttribute="height" secondItem="1Vv-Al-hDk" secondAttribute="height" id="EWo-Sa-ouw"/>
+                <constraint firstItem="Phy-8J-YXb" firstAttribute="top" secondItem="fBP-vm-RCi" secondAttribute="bottom" id="HlQ-1F-HgP"/>
                 <constraint firstItem="80s-Yk-2zt" firstAttribute="height" secondItem="1Vv-Al-hDk" secondAttribute="height" id="KCo-So-0mS"/>
                 <constraint firstItem="1Vv-Al-hDk" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="LQi-jz-hXJ"/>
                 <constraint firstItem="5eq-Kp-SoS" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Luy-0v-Ha2"/>
@@ -200,16 +210,17 @@
                 <constraint firstItem="ccN-ZU-cbe" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="RCp-9U-8g4"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="80s-Yk-2zt" secondAttribute="bottom" constant="24" id="Ulf-3r-oxw"/>
                 <constraint firstItem="5eq-Kp-SoS" firstAttribute="centerY" secondItem="ccN-ZU-cbe" secondAttribute="centerY" id="WT9-uj-3mZ"/>
-                <constraint firstItem="KZH-gX-XGC" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="X5p-xX-MHW"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ccN-ZU-cbe" secondAttribute="trailing" constant="24" id="XUb-3b-LF9"/>
                 <constraint firstItem="ccN-ZU-cbe" firstAttribute="top" secondItem="1Vv-Al-hDk" secondAttribute="bottom" constant="12" id="aQ8-HN-3MV"/>
                 <constraint firstItem="80s-Yk-2zt" firstAttribute="top" secondItem="ccN-ZU-cbe" secondAttribute="bottom" constant="12" id="abi-KG-TXw"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="1Vv-Al-hDk" secondAttribute="trailing" constant="24" id="anU-O9-PAh"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="fBP-vm-RCi" secondAttribute="trailing" id="erq-fI-EXO"/>
                 <constraint firstItem="cTR-iQ-8gP" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="hpd-Co-Si4"/>
                 <constraint firstItem="Phy-8J-YXb" firstAttribute="height" secondItem="1Vv-Al-hDk" secondAttribute="height" id="jfp-Ct-vic"/>
                 <constraint firstItem="cTR-iQ-8gP" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="35" id="oAt-wR-M3h"/>
+                <constraint firstItem="fBP-vm-RCi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="oUt-gR-L1a"/>
                 <constraint firstItem="Phy-8J-YXb" firstAttribute="leading" secondItem="1Vv-Al-hDk" secondAttribute="leading" id="q1i-dP-d2f"/>
-                <constraint firstItem="KZH-gX-XGC" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="vQ6-5N-bN7"/>
+                <constraint firstItem="fBP-vm-RCi" firstAttribute="top" secondItem="cTR-iQ-8gP" secondAttribute="bottom" id="qJW-f1-c8T"/>
                 <constraint firstItem="Phy-8J-YXb" firstAttribute="trailing" secondItem="1Vv-Al-hDk" secondAttribute="trailing" id="y4v-y7-X0q"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
