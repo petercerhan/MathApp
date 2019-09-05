@@ -60,6 +60,28 @@ class ExerciseSceneTests: XCTestCase {
         mockStore.verifyIncrementCompleteDispatched()
     }
     
+    func test_secondChoiceSelected_secondChoiceCorrect_incrementsCorrectCount() {
+        let choiceConfiguration = ExerciseChoiceConfiguration(correctPosition: 2, firstFalseChoice: 1, secondFalseChoice: 3)
+        let mockStore = FakeResultsStore()
+        let vc = composeSUT(fakeStore: mockStore, choiceConfiguration: choiceConfiguration)
+        
+        vc.loadViewIfNeeded()
+        vc.choice2Button.sendActions(for: .touchUpInside)
+        
+        mockStore.verifyIncrementCompleteDispatched()
+    }
+    
+    func test_thirdChoiceSelected_thirdChoiceCorrect_incrementsCorrectCount() {
+        let choiceConfiguration = ExerciseChoiceConfiguration(correctPosition: 3, firstFalseChoice: 1, secondFalseChoice: 3)
+        let mockStore = FakeResultsStore()
+        let vc = composeSUT(fakeStore: mockStore, choiceConfiguration: choiceConfiguration)
+        
+        vc.loadViewIfNeeded()
+        vc.choice3Button.sendActions(for: .touchUpInside)
+        
+        mockStore.verifyIncrementCompleteDispatched()
+    }
+    
     func test_firstChoiceSelected_firstChoiceCorrect_showsFirstCorrectImage() {
         let vc = composeSUT()
         

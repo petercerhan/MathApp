@@ -25,7 +25,11 @@ class FakeResultsStore: ResultsStore {
     
     func verifyIncrementCompleteDispatched(file: StaticString = #file, line: UInt = #line) {
         XCTAssertEqual(dispatch_callCount, 1, file: file, line: line)
-        XCTAssert(dispatch_action[0].isincrementCorrectCase, file: file, line: line)
+        if dispatch_action.count > 0 {
+            XCTAssert(dispatch_action[0].isincrementCorrectCase, file: file, line: line)
+        } else {
+            XCTFail("No action dispatched", file: file, line: line)
+        }
     }
     
 }

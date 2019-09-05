@@ -136,18 +136,19 @@ class ExerciseViewModelImpl: ExerciseViewModel {
     
     private func handle_choice1() {
         showCorrectAnswer()
-        if choiceConfiguration.correctPosition != 1 {
-            choice1CorrectSubject.onNext(false)
-        }
-        if choiceConfiguration.correctPosition == 1 {
+        if choice1Correct {
             resultsStore.dispatch(action: .incrementCorrect)
+        } else {
+            choice1CorrectSubject.onNext(false)
         }
         displayStateSubject.onNext(.answer)
     }
     
     private func handle_choice2() {
         showCorrectAnswer()
-        if choiceConfiguration.correctPosition != 2 {
+        if choice2Correct {
+            resultsStore.dispatch(action: .incrementCorrect)
+        } else {
             choice2CorrectSubject.onNext(false)
         }
         displayStateSubject.onNext(.answer)
@@ -155,20 +156,34 @@ class ExerciseViewModelImpl: ExerciseViewModel {
     
     private func handle_choice3() {
         showCorrectAnswer()
-        if choiceConfiguration.correctPosition != 3 {
+        if choice3Correct {
+            resultsStore.dispatch(action: .incrementCorrect)
+        } else {
             choice3CorrectSubject.onNext(false)
         }
         displayStateSubject.onNext(.answer)
     }
     
     private func showCorrectAnswer() {
-        if choiceConfiguration.correctPosition == 1 {
+        if choice1Correct {
             choice1CorrectSubject.onNext(true)
-        } else if choiceConfiguration.correctPosition == 2 {
+        } else if choice2Correct {
             choice2CorrectSubject.onNext(true)
         } else {
             choice3CorrectSubject.onNext(true)
         }
+    }
+    
+    private var choice1Correct: Bool {
+        return choiceConfiguration.correctPosition == 1
+    }
+    
+    private var choice2Correct: Bool {
+        return choiceConfiguration.correctPosition == 2
+    }
+    
+    private var choice3Correct: Bool {
+        return choiceConfiguration.correctPosition == 3
     }
     
     private func handle_next() {
