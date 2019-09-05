@@ -21,8 +21,10 @@ class CompositionRoot {
     //MARK: - Exercise sequence
     
     func composeExerciseCoordinator() -> ExerciseCoordinator {
+        let resultsStore = ResultsStoreImpl()
+        let containerVM = FeedContainerViewModel(resultsStore: resultsStore)
         return ExerciseCoordinator(compositionRoot: self,
-                                   containerVC: FeedContainerViewController(),
+                                   containerVC: FeedContainerViewController(viewModel: containerVM),
                                    randomizationService: RandomizationServiceImpl())
     }
     

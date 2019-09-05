@@ -31,5 +31,4 @@ class ResultsStoreTests: XCTestCase {
         XCTAssertEqual(correct, 1)
     }
     
-    
 }

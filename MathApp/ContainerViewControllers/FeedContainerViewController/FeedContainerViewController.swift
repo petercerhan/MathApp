@@ -7,8 +7,14 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class FeedContainerViewController: ContainerViewController {
+    
+    //MARK: - Dependencies
+    
+    private let viewModel: FeedContainerViewModel
     
     //MARK: - UI Components
     
@@ -20,14 +26,34 @@ class FeedContainerViewController: ContainerViewController {
         return containerContentView
     }
     
+    //MARK: - Rx
+    
+    private let disposeBag = DisposeBag()
+    
     //MARK: - Initialization
     
-    init() {
+    init(viewModel: FeedContainerViewModel) {
+        self.viewModel = viewModel
         super.init(nibName: "FeedContainerViewController", bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) should not be used. Use init(viewModel:) instead")
     }
+    
+    //MARK: - UIViewController Interface
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        bindUI()
+    }
 
+    private func bindUI() {
+        viewModel.points
+            .observeOn(MainScheduler.instance)
+            .map { "\($0)" }
+            .bind(to: pointsLabel.rx.text)
+            .disposed(by: disposeBag)
+    }
+    
 }

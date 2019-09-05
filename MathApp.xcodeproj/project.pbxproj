@@ -26,6 +26,7 @@
 		6E74FD53231C87F800730AEB /* FeedContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E74FD51231C87F800730AEB /* FeedContainerViewController.xib */; };
 		6E927E7E231CA75100822EBA /* ResultsStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E927E7D231CA75100822EBA /* ResultsStoreTests.swift */; };
 		6E927E81231CA88600822EBA /* ResultsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E927E80231CA88600822EBA /* ResultsStore.swift */; };
+		6E927E83231CAE2400822EBA /* FakeResultsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E927E82231CAE2400822EBA /* FakeResultsStore.swift */; };
 		6EBA303A230CADCB00E6DC54 /* AnimatedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBA3039230CADCB00E6DC54 /* AnimatedButton.swift */; };
 		6EBA303C230CAED200E6DC54 /* UIView+addShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBA303B230CAED200E6DC54 /* UIView+addShadow.swift */; };
 		6EBA304F230E07AE00E6DC54 /* CheckmarkImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBA304E230E07AE00E6DC54 /* CheckmarkImageView.swift */; };
@@ -42,6 +43,7 @@
 		6EBE4EA2230B66CD0047A880 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBE4EA1230B66CD0047A880 /* Exercise.swift */; };
 		6EBE4EA4230B675B0047A880 /* Exercise+data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBE4EA3230B675B0047A880 /* Exercise+data.swift */; };
 		6EBE4EA6230B68720047A880 /* ExerciseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBE4EA5230B68720047A880 /* ExerciseViewModel.swift */; };
+		6EC666E2232099860048068C /* FeedContainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC666E1232099860048068C /* FeedContainerViewModel.swift */; };
 		BCB14F255178DFA21D82194D /* Pods_MathAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE993BEBDF1A3B96DC4714AA /* Pods_MathAppTests.framework */; };
 		C99DA79539000A5618FB589C /* Pods_MathApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1CE43285555BFADE6DC3070 /* Pods_MathApp.framework */; };
 /* End PBXBuildFile section */
@@ -81,6 +83,7 @@
 		6E74FD51231C87F800730AEB /* FeedContainerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedContainerViewController.xib; sourceTree = "<group>"; };
 		6E927E7D231CA75100822EBA /* ResultsStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsStoreTests.swift; sourceTree = "<group>"; };
 		6E927E80231CA88600822EBA /* ResultsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsStore.swift; sourceTree = "<group>"; };
+		6E927E82231CAE2400822EBA /* FakeResultsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeResultsStore.swift; sourceTree = "<group>"; };
 		6EBA3039230CADCB00E6DC54 /* AnimatedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedButton.swift; sourceTree = "<group>"; };
 		6EBA303B230CAED200E6DC54 /* UIView+addShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+addShadow.swift"; sourceTree = "<group>"; };
 		6EBA304E230E07AE00E6DC54 /* CheckmarkImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmarkImageView.swift; sourceTree = "<group>"; };
@@ -97,6 +100,7 @@
 		6EBE4EA1230B66CD0047A880 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		6EBE4EA3230B675B0047A880 /* Exercise+data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exercise+data.swift"; sourceTree = "<group>"; };
 		6EBE4EA5230B68720047A880 /* ExerciseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViewModel.swift; sourceTree = "<group>"; };
+		6EC666E1232099860048068C /* FeedContainerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedContainerViewModel.swift; sourceTree = "<group>"; };
 		9BCF43D90809ABFC7320F5BB /* Pods-MathApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MathApp.release.xcconfig"; path = "Target Support Files/Pods-MathApp/Pods-MathApp.release.xcconfig"; sourceTree = "<group>"; };
 		A1CE43285555BFADE6DC3070 /* Pods_MathApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MathApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACC8CBE54D6FE6BB00980A70 /* Pods-MathApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MathApp.debug.xcconfig"; path = "Target Support Files/Pods-MathApp/Pods-MathApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -243,6 +247,7 @@
 			isa = PBXGroup;
 			children = (
 				6E74FD50231C87F800730AEB /* FeedContainerViewController.swift */,
+				6EC666E1232099860048068C /* FeedContainerViewModel.swift */,
 				6E74FD51231C87F800730AEB /* FeedContainerViewController.xib */,
 			);
 			path = FeedContainerViewController;
@@ -252,6 +257,7 @@
 			isa = PBXGroup;
 			children = (
 				6E927E7D231CA75100822EBA /* ResultsStoreTests.swift */,
+				6E927E82231CAE2400822EBA /* FakeResultsStore.swift */,
 			);
 			path = ResultsStore;
 			sourceTree = "<group>";
@@ -552,6 +558,7 @@
 				6E74FD52231C87F800730AEB /* FeedContainerViewController.swift in Sources */,
 				6E557C3B22FBA0DC00270F07 /* RootCoordinator.swift in Sources */,
 				6E557C3722FB9EEB00270F07 /* CompositionRoot.swift in Sources */,
+				6EC666E2232099860048068C /* FeedContainerViewModel.swift in Sources */,
 				6EBA305E231098F600E6DC54 /* ExerciseChoiceConfiguration.swift in Sources */,
 				6E557C1722FB9DCB00270F07 /* AppDelegate.swift in Sources */,
 				6EBE4EA2230B66CD0047A880 /* Exercise.swift in Sources */,
@@ -576,6 +583,7 @@
 				6EBE4E8F230A13D80047A880 /* ExerciseCoordinatorTests.swift in Sources */,
 				6E1E6B3222FFA8BD00AFB7A0 /* ContainerViewControllerTests.swift in Sources */,
 				6EBE4E9F230B644E0047A880 /* ExerciseSceneTests.swift in Sources */,
+				6E927E83231CAE2400822EBA /* FakeResultsStore.swift in Sources */,
 				6E74FD422318A2B900730AEB /* TestUtilities.swift in Sources */,
 				6E74FD402318A1F500730AEB /* FakeExerciseViewModelDelegate.swift in Sources */,
 				6EBA306D2314D4AB00E6DC54 /* RxLatestValueTests.swift in Sources */,
