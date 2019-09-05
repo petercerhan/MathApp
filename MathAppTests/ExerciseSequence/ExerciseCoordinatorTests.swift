@@ -35,7 +35,11 @@ class ExerciseCoordinatorTests: XCTestCase {
     //MARK: - SUT Composition
     
     func composeSUT(fakeContainerViewController: ContainerViewController) -> ExerciseCoordinator {
-        return ExerciseCoordinator(compositionRoot: CompositionRoot(), containerVC: fakeContainerViewController, randomizationService: RandomizationServiceImpl(), resultsStore: FakeResultsStore())
+        return ExerciseCoordinator(compositionRoot: CompositionRoot(),
+                                   containerVC: fakeContainerViewController,
+                                   exerciseService: FakeExerciseService(),
+                                   randomizationService: RandomizationServiceImpl(),
+                                   resultsStore: FakeResultsStore())
     }
     
 }
