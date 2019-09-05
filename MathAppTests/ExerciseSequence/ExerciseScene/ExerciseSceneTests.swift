@@ -50,6 +50,16 @@ class ExerciseSceneTests: XCTestCase {
         XCTAssertEqual(vc.choice3Label.latex, "z")
     }
     
+    func test_firstChoiceSelected_firstChoiceCorrect_incrementsCorrectCount() {
+        let mockStore = FakeResultsStore()
+        let vc = composeSUT(fakeStore: mockStore)
+        
+        vc.loadViewIfNeeded()
+        vc.choice1Button.sendActions(for: .touchUpInside)
+        
+        mockStore.verifyIncrementCompleteDispatched()
+    }
+    
     func test_firstChoiceSelected_firstChoiceCorrect_showsFirstCorrectImage() {
         let vc = composeSUT()
         
@@ -200,10 +210,13 @@ class ExerciseSceneTests: XCTestCase {
     
     //MARK: - SUT Composition
     
-    func composeSUT(fakeDelegate: FakeExerciseViewModelDelegate? = nil, choiceConfiguration: ExerciseChoiceConfiguration? = nil) -> ExerciseViewController {
+    func composeSUT(fakeDelegate: FakeExerciseViewModelDelegate? = nil,
+                    fakeStore: ResultsStore? = nil,
+                    choiceConfiguration: ExerciseChoiceConfiguration? = nil) -> ExerciseViewController {
         let configuration = choiceConfiguration ?? ExerciseChoiceConfiguration(correctPosition: 1, firstFalseChoice: 1, secondFalseChoice: 2)
         let delegate = fakeDelegate ?? FakeExerciseViewModelDelegate()
-        let vm = ExerciseViewModelImpl(delegate:delegate, exercise: Exercise.exercise1, choiceConfiguration: configuration)
+        let resultsStore = fakeStore ?? FakeResultsStore()
+        let vm = ExerciseViewModelImpl(delegate:delegate, resultsStore: resultsStore, exercise: Exercise.exercise1, choiceConfiguration: configuration)
         return ExerciseViewController(viewModel: vm)
     }
 

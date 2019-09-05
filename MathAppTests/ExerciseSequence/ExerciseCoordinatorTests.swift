@@ -35,13 +35,16 @@ class ExerciseCoordinatorTests: XCTestCase {
     //MARK: - SUT Composition
     
     func composeSUT(fakeContainerViewController: ContainerViewController) -> ExerciseCoordinator {
-        return ExerciseCoordinator(compositionRoot: CompositionRoot(), containerVC: fakeContainerViewController, randomizationService: RandomizationServiceImpl())
+        return ExerciseCoordinator(compositionRoot: CompositionRoot(), containerVC: fakeContainerViewController, randomizationService: RandomizationServiceImpl(), resultsStore: FakeResultsStore())
     }
     
 }
 
 class TestExerciseViewModel: ExerciseViewModelImpl {
     init() {
-        super.init(delegate: FakeExerciseViewModelDelegate(), exercise: Exercise.exercise1, choiceConfiguration: ExerciseChoiceConfiguration.buildStub())
+        super.init(delegate: FakeExerciseViewModelDelegate(),
+                   resultsStore: FakeResultsStore(),
+                   exercise: Exercise.exercise1,
+                   choiceConfiguration: ExerciseChoiceConfiguration.buildStub())
     }
 }

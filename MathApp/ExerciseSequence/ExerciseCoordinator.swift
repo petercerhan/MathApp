@@ -16,16 +16,19 @@ class ExerciseCoordinator: Coordinator {
     private let compositionRoot: CompositionRoot
     private let containerVC: ContainerViewController
     private let randomizationService: RandomizationService
+    private let resultsStore: ResultsStore
     
     //MARK: - Initialization
     
     init(compositionRoot: CompositionRoot,
          containerVC: ContainerViewController,
-         randomizationService: RandomizationService)
+         randomizationService: RandomizationService,
+         resultsStore: ResultsStore)
     {
         self.compositionRoot = compositionRoot
         self.containerVC = containerVC
         self.randomizationService = randomizationService
+        self.resultsStore = resultsStore
     }
     
     //MARK: - Coordinator Interface
@@ -42,7 +45,9 @@ class ExerciseCoordinator: Coordinator {
     
     private func getNextExerciseScene() -> UIViewController {
         let choiceConfiguration = randomizationService.randomizedExerciseChoiceConfiguration()
-        return compositionRoot.composeExerciseScene(delegate: self, choiceConfiguration: choiceConfiguration)
+        return compositionRoot.composeExerciseScene(delegate: self,
+                                                    resultsStore: resultsStore,
+                                                    choiceConfiguration: choiceConfiguration)
     }
 
 }

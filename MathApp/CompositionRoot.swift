@@ -25,11 +25,15 @@ class CompositionRoot {
         let containerVM = FeedContainerViewModel(resultsStore: resultsStore)
         return ExerciseCoordinator(compositionRoot: self,
                                    containerVC: FeedContainerViewController(viewModel: containerVM),
-                                   randomizationService: RandomizationServiceImpl())
+                                   randomizationService: RandomizationServiceImpl(),
+                                   resultsStore: resultsStore)
     }
     
-    func composeExerciseScene(delegate: ExerciseViewModelDelegate, choiceConfiguration: ExerciseChoiceConfiguration) -> UIViewController {
-        let vm = ExerciseViewModelImpl(delegate: delegate, exercise: Exercise.exercise1, choiceConfiguration: choiceConfiguration)
+    func composeExerciseScene(delegate: ExerciseViewModelDelegate, resultsStore: ResultsStore, choiceConfiguration: ExerciseChoiceConfiguration) -> UIViewController {
+        let vm = ExerciseViewModelImpl(delegate: delegate,
+                                       resultsStore: resultsStore,
+                                       exercise: Exercise.exercise1,
+                                       choiceConfiguration: choiceConfiguration)
         return ExerciseViewController(viewModel: vm)
     }
     

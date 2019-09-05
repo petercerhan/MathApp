@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import XCTest
 import RxSwift
 @testable import MathApp
 
@@ -14,7 +15,17 @@ class FakeResultsStore: ResultsStore {
 
     var correct = Observable<Int>.just(0)
     
+    var dispatch_callCount = 0
+    var dispatch_action = [ResultsStoreAction]()
+    
     func dispatch(action: ResultsStoreAction) {
-        
+        dispatch_callCount += 1
+        dispatch_action.append(action)
     }
+    
+    func verifyIncrementCompleteDispatched(file: StaticString = #file, line: UInt = #line) {
+        XCTAssertEqual(dispatch_callCount, 1, file: file, line: line)
+        XCTAssert(dispatch_action[0].isincrementCorrectCase, file: file, line: line)
+    }
+    
 }

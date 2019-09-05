@@ -14,9 +14,7 @@ import XCTest
 class FeedContainerViewControllerTests: XCTestCase {
     
     func test_outlets_shouldBeConnected() {
-        let resultsStore = FakeResultsStore()
-        let vm = FeedContainerViewModel(resultsStore: resultsStore)
-        let vc = FeedContainerViewController(viewModel: vm)
+        let vc = composeSUT()
         
         vc.loadViewIfNeeded()
         
@@ -25,15 +23,26 @@ class FeedContainerViewControllerTests: XCTestCase {
     }
     
     func test_correctDisplay_1CorrectAnswer_shows1Correct() {
-        let stubStore = FakeResultsStore()
-        stubStore.correct = Observable.just(1)
-        let vm = FeedContainerViewModel(resultsStore: stubStore)
-
-        let vc = FeedContainerViewController(viewModel: vm)
+        let stubStore = stubStore_oneCorrect()
+        let vc = composeSUT(fakeStore: stubStore)
         
         vc.loadViewIfNeeded()
         
         XCTAssertEqual(vc.pointsLabel.text, "1")
+    }
+    
+    //MARK: - SUT Composition
+    
+    func composeSUT(fakeStore: ResultsStore? = nil) -> FeedContainerViewController {
+        let resultsStore = fakeStore ?? FakeResultsStore()
+        let vm = FeedContainerViewModel(resultsStore: resultsStore)
+        return FeedContainerViewController(viewModel: vm)
+    }
+    
+    func stubStore_oneCorrect() -> ResultsStore {
+        let stubStore = FakeResultsStore()
+        stubStore.correct = Observable.just(1)
+        return stubStore
     }
     
 }

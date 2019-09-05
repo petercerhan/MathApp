@@ -55,6 +55,7 @@ class ExerciseViewModelImpl: ExerciseViewModel {
     //MARK: - Dependencies
     
     private weak var delegate: ExerciseViewModelDelegate?
+    private let resultsStore: ResultsStore
     
     //MARK: - Config
     
@@ -64,8 +65,13 @@ class ExerciseViewModelImpl: ExerciseViewModel {
     
     //MARK: - Initialization
     
-    init(delegate: ExerciseViewModelDelegate, exercise: Exercise, choiceConfiguration: ExerciseChoiceConfiguration) {
+    init(delegate: ExerciseViewModelDelegate,
+         resultsStore: ResultsStore,
+         exercise: Exercise,
+         choiceConfiguration: ExerciseChoiceConfiguration)
+    {
         self.delegate = delegate
+        self.resultsStore = resultsStore
         self.exercise = exercise
         self.choiceConfiguration = choiceConfiguration
         correctChoice = choiceConfiguration.correctPosition
@@ -132,6 +138,9 @@ class ExerciseViewModelImpl: ExerciseViewModel {
         showCorrectAnswer()
         if choiceConfiguration.correctPosition != 1 {
             choice1CorrectSubject.onNext(false)
+        }
+        if choiceConfiguration.correctPosition == 1 {
+            resultsStore.dispatch(action: .incrementCorrect)
         }
         displayStateSubject.onNext(.answer)
     }
