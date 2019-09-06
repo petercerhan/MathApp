@@ -13,7 +13,7 @@ class FakeInfoViewModelDelegate: InfoViewModelDelegate {
     
     var quit_callCount = 0
     func quit(_ infoViewModel: InfoViewModel) {
-        
+        quit_callCount += 1
     }
     
 }

@@ -12,6 +12,10 @@ protocol InfoViewModelDelegate: class {
     func quit(_ infoViewModel: InfoViewModel)
 }
 
+enum InfoAction {
+    case quit
+}
+
 class InfoViewModel {
     
     //MARK: - Dependencies
@@ -22,6 +26,19 @@ class InfoViewModel {
     
     init(delegate: InfoViewModelDelegate) {
         self.delegate = delegate
+    }
+    
+    //MARK: - InfoViewModel Interface
+    
+    func dispatch(action: InfoAction) {
+        switch action {
+        case .quit:
+            handle_quit()
+        }
+    }
+    
+    private func handle_quit() {
+        delegate?.quit(self)
     }
 
 }

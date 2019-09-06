@@ -41,8 +41,9 @@ class CompositionRoot {
         return ExerciseViewController(viewModel: vm)
     }
     
-    func composeInfoScene() -> UIViewController {
-        return InfoViewController()
+    func composeInfoScene(delegate: InfoViewModelDelegate) -> UIViewController {
+        let vm = InfoViewModel(delegate: delegate)
+        return InfoViewController(viewModel: vm)
     }
     
 }

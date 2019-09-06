@@ -68,7 +68,15 @@ extension ExerciseCoordinator: ExerciseViewModelDelegate {
     }
     
     func info(_ exerciseViewModel: ExerciseViewModel) {
-        let vc = compositionRoot.composeInfoScene()
+        let vc = compositionRoot.composeInfoScene(delegate: self)
         containerVC.presentModal(viewController: vc, animation: .fadeIn)
+    }
+}
+
+//MARK: - InfoViewModelDelegate
+
+extension ExerciseCoordinator: InfoViewModelDelegate {
+    func quit(_ infoViewModel: InfoViewModel) {
+        containerVC.dismissModal(animation: .uncoverFade)
     }
 }

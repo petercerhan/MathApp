@@ -28,12 +28,12 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q0Z-j1-TZL">
-                    <rect key="frame" x="329" y="36" width="30" height="33"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <rect key="frame" x="329" y="36" width="30" height="39"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
                     <state key="normal" title="X"/>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="0.9517435602945824" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.92533540725708008" green="0.92549019607843142" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="q0Z-j1-TZL" secondAttribute="trailing" constant="16" id="aT6-UW-Mz6"/>
                 <constraint firstItem="q0Z-j1-TZL" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="fyp-QP-w0u"/>

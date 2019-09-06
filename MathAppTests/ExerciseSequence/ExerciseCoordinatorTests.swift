@@ -42,6 +42,17 @@ class ExerciseCoordinatorTests: XCTestCase {
         mockContainerVC.verifyDidPresentModal(viewControllerType: InfoViewController.self)
     }
     
+    func test_infoSceneRequestsQuit_dismissesModal() {
+        let mockContainerVC = FakeContainerViewController()
+        let coordinator = composeSUT(fakeContainerViewController: mockContainerVC)
+        
+        coordinator.start()
+        coordinator.info(TestExerciseViewModel())
+        coordinator.quit(TestInfoViewModel())
+        
+        XCTAssertEqual(mockContainerVC.dismissModal_callCount, 1)
+    }
+    
     //MARK: - SUT Composition
     
     func composeSUT(fakeContainerViewController: ContainerViewController) -> ExerciseCoordinator {
@@ -60,5 +71,11 @@ class TestExerciseViewModel: ExerciseViewModelImpl {
                    resultsStore: FakeResultsStore(),
                    exercise: Exercise.exercise1,
                    choiceConfiguration: ExerciseChoiceConfiguration.buildStub())
+    }
+}
+
+class TestInfoViewModel: InfoViewModel {
+    init() {
+        super.init(delegate: FakeInfoViewModelDelegate())
     }
 }
