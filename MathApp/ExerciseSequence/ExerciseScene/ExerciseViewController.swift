@@ -42,6 +42,7 @@ class ExerciseViewController: UIViewController {
     @IBOutlet private(set) var correctFrame: UIView!
     
     @IBOutlet private(set) var nextButton: UIButton!
+    @IBOutlet private(set) var infoButton: UIButton!
     
     @IBOutlet private var nextButtonCenter: NSLayoutConstraint!
     @IBOutlet private var correctFrameBottomSpace: NSLayoutConstraint!
@@ -82,9 +83,20 @@ class ExerciseViewController: UIViewController {
     }
     
     private func configureUI() {
+        configureChoiceLabels()
+        configureInfoButton() 
+    }
+    
+    private func configureChoiceLabels() {
         choice1Label.contentInsets = UIEdgeInsets(top: 2.0, left: 0.0, bottom: 2.0, right: 0.0)
         choice2Label.contentInsets = UIEdgeInsets(top: 2.0, left: 0.0, bottom: 2.0, right: 0.0)
         choice3Label.contentInsets = UIEdgeInsets(top: 2.0, left: 0.0, bottom: 2.0, right: 0.0)
+    }
+    
+    private func configureInfoButton() {
+        infoButton.layer.borderWidth = 1.0
+        infoButton.layer.borderColor = Colors.lightBlue.cgColor
+        infoButton.layer.cornerRadius = 0.5 * infoButton.frame.width
     }
     
     private func bindUI() {
@@ -334,9 +346,12 @@ class ExerciseViewController: UIViewController {
     private func animateNextButtonVisible() {
         nextButton.alpha = 0.0
         nextButton.isHidden = false
+        infoButton.alpha = 0.0
+        infoButton.isHidden = false
         
         UIView.animate(withDuration: 0.35) { [unowned self] in
             self.nextButton.alpha = 1.0
+            self.infoButton.alpha = 1.0
         }
     }
 

@@ -26,6 +26,7 @@
                 <outlet property="choice3Label" destination="bz7-39-x30" id="Lte-Q5-t8P"/>
                 <outlet property="correctFrame" destination="Phy-8J-YXb" id="hGm-s5-erL"/>
                 <outlet property="correctFrameBottomSpace" destination="4mn-aR-XyL" id="akz-In-jZn"/>
+                <outlet property="infoButton" destination="SOC-af-M79" id="xj1-gP-YFE"/>
                 <outlet property="nextButton" destination="5eq-Kp-SoS" id="0ub-E5-xRs"/>
                 <outlet property="nextButtonCenter" destination="WT9-uj-3mZ" id="1Ge-Jd-oyK"/>
                 <outlet property="questionLabel" destination="cTR-iQ-8gP" id="j6n-eD-sSO"/>
@@ -38,11 +39,6 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5eq-Kp-SoS">
-                    <rect key="frame" x="167" y="538" width="41" height="36"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                    <state key="normal" title="Next"/>
-                </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cTR-iQ-8gP">
                     <rect key="frame" x="146" y="55" width="83" height="25.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="21"/>
@@ -193,17 +189,36 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="hasShadow" value="NO"/>
                     </userDefinedRuntimeAttributes>
                 </view>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5eq-Kp-SoS">
+                    <rect key="frame" x="167" y="538" width="41" height="36"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <state key="normal" title="Next">
+                        <color key="titleColor" red="0.16862745098039217" green="0.72549019607843135" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Phy-8J-YXb">
                     <rect key="frame" x="24" y="407" width="327" height="50"/>
                 </view>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SOC-af-M79">
+                    <rect key="frame" x="315" y="538" width="36" height="36"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="SOC-af-M79" secondAttribute="height" multiplier="1:1" id="Fsd-wn-fos"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <state key="normal" title="?">
+                        <color key="titleColor" red="0.16862745098039217" green="0.72549019607843135" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="80s-Yk-2zt" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="1nq-Nu-Cbw"/>
                 <constraint firstItem="1Vv-Al-hDk" firstAttribute="top" secondItem="Phy-8J-YXb" secondAttribute="bottom" constant="12" id="4mn-aR-XyL"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="SOC-af-M79" secondAttribute="trailing" constant="24" id="7ce-47-a1D"/>
                 <constraint firstItem="ccN-ZU-cbe" firstAttribute="height" secondItem="1Vv-Al-hDk" secondAttribute="height" id="EWo-Sa-ouw"/>
                 <constraint firstItem="Phy-8J-YXb" firstAttribute="top" secondItem="fBP-vm-RCi" secondAttribute="bottom" id="HlQ-1F-HgP"/>
                 <constraint firstItem="80s-Yk-2zt" firstAttribute="height" secondItem="1Vv-Al-hDk" secondAttribute="height" id="KCo-So-0mS"/>
+                <constraint firstItem="SOC-af-M79" firstAttribute="centerY" secondItem="5eq-Kp-SoS" secondAttribute="centerY" id="LHu-DS-L89"/>
                 <constraint firstItem="1Vv-Al-hDk" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="LQi-jz-hXJ"/>
                 <constraint firstItem="5eq-Kp-SoS" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Luy-0v-Ha2"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="80s-Yk-2zt" secondAttribute="trailing" constant="24" id="M42-B5-xAk"/>
