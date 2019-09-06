@@ -10,6 +10,10 @@ import UIKit
 
 class InfoViewController: UIViewController {
     
+    //MARK: - UI Components
+    
+    @IBOutlet private(set) var quitButton: UIButton!
+    
     //MARK: - Initialization
     
     init() {

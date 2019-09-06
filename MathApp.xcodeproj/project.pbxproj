@@ -51,6 +51,9 @@
 		6EC666EE2321DFA60048068C /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC666ED2321DFA60048068C /* Colors.swift */; };
 		6EC666F22321E64A0048068C /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC666F02321E64A0048068C /* InfoViewController.swift */; };
 		6EC666F32321E64A0048068C /* InfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EC666F12321E64A0048068C /* InfoViewController.xib */; };
+		6EC666F62322042F0048068C /* InfoSceneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC666F52322042F0048068C /* InfoSceneTests.swift */; };
+		6EC666F8232208FA0048068C /* InfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC666F7232208FA0048068C /* InfoViewModel.swift */; };
+		6EC666FC232209980048068C /* FakeInfoViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC666FB232209980048068C /* FakeInfoViewModelDelegate.swift */; };
 		BCB14F255178DFA21D82194D /* Pods_MathAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE993BEBDF1A3B96DC4714AA /* Pods_MathAppTests.framework */; };
 		C99DA79539000A5618FB589C /* Pods_MathApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1CE43285555BFADE6DC3070 /* Pods_MathApp.framework */; };
 /* End PBXBuildFile section */
@@ -115,6 +118,9 @@
 		6EC666ED2321DFA60048068C /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		6EC666F02321E64A0048068C /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		6EC666F12321E64A0048068C /* InfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoViewController.xib; sourceTree = "<group>"; };
+		6EC666F52322042F0048068C /* InfoSceneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoSceneTests.swift; sourceTree = "<group>"; };
+		6EC666F7232208FA0048068C /* InfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewModel.swift; sourceTree = "<group>"; };
+		6EC666FB232209980048068C /* FakeInfoViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeInfoViewModelDelegate.swift; sourceTree = "<group>"; };
 		9BCF43D90809ABFC7320F5BB /* Pods-MathApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MathApp.release.xcconfig"; path = "Target Support Files/Pods-MathApp/Pods-MathApp.release.xcconfig"; sourceTree = "<group>"; };
 		A1CE43285555BFADE6DC3070 /* Pods_MathApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MathApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACC8CBE54D6FE6BB00980A70 /* Pods-MathApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MathApp.debug.xcconfig"; path = "Target Support Files/Pods-MathApp/Pods-MathApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -321,6 +327,7 @@
 				6E927E7C231CA74000822EBA /* ResultsStore */,
 				6E74FD452318B52F00730AEB /* Models */,
 				6EBE4E9D230B64240047A880 /* ExerciseScene */,
+				6EC666F4232204170048068C /* InfoScene */,
 			);
 			path = ExerciseSequence;
 			sourceTree = "<group>";
@@ -396,9 +403,19 @@
 			isa = PBXGroup;
 			children = (
 				6EC666F02321E64A0048068C /* InfoViewController.swift */,
+				6EC666F7232208FA0048068C /* InfoViewModel.swift */,
 				6EC666F12321E64A0048068C /* InfoViewController.xib */,
 			);
 			path = InfoViewController;
+			sourceTree = "<group>";
+		};
+		6EC666F4232204170048068C /* InfoScene */ = {
+			isa = PBXGroup;
+			children = (
+				6EC666F52322042F0048068C /* InfoSceneTests.swift */,
+				6EC666FB232209980048068C /* FakeInfoViewModelDelegate.swift */,
+			);
+			path = InfoScene;
 			sourceTree = "<group>";
 		};
 		F76851D247041C4492AC41F1 /* Frameworks */ = {
@@ -603,6 +620,7 @@
 				6E557C3922FBA0AE00270F07 /* Coordinator.swift in Sources */,
 				6E74FD52231C87F800730AEB /* FeedContainerViewController.swift in Sources */,
 				6E557C3B22FBA0DC00270F07 /* RootCoordinator.swift in Sources */,
+				6EC666F8232208FA0048068C /* InfoViewModel.swift in Sources */,
 				6E557C3722FB9EEB00270F07 /* CompositionRoot.swift in Sources */,
 				6EC666E2232099860048068C /* FeedContainerViewModel.swift in Sources */,
 				6EBA305E231098F600E6DC54 /* ExerciseChoiceConfiguration.swift in Sources */,
@@ -630,6 +648,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EBE4E8F230A13D80047A880 /* ExerciseCoordinatorTests.swift in Sources */,
+				6EC666FC232209980048068C /* FakeInfoViewModelDelegate.swift in Sources */,
 				6E1E6B3222FFA8BD00AFB7A0 /* ContainerViewControllerTests.swift in Sources */,
 				6EBE4E9F230B644E0047A880 /* ExerciseSceneTests.swift in Sources */,
 				6E927E83231CAE2400822EBA /* FakeResultsStore.swift in Sources */,
@@ -641,6 +660,7 @@
 				6EC666E42321CB490048068C /* ResultsStoreAction+caseChecks.swift in Sources */,
 				6EC666E92321D4EF0048068C /* ExerciseServiceTests.swift in Sources */,
 				6EBE4E91230A14A70047A880 /* FakeContainerViewController.swift in Sources */,
+				6EC666F62322042F0048068C /* InfoSceneTests.swift in Sources */,
 				6E927E7E231CA75100822EBA /* ResultsStoreTests.swift in Sources */,
 				6E74FD4E231C86FC00730AEB /* FeedContainerViewControllerTests.swift in Sources */,
 				6E74FD472318B53F00730AEB /* ExerciseChoiceConfiguration+stubs.swift in Sources */,

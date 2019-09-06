@@ -38,6 +38,10 @@ class ContainerViewController: UIViewController {
         return view
     }
     
+    var modalBaseView: UIView {
+        return view
+    }
+    
     func show(viewController newViewController: UIViewController, animation: TransitionAnimation) {
         let priorViewController = contentViewController
         contentViewController = newViewController
@@ -63,9 +67,9 @@ class ContainerViewController: UIViewController {
         
         baseViewController = priorViewController
         
-        newViewController.view.frame = contentView.bounds
+        newViewController.view.frame = modalBaseView.bounds
         newViewController.view.alpha = 0 //Default before animation
-        contentView.addSubview(newViewController.view)
+        modalBaseView.addSubview(newViewController.view)
         
         newViewController.didMove(toParent: self)
         

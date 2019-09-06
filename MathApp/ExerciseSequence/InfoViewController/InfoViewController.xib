@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InfoViewController" customModule="MathApp" customModuleProvider="target">
             <connections>
+                <outlet property="quitButton" destination="q0Z-j1-TZL" id="ohr-74-XDB"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -26,9 +27,16 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q0Z-j1-TZL">
+                    <rect key="frame" x="329" y="36" width="30" height="33"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="X"/>
+                </button>
             </subviews>
             <color key="backgroundColor" white="0.9517435602945824" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="q0Z-j1-TZL" secondAttribute="trailing" constant="16" id="aT6-UW-Mz6"/>
+                <constraint firstItem="q0Z-j1-TZL" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="fyp-QP-w0u"/>
                 <constraint firstItem="5a9-IA-qKa" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="qpT-Vr-uKd"/>
                 <constraint firstItem="5a9-IA-qKa" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="xiO-fy-7JC"/>
             </constraints>
