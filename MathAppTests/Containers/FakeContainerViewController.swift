@@ -27,6 +27,21 @@ class FakeContainerViewController: ContainerViewController {
         }
     }
     
+    var presentModal_callCount = 0
+    var presentModal_viewController = [UIViewController]()
+    
+    override func presentModal(viewController newViewController: UIViewController, animation: TransitionAnimation = .coverFromBottom) {
+        presentModal_callCount += 1
+        presentModal_viewController.append(newViewController)
+    }
+    
+    func verifyDidPresentModal<T>(viewControllerType: T.Type, file: StaticString = #file, line: UInt = #line) {
+        XCTAssert(presentModal_callCount > 0, file: file, line: line)
+        if !(presentModal_viewController.last is T) {
+            XCTFail("Displayed View Controller type does not match", file: file, line: line)
+        }
+    }
+    
     var dismissModal_callCount = 0
     
     override func dismissModal(animation: TransitionAnimation = .uncoverDown) {

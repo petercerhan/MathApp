@@ -26,6 +26,7 @@ protocol ExerciseViewModel {
 
 protocol ExerciseViewModelDelegate: class {
     func next(_ exerciseViewModel: ExerciseViewModel)
+    func info(_ exerciseViewModel: ExerciseViewModel)
 }
 
 enum ExerciseAction {
@@ -33,6 +34,7 @@ enum ExerciseAction {
     case choice2
     case choice3
     case next
+    case info
 }
 
 extension ExerciseViewModel where Self: ExerciseViewModelImpl {
@@ -131,6 +133,8 @@ class ExerciseViewModelImpl: ExerciseViewModel {
             handle_choice3()
         case .next:
             handle_next()
+        case .info:
+            handle_info()
         }
     }
     
@@ -188,6 +192,10 @@ class ExerciseViewModelImpl: ExerciseViewModel {
     
     private func handle_next() {
         delegate?.next(self)
+    }
+    
+    private func handle_info() {
+        delegate?.info(self)
     }
     
 }

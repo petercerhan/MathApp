@@ -32,6 +32,16 @@ class ExerciseCoordinatorTests: XCTestCase {
         mockContainerVC.verifyDidShow(viewControllerType: ExerciseViewController.self)
     }
     
+    func test_exerciseSceneRequestsInfo_shouldShowInfoScene() {
+        let mockContainerVC = FakeContainerViewController()
+        let coordinator = composeSUT(fakeContainerViewController: mockContainerVC)
+        
+        coordinator.start()
+        coordinator.info(TestExerciseViewModel())
+        
+        mockContainerVC.verifyDidPresentModal(viewControllerType: InfoViewController.self)
+    }
+    
     //MARK: - SUT Composition
     
     func composeSUT(fakeContainerViewController: ContainerViewController) -> ExerciseCoordinator {

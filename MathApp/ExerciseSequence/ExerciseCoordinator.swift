@@ -66,4 +66,9 @@ extension ExerciseCoordinator: ExerciseViewModelDelegate {
         let vc = getNextExerciseScene()
         containerVC.show(viewController: vc, animation: .fadeIn)
     }
+    
+    func info(_ exerciseViewModel: ExerciseViewModel) {
+        let vc = compositionRoot.composeInfoScene()
+        containerVC.presentModal(viewController: vc, animation: .fadeIn)
+    }
 }

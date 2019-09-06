@@ -84,7 +84,7 @@ class ExerciseViewController: UIViewController {
     
     private func configureUI() {
         configureChoiceLabels()
-        configureInfoButton() 
+        configureInfoButton()
     }
     
     private func configureChoiceLabels() {
@@ -199,6 +199,7 @@ class ExerciseViewController: UIViewController {
         bindChoice2Action()
         bindChoice3Action()
         bindNextAction()
+        bindInfoAction()
     }
     
     private func bindChoice1Action() {
@@ -242,6 +243,15 @@ class ExerciseViewController: UIViewController {
             .throttle(.milliseconds(500), latest: false, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] in
                 self.viewModel.dispatch(action: .next)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindInfoAction() {
+        infoButton.rx.tap
+            .throttle(.milliseconds(500), latest: false, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in
+                self.viewModel.dispatch(action: .info)
             })
             .disposed(by: disposeBag)
     }

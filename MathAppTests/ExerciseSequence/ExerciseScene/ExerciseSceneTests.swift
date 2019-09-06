@@ -43,11 +43,11 @@ class ExerciseSceneTests: XCTestCase {
         
         vc.loadViewIfNeeded()
         
-        XCTAssertEqual(vc.questionLabel.text, "Solve for x")
-        XCTAssertEqual(vc.questionLatexLabel.latex, "\\sqrt{x^2}")
-        XCTAssertEqual(vc.choice1Label.latex, "x")
-        XCTAssertEqual(vc.choice2Label.latex, "y")
-        XCTAssertEqual(vc.choice3Label.latex, "z")
+        XCTAssertEqual(vc.questionLabel.text, "Find the derivative:")
+        XCTAssertEqual(vc.questionLatexLabel.latex, "\\frac{d}{dx}(1)")
+        XCTAssertEqual(vc.choice1Label.latex, "0")
+        XCTAssertEqual(vc.choice2Label.latex, "x")
+        XCTAssertEqual(vc.choice3Label.latex, "1")
     }
     
     func test_firstChoiceSelected_firstChoiceCorrect_incrementsCorrectCount() {
@@ -211,6 +211,16 @@ class ExerciseSceneTests: XCTestCase {
         vc.nextButton.sendActions(for: .touchUpInside)
         
         XCTAssertEqual(mockDelegate.next_callCount, 1)
+    }
+    
+    func test_infoButton_requestsInfoScene() {
+        let mockDelegate = FakeExerciseViewModelDelegate()
+        let vc = composeSUT(fakeDelegate: mockDelegate)
+        
+        vc.loadViewIfNeeded()
+        vc.infoButton.sendActions(for: .touchUpInside)
+        
+        XCTAssertEqual(mockDelegate.info_callCount, 1)
     }
     
     //MARK: - Assertions
