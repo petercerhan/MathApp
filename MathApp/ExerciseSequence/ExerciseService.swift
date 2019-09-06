@@ -18,7 +18,7 @@ class ExerciseServiceImpl: ExerciseService {
     
     func nextExercise() -> Exercise {
         let exercise = Exercise.getByID(exerciseIndex + 1)
-        exerciseIndex = (exerciseIndex + 1) % 2
+        exerciseIndex = (exerciseIndex + 1) % 8
         return exercise
     }
     
