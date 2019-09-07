@@ -35,9 +35,10 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                     </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="mhI-Xq-KHO" firstAttribute="height" secondItem="Xua-yJ-4qB" secondAttribute="height" placeholder="YES" id="En0-bj-YFw"/>
-                        <constraint firstAttribute="trailing" secondItem="mhI-Xq-KHO" secondAttribute="trailing" id="Osc-0z-6Vz"/>
+                        <constraint firstAttribute="trailing" secondItem="mhI-Xq-KHO" secondAttribute="trailing" priority="999" id="Osc-0z-6Vz"/>
                         <constraint firstItem="mhI-Xq-KHO" firstAttribute="top" secondItem="Xua-yJ-4qB" secondAttribute="top" id="SYf-Om-LUX"/>
                         <constraint firstAttribute="bottom" secondItem="mhI-Xq-KHO" secondAttribute="bottom" id="WZQ-yT-coq"/>
                         <constraint firstItem="mhI-Xq-KHO" firstAttribute="width" secondItem="Xua-yJ-4qB" secondAttribute="width" id="a6h-ru-7gS"/>

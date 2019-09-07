@@ -50,26 +50,32 @@ class InfoViewController: UIViewController {
         let contentElements = viewModel.infoViewContent
         
         for element in contentElements {
-            let label = UILabel()
-            label.numberOfLines = 0
-            label.text = element.content
-            label.translatesAutoresizingMaskIntoConstraints = false
-            scrollView.addSubview(label)
-            
-            if let bottomView = bottomView {
-                label.topAnchor.constraint(equalTo: bottomView.bottomAnchor, constant: 12.0).isActive = true
-            } else {
-                label.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 12.0).isActive = true
-            }
-            
-            label.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 12.0).isActive = true
-            label.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: 12.0).isActive = true
-            bottomView = label
+            let glyph = insertLabelGlyph(contentElement: element, bottomView: bottomView)
+            bottomView = glyph
         }
         
         if let bottomView = bottomView {
             bottomView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -12.0).isActive = true
         }
+    }
+    
+    private func insertLabelGlyph(contentElement: InfoViewContentElement, bottomView: UIView?) -> UILabel {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.text = contentElement.content
+        label.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.addSubview(label)
+        
+        if let bottomView = bottomView {
+            label.topAnchor.constraint(equalTo: bottomView.bottomAnchor, constant: 12.0).isActive = true
+        } else {
+            label.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 12.0).isActive = true
+        }
+        
+        label.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 12.0).isActive = true
+        label.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: 12.0).isActive = true
+        
+        return label
     }
     
     private func bindActions() {

@@ -14,8 +14,7 @@ class InfoSceneTests: XCTestCase {
     
     func test_quitButton_requestsToQuit() {
         let mockDelegate = FakeInfoViewModelDelegate()
-        let viewModel = InfoViewModelImpl(delegate: mockDelegate, concept: Concept.constantRule)
-        let vc = InfoViewController(viewModel: viewModel)
+        let vc = composeSUT(fakeDelegate: mockDelegate)
         
         vc.loadViewIfNeeded()
         vc.quitButton.sendActions(for: .touchUpInside)
@@ -24,15 +23,24 @@ class InfoSceneTests: XCTestCase {
     }
     
     func test_contentView_firstViewIsTitleLabel() {
-        let stubData = Concept.constantRule
-        let viewModel = InfoViewModelImpl(delegate: FakeInfoViewModelDelegate(), concept: stubData)
-        let vc = InfoViewController(viewModel: viewModel)
+        let stubConcept = Concept.constantRule
+        let vc = composeSUT(stubConcept: stubConcept)
         
         vc.loadViewIfNeeded()
         
         XCTAssert(vc.scrollView.subviews.count >= 4)
         XCTAssert(vc.scrollView.subviews[3] is UILabel)
-        XCTAssertEqual((vc.scrollView.subviews[3] as? UILabel)?.text, "Constant Rule")
+        XCTAssertEqual((vc.scrollView.subviews[3] as? UILabel)?.text, stubConcept.name)
+    }
+    
+    //MARK: - SUT Composition
+    
+    func composeSUT(fakeDelegate: InfoViewModelDelegate? = nil, stubConcept: Concept? = nil) -> InfoViewController {
+        let delegate = fakeDelegate ?? FakeInfoViewModelDelegate()
+        let concept = stubConcept ?? Concept.constantRule
+        let viewModel = InfoViewModelImpl(delegate: delegate, concept: concept)
+        
+        return InfoViewController(viewModel: viewModel)
     }
 
 }
