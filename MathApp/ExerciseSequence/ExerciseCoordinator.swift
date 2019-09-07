@@ -71,7 +71,7 @@ class ExerciseCoordinator: Coordinator {
 
 extension ExerciseCoordinator: FeedContainerViewModelDelegate {
     func menu(_ feedContainerViewModel: FeedContainerViewModel) {
-        let coordinator = compositionRoot.composeMenuCoordinator()
+        let coordinator = compositionRoot.composeMenuCoordinator(delegate: self)
         containerVC.presentModal(viewController: coordinator.containerViewController)
         coordinator.start()
         childCoordinator = coordinator
@@ -97,5 +97,13 @@ extension ExerciseCoordinator: ExerciseViewModelDelegate {
 extension ExerciseCoordinator: InfoViewModelDelegate {
     func quit(_ infoViewModel: InfoViewModelImpl) {
         containerVC.dismissModal(animation: .uncoverFade)
+    }
+}
+
+//MARK: - MenuCoordinatorDelegate
+
+extension ExerciseCoordinator: MenuCoordinatorDelegate {
+    func quit(_ menuCoordinator: MenuCoordinator) {
+        containerVC.dismissModal()
     }
 }

@@ -63,6 +63,16 @@ class ExerciseCoordinatorTests: XCTestCase {
         mockContainerVC.verifyDidPresentModal(viewControllerType: ContainerViewController.self)
     }
     
+    func test_menuRequestsQuit_shouldDismissMenu() {
+        let mockContainerVC = FakeContainerViewController()
+        let coordinator = composeSUT(fakeContainerViewController: mockContainerVC)
+        
+        coordinator.start()
+        coordinator.quit(TestMenuCoordinator())
+        
+        XCTAssertEqual(mockContainerVC.dismissModal_callCount, 1)
+    }
+    
     //MARK: - SUT Composition
     
     func composeSUT(fakeContainerViewController: ContainerViewController) -> ExerciseCoordinator {

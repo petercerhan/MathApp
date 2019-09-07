@@ -9,18 +9,31 @@
 import UIKit
 import RxSwift
 
+protocol MenuCoordinatorDelegate: class {
+    func quit(_ menuCoordinator: MenuCoordinator)
+}
+
 class MenuCoordinator: Coordinator {
     
     //MARK: - Dependencies
     
+    private weak var delegate: MenuCoordinatorDelegate?
     private let containerVC: ContainerViewController
     private let compositionRoot: CompositionRoot
     
     //MARK: - Initialization
     
-    init(containerVC: ContainerViewController, compositionRoot: CompositionRoot) {
+    init(delegate: MenuCoordinatorDelegate,
+         containerVC: ContainerViewController,
+         compositionRoot: CompositionRoot)
+    {
+        self.delegate = delegate
         self.containerVC = containerVC
         self.compositionRoot = compositionRoot
+        
+        if let quitableContainer = containerVC as? QuitableContainerViewController {
+            quitableContainer.viewModel.setDelegate(self)
+        }
     }
     
     //MARK: - Coordinator Interface
@@ -30,8 +43,17 @@ class MenuCoordinator: Coordinator {
     }
     
     func start() {
+        containerVC.loadViewIfNeeded()
         let vc = compositionRoot.composeMenuScene()
         containerVC.show(viewController: vc, animation: .none)
     }
     
+}
+
+//MARK: - QuitableContainerViewModelDelegate
+
+extension MenuCoordinator: QuitableContainerViewModelDelegate {
+    func quit(_ quitableContainerViewModel: QuitableContainerViewModel) {
+        delegate?.quit(self)
+    }
 }

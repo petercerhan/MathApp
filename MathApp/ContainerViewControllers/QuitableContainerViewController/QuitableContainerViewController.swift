@@ -14,7 +14,7 @@ class QuitableContainerViewController: ContainerViewController {
     
     //MARK: - Dependencies
     
-    private let viewModel: QuitableContainerViewModel
+    let viewModel: QuitableContainerViewModel
     
     //MARK: - Interface Components
     
