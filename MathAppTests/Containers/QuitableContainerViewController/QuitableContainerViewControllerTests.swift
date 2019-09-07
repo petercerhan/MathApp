@@ -19,6 +19,7 @@ class QuitableContainerViewControllerTests: XCTestCase {
         vc.loadViewIfNeeded()
         
         XCTAssertNotNil(vc.quitButton)
+        XCTAssertNotNil(vc.containerContentView)
     }
     
     func test_quitButtonPress_requestsToQuit() {

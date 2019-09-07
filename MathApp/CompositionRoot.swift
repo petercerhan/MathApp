@@ -49,7 +49,9 @@ class CompositionRoot {
     //MARK: - Menu sequence
     
     func composeMenuCoordinator() -> MenuCoordinator {
-        return MenuCoordinator(containerVC: ContainerViewController(), compositionRoot: self)
+        let quitableContainerVM = QuitableContainerViewModelImpl(delegate: nil)
+        let quitableContainer = QuitableContainerViewController(viewModel: quitableContainerVM)
+        return MenuCoordinator(containerVC: quitableContainer, compositionRoot: self)
     }
     
     func composeMenuScene() -> UIViewController {

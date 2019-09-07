@@ -18,7 +18,12 @@ class QuitableContainerViewController: ContainerViewController {
     
     //MARK: - Interface Components
     
-    @IBOutlet var quitButton: UIButton!
+    @IBOutlet private(set) var quitButton: UIButton!
+    @IBOutlet private(set) var containerContentView: UIView!
+    
+    override var contentView: UIView {
+        return containerContentView
+    }
     
     //MARK: - Rx
     
