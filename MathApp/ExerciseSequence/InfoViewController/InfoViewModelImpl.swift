@@ -42,8 +42,10 @@ class InfoViewModelImpl: InfoViewModel {
         let descriptionElement = InfoViewContentElement(contentType: .text, content: concept.description)
         let exampleIntroElement = InfoViewContentElement(contentType: .text, content: "Example:")
         let exampleLatex = InfoViewContentElement(contentType: .latex, content: concept.example)
+        let ruleLabelElement = InfoViewContentElement(contentType: .text, content: "Rule:")
+        let ruleLatex = InfoViewContentElement(contentType: .latex, content: concept.rule)
         
-        infoViewContent = [titleElement, descriptionElement, exampleIntroElement, exampleLatex]
+        infoViewContent = [titleElement, descriptionElement, exampleIntroElement, exampleLatex, ruleLabelElement, ruleLatex]
     }
     
     //MARK: - InfoViewModel Interface

@@ -77,8 +77,7 @@ class InfoViewController: UIViewController {
             label.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 12.0).isActive = true
         }
         
-        label.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 12.0).isActive = true
-        label.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: 12.0).isActive = true
+        label.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
         
         return label
     }

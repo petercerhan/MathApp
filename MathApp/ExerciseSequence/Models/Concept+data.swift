@@ -13,7 +13,7 @@ extension Concept {
     static var constantRule: Concept {
         return Concept(id: 1, name: "Constant Rule",
                        description: "The derivative of a constant is 0",
-                       rule: "\\frac{d}{dx}(1) = 0",
+                       rule: "\\frac{d}{dx}(c) = 0",
                        example: "\\frac{d}{dx}(5) = 0")
     }
     

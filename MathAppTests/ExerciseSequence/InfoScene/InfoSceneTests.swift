@@ -59,7 +59,21 @@ class InfoSceneTests: XCTestCase {
             return
         }
         XCTAssert(vc.scrollView.subviews[6] is MTMathUILabel)
-        XCTAssertEqual((vc.scrollView.subviews[6] as? MTMathUILabel)?.latex, "\\frac{d}{dx}(5) = 0")
+        XCTAssertEqual((vc.scrollView.subviews[6] as? MTMathUILabel)?.latex, stubConcept.example)
+    }
+    
+    func test_contentView_sixthViewIsLatexExample() {
+        let stubConcept = Concept.constantRule
+        let vc = composeSUT(stubConcept: stubConcept)
+        
+        vc.loadViewIfNeeded()
+        
+        guard vc.scrollView.subviews.count >= 9 else {
+            XCTFail("Scrollview has too few subviews")
+            return
+        }
+        XCTAssert(vc.scrollView.subviews[8] is MTMathUILabel)
+        XCTAssertEqual((vc.scrollView.subviews[8] as? MTMathUILabel)?.latex, stubConcept.rule)
     }
     
     //MARK: - SUT Composition
