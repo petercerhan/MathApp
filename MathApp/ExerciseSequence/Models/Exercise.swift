@@ -16,4 +16,5 @@ struct Exercise {
     let falseAnswer1: String
     let falseAnswer2: String
     let falseAnswer3: String
+    let concept: Concept
 }

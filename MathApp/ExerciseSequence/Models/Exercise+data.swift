@@ -43,7 +43,8 @@ extension Exercise {
                         answer: "0",
                         falseAnswer1: "x",
                         falseAnswer2: "1",
-                        falseAnswer3: "dx")
+                        falseAnswer3: "dx",
+                        concept: Concept.constantRule)
     }
     
     static var exercise2: Exercise {
@@ -53,7 +54,8 @@ extension Exercise {
                         answer: "0",
                         falseAnswer1: "1",
                         falseAnswer2: "2",
-                        falseAnswer3: "x")
+                        falseAnswer3: "x",
+                        concept: Concept.constantRule)
     }
     
     static var exercise3: Exercise {
@@ -63,7 +65,8 @@ extension Exercise {
                         answer: "0",
                         falseAnswer1: "1",
                         falseAnswer2: "3",
-                        falseAnswer3: "x")
+                        falseAnswer3: "x",
+                        concept: Concept.constantRule)
     }
     
     static var exercise4: Exercise {
@@ -73,7 +76,8 @@ extension Exercise {
                         answer: "0",
                         falseAnswer1: "1",
                         falseAnswer2: "10",
-                        falseAnswer3: "-1")
+                        falseAnswer3: "-1",
+                        concept: Concept.constantRule)
     }
     
     static var exercise5: Exercise {
@@ -83,7 +87,8 @@ extension Exercise {
                         answer: "0",
                         falseAnswer1: "1",
                         falseAnswer2: "dx",
-                        falseAnswer3: "-1")
+                        falseAnswer3: "-1",
+                        concept: Concept.constantRule)
     }
     
     static var exercise6: Exercise {
@@ -93,7 +98,8 @@ extension Exercise {
                         answer: "0",
                         falseAnswer1: "1",
                         falseAnswer2: "1.5",
-                        falseAnswer3: "-1")
+                        falseAnswer3: "-1",
+                        concept: Concept.constantRule)
     }
     
     static var exercise7: Exercise {
@@ -103,7 +109,8 @@ extension Exercise {
                         answer: "0",
                         falseAnswer1: "y",
                         falseAnswer2: "1",
-                        falseAnswer3: "-1")
+                        falseAnswer3: "-1",
+                        concept: Concept.constantRule)
     }
     
     static var exercise8: Exercise {
@@ -113,7 +120,8 @@ extension Exercise {
                         answer: "0",
                         falseAnswer1: "z",
                         falseAnswer2: "1",
-                        falseAnswer3: "-1")
+                        falseAnswer3: "-1",
+                        concept: Concept.constantRule)
     }
 }
 

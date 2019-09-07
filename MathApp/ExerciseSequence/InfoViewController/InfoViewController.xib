@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InfoViewController" customModule="MathApp" customModuleProvider="target">
             <connections>
                 <outlet property="quitButton" destination="q0Z-j1-TZL" id="ohr-74-XDB"/>
+                <outlet property="scrollView" destination="Xua-yJ-4qB" id="hdv-vt-59z"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -21,26 +22,40 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5a9-IA-qKa">
-                    <rect key="frame" x="173" y="323" width="29" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q0Z-j1-TZL">
                     <rect key="frame" x="329" y="36" width="30" height="39"/>
                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
                     <state key="normal" title="X"/>
                 </button>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xua-yJ-4qB">
+                    <rect key="frame" x="24" y="99" width="327" height="544"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mhI-Xq-KHO" userLabel="ContentSpaceView">
+                            <rect key="frame" x="0.0" y="0.0" width="327" height="544"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="mhI-Xq-KHO" firstAttribute="height" secondItem="Xua-yJ-4qB" secondAttribute="height" placeholder="YES" id="En0-bj-YFw"/>
+                        <constraint firstAttribute="trailing" secondItem="mhI-Xq-KHO" secondAttribute="trailing" id="Osc-0z-6Vz"/>
+                        <constraint firstItem="mhI-Xq-KHO" firstAttribute="top" secondItem="Xua-yJ-4qB" secondAttribute="top" id="SYf-Om-LUX"/>
+                        <constraint firstAttribute="bottom" secondItem="mhI-Xq-KHO" secondAttribute="bottom" id="WZQ-yT-coq"/>
+                        <constraint firstItem="mhI-Xq-KHO" firstAttribute="width" secondItem="Xua-yJ-4qB" secondAttribute="width" id="a6h-ru-7gS"/>
+                        <constraint firstItem="mhI-Xq-KHO" firstAttribute="leading" secondItem="Xua-yJ-4qB" secondAttribute="leading" id="lYl-i0-7D8"/>
+                    </constraints>
+                </scrollView>
             </subviews>
             <color key="backgroundColor" red="0.92533540725708008" green="0.92549019607843142" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="Xua-yJ-4qB" firstAttribute="top" secondItem="q0Z-j1-TZL" secondAttribute="bottom" constant="24" id="SXh-2V-hLY"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Xua-yJ-4qB" secondAttribute="trailing" constant="24" id="Zft-BE-U1t"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="q0Z-j1-TZL" secondAttribute="trailing" constant="16" id="aT6-UW-Mz6"/>
                 <constraint firstItem="q0Z-j1-TZL" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="fyp-QP-w0u"/>
-                <constraint firstItem="5a9-IA-qKa" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="qpT-Vr-uKd"/>
-                <constraint firstItem="5a9-IA-qKa" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="xiO-fy-7JC"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Xua-yJ-4qB" secondAttribute="bottom" constant="24" id="sxf-Mr-f7L"/>
+                <constraint firstItem="Xua-yJ-4qB" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="uQR-GW-FZh"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="133.59999999999999" y="154.27286356821591"/>
         </view>
     </objects>
 </document>

@@ -16,7 +16,7 @@ class FakeExerciseViewModelDelegate: ExerciseViewModelDelegate {
     }
     
     var info_callCount = 0
-    func info(_ exerciseViewModel: ExerciseViewModel) {
+    func info(_ exerciseViewModel: ExerciseViewModel, concept: Concept) {
         info_callCount += 1
     }
 }

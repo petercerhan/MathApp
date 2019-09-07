@@ -26,7 +26,7 @@ protocol ExerciseViewModel {
 
 protocol ExerciseViewModelDelegate: class {
     func next(_ exerciseViewModel: ExerciseViewModel)
-    func info(_ exerciseViewModel: ExerciseViewModel)
+    func info(_ exerciseViewModel: ExerciseViewModel, concept: Concept)
 }
 
 enum ExerciseAction {
@@ -195,7 +195,7 @@ class ExerciseViewModelImpl: ExerciseViewModel {
     }
     
     private func handle_info() {
-        delegate?.info(self)
+        delegate?.info(self, concept: exercise.concept)
     }
     
 }

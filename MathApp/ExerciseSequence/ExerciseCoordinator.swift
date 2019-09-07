@@ -67,8 +67,8 @@ extension ExerciseCoordinator: ExerciseViewModelDelegate {
         containerVC.show(viewController: vc, animation: .fadeIn)
     }
     
-    func info(_ exerciseViewModel: ExerciseViewModel) {
-        let vc = compositionRoot.composeInfoScene(delegate: self)
+    func info(_ exerciseViewModel: ExerciseViewModel, concept: Concept) {
+        let vc = compositionRoot.composeInfoScene(delegate: self, concept: Concept.constantRule)
         containerVC.presentModal(viewController: vc, animation: .fadeIn)
     }
 }
@@ -76,7 +76,7 @@ extension ExerciseCoordinator: ExerciseViewModelDelegate {
 //MARK: - InfoViewModelDelegate
 
 extension ExerciseCoordinator: InfoViewModelDelegate {
-    func quit(_ infoViewModel: InfoViewModel) {
+    func quit(_ infoViewModel: InfoViewModelImpl) {
         containerVC.dismissModal(animation: .uncoverFade)
     }
 }

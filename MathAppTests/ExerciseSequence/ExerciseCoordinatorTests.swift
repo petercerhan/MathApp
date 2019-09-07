@@ -37,7 +37,7 @@ class ExerciseCoordinatorTests: XCTestCase {
         let coordinator = composeSUT(fakeContainerViewController: mockContainerVC)
         
         coordinator.start()
-        coordinator.info(TestExerciseViewModel())
+        coordinator.info(TestExerciseViewModel(), concept: Concept.constantRule)
         
         mockContainerVC.verifyDidPresentModal(viewControllerType: InfoViewController.self)
     }
@@ -47,7 +47,7 @@ class ExerciseCoordinatorTests: XCTestCase {
         let coordinator = composeSUT(fakeContainerViewController: mockContainerVC)
         
         coordinator.start()
-        coordinator.info(TestExerciseViewModel())
+        coordinator.info(TestExerciseViewModel(), concept: Concept.constantRule)
         coordinator.quit(TestInfoViewModel())
         
         XCTAssertEqual(mockContainerVC.dismissModal_callCount, 1)
@@ -74,8 +74,8 @@ class TestExerciseViewModel: ExerciseViewModelImpl {
     }
 }
 
-class TestInfoViewModel: InfoViewModel {
+class TestInfoViewModel: InfoViewModelImpl {
     init() {
-        super.init(delegate: FakeInfoViewModelDelegate())
+        super.init(delegate: FakeInfoViewModelDelegate(), concept: Concept.constantRule)
     }
 }

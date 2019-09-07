@@ -12,7 +12,7 @@ import Foundation
 class FakeInfoViewModelDelegate: InfoViewModelDelegate {
     
     var quit_callCount = 0
-    func quit(_ infoViewModel: InfoViewModel) {
+    func quit(_ infoViewModel: InfoViewModelImpl) {
         quit_callCount += 1
     }
     

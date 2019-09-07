@@ -19,6 +19,7 @@ class InfoViewController: UIViewController {
     //MARK: - UI Components
     
     @IBOutlet private(set) var quitButton: UIButton!
+    @IBOutlet private(set) var scrollView: UIScrollView!
     
     //MARK: - Rx
     
@@ -39,7 +40,36 @@ class InfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        layoutContentGlyphs()
         bindActions()
+    }
+    
+    private func layoutContentGlyphs() {
+        var bottomView: UIView?
+        
+        let contentElements = viewModel.infoViewContent
+        
+        for element in contentElements {
+            let label = UILabel()
+            label.numberOfLines = 0
+            label.text = element.content
+            label.translatesAutoresizingMaskIntoConstraints = false
+            scrollView.addSubview(label)
+            
+            if let bottomView = bottomView {
+                label.topAnchor.constraint(equalTo: bottomView.bottomAnchor, constant: 12.0).isActive = true
+            } else {
+                label.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 12.0).isActive = true
+            }
+            
+            label.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 12.0).isActive = true
+            label.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: 12.0).isActive = true
+            bottomView = label
+        }
+        
+        if let bottomView = bottomView {
+            bottomView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -12.0).isActive = true
+        }
     }
     
     private func bindActions() {

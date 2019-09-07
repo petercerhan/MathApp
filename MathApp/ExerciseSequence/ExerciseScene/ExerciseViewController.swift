@@ -286,9 +286,10 @@ class ExerciseViewController: UIViewController {
         choice1ButtonIndependentYPositionConstraint?.isActive = false
         choice1Button.centerYAnchor.constraint(equalTo: correctFrame.centerYAnchor).isActive = true
         
+        self.choice2Button.alpha = 0
+        self.choice3Button.alpha = 0
+        
         UIView.animate(withDuration: 0.25) { [unowned self] in
-            self.choice2Button.alpha = 0
-            self.choice3Button.alpha = 0
             self.view.layoutIfNeeded()
         }
         
@@ -305,9 +306,10 @@ class ExerciseViewController: UIViewController {
         choice2ButtonIndependentYPositionConstraint?.isActive = false
         choice2Button.centerYAnchor.constraint(equalTo: correctFrame.centerYAnchor).isActive = true
         
+        self.choice1Button.alpha = 0
+        self.choice3Button.alpha = 0
+        
         UIView.animate(withDuration: 0.25) { [unowned self] in
-            self.choice1Button.alpha = 0
-            self.choice3Button.alpha = 0
             self.view.layoutIfNeeded()
         }
         
@@ -324,9 +326,10 @@ class ExerciseViewController: UIViewController {
         choice3ButtonIndependentYPositionConstraint?.isActive = false
         choice3Button.centerYAnchor.constraint(equalTo: correctFrame.centerYAnchor).isActive = true
         
+        self.choice1Button.alpha = 0
+        self.choice2Button.alpha = 0
+        
         UIView.animate(withDuration: 0.25) { [unowned self] in
-            self.choice1Button.alpha = 0
-            self.choice2Button.alpha = 0
             self.view.layoutIfNeeded()
         }
         
