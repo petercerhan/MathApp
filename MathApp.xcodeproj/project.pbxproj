@@ -62,6 +62,11 @@
 		6EC6670F232447C40048068C /* MenuCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC6670E232447C40048068C /* MenuCoordinatorTests.swift */; };
 		6EC667132324489F0048068C /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC667112324489F0048068C /* MenuViewController.swift */; };
 		6EC667142324489F0048068C /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EC667122324489F0048068C /* MenuViewController.xib */; };
+		6EC66717232451080048068C /* QuitableContainerViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC66716232451080048068C /* QuitableContainerViewControllerTests.swift */; };
+		6EC66719232451350048068C /* FakeQuitableContainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC66718232451350048068C /* FakeQuitableContainerViewModel.swift */; };
+		6EC6671D232451760048068C /* QuitableContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC6671B232451760048068C /* QuitableContainerViewController.swift */; };
+		6EC6671E232451760048068C /* QuitableContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EC6671C232451760048068C /* QuitableContainerViewController.xib */; };
+		6EC66720232451820048068C /* QuitableContainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC6671F232451820048068C /* QuitableContainerViewModel.swift */; };
 		BCB14F255178DFA21D82194D /* Pods_MathAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE993BEBDF1A3B96DC4714AA /* Pods_MathAppTests.framework */; };
 		C99DA79539000A5618FB589C /* Pods_MathApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1CE43285555BFADE6DC3070 /* Pods_MathApp.framework */; };
 /* End PBXBuildFile section */
@@ -137,6 +142,11 @@
 		6EC6670E232447C40048068C /* MenuCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCoordinatorTests.swift; sourceTree = "<group>"; };
 		6EC667112324489F0048068C /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		6EC667122324489F0048068C /* MenuViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
+		6EC66716232451080048068C /* QuitableContainerViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuitableContainerViewControllerTests.swift; sourceTree = "<group>"; };
+		6EC66718232451350048068C /* FakeQuitableContainerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeQuitableContainerViewModel.swift; sourceTree = "<group>"; };
+		6EC6671B232451760048068C /* QuitableContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuitableContainerViewController.swift; sourceTree = "<group>"; };
+		6EC6671C232451760048068C /* QuitableContainerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuitableContainerViewController.xib; sourceTree = "<group>"; };
+		6EC6671F232451820048068C /* QuitableContainerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuitableContainerViewModel.swift; sourceTree = "<group>"; };
 		9BCF43D90809ABFC7320F5BB /* Pods-MathApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MathApp.release.xcconfig"; path = "Target Support Files/Pods-MathApp/Pods-MathApp.release.xcconfig"; sourceTree = "<group>"; };
 		A1CE43285555BFADE6DC3070 /* Pods_MathApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MathApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACC8CBE54D6FE6BB00980A70 /* Pods-MathApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MathApp.debug.xcconfig"; path = "Target Support Files/Pods-MathApp/Pods-MathApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -178,6 +188,7 @@
 		6E1E6B3022FFA8A000AFB7A0 /* Containers */ = {
 			isa = PBXGroup;
 			children = (
+				6EC66715232450F10048068C /* QuitableContainerViewController */,
 				6E1E6B3122FFA8BD00AFB7A0 /* ContainerViewControllerTests.swift */,
 				6EBE4E90230A14A70047A880 /* FakeContainerViewController.swift */,
 			);
@@ -189,6 +200,7 @@
 			children = (
 				6E1E6B3422FFA95100AFB7A0 /* ContainerViewController.swift */,
 				6E1E6B3622FFA97800AFB7A0 /* TransitionAnimation.swift */,
+				6EC6671A232451530048068C /* QuitableContainerViewController */,
 			);
 			path = ContainerViewControllers;
 			sourceTree = "<group>";
@@ -474,6 +486,25 @@
 			path = MenuScene;
 			sourceTree = "<group>";
 		};
+		6EC66715232450F10048068C /* QuitableContainerViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6EC66716232451080048068C /* QuitableContainerViewControllerTests.swift */,
+				6EC66718232451350048068C /* FakeQuitableContainerViewModel.swift */,
+			);
+			path = QuitableContainerViewController;
+			sourceTree = "<group>";
+		};
+		6EC6671A232451530048068C /* QuitableContainerViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6EC6671B232451760048068C /* QuitableContainerViewController.swift */,
+				6EC6671F232451820048068C /* QuitableContainerViewModel.swift */,
+				6EC6671C232451760048068C /* QuitableContainerViewController.xib */,
+			);
+			path = QuitableContainerViewController;
+			sourceTree = "<group>";
+		};
 		F76851D247041C4492AC41F1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -571,6 +602,7 @@
 				6E557C2122FB9DCC00270F07 /* LaunchScreen.storyboard in Resources */,
 				6EC667142324489F0048068C /* MenuViewController.xib in Resources */,
 				6E557C1E22FB9DCC00270F07 /* Assets.xcassets in Resources */,
+				6EC6671E232451760048068C /* QuitableContainerViewController.xib in Resources */,
 				6E74FD53231C87F800730AEB /* FeedContainerViewController.xib in Resources */,
 				6EC666F32321E64A0048068C /* InfoViewController.xib in Resources */,
 				6EBE4E9C230B614B0047A880 /* ExerciseViewController.xib in Resources */,
@@ -674,6 +706,7 @@
 			files = (
 				6EBA303C230CAED200E6DC54 /* UIView+addShadow.swift in Sources */,
 				6EC667132324489F0048068C /* MenuViewController.swift in Sources */,
+				6EC66720232451820048068C /* QuitableContainerViewModel.swift in Sources */,
 				6EBE4E94230A16170047A880 /* ExerciseCoordinator.swift in Sources */,
 				6E557C3922FBA0AE00270F07 /* Coordinator.swift in Sources */,
 				6E74FD52231C87F800730AEB /* FeedContainerViewController.swift in Sources */,
@@ -681,6 +714,7 @@
 				6EC666F8232208FA0048068C /* InfoViewModelImpl.swift in Sources */,
 				6E557C3722FB9EEB00270F07 /* CompositionRoot.swift in Sources */,
 				6EC666E2232099860048068C /* FeedContainerViewModel.swift in Sources */,
+				6EC6671D232451760048068C /* QuitableContainerViewController.swift in Sources */,
 				6EBA305E231098F600E6DC54 /* ExerciseChoiceConfiguration.swift in Sources */,
 				6E557C1722FB9DCB00270F07 /* AppDelegate.swift in Sources */,
 				6EBE4EA2230B66CD0047A880 /* Exercise.swift in Sources */,
@@ -718,11 +752,13 @@
 				6EC6670C23243CDB0048068C /* FakeFeedContainerViewModelDelegate.swift in Sources */,
 				6EC6670F232447C40048068C /* MenuCoordinatorTests.swift in Sources */,
 				6E74FD402318A1F500730AEB /* FakeExerciseViewModelDelegate.swift in Sources */,
+				6EC66717232451080048068C /* QuitableContainerViewControllerTests.swift in Sources */,
 				6EBA306D2314D4AB00E6DC54 /* RxLatestValueTests.swift in Sources */,
 				6EC666EB2321D6D90048068C /* FakeExerciseService.swift in Sources */,
 				6EBE4E97230A1B7C0047A880 /* RootCoordinatorTests.swift in Sources */,
 				6EC666E42321CB490048068C /* ResultsStoreAction+caseChecks.swift in Sources */,
 				6EC666E92321D4EF0048068C /* ExerciseServiceTests.swift in Sources */,
+				6EC66719232451350048068C /* FakeQuitableContainerViewModel.swift in Sources */,
 				6EBE4E91230A14A70047A880 /* FakeContainerViewController.swift in Sources */,
 				6EC666F62322042F0048068C /* InfoSceneTests.swift in Sources */,
 				6E927E7E231CA75100822EBA /* ResultsStoreTests.swift in Sources */,

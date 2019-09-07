@@ -71,9 +71,6 @@ class ExerciseCoordinator: Coordinator {
 
 extension ExerciseCoordinator: FeedContainerViewModelDelegate {
     func menu(_ feedContainerViewModel: FeedContainerViewModel) {
-        
-        print("menu")
-        
         let coordinator = compositionRoot.composeMenuCoordinator()
         containerVC.presentModal(viewController: coordinator.containerViewController)
         coordinator.start()
