@@ -62,8 +62,16 @@ extension MenuCoordinator: QuitableContainerViewModelDelegate {
 
 extension MenuCoordinator: MenuViewModelDelegate {
     func conceptMap(_ menuViewModel: MenuViewModel) {
-        let vc = compositionRoot.composeConceptMapScene()
+        let vc = compositionRoot.composeConceptMapScene(delegate: self)
         containerVC.show(viewController: vc, animation: .slideFromRight)
     }
 }
 
+//MARK: - ConceptMapViewModelDelegate
+
+extension MenuCoordinator: ConceptMapViewModelDelegate {
+    func back(_ conceptMapViewModel: ConceptMapViewModel) {
+        let vc = compositionRoot.composeMenuScene(delegate: self)
+        containerVC.show(viewController: vc, animation: .slideFromLeft)
+    }
+}

@@ -59,8 +59,9 @@ class CompositionRoot {
         return MenuViewController(viewModel: vm)
     }
     
-    func composeConceptMapScene() -> UIViewController {
-        return ConceptMapViewController()
+    func composeConceptMapScene(delegate: ConceptMapViewModelDelegate) -> UIViewController {
+        let vm = ConceptMapViewModel(delegate: delegate)
+        return ConceptMapViewController(viewModel: vm)
     }
     
 }
