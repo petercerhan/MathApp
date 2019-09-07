@@ -42,7 +42,7 @@ class ExerciseCoordinatorTests: XCTestCase {
         mockContainerVC.verifyDidPresentModal(viewControllerType: InfoViewController.self)
     }
     
-    func test_infoSceneRequestsQuit_dismissesModal() {
+    func test_infoSceneRequestsQuit_shouldDismissModal() {
         let mockContainerVC = FakeContainerViewController()
         let coordinator = composeSUT(fakeContainerViewController: mockContainerVC)
         
@@ -51,6 +51,16 @@ class ExerciseCoordinatorTests: XCTestCase {
         coordinator.quit(TestInfoViewModel())
         
         XCTAssertEqual(mockContainerVC.dismissModal_callCount, 1)
+    }
+    
+    func test_containerRequestsMenu_shouldShowMenuContainer() {
+        let mockContainerVC = FakeContainerViewController()
+        let coordinator = composeSUT(fakeContainerViewController: mockContainerVC)
+        
+        coordinator.start()
+        coordinator.menu(TestFeedContainerViewModel())
+        
+        mockContainerVC.verifyDidPresentModal(viewControllerType: ContainerViewController.self)
     }
     
     //MARK: - SUT Composition
@@ -77,5 +87,11 @@ class TestExerciseViewModel: ExerciseViewModelImpl {
 class TestInfoViewModel: InfoViewModelImpl {
     init() {
         super.init(delegate: FakeInfoViewModelDelegate(), concept: Concept.constantRule)
+    }
+}
+
+class TestFeedContainerViewModel: FeedContainerViewModel {
+    init() {
+        super.init(delegate: FakeFeedContainerViewModelDelegate(), resultsStore: FakeResultsStore())
     }
 }

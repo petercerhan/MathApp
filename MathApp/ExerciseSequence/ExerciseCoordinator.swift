@@ -19,6 +19,10 @@ class ExerciseCoordinator: Coordinator {
     private let randomizationService: RandomizationService
     private let resultsStore: ResultsStore
     
+    //MARK: - State
+    
+    private var childCoordinator: Coordinator?
+    
     //MARK: - Initialization
     
     init(compositionRoot: CompositionRoot,
@@ -68,6 +72,12 @@ class ExerciseCoordinator: Coordinator {
 extension ExerciseCoordinator: FeedContainerViewModelDelegate {
     func menu(_ feedContainerViewModel: FeedContainerViewModel) {
         
+        print("menu")
+        
+        let coordinator = compositionRoot.composeMenuCoordinator()
+        containerVC.presentModal(viewController: coordinator.containerViewController)
+        coordinator.start()
+        childCoordinator = coordinator
     }
 }
 

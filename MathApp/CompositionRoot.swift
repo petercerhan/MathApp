@@ -46,4 +46,14 @@ class CompositionRoot {
         return InfoViewController(viewModel: vm)
     }
     
+    //MARK: - Menu sequence
+    
+    func composeMenuCoordinator() -> MenuCoordinator {
+        return MenuCoordinator(containerVC: ContainerViewController(), compositionRoot: self)
+    }
+    
+    func composeMenuScene() -> UIViewController {
+        return MenuViewController()
+    }
+    
 }
