@@ -22,7 +22,7 @@ class CompositionRoot {
     
     func composeExerciseCoordinator() -> ExerciseCoordinator {
         let resultsStore = ResultsStoreImpl()
-        let containerVM = FeedContainerViewModel(resultsStore: resultsStore)
+        let containerVM = FeedContainerViewModel(delegate: nil, resultsStore: resultsStore)
         return ExerciseCoordinator(compositionRoot: self,
                                    containerVC: FeedContainerViewController(viewModel: containerVM),
                                    exerciseService: ExerciseServiceImpl(),

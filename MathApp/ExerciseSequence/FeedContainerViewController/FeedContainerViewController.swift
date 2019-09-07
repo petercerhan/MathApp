@@ -14,7 +14,7 @@ class FeedContainerViewController: ContainerViewController {
     
     //MARK: - Dependencies
     
-    private let viewModel: FeedContainerViewModel
+    let viewModel: FeedContainerViewModel
     
     //MARK: - UI Components
     
@@ -46,6 +46,7 @@ class FeedContainerViewController: ContainerViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bindUI()
+        bindActions()
     }
 
     private func bindUI() {
@@ -53,6 +54,15 @@ class FeedContainerViewController: ContainerViewController {
             .observeOn(MainScheduler.instance)
             .map { "\($0)" }
             .bind(to: pointsLabel.rx.text)
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindActions() {
+        menuButton.rx.tap
+            .throttle(.milliseconds(500), latest: false, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in
+                self.viewModel.dispatch(action: .menu)
+            })
             .disposed(by: disposeBag)
     }
     

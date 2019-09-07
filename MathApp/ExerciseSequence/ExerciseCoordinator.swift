@@ -32,6 +32,10 @@ class ExerciseCoordinator: Coordinator {
         self.exerciseService = exerciseService
         self.randomizationService = randomizationService
         self.resultsStore = resultsStore
+        
+        if let feedContainer = containerVC as? FeedContainerViewController {
+            feedContainer.viewModel.setDelegate(self)
+        }
     }
     
     //MARK: - Coordinator Interface
@@ -57,6 +61,14 @@ class ExerciseCoordinator: Coordinator {
                                                     choiceConfiguration: choiceConfiguration)
     }
 
+}
+
+//MARK: - FeedContainerViewModelDelegate
+
+extension ExerciseCoordinator: FeedContainerViewModelDelegate {
+    func menu(_ feedContainerViewModel: FeedContainerViewModel) {
+        
+    }
 }
 
 //MARK: - ExerciseViewModelDelegate

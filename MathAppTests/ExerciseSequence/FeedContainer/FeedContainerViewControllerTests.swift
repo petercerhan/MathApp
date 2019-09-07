@@ -31,11 +31,22 @@ class FeedContainerViewControllerTests: XCTestCase {
         XCTAssertEqual(vc.pointsLabel.text, "1")
     }
     
+    func test_menuPressed_requestsMenu() {
+        let mockDelegate = FakeFeedContainerViewModelDelegate()
+        let vc = composeSUT(fakeDelegate: mockDelegate)
+        
+        vc.loadViewIfNeeded()
+        vc.menuButton.sendActions(for: .touchUpInside)
+        
+        XCTAssertEqual(mockDelegate.menu_callCount, 1)
+    }
+    
     //MARK: - SUT Composition
     
-    func composeSUT(fakeStore: ResultsStore? = nil) -> FeedContainerViewController {
+    func composeSUT(fakeDelegate: FakeFeedContainerViewModelDelegate? = nil, fakeStore: ResultsStore? = nil) -> FeedContainerViewController {
+        let delegate = fakeDelegate ?? FakeFeedContainerViewModelDelegate()
         let resultsStore = fakeStore ?? FakeResultsStore()
-        let vm = FeedContainerViewModel(resultsStore: resultsStore)
+        let vm = FeedContainerViewModel(delegate: delegate, resultsStore: resultsStore)
         return FeedContainerViewController(viewModel: vm)
     }
     
