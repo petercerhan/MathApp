@@ -8,6 +8,7 @@
 
 import UIKit
 import XCTest
+import iosMath
 @testable import MathApp
 
 class InfoSceneTests: XCTestCase {
@@ -31,6 +32,34 @@ class InfoSceneTests: XCTestCase {
         XCTAssert(vc.scrollView.subviews.count >= 4)
         XCTAssert(vc.scrollView.subviews[3] is UILabel)
         XCTAssertEqual((vc.scrollView.subviews[3] as? UILabel)?.text, stubConcept.name)
+    }
+    
+    func test_contentView_secondViewIsDescriptionLabel() {
+        let stubConcept = Concept.constantRule
+        let vc = composeSUT(stubConcept: stubConcept)
+        
+        vc.loadViewIfNeeded()
+        
+        guard vc.scrollView.subviews.count >= 5 else {
+            XCTFail("Scrollview has too few subviews")
+            return
+        }
+        XCTAssert(vc.scrollView.subviews[4] is UILabel)
+        XCTAssertEqual((vc.scrollView.subviews[4] as? UILabel)?.text, stubConcept.description)
+    }
+    
+    func test_contentView_fourthViewIsLatexExample() {
+        let stubConcept = Concept.constantRule
+        let vc = composeSUT(stubConcept: stubConcept)
+        
+        vc.loadViewIfNeeded()
+        
+        guard vc.scrollView.subviews.count >= 7 else {
+            XCTFail("Scrollview has too few subviews")
+            return
+        }
+        XCTAssert(vc.scrollView.subviews[6] is MTMathUILabel)
+        XCTAssertEqual((vc.scrollView.subviews[6] as? MTMathUILabel)?.latex, "\\frac{d}{dx}(5) = 0")
     }
     
     //MARK: - SUT Composition

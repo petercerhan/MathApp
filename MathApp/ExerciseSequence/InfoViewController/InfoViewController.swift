@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import iosMath
 import RxSwift
 import RxCocoa
 
@@ -50,13 +51,36 @@ class InfoViewController: UIViewController {
         let contentElements = viewModel.infoViewContent
         
         for element in contentElements {
-            let glyph = insertLabelGlyph(contentElement: element, bottomView: bottomView)
-            bottomView = glyph
+            if element.contentType == .text {
+                let glyph = insertLabelGlyph(contentElement: element, bottomView: bottomView)
+                bottomView = glyph
+            } else {
+                let glyph = insertLatexGlyph(contentElement: element, bottomView: bottomView)
+                bottomView = glyph
+            }
         }
         
         if let bottomView = bottomView {
             bottomView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -12.0).isActive = true
         }
+    }
+    
+    private func insertLatexGlyph(contentElement: InfoViewContentElement, bottomView: UIView?) -> MTMathUILabel {
+        let label = MTMathUILabel()
+        label.latex = contentElement.content
+        label.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.addSubview(label)
+        
+        if let bottomView = bottomView {
+            label.topAnchor.constraint(equalTo: bottomView.bottomAnchor, constant: 12.0).isActive = true
+        } else {
+            label.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 12.0).isActive = true
+        }
+        
+        label.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 12.0).isActive = true
+        label.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: 12.0).isActive = true
+        
+        return label
     }
     
     private func insertLabelGlyph(contentElement: InfoViewContentElement, bottomView: UIView?) -> UILabel {
