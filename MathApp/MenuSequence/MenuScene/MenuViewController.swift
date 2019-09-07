@@ -7,17 +7,48 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class MenuViewController: UIViewController {
     
+    //MARK: - Dependencies
+    
+    private let viewModel: MenuViewModel
+    
+    //MARK: - UI Components
+    
+    @IBOutlet private(set) var conceptMapButton: UIButton!
+    
+    //MARK: - Rx
+    
+    private let disposeBag = DisposeBag()
+    
     //MARK: - Initialization
     
-    init() {
+    init(viewModel: MenuViewModel) {
+        self.viewModel = viewModel
         super.init(nibName: "MenuViewController", bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("cannot initialize with init(coder:)")
+    }
+    
+    //MARK: - UIViewController Interface
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        bindActions()
+    }
+    
+    private func bindActions() {
+        conceptMapButton.rx.tap
+            .throttle(.milliseconds(500), latest: false, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in
+                self.viewModel.dispatch(action: .conceptMap)
+            })
+            .disposed(by: disposeBag)
     }
 
 }

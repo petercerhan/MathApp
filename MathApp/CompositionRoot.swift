@@ -54,8 +54,13 @@ class CompositionRoot {
         return MenuCoordinator(delegate: delegate, containerVC: quitableContainer, compositionRoot: self)
     }
     
-    func composeMenuScene() -> UIViewController {
-        return MenuViewController()
+    func composeMenuScene(delegate: MenuViewModelDelegate) -> UIViewController {
+        let vm = MenuViewModel(delegate: delegate)
+        return MenuViewController(viewModel: vm)
+    }
+    
+    func composeConceptMapScene() -> UIViewController {
+        return ConceptMapViewController()
     }
     
 }

@@ -31,10 +31,25 @@ class MenuCoordinatorTests: XCTestCase {
         XCTAssertEqual(mockDelegate.quit_callCount, 1)
     }
     
+    func test_menuRequestsConceptMap_shouldShowConceptMap() {
+        let mockContainerVC = FakeContainerViewController()
+        let coordinator = MenuCoordinator(delegate: FakeMenuCoordinatorDelegate(), containerVC: mockContainerVC, compositionRoot: CompositionRoot())
+        
+        coordinator.start()
+        coordinator.conceptMap(TestMenuViewModel())
+        
+        mockContainerVC.verifyDidShow(viewControllerType: ConceptMapViewController.self)
+    }
 }
 
 class TestQuitableContainerViewModel: QuitableContainerViewModelImpl {
     init() {
         super.init(delegate: FakeQuitableWorldViewModelDelegate())
+    }
+}
+
+class TestMenuViewModel: MenuViewModel {
+    init() {
+        super.init(delegate: FakeMenuViewModelDelegate())
     }
 }

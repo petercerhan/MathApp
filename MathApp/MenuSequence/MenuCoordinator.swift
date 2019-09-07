@@ -44,7 +44,7 @@ class MenuCoordinator: Coordinator {
     
     func start() {
         containerVC.loadViewIfNeeded()
-        let vc = compositionRoot.composeMenuScene()
+        let vc = compositionRoot.composeMenuScene(delegate: self)
         containerVC.show(viewController: vc, animation: .none)
     }
     
@@ -57,3 +57,13 @@ extension MenuCoordinator: QuitableContainerViewModelDelegate {
         delegate?.quit(self)
     }
 }
+
+//MARK: - MenuViewModelDelegate
+
+extension MenuCoordinator: MenuViewModelDelegate {
+    func conceptMap(_ menuViewModel: MenuViewModel) {
+        let vc = compositionRoot.composeConceptMapScene()
+        containerVC.show(viewController: vc, animation: .slideFromRight)
+    }
+}
+
