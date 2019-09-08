@@ -15,7 +15,7 @@ protocol ResultsStore {
 }
 
 enum ResultsStoreAction {
-    case incrementCorrect
+    case processResult(ExerciseResult)
 }
 
 extension ResultsStore where Self: ResultsStoreImpl {
@@ -36,16 +36,16 @@ class ResultsStoreImpl: ResultsStore {
     
     func dispatch(action: ResultsStoreAction) {
         switch action {
-        case .incrementCorrect:
-            handle_incrementCorrect()
+        case .processResult(let result):
+            handle_processResult(result)
         }
     }
     
-    private func handle_incrementCorrect() {
-        guard let priorValue = latestValue(of: correct, disposeBag: disposeBag) else {
+    private func handle_processResult(_ result: ExerciseResult) {
+        guard let priorCorrectValue = latestValue(of: correct, disposeBag: disposeBag) else {
             return
         }
-        correctSubject.onNext(priorValue + 1)
+        correctSubject.onNext(priorCorrectValue + 1)
     }
     
 }

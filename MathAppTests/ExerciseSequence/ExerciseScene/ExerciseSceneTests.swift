@@ -50,17 +50,28 @@ class ExerciseSceneTests: XCTestCase {
         XCTAssertEqual(vc.choice3Label.latex, "1")
     }
     
-    func test_firstChoiceSelected_firstChoiceCorrect_incrementsCorrectCount() {
+    func test_firstChoiceSelected_firstChoiceCorrect_shouldDispatchCorrectResult() {
         let mockStore = FakeResultsStore()
         let vc = composeSUT(fakeStore: mockStore)
         
         vc.loadViewIfNeeded()
         vc.choice1Button.sendActions(for: .touchUpInside)
         
-        mockStore.verifyIncrementCompleteDispatched()
+        mockStore.verifyProcessResultDispatched(correct: true)
     }
     
-    func test_secondChoiceSelected_secondChoiceCorrect_incrementsCorrectCount() {
+    func test_firstChoiceSelected_firstChoiceIncorrect_shouldDispatchIncorrectResult() {
+        let choiceConfiguration = ExerciseChoiceConfiguration(correctPosition: 2, firstFalseChoice: 1, secondFalseChoice: 3)
+        let mockStore = FakeResultsStore()
+        let vc = composeSUT(fakeStore: mockStore, choiceConfiguration: choiceConfiguration)
+        
+        vc.loadViewIfNeeded()
+        vc.choice1Button.sendActions(for: .touchUpInside)
+        
+        mockStore.verifyProcessResultDispatched(correct: false)
+    }
+    
+    func test_secondChoiceSelected_secondChoiceCorrect_shouldDispatchCorrectResult() {
         let choiceConfiguration = ExerciseChoiceConfiguration(correctPosition: 2, firstFalseChoice: 1, secondFalseChoice: 3)
         let mockStore = FakeResultsStore()
         let vc = composeSUT(fakeStore: mockStore, choiceConfiguration: choiceConfiguration)
@@ -68,10 +79,21 @@ class ExerciseSceneTests: XCTestCase {
         vc.loadViewIfNeeded()
         vc.choice2Button.sendActions(for: .touchUpInside)
         
-        mockStore.verifyIncrementCompleteDispatched()
+        mockStore.verifyProcessResultDispatched(correct: true)
     }
     
-    func test_thirdChoiceSelected_thirdChoiceCorrect_incrementsCorrectCount() {
+    func test_secondChoiceSelected_secondChoiceIncorrect_shouldDispatchIncorrectResult() {
+        let choiceConfiguration = ExerciseChoiceConfiguration(correctPosition: 1, firstFalseChoice: 1, secondFalseChoice: 3)
+        let mockStore = FakeResultsStore()
+        let vc = composeSUT(fakeStore: mockStore, choiceConfiguration: choiceConfiguration)
+        
+        vc.loadViewIfNeeded()
+        vc.choice2Button.sendActions(for: .touchUpInside)
+        
+        mockStore.verifyProcessResultDispatched(correct: false)
+    }
+    
+    func test_thirdChoiceSelected_thirdChoiceCorrect_shouldDispatchCorrectResult() {
         let choiceConfiguration = ExerciseChoiceConfiguration(correctPosition: 3, firstFalseChoice: 1, secondFalseChoice: 3)
         let mockStore = FakeResultsStore()
         let vc = composeSUT(fakeStore: mockStore, choiceConfiguration: choiceConfiguration)
@@ -79,7 +101,18 @@ class ExerciseSceneTests: XCTestCase {
         vc.loadViewIfNeeded()
         vc.choice3Button.sendActions(for: .touchUpInside)
         
-        mockStore.verifyIncrementCompleteDispatched()
+        mockStore.verifyProcessResultDispatched(correct: true)
+    }
+    
+    func test_thirdChoiceSelected_thirdChoiceIncorrect_shouldDispatchIncorrectResult() {
+        let choiceConfiguration = ExerciseChoiceConfiguration(correctPosition: 2, firstFalseChoice: 1, secondFalseChoice: 3)
+        let mockStore = FakeResultsStore()
+        let vc = composeSUT(fakeStore: mockStore, choiceConfiguration: choiceConfiguration)
+        
+        vc.loadViewIfNeeded()
+        vc.choice3Button.sendActions(for: .touchUpInside)
+        
+        mockStore.verifyProcessResultDispatched(correct: false)
     }
     
     func test_firstChoiceSelected_firstChoiceCorrect_showsFirstCorrectImage() {

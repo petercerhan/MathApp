@@ -23,13 +23,18 @@ class FakeResultsStore: ResultsStore {
         dispatch_action.append(action)
     }
     
-    func verifyIncrementCompleteDispatched(file: StaticString = #file, line: UInt = #line) {
+    func verifyProcessResultDispatched(correct: Bool, file: StaticString = #file, line: UInt = #line) {
         XCTAssertEqual(dispatch_callCount, 1, file: file, line: line)
         if dispatch_action.count > 0 {
-            XCTAssert(dispatch_action[0].isincrementCorrectCase, file: file, line: line)
+            if case let .processResult(result) = dispatch_action[0] {
+                XCTAssertEqual(result.correct, correct, "Result correct is \(result.correct), expected \(correct)", file: file, line: line)
+            } else {
+                XCTFail("Dispatched action does not match \(dispatch_action[0])", file: file, line: line)
+            }
         } else {
             XCTFail("No action dispatched", file: file, line: line)
         }
+        
     }
     
 }

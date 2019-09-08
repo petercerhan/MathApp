@@ -140,19 +140,22 @@ class ExerciseViewModelImpl: ExerciseViewModel {
     
     private func handle_choice1() {
         showCorrectAnswer()
-        if choice1Correct {
-            resultsStore.dispatch(action: .incrementCorrect)
-        } else {
+        submitResult(correct: choice1Correct)
+        if !choice1Correct {
             choice1CorrectSubject.onNext(false)
         }
         displayStateSubject.onNext(.answer)
     }
     
+    private func submitResult(correct: Bool) {
+        let result = ExerciseResult(correct: correct, conceptID: exercise.concept.id)
+        resultsStore.dispatch(action: .processResult(result))
+    }
+    
     private func handle_choice2() {
         showCorrectAnswer()
-        if choice2Correct {
-            resultsStore.dispatch(action: .incrementCorrect)
-        } else {
+        submitResult(correct: choice2Correct)
+        if !choice2Correct {
             choice2CorrectSubject.onNext(false)
         }
         displayStateSubject.onNext(.answer)
@@ -160,9 +163,8 @@ class ExerciseViewModelImpl: ExerciseViewModel {
     
     private func handle_choice3() {
         showCorrectAnswer()
-        if choice3Correct {
-            resultsStore.dispatch(action: .incrementCorrect)
-        } else {
+        submitResult(correct: choice3Correct)
+        if !choice3Correct {
             choice3CorrectSubject.onNext(false)
         }
         displayStateSubject.onNext(.answer)

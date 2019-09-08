@@ -22,13 +22,16 @@ class ResultsStoreTests: XCTestCase {
         XCTAssertEqual(correct, 0)
     }
     
-    func test_incrementCorrect_setsCorrectTo1() {
+    func test_correctResult_incrementsCorrectCount() {
+        let result = ExerciseResult(correct: true, conceptID: 1)
         let store = ResultsStoreImpl()
         
-        store.dispatch(action: .incrementCorrect)
+        store.dispatch(action: .processResult(result))
         
         let correct = latestValue(of: store.correct, disposeBag: disposeBag) ?? -1
         XCTAssertEqual(correct, 1)
     }
+    
+    
     
 }
