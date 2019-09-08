@@ -60,7 +60,7 @@ class CompositionRoot {
     }
     
     func composeConceptMapScene(delegate: ConceptMapViewModelDelegate) -> UIViewController {
-        let vm = ConceptMapViewModel(delegate: delegate)
+        let vm = ConceptMapViewModel(delegate: delegate, databaseService: DatabaseServiceImpl())
         return ConceptMapViewController(viewModel: vm)
     }
     

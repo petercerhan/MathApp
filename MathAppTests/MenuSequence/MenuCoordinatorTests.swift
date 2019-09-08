@@ -77,6 +77,6 @@ class TestMenuViewModel: MenuViewModel {
 
 class TestConceptMapViewModel: ConceptMapViewModel {
     init() {
-        super.init(delegate: FakeConceptMapViewModelDelegate())
+        super.init(delegate: FakeConceptMapViewModelDelegate(), databaseService: FakeDatabaseService())
     }
 }

@@ -10,6 +10,6 @@ import UIKit
 
 class ConceptMapTableViewCell: UITableViewCell {
 
-    
+    @IBOutlet var nameLabel: UILabel!
     
 }

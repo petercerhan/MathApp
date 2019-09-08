@@ -84,8 +84,9 @@ class ConceptMapViewController: UIViewController, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let element = elements[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ConceptMapTableViewCell")!
-       
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ConceptMapTableViewCell") as! ConceptMapTableViewCell
+        cell.nameLabel.text = element.name
+        
         return cell
     }
     

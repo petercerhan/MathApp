@@ -31,21 +31,27 @@ class ConceptMapSceneTests: XCTestCase {
     }
     
     func test_oneConcept_shouldDisplayOneConcept() {
-        //stub data
-        
-        let vc = composeSUT()
+        let stubData = [UserConcept(id: 1, concept: Concept.constantRule, strength: 1)]
+        let vc = composeSUT(stubUserConcepts: stubData)
         
         vc.loadViewIfNeeded()
         
-        
         XCTAssertEqual(vc.tableView.dataSource?.tableView(vc.tableView, numberOfRowsInSection: 0), 1)
+        guard let cell = vc.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? ConceptMapTableViewCell else {
+            XCTFail("Could not get cell")
+            return
+        }
+        XCTAssertEqual(cell.nameLabel.text, "Constant Rule")
     }
     
     //MARK: - SUT Composition
     
-    func composeSUT(fakeDelegate: ConceptMapViewModelDelegate? = nil) -> ConceptMapViewController {
+    func composeSUT(fakeDelegate: ConceptMapViewModelDelegate? = nil, stubUserConcepts: [UserConcept]? = nil) -> ConceptMapViewController {
         let delegate = fakeDelegate ?? FakeConceptMapViewModelDelegate()
-        let vm = ConceptMapViewModel(delegate: delegate)
+        let userConcepts = stubUserConcepts ?? [UserConcept(id: 1, concept: Concept.constantRule, strength: 1)]
+        let databaseService = FakeDatabaseService()
+        databaseService.stubUserConcepts = userConcepts
+        let vm = ConceptMapViewModel(delegate: delegate, databaseService: databaseService)
         return ConceptMapViewController(viewModel: vm)
     }
     

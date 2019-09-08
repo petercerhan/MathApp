@@ -22,16 +22,22 @@ class ConceptMapViewModel {
     //MARK: - Dependencies
     
     private weak var delegate: ConceptMapViewModelDelegate?
+    private let databaseService: DatabaseService
     
     //MARK: - Initialization
     
-    init(delegate: ConceptMapViewModelDelegate) {
+    init(delegate: ConceptMapViewModelDelegate, databaseService: DatabaseService) {
         self.delegate = delegate
+        self.databaseService = databaseService
     }
     
     //MARK: - ConceptMapViewModel Interface
     
-    let conceptMapElements = Observable<[ConceptMapElement]>.just([ConceptMapElement(name: "concept 1", strength: 2)])
+    private(set) lazy var conceptMapElements: Observable<[ConceptMapElement]> = {
+        let userConcepts = databaseService.getUserConcepts()
+        let elements = userConcepts.map { ConceptMapElement(name: $0.concept.name, strength: $0.strength) }
+        return Observable.just(elements)
+    }()
     
     func dispatch(action: ConceptMapAction) {
         switch action {
