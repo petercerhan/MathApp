@@ -84,6 +84,7 @@
 		6EC6674523249CB20048068C /* DatabaseServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC6674423249CB20048068C /* DatabaseServiceTests.swift */; };
 		6EC6674723249D850048068C /* UserConcept.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC6674623249D850048068C /* UserConcept.swift */; };
 		6EC667492324A08D0048068C /* FakeDatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC667482324A08D0048068C /* FakeDatabaseService.swift */; };
+		6EC6674B2324A40C0048068C /* ConceptMapTableViewCell+utilites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC6674A2324A40C0048068C /* ConceptMapTableViewCell+utilites.swift */; };
 		BCB14F255178DFA21D82194D /* Pods_MathAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE993BEBDF1A3B96DC4714AA /* Pods_MathAppTests.framework */; };
 		C99DA79539000A5618FB589C /* Pods_MathApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1CE43285555BFADE6DC3070 /* Pods_MathApp.framework */; };
 /* End PBXBuildFile section */
@@ -181,6 +182,7 @@
 		6EC6674423249CB20048068C /* DatabaseServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseServiceTests.swift; sourceTree = "<group>"; };
 		6EC6674623249D850048068C /* UserConcept.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserConcept.swift; sourceTree = "<group>"; };
 		6EC667482324A08D0048068C /* FakeDatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeDatabaseService.swift; sourceTree = "<group>"; };
+		6EC6674A2324A40C0048068C /* ConceptMapTableViewCell+utilites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConceptMapTableViewCell+utilites.swift"; sourceTree = "<group>"; };
 		9BCF43D90809ABFC7320F5BB /* Pods-MathApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MathApp.release.xcconfig"; path = "Target Support Files/Pods-MathApp/Pods-MathApp.release.xcconfig"; sourceTree = "<group>"; };
 		A1CE43285555BFADE6DC3070 /* Pods_MathApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MathApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACC8CBE54D6FE6BB00980A70 /* Pods-MathApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MathApp.debug.xcconfig"; path = "Target Support Files/Pods-MathApp/Pods-MathApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -572,6 +574,7 @@
 			isa = PBXGroup;
 			children = (
 				6EC667322324673F0048068C /* ConceptMapSceneTests.swift */,
+				6EC6674A2324A40C0048068C /* ConceptMapTableViewCell+utilites.swift */,
 				6EC66734232467840048068C /* FakeConceptMapViewModelDelegate.swift */,
 			);
 			path = ConceptMapTests;
@@ -859,6 +862,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EC6674B2324A40C0048068C /* ConceptMapTableViewCell+utilites.swift in Sources */,
 				6EBE4E8F230A13D80047A880 /* ExerciseCoordinatorTests.swift in Sources */,
 				6EC666FC232209980048068C /* FakeInfoViewModelDelegate.swift in Sources */,
 				6E1E6B3222FFA8BD00AFB7A0 /* ContainerViewControllerTests.swift in Sources */,

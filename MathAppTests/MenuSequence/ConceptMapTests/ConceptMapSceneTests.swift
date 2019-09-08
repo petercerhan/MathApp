@@ -37,11 +37,18 @@ class ConceptMapSceneTests: XCTestCase {
         vc.loadViewIfNeeded()
         
         XCTAssertEqual(vc.tableView.dataSource?.tableView(vc.tableView, numberOfRowsInSection: 0), 1)
-        guard let cell = vc.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? ConceptMapTableViewCell else {
-            XCTFail("Could not get cell")
-            return
-        }
-        XCTAssertEqual(cell.nameLabel.text, "Constant Rule")
+        ConceptMapTableViewCell.assertCellAtRow(0, inTable: vc.tableView, containsConceptNamed: "Constant Rule", strength: 1)
+    }
+    
+    func test_twoConcepts_shouldDisplayTwoConcepts() {
+        let stubData = [UserConcept(id: 1, concept: Concept.constantRule, strength: 1),
+                        UserConcept(id: 2, concept: Concept.linearRule, strength: 2)]
+        let vc = composeSUT(stubUserConcepts: stubData)
+        
+        vc.loadViewIfNeeded()
+        
+        XCTAssertEqual(vc.tableView.dataSource?.tableView(vc.tableView, numberOfRowsInSection: 0), 2)
+        ConceptMapTableViewCell.assertCellAtRow(1, inTable: vc.tableView, containsConceptNamed: "Linear Rule", strength: 2)
     }
     
     //MARK: - SUT Composition

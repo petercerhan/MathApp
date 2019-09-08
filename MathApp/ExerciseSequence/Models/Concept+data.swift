@@ -17,4 +17,11 @@ extension Concept {
                        example: "\\frac{d}{dx}(5) = 0")
     }
     
+    static var linearRule: Concept {
+        return Concept(id: 1, name: "Linear Rule",
+                       description: "The derivative of a linear function is the constant factor",
+                       rule: "\\frac{d}{dx}(cx) = c",
+                       example: "\\frac{d}{dx}(3x) = 3")
+    }
+    
 }

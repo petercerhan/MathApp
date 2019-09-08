@@ -86,6 +86,7 @@ class ConceptMapViewController: UIViewController, UITableViewDataSource {
         let element = elements[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "ConceptMapTableViewCell") as! ConceptMapTableViewCell
         cell.nameLabel.text = element.name
+        cell.strengthLabel.text = "\(element.strength)/3"
         
         return cell
     }
