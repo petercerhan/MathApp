@@ -24,4 +24,25 @@ extension Concept {
                        example: "\\frac{d}{dx}(3x) = 3")
     }
     
+    static var powerRule: Concept {
+        return Concept(id: 1, name: "Power Rule",
+                       description: "The derivative of a power follows this rule:",
+                       rule: "\\frac{d}{dx}(cx) = c",
+                       example: "\\frac{d}{dx}(3x) = 3")
+    }
+    
+    static var sumRule: Concept {
+        return Concept(id: 1, name: "Sum Rule",
+                       description: "The derivative of a sum is the sum of the derivatives",
+                       rule: "\\frac{d}{dx}(cx) = c",
+                       example: "\\frac{d}{dx}(3x) = 3")
+    }
+    
+    static var differenceRule: Concept {
+        return Concept(id: 1, name: "Difference Rule",
+                       description: "The derivative of a difference is the difference of the derivatives",
+                       rule: "\\frac{d}{dx}(cx) = c",
+                       example: "\\frac{d}{dx}(3x) = 3")
+    }
+    
 }

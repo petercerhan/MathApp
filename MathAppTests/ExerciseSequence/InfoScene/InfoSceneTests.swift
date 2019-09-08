@@ -48,7 +48,7 @@ class InfoSceneTests: XCTestCase {
         XCTAssertEqual((vc.scrollView.subviews[4] as? UILabel)?.text, stubConcept.description)
     }
     
-    func test_contentView_fourthViewIsLatexExample() {
+    func test_contentView_fourthViewIsLatexRule() {
         let stubConcept = Concept.constantRule
         let vc = composeSUT(stubConcept: stubConcept)
         
@@ -59,7 +59,7 @@ class InfoSceneTests: XCTestCase {
             return
         }
         XCTAssert(vc.scrollView.subviews[6] is MTMathUILabel)
-        XCTAssertEqual((vc.scrollView.subviews[6] as? MTMathUILabel)?.latex, stubConcept.example)
+        XCTAssertEqual((vc.scrollView.subviews[6] as? MTMathUILabel)?.latex, stubConcept.rule)
     }
     
     func test_contentView_sixthViewIsLatexExample() {
@@ -73,7 +73,7 @@ class InfoSceneTests: XCTestCase {
             return
         }
         XCTAssert(vc.scrollView.subviews[8] is MTMathUILabel)
-        XCTAssertEqual((vc.scrollView.subviews[8] as? MTMathUILabel)?.latex, stubConcept.rule)
+        XCTAssertEqual((vc.scrollView.subviews[8] as? MTMathUILabel)?.latex, stubConcept.example)
     }
     
     //MARK: - SUT Composition
