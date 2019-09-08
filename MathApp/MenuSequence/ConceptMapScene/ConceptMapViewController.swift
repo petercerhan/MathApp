@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class ConceptMapViewController: UIViewController {
+class ConceptMapViewController: UIViewController, UITableViewDataSource {
     
     //MARK: - Dependencies
     
@@ -18,7 +18,12 @@ class ConceptMapViewController: UIViewController {
     
     //MARK: - UI Components
     
+    @IBOutlet private(set) var tableView: UITableView!
     @IBOutlet private(set) var backButton: UIButton!
+    
+    //MARK: - State
+    
+    private var elements = [ConceptMapElement]()
     
     //MARK: - Rx
     
@@ -39,7 +44,27 @@ class ConceptMapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureTableView()
+        bindUI()
         bindActions()
+    }
+    
+    private func configureTableView() {
+        tableView.register(UINib(nibName:"ConceptMapTableViewCell", bundle: nil), forCellReuseIdentifier: "ConceptMapTableViewCell")
+    }
+    
+    private func bindUI() {
+        bindTableView()
+    }
+    
+    private func bindTableView() {
+        viewModel.conceptMapElements
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] elements in
+                self.elements = elements
+                self.tableView.reloadData()
+            })
+            .disposed(by: disposeBag)
     }
     
     private func bindActions() {
@@ -50,5 +75,20 @@ class ConceptMapViewController: UIViewController {
             })
             .disposed(by: disposeBag)
     }
-
+    
+    //MARK: - UITableViewDataSource
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return elements.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let element = elements[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ConceptMapTableViewCell")!
+       
+        return cell
+    }
+    
 }
+
+

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RxSwift
 
 protocol ConceptMapViewModelDelegate: class {
     func back(_ conceptMapViewModel: ConceptMapViewModel)
@@ -29,6 +30,8 @@ class ConceptMapViewModel {
     }
     
     //MARK: - ConceptMapViewModel Interface
+    
+    let conceptMapElements = Observable<[ConceptMapElement]>.just([ConceptMapElement(name: "concept 1", strength: 2)])
     
     func dispatch(action: ConceptMapAction) {
         switch action {
