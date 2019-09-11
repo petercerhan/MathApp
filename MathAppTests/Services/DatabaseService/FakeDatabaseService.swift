@@ -11,6 +11,12 @@ import Foundation
 
 class FakeDatabaseService: DatabaseService {
     
+    var setup_callCount = 0
+    
+    func setup() {
+        setup_callCount += 1
+    }
+    
     var stubUserConcepts = [UserConcept]()
     
     func getUserConcepts() -> [UserConcept] {

@@ -8,12 +8,16 @@ PODS:
   - RxSwift (5.0.0)
   - RxTest (5.0.0):
     - RxSwift (~> 5)
+  - SQLite.swift (0.12.2):
+    - SQLite.swift/standard (= 0.12.2)
+  - SQLite.swift/standard (0.12.2)
 
 DEPENDENCIES:
   - iosMath (~> 0.0)
   - RxCocoa (~> 5.0)
   - RxSwift (~> 5.0)
   - RxTest (~> 5.0)
+  - SQLite.swift (~> 0.12.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -22,6 +26,7 @@ SPEC REPOS:
     - RxRelay
     - RxSwift
     - RxTest
+    - SQLite.swift
 
 SPEC CHECKSUMS:
   iosMath: f7a6cbadf9d836d2149c2a84c435b1effc244cba
@@ -29,7 +34,8 @@ SPEC CHECKSUMS:
   RxRelay: 4f7409406a51a55cd88483f21ed898c234d60f18
   RxSwift: 8b0671caa829a763bbce7271095859121cbd895f
   RxTest: 4349afe98f564e0a9bc19063368904622d17d49a
+  SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
 
-PODFILE CHECKSUM: b7e9fb8addd72f2f913536936c93bcfc0046ac95
+PODFILE CHECKSUM: 6d81280cef9d92dec1b95d89ef0323c6dd7e7abc
 
 COCOAPODS: 1.7.3
