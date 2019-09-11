@@ -73,16 +73,12 @@ class DatabaseServiceImpl: DatabaseService {
         _ = try? db.run(UserConcept.differenceRule.insertStatement)
     }
     
-    func runSelectQuery() -> [UserConcept] {
+    func getUserConcepts() -> [UserConcept] {
         let query = conceptsTable.join(userConceptsTable, on: UserConcept.column_conceptID == conceptsTable[Concept.column_id])
         let result: [UserConcept]? = try? db.prepare(query).compactMap { row -> UserConcept? in
             return UserConcept.createFromQueryResult(row)
         }
         return result ?? [UserConcept]()
-    }
-    
-    func getUserConcepts() -> [UserConcept] {
-        return runSelectQuery()
     }
     
     func reset() {

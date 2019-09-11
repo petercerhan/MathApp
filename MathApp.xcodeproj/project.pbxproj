@@ -347,6 +347,33 @@
 			path = FeedContainerViewController;
 			sourceTree = "<group>";
 		};
+		6E8416092329BD6A0035F381 /* Exercise */ = {
+			isa = PBXGroup;
+			children = (
+				6EBE4EA1230B66CD0047A880 /* Exercise.swift */,
+				6EBE4EA3230B675B0047A880 /* Exercise+data.swift */,
+			);
+			path = Exercise;
+			sourceTree = "<group>";
+		};
+		6E84160A2329BD740035F381 /* Concept */ = {
+			isa = PBXGroup;
+			children = (
+				6EC666FD232324F70048068C /* Concept.swift */,
+				6EC666FF232326FA0048068C /* Concept+data.swift */,
+			);
+			path = Concept;
+			sourceTree = "<group>";
+		};
+		6E84160B2329BD800035F381 /* UserConcept */ = {
+			isa = PBXGroup;
+			children = (
+				6EC6674623249D850048068C /* UserConcept.swift */,
+				6ECC412B23288BC500E8F3E1 /* UserConcept+data.swift */,
+			);
+			path = UserConcept;
+			sourceTree = "<group>";
+		};
 		6E927E7C231CA74000822EBA /* ResultsStore */ = {
 			isa = PBXGroup;
 			children = (
@@ -450,12 +477,9 @@
 		6EBE4EA0230B663F0047A880 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				6EBE4EA1230B66CD0047A880 /* Exercise.swift */,
-				6EBE4EA3230B675B0047A880 /* Exercise+data.swift */,
-				6EC666FD232324F70048068C /* Concept.swift */,
-				6EC666FF232326FA0048068C /* Concept+data.swift */,
-				6EC6674623249D850048068C /* UserConcept.swift */,
-				6ECC412B23288BC500E8F3E1 /* UserConcept+data.swift */,
+				6E8416092329BD6A0035F381 /* Exercise */,
+				6E84160A2329BD740035F381 /* Concept */,
+				6E84160B2329BD800035F381 /* UserConcept */,
 				6EC6674C2324AA040048068C /* ExerciseResult.swift */,
 			);
 			path = Models;

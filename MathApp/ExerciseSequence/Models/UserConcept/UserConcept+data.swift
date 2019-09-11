@@ -27,12 +27,12 @@ extension UserConcept {
     
     static var sumRule: UserConcept {
         let concept = Concept.sumRule
-        return UserConcept(id: concept.id, concept: concept, strength: 1)
+        return UserConcept(id: concept.id, concept: concept, strength: 0)
     }
     
     static var differenceRule: UserConcept {
         let concept = Concept.differenceRule
-        return UserConcept(id: concept.id, concept: concept, strength: 2)
+        return UserConcept(id: concept.id, concept: concept, strength: 0)
     }
     
 }
