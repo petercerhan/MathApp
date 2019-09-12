@@ -13,6 +13,7 @@ protocol DatabaseService {
     func setup()
     func getUserConcepts() -> [UserConcept]
     func incrementStrengthForUserConcept(withID: Int)
+    func decrementStrengthForUserConcept(withID conceptID: Int)
     func reset()
 }
 
@@ -89,6 +90,16 @@ class DatabaseServiceImpl: DatabaseService {
         }
         let priorStrength = userConceptRow[UserConcept.column_strength]
         let newStrength = min(priorStrength + 1, 3)
+        _ = try? db.run(userConceptQuery.update(UserConcept.column_strength <- newStrength))
+    }
+    
+    func decrementStrengthForUserConcept(withID conceptID: Int) {
+        let userConceptQuery = userConceptsTable.filter(UserConcept.column_conceptID == Int64(conceptID))
+        guard let userConceptRow = try? db.pluck(userConceptQuery) else {
+            return
+        }
+        let priorStrength = userConceptRow[UserConcept.column_strength]
+        let newStrength = max(priorStrength - 1, 0)
         _ = try? db.run(userConceptQuery.update(UserConcept.column_strength <- newStrength))
     }
     

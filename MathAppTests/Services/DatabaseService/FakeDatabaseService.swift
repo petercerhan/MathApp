@@ -17,16 +17,25 @@ class FakeDatabaseService: DatabaseService {
         setup_callCount += 1
     }
     
+    
     var stubUserConcepts = [UserConcept]()
     
     func getUserConcepts() -> [UserConcept] {
         return stubUserConcepts
     }
     
+    
     var incrementStrengthForUserConcept_callCount = 0
     
     func incrementStrengthForUserConcept(withID: Int) {
         incrementStrengthForUserConcept_callCount += 1
+    }
+    
+    
+    var decrementStrengthForUserConcept_callCount = 0
+    
+    func decrementStrengthForUserConcept(withID conceptID: Int) {
+        decrementStrengthForUserConcept_callCount += 1
     }
     
     func reset() {

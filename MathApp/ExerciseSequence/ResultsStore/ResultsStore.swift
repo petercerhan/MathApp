@@ -67,6 +67,7 @@ class ResultsStoreImpl: ResultsStore {
         }
         if evaluated == 5 {
             incrementStrengthIfNeeded(conceptID: result.conceptID)
+            decrementStrengthIfNeeded(conceptID: result.conceptID)
             evaluated = 0
             correct = 0
         }
@@ -75,6 +76,12 @@ class ResultsStoreImpl: ResultsStore {
     private func incrementStrengthIfNeeded(conceptID: Int) {
         if correct >= 4 {
             databaseService.incrementStrengthForUserConcept(withID: conceptID)
+        }
+    }
+    
+    private func decrementStrengthIfNeeded(conceptID: Int) {
+        if correct <= 2 {
+            databaseService.decrementStrengthForUserConcept(withID: conceptID)
         }
     }
     
