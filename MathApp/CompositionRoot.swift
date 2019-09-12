@@ -11,7 +11,9 @@ import UIKit
 class CompositionRoot {
     
     func composeRootCoordinator() -> Coordinator {
-        return RootCoordinator(compositionRoot: self, containerVC: ContainerViewController())
+        return RootCoordinator(compositionRoot: self,
+                               containerVC: ContainerViewController(),
+                               databaseService: databaseService)
     }
     
     func composeWindow() -> UIWindow {
@@ -60,8 +62,14 @@ class CompositionRoot {
     }
     
     func composeConceptMapScene(delegate: ConceptMapViewModelDelegate) -> UIViewController {
-        let vm = ConceptMapViewModel(delegate: delegate, databaseService: DatabaseServiceImpl())
+        let vm = ConceptMapViewModel(delegate: delegate, databaseService: databaseService)
         return ConceptMapViewController(viewModel: vm)
     }
+    
+    //MARK: - Services
+    
+    private lazy var databaseService: DatabaseService = {
+        DatabaseServiceImpl()
+    }()
     
 }

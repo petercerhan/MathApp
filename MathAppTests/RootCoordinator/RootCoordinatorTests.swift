@@ -13,13 +13,31 @@ import XCTest
 class RootCoordinatorTests: XCTestCase {
     
     func test_start_shouldShowExerciseSequence() {
-        let fakeContainer = FakeContainerViewController()
-        let coordinator = RootCoordinator(compositionRoot: CompositionRoot(), containerVC: fakeContainer)
+        let mockContainer = FakeContainerViewController()
+        let coordinator = composeSUT(fakeContainer: mockContainer)
         
         coordinator.start()
         
-        fakeContainer.verifyDidShow(viewControllerType: ContainerViewController.self)
+        mockContainer.verifyDidShow(viewControllerType: ContainerViewController.self)
         XCTAssert(coordinator.childCoordinator is ExerciseCoordinator)
+    }
+    
+    func test_start_shouldSetupDatabaseService() {
+        let mockDatabaseService = FakeDatabaseService()
+        let coordinator = composeSUT(fakeDatabaseService: mockDatabaseService)
+        
+        coordinator.start()
+        
+        XCTAssertEqual(mockDatabaseService.setup_callCount, 1)
+    }
+    
+    //MARK: - SUT Composition
+    
+    func composeSUT(fakeContainer: FakeContainerViewController? = nil, fakeDatabaseService: FakeDatabaseService? = nil) -> RootCoordinator {
+        let container = fakeContainer ?? FakeContainerViewController()
+        let databaseService = fakeDatabaseService ?? FakeDatabaseService()
+        
+        return RootCoordinator(compositionRoot: CompositionRoot(), containerVC: container, databaseService: databaseService)
     }
     
 }
