@@ -82,8 +82,14 @@ class DatabaseServiceImpl: DatabaseService {
         return result ?? [UserConcept]()
     }
     
-    func incrementStrengthForUserConcept(withID: Int) {
-        
+    func incrementStrengthForUserConcept(withID conceptID: Int) {
+        let userConceptQuery = userConceptsTable.filter(UserConcept.column_conceptID == Int64(conceptID))
+        guard let userConceptRow = try? db.pluck(userConceptQuery) else {
+            return
+        }
+        let priorStrength = userConceptRow[UserConcept.column_strength]
+        let newStrength = min(priorStrength + 1, 3)
+        _ = try? db.run(userConceptQuery.update(UserConcept.column_strength <- newStrength))
     }
     
     func reset() {
