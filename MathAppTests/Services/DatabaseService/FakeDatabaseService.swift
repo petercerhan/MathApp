@@ -22,4 +22,14 @@ class FakeDatabaseService: DatabaseService {
     func getUserConcepts() -> [UserConcept] {
         return stubUserConcepts
     }
+    
+    var incrementStrengthForUserConcept_callCount = 0
+    
+    func incrementStrengthForUserConcept(withID: Int) {
+        incrementStrengthForUserConcept_callCount += 1
+    }
+    
+    func reset() {
+        
+    }
 }

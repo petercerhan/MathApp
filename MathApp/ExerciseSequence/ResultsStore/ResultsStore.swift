@@ -26,9 +26,24 @@ extension ResultsStore where Self: ResultsStoreImpl {
 
 class ResultsStoreImpl: ResultsStore {
     
+    //MARK: - DatabaseService
+    
+    private let databaseService: DatabaseService
+    
     //MARK: - Rx
     
     private let disposeBag = DisposeBag()
+    
+    //MARK: - State
+    
+    private var evaluated = 0
+    private var correct = 0
+    
+    //MARK: - Initialization
+    
+    init(databaseService: DatabaseService) {
+        self.databaseService = databaseService
+    }
     
     //MARK: - ResultsStore Interface
     
@@ -45,7 +60,22 @@ class ResultsStoreImpl: ResultsStore {
         guard let priorCorrectValue = latestValue(of: correct, disposeBag: disposeBag) else {
             return
         }
-        correctSubject.onNext(priorCorrectValue + 1)
+        evaluated += 1
+        if result.correct {
+            correct += 1
+            correctSubject.onNext(priorCorrectValue + 1)
+        }
+        if evaluated == 5 {
+            incrementStrengthIfNeeded(conceptID: result.conceptID)
+            evaluated = 0
+            correct = 0
+        }
+    }
+    
+    private func incrementStrengthIfNeeded(conceptID: Int) {
+        if correct >= 4 {
+            databaseService.incrementStrengthForUserConcept(withID: conceptID)
+        }
     }
     
 }

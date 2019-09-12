@@ -12,6 +12,7 @@ import SQLite
 protocol DatabaseService {
     func setup()
     func getUserConcepts() -> [UserConcept]
+    func incrementStrengthForUserConcept(withID: Int)
     func reset()
 }
 
@@ -79,6 +80,10 @@ class DatabaseServiceImpl: DatabaseService {
             return UserConcept.createFromQueryResult(row)
         }
         return result ?? [UserConcept]()
+    }
+    
+    func incrementStrengthForUserConcept(withID: Int) {
+        
     }
     
     func reset() {
