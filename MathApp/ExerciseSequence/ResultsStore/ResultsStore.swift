@@ -36,8 +36,11 @@ class ResultsStoreImpl: ResultsStore {
     
     //MARK: - State
     
-    private var evaluated = 0
-    private var correct = 0
+    private var progressMap = [String: ProgressRecord]()
+    struct ProgressRecord {
+        var evaluated = 0
+        var correct = 0
+    }
     
     //MARK: - Initialization
     
@@ -57,30 +60,44 @@ class ResultsStoreImpl: ResultsStore {
     }
     
     private func handle_processResult(_ result: ExerciseResult) {
+        reevaluatePoints(result: result)
+        reevaluateStrengths(result: result)
+    }
+    
+    private func reevaluatePoints(result: ExerciseResult) {
         guard let priorCorrectValue = latestValue(of: correct, disposeBag: disposeBag) else {
             return
         }
-        evaluated += 1
         if result.correct {
-            correct += 1
             correctSubject.onNext(priorCorrectValue + 1)
-        }
-        if evaluated == 5 {
-            incrementStrengthIfNeeded(conceptID: result.conceptID)
-            decrementStrengthIfNeeded(conceptID: result.conceptID)
-            evaluated = 0
-            correct = 0
         }
     }
     
-    private func incrementStrengthIfNeeded(conceptID: Int) {
-        if correct >= 4 {
+    private func reevaluateStrengths(result: ExerciseResult) {
+        var progressRecord = progressMap["\(result.conceptID)"] ?? ProgressRecord()
+        
+        progressRecord.evaluated += 1
+        if result.correct {
+            progressRecord.correct += 1
+        }
+        if progressRecord.evaluated == 5 {
+            incrementStrengthIfNeeded(progressRecord: progressRecord, conceptID: result.conceptID)
+            decrementStrengthIfNeeded(progressRecord: progressRecord, conceptID: result.conceptID)
+            progressRecord.evaluated = 0
+            progressRecord.correct = 0
+        }
+        
+        progressMap["\(result.conceptID)"] = progressRecord
+    }
+    
+    private func incrementStrengthIfNeeded(progressRecord: ProgressRecord, conceptID: Int) {
+        if progressRecord.correct >= 4 {
             databaseService.incrementStrengthForUserConcept(withID: conceptID)
         }
     }
     
-    private func decrementStrengthIfNeeded(conceptID: Int) {
-        if correct <= 2 {
+    private func decrementStrengthIfNeeded(progressRecord: ProgressRecord, conceptID: Int) {
+        if progressRecord.correct <= 2 {
             databaseService.decrementStrengthForUserConcept(withID: conceptID)
         }
     }

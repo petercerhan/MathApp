@@ -87,7 +87,7 @@ extension ExerciseCoordinator: ExerciseViewModelDelegate {
     }
     
     func info(_ exerciseViewModel: ExerciseViewModel, concept: Concept) {
-        let vc = compositionRoot.composeInfoScene(delegate: self, concept: Concept.constantRule)
+        let vc = compositionRoot.composeInfoScene(delegate: self, concept: concept)
         containerVC.presentModal(viewController: vc, animation: .fadeIn)
     }
 }

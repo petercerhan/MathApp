@@ -22,7 +22,7 @@ class ResultsStoreTests: XCTestCase {
         XCTAssertEqual(correct, 0)
     }
     
-    func test_correctResult_shouldIncrementsCorrectCount() {
+    func test_correctResult_shouldIncrementCorrectCount() {
         let store = composeSUT()
         
         let result = ExerciseResult(correct: true, conceptID: 1)
@@ -54,6 +54,7 @@ class ResultsStoreTests: XCTestCase {
         store.dispatch(action: .processResult(result))
 
         XCTAssertEqual(mockDatabaseService.incrementStrengthForUserConcept_callCount, 1)
+        XCTAssertEqual(mockDatabaseService.incrementStrengthForUserConcept_conceptID.last, 1)
     }
     
     func test_concept1_4of5Correct_shouldIncrementStrength() {
@@ -68,6 +69,7 @@ class ResultsStoreTests: XCTestCase {
         store.dispatch(action: .processResult(result))
         
         XCTAssertEqual(mockDatabaseService.incrementStrengthForUserConcept_callCount, 1)
+        XCTAssertEqual(mockDatabaseService.incrementStrengthForUserConcept_conceptID.last, 1)
     }
     
     func test_concept1_3of5Correct_shouldNotChangeStrength() {
@@ -95,6 +97,7 @@ class ResultsStoreTests: XCTestCase {
         store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
         
         XCTAssertEqual(mockDatabaseService.decrementStrengthForUserConcept_callCount, 1)
+        XCTAssertEqual(mockDatabaseService.decrementStrengthForUserConcept_conceptID.last, 1)
     }
     
     func test_concept1_0of5Correct_shouldDecementStrength() {
@@ -108,9 +111,76 @@ class ResultsStoreTests: XCTestCase {
         store.dispatch(action: .processResult(ExerciseResult(correct: false, conceptID: 1)))
         
         XCTAssertEqual(mockDatabaseService.decrementStrengthForUserConcept_callCount, 1)
+        XCTAssertEqual(mockDatabaseService.decrementStrengthForUserConcept_conceptID.last, 1)
     }
     
+    func test_4concept1Correct1Concept2Correct_shouldNotIncrementStrength() {
+        let mockDatabaseService = FakeDatabaseService()
+        let store = composeSUT(fakeDatabaseService: mockDatabaseService)
+        
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 2)))
+        
+        XCTAssertEqual(mockDatabaseService.incrementStrengthForUserConcept_callCount, 0)
+    }
     
+    func test_5concept1Correct1Concept2Correct_shouldIncrementStrength() {
+        let mockDatabaseService = FakeDatabaseService()
+        let store = composeSUT(fakeDatabaseService: mockDatabaseService)
+        
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 2)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        
+        XCTAssertEqual(mockDatabaseService.incrementStrengthForUserConcept_callCount, 1)
+        XCTAssertEqual(mockDatabaseService.incrementStrengthForUserConcept_conceptID.last, 1)
+    }
+    
+    func test_10Concept1Answers_shouldIncrementStrengthTwice() {
+        let mockDatabaseService = FakeDatabaseService()
+        let store = composeSUT(fakeDatabaseService: mockDatabaseService)
+        
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        
+        XCTAssertEqual(mockDatabaseService.incrementStrengthForUserConcept_callCount, 2)
+        XCTAssertEqual(mockDatabaseService.incrementStrengthForUserConcept_conceptID[0], 1)
+        XCTAssertEqual(mockDatabaseService.incrementStrengthForUserConcept_conceptID[1], 1)
+    }
+    
+    func test_5concept1Answers_5concept2Answers_shouldIncrementEachConceptOnce() {
+        let mockDatabaseService = FakeDatabaseService()
+        let store = composeSUT(fakeDatabaseService: mockDatabaseService)
+        
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 2)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 2)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 2)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 2)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 2)))
+        
+        XCTAssertEqual(mockDatabaseService.incrementStrengthForUserConcept_callCount, 2)
+        XCTAssertEqual(mockDatabaseService.incrementStrengthForUserConcept_conceptID[0], 1)
+        XCTAssertEqual(mockDatabaseService.incrementStrengthForUserConcept_conceptID[1], 2)
+    }
     
     //MARK: - Compose SUT
     

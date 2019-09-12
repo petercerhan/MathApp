@@ -13,21 +13,21 @@ extension Exercise {
     static func getByID(_ id: Int) -> Exercise {
         switch id {
         case 1:
-            return exercise1
+            return linearRule_exercise1
         case 2:
-            return exercise2
+            return linearRule_exercise2
         case 3:
-            return exercise3
+            return linearRule_exercise3
         case 4:
-            return exercise4
+            return linearRule_exercise4
         case 5:
-            return exercise5
+            return linearRule_exercise5
         case 6:
-            return exercise6
+            return linearRule_exercise6
         case 7:
-            return exercise7
+            return linearRule_exercise7
         case 8:
-            return exercise8
+            return linearRule_exercise8
             
         default:
             return exercise1
@@ -122,6 +122,96 @@ extension Exercise {
                         falseAnswer2: "1",
                         falseAnswer3: "-1",
                         concept: Concept.constantRule)
+    }
+    
+    //MARK: - Linear Rule
+    
+    static var linearRule_exercise1: Exercise {
+        return Exercise(id: 9,
+                        questionText: "Find the derivative:",
+                        questionLatex: "\\frac{d}{dx}(2x)",
+                        answer: "2",
+                        falseAnswer1: "1",
+                        falseAnswer2: "2x",
+                        falseAnswer3: "x",
+                        concept: Concept.linearRule)
+    }
+    
+    static var linearRule_exercise2: Exercise {
+        return Exercise(id: 10,
+                        questionText: "Find the derivative:",
+                        questionLatex: "\\frac{d}{dx}(3x)",
+                        answer: "3",
+                        falseAnswer1: "3x",
+                        falseAnswer2: "0",
+                        falseAnswer3: "x",
+                        concept: Concept.linearRule)
+    }
+    
+    static var linearRule_exercise3: Exercise {
+        return Exercise(id: 11,
+                        questionText: "Find the derivative:",
+                        questionLatex: "\\frac{d}{dx}(ax)",
+                        answer: "a",
+                        falseAnswer1: "1",
+                        falseAnswer2: "0",
+                        falseAnswer3: "x",
+                        concept: Concept.linearRule)
+    }
+    
+    static var linearRule_exercise4: Exercise {
+        return Exercise(id: 12,
+                        questionText: "Find the derivative:",
+                        questionLatex: "\\frac{d}{dx}(yx)",
+                        answer: "y",
+                        falseAnswer1: "yx",
+                        falseAnswer2: "\\frac{1}{2}x",
+                        falseAnswer3: "x",
+                        concept: Concept.linearRule)
+    }
+    
+    static var linearRule_exercise5: Exercise {
+        return Exercise(id: 13,
+                        questionText: "Find the derivative:",
+                        questionLatex: "\\frac{d}{dx}(-2x)",
+                        answer: "-2",
+                        falseAnswer1: "-1",
+                        falseAnswer2: "-2x",
+                        falseAnswer3: "\\frac{1}{2}x^2",
+                        concept: Concept.linearRule)
+    }
+    
+    static var linearRule_exercise6: Exercise {
+        return Exercise(id: 14,
+                        questionText: "Find the derivative:",
+                        questionLatex: "\\frac{d}{dx}(y^3x)",
+                        answer: "y^3",
+                        falseAnswer1: "\\frac{1}{2}y^2",
+                        falseAnswer2: "3x",
+                        falseAnswer3: "0",
+                        concept: Concept.linearRule)
+    }
+    
+    static var linearRule_exercise7: Exercise {
+        return Exercise(id: 15,
+                        questionText: "Find the derivative:",
+                        questionLatex: "\\frac{d}{dx}(-a^2x)",
+                        answer: "-a^2",
+                        falseAnswer1: "a",
+                        falseAnswer2: "a^2",
+                        falseAnswer3: "1",
+                        concept: Concept.linearRule)
+    }
+    
+    static var linearRule_exercise8: Exercise {
+        return Exercise(id: 16,
+                        questionText: "Find the derivative:",
+                        questionLatex: "\\frac{d}{dx}(-ax)",
+                        answer: "-a",
+                        falseAnswer1: "1",
+                        falseAnswer2: "0",
+                        falseAnswer3: "x",
+                        concept: Concept.linearRule)
     }
 }
 
