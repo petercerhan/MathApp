@@ -68,8 +68,8 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="80s-Yk-2zt" customClass="AnimatedButton" customModule="MathApp" customModuleProvider="target">
                     <rect key="frame" x="24" y="593" width="327" height="50"/>
                     <subviews>
-                        <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bz7-39-x30" customClass="MTMathUILabel">
-                            <rect key="frame" x="156.5" y="19.5" width="14" height="11"/>
+                        <view userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="bz7-39-x30" customClass="MTMathUILabel">
+                            <rect key="frame" x="156.5" y="0.0" width="14" height="50"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="latex" value="x"/>
@@ -88,6 +88,7 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstItem="bz7-39-x30" firstAttribute="height" secondItem="80s-Yk-2zt" secondAttribute="height" id="6k4-lD-Fl6"/>
                         <constraint firstAttribute="trailing" secondItem="FTe-nw-pNM" secondAttribute="trailing" constant="12" id="UoP-iQ-dcW"/>
                         <constraint firstItem="FTe-nw-pNM" firstAttribute="centerY" secondItem="80s-Yk-2zt" secondAttribute="centerY" id="czV-q0-mJ9"/>
                         <constraint firstItem="bz7-39-x30" firstAttribute="centerY" secondItem="80s-Yk-2zt" secondAttribute="centerY" id="pvV-tN-83U"/>
@@ -109,8 +110,8 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ccN-ZU-cbe" customClass="AnimatedButton" customModule="MathApp" customModuleProvider="target">
                     <rect key="frame" x="24" y="531" width="327" height="50"/>
                     <subviews>
-                        <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z7N-Ir-Ceu" customClass="MTMathUILabel">
-                            <rect key="frame" x="156.5" y="19.5" width="14" height="11"/>
+                        <view userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="z7N-Ir-Ceu" customClass="MTMathUILabel">
+                            <rect key="frame" x="156.5" y="0.0" width="14" height="50"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="latex" value="x"/>
@@ -132,6 +133,7 @@
                         <constraint firstItem="z7N-Ir-Ceu" firstAttribute="centerX" secondItem="ccN-ZU-cbe" secondAttribute="centerX" id="Gsm-4U-Dvm"/>
                         <constraint firstItem="Ye8-eJ-Iao" firstAttribute="centerY" secondItem="ccN-ZU-cbe" secondAttribute="centerY" id="I6x-ud-Xx9"/>
                         <constraint firstItem="z7N-Ir-Ceu" firstAttribute="centerY" secondItem="ccN-ZU-cbe" secondAttribute="centerY" id="XD2-WG-qyY"/>
+                        <constraint firstItem="z7N-Ir-Ceu" firstAttribute="height" secondItem="ccN-ZU-cbe" secondAttribute="height" id="bfI-zv-Lti"/>
                         <constraint firstAttribute="trailing" secondItem="Ye8-eJ-Iao" secondAttribute="trailing" constant="12" id="hge-8F-KTP"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
@@ -150,8 +152,8 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Vv-Al-hDk" customClass="AnimatedButton" customModule="MathApp" customModuleProvider="target">
                     <rect key="frame" x="24" y="469" width="327" height="50"/>
                     <subviews>
-                        <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Brh-4h-VRh" customClass="MTMathUILabel">
-                            <rect key="frame" x="156.5" y="19.5" width="14" height="11"/>
+                        <view userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="Brh-4h-VRh" customClass="MTMathUILabel">
+                            <rect key="frame" x="156.5" y="0.0" width="14" height="50"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="latex" value="x"/>
@@ -174,6 +176,7 @@
                         <constraint firstAttribute="trailing" secondItem="G9I-iO-sF9" secondAttribute="trailing" constant="12" id="ADs-Ot-Phc"/>
                         <constraint firstItem="Brh-4h-VRh" firstAttribute="centerY" secondItem="1Vv-Al-hDk" secondAttribute="centerY" id="CdR-ly-OrT"/>
                         <constraint firstItem="G9I-iO-sF9" firstAttribute="centerY" secondItem="1Vv-Al-hDk" secondAttribute="centerY" id="JIo-9A-W0V"/>
+                        <constraint firstItem="Brh-4h-VRh" firstAttribute="height" secondItem="1Vv-Al-hDk" secondAttribute="height" id="PIp-YF-zIA"/>
                         <constraint firstItem="Brh-4h-VRh" firstAttribute="centerX" secondItem="1Vv-Al-hDk" secondAttribute="centerX" id="Zhw-1y-2ii"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>

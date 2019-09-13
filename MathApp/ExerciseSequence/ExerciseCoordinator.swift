@@ -57,6 +57,7 @@ class ExerciseCoordinator: Coordinator {
     private func getNextExerciseScene() -> UIViewController {
         let choiceConfiguration = randomizationService.randomizedExerciseChoiceConfiguration()
         
+        //replace with exercise queue dequeue
         let exercise = exerciseService.nextExercise()
         
         return compositionRoot.composeExerciseScene(delegate: self,
