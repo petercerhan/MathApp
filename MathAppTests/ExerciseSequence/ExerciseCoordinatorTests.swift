@@ -21,6 +21,15 @@ class ExerciseCoordinatorTests: XCTestCase {
         mockContainerVC.verifyDidShow(viewControllerType: ExerciseViewController.self)
     }
     
+    func test_start_noExercisesLoaded_shouldShowLoadExercisesScene() {
+        let mockContainerVC = FakeContainerViewController()
+        let coordinator = composeSUT(fakeContainerViewController: mockContainerVC, stubData: [])
+        
+        coordinator.start()
+        
+        mockContainerVC.verifyDidShow(viewControllerType: LoadExercisesViewController.self)
+    }
+    
     func test_exerciseSceneRequestsNext_shouldShowNextExercise() {
         let mockContainerVC = FakeContainerViewController()
         let coordinator = composeSUT(fakeContainerViewController: mockContainerVC)
@@ -75,9 +84,10 @@ class ExerciseCoordinatorTests: XCTestCase {
     
     //MARK: - SUT Composition
     
-    func composeSUT(fakeContainerViewController: ContainerViewController) -> ExerciseCoordinator {
+    func composeSUT(fakeContainerViewController: ContainerViewController, stubData: [Exercise]? = nil) -> ExerciseCoordinator {
         let exercisesStore = FakeExercisesStore()
-        exercisesStore.setStubExercises([Exercise.exercise1, Exercise.exercise2, Exercise.exercise3])
+        let data = stubData ?? [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3]
+        exercisesStore.setStubExercises(data)
         
         return ExerciseCoordinator(compositionRoot: CompositionRoot(),
                                    containerVC: fakeContainerViewController,

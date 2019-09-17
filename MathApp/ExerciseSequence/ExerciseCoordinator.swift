@@ -57,15 +57,12 @@ class ExerciseCoordinator: Coordinator {
     
     func start() {
         containerVC.loadViewIfNeeded()
-        loadNextExerciseScene()
-        
-//        let vc = getNextExerciseScene()
-//        containerVC.show(viewController: vc, animation: .none)
+        showNextExerciseScene()
     }
     
     var exerciseArray = [Exercise]()
     
-    private func loadNextExerciseScene() {
+    private func showNextExerciseScene() {
         if exerciseArray.count == 0 {
             updateExerciseQueue()
         } else {
@@ -77,11 +74,11 @@ class ExerciseCoordinator: Coordinator {
     
     private func updateExerciseQueue() {
         guard let exercises = latestValue(of: exercisesStore.exercises, disposeBag: disposeBag), exercises.count > 0 else {
-            //show loading view, reload
+            loadNewExercises()
             return
         }
         exerciseArray = exercises
-        loadNextExerciseScene()
+        showNextExerciseScene()
     }
     
     private func composeExerciseScene(forExercise exercise: Exercise) -> UIViewController {
@@ -91,6 +88,11 @@ class ExerciseCoordinator: Coordinator {
                                                     resultsStore: resultsStore,
                                                     exercise: exercise,
                                                     choiceConfiguration: choiceConfiguration)
+    }
+    
+    private func loadNewExercises() {
+        let vc = compositionRoot.composeLoadExercisesScene(exercisesStore: exercisesStore)
+        containerVC.show(viewController: vc, animation: .none)
     }
 
 }
@@ -112,7 +114,7 @@ extension ExerciseCoordinator: ExerciseViewModelDelegate {
     func next(_ exerciseViewModel: ExerciseViewModel) {
 //        let vc = loadNextExerciseScene()
 //        containerVC.show(viewController: vc, animation: .fadeIn)
-        loadNextExerciseScene()
+        showNextExerciseScene()
     }
     
     func info(_ exerciseViewModel: ExerciseViewModel, concept: Concept) {

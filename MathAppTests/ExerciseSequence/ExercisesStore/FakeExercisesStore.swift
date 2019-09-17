@@ -21,8 +21,15 @@ class FakeExercisesStore: ExercisesStore {
         exercisesSubject.onNext(exercises)
     }
     
+    
+    var setStubExercises_callCount = 0
+    
     func dispatch(action: ExercisesStoreAction) {
-        
+        switch action {
+        case .updateExercises:
+            setStubExercises([Exercise.exercise1, Exercise.exercise2, Exercise.exercise3])
+            setStubExercises_callCount += 1
+        }
     }
     
 }

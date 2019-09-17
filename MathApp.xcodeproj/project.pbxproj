@@ -32,6 +32,10 @@
 		6E927E81231CA88600822EBA /* ResultsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E927E80231CA88600822EBA /* ResultsStore.swift */; };
 		6E927E83231CAE2400822EBA /* FakeResultsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E927E82231CAE2400822EBA /* FakeResultsStore.swift */; };
 		6EB9339B23305A3F00E38B52 /* FakeExercisesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB9339A23305A3F00E38B52 /* FakeExercisesStore.swift */; };
+		6EB933A42330702C00E38B52 /* LoadExercisesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB933A22330702C00E38B52 /* LoadExercisesViewController.swift */; };
+		6EB933A52330702C00E38B52 /* LoadExercisesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EB933A32330702C00E38B52 /* LoadExercisesViewController.xib */; };
+		6EB933A8233071D800E38B52 /* LoadExercisesSceneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB933A7233071D800E38B52 /* LoadExercisesSceneTests.swift */; };
+		6EB933AA233073C700E38B52 /* LoadExercisesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB933A9233073C700E38B52 /* LoadExercisesViewModel.swift */; };
 		6EBA303A230CADCB00E6DC54 /* AnimatedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBA3039230CADCB00E6DC54 /* AnimatedButton.swift */; };
 		6EBA303C230CAED200E6DC54 /* UIView+addShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBA303B230CAED200E6DC54 /* UIView+addShadow.swift */; };
 		6EBA304F230E07AE00E6DC54 /* CheckmarkImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBA304E230E07AE00E6DC54 /* CheckmarkImageView.swift */; };
@@ -138,6 +142,10 @@
 		6E927E80231CA88600822EBA /* ResultsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsStore.swift; sourceTree = "<group>"; };
 		6E927E82231CAE2400822EBA /* FakeResultsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeResultsStore.swift; sourceTree = "<group>"; };
 		6EB9339A23305A3F00E38B52 /* FakeExercisesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeExercisesStore.swift; sourceTree = "<group>"; };
+		6EB933A22330702C00E38B52 /* LoadExercisesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadExercisesViewController.swift; sourceTree = "<group>"; };
+		6EB933A32330702C00E38B52 /* LoadExercisesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadExercisesViewController.xib; sourceTree = "<group>"; };
+		6EB933A7233071D800E38B52 /* LoadExercisesSceneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadExercisesSceneTests.swift; sourceTree = "<group>"; };
+		6EB933A9233073C700E38B52 /* LoadExercisesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadExercisesViewModel.swift; sourceTree = "<group>"; };
 		6EBA3039230CADCB00E6DC54 /* AnimatedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedButton.swift; sourceTree = "<group>"; };
 		6EBA303B230CAED200E6DC54 /* UIView+addShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+addShadow.swift"; sourceTree = "<group>"; };
 		6EBA304E230E07AE00E6DC54 /* CheckmarkImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmarkImageView.swift; sourceTree = "<group>"; };
@@ -435,6 +443,24 @@
 			path = ResultsStore;
 			sourceTree = "<group>";
 		};
+		6EB933A123306F3900E38B52 /* LoadExercisesScene */ = {
+			isa = PBXGroup;
+			children = (
+				6EB933A22330702C00E38B52 /* LoadExercisesViewController.swift */,
+				6EB933A9233073C700E38B52 /* LoadExercisesViewModel.swift */,
+				6EB933A32330702C00E38B52 /* LoadExercisesViewController.xib */,
+			);
+			path = LoadExercisesScene;
+			sourceTree = "<group>";
+		};
+		6EB933A6233071A800E38B52 /* LoadExercisesSceneTests */ = {
+			isa = PBXGroup;
+			children = (
+				6EB933A7233071D800E38B52 /* LoadExercisesSceneTests.swift */,
+			);
+			path = LoadExercisesSceneTests;
+			sourceTree = "<group>";
+		};
 		6EBA3038230CADBF00E6DC54 /* InterfaceControls */ = {
 			isa = PBXGroup;
 			children = (
@@ -472,6 +498,7 @@
 				6E841616232B20770035F381 /* ExercisesStore */,
 				6E74FD452318B52F00730AEB /* Models */,
 				6EBE4E9D230B64240047A880 /* ExerciseScene */,
+				6EB933A6233071A800E38B52 /* LoadExercisesSceneTests */,
 				6EC666F4232204170048068C /* InfoScene */,
 			);
 			path = ExerciseSequence;
@@ -487,6 +514,7 @@
 				6E841619232B212D0035F381 /* ExercisesStore */,
 				6EBE4EA0230B663F0047A880 /* Models */,
 				6EBE4E98230B60F00047A880 /* ExerciseScene */,
+				6EB933A123306F3900E38B52 /* LoadExercisesScene */,
 				6EC666EF2321E6340048068C /* InfoViewController */,
 			);
 			path = ExerciseSequence;
@@ -795,6 +823,7 @@
 				6E557C1E22FB9DCC00270F07 /* Assets.xcassets in Resources */,
 				6EC6671E232451760048068C /* QuitableContainerViewController.xib in Resources */,
 				6E74FD53231C87F800730AEB /* FeedContainerViewController.xib in Resources */,
+				6EB933A52330702C00E38B52 /* LoadExercisesViewController.xib in Resources */,
 				6EC666F32321E64A0048068C /* InfoViewController.xib in Resources */,
 				6EC66730232464B20048068C /* ConceptMapViewController.xib in Resources */,
 				6EBE4E9C230B614B0047A880 /* ExerciseViewController.xib in Resources */,
@@ -922,6 +951,8 @@
 				6EC666EE2321DFA60048068C /* Colors.swift in Sources */,
 				6E1E6B3722FFA97800AFB7A0 /* TransitionAnimation.swift in Sources */,
 				6EC6672F232464B20048068C /* ConceptMapViewController.swift in Sources */,
+				6EB933AA233073C700E38B52 /* LoadExercisesViewModel.swift in Sources */,
+				6EB933A42330702C00E38B52 /* LoadExercisesViewController.swift in Sources */,
 				6EC666FE232324F70048068C /* Concept.swift in Sources */,
 				6EC6674723249D850048068C /* UserConcept.swift in Sources */,
 				6EC6674223249C300048068C /* DatabaseService.swift in Sources */,
@@ -950,6 +981,7 @@
 			files = (
 				6EC6674B2324A40C0048068C /* ConceptMapTableViewCell+utilites.swift in Sources */,
 				6EBE4E8F230A13D80047A880 /* ExerciseCoordinatorTests.swift in Sources */,
+				6EB933A8233071D800E38B52 /* LoadExercisesSceneTests.swift in Sources */,
 				6EB9339B23305A3F00E38B52 /* FakeExercisesStore.swift in Sources */,
 				6EC666FC232209980048068C /* FakeInfoViewModelDelegate.swift in Sources */,
 				6E1E6B3222FFA8BD00AFB7A0 /* ContainerViewControllerTests.swift in Sources */,

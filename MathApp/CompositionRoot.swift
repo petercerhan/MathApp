@@ -50,6 +50,11 @@ class CompositionRoot {
         return InfoViewController(viewModel: vm)
     }
     
+    func composeLoadExercisesScene(exercisesStore: ExercisesStore) -> UIViewController {
+        let vm = LoadExercisesViewModel(exercisesStore: exercisesStore)
+        return LoadExercisesViewController(viewModel: vm)
+    }
+    
     //MARK: - Menu sequence
     
     func composeMenuCoordinator(delegate: MenuCoordinatorDelegate) -> MenuCoordinator {
