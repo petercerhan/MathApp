@@ -50,8 +50,8 @@ class CompositionRoot {
         return InfoViewController(viewModel: vm)
     }
     
-    func composeLoadExercisesScene(exercisesStore: ExercisesStore) -> UIViewController {
-        let vm = LoadExercisesViewModel(exercisesStore: exercisesStore)
+    func composeLoadExercisesScene(delegate: LoadExercisesViewModelDelegate, exercisesStore: ExercisesStore) -> UIViewController {
+        let vm = LoadExercisesViewModel(delegate: delegate, exercisesStore: exercisesStore)
         return LoadExercisesViewController(viewModel: vm)
     }
     

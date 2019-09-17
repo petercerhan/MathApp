@@ -91,7 +91,7 @@ class ExerciseCoordinator: Coordinator {
     }
     
     private func loadNewExercises() {
-        let vc = compositionRoot.composeLoadExercisesScene(exercisesStore: exercisesStore)
+        let vc = compositionRoot.composeLoadExercisesScene(delegate: self, exercisesStore: exercisesStore)
         containerVC.show(viewController: vc, animation: .none)
     }
 
@@ -112,8 +112,6 @@ extension ExerciseCoordinator: FeedContainerViewModelDelegate {
 
 extension ExerciseCoordinator: ExerciseViewModelDelegate {
     func next(_ exerciseViewModel: ExerciseViewModel) {
-//        let vc = loadNextExerciseScene()
-//        containerVC.show(viewController: vc, animation: .fadeIn)
         showNextExerciseScene()
     }
     
@@ -136,5 +134,13 @@ extension ExerciseCoordinator: InfoViewModelDelegate {
 extension ExerciseCoordinator: MenuCoordinatorDelegate {
     func quit(_ menuCoordinator: MenuCoordinator) {
         containerVC.dismissModal()
+    }
+}
+
+//MARK: - LoadExercisesViewModelDelegate
+
+extension ExerciseCoordinator: LoadExercisesViewModelDelegate {
+    func next(_ loadExercisesViewModel: LoadExercisesViewModel) {
+        
     }
 }

@@ -13,13 +13,25 @@ import XCTest
 class LoadExercisesTests: XCTestCase {
     
     func test_onSetup_requestsNewExercises() {
+        let fakeDelegate = FakeLoadExercisesViewModelDelegate()
         let mockExercisesStore = FakeExercisesStore()
-        let viewModel = LoadExercisesViewModel(exercisesStore: mockExercisesStore)
+        let viewModel = LoadExercisesViewModel(delegate: fakeDelegate, exercisesStore: mockExercisesStore)
         let vc = LoadExercisesViewController(viewModel: viewModel)
         
         vc.loadViewIfNeeded()
         
         XCTAssertEqual(mockExercisesStore.setStubExercises_callCount, 1)
+    }
+    
+    func test_onExercisesLoaded_requestsNextScene() {
+        let mockDelegate = FakeLoadExercisesViewModelDelegate()
+        let stubExercisesStore = FakeExercisesStore()
+        let viewModel = LoadExercisesViewModel(delegate: mockDelegate, exercisesStore: stubExercisesStore)
+        let vc = LoadExercisesViewController(viewModel: viewModel)
+        
+        vc.loadViewIfNeeded()
+        
+        XCTAssertEqual(mockDelegate.next_callCount, 1)
     }
     
 }
