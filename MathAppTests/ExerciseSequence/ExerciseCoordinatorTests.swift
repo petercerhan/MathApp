@@ -76,11 +76,15 @@ class ExerciseCoordinatorTests: XCTestCase {
     //MARK: - SUT Composition
     
     func composeSUT(fakeContainerViewController: ContainerViewController) -> ExerciseCoordinator {
+        let exercisesStore = FakeExercisesStore()
+        exercisesStore.setStubExercises([Exercise.exercise1, Exercise.exercise2, Exercise.exercise3])
+        
         return ExerciseCoordinator(compositionRoot: CompositionRoot(),
                                    containerVC: fakeContainerViewController,
                                    exerciseService: FakeExerciseService(),
                                    randomizationService: RandomizationServiceImpl(),
-                                   resultsStore: FakeResultsStore())
+                                   resultsStore: FakeResultsStore(),
+                                   exercisesStore: exercisesStore)
     }
     
 }

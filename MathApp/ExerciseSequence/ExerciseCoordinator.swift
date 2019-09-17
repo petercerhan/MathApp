@@ -18,10 +18,15 @@ class ExerciseCoordinator: Coordinator {
     private let exerciseService: ExerciseService
     private let randomizationService: RandomizationService
     private let resultsStore: ResultsStore
+    private let exercisesStore: ExercisesStore
     
     //MARK: - State
     
     private var childCoordinator: Coordinator?
+    
+    //MARK: - Rx
+    
+    private let disposeBag = DisposeBag()
     
     //MARK: - Initialization
     
@@ -29,13 +34,15 @@ class ExerciseCoordinator: Coordinator {
          containerVC: ContainerViewController,
          exerciseService: ExerciseService,
          randomizationService: RandomizationService,
-         resultsStore: ResultsStore)
+         resultsStore: ResultsStore,
+         exercisesStore: ExercisesStore)
     {
         self.compositionRoot = compositionRoot
         self.containerVC = containerVC
         self.exerciseService = exerciseService
         self.randomizationService = randomizationService
         self.resultsStore = resultsStore
+        self.exercisesStore = exercisesStore
         
         if let feedContainer = containerVC as? FeedContainerViewController {
             feedContainer.viewModel.setDelegate(self)
@@ -50,15 +57,35 @@ class ExerciseCoordinator: Coordinator {
     
     func start() {
         containerVC.loadViewIfNeeded()
-        let vc = getNextExerciseScene()
-        containerVC.show(viewController: vc, animation: .none)
+        loadNextExerciseScene()
+        
+//        let vc = getNextExerciseScene()
+//        containerVC.show(viewController: vc, animation: .none)
     }
     
-    private func getNextExerciseScene() -> UIViewController {
+    var exerciseArray = [Exercise]()
+    
+    private func loadNextExerciseScene() {
+        if exerciseArray.count == 0 {
+            updateExerciseQueue()
+        } else {
+            //dequeue and show next scene
+            let vc = composeExerciseScene(forExercise: exerciseArray[0])
+            containerVC.show(viewController: vc, animation: .none)
+        }
+    }
+    
+    private func updateExerciseQueue() {
+        guard let exercises = latestValue(of: exercisesStore.exercises, disposeBag: disposeBag), exercises.count > 0 else {
+            //show loading view, reload
+            return
+        }
+        exerciseArray = exercises
+        loadNextExerciseScene()
+    }
+    
+    private func composeExerciseScene(forExercise exercise: Exercise) -> UIViewController {
         let choiceConfiguration = randomizationService.randomizedExerciseChoiceConfiguration()
-        
-        //replace with exercise queue dequeue
-        let exercise = exerciseService.nextExercise()
         
         return compositionRoot.composeExerciseScene(delegate: self,
                                                     resultsStore: resultsStore,
@@ -83,8 +110,9 @@ extension ExerciseCoordinator: FeedContainerViewModelDelegate {
 
 extension ExerciseCoordinator: ExerciseViewModelDelegate {
     func next(_ exerciseViewModel: ExerciseViewModel) {
-        let vc = getNextExerciseScene()
-        containerVC.show(viewController: vc, animation: .fadeIn)
+//        let vc = loadNextExerciseScene()
+//        containerVC.show(viewController: vc, animation: .fadeIn)
+        loadNextExerciseScene()
     }
     
     func info(_ exerciseViewModel: ExerciseViewModel, concept: Concept) {

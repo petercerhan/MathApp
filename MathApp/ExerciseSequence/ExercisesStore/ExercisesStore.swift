@@ -42,7 +42,7 @@ class ExercisesStoreImpl: ExercisesStore {
     
     //MARK: - ExercisesStore Interface
     
-    let exercisesSubject = BehaviorSubject<[Exercise]>(value: [])
+    let exercisesSubject = BehaviorSubject<[Exercise]>(value: [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3])
     
     func dispatch(action: ExercisesStoreAction) {
         switch action {

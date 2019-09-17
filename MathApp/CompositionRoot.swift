@@ -24,12 +24,14 @@ class CompositionRoot {
     
     func composeExerciseCoordinator() -> ExerciseCoordinator {
         let resultsStore = ResultsStoreImpl(databaseService: databaseService)
+        let exercisesStore = ExercisesStoreImpl(exerciseExternalDataService: exercisesExternalDataService)
         let containerVM = FeedContainerViewModel(delegate: nil, resultsStore: resultsStore)
         return ExerciseCoordinator(compositionRoot: self,
                                    containerVC: FeedContainerViewController(viewModel: containerVM),
                                    exerciseService: ExerciseServiceImpl(),
                                    randomizationService: RandomizationServiceImpl(),
-                                   resultsStore: resultsStore)
+                                   resultsStore: resultsStore,
+                                   exercisesStore: exercisesStore)
     }
     
     func composeExerciseScene(delegate: ExerciseViewModelDelegate,
@@ -70,6 +72,10 @@ class CompositionRoot {
     
     private lazy var databaseService: DatabaseService = {
         DatabaseServiceImpl()
+    }()
+    
+    private lazy var exercisesExternalDataService: ExerciseExternalDataService =  {
+        ExerciseExternalDataServiceImpl()
     }()
     
 }
