@@ -23,7 +23,7 @@ class FakeContainerViewController: ContainerViewController {
     func verifyDidShow<T>(viewControllerType: T.Type, file: StaticString = #file, line: UInt = #line) {
         XCTAssert(show_callCount > 0, file: file, line: line)
         if !(show_viewController.last is T) {
-            XCTFail("Displayed View Controller type \(type(of: show_viewController.last)) does not match expected type \(viewControllerType.self)", file: file, line: line)
+            XCTFail("Displayed View Controller type \(type(of: show_viewController.last!)) does not match expected type \(viewControllerType.self)", file: file, line: line)
         }
     }
     
@@ -38,7 +38,7 @@ class FakeContainerViewController: ContainerViewController {
     func verifyDidPresentModal<T>(viewControllerType: T.Type, file: StaticString = #file, line: UInt = #line) {
         XCTAssert(presentModal_callCount > 0, file: file, line: line)
         if !(presentModal_viewController.last is T) {
-            XCTFail("Presented View Controller type \(type(of: presentModal_viewController.last)) does not match expected type \(viewControllerType.self)", file: file, line: line)
+            XCTFail("Presented View Controller type \(type(of: presentModal_viewController.last!)) does not match expected type \(viewControllerType.self)", file: file, line: line)
         }
     }
     

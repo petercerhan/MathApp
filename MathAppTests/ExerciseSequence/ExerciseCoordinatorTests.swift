@@ -23,7 +23,7 @@ class ExerciseCoordinatorTests: XCTestCase {
     
     func test_start_noExercisesLoaded_shouldShowLoadExercisesScene() {
         let mockContainerVC = FakeContainerViewController()
-        let coordinator = composeSUT(fakeContainerViewController: mockContainerVC, stubData: [])
+        let coordinator = composeSUT(fakeContainerViewController: mockContainerVC, stubData: [[Exercise]()])
         
         coordinator.start()
         
@@ -82,11 +82,27 @@ class ExerciseCoordinatorTests: XCTestCase {
         XCTAssertEqual(mockContainerVC.dismissModal_callCount, 1)
     }
     
+    func test_loadExercisesRequestsNext_shouldShowExerciseScene() {
+        let mockContainerVC = FakeContainerViewController()
+        //Load exercises view controller is automatically created by the coordinator & next is called due to the data structure
+        let coordinator = composeSUT(fakeContainerViewController: mockContainerVC, stubData: [[Exercise](), [Exercise.exercise1]])
+        
+        coordinator.start()
+        
+        let assertion = {
+            mockContainerVC.verifyDidShow(viewControllerType: ExerciseViewController.self)
+            for vc in mockContainerVC.show_viewController {
+                print("ViewController type: \(type(of: vc))")
+            }
+        }
+        delayedAssertion(assertion)
+    }
+    
     //MARK: - SUT Composition
     
-    func composeSUT(fakeContainerViewController: ContainerViewController, stubData: [Exercise]? = nil) -> ExerciseCoordinator {
+    func composeSUT(fakeContainerViewController: ContainerViewController, stubData: [[Exercise]]? = nil) -> ExerciseCoordinator {
         let exercisesStore = FakeExercisesStore()
-        let data = stubData ?? [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3]
+        let data = stubData ?? [[Exercise.exercise1, Exercise.exercise2, Exercise.exercise3]]
         exercisesStore.setStubExercises(data)
         
         return ExerciseCoordinator(compositionRoot: CompositionRoot(),
@@ -117,5 +133,11 @@ class TestInfoViewModel: InfoViewModelImpl {
 class TestFeedContainerViewModel: FeedContainerViewModel {
     init() {
         super.init(delegate: FakeFeedContainerViewModelDelegate(), resultsStore: FakeResultsStore())
+    }
+}
+
+class TestLoadExercisesViewModel: LoadExercisesViewModel {
+    init() {
+        super.init(delegate: FakeLoadExercisesViewModelDelegate(), exercisesStore: FakeExercisesStore())
     }
 }

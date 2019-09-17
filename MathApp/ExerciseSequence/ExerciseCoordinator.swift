@@ -57,28 +57,28 @@ class ExerciseCoordinator: Coordinator {
     
     func start() {
         containerVC.loadViewIfNeeded()
-        showNextExerciseScene()
+        showNextExerciseScene(animation: .none)
     }
     
     var exerciseArray = [Exercise]()
     
-    private func showNextExerciseScene() {
+    private func showNextExerciseScene(animation: TransitionAnimation) {
         if exerciseArray.count == 0 {
-            updateExerciseQueue()
+            updateExerciseQueue(animation: animation)
         } else {
             //dequeue and show next scene
             let vc = composeExerciseScene(forExercise: exerciseArray[0])
-            containerVC.show(viewController: vc, animation: .none)
+            containerVC.show(viewController: vc, animation: animation)
         }
     }
     
-    private func updateExerciseQueue() {
+    private func updateExerciseQueue(animation: TransitionAnimation) {
         guard let exercises = latestValue(of: exercisesStore.exercises, disposeBag: disposeBag), exercises.count > 0 else {
             loadNewExercises()
             return
         }
         exerciseArray = exercises
-        showNextExerciseScene()
+        showNextExerciseScene(animation: animation)
     }
     
     private func composeExerciseScene(forExercise exercise: Exercise) -> UIViewController {
@@ -112,7 +112,7 @@ extension ExerciseCoordinator: FeedContainerViewModelDelegate {
 
 extension ExerciseCoordinator: ExerciseViewModelDelegate {
     func next(_ exerciseViewModel: ExerciseViewModel) {
-        showNextExerciseScene()
+        showNextExerciseScene(animation: .fadeIn)
     }
     
     func info(_ exerciseViewModel: ExerciseViewModel, concept: Concept) {
@@ -141,6 +141,8 @@ extension ExerciseCoordinator: MenuCoordinatorDelegate {
 
 extension ExerciseCoordinator: LoadExercisesViewModelDelegate {
     func next(_ loadExercisesViewModel: LoadExercisesViewModel) {
-        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.005) { [weak self] in
+            self?.showNextExerciseScene(animation: .fadeIn)
+        }
     }
 }

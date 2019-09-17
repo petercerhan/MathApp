@@ -17,17 +17,28 @@ class FakeExercisesStore: ExercisesStore {
     }
     private var exercisesSubject = BehaviorSubject<[Exercise]>(value: [])
     
-    func setStubExercises(_ exercises: [Exercise]) {
-        exercisesSubject.onNext(exercises)
+    var stubExercises = [[Exercise]()]
+    var stubIndex = 0
+    
+    func setStubExercises(_ exercises: [[Exercise]]) {
+        stubIndex = 0
+        stubExercises = exercises
+        nextStubExercise()
     }
     
+    private func nextStubExercise() {
+        print("will show exercises at index \(stubIndex)")
+        let exercises = stubExercises[stubIndex]
+        exercisesSubject.onNext(exercises)
+        stubIndex = (stubIndex + 1) % stubExercises.count
+    }
     
     var setStubExercises_callCount = 0
     
     func dispatch(action: ExercisesStoreAction) {
         switch action {
         case .updateExercises:
-            setStubExercises([Exercise.exercise1, Exercise.exercise2, Exercise.exercise3])
+            nextStubExercise()
             setStubExercises_callCount += 1
         }
     }
