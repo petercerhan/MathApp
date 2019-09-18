@@ -21,4 +21,11 @@ class ExerciseExternalDataServiceImpl: ExerciseExternalDataService {
         return Observable<[Exercise]>.just([Exercise.exercise1, Exercise.exercise2, Exercise.exercise3])
     }
     
+    
+    
+    
+    
+    
+    
+    
 }
