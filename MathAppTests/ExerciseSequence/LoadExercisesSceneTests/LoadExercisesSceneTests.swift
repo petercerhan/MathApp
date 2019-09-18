@@ -20,7 +20,7 @@ class LoadExercisesTests: XCTestCase {
         
         vc.loadViewIfNeeded()
         
-        XCTAssertEqual(mockExercisesStore.setStubExercises_callCount, 1)
+        XCTAssertEqual(mockExercisesStore.updateExercises_callCount, 1)
     }
     
     func test_onExercisesLoaded_requestsNextScene() {

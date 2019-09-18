@@ -60,15 +60,17 @@ class ExerciseCoordinator: Coordinator {
         showNextExerciseScene(animation: .none)
     }
     
-    var exerciseArray = [Exercise]()
+    var exerciseQueue = Queue<Exercise>()
     
     private func showNextExerciseScene(animation: TransitionAnimation) {
-        if exerciseArray.count == 0 {
+        if exerciseQueue.count == 0 {
             updateExerciseQueue(animation: animation)
         } else {
-            //dequeue and show next scene
-            let vc = composeExerciseScene(forExercise: exerciseArray[0])
-            containerVC.show(viewController: vc, animation: animation)
+            if let exercise = exerciseQueue.dequeue() {
+                let vc = composeExerciseScene(forExercise: exercise)
+                containerVC.show(viewController: vc, animation: animation)
+                loadExercisesIfNeeded()
+            }
         }
     }
     
@@ -77,7 +79,7 @@ class ExerciseCoordinator: Coordinator {
             loadNewExercises()
             return
         }
-        exerciseArray = exercises
+        exerciseQueue.enqueue(elements: exercises)
         showNextExerciseScene(animation: animation)
     }
     
@@ -93,6 +95,12 @@ class ExerciseCoordinator: Coordinator {
     private func loadNewExercises() {
         let vc = compositionRoot.composeLoadExercisesScene(delegate: self, exercisesStore: exercisesStore)
         containerVC.show(viewController: vc, animation: .none)
+    }
+    
+    private func loadExercisesIfNeeded() {
+        if exerciseQueue.count == 0 {
+            exercisesStore.dispatch(action: .updateExercises)
+        }
     }
 
 }

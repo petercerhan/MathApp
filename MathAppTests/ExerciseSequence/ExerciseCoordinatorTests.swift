@@ -91,22 +91,86 @@ class ExerciseCoordinatorTests: XCTestCase {
         
         let assertion = {
             mockContainerVC.verifyDidShow(viewControllerType: ExerciseViewController.self)
-            for vc in mockContainerVC.show_viewController {
-                print("ViewController type: \(type(of: vc))")
-            }
         }
         delayedAssertion(assertion)
     }
     
+    func test_threeExercises_showInOrderAndRequestRefreshAfterThirdLoaded() {
+        let mockContainerVC = FakeContainerViewController()
+        let stubData = [[Exercise.exercise1, Exercise.exercise4, Exercise.exercise7]]
+        let coordinator = composeSUT(fakeContainerViewController: mockContainerVC, stubData: stubData)
+        
+        coordinator.start()
+        
+        if mockContainerVC.show_viewController.count > 0,
+            let vc = mockContainerVC.show_viewController[0] as? ExerciseViewController
+        {
+            vc.loadViewIfNeeded()
+            XCTAssertEqual(vc.questionLatexLabel.latex, Exercise.exercise1.questionLatex)
+        } else {
+            XCTFail("ExerciseViewController not presented")
+        }
+    }
+    
+    func test_threeExercises_advanceToSecondExercise_shouldShowSecondExercise() {
+        let mockContainerVC = FakeContainerViewController()
+        let stubData = [[Exercise.exercise1, Exercise.exercise4, Exercise.exercise7]]
+        let coordinator = composeSUT(fakeContainerViewController: mockContainerVC, stubData: stubData)
+        
+        coordinator.start()
+        coordinator.next(TestExerciseViewModel())
+        
+        if mockContainerVC.show_viewController.count > 1,
+            let vc = mockContainerVC.show_viewController[1] as? ExerciseViewController
+        {
+            vc.loadViewIfNeeded()
+            XCTAssertEqual(vc.questionLatexLabel.latex, Exercise.exercise4.questionLatex)
+        } else {
+            XCTFail("ExerciseViewController not presented")
+        }
+    }
+    
+    func test_threeExercises_advanceToThirdExercise_shouldShowThirdExercise() {
+        let mockContainerVC = FakeContainerViewController()
+        let stubData = [[Exercise.exercise1, Exercise.exercise4, Exercise.exercise7]]
+        let coordinator = composeSUT(fakeContainerViewController: mockContainerVC, stubData: stubData)
+        
+        coordinator.start()
+        coordinator.next(TestExerciseViewModel())
+        coordinator.next(TestExerciseViewModel())
+        
+        if mockContainerVC.show_viewController.count > 2,
+            let vc = mockContainerVC.show_viewController[2] as? ExerciseViewController
+        {
+            vc.loadViewIfNeeded()
+            XCTAssertEqual(vc.questionLatexLabel.latex, Exercise.exercise7.questionLatex)
+        } else {
+            XCTFail("ExerciseViewController not presented")
+        }
+    }
+    
+    func test_threeExercises_advanceToThirdExercise_shouldRequestNewExercises() {
+        let mockExercisesStore = FakeExercisesStore()
+        let stubData = [[Exercise.exercise1, Exercise.exercise4, Exercise.exercise7]]
+        let coordinator = composeSUT(fakeExercisesStore: mockExercisesStore, stubData: stubData)
+        
+        coordinator.start()
+        coordinator.next(TestExerciseViewModel())
+        coordinator.next(TestExerciseViewModel())
+        
+        XCTAssertEqual(mockExercisesStore.updateExercises_callCount, 1)
+    }
+    
     //MARK: - SUT Composition
     
-    func composeSUT(fakeContainerViewController: ContainerViewController, stubData: [[Exercise]]? = nil) -> ExerciseCoordinator {
-        let exercisesStore = FakeExercisesStore()
+    func composeSUT(fakeContainerViewController: ContainerViewController? = nil, fakeExercisesStore: FakeExercisesStore? = nil, stubData: [[Exercise]]? = nil) -> ExerciseCoordinator {
+        let containerVC = fakeContainerViewController ?? FakeContainerViewController()
+        let exercisesStore = fakeExercisesStore ?? FakeExercisesStore()
         let data = stubData ?? [[Exercise.exercise1, Exercise.exercise2, Exercise.exercise3]]
         exercisesStore.setStubExercises(data)
         
         return ExerciseCoordinator(compositionRoot: CompositionRoot(),
-                                   containerVC: fakeContainerViewController,
+                                   containerVC: containerVC,
                                    exerciseService: FakeExerciseService(),
                                    randomizationService: RandomizationServiceImpl(),
                                    resultsStore: FakeResultsStore(),

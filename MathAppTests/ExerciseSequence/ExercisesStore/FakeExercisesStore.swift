@@ -33,13 +33,13 @@ class FakeExercisesStore: ExercisesStore {
         stubIndex = (stubIndex + 1) % stubExercises.count
     }
     
-    var setStubExercises_callCount = 0
+    var updateExercises_callCount = 0
     
     func dispatch(action: ExercisesStoreAction) {
         switch action {
         case .updateExercises:
             nextStubExercise()
-            setStubExercises_callCount += 1
+            updateExercises_callCount += 1
         }
     }
     

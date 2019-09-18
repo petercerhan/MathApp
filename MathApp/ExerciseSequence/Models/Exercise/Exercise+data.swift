@@ -50,7 +50,7 @@ extension Exercise {
     static var exercise2: Exercise {
         return Exercise(id: 2,
                         questionText: "Find the derivative:",
-                        questionLatex: "\\frac{d}{dx}(1)",
+                        questionLatex: "\\frac{d}{dx}(2)",
                         answer: "0",
                         falseAnswer1: "1",
                         falseAnswer2: "2",
