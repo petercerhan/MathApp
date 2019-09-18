@@ -23,6 +23,7 @@ class ExerciseCoordinator: Coordinator {
     //MARK: - State
     
     private var childCoordinator: Coordinator?
+    var exerciseQueue = Queue<Exercise>()
     
     //MARK: - Rx
     
@@ -57,30 +58,40 @@ class ExerciseCoordinator: Coordinator {
     
     func start() {
         containerVC.loadViewIfNeeded()
-        showNextExerciseScene(animation: .none)
+        showNextFeedScene(animation: .none)
     }
     
-    var exerciseQueue = Queue<Exercise>()
+    private func showNextFeedScene(animation: TransitionAnimation) {
+        if exerciseQueue.count > 0 {
+            showNextExerciseScene(animation: animation)
+        } else {
+            updateExerciseQueue(animation: animation)
+        }
+    }
     
     private func showNextExerciseScene(animation: TransitionAnimation) {
+        if let exercise = exerciseQueue.dequeue() {
+            let vc = composeExerciseScene(forExercise: exercise)
+            containerVC.show(viewController: vc, animation: animation)
+            loadExercisesIfNeeded()
+        }
+    }
+    
+    private func loadExercisesIfNeeded() {
         if exerciseQueue.count == 0 {
-            updateExerciseQueue(animation: animation)
-        } else {
-            if let exercise = exerciseQueue.dequeue() {
-                let vc = composeExerciseScene(forExercise: exercise)
-                containerVC.show(viewController: vc, animation: animation)
-                loadExercisesIfNeeded()
-            }
+            exercisesStore.dispatch(action: .updateExercises)
         }
     }
     
     private func updateExerciseQueue(animation: TransitionAnimation) {
-        guard let exercises = latestValue(of: exercisesStore.exercises, disposeBag: disposeBag), exercises.count > 0 else {
+        guard let exercises = latestValue(of: exercisesStore.exercises, disposeBag: disposeBag),
+            exercises.count > 0
+        else {
             loadNewExercises()
             return
         }
         exerciseQueue.enqueue(elements: exercises)
-        showNextExerciseScene(animation: animation)
+        showNextFeedScene(animation: animation)
     }
     
     private func composeExerciseScene(forExercise exercise: Exercise) -> UIViewController {
@@ -95,12 +106,6 @@ class ExerciseCoordinator: Coordinator {
     private func loadNewExercises() {
         let vc = compositionRoot.composeLoadExercisesScene(delegate: self, exercisesStore: exercisesStore)
         containerVC.show(viewController: vc, animation: .none)
-    }
-    
-    private func loadExercisesIfNeeded() {
-        if exerciseQueue.count == 0 {
-            exercisesStore.dispatch(action: .updateExercises)
-        }
     }
 
 }
@@ -120,7 +125,7 @@ extension ExerciseCoordinator: FeedContainerViewModelDelegate {
 
 extension ExerciseCoordinator: ExerciseViewModelDelegate {
     func next(_ exerciseViewModel: ExerciseViewModel) {
-        showNextExerciseScene(animation: .fadeIn)
+        showNextFeedScene(animation: .fadeIn)
     }
     
     func info(_ exerciseViewModel: ExerciseViewModel, concept: Concept) {
@@ -150,7 +155,7 @@ extension ExerciseCoordinator: MenuCoordinatorDelegate {
 extension ExerciseCoordinator: LoadExercisesViewModelDelegate {
     func next(_ loadExercisesViewModel: LoadExercisesViewModel) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.005) { [weak self] in
-            self?.showNextExerciseScene(animation: .fadeIn)
+            self?.showNextFeedScene(animation: .fadeIn)
         }
     }
 }
