@@ -21,58 +21,29 @@ class DatabaseServiceImpl: DatabaseService {
     
     private var db: Connection!
     
+    private let databaseFilename = "db.sqlite3"
+    
     private lazy var conceptsTable = Concept.table
     private lazy var userConceptsTable = UserConcept.table
     
     func setup() {
-        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        guard let db = try? Connection("\(path)/db.sqlite3") else {
+        guard let bundleURL = Bundle.main.url(forResource: "db", withExtension: "sqlite3"),
+            let documentsDirectory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+        else {
+                return
+        }
+        let documentsURL = documentsDirectory.appendingPathComponent(databaseFilename)
+        
+        if !FileManager().fileExists(atPath: documentsURL.absoluteString) {
+            return
+        }
+        
+        try? FileManager.default.copyItem(at: bundleURL, to: documentsURL)
+        
+        guard let db = try? Connection(documentsURL.absoluteString) else {
             return
         }
         self.db = db
-
-        if !databaseIsSetup() {
-            setupTables()
-        }
-    }
-    
-    private func databaseIsSetup() -> Bool {
-        if let _ = try? db.pluck(conceptsTable) {
-            return true
-        } else {
-            return false
-        }
-    }
-    
-    private func setupTables() {
-        setupConceptsTable()
-        setupUserConceptsTable()
-    }
-    
-    private func setupConceptsTable() {
-        _ = try? db.run(Concept.createTableStatement)
-        insertConceptsData()
-    }
-    
-    private func insertConceptsData() {
-        _ = try? db.run(Concept.constantRule.insertStatement)
-        _ = try? db.run(Concept.linearRule.insertStatement)
-        _ = try? db.run(Concept.powerRule.insertStatement)
-        _ = try? db.run(Concept.sumRule.insertStatement)
-        _ = try? db.run(Concept.differenceRule.insertStatement)
-    }
-    
-    private func setupUserConceptsTable() {
-        _ = try? db.run(UserConcept.createTableStatement)
-        insertUserConceptsData()
-    }
-    
-    private func insertUserConceptsData() {
-        _ = try? db.run(UserConcept.constantRule.insertStatement)
-        _ = try? db.run(UserConcept.linearRule.insertStatement)
-        _ = try? db.run(UserConcept.powerRule.insertStatement)
-        _ = try? db.run(UserConcept.sumRule.insertStatement)
-        _ = try? db.run(UserConcept.differenceRule.insertStatement)
     }
     
     func getUserConcepts() -> [UserConcept] {

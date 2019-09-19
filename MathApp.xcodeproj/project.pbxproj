@@ -16,6 +16,7 @@
 		6E557C3722FB9EEB00270F07 /* CompositionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E557C3622FB9EEB00270F07 /* CompositionRoot.swift */; };
 		6E557C3922FBA0AE00270F07 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E557C3822FBA0AE00270F07 /* Coordinator.swift */; };
 		6E557C3B22FBA0DC00270F07 /* RootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E557C3A22FBA0DC00270F07 /* RootCoordinator.swift */; };
+		6E71308E23330FB6009FEFBB /* db.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 6E71308D23330FB6009FEFBB /* db.sqlite3 */; };
 		6E74FD402318A1F500730AEB /* FakeExerciseViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E74FD3F2318A1F500730AEB /* FakeExerciseViewModelDelegate.swift */; };
 		6E74FD422318A2B900730AEB /* TestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E74FD412318A2B900730AEB /* TestUtilities.swift */; };
 		6E74FD442318B0A400730AEB /* GeneralError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E74FD432318B0A400730AEB /* GeneralError.swift */; };
@@ -128,6 +129,7 @@
 		6E557C3622FB9EEB00270F07 /* CompositionRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionRoot.swift; sourceTree = "<group>"; };
 		6E557C3822FBA0AE00270F07 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		6E557C3A22FBA0DC00270F07 /* RootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCoordinator.swift; sourceTree = "<group>"; };
+		6E71308D23330FB6009FEFBB /* db.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = db.sqlite3; sourceTree = "<group>"; };
 		6E74FD3F2318A1F500730AEB /* FakeExerciseViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeExerciseViewModelDelegate.swift; sourceTree = "<group>"; };
 		6E74FD412318A2B900730AEB /* TestUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtilities.swift; sourceTree = "<group>"; };
 		6E74FD432318B0A400730AEB /* GeneralError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralError.swift; sourceTree = "<group>"; };
@@ -306,6 +308,7 @@
 				6E557C1D22FB9DCC00270F07 /* Assets.xcassets */,
 				6E557C1F22FB9DCC00270F07 /* LaunchScreen.storyboard */,
 				6E557C2222FB9DCC00270F07 /* Info.plist */,
+				6EB933B32331CBA900E38B52 /* SupportingFiles */,
 			);
 			path = MathApp;
 			sourceTree = "<group>";
@@ -464,6 +467,14 @@
 				6EB933AB233076E500E38B52 /* FakeLoadExercisesViewModelDelegate.swift */,
 			);
 			path = LoadExercisesSceneTests;
+			sourceTree = "<group>";
+		};
+		6EB933B32331CBA900E38B52 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				6E71308D23330FB6009FEFBB /* db.sqlite3 */,
+			);
+			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 		6EBA3038230CADBF00E6DC54 /* InterfaceControls */ = {
@@ -827,6 +838,7 @@
 				6EC6673C232494170048068C /* ConceptMapTableViewCell.xib in Resources */,
 				6EC667142324489F0048068C /* MenuViewController.xib in Resources */,
 				6E557C1E22FB9DCC00270F07 /* Assets.xcassets in Resources */,
+				6E71308E23330FB6009FEFBB /* db.sqlite3 in Resources */,
 				6EC6671E232451760048068C /* QuitableContainerViewController.xib in Resources */,
 				6E74FD53231C87F800730AEB /* FeedContainerViewController.xib in Resources */,
 				6EB933A52330702C00E38B52 /* LoadExercisesViewController.xib in Resources */,
