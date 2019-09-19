@@ -23,4 +23,12 @@ class MenuSceneTests: XCTestCase {
         XCTAssertEqual(mockDelegate.conceptMap_callCount, 1)
     }
     
+    func test_resetDB_shouldRequestDBReset() {
+        
+        
+        
+        
+        
+    }
+    
 }

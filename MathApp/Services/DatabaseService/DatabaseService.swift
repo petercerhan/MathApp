@@ -73,8 +73,13 @@ class DatabaseServiceImpl: DatabaseService {
     }
     
     func reset() {
+        removeOldDB()
+        setup()
+    }
+    
+    private func removeOldDB() {
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
         let fileManager = FileManager.default
-        try? fileManager.removeItem(atPath: "\(path)/db.sqlite3")
+        try? fileManager.removeItem(atPath: "\(path)/\(databaseFilename)")
     }
 }
