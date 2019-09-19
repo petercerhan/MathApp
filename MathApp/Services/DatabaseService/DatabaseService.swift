@@ -34,12 +34,10 @@ class DatabaseServiceImpl: DatabaseService {
         }
         let documentsURL = documentsDirectory.appendingPathComponent(databaseFilename)
         
-        if !FileManager().fileExists(atPath: documentsURL.absoluteString) {
-            return
+        if !(FileManager().fileExists(atPath: documentsURL.absoluteString)) {
+            try? FileManager.default.copyItem(at: bundleURL, to: documentsURL)
         }
-        
-        try? FileManager.default.copyItem(at: bundleURL, to: documentsURL)
-        
+
         guard let db = try? Connection(documentsURL.absoluteString) else {
             return
         }

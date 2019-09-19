@@ -35,47 +35,6 @@ class RootCoordinator: Coordinator {
         return containerVC
     }
     
-//    func start() {
-//        let vc = UIViewController()
-//        vc.view.backgroundColor = UIColor.blue
-//        containerVC.show(viewController: vc, animation: .none)
-//
-////        let path = Bundle.main.url(forResource: "TestDB", withExtension: "sqlite3")
-////        print("dbpath: \(path)")
-////
-//////        let documentsDirectory = NSFileManager.defaultManager().URLForDirectory(NSSearchPathDirectory.DocumentDirectory, inDomain:NSSearchPathDomainMask.UserDomainMask, url:nil, shouldCreate:false, error:nil);
-////        let documentsDirectory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-////        print("document path: \(documentsDirectory)")
-//
-//
-////        let deletePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-////        let fileManager = FileManager.default
-////        try? fileManager.removeItem(atPath: "\(deletePath)/database.sqlite3")
-//
-//
-//        guard let sourceURL = Bundle.main.url(forResource: "db", withExtension: "sqlite3"),
-//            let documentsDirectory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-//        else {
-//            return
-//        }
-//
-//        let destinationURL = documentsDirectory.appendingPathComponent("db.sqlite3")
-//
-//        do {
-//            print("try to copy file")
-//            try FileManager.default.copyItem(at: sourceURL, to: destinationURL)
-//        } catch {
-//            print("error: \(error)")
-//        }
-//
-//        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-//        guard let db = try? Connection("\(path)/db.sqlite3") else {
-//            return
-//        }
-//
-//
-//    }
-    
     func start() {
         databaseService.setup()
 
