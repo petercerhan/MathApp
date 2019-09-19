@@ -42,8 +42,11 @@ class FakeDatabaseService: DatabaseService {
         decrementStrengthForUserConcept_conceptID.append(conceptID)
     }
     
+    
+    var reset_callCount = 0
+    
     func reset() {
-        
+        reset_callCount += 1
     }
 
 }

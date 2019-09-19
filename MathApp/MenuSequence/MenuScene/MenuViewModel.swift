@@ -14,6 +14,7 @@ protocol MenuViewModelDelegate: class {
 
 enum MenuAction {
     case conceptMap
+    case resetDB
 }
 
 class MenuViewModel {
@@ -21,11 +22,13 @@ class MenuViewModel {
     //MARK: - Dependencies
     
     private weak var delegate: MenuViewModelDelegate?
+    private let databaseService: DatabaseService
     
     //MARK: - Initialization
     
-    init(delegate: MenuViewModelDelegate) {
+    init(delegate: MenuViewModelDelegate, databaseService: DatabaseService) {
         self.delegate = delegate
+        self.databaseService = databaseService
     }
     
     //MARK: - MenuViewModel Interface
@@ -34,11 +37,17 @@ class MenuViewModel {
         switch action {
         case .conceptMap:
             handle_conceptMap()
+        case .resetDB:
+            handle_resetDB()
         }
     }
     
     private func handle_conceptMap() {
         delegate?.conceptMap(self)
+    }
+    
+    private func handle_resetDB() {
+        databaseService.reset()
     }
     
 }

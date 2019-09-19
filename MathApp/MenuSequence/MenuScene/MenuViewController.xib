@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MenuViewController" customModule="MathApp" customModuleProvider="target">
             <connections>
                 <outlet property="conceptMapButton" destination="Jb7-YA-ZOp" id="o0C-oW-wTI"/>
+                <outlet property="resetDBButton" destination="7lJ-gh-pUv" id="KMJ-Ig-14c"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -67,15 +68,41 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="hasShadow" value="NO"/>
                     </userDefinedRuntimeAttributes>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7lJ-gh-pUv" customClass="AnimatedButton" customModule="MathApp" customModuleProvider="target">
+                    <rect key="frame" x="24" y="234" width="327" height="50"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="KVg-TX-Vtn"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <state key="normal" title="Reset Database">
+                        <color key="titleColor" white="0.17999999999999999" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                            <color key="value" red="0.16670436829999999" green="0.72732793110000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                            <real key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="8"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="hasShadow" value="NO"/>
+                    </userDefinedRuntimeAttributes>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Jb7-YA-ZOp" firstAttribute="top" secondItem="Hs9-C3-ei9" secondAttribute="bottom" constant="16" id="BkP-CT-Khu"/>
                 <constraint firstItem="Jb7-YA-ZOp" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="DcI-Vu-GHb"/>
                 <constraint firstItem="Hs9-C3-ei9" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="82" id="Kbt-ZY-moJ"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="7lJ-gh-pUv" secondAttribute="trailing" constant="24" id="MOb-uX-Yuf"/>
                 <constraint firstItem="Hs9-C3-ei9" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="TWe-qf-OTu"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Jb7-YA-ZOp" secondAttribute="trailing" constant="24" id="cvA-Wz-wXN"/>
+                <constraint firstItem="7lJ-gh-pUv" firstAttribute="top" secondItem="Jb7-YA-ZOp" secondAttribute="bottom" constant="16" id="mhX-UM-jBs"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Hs9-C3-ei9" secondAttribute="trailing" constant="24" id="qnz-IO-AWv"/>
+                <constraint firstItem="7lJ-gh-pUv" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="zz5-2P-vZF"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="127" y="154"/>

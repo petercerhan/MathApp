@@ -14,7 +14,7 @@ class MenuSceneTests: XCTestCase {
     
     func test_conceptMapPressed_shouldRequestConceptMap() {
         let mockDelegate = FakeMenuViewModelDelegate()
-        let vm = MenuViewModel(delegate: mockDelegate)
+        let vm = MenuViewModel(delegate: mockDelegate, databaseService: FakeDatabaseService())
         let vc = MenuViewController(viewModel: vm)
         
         vc.loadViewIfNeeded()
@@ -24,11 +24,14 @@ class MenuSceneTests: XCTestCase {
     }
     
     func test_resetDB_shouldRequestDBReset() {
+        let mockDatabaseService = FakeDatabaseService()
+        let vm = MenuViewModel(delegate: FakeMenuViewModelDelegate(), databaseService: mockDatabaseService)
+        let vc = MenuViewController(viewModel: vm)
         
+        vc.loadViewIfNeeded()
+        vc.resetDBButton.sendActions(for: .touchUpInside)
         
-        
-        
-        
+        XCTAssertEqual(mockDatabaseService.reset_callCount, 1)
     }
     
 }

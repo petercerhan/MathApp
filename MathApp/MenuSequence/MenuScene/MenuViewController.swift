@@ -19,6 +19,7 @@ class MenuViewController: UIViewController {
     //MARK: - UI Components
     
     @IBOutlet private(set) var conceptMapButton: UIButton!
+    @IBOutlet private(set) var resetDBButton: UIButton!
     
     //MARK: - Rx
     
@@ -47,6 +48,13 @@ class MenuViewController: UIViewController {
             .throttle(.milliseconds(500), latest: false, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] in
                 self.viewModel.dispatch(action: .conceptMap)
+            })
+            .disposed(by: disposeBag)
+        
+        resetDBButton.rx.tap
+            .throttle(.milliseconds(500), latest: false, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in
+                self.viewModel.dispatch(action: .resetDB)
             })
             .disposed(by: disposeBag)
     }

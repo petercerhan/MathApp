@@ -71,7 +71,7 @@ class TestQuitableContainerViewModel: QuitableContainerViewModelImpl {
 
 class TestMenuViewModel: MenuViewModel {
     init() {
-        super.init(delegate: FakeMenuViewModelDelegate())
+        super.init(delegate: FakeMenuViewModelDelegate(), databaseService: FakeDatabaseService())
     }
 }
 

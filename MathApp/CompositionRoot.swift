@@ -64,7 +64,7 @@ class CompositionRoot {
     }
     
     func composeMenuScene(delegate: MenuViewModelDelegate) -> UIViewController {
-        let vm = MenuViewModel(delegate: delegate)
+        let vm = MenuViewModel(delegate: delegate, databaseService: databaseService)
         return MenuViewController(viewModel: vm)
     }
     
