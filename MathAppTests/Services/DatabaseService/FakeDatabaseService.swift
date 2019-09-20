@@ -43,6 +43,11 @@ class FakeDatabaseService: DatabaseService {
     }
     
     
+    func getExercises(forConceptID conceptID: Int) -> [Exercise] {
+        return [Exercise]()
+    }
+    
+    
     var reset_callCount = 0
     
     func reset() {

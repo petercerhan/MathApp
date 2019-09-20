@@ -80,7 +80,7 @@ class CompositionRoot {
     }()
     
     private lazy var exercisesExternalDataService: ExerciseExternalDataService =  {
-        ExerciseExternalDataServiceImpl()
+        ExerciseExternalDataServiceImpl(databaseService: databaseService)
     }()
     
 }

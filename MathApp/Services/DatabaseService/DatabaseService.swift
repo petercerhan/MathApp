@@ -14,6 +14,7 @@ protocol DatabaseService {
     func getUserConcepts() -> [UserConcept]
     func incrementStrengthForUserConcept(withID: Int)
     func decrementStrengthForUserConcept(withID conceptID: Int)
+    func getExercises(forConceptID conceptID: Int) -> [Exercise]
     func reset()
 }
 
@@ -25,6 +26,7 @@ class DatabaseServiceImpl: DatabaseService {
     
     private lazy var conceptsTable = Concept.table
     private lazy var userConceptsTable = UserConcept.table
+    private lazy var exerciseTable = Exercise.table
     
     func setup() {
         guard let bundleURL = Bundle.main.url(forResource: "db", withExtension: "sqlite3"),
@@ -70,6 +72,17 @@ class DatabaseServiceImpl: DatabaseService {
         let priorStrength = userConceptRow[UserConcept.column_strength]
         let newStrength = max(priorStrength - 1, 0)
         _ = try? db.run(userConceptQuery.update(UserConcept.column_strength <- newStrength))
+    }
+    
+    func getExercises(forConceptID conceptID: Int) -> [Exercise] {
+        let query = exerciseTable.join(conceptsTable, on: conceptsTable[Concept.column_id] == exerciseTable[Exercise.column_conceptID])
+                    .filter(Exercise.column_conceptID == Int64(conceptID))
+
+        let result: [Exercise]? = try? db.prepare(query).compactMap { row -> Exercise? in
+            return Exercise.createFromQueryResult(row)
+        }
+
+        return result ?? [Exercise]()
     }
     
     func reset() {
