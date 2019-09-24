@@ -37,7 +37,18 @@ class RootCoordinatorTests: XCTestCase {
         let container = fakeContainer ?? FakeContainerViewController()
         let databaseService = fakeDatabaseService ?? FakeDatabaseService()
         
-        return RootCoordinator(compositionRoot: CompositionRoot(), containerVC: container, databaseService: databaseService)
+        return RootCoordinator(compositionRoot: RootCoordinatorFakeCompositionRoot(), containerVC: container, databaseService: databaseService)
     }
     
+}
+
+class RootCoordinatorFakeCompositionRoot: CompositionRoot {
+    override func composeExerciseCoordinator() -> ExerciseCoordinator {
+        return ExerciseCoordinator(compositionRoot: CompositionRoot(),
+                                   containerVC: ContainerViewController(),
+                                   exerciseService: FakeExerciseService(),
+                                   randomizationService: RandomizationServiceImpl(),
+                                   resultsStore: FakeResultsStore(),
+                                   exercisesStore: FakeExercisesStore())
+    }
 }
