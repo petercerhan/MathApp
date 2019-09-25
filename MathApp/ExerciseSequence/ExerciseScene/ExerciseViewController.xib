@@ -69,12 +69,12 @@
                     <rect key="frame" x="24" y="593" width="327" height="50"/>
                     <subviews>
                         <view userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="bz7-39-x30" customClass="MTMathUILabel">
-                            <rect key="frame" x="156.5" y="0.0" width="14" height="50"/>
+                            <rect key="frame" x="157" y="0.0" width="13" height="50"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="latex" value="x"/>
                                 <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
-                                    <real key="value" value="25"/>
+                                    <real key="value" value="21"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </view>
@@ -111,12 +111,12 @@
                     <rect key="frame" x="24" y="531" width="327" height="50"/>
                     <subviews>
                         <view userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="z7N-Ir-Ceu" customClass="MTMathUILabel">
-                            <rect key="frame" x="156.5" y="0.0" width="14" height="50"/>
+                            <rect key="frame" x="157" y="0.0" width="13" height="50"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="latex" value="x"/>
                                 <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
-                                    <real key="value" value="25"/>
+                                    <real key="value" value="21"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </view>
@@ -153,12 +153,12 @@
                     <rect key="frame" x="24" y="469" width="327" height="50"/>
                     <subviews>
                         <view userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="Brh-4h-VRh" customClass="MTMathUILabel">
-                            <rect key="frame" x="156.5" y="0.0" width="14" height="50"/>
+                            <rect key="frame" x="157.5" y="0.0" width="12" height="50"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="latex" value="x"/>
                                 <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
-                                    <real key="value" value="25"/>
+                                    <real key="value" value="21"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </view>
