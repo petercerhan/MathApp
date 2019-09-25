@@ -52,6 +52,16 @@ class MenuCoordinatorTests: XCTestCase {
         mockContainerVC.verifyDidShow(viewControllerType: MenuViewController.self)
     }
     
+    func test_menuRequestsChooseExercise_shouldShowChooseExercise() {
+        let mockContainerVC = FakeContainerViewController()
+        let coordinator = composeSUT(fakeContainer: mockContainerVC)
+        
+        coordinator.start()
+        coordinator.chooseExercise(TestMenuViewModel())
+        
+        mockContainerVC.verifyDidShow(viewControllerType: ChooseExerciseViewController.self)
+    }
+    
     //MARK: - SUT Composition
     
     func composeSUT(fakeDelegate: MenuCoordinatorDelegate? = nil, fakeContainer: FakeContainerViewController? = nil) -> MenuCoordinator {

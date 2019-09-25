@@ -73,6 +73,10 @@ class CompositionRoot {
         return ConceptMapViewController(viewModel: vm)
     }
     
+    func composeChooseExerciseScene() -> UIViewController {
+        return ChooseExerciseViewController()
+    }
+    
     //MARK: - Services
     
     private lazy var databaseService: DatabaseService = {

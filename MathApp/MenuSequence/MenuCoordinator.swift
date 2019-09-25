@@ -67,7 +67,8 @@ extension MenuCoordinator: MenuViewModelDelegate {
     }
     
     func chooseExercise(_ menuViewModel: MenuViewModel) {
-
+        let vc = compositionRoot.composeChooseExerciseScene()
+        containerVC.show(viewController: vc, animation: .slideFromRight)
     }
 }
 
