@@ -16,4 +16,12 @@ class FakeChooseExerciseViewModelDelegate: ChooseExerciseViewModelDelegate {
         back_callCount += 1
     }
     
+    var loadExercise_callCount = 0
+    var loadExercise_id = [Int]()
+    
+    func loadExercise(_ chooseExerciseViewModel: ChooseExerciseViewModel, withID id: Int) {
+        loadExercise_callCount += 1
+        loadExercise_id.append(id)
+    }
+    
 }

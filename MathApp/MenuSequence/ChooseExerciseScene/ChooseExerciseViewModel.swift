@@ -10,10 +10,12 @@ import Foundation
 
 protocol ChooseExerciseViewModelDelegate: class {
     func back(_ chooseExerciseViewModel: ChooseExerciseViewModel)
+    func loadExercise(_ chooseExerciseViewModel: ChooseExerciseViewModel, withID id: Int)
 }
 
 enum ChooseExerciseAction {
     case back
+    case submit(id: Int)
 }
 
 class ChooseExerciseViewModel {
@@ -34,11 +36,17 @@ class ChooseExerciseViewModel {
         switch action {
         case .back:
             handle_back()
+        case .submit(let id):
+            handle_submit(id: id)
         }
     }
     
     private func handle_back() {
         delegate?.back(self)
+    }
+    
+    private func handle_submit(id: Int) {
+        delegate?.loadExercise(self, withID: id)
     }
     
 }

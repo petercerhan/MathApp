@@ -88,4 +88,8 @@ extension MenuCoordinator: ChooseExerciseViewModelDelegate {
         let vc = compositionRoot.composeMenuScene(delegate: self)
         containerVC.show(viewController: vc, animation: .slideFromLeft)
     }
+    
+    func loadExercise(_ chooseExerciseViewModel: ChooseExerciseViewModel, withID id: Int) {
+        
+    }
 }

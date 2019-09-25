@@ -19,6 +19,8 @@ class ChooseExerciseViewController: UIViewController {
     //MARK: - UI Components
     
     @IBOutlet private(set) var backButton: UIButton!
+    @IBOutlet private(set) var textField: UITextField!
+    @IBOutlet private(set) var submitButton: UIButton!
     
     //MARK: - Rx
     
@@ -43,12 +45,33 @@ class ChooseExerciseViewController: UIViewController {
     }
     
     private func bindActions() {
+        bindBackAction()
+        bindSubmitAction()
+    }
+    
+    private func bindBackAction() {
         backButton.rx.tap
             .throttle(.milliseconds(500), latest: false, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] in
                 self.viewModel.dispatch(action: .back)
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func bindSubmitAction() {
+        submitButton.rx.tap
+            .throttle(.milliseconds(500), latest: false, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in
+                self.submit()
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func submit() {
+        guard let idString = textField.text, let id = Int(idString) else {
+            return
+        }
+        viewModel.dispatch(action: .submit(id: id))
     }
 
 }
