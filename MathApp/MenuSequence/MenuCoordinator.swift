@@ -67,7 +67,7 @@ extension MenuCoordinator: MenuViewModelDelegate {
     }
     
     func chooseExercise(_ menuViewModel: MenuViewModel) {
-        let vc = compositionRoot.composeChooseExerciseScene()
+        let vc = compositionRoot.composeChooseExerciseScene(delegate: self)
         containerVC.show(viewController: vc, animation: .slideFromRight)
     }
 }
@@ -78,5 +78,13 @@ extension MenuCoordinator: ConceptMapViewModelDelegate {
     func back(_ conceptMapViewModel: ConceptMapViewModel) {
         let vc = compositionRoot.composeMenuScene(delegate: self)
         containerVC.show(viewController: vc, animation: .slideFromLeft)
+    }
+}
+
+//MARK: - ChooseExerciseViewModelDelegate
+
+extension MenuCoordinator: ChooseExerciseViewModelDelegate {
+    func back(_ chooseExerciseViewModel: ChooseExerciseViewModel) {
+        
     }
 }

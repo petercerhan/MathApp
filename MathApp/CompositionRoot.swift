@@ -73,8 +73,9 @@ class CompositionRoot {
         return ConceptMapViewController(viewModel: vm)
     }
     
-    func composeChooseExerciseScene() -> UIViewController {
-        return ChooseExerciseViewController()
+    func composeChooseExerciseScene(delegate: ChooseExerciseViewModelDelegate) -> UIViewController {
+        let vm = ChooseExerciseViewModel(delegate: delegate)
+        return ChooseExerciseViewController(viewModel: vm)
     }
     
     //MARK: - Services

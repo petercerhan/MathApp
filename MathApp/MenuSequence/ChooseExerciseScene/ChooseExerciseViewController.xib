@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChooseExerciseViewController" customModule="MathApp" customModuleProvider="target">
             <connections>
+                <outlet property="backButton" destination="BQR-Dd-CYC" id="0u3-CJ-8P8"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -26,10 +27,17 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BQR-Dd-CYC">
+                    <rect key="frame" x="16" y="613" width="40" height="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <state key="normal" title="Back"/>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="qTG-b2-2Vq" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="VvE-Od-btw"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="BQR-Dd-CYC" secondAttribute="bottom" constant="20" id="dCH-QG-3Ut"/>
+                <constraint firstItem="BQR-Dd-CYC" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="ee5-Kw-pMR"/>
                 <constraint firstItem="qTG-b2-2Vq" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="40" id="k7x-i0-h3z"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
