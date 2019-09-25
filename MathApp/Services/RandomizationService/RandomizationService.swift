@@ -10,6 +10,7 @@ import Foundation
 
 protocol RandomizationService {
     func randomizedExerciseChoiceConfiguration() -> ExerciseChoiceConfiguration
+    func intFromRange(min: Int, max: Int) -> Int
     func setFromRange(min: Int, max: Int, selectionCount: Int) -> [Int]
     func setFromRange(min: Int, max: Int, selectionCount: Int, weightTable: [Double]) -> [Int]
     func nonRepeatingSetFromRange(min: Int, max: Int, selectionCount: Int) -> [Int]
@@ -29,6 +30,10 @@ class RandomizationServiceImpl: RandomizationService {
         return ExerciseChoiceConfiguration(correctPosition: correctPosition,
                                            firstFalseChoice: firstFalseChoice,
                                            secondFalseChoice: secondFalseChoice)
+    }
+    
+    func intFromRange(min: Int, max: Int) -> Int {
+        return Int.random(in: min...max)
     }
     
     func setFromRange(min: Int, max: Int, selectionCount: Int) -> [Int] {

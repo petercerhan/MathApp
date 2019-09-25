@@ -45,16 +45,54 @@ class ExerciseExternalDataServiceImpl: ExerciseExternalDataService {
         let concept1Difficulties = randomizationService.setFromRange(min: 1, max: 3, selectionCount: concept1Count, weightTable: [0.2, 0.6, 0.2])
         let concept2Difficulties = randomizationService.setFromRange(min: 1, max: 3, selectionCount: concept2Count, weightTable: [0.2, 0.6, 0.2])
         
-        print("1 diff: \(concept1Difficulties)")
-        print("2 diff: \(concept2Difficulties)")
-        
         //randomly choose from arrays filtered by criteria
+        var concept1DifficultyIndex = 0
+        var concept2DifficultyIndex = 0
         
+        var exercises = [Exercise]()
         
-        
-        
-        
-        return Observable<[Exercise]>.just([Exercise.exercise1, Exercise.exercise2, Exercise.exercise3])
+        for i in 0...conceptSelections.count - 1 {
+            if conceptSelections[i] == 0 {
+                //add concept 1 items
+                var newExercise: Exercise? = nil
+                
+                while newExercise == nil {
+                    let difficulty = concept1Difficulties[concept1DifficultyIndex]
+                    let exercisePool = exercises_concept1.filter { $0.difficulty == difficulty }
+                    let exerciseIndex = randomizationService.intFromRange(min: 0, max: exercisePool.count - 1)
+                    let exercise = exercisePool[exerciseIndex]
+                    if let _ = exercises.first(where: { $0.id == exercise.id }) {
+                        continue
+                    } else {
+                        newExercise = exercise
+                    }
+                }
+                
+                exercises.append(newExercise!)
+                concept1DifficultyIndex += 1
+                
+            } else {
+                //add concept 2 items
+                var newExercise: Exercise? = nil
+                
+                while newExercise == nil {
+                    let difficulty = concept2Difficulties[concept2DifficultyIndex]
+                    let exercisePool = exercises_concept2.filter { $0.difficulty == difficulty }
+                    let exerciseIndex = randomizationService.intFromRange(min: 0, max: exercisePool.count - 1)
+                    let exercise = exercisePool[exerciseIndex]
+                    if let _ = exercises.first(where: { $0.id == exercise.id }) {
+                        continue
+                    } else {
+                        newExercise = exercise
+                    }
+                }
+                
+                exercises.append(newExercise!)
+                concept2DifficultyIndex += 1
+            }
+        }
+    
+        return Observable.just(exercises)
     }
     
     

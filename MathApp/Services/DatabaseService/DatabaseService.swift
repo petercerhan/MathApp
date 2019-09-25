@@ -11,11 +11,14 @@ import SQLite
 
 protocol DatabaseService {
     func setup()
+    func reset()
+    
     func getUserConcepts() -> [UserConcept]
+    
     func incrementStrengthForUserConcept(withID: Int)
     func decrementStrengthForUserConcept(withID conceptID: Int)
+    
     func getExercises(forConceptID conceptID: Int) -> [Exercise]
-    func reset()
 }
 
 class DatabaseServiceImpl: DatabaseService {

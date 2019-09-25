@@ -17,4 +17,5 @@ struct Exercise {
     let falseAnswer2: String
     let falseAnswer3: String
     let concept: Concept
+    let difficulty: Int
 }

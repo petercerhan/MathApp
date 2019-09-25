@@ -16,7 +16,6 @@
 		6E557C3722FB9EEB00270F07 /* CompositionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E557C3622FB9EEB00270F07 /* CompositionRoot.swift */; };
 		6E557C3922FBA0AE00270F07 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E557C3822FBA0AE00270F07 /* Coordinator.swift */; };
 		6E557C3B22FBA0DC00270F07 /* RootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E557C3A22FBA0DC00270F07 /* RootCoordinator.swift */; };
-		6E71309023343DB1009FEFBB /* db.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 6E71308F23343DB1009FEFBB /* db.sqlite3 */; };
 		6E713092233443F5009FEFBB /* Exercise+sqlite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E713091233443F5009FEFBB /* Exercise+sqlite.swift */; };
 		6E74FD402318A1F500730AEB /* FakeExerciseViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E74FD3F2318A1F500730AEB /* FakeExerciseViewModelDelegate.swift */; };
 		6E74FD422318A2B900730AEB /* TestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E74FD412318A2B900730AEB /* TestUtilities.swift */; };
@@ -46,6 +45,7 @@
 		6EBA305E231098F600E6DC54 /* ExerciseChoiceConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBA305D231098F600E6DC54 /* ExerciseChoiceConfiguration.swift */; };
 		6EBA306A2314D3F800E6DC54 /* RxLatestValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBA30692314D3F800E6DC54 /* RxLatestValue.swift */; };
 		6EBA306D2314D4AB00E6DC54 /* RxLatestValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBA306C2314D4AB00E6DC54 /* RxLatestValueTests.swift */; };
+		6EBD530B233AE95C0057F28A /* db.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 6EBD530A233AE95C0057F28A /* db.sqlite3 */; };
 		6EBE4E8F230A13D80047A880 /* ExerciseCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBE4E8E230A13D80047A880 /* ExerciseCoordinatorTests.swift */; };
 		6EBE4E91230A14A70047A880 /* FakeContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBE4E90230A14A70047A880 /* FakeContainerViewController.swift */; };
 		6EBE4E94230A16170047A880 /* ExerciseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBE4E93230A16170047A880 /* ExerciseCoordinator.swift */; };
@@ -130,7 +130,6 @@
 		6E557C3622FB9EEB00270F07 /* CompositionRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionRoot.swift; sourceTree = "<group>"; };
 		6E557C3822FBA0AE00270F07 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		6E557C3A22FBA0DC00270F07 /* RootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCoordinator.swift; sourceTree = "<group>"; };
-		6E71308F23343DB1009FEFBB /* db.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = db.sqlite3; sourceTree = "<group>"; };
 		6E713091233443F5009FEFBB /* Exercise+sqlite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exercise+sqlite.swift"; sourceTree = "<group>"; };
 		6E74FD3F2318A1F500730AEB /* FakeExerciseViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeExerciseViewModelDelegate.swift; sourceTree = "<group>"; };
 		6E74FD412318A2B900730AEB /* TestUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtilities.swift; sourceTree = "<group>"; };
@@ -160,6 +159,7 @@
 		6EBA305D231098F600E6DC54 /* ExerciseChoiceConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseChoiceConfiguration.swift; sourceTree = "<group>"; };
 		6EBA30692314D3F800E6DC54 /* RxLatestValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxLatestValue.swift; sourceTree = "<group>"; };
 		6EBA306C2314D4AB00E6DC54 /* RxLatestValueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxLatestValueTests.swift; sourceTree = "<group>"; };
+		6EBD530A233AE95C0057F28A /* db.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = db.sqlite3; sourceTree = "<group>"; };
 		6EBE4E8E230A13D80047A880 /* ExerciseCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCoordinatorTests.swift; sourceTree = "<group>"; };
 		6EBE4E90230A14A70047A880 /* FakeContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeContainerViewController.swift; sourceTree = "<group>"; };
 		6EBE4E93230A16170047A880 /* ExerciseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCoordinator.swift; sourceTree = "<group>"; };
@@ -474,7 +474,7 @@
 		6EB933B32331CBA900E38B52 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
-				6E71308F23343DB1009FEFBB /* db.sqlite3 */,
+				6EBD530A233AE95C0057F28A /* db.sqlite3 */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -841,7 +841,7 @@
 				6EC6673C232494170048068C /* ConceptMapTableViewCell.xib in Resources */,
 				6EC667142324489F0048068C /* MenuViewController.xib in Resources */,
 				6E557C1E22FB9DCC00270F07 /* Assets.xcassets in Resources */,
-				6E71309023343DB1009FEFBB /* db.sqlite3 in Resources */,
+				6EBD530B233AE95C0057F28A /* db.sqlite3 in Resources */,
 				6EC6671E232451760048068C /* QuitableContainerViewController.xib in Resources */,
 				6E74FD53231C87F800730AEB /* FeedContainerViewController.xib in Resources */,
 				6EB933A52330702C00E38B52 /* LoadExercisesViewController.xib in Resources */,
