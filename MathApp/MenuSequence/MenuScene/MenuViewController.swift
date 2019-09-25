@@ -20,6 +20,7 @@ class MenuViewController: UIViewController {
     
     @IBOutlet private(set) var conceptMapButton: UIButton!
     @IBOutlet private(set) var resetDBButton: UIButton!
+    @IBOutlet private(set) var chooseExerciseButton: UIButton!
     
     //MARK: - Rx
     
@@ -44,17 +45,34 @@ class MenuViewController: UIViewController {
     }
     
     private func bindActions() {
+        bindConceptMapAction()
+        bindResetDBAction()
+        bindChooseExerciseAction()
+    }
+    
+    private func bindConceptMapAction() {
         conceptMapButton.rx.tap
             .throttle(.milliseconds(500), latest: false, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] in
                 self.viewModel.dispatch(action: .conceptMap)
             })
             .disposed(by: disposeBag)
-        
+    }
+    
+    private func bindResetDBAction() {
         resetDBButton.rx.tap
             .throttle(.milliseconds(500), latest: false, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] in
                 self.viewModel.dispatch(action: .resetDB)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindChooseExerciseAction() {
+        chooseExerciseButton.rx.tap
+            .throttle(.milliseconds(500), latest: false, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in
+                self.viewModel.dispatch(action: .chooseExercise)
             })
             .disposed(by: disposeBag)
     }

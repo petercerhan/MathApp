@@ -65,6 +65,10 @@ extension MenuCoordinator: MenuViewModelDelegate {
         let vc = compositionRoot.composeConceptMapScene(delegate: self)
         containerVC.show(viewController: vc, animation: .slideFromRight)
     }
+    
+    func chooseExercise(_ menuViewModel: MenuViewModel) {
+
+    }
 }
 
 //MARK: - ConceptMapViewModelDelegate

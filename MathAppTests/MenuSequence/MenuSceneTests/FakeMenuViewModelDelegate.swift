@@ -17,4 +17,11 @@ class FakeMenuViewModelDelegate: MenuViewModelDelegate {
         conceptMap_callCount += 1
     }
     
+    var chooseExercise_callCount = 0
+    
+    func chooseExercise(_ menuViewModel: MenuViewModel) {
+        chooseExercise_callCount += 1
+    }
+    
+    
 }

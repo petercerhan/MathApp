@@ -10,11 +10,13 @@ import Foundation
 
 protocol MenuViewModelDelegate: class {
     func conceptMap(_ menuViewModel: MenuViewModel)
+    func chooseExercise(_ menuViewModel: MenuViewModel)
 }
 
 enum MenuAction {
     case conceptMap
     case resetDB
+    case chooseExercise
 }
 
 class MenuViewModel {
@@ -39,6 +41,8 @@ class MenuViewModel {
             handle_conceptMap()
         case .resetDB:
             handle_resetDB()
+        case .chooseExercise:
+            handle_chooseExercise()
         }
     }
     
@@ -48,6 +52,10 @@ class MenuViewModel {
     
     private func handle_resetDB() {
         databaseService.reset()
+    }
+    
+    private func handle_chooseExercise() {
+        delegate?.chooseExercise(self)
     }
     
 }
