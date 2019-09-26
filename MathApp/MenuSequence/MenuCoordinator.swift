@@ -11,6 +11,7 @@ import RxSwift
 
 protocol MenuCoordinatorDelegate: class {
     func quit(_ menuCoordinator: MenuCoordinator)
+    func loadExercise(_ menuCoordinator: MenuCoordinator, withID id: Int)
 }
 
 class MenuCoordinator: Coordinator {
@@ -90,6 +91,6 @@ extension MenuCoordinator: ChooseExerciseViewModelDelegate {
     }
     
     func loadExercise(_ chooseExerciseViewModel: ChooseExerciseViewModel, withID id: Int) {
-        
+        delegate?.loadExercise(self, withID: id)
     }
 }

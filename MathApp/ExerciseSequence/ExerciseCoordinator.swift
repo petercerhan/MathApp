@@ -148,6 +148,10 @@ extension ExerciseCoordinator: MenuCoordinatorDelegate {
     func quit(_ menuCoordinator: MenuCoordinator) {
         containerVC.dismissModal()
     }
+    
+    func loadExercise(_ menuCoordinator: MenuCoordinator, withID id: Int) {
+        
+    }
 }
 
 //MARK: - LoadExercisesViewModelDelegate
