@@ -16,6 +16,7 @@ class ExerciseCoordinator: Coordinator {
     private let compositionRoot: CompositionRoot
     private let containerVC: ContainerViewController
     private let randomizationService: RandomizationService
+    private let exerciseExternalDataService: ExerciseExternalDataService
     private let resultsStore: ResultsStore
     private let exercisesStore: ExercisesStore
     
@@ -33,12 +34,14 @@ class ExerciseCoordinator: Coordinator {
     init(compositionRoot: CompositionRoot,
          containerVC: ContainerViewController,
          randomizationService: RandomizationService,
+         exerciseExternalDataService: ExerciseExternalDataService,
          resultsStore: ResultsStore,
          exercisesStore: ExercisesStore)
     {
         self.compositionRoot = compositionRoot
         self.containerVC = containerVC
         self.randomizationService = randomizationService
+        self.exerciseExternalDataService = exerciseExternalDataService
         self.resultsStore = resultsStore
         self.exercisesStore = exercisesStore
         
@@ -68,10 +71,14 @@ class ExerciseCoordinator: Coordinator {
     
     private func showNextExerciseScene(animation: TransitionAnimation) {
         if let exercise = exerciseQueue.dequeue() {
-            let vc = composeExerciseScene(forExercise: exercise)
-            containerVC.show(viewController: vc, animation: animation)
-            loadExercisesIfNeeded()
+            showExerciseScene(exercise, animation: animation)
         }
+    }
+    
+    private func showExerciseScene(_ exercise: Exercise, animation: TransitionAnimation) {
+        let vc = composeExerciseScene(forExercise: exercise)
+        containerVC.show(viewController: vc, animation: animation)
+        loadExercisesIfNeeded()
     }
     
     private func loadExercisesIfNeeded() {
@@ -147,7 +154,13 @@ extension ExerciseCoordinator: MenuCoordinatorDelegate {
     }
     
     func loadExercise(_ menuCoordinator: MenuCoordinator, withID id: Int) {
-        
+        exerciseExternalDataService.getExercise(id: id)
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] exercise in
+                self.containerVC.dismissModal()
+                self.showExerciseScene(exercise, animation: .fadeIn)
+            })
+            .disposed(by: disposeBag)
     }
 }
 

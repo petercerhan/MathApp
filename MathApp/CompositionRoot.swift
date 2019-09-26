@@ -29,6 +29,7 @@ class CompositionRoot {
         return ExerciseCoordinator(compositionRoot: self,
                                    containerVC: FeedContainerViewController(viewModel: containerVM),
                                    randomizationService: RandomizationServiceImpl(),
+                                   exerciseExternalDataService: exercisesExternalDataService,
                                    resultsStore: resultsStore,
                                    exercisesStore: exercisesStore)
     }

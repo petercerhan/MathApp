@@ -162,13 +162,54 @@ class ExerciseCoordinatorTests: XCTestCase {
     }
     
     func test_loadExercise_id1_shouldLoadExerciseID1FromDatabaseService() {
+        let mockExerciseExternalDataService = FakeExerciseExternalDataService()
+        let coordinator = composeSUT(fakeExerciseExternalDataService: mockExerciseExternalDataService)
         
+        coordinator.start()
+        coordinator.loadExercise(TestMenuCoordinator(), withID: 1)
+        
+        XCTAssertEqual(mockExerciseExternalDataService.getExercise_callCount, 1)
+        XCTAssertEqual(mockExerciseExternalDataService.getExercise_id.first, 1)
+    }
+    
+    func test_loadExercise_exercise8_shouldShowExercise8() {
+        let mockContainerVC = FakeContainerViewController()
+        let stubExerciseExternalDataService = FakeExerciseExternalDataService()
+        stubExerciseExternalDataService.getExercise_stubData = Exercise.exercise8
+        let coordinator = composeSUT(fakeContainerViewController: mockContainerVC, fakeExerciseExternalDataService: stubExerciseExternalDataService)
+        
+        coordinator.start()
+        coordinator.loadExercise(TestMenuCoordinator(), withID: 8)
+        
+        if mockContainerVC.show_viewController.count > 1,
+            let vc = mockContainerVC.show_viewController[1] as? ExerciseViewController
+        {
+            vc.loadViewIfNeeded()
+            XCTAssertEqual(vc.questionLatexLabel.latex, Exercise.exercise8.questionLatex)
+        } else {
+            XCTFail("ExerciseViewController not presented")
+        }
+    }
+    
+    func test_loadExercise_shouldDismissMenu() {
+        let mockContainer = FakeContainerViewController()
+        let coordinator = composeSUT(fakeContainerViewController: mockContainer)
+        
+        coordinator.start()
+        coordinator.loadExercise(TestMenuCoordinator(), withID: 1)
+        
+        XCTAssertEqual(mockContainer.dismissModal_callCount, 1)
     }
     
     //MARK: - SUT Composition
     
-    func composeSUT(fakeContainerViewController: ContainerViewController? = nil, fakeExercisesStore: FakeExercisesStore? = nil, stubData: [[Exercise]]? = nil) -> ExerciseCoordinator {
+    func composeSUT(fakeContainerViewController: ContainerViewController? = nil,
+                    fakeExerciseExternalDataService: FakeExerciseExternalDataService? = nil,
+                    fakeExercisesStore: FakeExercisesStore? = nil,
+                    stubData: [[Exercise]]? = nil) -> ExerciseCoordinator {
+        
         let containerVC = fakeContainerViewController ?? FakeContainerViewController()
+        let exerciseExternalDataService = fakeExerciseExternalDataService ?? FakeExerciseExternalDataService()
         let exercisesStore = fakeExercisesStore ?? FakeExercisesStore()
         let data = stubData ?? [[Exercise.exercise1, Exercise.exercise2, Exercise.exercise3]]
         exercisesStore.setStubExercises(data)
@@ -176,6 +217,7 @@ class ExerciseCoordinatorTests: XCTestCase {
         return ExerciseCoordinator(compositionRoot: CompositionRoot(),
                                    containerVC: containerVC,
                                    randomizationService: RandomizationServiceImpl(),
+                                   exerciseExternalDataService: exerciseExternalDataService,
                                    resultsStore: FakeResultsStore(),
                                    exercisesStore: exercisesStore)
     }
