@@ -12,6 +12,16 @@ import XCTest
 
 class ChooseExerciseSceneTests: XCTestCase {
     
+    func test_textViewDelegate_shouldBeConnected() {
+        let mockDelegate = FakeChooseExerciseViewModelDelegate()
+        let vm = ChooseExerciseViewModel(delegate: mockDelegate)
+        let vc = ChooseExerciseViewController(viewModel: vm)
+        
+        vc.loadViewIfNeeded()
+        
+        XCTAssertNotNil(vc.textField.delegate)
+    }
+    
     func test_back_shouldRequestBack() {
         let mockDelegate = FakeChooseExerciseViewModelDelegate()
         let vm = ChooseExerciseViewModel(delegate: mockDelegate)

@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class ChooseExerciseViewController: UIViewController {
+class ChooseExerciseViewController: UIViewController, UITextFieldDelegate {
     
     //MARK: - Dependencies
     
@@ -45,8 +45,17 @@ class ChooseExerciseViewController: UIViewController {
     }
     
     private func bindActions() {
+        bindBackgroundTap()
         bindBackAction()
         bindSubmitAction()
+    }
+    
+    private func bindBackgroundTap() {
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.backgroundTapped)))
+    }
+    
+    @objc func backgroundTapped() {
+        textField.resignFirstResponder()
     }
     
     private func bindBackAction() {
@@ -72,6 +81,13 @@ class ChooseExerciseViewController: UIViewController {
             return
         }
         viewModel.dispatch(action: .submit(id: id))
+    }
+    
+    //MARK: - UITextFieldDelegate
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 
 }
