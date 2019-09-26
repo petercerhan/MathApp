@@ -28,7 +28,6 @@ class CompositionRoot {
         let containerVM = FeedContainerViewModel(delegate: nil, resultsStore: resultsStore)
         return ExerciseCoordinator(compositionRoot: self,
                                    containerVC: FeedContainerViewController(viewModel: containerVM),
-                                   exerciseService: ExerciseServiceImpl(),
                                    randomizationService: RandomizationServiceImpl(),
                                    resultsStore: resultsStore,
                                    exercisesStore: exercisesStore)

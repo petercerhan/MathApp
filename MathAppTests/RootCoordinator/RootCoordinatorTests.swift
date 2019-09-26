@@ -46,7 +46,6 @@ class RootCoordinatorFakeCompositionRoot: CompositionRoot {
     override func composeExerciseCoordinator() -> ExerciseCoordinator {
         return ExerciseCoordinator(compositionRoot: CompositionRoot(),
                                    containerVC: ContainerViewController(),
-                                   exerciseService: FakeExerciseService(),
                                    randomizationService: RandomizationServiceImpl(),
                                    resultsStore: FakeResultsStore(),
                                    exercisesStore: FakeExercisesStore())

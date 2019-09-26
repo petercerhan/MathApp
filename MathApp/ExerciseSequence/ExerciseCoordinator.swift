@@ -15,7 +15,6 @@ class ExerciseCoordinator: Coordinator {
     
     private let compositionRoot: CompositionRoot
     private let containerVC: ContainerViewController
-    private let exerciseService: ExerciseService
     private let randomizationService: RandomizationService
     private let resultsStore: ResultsStore
     private let exercisesStore: ExercisesStore
@@ -33,14 +32,12 @@ class ExerciseCoordinator: Coordinator {
     
     init(compositionRoot: CompositionRoot,
          containerVC: ContainerViewController,
-         exerciseService: ExerciseService,
          randomizationService: RandomizationService,
          resultsStore: ResultsStore,
          exercisesStore: ExercisesStore)
     {
         self.compositionRoot = compositionRoot
         self.containerVC = containerVC
-        self.exerciseService = exerciseService
         self.randomizationService = randomizationService
         self.resultsStore = resultsStore
         self.exercisesStore = exercisesStore

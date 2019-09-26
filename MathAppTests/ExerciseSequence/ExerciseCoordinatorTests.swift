@@ -161,6 +161,10 @@ class ExerciseCoordinatorTests: XCTestCase {
         XCTAssertEqual(mockExercisesStore.updateExercises_callCount, 1)
     }
     
+    func test_loadExercise_id1_shouldLoadExerciseID1FromDatabaseService() {
+        
+    }
+    
     //MARK: - SUT Composition
     
     func composeSUT(fakeContainerViewController: ContainerViewController? = nil, fakeExercisesStore: FakeExercisesStore? = nil, stubData: [[Exercise]]? = nil) -> ExerciseCoordinator {
@@ -171,7 +175,6 @@ class ExerciseCoordinatorTests: XCTestCase {
         
         return ExerciseCoordinator(compositionRoot: CompositionRoot(),
                                    containerVC: containerVC,
-                                   exerciseService: FakeExerciseService(),
                                    randomizationService: RandomizationServiceImpl(),
                                    resultsStore: FakeResultsStore(),
                                    exercisesStore: exercisesStore)
