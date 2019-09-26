@@ -19,6 +19,7 @@ protocol DatabaseService {
     func decrementStrengthForUserConcept(withID conceptID: Int)
     
     func getExercises(forConceptID conceptID: Int) -> [Exercise]
+    func getExercise(id: Int) -> Exercise?
 }
 
 class DatabaseServiceImpl: DatabaseService {
@@ -86,6 +87,17 @@ class DatabaseServiceImpl: DatabaseService {
         }
 
         return result ?? [Exercise]()
+    }
+    
+    func getExercise(id: Int) -> Exercise? {
+        let query = exerciseTable.join(conceptsTable, on: conceptsTable[Concept.column_id] == exerciseTable[Exercise.column_conceptID])
+            .filter(exerciseTable[Exercise.column_id] == Int64(id))
+ 
+        guard let exerciseRow = try? db.pluck(query) else {
+            return nil
+        }
+        
+        return Exercise.createFromQueryResult(exerciseRow)
     }
     
     func reset() {

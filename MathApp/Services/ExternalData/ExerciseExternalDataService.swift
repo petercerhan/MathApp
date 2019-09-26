@@ -96,10 +96,10 @@ class ExerciseExternalDataServiceImpl: ExerciseExternalDataService {
         return Observable.just(exercises)
     }
     
-    
-    
     func getExercise(id: Int) -> Observable<Exercise> {
-        return Observable.just(Exercise.exercise1)
+        let exercise = databaseService.getExercise(id: id)
+        print("exercise: \(exercise)")
+        return Observable.just(exercise ?? Exercise.exercise1)
     }
     
 }
