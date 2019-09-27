@@ -13,7 +13,7 @@ class ConceptIntroViewController: UIViewController {
     //MARK: - Initialization
     
     init() {
-        super.init(nibName: "ExerciseViewController", bundle: nil)
+        super.init(nibName: "ConceptIntroViewController", bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {

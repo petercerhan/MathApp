@@ -32,9 +32,9 @@ class ExerciseExternalDataServiceImpl: ExerciseExternalDataService {
     
     func getExercises() -> Observable<FeedPackage> {
         let conceptIntro = ConceptIntro(concept: Concept.constantRule)
-//        let feedPackage = FeedPackage(feedPackageType: .conceptIntro, exercises: [Exercise.], transitionItem: <#T##FeedItem?#>)
+        let feedPackage = FeedPackage(feedPackageType: .conceptIntro, exercises: [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3], transitionItem: conceptIntro)
         
-        return getExercises_prior()
+        return Observable.just(feedPackage)
     }
     
     func getExercises_prior() -> Observable<FeedPackage> {
