@@ -12,12 +12,12 @@ import RxSwift
 
 class FakeExerciseExternalDataService: ExerciseExternalDataService {
 
-    var getExercises_stubData = [Exercise]()
+    var getExercises_stubData = FeedPackage(feedPackageType: .exercises, exercises: [Exercise](), transitionItem: nil)
     var getExercises_callCount = 0
     
-    func getExercises() -> Observable<[Exercise]> {
+    func getExercises() -> Observable<FeedPackage> {
         getExercises_callCount += 1
-        return Observable<[Exercise]>.just(getExercises_stubData)
+        return Observable<FeedPackage>.just(getExercises_stubData)
     }
     
     var getExercise_stubData = Exercise.exercise1

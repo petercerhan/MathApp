@@ -24,7 +24,7 @@ extension ExercisesStore where Self: ExercisesStoreImpl {
         return exercisesSubject.asObservable()
     }
     var transitionItem: Observable<FeedItem?> {
-        return transitionItem.asObservable()
+        return transitionItemSubject.asObservable()
     }
 }
 
@@ -47,7 +47,7 @@ class ExercisesStoreImpl: ExercisesStore {
     //MARK: - ExercisesStore Interface
     
     let exercisesSubject = BehaviorSubject<[Exercise]>(value: [])
-    let transitionItem = BehaviorSubject<FeedItem?>(value: nil)
+    let transitionItemSubject = BehaviorSubject<FeedItem?>(value: nil)
     
     func dispatch(action: ExercisesStoreAction) {
         switch action {
@@ -58,8 +58,13 @@ class ExercisesStoreImpl: ExercisesStore {
     
     private func handle_updateExercises() {
         exerciseExternalDataService.getExercises()
-            .subscribe(onNext: { [unowned self] exercises in
-                self.exercisesSubject.onNext(exercises)
+            .subscribe(onNext: { [unowned self] feedPackage in
+                self.exercisesSubject.onNext(feedPackage.exercises)
+                
+                if let transitionItem = feedPackage.transitionItem {
+                    self.transitionItemSubject.onNext(transitionItem)
+                }
+                
             })
             .disposed(by: disposeBag)
     }

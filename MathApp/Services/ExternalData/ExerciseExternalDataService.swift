@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 protocol ExerciseExternalDataService {
-    func getExercises() -> Observable<[Exercise]>
+    func getExercises() -> Observable<FeedPackage>
     func getExercise(id: Int) -> Observable<Exercise>
 }
 
@@ -30,7 +30,7 @@ class ExerciseExternalDataServiceImpl: ExerciseExternalDataService {
     
     //MARK: - ExerciseExternalDataService Interface
     
-    func getExercises() -> Observable<[Exercise]> {
+    func getExercises() -> Observable<FeedPackage> {
         let concept1 = Concept.constantRule
         let concept2 = Concept.linearRule
         
@@ -93,7 +93,9 @@ class ExerciseExternalDataServiceImpl: ExerciseExternalDataService {
             }
         }
     
-        return Observable.just(exercises)
+        let feedPackage = FeedPackage(feedPackageType: .exercises, exercises: exercises, transitionItem: nil)
+        
+        return Observable.just(feedPackage)
     }
     
     func getExercise(id: Int) -> Observable<Exercise> {

@@ -36,10 +36,22 @@ class ExercisesStoreTests: XCTestCase {
         XCTAssertEqual(exercises.count, 3)
     }
     
+    func test_updateExercises_receivesExercisesPackage_shouldSetTransitionItemNil() {
+        let exerciseStore = composeSUT(stubExercises: [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3])
+        
+        exerciseStore.dispatch(action: .updateExercises)
+        
+        guard let transitionItem = latestValue(of: exerciseStore.transitionItem, disposeBag: disposeBag) else {
+            XCTFail("Could not get transition item")
+            return
+        }
+        XCTAssertNil(transitionItem)
+    }
+    
     func test_updateExercises_receivesConceptIntroPackage_shouldEmitConceptIntro() {
         let conceptIntroItem = ConceptIntro(concept: Concept.constantRule, exercises: [Exercise.exercise1])
         let stubFeedPackage = FeedPackage(feedPackageType: .conceptIntro, exercises: [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3], transitionItem: conceptIntroItem)
-        let exerciseStore = composeSUT()
+        let exerciseStore = composeSUT(stubFeedPackage: stubFeedPackage)
         
         exerciseStore.dispatch(action: .updateExercises)
         
@@ -50,6 +62,20 @@ class ExercisesStoreTests: XCTestCase {
         XCTAssertEqual(transitionItem.concept.id, 1)
     }
     
+    func test_updateExercises_receivesConceptIntroPackage_shouldEmitExercises() {
+        let conceptIntroItem = ConceptIntro(concept: Concept.constantRule, exercises: [Exercise.exercise1])
+        let stubFeedPackage = FeedPackage(feedPackageType: .conceptIntro, exercises: [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3], transitionItem: conceptIntroItem)
+        let exerciseStore = composeSUT(stubFeedPackage: stubFeedPackage)
+        
+        exerciseStore.dispatch(action: .updateExercises)
+        
+        guard let exercises = latestValue(of: exerciseStore.exercises, disposeBag: disposeBag) else {
+            XCTFail("Could not get exercises")
+            return
+        }
+        XCTAssertEqual(exercises.count, 3)
+    }
+    
     //MARK: - SUT Composition
     
     func composeSUT(fakeExerciseExternalDataService: FakeExerciseExternalDataService? = nil,
@@ -58,7 +84,10 @@ class ExercisesStoreTests: XCTestCase {
     {
         let exerciseExternalDataService = fakeExerciseExternalDataService ?? FakeExerciseExternalDataService()
         if let stubExercises = stubExercises {
-            exerciseExternalDataService.getExercises_stubData = stubExercises
+            exerciseExternalDataService.getExercises_stubData = FeedPackage(feedPackageType: .exercises, exercises: stubExercises, transitionItem: nil)
+        }
+        if let stubFeedPackage = stubFeedPackage {
+            exerciseExternalDataService.getExercises_stubData = stubFeedPackage
         }
         return ExercisesStoreImpl(exerciseExternalDataService: exerciseExternalDataService)
     }
