@@ -48,6 +48,10 @@ class FakeDatabaseService: DatabaseService {
     }
     
     
+    func getExercise(id: Int) -> Exercise? {
+        return nil
+    }
+    
     var reset_callCount = 0
     
     func reset() {
@@ -55,5 +59,4 @@ class FakeDatabaseService: DatabaseService {
     }
 
 }
-
 

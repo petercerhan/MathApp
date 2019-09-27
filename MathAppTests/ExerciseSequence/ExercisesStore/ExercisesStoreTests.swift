@@ -17,7 +17,7 @@ class ExercisesStoreTests: XCTestCase {
     
     func test_updateExercises_reqeustsNewExercises() {
         let mockExerciseExternalDataService = FakeExerciseExternalDataService()
-        let exerciseStore = ExercisesStoreImpl(exerciseExternalDataService: mockExerciseExternalDataService)
+        let exerciseStore = composeSUT(fakeExerciseExternalDataService: mockExerciseExternalDataService)
         
         exerciseStore.dispatch(action: .updateExercises)
         
@@ -25,9 +25,7 @@ class ExercisesStoreTests: XCTestCase {
     }
     
     func test_updateExercises_externalDataReturnsThreeExercises_shouldEmitThreeExercises() {
-        let stubExerciseExternalDataService = FakeExerciseExternalDataService()
-        stubExerciseExternalDataService.getExercises_stubData = [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3]
-        let exerciseStore = ExercisesStoreImpl(exerciseExternalDataService: stubExerciseExternalDataService)
+        let exerciseStore = composeSUT(stubExercises: [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3])
         
         exerciseStore.dispatch(action: .updateExercises)
         
@@ -36,6 +34,33 @@ class ExercisesStoreTests: XCTestCase {
             return
         }
         XCTAssertEqual(exercises.count, 3)
+    }
+    
+    func test_updateExercises_receivesConceptIntroPackage_shouldEmitConceptIntro() {
+        let conceptIntroItem = ConceptIntro(concept: Concept.constantRule, exercises: [Exercise.exercise1])
+        let stubFeedPackage = FeedPackage(feedPackageType: .conceptIntro, exercises: [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3], transitionItem: conceptIntroItem)
+        let exerciseStore = composeSUT()
+        
+        exerciseStore.dispatch(action: .updateExercises)
+        
+        guard let transitionItem = latestValue(of: exerciseStore.transitionItem, disposeBag: disposeBag) as? ConceptIntro else {
+            XCTFail("No conceptIntro item")
+            return
+        }
+        XCTAssertEqual(transitionItem.concept.id, 1)
+    }
+    
+    //MARK: - SUT Composition
+    
+    func composeSUT(fakeExerciseExternalDataService: FakeExerciseExternalDataService? = nil,
+                    stubExercises: [Exercise]? = nil,
+                    stubFeedPackage: FeedPackage? = nil) -> ExercisesStore
+    {
+        let exerciseExternalDataService = fakeExerciseExternalDataService ?? FakeExerciseExternalDataService()
+        if let stubExercises = stubExercises {
+            exerciseExternalDataService.getExercises_stubData = stubExercises
+        }
+        return ExercisesStoreImpl(exerciseExternalDataService: exerciseExternalDataService)
     }
     
 }

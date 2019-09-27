@@ -29,6 +29,9 @@
 		6E84161B232B213D0035F381 /* ExercisesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E84161A232B213D0035F381 /* ExercisesStore.swift */; };
 		6E841620232B22F20035F381 /* ExerciseExternalDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E84161F232B22F20035F381 /* ExerciseExternalDataService.swift */; };
 		6E841623232B234F0035F381 /* FakeExerciseExternalDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E841622232B234F0035F381 /* FakeExerciseExternalDataService.swift */; };
+		6E883F8F233D8301004F0D0E /* FeedPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E883F8E233D8301004F0D0E /* FeedPackage.swift */; };
+		6E883F91233D85D6004F0D0E /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E883F90233D85D6004F0D0E /* FeedItem.swift */; };
+		6E883F93233D8674004F0D0E /* ConceptIntro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E883F92233D8674004F0D0E /* ConceptIntro.swift */; };
 		6E927E7E231CA75100822EBA /* ResultsStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E927E7D231CA75100822EBA /* ResultsStoreTests.swift */; };
 		6E927E81231CA88600822EBA /* ResultsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E927E80231CA88600822EBA /* ResultsStore.swift */; };
 		6E927E83231CAE2400822EBA /* FakeResultsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E927E82231CAE2400822EBA /* FakeResultsStore.swift */; };
@@ -148,6 +151,9 @@
 		6E84161A232B213D0035F381 /* ExercisesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesStore.swift; sourceTree = "<group>"; };
 		6E84161F232B22F20035F381 /* ExerciseExternalDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseExternalDataService.swift; sourceTree = "<group>"; };
 		6E841622232B234F0035F381 /* FakeExerciseExternalDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeExerciseExternalDataService.swift; sourceTree = "<group>"; };
+		6E883F8E233D8301004F0D0E /* FeedPackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPackage.swift; sourceTree = "<group>"; };
+		6E883F90233D85D6004F0D0E /* FeedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
+		6E883F92233D8674004F0D0E /* ConceptIntro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptIntro.swift; sourceTree = "<group>"; };
 		6E927E7D231CA75100822EBA /* ResultsStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsStoreTests.swift; sourceTree = "<group>"; };
 		6E927E80231CA88600822EBA /* ResultsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsStore.swift; sourceTree = "<group>"; };
 		6E927E82231CAE2400822EBA /* FakeResultsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeResultsStore.swift; sourceTree = "<group>"; };
@@ -445,6 +451,14 @@
 			path = ExternalData;
 			sourceTree = "<group>";
 		};
+		6E883F8D233D82E7004F0D0E /* FeedPackage */ = {
+			isa = PBXGroup;
+			children = (
+				6E883F8E233D8301004F0D0E /* FeedPackage.swift */,
+			);
+			path = FeedPackage;
+			sourceTree = "<group>";
+		};
 		6E927E7C231CA74000822EBA /* ResultsStore */ = {
 			isa = PBXGroup;
 			children = (
@@ -599,6 +613,9 @@
 		6EBE4EA0230B663F0047A880 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				6E883F90233D85D6004F0D0E /* FeedItem.swift */,
+				6E883F92233D8674004F0D0E /* ConceptIntro.swift */,
+				6E883F8D233D82E7004F0D0E /* FeedPackage */,
 				6E8416092329BD6A0035F381 /* Exercise */,
 				6E84160A2329BD740035F381 /* Concept */,
 				6E84160B2329BD800035F381 /* UserConcept */,
@@ -1002,14 +1019,17 @@
 				6E1E6B3522FFA95100AFB7A0 /* ContainerViewController.swift in Sources */,
 				6EBA306A2314D3F800E6DC54 /* RxLatestValue.swift in Sources */,
 				6EC6670723233A140048068C /* InfoViewContentElement.swift in Sources */,
+				6E883F91233D85D6004F0D0E /* FeedItem.swift in Sources */,
 				6EC666EE2321DFA60048068C /* Colors.swift in Sources */,
 				6E1E6B3722FFA97800AFB7A0 /* TransitionAnimation.swift in Sources */,
 				6EC6672F232464B20048068C /* ConceptMapViewController.swift in Sources */,
 				6EB933AA233073C700E38B52 /* LoadExercisesViewModel.swift in Sources */,
+				6E883F93233D8674004F0D0E /* ConceptIntro.swift in Sources */,
 				6EB933A42330702C00E38B52 /* LoadExercisesViewController.swift in Sources */,
 				6EC666FE232324F70048068C /* Concept.swift in Sources */,
 				6EC6674723249D850048068C /* UserConcept.swift in Sources */,
 				6EC6674223249C300048068C /* DatabaseService.swift in Sources */,
+				6E883F8F233D8301004F0D0E /* FeedPackage.swift in Sources */,
 				6EBE4EA4230B675B0047A880 /* Exercise+data.swift in Sources */,
 				6EBE4E9B230B614B0047A880 /* ExerciseViewController.swift in Sources */,
 				6EC6670A23243B870048068C /* MenuCoordinator.swift in Sources */,

@@ -26,8 +26,9 @@ class FakeExercisesStore: ExercisesStore {
         nextStubExercise()
     }
     
+    var transitionItem = Observable<FeedItem?>.just(nil)
+    
     private func nextStubExercise() {
-        print("will show exercises at index \(stubIndex)")
         let exercises = stubExercises[stubIndex]
         exercisesSubject.onNext(exercises)
         stubIndex = (stubIndex + 1) % stubExercises.count

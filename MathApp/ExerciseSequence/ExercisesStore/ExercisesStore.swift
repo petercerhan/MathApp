@@ -11,6 +11,7 @@ import RxSwift
 
 protocol ExercisesStore {
     var exercises: Observable<[Exercise]> { get }
+    var transitionItem: Observable<FeedItem?> { get }
     func dispatch(action: ExercisesStoreAction)
 }
 
@@ -21,6 +22,9 @@ enum ExercisesStoreAction {
 extension ExercisesStore where Self: ExercisesStoreImpl {
     var exercises: Observable<[Exercise]> {
         return exercisesSubject.asObservable()
+    }
+    var transitionItem: Observable<FeedItem?> {
+        return transitionItem.asObservable()
     }
 }
 
@@ -43,6 +47,7 @@ class ExercisesStoreImpl: ExercisesStore {
     //MARK: - ExercisesStore Interface
     
     let exercisesSubject = BehaviorSubject<[Exercise]>(value: [])
+    let transitionItem = BehaviorSubject<FeedItem?>(value: nil)
     
     func dispatch(action: ExercisesStoreAction) {
         switch action {

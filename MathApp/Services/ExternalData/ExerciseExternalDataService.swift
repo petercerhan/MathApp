@@ -98,7 +98,6 @@ class ExerciseExternalDataServiceImpl: ExerciseExternalDataService {
     
     func getExercise(id: Int) -> Observable<Exercise> {
         let exercise = databaseService.getExercise(id: id)
-        print("exercise: \(exercise)")
         return Observable.just(exercise ?? Exercise.exercise1)
     }
     
