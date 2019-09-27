@@ -45,8 +45,9 @@ class CompositionRoot {
         return ExerciseViewController(viewModel: vm)
     }
     
-    func composeConceptIntroScene(conceptIntro: ConceptIntro) -> UIViewController {
-        return ConceptIntroViewController()
+    func composeConceptIntroScene(delegate: ConceptIntroViewModelDelegate, conceptIntro: ConceptIntro) -> UIViewController {
+        let vm = ConceptIntroViewModel(delegate: delegate, conceptIntro: conceptIntro)
+        return ConceptIntroViewController(viewModel: vm)
     }
     
     func composeInfoScene(delegate: InfoViewModelDelegate, concept: Concept) -> UIViewController {

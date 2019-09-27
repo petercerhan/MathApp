@@ -34,6 +34,9 @@
 		6E883F93233D8674004F0D0E /* ConceptIntro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E883F92233D8674004F0D0E /* ConceptIntro.swift */; };
 		6E883F97233D92F2004F0D0E /* ConceptIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E883F95233D92F2004F0D0E /* ConceptIntroViewController.swift */; };
 		6E883F98233D92F2004F0D0E /* ConceptIntroViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E883F96233D92F2004F0D0E /* ConceptIntroViewController.xib */; };
+		6E883F9B233D9B96004F0D0E /* ConceptIntroSceneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E883F9A233D9B96004F0D0E /* ConceptIntroSceneTests.swift */; };
+		6E883F9D233D9E5D004F0D0E /* ConceptIntroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E883F9C233D9E5D004F0D0E /* ConceptIntroViewModel.swift */; };
+		6E883F9F233DA2DE004F0D0E /* FakeConceptIntroViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E883F9E233DA2DE004F0D0E /* FakeConceptIntroViewModelDelegate.swift */; };
 		6E927E7E231CA75100822EBA /* ResultsStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E927E7D231CA75100822EBA /* ResultsStoreTests.swift */; };
 		6E927E81231CA88600822EBA /* ResultsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E927E80231CA88600822EBA /* ResultsStore.swift */; };
 		6E927E83231CAE2400822EBA /* FakeResultsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E927E82231CAE2400822EBA /* FakeResultsStore.swift */; };
@@ -158,6 +161,9 @@
 		6E883F92233D8674004F0D0E /* ConceptIntro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptIntro.swift; sourceTree = "<group>"; };
 		6E883F95233D92F2004F0D0E /* ConceptIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptIntroViewController.swift; sourceTree = "<group>"; };
 		6E883F96233D92F2004F0D0E /* ConceptIntroViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConceptIntroViewController.xib; sourceTree = "<group>"; };
+		6E883F9A233D9B96004F0D0E /* ConceptIntroSceneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptIntroSceneTests.swift; sourceTree = "<group>"; };
+		6E883F9C233D9E5D004F0D0E /* ConceptIntroViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptIntroViewModel.swift; sourceTree = "<group>"; };
+		6E883F9E233DA2DE004F0D0E /* FakeConceptIntroViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeConceptIntroViewModelDelegate.swift; sourceTree = "<group>"; };
 		6E927E7D231CA75100822EBA /* ResultsStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsStoreTests.swift; sourceTree = "<group>"; };
 		6E927E80231CA88600822EBA /* ResultsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsStore.swift; sourceTree = "<group>"; };
 		6E927E82231CAE2400822EBA /* FakeResultsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeResultsStore.swift; sourceTree = "<group>"; };
@@ -467,7 +473,17 @@
 			isa = PBXGroup;
 			children = (
 				6E883F95233D92F2004F0D0E /* ConceptIntroViewController.swift */,
+				6E883F9C233D9E5D004F0D0E /* ConceptIntroViewModel.swift */,
 				6E883F96233D92F2004F0D0E /* ConceptIntroViewController.xib */,
+			);
+			path = ConceptIntroScene;
+			sourceTree = "<group>";
+		};
+		6E883F99233D9B7B004F0D0E /* ConceptIntroScene */ = {
+			isa = PBXGroup;
+			children = (
+				6E883F9A233D9B96004F0D0E /* ConceptIntroSceneTests.swift */,
+				6E883F9E233DA2DE004F0D0E /* FakeConceptIntroViewModelDelegate.swift */,
 			);
 			path = ConceptIntroScene;
 			sourceTree = "<group>";
@@ -573,6 +589,7 @@
 				6E841616232B20770035F381 /* ExercisesStore */,
 				6E74FD452318B52F00730AEB /* Models */,
 				6EBE4E9D230B64240047A880 /* ExerciseScene */,
+				6E883F99233D9B7B004F0D0E /* ConceptIntroScene */,
 				6EB933A6233071A800E38B52 /* LoadExercisesSceneTests */,
 				6EC666F4232204170048068C /* InfoScene */,
 			);
@@ -1012,6 +1029,7 @@
 			files = (
 				6EBA303C230CAED200E6DC54 /* UIView+addShadow.swift in Sources */,
 				6EC667132324489F0048068C /* MenuViewController.swift in Sources */,
+				6E883F9D233D9E5D004F0D0E /* ConceptIntroViewModel.swift in Sources */,
 				6EC66720232451820048068C /* QuitableContainerViewModel.swift in Sources */,
 				6EBE4E94230A16170047A880 /* ExerciseCoordinator.swift in Sources */,
 				6E557C3922FBA0AE00270F07 /* Coordinator.swift in Sources */,
@@ -1089,6 +1107,7 @@
 				6EC66735232467840048068C /* FakeConceptMapViewModelDelegate.swift in Sources */,
 				6E841618232B208E0035F381 /* ExercisesStoreTests.swift in Sources */,
 				6EBD5313233AF9A50057F28A /* ChooseExerciseSceneTests.swift in Sources */,
+				6E883F9B233D9B96004F0D0E /* ConceptIntroSceneTests.swift in Sources */,
 				6EBA306D2314D4AB00E6DC54 /* RxLatestValueTests.swift in Sources */,
 				6EC666EB2321D6D90048068C /* FakeExerciseService.swift in Sources */,
 				6EC667492324A08D0048068C /* FakeDatabaseService.swift in Sources */,
@@ -1107,6 +1126,7 @@
 				6EC66729232462280048068C /* FakeMenuViewModelDelegate.swift in Sources */,
 				6E841623232B234F0035F381 /* FakeExerciseExternalDataService.swift in Sources */,
 				6EC6672423245D730048068C /* TestMenuCoordinator.swift in Sources */,
+				6E883F9F233DA2DE004F0D0E /* FakeConceptIntroViewModelDelegate.swift in Sources */,
 				6E74FD472318B53F00730AEB /* ExerciseChoiceConfiguration+stubs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

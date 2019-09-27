@@ -75,7 +75,7 @@ class ExerciseCoordinator: Coordinator {
     }
     
     private func showConceptIntroScene(conceptIntro: ConceptIntro) {
-        let vc = compositionRoot.composeConceptIntroScene(conceptIntro: conceptIntro)
+        let vc = compositionRoot.composeConceptIntroScene(delegate: self, conceptIntro: conceptIntro)
         containerVC.show(viewController: vc, animation: .fadeIn)
     }
     
@@ -181,5 +181,13 @@ extension ExerciseCoordinator: LoadExercisesViewModelDelegate {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.005) { [weak self] in
             self?.showNextFeedScene(animation: .fadeIn)
         }
+    }
+}
+
+//MARK: - ConceptIntroViewModelDelegate'
+
+extension ExerciseCoordinator: ConceptIntroViewModelDelegate {
+    func next(_ conceptIntroViewModel: ConceptIntroViewModel) {
+        
     }
 }
