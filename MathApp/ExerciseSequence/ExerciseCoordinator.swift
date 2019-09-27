@@ -62,11 +62,21 @@ class ExerciseCoordinator: Coordinator {
     }
     
     private func showNextFeedScene(animation: TransitionAnimation) {
+        if let conceptIntro = latestValue(of: exercisesStore.transitionItem, disposeBag: disposeBag) as? ConceptIntro {
+            showConceptIntroScene(conceptIntro: conceptIntro)
+            return
+        }
+        
         if exerciseQueue.count > 0 {
             showNextExerciseScene(animation: animation)
         } else {
             updateExerciseQueue(animation: animation)
         }
+    }
+    
+    private func showConceptIntroScene(conceptIntro: ConceptIntro) {
+        let vc = compositionRoot.composeConceptIntroScene(conceptIntro: conceptIntro)
+        containerVC.show(viewController: vc, animation: .fadeIn)
     }
     
     private func showNextExerciseScene(animation: TransitionAnimation) {

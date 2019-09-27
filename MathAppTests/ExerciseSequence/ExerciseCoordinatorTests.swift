@@ -12,7 +12,7 @@ import XCTest
 
 class ExerciseCoordinatorTests: XCTestCase {
     
-    func test_start_shouldShowExerciseScene() {
+    func test_start_exercisesFeedPackage_shouldShowExerciseScene() {
         let mockContainerVC = FakeContainerViewController()
         let coordinator = composeSUT(fakeContainerViewController: mockContainerVC)
         
@@ -201,18 +201,31 @@ class ExerciseCoordinatorTests: XCTestCase {
         XCTAssertEqual(mockContainer.dismissModal_callCount, 1)
     }
     
+    func test_start_conceptIntroFeedPackage_shouldShowConceptIntro() {
+        let stubTransitionItem = ConceptIntro(concept: Concept.constantRule, exercises: [Exercise.exercise1])
+        let mockContainer = FakeContainerViewController()
+        let coordinator = composeSUT(fakeContainerViewController: mockContainer, stubTransitionItem: stubTransitionItem)
+        
+        coordinator.start()
+        
+        mockContainer.verifyDidShow(viewControllerType: ConceptIntroViewController.self)
+    }
+    
     //MARK: - SUT Composition
     
     func composeSUT(fakeContainerViewController: ContainerViewController? = nil,
                     fakeExerciseExternalDataService: FakeExerciseExternalDataService? = nil,
                     fakeExercisesStore: FakeExercisesStore? = nil,
-                    stubData: [[Exercise]]? = nil) -> ExerciseCoordinator {
+                    stubData: [[Exercise]]? = nil,
+                    stubTransitionItem: FeedItem? = nil) -> ExerciseCoordinator {
         
         let containerVC = fakeContainerViewController ?? FakeContainerViewController()
         let exerciseExternalDataService = fakeExerciseExternalDataService ?? FakeExerciseExternalDataService()
         let exercisesStore = fakeExercisesStore ?? FakeExercisesStore()
+        
         let data = stubData ?? [[Exercise.exercise1, Exercise.exercise2, Exercise.exercise3]]
         exercisesStore.setStubExercises(data)
+        exercisesStore.setStubTransitionItem(stubTransitionItem)
         
         return ExerciseCoordinator(compositionRoot: CompositionRoot(),
                                    containerVC: containerVC,

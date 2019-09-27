@@ -15,7 +15,7 @@ class FakeExercisesStore: ExercisesStore {
     var exercises: Observable<[Exercise]> {
         return exercisesSubject.asObservable()
     }
-    private var exercisesSubject = BehaviorSubject<[Exercise]>(value: [])
+    private let exercisesSubject = BehaviorSubject<[Exercise]>(value: [])
     
     var stubExercises = [[Exercise]()]
     var stubIndex = 0
@@ -26,7 +26,17 @@ class FakeExercisesStore: ExercisesStore {
         nextStubExercise()
     }
     
-    var transitionItem = Observable<FeedItem?>.just(nil)
+    
+    var transitionItem: Observable<FeedItem?> {
+        return transitionItemSubject.asObservable()
+    }
+    
+    private let transitionItemSubject = BehaviorSubject<FeedItem?>(value: nil)
+    
+    func setStubTransitionItem(_ item: FeedItem?) {
+        transitionItemSubject.onNext(item)
+    }
+    
     
     private func nextStubExercise() {
         let exercises = stubExercises[stubIndex]
