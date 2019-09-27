@@ -59,14 +59,16 @@ class ExercisesStoreImpl: ExercisesStore {
     private func handle_updateExercises() {
         exerciseExternalDataService.getExercises()
             .subscribe(onNext: { [unowned self] feedPackage in
-                self.exercisesSubject.onNext(feedPackage.exercises)
-                
-                if let transitionItem = feedPackage.transitionItem {
-                    self.transitionItemSubject.onNext(transitionItem)
-                }
-                
+                self.processFeedPackage(feedPackage)
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func processFeedPackage(_ feedPackage: FeedPackage) {
+        exercisesSubject.onNext(feedPackage.exercises)
+        if let transitionItem = feedPackage.transitionItem {
+            transitionItemSubject.onNext(transitionItem)
+        }
     }
     
 }
