@@ -49,7 +49,7 @@ class ExercisesStoreTests: XCTestCase {
     }
     
     func test_updateExercises_receivesConceptIntroPackage_shouldEmitConceptIntro() {
-        let conceptIntroItem = ConceptIntro(concept: Concept.constantRule, exercises: [Exercise.exercise1])
+        let conceptIntroItem = ConceptIntro(concept: Concept.constantRule)
         let stubFeedPackage = FeedPackage(feedPackageType: .conceptIntro, exercises: [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3], transitionItem: conceptIntroItem)
         let exerciseStore = composeSUT(stubFeedPackage: stubFeedPackage)
         
@@ -63,7 +63,7 @@ class ExercisesStoreTests: XCTestCase {
     }
     
     func test_updateExercises_receivesConceptIntroPackage_shouldEmitExercises() {
-        let conceptIntroItem = ConceptIntro(concept: Concept.constantRule, exercises: [Exercise.exercise1])
+        let conceptIntroItem = ConceptIntro(concept: Concept.constantRule)
         let stubFeedPackage = FeedPackage(feedPackageType: .conceptIntro, exercises: [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3], transitionItem: conceptIntroItem)
         let exerciseStore = composeSUT(stubFeedPackage: stubFeedPackage)
         

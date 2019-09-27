@@ -10,11 +10,9 @@ import Foundation
 
 struct ConceptIntro: FeedItem {
     let concept: Concept
-    let exercises: [Exercise]
     
-    init(concept: Concept, exercises: [Exercise]) {
+    init(concept: Concept) {
         self.concept = concept
-        self.exercises = exercises
     }
     
 }

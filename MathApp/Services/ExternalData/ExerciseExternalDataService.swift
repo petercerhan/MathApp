@@ -31,6 +31,13 @@ class ExerciseExternalDataServiceImpl: ExerciseExternalDataService {
     //MARK: - ExerciseExternalDataService Interface
     
     func getExercises() -> Observable<FeedPackage> {
+        let conceptIntro = ConceptIntro(concept: Concept.constantRule)
+//        let feedPackage = FeedPackage(feedPackageType: .conceptIntro, exercises: [Exercise.], transitionItem: <#T##FeedItem?#>)
+        
+        return getExercises_prior()
+    }
+    
+    func getExercises_prior() -> Observable<FeedPackage> {
         let concept1 = Concept.constantRule
         let concept2 = Concept.linearRule
         

@@ -202,7 +202,7 @@ class ExerciseCoordinatorTests: XCTestCase {
     }
     
     func test_start_conceptIntroFeedPackage_shouldShowConceptIntro() {
-        let stubTransitionItem = ConceptIntro(concept: Concept.constantRule, exercises: [Exercise.exercise1])
+        let stubTransitionItem = ConceptIntro(concept: Concept.constantRule)
         let mockContainer = FakeContainerViewController()
         let coordinator = composeSUT(fakeContainerViewController: mockContainer, stubTransitionItem: stubTransitionItem)
         
