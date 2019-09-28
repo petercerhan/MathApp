@@ -75,7 +75,7 @@ class ExercisesStoreImpl: ExercisesStore {
     }
     
     private func handle_resetTransitionItem() {
-        
+        transitionItemSubject.onNext(nil)
     }
     
 }

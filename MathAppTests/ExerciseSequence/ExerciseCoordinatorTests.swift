@@ -211,7 +211,7 @@ class ExerciseCoordinatorTests: XCTestCase {
         mockContainer.verifyDidShow(viewControllerType: ConceptIntroViewController.self)
     }
     
-    func test_conceptIntroDisplayed_shouldResetTransitionItem() {
+    func test_start_conceptIntroDisplayed_shouldResetTransitionItem() {
         let mockExercisesStore = FakeExercisesStore()
         mockExercisesStore.setStubTransitionItem(ConceptIntro(concept: Concept.constantRule))
         let coordinator = composeSUT(fakeExercisesStore: mockExercisesStore, stubTransitionItem: ConceptIntro(concept: Concept.constantRule))
@@ -221,16 +221,16 @@ class ExerciseCoordinatorTests: XCTestCase {
         XCTAssertEqual(mockExercisesStore.resetTransitionItem_callCount, 1)
     }
     
-//    func test_conceptIntroRequestsNext_exercisesLoaded_shouldShowExercise() {
-//        let stubTransitionItem = ConceptIntro(concept: Concept.constantRule)
-//        let mockContainer = FakeContainerViewController()
-//        let coordinator = composeSUT(fakeContainerViewController: mockContainer, stubTransitionItem: stubTransitionItem)
-//
-//        coordinator.start()
-//        coordinator.next(TestConceptIntroViewModel())
-//
-//        mockContainer.verifyDidShow(viewControllerType: ExerciseViewController.self)
-//    }
+    func test_conceptIntroRequestsNext_exercisesLoaded_shouldShowExercise() {
+        let stubTransitionItem = ConceptIntro(concept: Concept.constantRule)
+        let mockContainer = FakeContainerViewController()
+        let coordinator = composeSUT(fakeContainerViewController: mockContainer, stubTransitionItem: stubTransitionItem)
+
+        coordinator.start()
+        coordinator.next(TestConceptIntroViewModel())
+
+        mockContainer.verifyDidShow(viewControllerType: ExerciseViewController.self)
+    }
     
     //MARK: - SUT Composition
     

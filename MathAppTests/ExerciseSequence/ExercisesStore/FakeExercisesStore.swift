@@ -48,12 +48,12 @@ class FakeExercisesStore: ExercisesStore {
     var resetTransitionItem_callCount = 0
     
     func dispatch(action: ExercisesStoreAction) {
-        print("\n\ndispatch: \(action)")
         switch action {
         case .updateExercises:
             nextStubExercise()
             updateExercises_callCount += 1
         case .resetTransitionItem:
+            transitionItemSubject.onNext(nil)
             resetTransitionItem_callCount += 1
         }
     }
