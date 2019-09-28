@@ -50,21 +50,6 @@ class ExercisesStoreTests: XCTestCase {
         XCTAssertEqual(exercises.count, 3)
     }
     
-    func test_resetTransitionItem_setsTransitionItemToNil() {
-        let conceptIntroItem = ConceptIntro(concept: Concept.constantRule)
-        let stubFeedPackage = FeedPackage(feedPackageType: .conceptIntro, exercises: [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3], transitionItem: conceptIntroItem)
-        let exercisesStore = composeSUT(stubFeedPackage: stubFeedPackage)
-        
-        exercisesStore.dispatch(action: .updateExercises)
-        exercisesStore.dispatch(action: .resetTransitionItem)
-        
-        guard let transitionItem = latestValue(of: exercisesStore.transitionItem, disposeBag: disposeBag) else {
-            XCTFail("Could not get transition item")
-            return
-        }
-        XCTAssertNil(transitionItem)
-    }
-    
     //MARK: - SUT Composition
     
     func composeSUT(fakeExerciseExternalDataService: FakeExerciseExternalDataService? = nil,

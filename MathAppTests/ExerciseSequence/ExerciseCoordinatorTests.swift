@@ -210,6 +210,7 @@ class ExerciseCoordinatorTests: XCTestCase {
         mockContainer.verifyDidShow(viewControllerType: ConceptIntroViewController.self)
     }
     
+    //TODO: "setTransitionItemSeen"
     func test_start_conceptIntroDisplayed_shouldResetTransitionItem() {
         let mockExercisesStore = FakeExercisesStore()
         let coordinator = composeSUT(fakeExercisesStore: mockExercisesStore, stubFeedPackage: FeedPackage.constantRuleIntro)
