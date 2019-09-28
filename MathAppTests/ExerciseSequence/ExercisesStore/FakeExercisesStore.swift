@@ -36,6 +36,10 @@ class FakeExercisesStore: ExercisesStore {
         nextPackage()
     }
     
+    func setStubFeedPackageLoadState(_ loadState: LoadState<FeedPackage>) {
+        feedPackageSubject.onNext(loadState)
+    }
+    
     var exercises: Observable<[Exercise]> {
         return exercisesSubject.asObservable()
     }

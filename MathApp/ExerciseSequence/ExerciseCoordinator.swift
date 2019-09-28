@@ -101,12 +101,20 @@ class ExerciseCoordinator: Coordinator {
     }
     
     private func updateExerciseQueue(animation: TransitionAnimation) {
-        guard let exercises = latestValue(of: exercisesStore.exercises, disposeBag: disposeBag),
+//        guard let exercises = latestValue(of: exercisesStore.exercises, disposeBag: disposeBag),
+//            exercises.count > 0
+//        else {
+//            loadNewExercises()
+//            return
+//        }
+        
+        guard let exercises = latestValue(of: exercisesStore.feedPackage, disposeBag: disposeBag)?.data?.exercises,
             exercises.count > 0
         else {
             loadNewExercises()
             return
         }
+        
         exerciseQueue.enqueue(elements: exercises)
         showNextFeedScene(animation: animation)
     }
