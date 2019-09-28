@@ -15,7 +15,7 @@ class LoadExercisesTests: XCTestCase {
     func test_onSetup_requestsNewExercises() {
         let fakeDelegate = FakeLoadExercisesViewModelDelegate()
         let mockExercisesStore = FakeExercisesStore()
-        let viewModel = LoadExercisesViewModel(delegate: fakeDelegate, exercisesStore: mockExercisesStore)
+        let viewModel = LoadExercisesViewModel(delegate: fakeDelegate, feedPackageStore: mockExercisesStore)
         let vc = LoadExercisesViewController(viewModel: viewModel)
         
         vc.loadViewIfNeeded()
@@ -27,7 +27,7 @@ class LoadExercisesTests: XCTestCase {
         let mockDelegate = FakeLoadExercisesViewModelDelegate()
         let stubExercisesStore = FakeExercisesStore()
         stubExercisesStore.setStubFeedPackage(FeedPackage.exercisesPackage)
-        let viewModel = LoadExercisesViewModel(delegate: mockDelegate, exercisesStore: stubExercisesStore)
+        let viewModel = LoadExercisesViewModel(delegate: mockDelegate, feedPackageStore: stubExercisesStore)
         let vc = LoadExercisesViewController(viewModel: viewModel)
         
         vc.loadViewIfNeeded()

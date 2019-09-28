@@ -18,7 +18,7 @@ class ExerciseCoordinator: Coordinator {
     private let randomizationService: RandomizationService
     private let exerciseExternalDataService: ExerciseExternalDataService
     private let resultsStore: ResultsStore
-    private let exercisesStore: ExercisesStore
+    private let feedPackageStore: FeedPackageStore
     
     //MARK: - State
     
@@ -36,14 +36,14 @@ class ExerciseCoordinator: Coordinator {
          randomizationService: RandomizationService,
          exerciseExternalDataService: ExerciseExternalDataService,
          resultsStore: ResultsStore,
-         exercisesStore: ExercisesStore)
+         feedPackageStore: FeedPackageStore)
     {
         self.compositionRoot = compositionRoot
         self.containerVC = containerVC
         self.randomizationService = randomizationService
         self.exerciseExternalDataService = exerciseExternalDataService
         self.resultsStore = resultsStore
-        self.exercisesStore = exercisesStore
+        self.feedPackageStore = feedPackageStore
         
         if let feedContainer = containerVC as? FeedContainerViewController {
             feedContainer.viewModel.setDelegate(self)
@@ -62,7 +62,7 @@ class ExerciseCoordinator: Coordinator {
     }
     
     private func showNextFeedScene(animation: TransitionAnimation) {
-        if let feedPackage = latestValue(of: exercisesStore.feedPackage, disposeBag: disposeBag)?.data,
+        if let feedPackage = latestValue(of: feedPackageStore.feedPackage, disposeBag: disposeBag)?.data,
             let conceptIntro = feedPackage.transitionItem as? ConceptIntro
         {
             showConceptIntroScene(conceptIntro: conceptIntro)
@@ -79,7 +79,7 @@ class ExerciseCoordinator: Coordinator {
     private func showConceptIntroScene(conceptIntro: ConceptIntro) {
         let vc = compositionRoot.composeConceptIntroScene(delegate: self, conceptIntro: conceptIntro)
         containerVC.show(viewController: vc, animation: .fadeIn)
-        exercisesStore.dispatch(action: .setTransitionItemSeen)
+        feedPackageStore.dispatch(action: .setTransitionItemSeen)
     }
     
     private func showNextExerciseScene(animation: TransitionAnimation) {
@@ -96,12 +96,12 @@ class ExerciseCoordinator: Coordinator {
     
     private func loadExercisesIfNeeded() {
         if exerciseQueue.count == 0 {
-            exercisesStore.dispatch(action: .updateExercises)
+            feedPackageStore.dispatch(action: .updateFeedPackage)
         }
     }
     
     private func updateExerciseQueue(animation: TransitionAnimation) {
-        guard let exercises = latestValue(of: exercisesStore.feedPackage, disposeBag: disposeBag)?.data?.exercises,
+        guard let exercises = latestValue(of: feedPackageStore.feedPackage, disposeBag: disposeBag)?.data?.exercises,
             exercises.count > 0
         else {
             loadNewExercises()
@@ -122,7 +122,7 @@ class ExerciseCoordinator: Coordinator {
     }
     
     private func loadNewExercises() {
-        let vc = compositionRoot.composeLoadExercisesScene(delegate: self, exercisesStore: exercisesStore)
+        let vc = compositionRoot.composeLoadExercisesScene(delegate: self, feedPackageStore: feedPackageStore)
         containerVC.show(viewController: vc, animation: .none)
     }
 

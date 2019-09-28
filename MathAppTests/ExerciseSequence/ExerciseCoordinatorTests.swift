@@ -201,6 +201,9 @@ class ExerciseCoordinatorTests: XCTestCase {
         XCTAssertEqual(mockContainer.dismissModal_callCount, 1)
     }
     
+    
+    
+    
     func test_start_conceptIntroFeedPackage_shouldShowConceptIntro() {
         let mockContainer = FakeContainerViewController()
         let coordinator = composeSUT(fakeContainerViewController: mockContainer, stubFeedPackage: FeedPackage.constantRuleIntro)
@@ -257,7 +260,7 @@ class ExerciseCoordinatorTests: XCTestCase {
                                    randomizationService: RandomizationServiceImpl(),
                                    exerciseExternalDataService: exerciseExternalDataService,
                                    resultsStore: FakeResultsStore(),
-                                   exercisesStore: exercisesStore)
+                                   feedPackageStore: exercisesStore)
     }
     
 }
@@ -285,7 +288,7 @@ class TestFeedContainerViewModel: FeedContainerViewModel {
 
 class TestLoadExercisesViewModel: LoadExercisesViewModel {
     init() {
-        super.init(delegate: FakeLoadExercisesViewModelDelegate(), exercisesStore: FakeExercisesStore())
+        super.init(delegate: FakeLoadExercisesViewModelDelegate(), feedPackageStore: FakeExercisesStore())
     }
 }
 
@@ -296,8 +299,8 @@ class TestConceptIntroViewModel: ConceptIntroViewModel {
 }
 
 class CompositionRoot_deadLoadScene: CompositionRoot {
-    override func composeLoadExercisesScene(delegate: LoadExercisesViewModelDelegate, exercisesStore: ExercisesStore) -> UIViewController {
-        let vm = LoadExercisesViewModel(delegate: FakeLoadExercisesViewModelDelegate(), exercisesStore: exercisesStore)
+    override func composeLoadExercisesScene(delegate: LoadExercisesViewModelDelegate, feedPackageStore: FeedPackageStore) -> UIViewController {
+        let vm = LoadExercisesViewModel(delegate: FakeLoadExercisesViewModelDelegate(), feedPackageStore: feedPackageStore)
         return LoadExercisesViewController(viewModel: vm)
     }
 }

@@ -49,6 +49,6 @@ class RootCoordinatorFakeCompositionRoot: CompositionRoot {
                                    randomizationService: RandomizationServiceImpl(),
                                    exerciseExternalDataService: FakeExerciseExternalDataService(),
                                    resultsStore: FakeResultsStore(),
-                                   exercisesStore: FakeExercisesStore())
+                                   feedPackageStore: FakeExercisesStore())
     }
 }

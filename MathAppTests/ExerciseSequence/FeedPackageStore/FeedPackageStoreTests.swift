@@ -11,25 +11,25 @@ import RxSwift
 import XCTest
 @testable import MathApp
 
-class ExercisesStoreTests: XCTestCase {
+class FeedPackageStoreTests: XCTestCase {
     
     private let disposeBag = DisposeBag()
     
-    func test_updateExercises_reqeustsNewExercises() {
+    func test_updateExercises_requestsNewExercises() {
         let mockExerciseExternalDataService = FakeExerciseExternalDataService()
-        let exerciseStore = composeSUT(fakeExerciseExternalDataService: mockExerciseExternalDataService)
+        let feedPackageStore = composeSUT(fakeExerciseExternalDataService: mockExerciseExternalDataService)
         
-        exerciseStore.dispatch(action: .updateExercises)
+        feedPackageStore.dispatch(action: .updateFeedPackage)
         
         XCTAssertEqual(mockExerciseExternalDataService.getExercises_callCount, 1)
     }
     
     func test_updateExercises_externalDataReturnsThreeExercises_shouldEmitThreeExercises() {
-        let exerciseStore = composeSUT(stubExercises: [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3])
+        let feedPackageStore = composeSUT(stubExercises: [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3])
         
-        exerciseStore.dispatch(action: .updateExercises)
+        feedPackageStore.dispatch(action: .updateFeedPackage)
         
-        guard let feedPackage = latestValue(of: exerciseStore.feedPackage, disposeBag: disposeBag)?.data else {
+        guard let feedPackage = latestValue(of: feedPackageStore.feedPackage, disposeBag: disposeBag)?.data else {
             XCTFail("Could not get exercises")
             return
         }
@@ -39,11 +39,11 @@ class ExercisesStoreTests: XCTestCase {
     func test_updateExercises_receivesConceptIntroPackage_shouldEmitExercises() {
         let conceptIntroItem = ConceptIntro(concept: Concept.constantRule)
         let stubFeedPackage = FeedPackage(feedPackageType: .conceptIntro, exercises: [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3], transitionItem: conceptIntroItem)
-        let exerciseStore = composeSUT(stubFeedPackage: stubFeedPackage)
+        let feedPackageStore = composeSUT(stubFeedPackage: stubFeedPackage)
         
-        exerciseStore.dispatch(action: .updateExercises)
+        feedPackageStore.dispatch(action: .updateFeedPackage)
         
-        guard let exercises = latestValue(of: exerciseStore.feedPackage, disposeBag: disposeBag)?.data?.exercises else {
+        guard let exercises = latestValue(of: feedPackageStore.feedPackage, disposeBag: disposeBag)?.data?.exercises else {
             XCTFail("Could not get exercises")
             return
         }
@@ -54,7 +54,7 @@ class ExercisesStoreTests: XCTestCase {
     
     func composeSUT(fakeExerciseExternalDataService: FakeExerciseExternalDataService? = nil,
                     stubExercises: [Exercise]? = nil,
-                    stubFeedPackage: FeedPackage? = nil) -> ExercisesStore
+                    stubFeedPackage: FeedPackage? = nil) -> FeedPackageStore
     {
         let exerciseExternalDataService = fakeExerciseExternalDataService ?? FakeExerciseExternalDataService()
         if let stubExercises = stubExercises {
@@ -63,7 +63,7 @@ class ExercisesStoreTests: XCTestCase {
         if let stubFeedPackage = stubFeedPackage {
             exerciseExternalDataService.getExercises_stubData = stubFeedPackage
         }
-        return ExercisesStoreImpl(exerciseExternalDataService: exerciseExternalDataService)
+        return FeedPackageStoreImpl(exerciseExternalDataService: exerciseExternalDataService)
     }
     
 }

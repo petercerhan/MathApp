@@ -9,23 +9,23 @@
 import Foundation
 import RxSwift
 
-protocol ExercisesStore {
+protocol FeedPackageStore {
     var feedPackage: Observable<LoadState<FeedPackage>> { get }
     func dispatch(action: ExercisesStoreAction)
 }
 
 enum ExercisesStoreAction {
-    case updateExercises
+    case updateFeedPackage
     case setTransitionItemSeen
 }
 
-extension ExercisesStore where Self: ExercisesStoreImpl {
+extension FeedPackageStore where Self: FeedPackageStoreImpl {
     var feedPackage: Observable<LoadState<FeedPackage>> {
         return feedPackageSubject.asObservable()
     }
 }
 
-class ExercisesStoreImpl: ExercisesStore {
+class FeedPackageStoreImpl: FeedPackageStore {
     
     //MARK: - Dependencies
     
@@ -47,14 +47,14 @@ class ExercisesStoreImpl: ExercisesStore {
     
     func dispatch(action: ExercisesStoreAction) {
         switch action {
-        case .updateExercises:
-            handle_updateExercises()
+        case .updateFeedPackage:
+            handle_updateFeedPackage()
         case .setTransitionItemSeen:
             handle_setTransitionItemSeen()
         }
     }
     
-    private func handle_updateExercises() {
+    private func handle_updateFeedPackage() {
         exerciseExternalDataService.getExercises()
             .subscribe(onNext: { [unowned self] feedPackage in
                 self.feedPackageSubject.onNext(.loaded(feedPackage))
