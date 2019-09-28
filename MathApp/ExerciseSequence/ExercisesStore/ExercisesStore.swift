@@ -10,6 +10,7 @@ import Foundation
 import RxSwift
 
 protocol ExercisesStore {
+    var feedPackage: Observable<LoadState<FeedPackage>> { get }
     var exercises: Observable<[Exercise]> { get }
     var transitionItem: Observable<FeedItem?> { get }
     func dispatch(action: ExercisesStoreAction)
@@ -21,6 +22,9 @@ enum ExercisesStoreAction {
 }
 
 extension ExercisesStore where Self: ExercisesStoreImpl {
+    var feedPackage: Observable<LoadState<FeedPackage>> {
+        return feedPackageSubject.asObservable()
+    }
     var exercises: Observable<[Exercise]> {
         return exercisesSubject.asObservable()
     }
@@ -47,6 +51,7 @@ class ExercisesStoreImpl: ExercisesStore {
     
     //MARK: - ExercisesStore Interface
     
+    let feedPackageSubject = BehaviorSubject<LoadState<FeedPackage>>(value: .noData)
     let exercisesSubject = BehaviorSubject<[Exercise]>(value: [])
     let transitionItemSubject = BehaviorSubject<FeedItem?>(value: nil)
     
@@ -63,6 +68,7 @@ class ExercisesStoreImpl: ExercisesStore {
         exerciseExternalDataService.getExercises()
             .subscribe(onNext: { [unowned self] feedPackage in
                 self.processFeedPackage(feedPackage)
+                self.feedPackageSubject.onNext(.loaded(feedPackage))
             })
             .disposed(by: disposeBag)
     }

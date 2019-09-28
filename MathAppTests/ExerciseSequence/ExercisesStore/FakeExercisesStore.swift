@@ -12,6 +12,30 @@ import RxSwift
 
 class FakeExercisesStore: ExercisesStore {
     
+    var feedPackage: Observable<LoadState<FeedPackage>> {
+        return feedPackageSubject.asObservable()
+    }
+    private let feedPackageSubject = BehaviorSubject<LoadState<FeedPackage>>(value: .noData)
+    
+    var stubFeedPackages = [FeedPackage]()
+    
+    var feedPackageStubIndex = 0
+    
+    private func nextPackage() {
+        guard feedPackageStubIndex < stubFeedPackages.count else {
+            return
+        }
+        let feedPackage = stubFeedPackages[feedPackageStubIndex]
+        feedPackageSubject.onNext(.loaded(feedPackage))
+        feedPackageStubIndex = (feedPackageStubIndex + 1) % stubFeedPackages.count
+    }
+    
+    func setStubFeedPackage(_ feedPackage: FeedPackage) {
+        stubFeedPackages = [feedPackage]
+        feedPackageStubIndex = 0
+        nextPackage()
+    }
+    
     var exercises: Observable<[Exercise]> {
         return exercisesSubject.asObservable()
     }
@@ -26,6 +50,12 @@ class FakeExercisesStore: ExercisesStore {
         nextStubExercise()
     }
     
+    private func nextStubExercise() {
+        let exercises = stubExercises[stubIndex]
+        exercisesSubject.onNext(exercises)
+        stubIndex = (stubIndex + 1) % stubExercises.count
+    }
+    
     
     var transitionItem: Observable<FeedItem?> {
         return transitionItemSubject.asObservable()
@@ -38,11 +68,6 @@ class FakeExercisesStore: ExercisesStore {
     }
     
     
-    private func nextStubExercise() {
-        let exercises = stubExercises[stubIndex]
-        exercisesSubject.onNext(exercises)
-        stubIndex = (stubIndex + 1) % stubExercises.count
-    }
     
     var updateExercises_callCount = 0
     var resetTransitionItem_callCount = 0

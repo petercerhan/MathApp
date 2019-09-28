@@ -62,7 +62,9 @@ class ExerciseCoordinator: Coordinator {
     }
     
     private func showNextFeedScene(animation: TransitionAnimation) {
-        if let conceptIntro = latestValue(of: exercisesStore.transitionItem, disposeBag: disposeBag) as? ConceptIntro {
+        if let feedPackage = latestValue(of: exercisesStore.feedPackage, disposeBag: disposeBag)?.data,
+            let conceptIntro = feedPackage.transitionItem as? ConceptIntro
+        {
             showConceptIntroScene(conceptIntro: conceptIntro)
             return
         }

@@ -202,9 +202,8 @@ class ExerciseCoordinatorTests: XCTestCase {
     }
     
     func test_start_conceptIntroFeedPackage_shouldShowConceptIntro() {
-        let stubTransitionItem = ConceptIntro(concept: Concept.constantRule)
         let mockContainer = FakeContainerViewController()
-        let coordinator = composeSUT(fakeContainerViewController: mockContainer, stubTransitionItem: stubTransitionItem)
+        let coordinator = composeSUT(fakeContainerViewController: mockContainer, stubFeedPackage: FeedPackage.constantRuleIntro)
         
         coordinator.start()
         
@@ -213,8 +212,7 @@ class ExerciseCoordinatorTests: XCTestCase {
     
     func test_start_conceptIntroDisplayed_shouldResetTransitionItem() {
         let mockExercisesStore = FakeExercisesStore()
-        mockExercisesStore.setStubTransitionItem(ConceptIntro(concept: Concept.constantRule))
-        let coordinator = composeSUT(fakeExercisesStore: mockExercisesStore, stubTransitionItem: ConceptIntro(concept: Concept.constantRule))
+        let coordinator = composeSUT(fakeExercisesStore: mockExercisesStore, stubFeedPackage: FeedPackage.constantRuleIntro)
         
         coordinator.start()
         
@@ -238,7 +236,8 @@ class ExerciseCoordinatorTests: XCTestCase {
                     fakeExerciseExternalDataService: FakeExerciseExternalDataService? = nil,
                     fakeExercisesStore: FakeExercisesStore? = nil,
                     stubData: [[Exercise]]? = nil,
-                    stubTransitionItem: FeedItem? = nil) -> ExerciseCoordinator {
+                    stubTransitionItem: FeedItem? = nil,
+                    stubFeedPackage: FeedPackage? = nil) -> ExerciseCoordinator {
         
         let containerVC = fakeContainerViewController ?? FakeContainerViewController()
         let exerciseExternalDataService = fakeExerciseExternalDataService ?? FakeExerciseExternalDataService()
@@ -247,6 +246,11 @@ class ExerciseCoordinatorTests: XCTestCase {
         let data = stubData ?? [[Exercise.exercise1, Exercise.exercise2, Exercise.exercise3]]
         exercisesStore.setStubExercises(data)
         exercisesStore.setStubTransitionItem(stubTransitionItem)
+        if let stubFeedPackage = stubFeedPackage {
+            exercisesStore.setStubFeedPackage(stubFeedPackage)
+        }
+        
+        
         
         return ExerciseCoordinator(compositionRoot: CompositionRoot(),
                                    containerVC: containerVC,
