@@ -36,35 +36,6 @@ class ExercisesStoreTests: XCTestCase {
         XCTAssertEqual(feedPackage.exercises.count, 3)
     }
     
-    //remove test
-    func test_updateExercises_receivesExercisesPackage_shouldSetTransitionItemNil() {
-        let exerciseStore = composeSUT(stubExercises: [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3])
-        
-        exerciseStore.dispatch(action: .updateExercises)
-        
-        guard let transitionItem = latestValue(of: exerciseStore.transitionItem, disposeBag: disposeBag) else {
-            XCTFail("Could not get transition item")
-            return
-        }
-        XCTAssertNil(transitionItem)
-    }
-    //
-    
-//    func test_updateExercises_receivesConceptIntroPackage_shouldEmitConceptIntro() {
-//        let conceptIntroItem = ConceptIntro(concept: Concept.constantRule)
-//        let stubFeedPackage = FeedPackage(feedPackageType: .conceptIntro, exercises: [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3], transitionItem: conceptIntroItem)
-//        let exerciseStore = composeSUT(stubFeedPackage: stubFeedPackage)
-//
-//        exerciseStore.dispatch(action: .updateExercises)
-//
-//        guard let feedPackage = latestValue(of: exerciseStore.feedPackage, disposeBag: disposeBag)?.data else {
-//            XCTFail("Could not get exercises")
-//            return
-//        }
-//        XCTAssertEqual(feedPackage.transitionItem.concept.id, 1)
-//    }
-    
-    
     func test_updateExercises_receivesConceptIntroPackage_shouldEmitExercises() {
         let conceptIntroItem = ConceptIntro(concept: Concept.constantRule)
         let stubFeedPackage = FeedPackage(feedPackageType: .conceptIntro, exercises: [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3], transitionItem: conceptIntroItem)
@@ -72,7 +43,7 @@ class ExercisesStoreTests: XCTestCase {
         
         exerciseStore.dispatch(action: .updateExercises)
         
-        guard let exercises = latestValue(of: exerciseStore.exercises, disposeBag: disposeBag) else {
+        guard let exercises = latestValue(of: exerciseStore.feedPackage, disposeBag: disposeBag)?.data?.exercises else {
             XCTFail("Could not get exercises")
             return
         }

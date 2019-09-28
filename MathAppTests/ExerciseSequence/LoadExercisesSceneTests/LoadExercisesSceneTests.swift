@@ -26,6 +26,7 @@ class LoadExercisesTests: XCTestCase {
     func test_onExercisesLoaded_requestsNextScene() {
         let mockDelegate = FakeLoadExercisesViewModelDelegate()
         let stubExercisesStore = FakeExercisesStore()
+        stubExercisesStore.setStubFeedPackage(FeedPackage.exercisesPackage)
         let viewModel = LoadExercisesViewModel(delegate: mockDelegate, exercisesStore: stubExercisesStore)
         let vc = LoadExercisesViewController(viewModel: viewModel)
         
