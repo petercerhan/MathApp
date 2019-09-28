@@ -55,15 +55,21 @@ class FeedPackageStoreImpl: FeedPackageStore {
     }
     
     private func handle_updateFeedPackage() {
+        getNewFeedPackage()
+    }
+    
+    private func handle_setTransitionItemSeen() {
+        getNewFeedPackage()
+    }
+    
+    private func getNewFeedPackage() {
+        feedPackageSubject.onNext(.loading)
+        
         exerciseExternalDataService.getExercises()
             .subscribe(onNext: { [unowned self] feedPackage in
                 self.feedPackageSubject.onNext(.loaded(feedPackage))
             })
             .disposed(by: disposeBag)
-    }
-    
-    private func handle_setTransitionItemSeen() {
-        
     }
     
 }

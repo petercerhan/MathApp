@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import RxTest
 import XCTest
 @testable import MathApp
 
@@ -15,7 +16,7 @@ class FeedPackageStoreTests: XCTestCase {
     
     private let disposeBag = DisposeBag()
     
-    func test_updateExercises_requestsNewExercises() {
+    func test_updateFeedPackage_requestsNewFeedPackage() {
         let mockExerciseExternalDataService = FakeExerciseExternalDataService()
         let feedPackageStore = composeSUT(fakeExerciseExternalDataService: mockExerciseExternalDataService)
         
@@ -24,7 +25,17 @@ class FeedPackageStoreTests: XCTestCase {
         XCTAssertEqual(mockExerciseExternalDataService.getExercises_callCount, 1)
     }
     
-    func test_updateExercises_externalDataReturnsThreeExercises_shouldEmitThreeExercises() {
+    func test_updateFeedPackage_setsFeedPackageStateLoading() {
+        let feedPackageStore = composeSUT()
+        let observer: TestableObserver<LoadState<FeedPackage>> = getNewObserver()
+        _ = feedPackageStore.feedPackage.subscribe(observer)
+        
+        feedPackageStore.dispatch(action: .updateFeedPackage)
+        
+        assertSecondEventIsLoadingState(observer: observer)
+    }
+    
+    func test_updateFeedPackage_externalDataReturnsFeedPackage_shouldEmitFeedPackage() {
         let feedPackageStore = composeSUT(stubExercises: [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3])
         
         feedPackageStore.dispatch(action: .updateFeedPackage)
@@ -36,18 +47,23 @@ class FeedPackageStoreTests: XCTestCase {
         XCTAssertEqual(feedPackage.exercises.count, 3)
     }
     
-    func test_updateExercises_receivesConceptIntroPackage_shouldEmitExercises() {
-        let conceptIntroItem = ConceptIntro(concept: Concept.constantRule)
-        let stubFeedPackage = FeedPackage(feedPackageType: .conceptIntro, exercises: [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3], transitionItem: conceptIntroItem)
-        let feedPackageStore = composeSUT(stubFeedPackage: stubFeedPackage)
+    func test_setTransitionItemSeen_setsFeedPackageStateLoading() {
+        let feedPackageStore = composeSUT()
+        let observer: TestableObserver<LoadState<FeedPackage>> = getNewObserver()
+        _ = feedPackageStore.feedPackage.subscribe(observer)
         
-        feedPackageStore.dispatch(action: .updateFeedPackage)
+        feedPackageStore.dispatch(action: .setTransitionItemSeen)
         
-        guard let exercises = latestValue(of: feedPackageStore.feedPackage, disposeBag: disposeBag)?.data?.exercises else {
-            XCTFail("Could not get exercises")
-            return
-        }
-        XCTAssertEqual(exercises.count, 3)
+        assertSecondEventIsLoadingState(observer: observer)
+    }
+    
+    func test_setTransitionItemSeen_requestsNewFeedPackage() {
+        let mockExerciseExternalDataService = FakeExerciseExternalDataService()
+        let feedPackageStore = composeSUT(fakeExerciseExternalDataService: mockExerciseExternalDataService)
+        
+        feedPackageStore.dispatch(action: .setTransitionItemSeen)
+        
+        XCTAssertEqual(mockExerciseExternalDataService.getExercises_callCount, 1)
     }
     
     //MARK: - SUT Composition
@@ -64,6 +80,14 @@ class FeedPackageStoreTests: XCTestCase {
             exerciseExternalDataService.getExercises_stubData = stubFeedPackage
         }
         return FeedPackageStoreImpl(exerciseExternalDataService: exerciseExternalDataService)
+    }
+    
+    func assertSecondEventIsLoadingState(observer: TestableObserver<LoadState<FeedPackage>>, file: StaticString = #file, line: UInt = #line) {
+        guard observer.events.count > 1, let result = observer.events[1].value.element else {
+            XCTFail("could not get second event", file: file, line: line)
+            return
+        }
+        XCTAssert(result.isLoading, "Second event is not .loading", file: file, line: line)
     }
     
 }
