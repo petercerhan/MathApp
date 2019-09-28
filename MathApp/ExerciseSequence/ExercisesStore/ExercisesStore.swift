@@ -17,6 +17,7 @@ protocol ExercisesStore {
 
 enum ExercisesStoreAction {
     case updateExercises
+    case resetTransitionItem
 }
 
 extension ExercisesStore where Self: ExercisesStoreImpl {
@@ -53,6 +54,8 @@ class ExercisesStoreImpl: ExercisesStore {
         switch action {
         case .updateExercises:
             handle_updateExercises()
+        case .resetTransitionItem:
+            handle_resetTransitionItem()
         }
     }
     
@@ -69,6 +72,10 @@ class ExercisesStoreImpl: ExercisesStore {
         if let transitionItem = feedPackage.transitionItem {
             transitionItemSubject.onNext(transitionItem)
         }
+    }
+    
+    private func handle_resetTransitionItem() {
+        
     }
     
 }

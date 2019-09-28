@@ -211,6 +211,27 @@ class ExerciseCoordinatorTests: XCTestCase {
         mockContainer.verifyDidShow(viewControllerType: ConceptIntroViewController.self)
     }
     
+    func test_conceptIntroDisplayed_shouldResetTransitionItem() {
+        let mockExercisesStore = FakeExercisesStore()
+        mockExercisesStore.setStubTransitionItem(ConceptIntro(concept: Concept.constantRule))
+        let coordinator = composeSUT(fakeExercisesStore: mockExercisesStore, stubTransitionItem: ConceptIntro(concept: Concept.constantRule))
+        
+        coordinator.start()
+        
+        XCTAssertEqual(mockExercisesStore.resetTransitionItem_callCount, 1)
+    }
+    
+//    func test_conceptIntroRequestsNext_exercisesLoaded_shouldShowExercise() {
+//        let stubTransitionItem = ConceptIntro(concept: Concept.constantRule)
+//        let mockContainer = FakeContainerViewController()
+//        let coordinator = composeSUT(fakeContainerViewController: mockContainer, stubTransitionItem: stubTransitionItem)
+//
+//        coordinator.start()
+//        coordinator.next(TestConceptIntroViewModel())
+//
+//        mockContainer.verifyDidShow(viewControllerType: ExerciseViewController.self)
+//    }
+    
     //MARK: - SUT Composition
     
     func composeSUT(fakeContainerViewController: ContainerViewController? = nil,
@@ -261,5 +282,11 @@ class TestFeedContainerViewModel: FeedContainerViewModel {
 class TestLoadExercisesViewModel: LoadExercisesViewModel {
     init() {
         super.init(delegate: FakeLoadExercisesViewModelDelegate(), exercisesStore: FakeExercisesStore())
+    }
+}
+
+class TestConceptIntroViewModel: ConceptIntroViewModel {
+    init() {
+        super.init(delegate: FakeConceptIntroViewModelDelegate(), conceptIntro: ConceptIntro(concept: Concept.constantRule))
     }
 }

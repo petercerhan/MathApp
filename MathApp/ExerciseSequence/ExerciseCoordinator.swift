@@ -77,6 +77,7 @@ class ExerciseCoordinator: Coordinator {
     private func showConceptIntroScene(conceptIntro: ConceptIntro) {
         let vc = compositionRoot.composeConceptIntroScene(delegate: self, conceptIntro: conceptIntro)
         containerVC.show(viewController: vc, animation: .fadeIn)
+        exercisesStore.dispatch(action: .resetTransitionItem)
     }
     
     private func showNextExerciseScene(animation: TransitionAnimation) {
@@ -188,6 +189,6 @@ extension ExerciseCoordinator: LoadExercisesViewModelDelegate {
 
 extension ExerciseCoordinator: ConceptIntroViewModelDelegate {
     func next(_ conceptIntroViewModel: ConceptIntroViewModel) {
-        
+        showNextFeedScene(animation: .fadeIn)
     }
 }
