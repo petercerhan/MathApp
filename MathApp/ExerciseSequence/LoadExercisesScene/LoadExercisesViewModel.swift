@@ -35,15 +35,6 @@ class LoadExercisesViewModel {
     }
     
     private func bindExercisesUpdate() {
-//        exercisesStore.exercises
-//            .skip(1)
-//            .take(1)
-//            .observeOn(MainScheduler.instance)
-//            .subscribe(onNext: { [unowned self] _ in
-//                self.delegate?.next(self)
-//            })
-//            .disposed(by: disposeBag)
-        
         exercisesStore.feedPackage
             .compactMap { $0.data }
             .take(1)

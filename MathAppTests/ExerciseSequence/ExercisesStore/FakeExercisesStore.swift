@@ -36,54 +36,22 @@ class FakeExercisesStore: ExercisesStore {
         nextPackage()
     }
     
+    
+    
     func setStubFeedPackageLoadState(_ loadState: LoadState<FeedPackage>) {
         feedPackageSubject.onNext(loadState)
     }
     
-    var exercises: Observable<[Exercise]> {
-        return exercisesSubject.asObservable()
-    }
-    private let exercisesSubject = BehaviorSubject<[Exercise]>(value: [])
-    
-    var stubExercises = [[Exercise]()]
-    var stubIndex = 0
-    
-    func setStubExercises(_ exercises: [[Exercise]]) {
-        stubIndex = 0
-        stubExercises = exercises
-        nextStubExercise()
-    }
-    
-    private func nextStubExercise() {
-        let exercises = stubExercises[stubIndex]
-        exercisesSubject.onNext(exercises)
-        stubIndex = (stubIndex + 1) % stubExercises.count
-    }
-    
-    
-    var transitionItem: Observable<FeedItem?> {
-        return transitionItemSubject.asObservable()
-    }
-    
-    private let transitionItemSubject = BehaviorSubject<FeedItem?>(value: nil)
-    
-    func setStubTransitionItem(_ item: FeedItem?) {
-        transitionItemSubject.onNext(item)
-    }
-    
-    
-    
     var updateExercises_callCount = 0
-    var resetTransitionItem_callCount = 0
+    var setTransitionItemSeen_callCount = 0
     
     func dispatch(action: ExercisesStoreAction) {
         switch action {
         case .updateExercises:
-            nextStubExercise()
             updateExercises_callCount += 1
-        case .resetTransitionItem:
-            transitionItemSubject.onNext(nil)
-            resetTransitionItem_callCount += 1
+            nextPackage()
+        case .setTransitionItemSeen:
+            setTransitionItemSeen_callCount += 1
         }
     }
     

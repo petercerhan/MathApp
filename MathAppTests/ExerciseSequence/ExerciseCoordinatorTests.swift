@@ -84,10 +84,10 @@ class ExerciseCoordinatorTests: XCTestCase {
     
     func test_loadExercisesRequestsNext_shouldShowExerciseScene() {
         let mockContainerVC = FakeContainerViewController()
-        //Load exercises view controller is automatically created by the coordinator & next is called due to the data structure
-        let coordinator = composeSUT(fakeContainerViewController: mockContainerVC, stubData: [[Exercise](), [Exercise.exercise1]])
+        let coordinator = composeSUT(fakeContainerViewController: mockContainerVC, feedPackageLoadState: .loading, compositionRoot: CompositionRoot_deadLoadScene())
         
         coordinator.start()
+        coordinator.next(TestLoadExercisesViewModel())
         
         let assertion = {
             mockContainerVC.verifyDidShow(viewControllerType: ExerciseViewController.self)
@@ -210,14 +210,13 @@ class ExerciseCoordinatorTests: XCTestCase {
         mockContainer.verifyDidShow(viewControllerType: ConceptIntroViewController.self)
     }
     
-    //TODO: "setTransitionItemSeen"
-    func test_start_conceptIntroDisplayed_shouldResetTransitionItem() {
+    func test_start_conceptIntroDisplayed_shouldSetTransitionItemSeen() {
         let mockExercisesStore = FakeExercisesStore()
         let coordinator = composeSUT(fakeExercisesStore: mockExercisesStore, stubFeedPackage: FeedPackage.constantRuleIntro)
         
         coordinator.start()
         
-        XCTAssertEqual(mockExercisesStore.resetTransitionItem_callCount, 1)
+        XCTAssertEqual(mockExercisesStore.setTransitionItemSeen_callCount, 1)
     }
     
 //    func test_conceptIntroRequestsNext_exercisesLoaded_shouldShowExercise() {
@@ -236,18 +235,13 @@ class ExerciseCoordinatorTests: XCTestCase {
     func composeSUT(fakeContainerViewController: ContainerViewController? = nil,
                     fakeExerciseExternalDataService: FakeExerciseExternalDataService? = nil,
                     fakeExercisesStore: FakeExercisesStore? = nil,
-                    stubData: [[Exercise]]? = nil,
-                    stubTransitionItem: FeedItem? = nil,
                     stubFeedPackage: FeedPackage? = nil,
-                    feedPackageLoadState: LoadState<FeedPackage>? = nil) -> ExerciseCoordinator {
+                    feedPackageLoadState: LoadState<FeedPackage>? = nil,
+                    compositionRoot: CompositionRoot? = nil) -> ExerciseCoordinator {
         
         let containerVC = fakeContainerViewController ?? FakeContainerViewController()
         let exerciseExternalDataService = fakeExerciseExternalDataService ?? FakeExerciseExternalDataService()
         let exercisesStore = fakeExercisesStore ?? FakeExercisesStore()
-        
-        let data = stubData ?? [[Exercise.exercise1, Exercise.exercise2, Exercise.exercise3]]
-        exercisesStore.setStubExercises(data)
-        exercisesStore.setStubTransitionItem(stubTransitionItem)
         
         let feedPackage = stubFeedPackage ?? FeedPackage.exercisesPackage
         exercisesStore.setStubFeedPackage(feedPackage)
@@ -256,8 +250,9 @@ class ExerciseCoordinatorTests: XCTestCase {
             exercisesStore.setStubFeedPackageLoadState(feedPackageLoadState)
         }
         
+        let inputCompositionRoot = compositionRoot ?? CompositionRoot()
         
-        return ExerciseCoordinator(compositionRoot: CompositionRoot(),
+        return ExerciseCoordinator(compositionRoot: inputCompositionRoot,
                                    containerVC: containerVC,
                                    randomizationService: RandomizationServiceImpl(),
                                    exerciseExternalDataService: exerciseExternalDataService,
@@ -297,5 +292,12 @@ class TestLoadExercisesViewModel: LoadExercisesViewModel {
 class TestConceptIntroViewModel: ConceptIntroViewModel {
     init() {
         super.init(delegate: FakeConceptIntroViewModelDelegate(), conceptIntro: ConceptIntro(concept: Concept.constantRule))
+    }
+}
+
+class CompositionRoot_deadLoadScene: CompositionRoot {
+    override func composeLoadExercisesScene(delegate: LoadExercisesViewModelDelegate, exercisesStore: ExercisesStore) -> UIViewController {
+        let vm = LoadExercisesViewModel(delegate: FakeLoadExercisesViewModelDelegate(), exercisesStore: exercisesStore)
+        return LoadExercisesViewController(viewModel: vm)
     }
 }

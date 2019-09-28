@@ -16,7 +16,7 @@ protocol ExercisesStore {
 
 enum ExercisesStoreAction {
     case updateExercises
-    case resetTransitionItem
+    case setTransitionItemSeen
 }
 
 extension ExercisesStore where Self: ExercisesStoreImpl {
@@ -49,8 +49,8 @@ class ExercisesStoreImpl: ExercisesStore {
         switch action {
         case .updateExercises:
             handle_updateExercises()
-        case .resetTransitionItem:
-            handle_resetTransitionItem()
+        case .setTransitionItemSeen:
+            handle_setTransitionItemSeen()
         }
     }
     
@@ -62,8 +62,8 @@ class ExercisesStoreImpl: ExercisesStore {
             .disposed(by: disposeBag)
     }
     
-    private func handle_resetTransitionItem() {
-
+    private func handle_setTransitionItemSeen() {
+        
     }
     
 }
