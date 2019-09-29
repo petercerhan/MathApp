@@ -25,7 +25,7 @@ protocol ExerciseViewModel {
 }
 
 protocol ExerciseViewModelDelegate: class {
-    func next(_ exerciseViewModel: ExerciseViewModel)
+    func next(_ exerciseViewModel: ExerciseViewModel, correctAnswer: Bool)
     func info(_ exerciseViewModel: ExerciseViewModel, concept: Concept)
 }
 
@@ -64,6 +64,10 @@ class ExerciseViewModelImpl: ExerciseViewModel {
     private let exercise: Exercise
     private let choiceConfiguration: ExerciseChoiceConfiguration
     private let choices: [String]
+    
+    //MARK: - State
+    
+    private var correctAnswerSelected: Bool?
     
     //MARK: - Initialization
     
@@ -143,6 +147,9 @@ class ExerciseViewModelImpl: ExerciseViewModel {
         submitResult(correct: choice1Correct)
         if !choice1Correct {
             choice1CorrectSubject.onNext(false)
+            correctAnswerSelected = false
+        } else {
+            correctAnswerSelected = true
         }
         displayStateSubject.onNext(.answer)
     }
@@ -157,6 +164,9 @@ class ExerciseViewModelImpl: ExerciseViewModel {
         submitResult(correct: choice2Correct)
         if !choice2Correct {
             choice2CorrectSubject.onNext(false)
+            correctAnswerSelected = false
+        } else {
+            correctAnswerSelected = true
         }
         displayStateSubject.onNext(.answer)
     }
@@ -166,6 +176,9 @@ class ExerciseViewModelImpl: ExerciseViewModel {
         submitResult(correct: choice3Correct)
         if !choice3Correct {
             choice3CorrectSubject.onNext(false)
+            correctAnswerSelected = false
+        } else {
+            correctAnswerSelected = true
         }
         displayStateSubject.onNext(.answer)
     }
@@ -193,7 +206,7 @@ class ExerciseViewModelImpl: ExerciseViewModel {
     }
     
     private func handle_next() {
-        delegate?.next(self)
+        delegate?.next(self, correctAnswer: correctAnswerSelected ?? false)
     }
     
     private func handle_info() {

@@ -21,6 +21,11 @@ extension FeedPackage {
         return FeedPackage(feedPackageType: .exercises, exercises: exercises, transitionItem: nil)
     }
     
+    static var exercisePackage2: FeedPackage {
+        let exercises = [Exercise.exercise4, Exercise.exercise5, Exercise.exercise6]
+        return FeedPackage(feedPackageType: .exercises, exercises: exercises, transitionItem: nil)
+    }
+    
     static var constantRuleIntro: FeedPackage {
         let exercises = [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3]
         let transitionItem = ConceptIntro(concept: Concept.constantRule)

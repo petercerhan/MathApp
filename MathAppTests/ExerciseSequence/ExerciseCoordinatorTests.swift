@@ -35,7 +35,7 @@ class ExerciseCoordinatorTests: XCTestCase {
         let coordinator = composeSUT(fakeContainerViewController: mockContainerVC)
 
         coordinator.start()
-        coordinator.next(TestExerciseViewModel())
+        coordinator.next(TestExerciseViewModel(), correctAnswer: true)
         
         XCTAssertEqual(mockContainerVC.show_callCount, 2)
         mockContainerVC.verifyDidShow(viewControllerType: ExerciseViewController.self)
@@ -118,7 +118,7 @@ class ExerciseCoordinatorTests: XCTestCase {
         let coordinator = composeSUT(fakeContainerViewController: mockContainerVC, stubFeedPackage: feedPackage)
         
         coordinator.start()
-        coordinator.next(TestExerciseViewModel())
+        coordinator.next(TestExerciseViewModel(), correctAnswer: true)
         
         if mockContainerVC.show_viewController.count > 1,
             let vc = mockContainerVC.show_viewController[1] as? ExerciseViewController
@@ -136,8 +136,8 @@ class ExerciseCoordinatorTests: XCTestCase {
         let coordinator = composeSUT(fakeContainerViewController: mockContainerVC, stubFeedPackage: feedPackage)
         
         coordinator.start()
-        coordinator.next(TestExerciseViewModel())
-        coordinator.next(TestExerciseViewModel())
+        coordinator.next(TestExerciseViewModel(), correctAnswer: true)
+        coordinator.next(TestExerciseViewModel(), correctAnswer: true)
         
         if mockContainerVC.show_viewController.count > 2,
             let vc = mockContainerVC.show_viewController[2] as? ExerciseViewController
@@ -155,8 +155,8 @@ class ExerciseCoordinatorTests: XCTestCase {
         let coordinator = composeSUT(fakeExercisesStore: mockExercisesStore, stubFeedPackage: feedPackage)
         
         coordinator.start()
-        coordinator.next(TestExerciseViewModel())
-        coordinator.next(TestExerciseViewModel())
+        coordinator.next(TestExerciseViewModel(), correctAnswer: true)
+        coordinator.next(TestExerciseViewModel(), correctAnswer: true)
         
         XCTAssertEqual(mockExercisesStore.updateExercises_callCount, 1)
     }
@@ -232,9 +232,23 @@ class ExerciseCoordinatorTests: XCTestCase {
         mockContainer.verifyDidShow(viewControllerType: ExerciseViewController.self)
     }
     
-    //test that concept intro seen updates user-concept to introduced & in progress
-    
     //test that if exercise has been shown and then we refresh and get concept intro, shows exercise first, then if correct shows concept intro
+    func test_conceptIntro_afterExercisePackage_shouldPresentExerciseUntilCorrectThenConceptIntro() {
+        let mockContainer = FakeContainerViewController()
+        let singleExercisePackage = FeedPackage(feedPackageType: .exercises, exercises: [Exercise.exercise1], transitionItem: nil)
+        let feedPackages = [singleExercisePackage, FeedPackage.constantRuleIntro, FeedPackage.exercisePackage2]
+        let coordinator = composeSUT(fakeContainerViewController: mockContainer, stubFeedPackages: feedPackages)
+        
+        coordinator.start()
+        //need correct/incorrect options on next
+        coordinator.next(TestExerciseViewModel(), correctAnswer: true)
+        
+        mockContainer.verifyDidShow(viewControllerType: ConceptIntroViewController.self)
+        
+        
+        
+        
+    }
     
     //MARK: - SUT Composition
     

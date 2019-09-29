@@ -11,8 +11,10 @@
 class FakeExerciseViewModelDelegate: ExerciseViewModelDelegate {
     
     var next_callCount = 0
-    func next(_ exerciseViewModel: ExerciseViewModel) {
+    var next_correct = [Bool]()
+    func next(_ exerciseViewModel: ExerciseViewModel, correctAnswer: Bool) {
         next_callCount += 1
+        next_correct.append(correctAnswer)
     }
     
     var info_callCount = 0

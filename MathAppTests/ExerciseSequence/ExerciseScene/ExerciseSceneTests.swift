@@ -236,14 +236,28 @@ class ExerciseSceneTests: XCTestCase {
         XCTAssertEqual(vc.displayState, .answer)
     }
     
-    func test_next_requestsNext() {
+    func test_next_correctAnswer_shouldRequestNextWithCorrectStatus() {
         let mockDelegate = FakeExerciseViewModelDelegate()
         let vc = composeSUT(fakeDelegate: mockDelegate)
         
         vc.loadViewIfNeeded()
+        vc.choice1Button.sendActions(for: .touchUpInside)
         vc.nextButton.sendActions(for: .touchUpInside)
         
         XCTAssertEqual(mockDelegate.next_callCount, 1)
+        XCTAssertEqual(mockDelegate.next_correct.first, true)
+    }
+    
+    func test_next_incorrectAnswer_shouldRequestNextWithIncorrectStatus() {
+        let mockDelegate = FakeExerciseViewModelDelegate()
+        let vc = composeSUT(fakeDelegate: mockDelegate)
+        
+        vc.loadViewIfNeeded()
+        vc.choice2Button.sendActions(for: .touchUpInside)
+        vc.nextButton.sendActions(for: .touchUpInside)
+        
+        XCTAssertEqual(mockDelegate.next_callCount, 1)
+        XCTAssertEqual(mockDelegate.next_correct.first, false)
     }
     
     func test_infoButton_requestsInfoScene() {

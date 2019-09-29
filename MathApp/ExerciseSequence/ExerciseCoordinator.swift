@@ -143,7 +143,7 @@ extension ExerciseCoordinator: FeedContainerViewModelDelegate {
 //MARK: - ExerciseViewModelDelegate
 
 extension ExerciseCoordinator: ExerciseViewModelDelegate {
-    func next(_ exerciseViewModel: ExerciseViewModel) {
+    func next(_ exerciseViewModel: ExerciseViewModel, correctAnswer: Bool) {
         showNextFeedScene(animation: .fadeIn)
     }
     
