@@ -55,7 +55,7 @@ class FakeExercisesStore: FeedPackageStore {
         case .updateFeedPackage:
             updateExercises_callCount += 1
             nextPackage()
-        case .setTransitionItemSeen:
+        case .setConceptIntroSeen:
             setTransitionItemSeen_callCount += 1
             nextPackage()
         }

@@ -11,6 +11,8 @@ import RxSwift
 
 protocol ExerciseExternalDataService {
     func getExercises() -> Observable<FeedPackage>
+    func getFeedPackage(introducedConceptID: Int) -> Observable<FeedPackage>
+    
     func getExercise(id: Int) -> Observable<Exercise>
 }
 
@@ -43,6 +45,13 @@ class ExerciseExternalDataServiceImpl: ExerciseExternalDataService {
         } else {
             return getExercises_prior()
         }
+    }
+    
+    func getFeedPackage(introducedConceptID: Int) -> Observable<FeedPackage> {
+        //set conceptID seen
+        
+        
+        return getExercises_prior()
     }
     
     func getExercises_prior() -> Observable<FeedPackage> {

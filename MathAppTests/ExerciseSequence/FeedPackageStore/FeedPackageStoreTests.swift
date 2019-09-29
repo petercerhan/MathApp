@@ -47,23 +47,24 @@ class FeedPackageStoreTests: XCTestCase {
         XCTAssertEqual(feedPackage.exercises.count, 3)
     }
     
-    func test_setTransitionItemSeen_setsFeedPackageStateLoading() {
+    func test_setConceptIntroSeen_setsFeedPackageStateLoading() {
         let feedPackageStore = composeSUT()
         let observer: TestableObserver<LoadState<FeedPackage>> = getNewObserver()
         _ = feedPackageStore.feedPackage.subscribe(observer)
         
-        feedPackageStore.dispatch(action: .setTransitionItemSeen)
+        feedPackageStore.dispatch(action: .setConceptIntroSeen(id: 1))
         
         assertSecondEventIsLoadingState(observer: observer)
     }
     
-    func test_setTransitionItemSeen_requestsNewFeedPackage() {
+    func test_setConceptIntroSeen_conceptIntro_shouldRequestsNewFeedPackageWithConceptIntroID() {
         let mockExerciseExternalDataService = FakeExerciseExternalDataService()
         let feedPackageStore = composeSUT(fakeExerciseExternalDataService: mockExerciseExternalDataService)
         
-        feedPackageStore.dispatch(action: .setTransitionItemSeen)
+        feedPackageStore.dispatch(action: .setConceptIntroSeen(id: 2))
         
-        XCTAssertEqual(mockExerciseExternalDataService.getExercises_callCount, 1)
+        XCTAssertEqual(mockExerciseExternalDataService.getExercises_conceptID_callCount, 1)
+        XCTAssertEqual(mockExerciseExternalDataService.getExercises_conceptID_conceptID.first, 2)
     }
     
     //MARK: - SUT Composition
