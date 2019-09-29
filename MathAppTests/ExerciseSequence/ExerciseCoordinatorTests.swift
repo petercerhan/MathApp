@@ -222,16 +222,19 @@ class ExerciseCoordinatorTests: XCTestCase {
         XCTAssertEqual(mockExercisesStore.setTransitionItemSeen_callCount, 1)
     }
     
-//    func test_conceptIntroRequestsNext_exercisesLoaded_shouldShowExercise() {
-//        let stubTransitionItem = ConceptIntro(concept: Concept.constantRule)
-//        let mockContainer = FakeContainerViewController()
-//        let coordinator = composeSUT(fakeContainerViewController: mockContainer, stubTransitionItem: stubTransitionItem)
-//
-//        coordinator.start()
-//        coordinator.next(TestConceptIntroViewModel())
-//
-//        mockContainer.verifyDidShow(viewControllerType: ExerciseViewController.self)
-//    }
+    func test_conceptIntroRequestsNext_exercisesLoaded_shouldShowExercise() {
+        let mockContainer = FakeContainerViewController()
+        let coordinator = composeSUT(fakeContainerViewController: mockContainer, stubFeedPackages: [FeedPackage.constantRuleIntro, FeedPackage.exercisesPackage])
+
+        coordinator.start()
+        coordinator.next(TestConceptIntroViewModel())
+
+        mockContainer.verifyDidShow(viewControllerType: ExerciseViewController.self)
+    }
+    
+    //test that concept intro seen updates user-concept to introduced & in progress
+    
+    //test that if exercise has been shown and then we refresh and get concept intro, shows exercise first, then if correct shows concept intro
     
     //MARK: - SUT Composition
     
@@ -239,6 +242,7 @@ class ExerciseCoordinatorTests: XCTestCase {
                     fakeExerciseExternalDataService: FakeExerciseExternalDataService? = nil,
                     fakeExercisesStore: FakeExercisesStore? = nil,
                     stubFeedPackage: FeedPackage? = nil,
+                    stubFeedPackages: [FeedPackage]? = nil,
                     feedPackageLoadState: LoadState<FeedPackage>? = nil,
                     compositionRoot: CompositionRoot? = nil) -> ExerciseCoordinator {
         
@@ -248,6 +252,10 @@ class ExerciseCoordinatorTests: XCTestCase {
         
         let feedPackage = stubFeedPackage ?? FeedPackage.exercisesPackage
         exercisesStore.setStubFeedPackage(feedPackage)
+        
+        if let feedPackages = stubFeedPackages {
+            exercisesStore.setStubFeedPackages(feedPackages)
+        }
         
         if let feedPackageLoadState = feedPackageLoadState {
             exercisesStore.setStubFeedPackageLoadState(feedPackageLoadState)

@@ -80,6 +80,7 @@ class ExerciseCoordinator: Coordinator {
         let vc = compositionRoot.composeConceptIntroScene(delegate: self, conceptIntro: conceptIntro)
         containerVC.show(viewController: vc, animation: .fadeIn)
         feedPackageStore.dispatch(action: .setTransitionItemSeen)
+        exerciseQueue = Queue<Exercise>()
     }
     
     private func showNextExerciseScene(animation: TransitionAnimation) {

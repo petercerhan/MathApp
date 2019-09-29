@@ -30,11 +30,19 @@ class ExerciseExternalDataServiceImpl: ExerciseExternalDataService {
     
     //MARK: - ExerciseExternalDataService Interface
     
+    var returnConceptIntroFlag = true
+    
     func getExercises() -> Observable<FeedPackage> {
-        let conceptIntro = ConceptIntro(concept: Concept.constantRule)
-        let feedPackage = FeedPackage(feedPackageType: .conceptIntro, exercises: [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3], transitionItem: conceptIntro)
-        
-        return Observable.just(feedPackage)
+        if returnConceptIntroFlag {
+            let conceptIntro = ConceptIntro(concept: Concept.constantRule)
+            let feedPackage = FeedPackage(feedPackageType: .conceptIntro, exercises: [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3], transitionItem: conceptIntro)
+            
+            returnConceptIntroFlag = false
+            
+            return Observable.just(feedPackage)
+        } else {
+            return getExercises_prior()
+        }
     }
     
     func getExercises_prior() -> Observable<FeedPackage> {

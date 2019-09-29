@@ -36,6 +36,11 @@ class FakeExercisesStore: FeedPackageStore {
         nextPackage()
     }
     
+    func setStubFeedPackages(_ feedPackages: [FeedPackage]) {
+        stubFeedPackages = feedPackages
+        feedPackageStubIndex = 0
+        nextPackage()
+    }
     
     
     func setStubFeedPackageLoadState(_ loadState: LoadState<FeedPackage>) {
@@ -52,6 +57,7 @@ class FakeExercisesStore: FeedPackageStore {
             nextPackage()
         case .setTransitionItemSeen:
             setTransitionItemSeen_callCount += 1
+            nextPackage()
         }
     }
     
