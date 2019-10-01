@@ -55,7 +55,6 @@
 		6EBA305E231098F600E6DC54 /* ExerciseChoiceConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBA305D231098F600E6DC54 /* ExerciseChoiceConfiguration.swift */; };
 		6EBA306A2314D3F800E6DC54 /* RxLatestValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBA30692314D3F800E6DC54 /* RxLatestValue.swift */; };
 		6EBA306D2314D4AB00E6DC54 /* RxLatestValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBA306C2314D4AB00E6DC54 /* RxLatestValueTests.swift */; };
-		6EBD530B233AE95C0057F28A /* db.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 6EBD530A233AE95C0057F28A /* db.sqlite3 */; };
 		6EBD530F233AF7A70057F28A /* ChooseExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD530D233AF7A70057F28A /* ChooseExerciseViewController.swift */; };
 		6EBD5310233AF7A70057F28A /* ChooseExerciseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EBD530E233AF7A70057F28A /* ChooseExerciseViewController.xib */; };
 		6EBD5313233AF9A50057F28A /* ChooseExerciseSceneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD5312233AF9A50057F28A /* ChooseExerciseSceneTests.swift */; };
@@ -116,6 +115,7 @@
 		6ECC412823287BAE00E8F3E1 /* Concept+sqlite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECC412723287BAE00E8F3E1 /* Concept+sqlite.swift */; };
 		6ECC412A2328842A00E8F3E1 /* UserConcept+sqlite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECC41292328842A00E8F3E1 /* UserConcept+sqlite.swift */; };
 		6ECC412C23288BC500E8F3E1 /* UserConcept+data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECC412B23288BC500E8F3E1 /* UserConcept+data.swift */; };
+		6EE60C3F234400EA00B0322B /* db.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 6EE60C3E234400EA00B0322B /* db.sqlite3 */; };
 		BCB14F255178DFA21D82194D /* Pods_MathAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE993BEBDF1A3B96DC4714AA /* Pods_MathAppTests.framework */; };
 		C99DA79539000A5618FB589C /* Pods_MathApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1CE43285555BFADE6DC3070 /* Pods_MathApp.framework */; };
 /* End PBXBuildFile section */
@@ -184,7 +184,6 @@
 		6EBA305D231098F600E6DC54 /* ExerciseChoiceConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseChoiceConfiguration.swift; sourceTree = "<group>"; };
 		6EBA30692314D3F800E6DC54 /* RxLatestValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxLatestValue.swift; sourceTree = "<group>"; };
 		6EBA306C2314D4AB00E6DC54 /* RxLatestValueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxLatestValueTests.swift; sourceTree = "<group>"; };
-		6EBD530A233AE95C0057F28A /* db.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = db.sqlite3; sourceTree = "<group>"; };
 		6EBD530D233AF7A70057F28A /* ChooseExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseExerciseViewController.swift; sourceTree = "<group>"; };
 		6EBD530E233AF7A70057F28A /* ChooseExerciseViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChooseExerciseViewController.xib; sourceTree = "<group>"; };
 		6EBD5312233AF9A50057F28A /* ChooseExerciseSceneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseExerciseSceneTests.swift; sourceTree = "<group>"; };
@@ -245,6 +244,7 @@
 		6ECC412723287BAE00E8F3E1 /* Concept+sqlite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Concept+sqlite.swift"; sourceTree = "<group>"; };
 		6ECC41292328842A00E8F3E1 /* UserConcept+sqlite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserConcept+sqlite.swift"; sourceTree = "<group>"; };
 		6ECC412B23288BC500E8F3E1 /* UserConcept+data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserConcept+data.swift"; sourceTree = "<group>"; };
+		6EE60C3E234400EA00B0322B /* db.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = db.sqlite3; sourceTree = "<group>"; };
 		9BCF43D90809ABFC7320F5BB /* Pods-MathApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MathApp.release.xcconfig"; path = "Target Support Files/Pods-MathApp/Pods-MathApp.release.xcconfig"; sourceTree = "<group>"; };
 		A1CE43285555BFADE6DC3070 /* Pods_MathApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MathApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACC8CBE54D6FE6BB00980A70 /* Pods-MathApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MathApp.debug.xcconfig"; path = "Target Support Files/Pods-MathApp/Pods-MathApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -532,7 +532,7 @@
 		6EB933B32331CBA900E38B52 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
-				6EBD530A233AE95C0057F28A /* db.sqlite3 */,
+				6EE60C3E234400EA00B0322B /* db.sqlite3 */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -928,13 +928,13 @@
 				6EC667142324489F0048068C /* MenuViewController.xib in Resources */,
 				6E883F98233D92F2004F0D0E /* ConceptIntroViewController.xib in Resources */,
 				6E557C1E22FB9DCC00270F07 /* Assets.xcassets in Resources */,
-				6EBD530B233AE95C0057F28A /* db.sqlite3 in Resources */,
 				6EC6671E232451760048068C /* QuitableContainerViewController.xib in Resources */,
 				6E74FD53231C87F800730AEB /* FeedContainerViewController.xib in Resources */,
 				6EB933A52330702C00E38B52 /* LoadExercisesViewController.xib in Resources */,
 				6EC666F32321E64A0048068C /* InfoViewController.xib in Resources */,
 				6EC66730232464B20048068C /* ConceptMapViewController.xib in Resources */,
 				6EBE4E9C230B614B0047A880 /* ExerciseViewController.xib in Resources */,
+				6EE60C3F234400EA00B0322B /* db.sqlite3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

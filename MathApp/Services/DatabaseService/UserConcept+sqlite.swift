@@ -15,11 +15,15 @@ extension UserConcept {
     static let column_id = Expression<Int64>("id")
     static let column_conceptID = Expression<Int64>("concept_id")
     static let column_strength = Expression<Int64>("strength")
-    
-    static let createTableStatement: String = UserConcept.table.create { table in
-                                                table.column(UserConcept.column_id, primaryKey: true)
-                                                table.column(UserConcept.column_conceptID)
-                                                table.column(UserConcept.column_strength) }
+    static let column_status = Expression<Int64>("status")
+    static let column_exercise_result_0 = Expression<Int64>("exercise_result_0")
+    static let column_exercise_result_1 = Expression<Int64>("exercise_result_1")
+    static let column_exercise_result_2 = Expression<Int64>("exercise_result_2")
+    static let column_exercise_result_3 = Expression<Int64>("exercise_result_3")
+    static let column_exercise_result_4 = Expression<Int64>("exercise_result_4")
+    static let column_exercise_result_5 = Expression<Int64>("exercise_result_5")
+    static let column_exercise_result_6 = Expression<Int64>("exercise_result_6")
+    static let column_latest_result_index = Expression<Int64>("latest_result_index")
     
     static func createFromQueryResult(_ row: Row) -> UserConcept? {
         let tableName = UserConcept.table

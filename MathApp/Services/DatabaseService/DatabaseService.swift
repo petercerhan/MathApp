@@ -103,8 +103,64 @@ class DatabaseServiceImpl: DatabaseService {
     }
     
     func recordResult(concept_id: Int, correct: Bool) {
+        let query = userConceptsTable.filter(UserConcept.column_conceptID == Int64(concept_id))
         
+        guard let userConceptRow = try? db.pluck(query) else {
+            return
+        }
+        
+        let latestResultIndex = Int(userConceptRow[UserConcept.column_latest_result_index])
+        
+        let resultValue: Int64 = correct ? 1 : 0
+        let resultColumn = resultColumnFromIndex(latestResultIndex)
+        let indexColumn = UserConcept.column_latest_result_index
+        let newResultValue = (resultValue + 1) % 7
+        
+        _ = try? db.run(query.update(resultColumn <- resultValue, indexColumn <- newResultValue))
+        
+//        printCurrentUserConceptStatus(concept_id: concept_id)
     }
+    
+    private func printCurrentUserConceptStatus(concept_id: Int) {
+        let query = userConceptsTable.filter(UserConcept.column_conceptID == Int64(concept_id))
+        
+        guard let userConceptRow = try? db.pluck(query) else {
+            return
+        }
+        
+        let results = [userConceptRow[UserConcept.column_exercise_result_0],
+                       userConceptRow[UserConcept.column_exercise_result_1],
+                       userConceptRow[UserConcept.column_exercise_result_2],
+                       userConceptRow[UserConcept.column_exercise_result_3],
+                       userConceptRow[UserConcept.column_exercise_result_4],
+                       userConceptRow[UserConcept.column_exercise_result_5],
+                       userConceptRow[UserConcept.column_exercise_result_6] ]
+        
+        print("latestResultIndex: \(results)")
+    }
+    
+    private func resultColumnFromIndex(_ index: Int) -> Expression<Int64> {
+        switch index {
+        case 0:
+            return UserConcept.column_exercise_result_0
+        case 1:
+            return UserConcept.column_exercise_result_1
+        case 2:
+            return UserConcept.column_exercise_result_2
+        case 3:
+            return UserConcept.column_exercise_result_3
+        case 4:
+            return UserConcept.column_exercise_result_4
+        case 5:
+            return UserConcept.column_exercise_result_5
+        case 6:
+            return UserConcept.column_exercise_result_6
+        default:
+            return UserConcept.column_exercise_result_0
+        }
+    }
+    
+    
     
     func reset() {
         removeOldDB()
