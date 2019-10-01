@@ -23,7 +23,7 @@ class ExerciseCoordinator: Coordinator {
     //MARK: - State
     
     private var childCoordinator: Coordinator?
-    var exerciseQueue = Queue<Exercise>()
+    private var exerciseQueue = Queue<Exercise>()
     
     //MARK: - Rx
     
@@ -58,11 +58,12 @@ class ExerciseCoordinator: Coordinator {
     
     func start() {
         containerVC.loadViewIfNeeded()
-        showNextFeedScene(animation: .none)
+        showNextFeedScene(animation: .none, canTransition: true)
     }
     
-    private func showNextFeedScene(animation: TransitionAnimation) {
-        if let feedPackage = latestValue(of: feedPackageStore.feedPackage, disposeBag: disposeBag)?.data,
+    private func showNextFeedScene(animation: TransitionAnimation, canTransition: Bool) {
+        if canTransition,
+            let feedPackage = latestValue(of: feedPackageStore.feedPackage, disposeBag: disposeBag)?.data,
             let conceptIntro = feedPackage.transitionItem as? ConceptIntro
         {
             showConceptIntroScene(conceptIntro: conceptIntro)
@@ -92,13 +93,22 @@ class ExerciseCoordinator: Coordinator {
     private func showExerciseScene(_ exercise: Exercise, animation: TransitionAnimation) {
         let vc = composeExerciseScene(forExercise: exercise)
         containerVC.show(viewController: vc, animation: animation)
-        loadExercisesIfNeeded()
+        refreshFeedPackageIfNeeded()
     }
     
-    private func loadExercisesIfNeeded() {
-        if exerciseQueue.count == 0 {
+    private func refreshFeedPackageIfNeeded() {
+        
+        if exerciseQueue.count == 0, !transitionItemQueued() {
             feedPackageStore.dispatch(action: .updateFeedPackage)
         }
+    }
+    
+    private func transitionItemQueued() -> Bool {
+        guard let feedPackage = latestValue(of: feedPackageStore.feedPackage, disposeBag: disposeBag)?.data else {
+            return false
+        }
+        
+        return (feedPackage.transitionItem != nil)
     }
     
     private func updateExerciseQueue(animation: TransitionAnimation) {
@@ -110,7 +120,7 @@ class ExerciseCoordinator: Coordinator {
         }
         
         exerciseQueue.enqueue(elements: exercises)
-        showNextFeedScene(animation: animation)
+        showNextFeedScene(animation: animation, canTransition: false)
     }
     
     private func composeExerciseScene(forExercise exercise: Exercise) -> UIViewController {
@@ -144,7 +154,7 @@ extension ExerciseCoordinator: FeedContainerViewModelDelegate {
 
 extension ExerciseCoordinator: ExerciseViewModelDelegate {
     func next(_ exerciseViewModel: ExerciseViewModel, correctAnswer: Bool) {
-        showNextFeedScene(animation: .fadeIn)
+        showNextFeedScene(animation: .fadeIn, canTransition: correctAnswer)
     }
     
     func info(_ exerciseViewModel: ExerciseViewModel, concept: Concept) {
@@ -184,7 +194,7 @@ extension ExerciseCoordinator: MenuCoordinatorDelegate {
 extension ExerciseCoordinator: LoadExercisesViewModelDelegate {
     func next(_ loadExercisesViewModel: LoadExercisesViewModel) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.005) { [weak self] in
-            self?.showNextFeedScene(animation: .fadeIn)
+            self?.showNextFeedScene(animation: .fadeIn, canTransition: false)
         }
     }
 }
@@ -193,6 +203,6 @@ extension ExerciseCoordinator: LoadExercisesViewModelDelegate {
 
 extension ExerciseCoordinator: ConceptIntroViewModelDelegate {
     func next(_ conceptIntroViewModel: ConceptIntroViewModel) {
-        showNextFeedScene(animation: .fadeIn)
+        showNextFeedScene(animation: .fadeIn, canTransition: false)
     }
 }

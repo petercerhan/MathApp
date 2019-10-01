@@ -232,22 +232,57 @@ class ExerciseCoordinatorTests: XCTestCase {
         mockContainer.verifyDidShow(viewControllerType: ExerciseViewController.self)
     }
     
-    //test that if exercise has been shown and then we refresh and get concept intro, shows exercise first, then if correct shows concept intro
-    func test_conceptIntro_afterExercisePackage_shouldPresentExerciseUntilCorrectThenConceptIntro() {
+    func test_exerciseAnsweredCorrectly_conceptIntroQueued_shouldPresentConceptIntro() {
         let mockContainer = FakeContainerViewController()
         let singleExercisePackage = FeedPackage(feedPackageType: .exercises, exercises: [Exercise.exercise1], transitionItem: nil)
         let feedPackages = [singleExercisePackage, FeedPackage.constantRuleIntro, FeedPackage.exercisePackage2]
         let coordinator = composeSUT(fakeContainerViewController: mockContainer, stubFeedPackages: feedPackages)
         
         coordinator.start()
-        //need correct/incorrect options on next
         coordinator.next(TestExerciseViewModel(), correctAnswer: true)
         
         mockContainer.verifyDidShow(viewControllerType: ConceptIntroViewController.self)
+    }
+    
+    func test_exerciseAnsweredIncorrectly_conceptIntroQueued_shouldPresentExercise() {
+        let mockContainer = FakeContainerViewController()
+        let singleExercisePackage = FeedPackage(feedPackageType: .exercises, exercises: [Exercise.exercise1], transitionItem: nil)
+        let feedPackages = [singleExercisePackage, FeedPackage.constantRuleIntro, FeedPackage.exercisePackage2]
+        let coordinator = composeSUT(fakeContainerViewController: mockContainer, stubFeedPackages: feedPackages)
         
+        coordinator.start()
+        coordinator.next(TestExerciseViewModel(), correctAnswer: false)
         
+        mockContainer.verifyDidShow(viewControllerType: ExerciseViewController.self)
+    }
+    
+    func test_exerciseIncorrectThenCorrect_conceptIntroQueued_shouldPresentConceptIntro() {
+        let mockContainer = FakeContainerViewController()
+        let singleExercisePackage = FeedPackage(feedPackageType: .exercises, exercises: [Exercise.exercise1], transitionItem: nil)
+        let feedPackages = [singleExercisePackage, FeedPackage.constantRuleIntro, FeedPackage.exercisePackage2]
+        let coordinator = composeSUT(fakeContainerViewController: mockContainer, stubFeedPackages: feedPackages)
         
+        coordinator.start()
+        coordinator.next(TestExerciseViewModel(), correctAnswer: false)
+        coordinator.next(TestExerciseViewModel(), correctAnswer: true)
         
+        mockContainer.verifyDidShow(viewControllerType: ConceptIntroViewController.self)
+    }
+    
+    func test_conceptIntroQueued_seriesOfIncorrectAnswers_shouldNotRefreshFeedPackage() {
+        let mockExercisesStore = FakeExercisesStore()
+        let singleExercisePackage = FeedPackage(feedPackageType: .exercises, exercises: [Exercise.exercise1], transitionItem: nil)
+        let feedPackages = [singleExercisePackage, FeedPackage.constantRuleIntro, FeedPackage.exercisePackage2]
+        let coordinator = composeSUT(fakeExercisesStore: mockExercisesStore, stubFeedPackages: feedPackages)
+        
+        coordinator.start()
+        coordinator.next(TestExerciseViewModel(), correctAnswer: false)
+        coordinator.next(TestExerciseViewModel(), correctAnswer: false)
+        coordinator.next(TestExerciseViewModel(), correctAnswer: false)
+        coordinator.next(TestExerciseViewModel(), correctAnswer: false)
+        coordinator.next(TestExerciseViewModel(), correctAnswer: false)
+        
+        XCTAssertEqual(mockExercisesStore.updateExercises_callCount, 1)
     }
     
     //MARK: - SUT Composition
