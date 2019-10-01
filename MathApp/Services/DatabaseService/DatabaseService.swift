@@ -20,6 +20,8 @@ protocol DatabaseService {
     
     func getExercises(forConceptID conceptID: Int) -> [Exercise]
     func getExercise(id: Int) -> Exercise?
+    
+    func recordResult(concept_id: Int, correct: Bool)
 }
 
 class DatabaseServiceImpl: DatabaseService {
@@ -98,6 +100,10 @@ class DatabaseServiceImpl: DatabaseService {
         }
         
         return Exercise.createFromQueryResult(exerciseRow)
+    }
+    
+    func recordResult(concept_id: Int, correct: Bool) {
+        
     }
     
     func reset() {

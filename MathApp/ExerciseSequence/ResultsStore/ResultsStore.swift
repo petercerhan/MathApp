@@ -60,8 +60,9 @@ class ResultsStoreImpl: ResultsStore {
     }
     
     private func handle_processResult(_ result: ExerciseResult) {
+        databaseService.recordResult(concept_id: result.conceptID, correct: result.correct)
         reevaluatePoints(result: result)
-        reevaluateStrengths(result: result)
+//        reevaluateStrengths(result: result)
     }
     
     private func reevaluatePoints(result: ExerciseResult) {

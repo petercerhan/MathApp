@@ -42,6 +42,34 @@ class ResultsStoreTests: XCTestCase {
         XCTAssertEqual(correct, 0)
     }
     
+    func test_correctResult_shouldSendCorrectResultToExternalDataService() {
+        let mockDatabaseService = FakeDatabaseService()
+        let store = composeSUT(fakeDatabaseService: mockDatabaseService)
+        
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        
+        XCTAssertEqual(mockDatabaseService.recordResult_callCount, 1)
+        XCTAssertEqual(mockDatabaseService.recordResult_correct.last, true)
+    }
+    
+    func test_incorrectResult_shouldSendIncorrectResultToExternalDataService() {
+        let mockDatabaseService = FakeDatabaseService()
+        let store = composeSUT(fakeDatabaseService: mockDatabaseService)
+        
+        store.dispatch(action: .processResult(ExerciseResult(correct: false, conceptID: 1)))
+        
+        XCTAssertEqual(mockDatabaseService.recordResult_callCount, 1)
+        XCTAssertEqual(mockDatabaseService.recordResult_correct.last, false)
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     func test_concept1_5of5Correct_shouldIncrementStrength() {
         let mockDatabaseService = FakeDatabaseService()
         let store = composeSUT(fakeDatabaseService: mockDatabaseService)
