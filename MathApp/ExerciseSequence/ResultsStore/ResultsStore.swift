@@ -34,14 +34,6 @@ class ResultsStoreImpl: ResultsStore {
     
     private let disposeBag = DisposeBag()
     
-    //MARK: - State
-    
-    private var progressMap = [String: ProgressRecord]()
-    struct ProgressRecord {
-        var evaluated = 0
-        var correct = 0
-    }
-    
     //MARK: - Initialization
     
     init(databaseService: DatabaseService) {
@@ -62,7 +54,6 @@ class ResultsStoreImpl: ResultsStore {
     private func handle_processResult(_ result: ExerciseResult) {
         databaseService.recordResult(concept_id: result.conceptID, correct: result.correct)
         reevaluatePoints(result: result)
-//        reevaluateStrengths(result: result)
     }
     
     private func reevaluatePoints(result: ExerciseResult) {
@@ -71,35 +62,6 @@ class ResultsStoreImpl: ResultsStore {
         }
         if result.correct {
             correctSubject.onNext(priorCorrectValue + 1)
-        }
-    }
-    
-    private func reevaluateStrengths(result: ExerciseResult) {
-        var progressRecord = progressMap["\(result.conceptID)"] ?? ProgressRecord()
-        
-        progressRecord.evaluated += 1
-        if result.correct {
-            progressRecord.correct += 1
-        }
-        if progressRecord.evaluated == 5 {
-            incrementStrengthIfNeeded(progressRecord: progressRecord, conceptID: result.conceptID)
-            decrementStrengthIfNeeded(progressRecord: progressRecord, conceptID: result.conceptID)
-            progressRecord.evaluated = 0
-            progressRecord.correct = 0
-        }
-        
-        progressMap["\(result.conceptID)"] = progressRecord
-    }
-    
-    private func incrementStrengthIfNeeded(progressRecord: ProgressRecord, conceptID: Int) {
-        if progressRecord.correct >= 4 {
-            databaseService.incrementStrengthForUserConcept(withID: conceptID)
-        }
-    }
-    
-    private func decrementStrengthIfNeeded(progressRecord: ProgressRecord, conceptID: Int) {
-        if progressRecord.correct <= 2 {
-            databaseService.decrementStrengthForUserConcept(withID: conceptID)
         }
     }
     
