@@ -68,6 +68,17 @@ class FakeDatabaseService: DatabaseService {
     func reset() {
         reset_callCount += 1
     }
+    
+    
+    func getFocusConcepts() -> (Int, Int) {
+        
+        return (0, 0)
+    }
+    
+    func getEnrichedUserConcept(id: Int) -> EnrichedUserConcept? {
+        
+        return nil
+    }
 
 }
 

@@ -57,7 +57,7 @@ class FeedPackageStoreImpl: FeedPackageStore {
     private func handle_updateFeedPackage() {
         feedPackageSubject.onNext(.loading)
         
-        exerciseExternalDataService.getExercises()
+        exerciseExternalDataService.getNextFeedPackage()
             .subscribe(onNext: { [unowned self] feedPackage in
                 self.feedPackageSubject.onNext(.loaded(feedPackage))
             })

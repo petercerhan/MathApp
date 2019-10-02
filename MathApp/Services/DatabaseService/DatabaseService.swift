@@ -22,6 +22,9 @@ protocol DatabaseService {
     func getExercise(id: Int) -> Exercise?
     
     func recordResult(concept_id: Int, correct: Bool)
+    
+    func getFocusConcepts() -> (Int, Int)
+    func getEnrichedUserConcept(id: Int) -> EnrichedUserConcept?
 }
 
 class DatabaseServiceImpl: DatabaseService {
@@ -50,6 +53,17 @@ class DatabaseServiceImpl: DatabaseService {
             return
         }
         self.db = db
+    }
+    
+    func reset() {
+        removeOldDB()
+        setup()
+    }
+    
+    private func removeOldDB() {
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+        let fileManager = FileManager.default
+        try? fileManager.removeItem(atPath: "\(path)/\(databaseFilename)")
     }
     
     func getUserConcepts() -> [UserConcept] {
@@ -124,6 +138,8 @@ class DatabaseServiceImpl: DatabaseService {
     private func printCurrentUserConceptStatus(concept_id: Int) {
         let query = userConceptsTable.filter(UserConcept.column_conceptID == Int64(concept_id))
         
+        
+        
         guard let userConceptRow = try? db.pluck(query) else {
             return
         }
@@ -160,16 +176,41 @@ class DatabaseServiceImpl: DatabaseService {
         }
     }
     
-    
-    
-    func reset() {
-        removeOldDB()
-        setup()
+    func getFocusConcepts() -> (Int, Int) {
+        let query = User.table.filter(User.column_id == 1)
+        
+        guard let userRow = try? db.pluck(query) else {
+            return (0, 0)
+        }
+        
+        let concept1 = Int(userRow[User.column_focus_concept_1])
+        let concept2 = Int(userRow[User.column_focus_concept_2])
+        
+        return (concept1, concept2)
     }
     
-    private func removeOldDB() {
-        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let fileManager = FileManager.default
-        try? fileManager.removeItem(atPath: "\(path)/\(databaseFilename)")
+    func getEnrichedUserConcept(id: Int) -> EnrichedUserConcept? {
+        let query = conceptsTable.join(userConceptsTable, on: UserConcept.column_conceptID == conceptsTable[Concept.column_id])
+                                .filter(UserConcept.column_conceptID == Int64(id))
+        
+        guard let userConceptRow = try? db.pluck(query),
+            let userConcept = UserConcept.createFromQueryResult(userConceptRow)
+        else {
+            return nil
+        }
+
+        let results = [Int(userConceptRow[UserConcept.column_exercise_result_0]),
+                       Int(userConceptRow[UserConcept.column_exercise_result_1]),
+                       Int(userConceptRow[UserConcept.column_exercise_result_2]),
+                       Int(userConceptRow[UserConcept.column_exercise_result_3]),
+                       Int(userConceptRow[UserConcept.column_exercise_result_4]),
+                       Int(userConceptRow[UserConcept.column_exercise_result_5]),
+                       Int(userConceptRow[UserConcept.column_exercise_result_6]) ]
+
+        let score = results.reduce(0) { $0 + $1 }
+        let status = Int(userConceptRow[UserConcept.column_status])
+
+        return EnrichedUserConcept(userConcept: userConcept, statusCode: status, currentScore: score)
     }
+    
 }

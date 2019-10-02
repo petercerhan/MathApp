@@ -15,7 +15,7 @@ class FakeExerciseExternalDataService: ExerciseExternalDataService {
     var getExercises_stubData = FeedPackage(feedPackageType: .exercises, exercises: [Exercise](), transitionItem: nil)
     var getExercises_callCount = 0
     
-    func getExercises() -> Observable<FeedPackage> {
+    func getNextFeedPackage() -> Observable<FeedPackage> {
         getExercises_callCount += 1
         return Observable<FeedPackage>.just(getExercises_stubData)
     }

@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 protocol ExerciseExternalDataService {
-    func getExercises() -> Observable<FeedPackage>
+    func getNextFeedPackage() -> Observable<FeedPackage>
     func getFeedPackage(introducedConceptID: Int) -> Observable<FeedPackage>
     
     func getExercise(id: Int) -> Observable<Exercise>
@@ -34,7 +34,28 @@ class ExerciseExternalDataServiceImpl: ExerciseExternalDataService {
     
     var returnConceptIntroFlag = true
     
-    func getExercises() -> Observable<FeedPackage> {
+    func getNextFeedPackage() -> Observable<FeedPackage> {
+        //pull concepts from user record
+        let focusConcepts = databaseService.getFocusConcepts()
+        let concept1_id = focusConcepts.0
+        let concept2_id = focusConcepts.1
+        
+        guard let enrichedUserConcept_1 = databaseService.getEnrichedUserConcept(id: concept1_id) else {
+            return getExercises_prior()
+        }
+
+        if enrichedUserConcept_1.status == .unseen {
+            print("should return user concept")
+            let conceptIntro = ConceptIntro(concept: enrichedUserConcept_1.userConcept.concept)
+            let exercises = getExercisesForConcept(conceptID: enrichedUserConcept_1.userConcept.concept.id, strength: enrichedUserConcept_1.userConcept.strength)
+            return Observable<FeedPackage>.just(FeedPackage(feedPackageType: .conceptIntro, exercises: exercises, transitionItem: conceptIntro))
+        }
+        
+        //get concept 1 user-concept
+        //get concept 2 user-concept
+        
+        
+        
         if returnConceptIntroFlag {
             let conceptIntro = ConceptIntro(concept: Concept.constantRule)
             let feedPackage = FeedPackage(feedPackageType: .conceptIntro, exercises: [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3], transitionItem: conceptIntro)
@@ -47,6 +68,50 @@ class ExerciseExternalDataServiceImpl: ExerciseExternalDataService {
         }
     }
     
+    private func getExercisesForConcept(conceptID: Int, strength: Int) -> [Exercise] {
+        let unfilteredExercises = databaseService.getExercises(forConceptID: conceptID)
+        let weightTable = weightTableForStrength(strength)
+        let difficulties = randomizationService.setFromRange(min: 1, max: 3, selectionCount: 3, weightTable: weightTable)
+        
+        var exercises = [Exercise]()
+        
+        for i in 0...2 {
+            var newExercise: Exercise? = nil
+
+            while newExercise == nil {
+                let difficulty = difficulties[i]
+                let exercisePool = unfilteredExercises.filter { $0.difficulty == difficulty }
+                let exerciseIndex = randomizationService.intFromRange(min: 0, max: exercisePool.count - 1)
+                let exercise = exercisePool[exerciseIndex]
+                if let _ = exercises.first(where: { $0.id == exercise.id }) {
+                    continue
+                } else {
+                    newExercise = exercise
+                }
+            }
+            
+            exercises.append(newExercise!)
+        }
+        
+        return exercises
+    }
+    
+    private func weightTableForStrength(_ strength: Int) -> [Double] {
+        switch strength {
+        case 0:
+            return [1.0, 0.0, 0.0]
+        case 1:
+            return [0.5, 0.5, 0.0]
+        case 2:
+            return [0.2, 0.6, 0.2]
+        case 3:
+            return [0.0, 0.4, 0.6]
+        default:
+            return [1.0, 0.0, 0.0]
+        }
+    }
+    
+    
     func getFeedPackage(introducedConceptID: Int) -> Observable<FeedPackage> {
         //set conceptID seen
         
@@ -54,7 +119,9 @@ class ExerciseExternalDataServiceImpl: ExerciseExternalDataService {
         return getExercises_prior()
     }
     
-    func getExercises_prior() -> Observable<FeedPackage> {
+    
+    //get exercises for two focus concepts
+    private func getExercises_prior() -> Observable<FeedPackage> {
         let concept1 = Concept.constantRule
         let concept2 = Concept.linearRule
         
