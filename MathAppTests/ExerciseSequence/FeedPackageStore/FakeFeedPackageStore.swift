@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 @testable import MathApp
 
-class FakeExercisesStore: FeedPackageStore {
+class FakeFeedPackageStore: FeedPackageStore {
     
     var feedPackage: Observable<LoadState<FeedPackage>> {
         return feedPackageSubject.asObservable()
@@ -47,13 +47,13 @@ class FakeExercisesStore: FeedPackageStore {
         feedPackageSubject.onNext(loadState)
     }
     
-    var updateExercises_callCount = 0
+    var updateFeedPackage_callCount = 0
     var setTransitionItemSeen_callCount = 0
     
     func dispatch(action: ExercisesStoreAction) {
         switch action {
         case .updateFeedPackage:
-            updateExercises_callCount += 1
+            updateFeedPackage_callCount += 1
             nextPackage()
         case .setConceptIntroSeen:
             setTransitionItemSeen_callCount += 1

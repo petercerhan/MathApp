@@ -150,7 +150,7 @@ class ExerciseCoordinatorTests: XCTestCase {
     }
     
     func test_threeExercises_advanceToThirdExercise_shouldRequestNewExercises() {
-        let mockExercisesStore = FakeExercisesStore()
+        let mockExercisesStore = FakeFeedPackageStore()
         let feedPackage = FeedPackage.createExercisesStub(exercises: [Exercise.exercise1, Exercise.exercise4, Exercise.exercise7])
         let coordinator = composeSUT(fakeExercisesStore: mockExercisesStore, stubFeedPackage: feedPackage)
         
@@ -158,7 +158,7 @@ class ExerciseCoordinatorTests: XCTestCase {
         coordinator.next(TestExerciseViewModel(), correctAnswer: true)
         coordinator.next(TestExerciseViewModel(), correctAnswer: true)
         
-        XCTAssertEqual(mockExercisesStore.updateExercises_callCount, 1)
+        XCTAssertEqual(mockExercisesStore.updateFeedPackage_callCount, 1)
     }
     
     func test_loadExercise_id1_shouldLoadExerciseID1FromDatabaseService() {
@@ -214,7 +214,7 @@ class ExerciseCoordinatorTests: XCTestCase {
     }
     
     func test_start_conceptIntroDisplayed_shouldSetTransitionItemSeen() {
-        let mockExercisesStore = FakeExercisesStore()
+        let mockExercisesStore = FakeFeedPackageStore()
         let coordinator = composeSUT(fakeExercisesStore: mockExercisesStore, stubFeedPackage: FeedPackage.constantRuleIntro)
         
         coordinator.start()
@@ -270,7 +270,7 @@ class ExerciseCoordinatorTests: XCTestCase {
     }
     
     func test_conceptIntroQueued_seriesOfIncorrectAnswers_shouldNotRefreshFeedPackage() {
-        let mockExercisesStore = FakeExercisesStore()
+        let mockExercisesStore = FakeFeedPackageStore()
         let singleExercisePackage = FeedPackage(feedPackageType: .exercises, exercises: [Exercise.exercise1], transitionItem: nil)
         let feedPackages = [singleExercisePackage, FeedPackage.constantRuleIntro, FeedPackage.exercisePackage2]
         let coordinator = composeSUT(fakeExercisesStore: mockExercisesStore, stubFeedPackages: feedPackages)
@@ -282,14 +282,14 @@ class ExerciseCoordinatorTests: XCTestCase {
         coordinator.next(TestExerciseViewModel(), correctAnswer: false)
         coordinator.next(TestExerciseViewModel(), correctAnswer: false)
         
-        XCTAssertEqual(mockExercisesStore.updateExercises_callCount, 1)
+        XCTAssertEqual(mockExercisesStore.updateFeedPackage_callCount, 1)
     }
     
     //MARK: - SUT Composition
     
     func composeSUT(fakeContainerViewController: ContainerViewController? = nil,
                     fakeExerciseExternalDataService: FakeExerciseExternalDataService? = nil,
-                    fakeExercisesStore: FakeExercisesStore? = nil,
+                    fakeExercisesStore: FakeFeedPackageStore? = nil,
                     stubFeedPackage: FeedPackage? = nil,
                     stubFeedPackages: [FeedPackage]? = nil,
                     feedPackageLoadState: LoadState<FeedPackage>? = nil,
@@ -297,7 +297,7 @@ class ExerciseCoordinatorTests: XCTestCase {
         
         let containerVC = fakeContainerViewController ?? FakeContainerViewController()
         let exerciseExternalDataService = fakeExerciseExternalDataService ?? FakeExerciseExternalDataService()
-        let exercisesStore = fakeExercisesStore ?? FakeExercisesStore()
+        let exercisesStore = fakeExercisesStore ?? FakeFeedPackageStore()
         
         let feedPackage = stubFeedPackage ?? FeedPackage.exercisesPackage
         exercisesStore.setStubFeedPackage(feedPackage)
@@ -345,7 +345,7 @@ class TestFeedContainerViewModel: FeedContainerViewModel {
 
 class TestLoadExercisesViewModel: LoadExercisesViewModel {
     init() {
-        super.init(delegate: FakeLoadExercisesViewModelDelegate(), feedPackageStore: FakeExercisesStore())
+        super.init(delegate: FakeLoadExercisesViewModelDelegate(), feedPackageStore: FakeFeedPackageStore())
     }
 }
 

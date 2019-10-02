@@ -38,10 +38,13 @@ class RootCoordinator: Coordinator {
     func start() {
         databaseService.setup()
 
-        let coordinator = compositionRoot.composeExerciseCoordinator()
-        containerVC.show(viewController: coordinator.containerViewController, animation: .none)
-        coordinator.start()
-        childCoordinator = coordinator
+        let vc = compositionRoot.composePrepareFeedScene()
+        containerVC.show(viewController: vc, animation: .none)
+        
+//        let coordinator = compositionRoot.composeExerciseCoordinator()
+//        containerVC.show(viewController: coordinator.containerViewController, animation: .none)
+//        coordinator.start()
+//        childCoordinator = coordinator
     }
     
 }

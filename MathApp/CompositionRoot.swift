@@ -20,6 +20,12 @@ class CompositionRoot {
         return UIWindow(frame: UIScreen.main.bounds)
     }
     
+    func composePrepareFeedScene() -> UIViewController {
+        let feedPackageStore = FeedPackageStoreImpl(exerciseExternalDataService: exercisesExternalDataService)
+        let vm = PrepareFeedViewModel(feedPackageStore: feedPackageStore)
+        return PrepareFeedViewController(viewModel: vm)
+    }
+    
     //MARK: - Exercise sequence
     
     func composeExerciseCoordinator() -> ExerciseCoordinator {

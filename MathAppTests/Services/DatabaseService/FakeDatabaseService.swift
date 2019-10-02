@@ -14,6 +14,7 @@ class FakeDatabaseService: DatabaseService {
     var setup_callCount = 0
     
     func setup() {
+        print("setup")
         setup_callCount += 1
     }
     
