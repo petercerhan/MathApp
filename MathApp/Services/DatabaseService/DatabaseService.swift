@@ -24,7 +24,7 @@ protocol DatabaseService {
     func recordResult(concept_id: Int, correct: Bool)
     
     func getFocusConcepts() -> (Int, Int)
-    func getEnrichedUserConcept(id: Int) -> EnrichedUserConcept?
+    func getEnrichedUserConcept(conceptID: Int) -> EnrichedUserConcept?
     
     func setUserConceptStatus(_ status: Int, forID id: Int)
 }
@@ -191,9 +191,9 @@ class DatabaseServiceImpl: DatabaseService {
         return (concept1, concept2)
     }
     
-    func getEnrichedUserConcept(id: Int) -> EnrichedUserConcept? {
+    func getEnrichedUserConcept(conceptID: Int) -> EnrichedUserConcept? {
         let query = conceptsTable.join(userConceptsTable, on: UserConcept.column_conceptID == conceptsTable[Concept.column_id])
-                                .filter(UserConcept.column_conceptID == Int64(id))
+                                .filter(UserConcept.column_conceptID == Int64(conceptID))
         
         guard let userConceptRow = try? db.pluck(query),
             let userConcept = UserConcept.createFromQueryResult(userConceptRow)

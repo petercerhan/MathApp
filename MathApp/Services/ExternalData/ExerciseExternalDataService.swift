@@ -39,36 +39,51 @@ class ExerciseExternalDataServiceImpl: ExerciseExternalDataService {
         print("focus concepts: \(focusConcepts)")
         
         let concept1_id = focusConcepts.0
-        let concept2_id = focusConcepts.1
+//        let concept2_id = focusConcepts.1
         
-        guard let enrichedUserConcept_1 = databaseService.getEnrichedUserConcept(id: concept1_id) else {
+        guard let enrichedUserConcept_1 = databaseService.getEnrichedUserConcept(conceptID: concept1_id) else {
             return getExercises_prior()
         }
-        let enrichedUserConcept_2 = databaseService.getEnrichedUserConcept(id: concept2_id)
+        let concept1 = enrichedUserConcept_1.userConcept.concept
+        let strength1 = enrichedUserConcept_1.userConcept.strength
         
         print("concept 1 score: \(enrichedUserConcept_1.currentScore)")
 
         if enrichedUserConcept_1.status == .unseen {
-            print("concept intro for concept \(enrichedUserConcept_1.userConcept.concept.id)")
-            let conceptIntro = ConceptIntro(concept: enrichedUserConcept_1.userConcept.concept)
+            print("concept intro for concept \(concept1_id)")
+
+            let conceptIntro = ConceptIntro(concept: concept1)
             
             //should actually be exercises for previous concept, (if none, no exercises (will this work?))
-            let exercises = getExercisesForConcept(conceptID: enrichedUserConcept_1.userConcept.concept.id, strength: enrichedUserConcept_1.userConcept.strength)
-            return Observable<FeedPackage>.just(FeedPackage(feedPackageType: .conceptIntro, exercises: exercises, transitionItem: conceptIntro))
+            
+            let exercises = getExercisesForConcept(conceptID: enrichedUserConcept_1.userConcept.concept.id, strength: strength1)
+            let feedPackage = FeedPackage(feedPackageType: .conceptIntro, exercises: exercises, transitionItem: conceptIntro)
+            return wrapFeedPackage(feedPackage)
         }
         
         if enrichedUserConcept_1.status == .introductionInProgress, enrichedUserConcept_1.currentScore < 5 {
-            print("in progress exercises for concept \(enrichedUserConcept_1.userConcept.concept.id)")
-            let exercises = getExercisesForConcept(conceptID: enrichedUserConcept_1.userConcept.concept.id, strength: enrichedUserConcept_1.userConcept.strength)
-            return Observable<FeedPackage>.just(FeedPackage(feedPackageType: .exercises, exercises: exercises, transitionItem: nil))
+            print("in progress exercises for concept \(concept1_id)")
+            
+            let exercises = getExercisesForConcept(conceptID: concept1_id, strength: strength1)
+            let feedPackage = FeedPackage(feedPackageType: .exercises, exercises: exercises, transitionItem: nil)
+            return wrapFeedPackage(feedPackage)
         }
         
         if enrichedUserConcept_1.status == .introductionInProgress, enrichedUserConcept_1.currentScore >= 5 {
             print("level up for concept \(enrichedUserConcept_1.userConcept.concept.id)")
+            
+            let exercises = getExercisesForConcept(conceptID: enrichedUserConcept_1.userConcept.concept.id, strength: enrichedUserConcept_1.userConcept.strength)
+            let levelUpItem = LevelUpItem(concept: concept1, previousLevel: strength1, newLevel: strength1 + 1)
+            let feedPackage = FeedPackage(feedPackageType: .levelUp, exercises: exercises, transitionItem: levelUpItem)
+            return wrapFeedPackage(feedPackage)
         }
         
         
         return getExercises_prior()
+    }
+    
+    private func wrapFeedPackage(_ feedPackage: FeedPackage) -> Observable<FeedPackage> {
+        return Observable<FeedPackage>.just(feedPackage)
     }
     
     private func getExercisesForConcept(conceptID: Int, strength: Int) -> [Exercise] {
