@@ -17,15 +17,20 @@ func getNewObserver<T>() -> TestableObserver<T> {
 }
 
 extension XCTestCase {
-    func delayedAssertion(_ assertion: @escaping () -> () ) {
+    
+    func delayedAssertion(delay: Double, _ assertion: @escaping () -> () ) {
         let expectation = XCTestExpectation()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.005) {
+        let expectationTimeout = max(delay + 0.1, 0.5)
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             assertion()
             expectation.fulfill()
         }
-        wait(for:[expectation], timeout: 0.05)
+        wait(for:[expectation], timeout: expectationTimeout)
     }
     
+    func delayedAssertion(_ assertion: @escaping () -> () ) {
+        delayedAssertion(delay: 0.005, assertion)
+    }
     
 }
 

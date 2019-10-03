@@ -36,10 +36,10 @@ class PrepareFeedViewModel {
     private func bindFeedPackageLoad() {
         feedPackageStore.feedPackage
             .observeOn(MainScheduler.instance)
+            .filter { $0.isLoaded }
+            .take(1)
             .subscribe(onNext: { [unowned self] loadState in
-                if loadState.isLoaded {
-                    self.delegate?.next(self)
-                }
+                self.delegate?.next(self)
             })
             .disposed(by: disposeBag)
     }

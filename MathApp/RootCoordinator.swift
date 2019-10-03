@@ -16,6 +16,7 @@ class RootCoordinator: Coordinator {
     private let compositionRoot: CompositionRoot
     private let containerVC: ContainerViewController
     private let databaseService: DatabaseService
+    private let feedPackageStore: FeedPackageStore
     
     //MARK: - State
     
@@ -23,10 +24,11 @@ class RootCoordinator: Coordinator {
     
     //MARK: - Initialization
     
-    init(compositionRoot: CompositionRoot, containerVC: ContainerViewController, databaseService: DatabaseService) {
+    init(compositionRoot: CompositionRoot, containerVC: ContainerViewController, databaseService: DatabaseService, feedPackageStore: FeedPackageStore) {
         self.compositionRoot = compositionRoot
         self.containerVC = containerVC
         self.databaseService = databaseService
+        self.feedPackageStore = feedPackageStore
     }
     
     //MARK: - Coordinator Interface
@@ -38,7 +40,7 @@ class RootCoordinator: Coordinator {
     func start() {
         databaseService.setup()
 
-        let vc = compositionRoot.composePrepareFeedScene(delegate: self)
+        let vc = compositionRoot.composePrepareFeedScene(delegate: self, feedPackageStore: feedPackageStore)
         containerVC.show(viewController: vc, animation: .none)
     }
     
@@ -48,7 +50,13 @@ class RootCoordinator: Coordinator {
 
 extension RootCoordinator: PrepareFeedViewModelDelegate {
     func next(_ prepareFeedViewModel: PrepareFeedViewModel) {
-        let coordinator = compositionRoot.composeExerciseCoordinator()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) { [weak self] in
+            self?.transitionToFeedSquence()
+        }
+    }
+    
+    private func transitionToFeedSquence() {
+        let coordinator = compositionRoot.composeExerciseCoordinator(feedPackageStore: feedPackageStore)
         containerVC.show(viewController: coordinator.containerViewController, animation: .none)
         coordinator.start()
         childCoordinator = coordinator

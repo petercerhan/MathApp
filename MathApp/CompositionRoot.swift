@@ -11,26 +11,26 @@ import UIKit
 class CompositionRoot {
     
     func composeRootCoordinator() -> Coordinator {
+        let feedPackageStore = FeedPackageStoreImpl(exerciseExternalDataService: exercisesExternalDataService)
         return RootCoordinator(compositionRoot: self,
                                containerVC: ContainerViewController(),
-                               databaseService: databaseService)
+                               databaseService: databaseService,
+                               feedPackageStore: feedPackageStore)
     }
     
     func composeWindow() -> UIWindow {
         return UIWindow(frame: UIScreen.main.bounds)
     }
     
-    func composePrepareFeedScene(delegate: PrepareFeedViewModelDelegate) -> UIViewController {
-        let feedPackageStore = FeedPackageStoreImpl(exerciseExternalDataService: exercisesExternalDataService)
+    func composePrepareFeedScene(delegate: PrepareFeedViewModelDelegate, feedPackageStore: FeedPackageStore) -> UIViewController {
         let vm = PrepareFeedViewModel(delegate: delegate, feedPackageStore: feedPackageStore)
         return PrepareFeedViewController(viewModel: vm)
     }
     
     //MARK: - Exercise sequence
     
-    func composeExerciseCoordinator() -> ExerciseCoordinator {
+    func composeExerciseCoordinator(feedPackageStore: FeedPackageStore) -> ExerciseCoordinator {
         let resultsStore = ResultsStoreImpl(databaseService: databaseService)
-        let feedPackageStore = FeedPackageStoreImpl(exerciseExternalDataService: exercisesExternalDataService)
         let containerVM = FeedContainerViewModel(delegate: nil, resultsStore: resultsStore)
         return ExerciseCoordinator(compositionRoot: self,
                                    containerVC: FeedContainerViewController(viewModel: containerVM),
