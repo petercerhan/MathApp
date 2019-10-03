@@ -76,7 +76,7 @@ class FakeDatabaseService: DatabaseService {
         return (0, 0)
     }
     
-    func getEnrichedUserConcept(id: Int) -> EnrichedUserConcept? {
+    func getEnrichedUserConcept(conceptID: Int) -> EnrichedUserConcept? {
         return nil
     }
     

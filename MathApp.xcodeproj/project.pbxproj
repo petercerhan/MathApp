@@ -55,6 +55,8 @@
 		6EBA305E231098F600E6DC54 /* ExerciseChoiceConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBA305D231098F600E6DC54 /* ExerciseChoiceConfiguration.swift */; };
 		6EBA306A2314D3F800E6DC54 /* RxLatestValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBA30692314D3F800E6DC54 /* RxLatestValue.swift */; };
 		6EBA306D2314D4AB00E6DC54 /* RxLatestValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBA306C2314D4AB00E6DC54 /* RxLatestValueTests.swift */; };
+		6EBC1BC42346B6E200654285 /* LevelUpSceneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC1BC32346B6E200654285 /* LevelUpSceneTests.swift */; };
+		6EBC1BC62346B85100654285 /* LevelUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC1BC52346B85100654285 /* LevelUpViewModel.swift */; };
 		6EBD530F233AF7A70057F28A /* ChooseExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD530D233AF7A70057F28A /* ChooseExerciseViewController.swift */; };
 		6EBD5310233AF7A70057F28A /* ChooseExerciseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EBD530E233AF7A70057F28A /* ChooseExerciseViewController.xib */; };
 		6EBD5313233AF9A50057F28A /* ChooseExerciseSceneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD5312233AF9A50057F28A /* ChooseExerciseSceneTests.swift */; };
@@ -194,6 +196,8 @@
 		6EBA305D231098F600E6DC54 /* ExerciseChoiceConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseChoiceConfiguration.swift; sourceTree = "<group>"; };
 		6EBA30692314D3F800E6DC54 /* RxLatestValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxLatestValue.swift; sourceTree = "<group>"; };
 		6EBA306C2314D4AB00E6DC54 /* RxLatestValueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxLatestValueTests.swift; sourceTree = "<group>"; };
+		6EBC1BC32346B6E200654285 /* LevelUpSceneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelUpSceneTests.swift; sourceTree = "<group>"; };
+		6EBC1BC52346B85100654285 /* LevelUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelUpViewModel.swift; sourceTree = "<group>"; };
 		6EBD530D233AF7A70057F28A /* ChooseExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseExerciseViewController.swift; sourceTree = "<group>"; };
 		6EBD530E233AF7A70057F28A /* ChooseExerciseViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChooseExerciseViewController.xib; sourceTree = "<group>"; };
 		6EBD5312233AF9A50057F28A /* ChooseExerciseSceneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseExerciseSceneTests.swift; sourceTree = "<group>"; };
@@ -588,6 +592,14 @@
 			path = Library;
 			sourceTree = "<group>";
 		};
+		6EBC1BC22346B6CF00654285 /* LevelUpScene */ = {
+			isa = PBXGroup;
+			children = (
+				6EBC1BC32346B6E200654285 /* LevelUpSceneTests.swift */,
+			);
+			path = LevelUpScene;
+			sourceTree = "<group>";
+		};
 		6EBD530C233AF78A0057F28A /* ChooseExerciseScene */ = {
 			isa = PBXGroup;
 			children = (
@@ -618,6 +630,7 @@
 				6E74FD452318B52F00730AEB /* Models */,
 				6EBE4E9D230B64240047A880 /* ExerciseScene */,
 				6E883F99233D9B7B004F0D0E /* ConceptIntroScene */,
+				6EBC1BC22346B6CF00654285 /* LevelUpScene */,
 				6EB933A6233071A800E38B52 /* LoadExercisesSceneTests */,
 				6EC666F4232204170048068C /* InfoScene */,
 			);
@@ -877,6 +890,7 @@
 			isa = PBXGroup;
 			children = (
 				6EE60C5D2345900900B0322B /* LevelUpViewController.swift */,
+				6EBC1BC52346B85100654285 /* LevelUpViewModel.swift */,
 				6EE60C5E2345900900B0322B /* LevelUpViewController.xib */,
 			);
 			path = LevelUpScene;
@@ -1147,6 +1161,7 @@
 				6EB933B22331AB3800E38B52 /* Queue.swift in Sources */,
 				6ECC412A2328842A00E8F3E1 /* UserConcept+sqlite.swift in Sources */,
 				6EC66700232326FA0048068C /* Concept+data.swift in Sources */,
+				6EBC1BC62346B85100654285 /* LevelUpViewModel.swift in Sources */,
 				6EC6674D2324AA040048068C /* ExerciseResult.swift in Sources */,
 				6E00E487233FEAD500BFF274 /* LoadState.swift in Sources */,
 				6E74FD442318B0A400730AEB /* GeneralError.swift in Sources */,
@@ -1171,6 +1186,7 @@
 				6EC66727232461840048068C /* MenuSceneTests.swift in Sources */,
 				6E74FD422318A2B900730AEB /* TestUtilities.swift in Sources */,
 				6EC6670C23243CDB0048068C /* FakeFeedContainerViewModelDelegate.swift in Sources */,
+				6EBC1BC42346B6E200654285 /* LevelUpSceneTests.swift in Sources */,
 				6EC6670F232447C40048068C /* MenuCoordinatorTests.swift in Sources */,
 				6E74FD402318A1F500730AEB /* FakeExerciseViewModelDelegate.swift in Sources */,
 				6EE60C5523456DCF00B0322B /* FakePrepareFeedViewModelDelegate.swift in Sources */,

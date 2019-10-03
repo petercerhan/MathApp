@@ -9,22 +9,37 @@
 import UIKit
 
 class LevelUpViewController: UIViewController {
-
+    
+    //MARK: - Dependencies
+    
+    private let viewModel: LevelUpViewModel
+    
+    //MARK: - UI Components
+    
+    @IBOutlet private(set) var levelUpLabel: UILabel!
+    @IBOutlet private(set) var conceptLabel: UILabel!
+    
+    //MARK: - Initialization
+    
+    init(viewModel: LevelUpViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: "LevelUpViewController", bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("cannot initialize with init(coder:)")
+    }
+    
+    //MARK: - UIViewController Interface
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        bindUI()
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    private func bindUI() {
+        levelUpLabel.text = "Level *\(viewModel.previousLevel)* to level *\(viewModel.newLevel)*"
+        conceptLabel.text = viewModel.conceptName
     }
-    */
 
 }

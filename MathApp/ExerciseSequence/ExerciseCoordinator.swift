@@ -93,7 +93,7 @@ class ExerciseCoordinator: Coordinator {
     }
     
     private func showLevelUpScene(levelUpItem: LevelUpItem) {
-        let vc = compositionRoot.composeLevelUpScene()
+        let vc = compositionRoot.composeLevelUpScene(levelUpItem: levelUpItem)
         containerVC.show(viewController: vc, animation: .fadeIn)
     }
     

@@ -10,6 +10,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LevelUpViewController" customModule="MathApp" customModuleProvider="target">
             <connections>
+                <outlet property="conceptLabel" destination="TGu-DQ-YdR" id="Sy5-gU-wa9"/>
+                <outlet property="levelUpLabel" destination="js1-A8-1Sy" id="UvN-aR-fOF"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -24,11 +26,35 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Well Done!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cg0-hy-Lxm">
+                    <rect key="frame" x="16" y="20" width="103" height="26.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have leveled up the following skill:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YCb-rP-ZR6">
+                    <rect key="frame" x="16" y="78.5" width="308" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rule" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGu-DQ-YdR">
+                    <rect key="frame" x="16" y="190" width="35.5" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="TGu-DQ-YdR" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="1oB-td-3LG"/>
+                <constraint firstItem="YCb-rP-ZR6" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="4hM-pM-UPF"/>
+                <constraint firstItem="TGu-DQ-YdR" firstAttribute="top" secondItem="YCb-rP-ZR6" secondAttribute="bottom" constant="90.5" id="C2o-jn-emy"/>
+                <constraint firstItem="YCb-rP-ZR6" firstAttribute="top" secondItem="cg0-hy-Lxm" secondAttribute="bottom" constant="32" id="Juj-3r-2Lq"/>
                 <constraint firstItem="js1-A8-1Sy" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="bLQ-XJ-pPu"/>
+                <constraint firstItem="cg0-hy-Lxm" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="e0J-ZT-rQP"/>
                 <constraint firstItem="js1-A8-1Sy" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="wcS-Db-9aG"/>
+                <constraint firstItem="cg0-hy-Lxm" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="zeD-aW-p6U"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="133" y="154"/>
