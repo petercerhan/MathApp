@@ -20,9 +20,9 @@ class CompositionRoot {
         return UIWindow(frame: UIScreen.main.bounds)
     }
     
-    func composePrepareFeedScene() -> UIViewController {
+    func composePrepareFeedScene(delegate: PrepareFeedViewModelDelegate) -> UIViewController {
         let feedPackageStore = FeedPackageStoreImpl(exerciseExternalDataService: exercisesExternalDataService)
-        let vm = PrepareFeedViewModel(feedPackageStore: feedPackageStore)
+        let vm = PrepareFeedViewModel(delegate: delegate, feedPackageStore: feedPackageStore)
         return PrepareFeedViewController(viewModel: vm)
     }
     

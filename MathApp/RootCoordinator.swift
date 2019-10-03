@@ -38,14 +38,19 @@ class RootCoordinator: Coordinator {
     func start() {
         databaseService.setup()
 
-        let vc = compositionRoot.composePrepareFeedScene()
+        let vc = compositionRoot.composePrepareFeedScene(delegate: self)
         containerVC.show(viewController: vc, animation: .none)
-        
-//        let coordinator = compositionRoot.composeExerciseCoordinator()
-//        containerVC.show(viewController: coordinator.containerViewController, animation: .none)
-//        coordinator.start()
-//        childCoordinator = coordinator
     }
     
 }
 
+//MARK: - PrepareFeedViewModelDelegate
+
+extension RootCoordinator: PrepareFeedViewModelDelegate {
+    func next(_ prepareFeedViewModel: PrepareFeedViewModel) {
+        let coordinator = compositionRoot.composeExerciseCoordinator()
+        containerVC.show(viewController: coordinator.containerViewController, animation: .none)
+        coordinator.start()
+        childCoordinator = coordinator
+    }
+}

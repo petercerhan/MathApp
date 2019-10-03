@@ -40,6 +40,17 @@ class RootCoordinatorTests: XCTestCase {
         XCTAssertEqual(mockDatabaseService.setup_callCount, 1)
     }
     
+    func test_prepareFeedRequestsNext_shouldShowFeedSequence() {
+        let mockContainer = FakeContainerViewController()
+        let coordinator = composeSUT(fakeContainer: mockContainer)
+        
+        coordinator.start()
+        coordinator.next(TestPrepareFeedViewModel())
+        
+        mockContainer.verifyDidShow(viewControllerType: ContainerViewController.self)
+        XCTAssert(coordinator.childCoordinator is ExerciseCoordinator)
+    }
+    
     //MARK: - SUT Composition
     
     func composeSUT(fakeContainer: FakeContainerViewController? = nil, fakeDatabaseService: FakeDatabaseService? = nil) -> RootCoordinator {
@@ -61,8 +72,14 @@ class RootCoordinatorFakeCompositionRoot: CompositionRoot {
                                    feedPackageStore: FakeFeedPackageStore())
     }
     
-    override func composePrepareFeedScene() -> UIViewController {
-        let vm = PrepareFeedViewModel(feedPackageStore: FakeFeedPackageStore())
+    override func composePrepareFeedScene(delegate: PrepareFeedViewModelDelegate) -> UIViewController {
+        let vm = PrepareFeedViewModel(delegate: delegate, feedPackageStore: FakeFeedPackageStore())
         return PrepareFeedViewController(viewModel: vm)
+    }
+}
+
+class TestPrepareFeedViewModel: PrepareFeedViewModel {
+    init() {
+        super.init(delegate: FakePrepareFeedViewModelDelegate(), feedPackageStore: FakeFeedPackageStore())
     }
 }

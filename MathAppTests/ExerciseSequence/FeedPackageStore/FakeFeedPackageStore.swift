@@ -36,6 +36,11 @@ class FakeFeedPackageStore: FeedPackageStore {
         nextPackage()
     }
     
+    func setStubFeedPackage_doNotEmit(_ feedPackage: FeedPackage) {
+        stubFeedPackages = [feedPackage]
+        feedPackageStubIndex = 0
+    }
+    
     func setStubFeedPackages(_ feedPackages: [FeedPackage]) {
         stubFeedPackages = feedPackages
         feedPackageStubIndex = 0
