@@ -56,6 +56,10 @@ class CompositionRoot {
         return ConceptIntroViewController(viewModel: vm)
     }
     
+    func composeLevelUpScene() -> UIViewController {
+        return LevelUpViewController()
+    }
+    
     func composeInfoScene(delegate: InfoViewModelDelegate, concept: Concept) -> UIViewController {
         let vm = InfoViewModelImpl(delegate: delegate, concept: concept)
         return InfoViewController(viewModel: vm)

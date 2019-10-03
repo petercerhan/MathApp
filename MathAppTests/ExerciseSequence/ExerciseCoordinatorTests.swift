@@ -291,9 +291,14 @@ class ExerciseCoordinatorTests: XCTestCase {
     
     func test_start_levelUpFeedPackage_shouldShowLevelUp() {
         let mockContainer = FakeContainerViewController()
-        let coordinator = composeSUT(fakeContainerViewController: mockContainer, stubFeedPackage: FeedPackage.constantRuleIntro)
+        let coordinator = composeSUT(fakeContainerViewController: mockContainer, stubFeedPackage: FeedPackage.constantRuleLevelUp)
         
+        coordinator.start()
+        
+        mockContainer.verifyDidShow(viewControllerType: LevelUpViewController.self)
     }
+    
+    
     
     //MARK: - SUT Composition
     

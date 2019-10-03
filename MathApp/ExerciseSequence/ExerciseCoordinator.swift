@@ -64,9 +64,9 @@ class ExerciseCoordinator: Coordinator {
     private func showNextFeedScene(animation: TransitionAnimation, canTransition: Bool) {
         if canTransition,
             let feedPackage = latestValue(of: feedPackageStore.feedPackage, disposeBag: disposeBag)?.data,
-            let conceptIntro = feedPackage.transitionItem as? ConceptIntro
+            let transitionItem = feedPackage.transitionItem
         {
-            showConceptIntroScene(conceptIntro: conceptIntro)
+            showTransitionItem(transitionItem)
             return
         }
         
@@ -77,11 +77,24 @@ class ExerciseCoordinator: Coordinator {
         }
     }
     
+    private func showTransitionItem(_ transitionItem: FeedItem) {
+        if let conceptIntro = transitionItem as? ConceptIntro {
+            showConceptIntroScene(conceptIntro: conceptIntro)
+        } else if let levelUpItem = transitionItem as? LevelUpItem  {
+            showLevelUpScene(levelUpItem: levelUpItem)
+        }
+    }
+    
     private func showConceptIntroScene(conceptIntro: ConceptIntro) {
         let vc = compositionRoot.composeConceptIntroScene(delegate: self, conceptIntro: conceptIntro)
         containerVC.show(viewController: vc, animation: .fadeIn)
         feedPackageStore.dispatch(action: .setConceptIntroSeen(id: conceptIntro.concept.id))
         exerciseQueue = Queue<Exercise>()
+    }
+    
+    private func showLevelUpScene(levelUpItem: LevelUpItem) {
+        let vc = compositionRoot.composeLevelUpScene()
+        containerVC.show(viewController: vc, animation: .fadeIn)
     }
     
     private func showNextExerciseScene(animation: TransitionAnimation) {

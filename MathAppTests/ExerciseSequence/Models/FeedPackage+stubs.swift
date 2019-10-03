@@ -32,9 +32,10 @@ extension FeedPackage {
         return FeedPackage(feedPackageType: .conceptIntro, exercises: exercises, transitionItem: transitionItem)
     }
     
-    static func constantRuleLevelUp: FeedPackage {
+    static var constantRuleLevelUp: FeedPackage {
         let exercises = [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3]
-        let transitionItem = 
+        let transitionItem = LevelUpItem(concept: Concept.constantRule, previousLevel: 0, newLevel: 1)
+        return FeedPackage(feedPackageType: .levelUp, exercises: exercises, transitionItem: transitionItem)
     }
 
 }
