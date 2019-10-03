@@ -31,5 +31,10 @@ extension FeedPackage {
         let transitionItem = ConceptIntro(concept: Concept.constantRule)
         return FeedPackage(feedPackageType: .conceptIntro, exercises: exercises, transitionItem: transitionItem)
     }
+    
+    static func constantRuleLevelUp: FeedPackage {
+        let exercises = [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3]
+        let transitionItem = 
+    }
 
 }

@@ -12,6 +12,8 @@ import XCTest
 
 class ExerciseCoordinatorTests: XCTestCase {
     
+    //MARK: - Exercise Packages
+    
     func test_start_exercisesFeedPackage_shouldShowExerciseScene() {
         let mockContainerVC = FakeContainerViewController()
         let coordinator = composeSUT(fakeContainerViewController: mockContainerVC)
@@ -202,7 +204,7 @@ class ExerciseCoordinatorTests: XCTestCase {
     }
     
     
-    
+    //MARK: - Concept Intro Packages
     
     func test_start_conceptIntroFeedPackage_shouldShowConceptIntro() {
         let mockContainer = FakeContainerViewController()
@@ -283,6 +285,14 @@ class ExerciseCoordinatorTests: XCTestCase {
         coordinator.next(TestExerciseViewModel(), correctAnswer: false)
         
         XCTAssertEqual(mockExercisesStore.updateFeedPackage_callCount, 1)
+    }
+    
+    //MARK: - Level Up Packages
+    
+    func test_start_levelUpFeedPackage_shouldShowLevelUp() {
+        let mockContainer = FakeContainerViewController()
+        let coordinator = composeSUT(fakeContainerViewController: mockContainer, stubFeedPackage: FeedPackage.constantRuleIntro)
+        
     }
     
     //MARK: - SUT Composition
