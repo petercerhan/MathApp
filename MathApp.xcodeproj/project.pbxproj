@@ -117,12 +117,12 @@
 		6ECC412C23288BC500E8F3E1 /* UserConcept+data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECC412B23288BC500E8F3E1 /* UserConcept+data.swift */; };
 		6EE60C4123441C3700B0322B /* User+sqlite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE60C4023441C3700B0322B /* User+sqlite.swift */; };
 		6EE60C43234420A900B0322B /* EnrichedUserConcept.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE60C42234420A900B0322B /* EnrichedUserConcept.swift */; };
-		6EE60C45234428D500B0322B /* db.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 6EE60C44234428D500B0322B /* db.sqlite3 */; };
 		6EE60C492344347A00B0322B /* PrepareFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE60C472344347A00B0322B /* PrepareFeedViewController.swift */; };
 		6EE60C4A2344347A00B0322B /* PrepareFeedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EE60C482344347A00B0322B /* PrepareFeedViewController.xib */; };
 		6EE60C4E2344370500B0322B /* PrepareFeedSceneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE60C4D2344370500B0322B /* PrepareFeedSceneTests.swift */; };
 		6EE60C502344399900B0322B /* PrepareFeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE60C4F2344399900B0322B /* PrepareFeedViewModel.swift */; };
 		6EE60C5523456DCF00B0322B /* FakePrepareFeedViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE60C5423456DCF00B0322B /* FakePrepareFeedViewModelDelegate.swift */; };
+		6EE60C572345898800B0322B /* db.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 6EE60C562345898800B0322B /* db.sqlite3 */; };
 		BCB14F255178DFA21D82194D /* Pods_MathAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE993BEBDF1A3B96DC4714AA /* Pods_MathAppTests.framework */; };
 		C99DA79539000A5618FB589C /* Pods_MathApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1CE43285555BFADE6DC3070 /* Pods_MathApp.framework */; };
 /* End PBXBuildFile section */
@@ -253,12 +253,12 @@
 		6ECC412B23288BC500E8F3E1 /* UserConcept+data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserConcept+data.swift"; sourceTree = "<group>"; };
 		6EE60C4023441C3700B0322B /* User+sqlite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+sqlite.swift"; sourceTree = "<group>"; };
 		6EE60C42234420A900B0322B /* EnrichedUserConcept.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrichedUserConcept.swift; sourceTree = "<group>"; };
-		6EE60C44234428D500B0322B /* db.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = db.sqlite3; sourceTree = "<group>"; };
 		6EE60C472344347A00B0322B /* PrepareFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepareFeedViewController.swift; sourceTree = "<group>"; };
 		6EE60C482344347A00B0322B /* PrepareFeedViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PrepareFeedViewController.xib; sourceTree = "<group>"; };
 		6EE60C4D2344370500B0322B /* PrepareFeedSceneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepareFeedSceneTests.swift; sourceTree = "<group>"; };
 		6EE60C4F2344399900B0322B /* PrepareFeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepareFeedViewModel.swift; sourceTree = "<group>"; };
 		6EE60C5423456DCF00B0322B /* FakePrepareFeedViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakePrepareFeedViewModelDelegate.swift; sourceTree = "<group>"; };
+		6EE60C562345898800B0322B /* db.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = db.sqlite3; sourceTree = "<group>"; };
 		9BCF43D90809ABFC7320F5BB /* Pods-MathApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MathApp.release.xcconfig"; path = "Target Support Files/Pods-MathApp/Pods-MathApp.release.xcconfig"; sourceTree = "<group>"; };
 		A1CE43285555BFADE6DC3070 /* Pods_MathApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MathApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACC8CBE54D6FE6BB00980A70 /* Pods-MathApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MathApp.debug.xcconfig"; path = "Target Support Files/Pods-MathApp/Pods-MathApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -548,7 +548,7 @@
 		6EB933B32331CBA900E38B52 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
-				6EE60C44234428D500B0322B /* db.sqlite3 */,
+				6EE60C562345898800B0322B /* db.sqlite3 */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -972,7 +972,7 @@
 				6EC66730232464B20048068C /* ConceptMapViewController.xib in Resources */,
 				6EBE4E9C230B614B0047A880 /* ExerciseViewController.xib in Resources */,
 				6EE60C4A2344347A00B0322B /* PrepareFeedViewController.xib in Resources */,
-				6EE60C45234428D500B0322B /* db.sqlite3 in Resources */,
+				6EE60C572345898800B0322B /* db.sqlite3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

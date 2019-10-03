@@ -42,4 +42,5 @@ extension UserConcept {
                                     UserConcept.column_conceptID <- Int64(concept.id),
                                     UserConcept.column_strength <- Int64(strength))
     }
+    
 }

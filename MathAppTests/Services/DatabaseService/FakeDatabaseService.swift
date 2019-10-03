@@ -77,9 +77,11 @@ class FakeDatabaseService: DatabaseService {
     }
     
     func getEnrichedUserConcept(id: Int) -> EnrichedUserConcept? {
-        
         return nil
     }
-
+    
+    func setUserConceptStatus(_ status: Int, forID id: Int) {
+        
+    }
 }
 

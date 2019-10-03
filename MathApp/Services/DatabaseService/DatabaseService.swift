@@ -25,6 +25,8 @@ protocol DatabaseService {
     
     func getFocusConcepts() -> (Int, Int)
     func getEnrichedUserConcept(id: Int) -> EnrichedUserConcept?
+    
+    func setUserConceptStatus(_ status: Int, forID id: Int)
 }
 
 class DatabaseServiceImpl: DatabaseService {
@@ -124,13 +126,13 @@ class DatabaseServiceImpl: DatabaseService {
         }
         
         let latestResultIndex = Int(userConceptRow[UserConcept.column_latest_result_index])
+        let newResultIndex = (latestResultIndex + 1) % 7
         
         let resultValue: Int64 = correct ? 1 : 0
-        let resultColumn = resultColumnFromIndex(latestResultIndex)
+        let resultColumn = resultColumnFromIndex(newResultIndex)
         let indexColumn = UserConcept.column_latest_result_index
-        let newResultValue = (resultValue + 1) % 7
         
-        _ = try? db.run(query.update(resultColumn <- resultValue, indexColumn <- newResultValue))
+        _ = try? db.run(query.update(resultColumn <- resultValue, indexColumn <- Int64(newResultIndex)))
         
 //        printCurrentUserConceptStatus(concept_id: concept_id)
     }
@@ -213,4 +215,8 @@ class DatabaseServiceImpl: DatabaseService {
         return EnrichedUserConcept(userConcept: userConcept, statusCode: status, currentScore: score)
     }
     
+    func setUserConceptStatus(_ status: Int, forID id: Int) {
+        let query = UserConcept.table.filter(UserConcept.column_id == Int64(id))
+        _ = try? db.run(query.update(UserConcept.column_status <- Int64(status)))
+    }
 }

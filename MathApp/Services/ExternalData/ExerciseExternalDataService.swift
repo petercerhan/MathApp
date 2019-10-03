@@ -32,40 +32,43 @@ class ExerciseExternalDataServiceImpl: ExerciseExternalDataService {
     
     //MARK: - ExerciseExternalDataService Interface
     
-    var returnConceptIntroFlag = true
-    
     func getNextFeedPackage() -> Observable<FeedPackage> {
         //pull concepts from user record
         let focusConcepts = databaseService.getFocusConcepts()
+        
+        print("focus concepts: \(focusConcepts)")
+        
         let concept1_id = focusConcepts.0
         let concept2_id = focusConcepts.1
         
         guard let enrichedUserConcept_1 = databaseService.getEnrichedUserConcept(id: concept1_id) else {
             return getExercises_prior()
         }
+        let enrichedUserConcept_2 = databaseService.getEnrichedUserConcept(id: concept2_id)
+        
+        print("concept 1 score: \(enrichedUserConcept_1.currentScore)")
 
         if enrichedUserConcept_1.status == .unseen {
-            print("should return user concept")
+            print("concept intro for concept \(enrichedUserConcept_1.userConcept.concept.id)")
             let conceptIntro = ConceptIntro(concept: enrichedUserConcept_1.userConcept.concept)
+            
+            //should actually be exercises for previous concept, (if none, no exercises (will this work?))
             let exercises = getExercisesForConcept(conceptID: enrichedUserConcept_1.userConcept.concept.id, strength: enrichedUserConcept_1.userConcept.strength)
             return Observable<FeedPackage>.just(FeedPackage(feedPackageType: .conceptIntro, exercises: exercises, transitionItem: conceptIntro))
         }
         
-        //get concept 1 user-concept
-        //get concept 2 user-concept
-        
-        
-        
-        if returnConceptIntroFlag {
-            let conceptIntro = ConceptIntro(concept: Concept.constantRule)
-            let feedPackage = FeedPackage(feedPackageType: .conceptIntro, exercises: [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3], transitionItem: conceptIntro)
-            
-            returnConceptIntroFlag = false
-            
-            return Observable.just(feedPackage)
-        } else {
-            return getExercises_prior()
+        if enrichedUserConcept_1.status == .introductionInProgress, enrichedUserConcept_1.currentScore < 5 {
+            print("in progress exercises for concept \(enrichedUserConcept_1.userConcept.concept.id)")
+            let exercises = getExercisesForConcept(conceptID: enrichedUserConcept_1.userConcept.concept.id, strength: enrichedUserConcept_1.userConcept.strength)
+            return Observable<FeedPackage>.just(FeedPackage(feedPackageType: .exercises, exercises: exercises, transitionItem: nil))
         }
+        
+        if enrichedUserConcept_1.status == .introductionInProgress, enrichedUserConcept_1.currentScore >= 5 {
+            print("level up for concept \(enrichedUserConcept_1.userConcept.concept.id)")
+        }
+        
+        
+        return getExercises_prior()
     }
     
     private func getExercisesForConcept(conceptID: Int, strength: Int) -> [Exercise] {
@@ -111,14 +114,12 @@ class ExerciseExternalDataServiceImpl: ExerciseExternalDataService {
         }
     }
     
-    
     func getFeedPackage(introducedConceptID: Int) -> Observable<FeedPackage> {
-        //set conceptID seen
-        
-        
-        return getExercises_prior()
+        print("intro package for id \(introducedConceptID)")
+        databaseService.setUserConceptStatus(EnrichedUserConcept.Status.introductionInProgress.rawValue, forID: introducedConceptID)
+        let exercises = getExercisesForConcept(conceptID: introducedConceptID, strength: 0)
+        return Observable.just(FeedPackage(feedPackageType: .exercises, exercises: exercises, transitionItem: nil))
     }
-    
     
     //get exercises for two focus concepts
     private func getExercises_prior() -> Observable<FeedPackage> {
