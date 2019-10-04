@@ -246,7 +246,7 @@ class ExerciseCoordinatorTests: XCTestCase {
         mockContainer.verifyDidShow(viewControllerType: ConceptIntroViewController.self)
     }
     
-    func test_exerciseAnsweredIncorrectly_conceptIntroQueued_shouldPresentExercise() {
+    func test_exerciseAnsweredIncorrectly_conceptIntroQueued_shouldShowExercise() {
         let mockContainer = FakeContainerViewController()
         let singleExercisePackage = FeedPackage(feedPackageType: .exercises, exercises: [Exercise.exercise1], transitionItem: nil)
         let feedPackages = [singleExercisePackage, FeedPackage.constantRuleIntro, FeedPackage.exercisePackage2]
@@ -305,6 +305,32 @@ class ExerciseCoordinatorTests: XCTestCase {
         coordinator.start()
         
         XCTAssertEqual(mockFeedPackageStore.setLevelUpSeen_callCount, 1)
+    }
+    
+    func test_levelUpQueued_seriesOfIncorrectAnswers_shouldNotRefreshFeedPackage() {
+        let mockFeedPackageStore = FakeFeedPackageStore()
+        let singleExercisePackage = FeedPackage(feedPackageType: .exercises, exercises: [Exercise.exercise1], transitionItem: nil)
+        let feedPackages = [singleExercisePackage, FeedPackage.constantRuleLevelUp, FeedPackage.exercisePackage2]
+        let coordinator = composeSUT(fakeFeedPackageStore: mockFeedPackageStore, stubFeedPackages: feedPackages)
+        
+        coordinator.start()
+        coordinator.next(TestExerciseViewModel(), correctAnswer: false)
+        coordinator.next(TestExerciseViewModel(), correctAnswer: false)
+        coordinator.next(TestExerciseViewModel(), correctAnswer: false)
+        coordinator.next(TestExerciseViewModel(), correctAnswer: false)
+        coordinator.next(TestExerciseViewModel(), correctAnswer: false)
+        
+        XCTAssertEqual(mockFeedPackageStore.updateFeedPackage_callCount, 1)
+    }
+    
+    func test_levelUpRequestsNext_exercisesLoaded_shouldShowExerciseScene() {
+        let mockContainer = FakeContainerViewController()
+        let coordinator = composeSUT(fakeContainerViewController: mockContainer, stubFeedPackages: [FeedPackage.constantRuleLevelUp, FeedPackage.exercisesPackage])
+        
+        coordinator.start()
+        coordinator.next(TestLevelUpViewModel())
+        
+        mockContainer.verifyDidShow(viewControllerType: ExerciseViewController.self)
     }
     
     //MARK: - SUT Composition
@@ -374,6 +400,12 @@ class TestLoadExercisesViewModel: LoadExercisesViewModel {
 class TestConceptIntroViewModel: ConceptIntroViewModel {
     init() {
         super.init(delegate: FakeConceptIntroViewModelDelegate(), conceptIntro: ConceptIntro(concept: Concept.constantRule))
+    }
+}
+
+class TestLevelUpViewModel: LevelUpViewModel {
+    init() {
+        super.init(delegate: FakeLevelUpViewModelDelegate(), levelUpItem: LevelUpItem.constantRuleItem)
     }
 }
 
