@@ -8,11 +8,24 @@
 
 import Foundation
 
+protocol LevelUpViewModelDelegate: class {
+    func next(_ levelUpViewModel: LevelUpViewModel)
+}
+
+enum LevelUpAction {
+    case next
+}
+
 class LevelUpViewModel {
+    
+    //MARK: - Dependencies
+    
+    private weak var delegate: LevelUpViewModelDelegate?
     
     //MARK: - Initialization
     
-    init(levelUpItem: LevelUpItem) {
+    init(delegate: LevelUpViewModelDelegate, levelUpItem: LevelUpItem) {
+        self.delegate = delegate
         conceptName = levelUpItem.concept.name
         previousLevel = levelUpItem.previousLevel
         newLevel = levelUpItem.newLevel
@@ -24,5 +37,17 @@ class LevelUpViewModel {
     let previousLevel: Int
     let newLevel: Int
     
+    //MARK: - LevelUpViewModel Interface
+    
+    func dispatch(action: LevelUpAction) {
+        switch action {
+        case .next:
+            handle_next()
+        }
+    }
+    
+    private func handle_next() {
+        delegate?.next(self)
+    }
     
 }

@@ -16,7 +16,8 @@ protocol FeedPackageStore {
 
 enum ExercisesStoreAction {
     case updateFeedPackage
-    case setConceptIntroSeen(id: Int)
+    case setConceptIntroSeen(conceptID: Int)
+    case setLevelUpSeen(conceptID: Int)
 }
 
 extension FeedPackageStore where Self: FeedPackageStoreImpl {
@@ -49,8 +50,10 @@ class FeedPackageStoreImpl: FeedPackageStore {
         switch action {
         case .updateFeedPackage:
             handle_updateFeedPackage()
-        case .setConceptIntroSeen(let id):
-            handle_setTransitionItemSeen(id: id)
+        case .setConceptIntroSeen(let conceptID):
+            handle_setConceptIntroSeen(conceptID: conceptID)
+        case .setLevelUpSeen(let conceptID):
+            handle_setLevelUpSeen(conceptID: conceptID)
         }
     }
     
@@ -64,14 +67,18 @@ class FeedPackageStoreImpl: FeedPackageStore {
             .disposed(by: disposeBag)
     }
     
-    private func handle_setTransitionItemSeen(id: Int) {
+    private func handle_setConceptIntroSeen(conceptID: Int) {
         feedPackageSubject.onNext(.loading)
         
-        exerciseExternalDataService.getFeedPackage(introducedConceptID: id)
+        exerciseExternalDataService.getFeedPackage(introducedConceptID: conceptID)
             .subscribe(onNext: { [unowned self] feedPackage in
                 self.feedPackageSubject.onNext(.loaded(feedPackage))
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func handle_setLevelUpSeen(conceptID: Int) {
+        
     }
     
 }

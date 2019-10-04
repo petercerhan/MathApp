@@ -53,7 +53,8 @@ class FakeFeedPackageStore: FeedPackageStore {
     }
     
     var updateFeedPackage_callCount = 0
-    var setTransitionItemSeen_callCount = 0
+    var setConceptIntroSeen_callCount = 0
+    var setLevelUpSeen_callCount = 0
     
     func dispatch(action: ExercisesStoreAction) {
         switch action {
@@ -61,7 +62,10 @@ class FakeFeedPackageStore: FeedPackageStore {
             updateFeedPackage_callCount += 1
             nextPackage()
         case .setConceptIntroSeen:
-            setTransitionItemSeen_callCount += 1
+            setConceptIntroSeen_callCount += 1
+            nextPackage()
+        case .setLevelUpSeen:
+            setLevelUpSeen_callCount += 1
             nextPackage()
         }
     }

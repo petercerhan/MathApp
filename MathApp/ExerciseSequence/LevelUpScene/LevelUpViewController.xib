@@ -12,6 +12,7 @@
             <connections>
                 <outlet property="conceptLabel" destination="TGu-DQ-YdR" id="Sy5-gU-wa9"/>
                 <outlet property="levelUpLabel" destination="js1-A8-1Sy" id="UvN-aR-fOF"/>
+                <outlet property="nextButton" destination="BCP-39-q5f" id="DEm-yM-8pJ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -44,6 +45,10 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BCP-39-q5f">
+                    <rect key="frame" x="171.5" y="617" width="32" height="30"/>
+                    <state key="normal" title="Next"/>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -51,8 +56,10 @@
                 <constraint firstItem="YCb-rP-ZR6" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="4hM-pM-UPF"/>
                 <constraint firstItem="TGu-DQ-YdR" firstAttribute="top" secondItem="YCb-rP-ZR6" secondAttribute="bottom" constant="90.5" id="C2o-jn-emy"/>
                 <constraint firstItem="YCb-rP-ZR6" firstAttribute="top" secondItem="cg0-hy-Lxm" secondAttribute="bottom" constant="32" id="Juj-3r-2Lq"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="BCP-39-q5f" secondAttribute="bottom" constant="20" id="W8k-gN-l0f"/>
                 <constraint firstItem="js1-A8-1Sy" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="bLQ-XJ-pPu"/>
                 <constraint firstItem="cg0-hy-Lxm" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="e0J-ZT-rQP"/>
+                <constraint firstItem="BCP-39-q5f" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="gfK-ir-agI"/>
                 <constraint firstItem="js1-A8-1Sy" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="wcS-Db-9aG"/>
                 <constraint firstItem="cg0-hy-Lxm" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="zeD-aW-p6U"/>
             </constraints>

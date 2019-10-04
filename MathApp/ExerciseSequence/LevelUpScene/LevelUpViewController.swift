@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class LevelUpViewController: UIViewController {
     
@@ -18,6 +20,11 @@ class LevelUpViewController: UIViewController {
     
     @IBOutlet private(set) var levelUpLabel: UILabel!
     @IBOutlet private(set) var conceptLabel: UILabel!
+    @IBOutlet private(set) var nextButton: UIButton!
+    
+    //MARK: - Rx
+    
+    private let disposeBag = DisposeBag()
     
     //MARK: - Initialization
     
@@ -35,11 +42,21 @@ class LevelUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bindUI()
+        bindActions()
     }
     
     private func bindUI() {
         levelUpLabel.text = "Level *\(viewModel.previousLevel)* to level *\(viewModel.newLevel)*"
         conceptLabel.text = viewModel.conceptName
+    }
+    
+    private func bindActions() {
+        nextButton.rx.tap
+            .throttle(.milliseconds(500), latest: false, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in
+                self.viewModel.dispatch(action: .next)
+            })
+            .disposed(by: disposeBag)
     }
 
 }

@@ -52,7 +52,7 @@ class FeedPackageStoreTests: XCTestCase {
         let observer: TestableObserver<LoadState<FeedPackage>> = getNewObserver()
         _ = feedPackageStore.feedPackage.subscribe(observer)
         
-        feedPackageStore.dispatch(action: .setConceptIntroSeen(id: 1))
+        feedPackageStore.dispatch(action: .setConceptIntroSeen(conceptID: 1))
         
         assertSecondEventIsLoadingState(observer: observer)
     }
@@ -61,7 +61,7 @@ class FeedPackageStoreTests: XCTestCase {
         let mockExerciseExternalDataService = FakeExerciseExternalDataService()
         let feedPackageStore = composeSUT(fakeExerciseExternalDataService: mockExerciseExternalDataService)
         
-        feedPackageStore.dispatch(action: .setConceptIntroSeen(id: 2))
+        feedPackageStore.dispatch(action: .setConceptIntroSeen(conceptID: 2))
         
         XCTAssertEqual(mockExerciseExternalDataService.getExercises_conceptID_callCount, 1)
         XCTAssertEqual(mockExerciseExternalDataService.getExercises_conceptID_conceptID.first, 2)

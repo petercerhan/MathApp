@@ -88,13 +88,15 @@ class ExerciseCoordinator: Coordinator {
     private func showConceptIntroScene(conceptIntro: ConceptIntro) {
         let vc = compositionRoot.composeConceptIntroScene(delegate: self, conceptIntro: conceptIntro)
         containerVC.show(viewController: vc, animation: .fadeIn)
-        feedPackageStore.dispatch(action: .setConceptIntroSeen(id: conceptIntro.concept.id))
+        feedPackageStore.dispatch(action: .setConceptIntroSeen(conceptID: conceptIntro.concept.id))
         exerciseQueue = Queue<Exercise>()
     }
     
     private func showLevelUpScene(levelUpItem: LevelUpItem) {
-        let vc = compositionRoot.composeLevelUpScene(levelUpItem: levelUpItem)
+        let vc = compositionRoot.composeLevelUpScene(delegate: self, levelUpItem: levelUpItem)
         containerVC.show(viewController: vc, animation: .fadeIn)
+        feedPackageStore.dispatch(action: .setLevelUpSeen(conceptID: levelUpItem.concept.id))
+        exerciseQueue = Queue<Exercise>()
     }
     
     private func showNextExerciseScene(animation: TransitionAnimation) {
@@ -212,10 +214,18 @@ extension ExerciseCoordinator: LoadExercisesViewModelDelegate {
     }
 }
 
-//MARK: - ConceptIntroViewModelDelegate'
+//MARK: - ConceptIntroViewModelDelegate
 
 extension ExerciseCoordinator: ConceptIntroViewModelDelegate {
     func next(_ conceptIntroViewModel: ConceptIntroViewModel) {
         showNextFeedScene(animation: .fadeIn, canTransition: false)
+    }
+}
+
+//MARK: - LevelUpViewModelDelegate
+
+extension ExerciseCoordinator: LevelUpViewModelDelegate {
+    func next(_ levelUpViewModel: LevelUpViewModel) {
+        
     }
 }
