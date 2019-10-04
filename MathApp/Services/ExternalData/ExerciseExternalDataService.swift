@@ -12,6 +12,7 @@ import RxSwift
 protocol ExerciseExternalDataService {
     func getNextFeedPackage() -> Observable<FeedPackage>
     func getFeedPackage(introducedConceptID: Int) -> Observable<FeedPackage>
+    func getFeedPackage(levelUpConceptID: Int) -> Observable<FeedPackage>
     
     func getExercise(id: Int) -> Observable<Exercise>
 }
@@ -130,9 +131,26 @@ class ExerciseExternalDataServiceImpl: ExerciseExternalDataService {
     }
     
     func getFeedPackage(introducedConceptID: Int) -> Observable<FeedPackage> {
-        print("intro package for id \(introducedConceptID)")
+        print("exercises package for introduced concept \(introducedConceptID)")
+        
         databaseService.setUserConceptStatus(EnrichedUserConcept.Status.introductionInProgress.rawValue, forID: introducedConceptID)
         let exercises = getExercisesForConcept(conceptID: introducedConceptID, strength: 0)
+        return Observable.just(FeedPackage(feedPackageType: .exercises, exercises: exercises, transitionItem: nil))
+    }
+    
+    func getFeedPackage(levelUpConceptID: Int) -> Observable<FeedPackage> {
+        
+        guard let enrichedUserConcept = databaseService.getEnrichedUserConcept(conceptID: levelUpConceptID) else {
+            return getExercises_prior()
+        }
+        let strength = enrichedUserConcept.userConcept.strength
+        let newStrength = min(strength + 1, 3)
+        
+        print("exercises package for level up concept \(levelUpConceptID), strength \(newStrength)")
+
+        databaseService.incrementStrengthForUserConcept(conceptID: levelUpConceptID)
+        
+        let exercises = getExercisesForConcept(conceptID: levelUpConceptID, strength: newStrength)
         return Observable.just(FeedPackage(feedPackageType: .exercises, exercises: exercises, transitionItem: nil))
     }
     

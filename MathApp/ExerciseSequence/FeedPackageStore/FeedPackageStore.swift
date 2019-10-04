@@ -78,7 +78,15 @@ class FeedPackageStoreImpl: FeedPackageStore {
     }
     
     private func handle_setLevelUpSeen(conceptID: Int) {
+        feedPackageSubject.onNext(.loading)
         
+        exerciseExternalDataService.getFeedPackage(levelUpConceptID: conceptID)
+            .subscribe(onNext: { [unowned self] feedPackage in
+                self.feedPackageSubject.onNext(.loaded(feedPackage))
+            })
+            .disposed(by: disposeBag)
     }
     
 }
+
+

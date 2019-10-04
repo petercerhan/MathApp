@@ -14,7 +14,6 @@ class FakeDatabaseService: DatabaseService {
     var setup_callCount = 0
     
     func setup() {
-        print("setup")
         setup_callCount += 1
     }
     
@@ -29,7 +28,7 @@ class FakeDatabaseService: DatabaseService {
     var incrementStrengthForUserConcept_callCount = 0
     var incrementStrengthForUserConcept_conceptID = [Int]()
     
-    func incrementStrengthForUserConcept(withID conceptID: Int) {
+    func incrementStrengthForUserConcept(conceptID: Int) {
         incrementStrengthForUserConcept_callCount += 1
         incrementStrengthForUserConcept_conceptID.append(conceptID)
     }
@@ -38,7 +37,7 @@ class FakeDatabaseService: DatabaseService {
     var decrementStrengthForUserConcept_callCount = 0
     var decrementStrengthForUserConcept_conceptID = [Int]()
     
-    func decrementStrengthForUserConcept(withID conceptID: Int) {
+    func decrementStrengthForUserConcept(conceptID: Int) {
         decrementStrengthForUserConcept_callCount += 1
         decrementStrengthForUserConcept_conceptID.append(conceptID)
     }

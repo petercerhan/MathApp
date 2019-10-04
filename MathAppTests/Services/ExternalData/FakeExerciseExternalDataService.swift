@@ -11,6 +11,8 @@ import RxSwift
 @testable import MathApp
 
 class FakeExerciseExternalDataService: ExerciseExternalDataService {
+    
+    //MARK: - getNextFeedPackage()
 
     var getExercises_stubData = FeedPackage(feedPackageType: .exercises, exercises: [Exercise](), transitionItem: nil)
     var getExercises_callCount = 0
@@ -20,6 +22,8 @@ class FakeExerciseExternalDataService: ExerciseExternalDataService {
         return Observable<FeedPackage>.just(getExercises_stubData)
     }
     
+    //MARK: - getFeedPackage(introducedConceptID: )
+    
     var getExercises_conceptID_callCount = 0
     var getExercises_conceptID_conceptID = [Int]()
     
@@ -28,6 +32,20 @@ class FakeExerciseExternalDataService: ExerciseExternalDataService {
         getExercises_conceptID_conceptID.append(introducedConceptID)
         return Observable<FeedPackage>.just(getExercises_stubData)
     }
+    
+    //MARK: - getFeedPackage(levelUpConceptID: )
+    
+    var getFeedPackage_levelUp_callCount = 0
+    var getFeedPackage_levelUp_conceptID = [Int]()
+    
+    func getFeedPackage(levelUpConceptID: Int) -> Observable<FeedPackage> {
+        getFeedPackage_levelUp_callCount += 1
+        getFeedPackage_levelUp_conceptID.append(levelUpConceptID)
+        
+        return Observable<FeedPackage>.just(getExercises_stubData)
+    }
+    
+    //MARK: - getExercise(id: )
     
     var getExercise_stubData = Exercise.exercise1
     var getExercise_callCount = 0

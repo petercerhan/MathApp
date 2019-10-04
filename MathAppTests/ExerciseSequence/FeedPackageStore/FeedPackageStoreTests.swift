@@ -47,7 +47,7 @@ class FeedPackageStoreTests: XCTestCase {
         XCTAssertEqual(feedPackage.exercises.count, 3)
     }
     
-    func test_setConceptIntroSeen_setsFeedPackageStateLoading() {
+    func test_setConceptIntroSeen_shouldSetFeedPackageStateLoading() {
         let feedPackageStore = composeSUT()
         let observer: TestableObserver<LoadState<FeedPackage>> = getNewObserver()
         _ = feedPackageStore.feedPackage.subscribe(observer)
@@ -57,7 +57,7 @@ class FeedPackageStoreTests: XCTestCase {
         assertSecondEventIsLoadingState(observer: observer)
     }
     
-    func test_setConceptIntroSeen_conceptIntro_shouldRequestsNewFeedPackageWithConceptIntroID() {
+    func test_setConceptIntroSeen_shouldRequestsNewFeedPackageWithIntroducedConceptID() {
         let mockExerciseExternalDataService = FakeExerciseExternalDataService()
         let feedPackageStore = composeSUT(fakeExerciseExternalDataService: mockExerciseExternalDataService)
         
@@ -65,6 +65,26 @@ class FeedPackageStoreTests: XCTestCase {
         
         XCTAssertEqual(mockExerciseExternalDataService.getExercises_conceptID_callCount, 1)
         XCTAssertEqual(mockExerciseExternalDataService.getExercises_conceptID_conceptID.first, 2)
+    }
+    
+    func test_setLevelUpSeen_shoulSetFeedPackageStateLoading() {
+        let feedPackageStore = composeSUT()
+        let observer: TestableObserver<LoadState<FeedPackage>> = getNewObserver()
+        _ = feedPackageStore.feedPackage.subscribe(observer)
+        
+        feedPackageStore.dispatch(action: .setLevelUpSeen(conceptID: 1))
+        
+        assertSecondEventIsLoadingState(observer: observer)
+    }
+    
+    func test_setLevelUpSeen_shouldRequestNewFeedPackageWithLevelUpConceptID() {
+        let mockExerciseExternalDataService = FakeExerciseExternalDataService()
+        let feedPackageStore = composeSUT(fakeExerciseExternalDataService: mockExerciseExternalDataService)
+        
+        feedPackageStore.dispatch(action: .setLevelUpSeen(conceptID: 2))
+        
+        XCTAssertEqual(mockExerciseExternalDataService.getFeedPackage_levelUp_callCount, 1)
+        XCTAssertEqual(mockExerciseExternalDataService.getFeedPackage_levelUp_conceptID.first, 2)
     }
     
     //MARK: - SUT Composition
