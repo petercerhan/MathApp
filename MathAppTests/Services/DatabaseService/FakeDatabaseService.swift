@@ -10,6 +10,8 @@ import Foundation
 @testable import MathApp
 
 class FakeDatabaseService: DatabaseService {
+
+    //MARK: - setup
     
     var setup_callCount = 0
     
@@ -17,6 +19,7 @@ class FakeDatabaseService: DatabaseService {
         setup_callCount += 1
     }
     
+    //MARK: - getUserConcepts
     
     var stubUserConcepts = [UserConcept]()
     
@@ -24,6 +27,7 @@ class FakeDatabaseService: DatabaseService {
         return stubUserConcepts
     }
     
+    //MARK: - incementStrengthForUserConcept
     
     var incrementStrengthForUserConcept_callCount = 0
     var incrementStrengthForUserConcept_conceptID = [Int]()
@@ -33,6 +37,7 @@ class FakeDatabaseService: DatabaseService {
         incrementStrengthForUserConcept_conceptID.append(conceptID)
     }
     
+    //MARK: - decrementStrenthForUserConcept
     
     var decrementStrengthForUserConcept_callCount = 0
     var decrementStrengthForUserConcept_conceptID = [Int]()
@@ -42,16 +47,21 @@ class FakeDatabaseService: DatabaseService {
         decrementStrengthForUserConcept_conceptID.append(conceptID)
     }
     
+    //MARK: - getExercises(forConceptID: )
+    
+    var getExercises_stubData = [Exercise]()
     
     func getExercises(forConceptID conceptID: Int) -> [Exercise] {
-        return [Exercise]()
+        return getExercises_stubData
     }
     
+    //MARK: - getExercise(id: )
     
     func getExercise(id: Int) -> Exercise? {
         return nil
     }
     
+    //MARK: - recordResult(concept_id: correct: )
     
     var recordResult_callCount = 0
     var recordResult_concept_id = [Int]()
@@ -63,6 +73,8 @@ class FakeDatabaseService: DatabaseService {
         recordResult_correct.append(correct)
     }
     
+    //MARK: - reset
+    
     var reset_callCount = 0
     
     func reset() {
@@ -70,14 +82,21 @@ class FakeDatabaseService: DatabaseService {
     }
     
     
+    //MARK: - getFocusConcepts
+    
+    var getFocusConcepts_stub = (0, 0)
     func getFocusConcepts() -> (Int, Int) {
-        
-        return (0, 0)
+        return getFocusConcepts_stub
     }
     
+    //MARK: - getEnrichedUserConcept(conceptID: )
+    
+    var getEnrichedUserConcept_stub: EnrichedUserConcept?
     func getEnrichedUserConcept(conceptID: Int) -> EnrichedUserConcept? {
-        return nil
+        return getEnrichedUserConcept_stub
     }
+    
+    //MARK: - setUserConceptStatus(_ : forID: )
     
     func setUserConceptStatus(_ status: Int, forID id: Int) {
         

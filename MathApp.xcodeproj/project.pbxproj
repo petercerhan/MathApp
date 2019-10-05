@@ -10,6 +10,8 @@
 		6E00E487233FEAD500BFF274 /* LoadState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E00E486233FEAD500BFF274 /* LoadState.swift */; };
 		6E00E489233FF17800BFF274 /* FeedPackage+stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E00E488233FF17800BFF274 /* FeedPackage+stubs.swift */; };
 		6E0ADF3F23492312004B4348 /* FeedPackageExternalDataServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0ADF3E23492312004B4348 /* FeedPackageExternalDataServiceTests.swift */; };
+		6E0ADF42234927F1004B4348 /* FakeRandomizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0ADF41234927F1004B4348 /* FakeRandomizationService.swift */; };
+		6E0ADF4423492B2A004B4348 /* FeedPackageCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0ADF4323492B2A004B4348 /* FeedPackageCalculator.swift */; };
 		6E1E6B3222FFA8BD00AFB7A0 /* ContainerViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1E6B3122FFA8BD00AFB7A0 /* ContainerViewControllerTests.swift */; };
 		6E1E6B3522FFA95100AFB7A0 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1E6B3422FFA95100AFB7A0 /* ContainerViewController.swift */; };
 		6E1E6B3722FFA97800AFB7A0 /* TransitionAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1E6B3622FFA97800AFB7A0 /* TransitionAnimation.swift */; };
@@ -150,6 +152,8 @@
 		6E00E486233FEAD500BFF274 /* LoadState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadState.swift; sourceTree = "<group>"; };
 		6E00E488233FF17800BFF274 /* FeedPackage+stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedPackage+stubs.swift"; sourceTree = "<group>"; };
 		6E0ADF3E23492312004B4348 /* FeedPackageExternalDataServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPackageExternalDataServiceTests.swift; sourceTree = "<group>"; };
+		6E0ADF41234927F1004B4348 /* FakeRandomizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeRandomizationService.swift; sourceTree = "<group>"; };
+		6E0ADF4323492B2A004B4348 /* FeedPackageCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPackageCalculator.swift; sourceTree = "<group>"; };
 		6E1E6B3122FFA8BD00AFB7A0 /* ContainerViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewControllerTests.swift; sourceTree = "<group>"; };
 		6E1E6B3422FFA95100AFB7A0 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		6E1E6B3622FFA97800AFB7A0 /* TransitionAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionAnimation.swift; sourceTree = "<group>"; };
@@ -313,6 +317,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		6E0ADF40234927DB004B4348 /* RandomizationService */ = {
+			isa = PBXGroup;
+			children = (
+				6E0ADF41234927F1004B4348 /* FakeRandomizationService.swift */,
+			);
+			path = RandomizationService;
+			sourceTree = "<group>";
+		};
 		6E1E6B3022FFA8A000AFB7A0 /* Containers */ = {
 			isa = PBXGroup;
 			children = (
@@ -385,8 +397,8 @@
 				6EBE4E8D230A13AD0047A880 /* ExerciseSequence */,
 				6E1E6B3022FFA8A000AFB7A0 /* Containers */,
 				6EBA306B2314D49300E6DC54 /* Library */,
-				6E557C2D22FB9DCD00270F07 /* Info.plist */,
 				6E74FD412318A2B900730AEB /* TestUtilities.swift */,
+				6E557C2D22FB9DCD00270F07 /* Info.plist */,
 			);
 			path = MathAppTests;
 			sourceTree = "<group>";
@@ -486,6 +498,7 @@
 			isa = PBXGroup;
 			children = (
 				6E84161F232B22F20035F381 /* FeedPackageExternalDataService.swift */,
+				6E0ADF4323492B2A004B4348 /* FeedPackageCalculator.swift */,
 				6EE60C42234420A900B0322B /* EnrichedUserConcept.swift */,
 			);
 			path = ExternalData;
@@ -494,8 +507,8 @@
 		6E841621232B233C0035F381 /* ExternalData */ = {
 			isa = PBXGroup;
 			children = (
-				6E841622232B234F0035F381 /* FakeExerciseExternalDataService.swift */,
 				6E0ADF3E23492312004B4348 /* FeedPackageExternalDataServiceTests.swift */,
+				6E841622232B234F0035F381 /* FakeExerciseExternalDataService.swift */,
 			);
 			path = ExternalData;
 			sourceTree = "<group>";
@@ -851,6 +864,7 @@
 			children = (
 				6EC6674323249CA70048068C /* DatabaseService */,
 				6E841621232B233C0035F381 /* ExternalData */,
+				6E0ADF40234927DB004B4348 /* RandomizationService */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1154,6 +1168,7 @@
 				6E883F8F233D8301004F0D0E /* FeedPackage.swift in Sources */,
 				6EBE4EA4230B675B0047A880 /* Exercise+data.swift in Sources */,
 				6EBE4E9B230B614B0047A880 /* ExerciseViewController.swift in Sources */,
+				6E0ADF4423492B2A004B4348 /* FeedPackageCalculator.swift in Sources */,
 				6EC6670A23243B870048068C /* MenuCoordinator.swift in Sources */,
 				6EBD530F233AF7A70057F28A /* ChooseExerciseViewController.swift in Sources */,
 				6EE60C43234420A900B0322B /* EnrichedUserConcept.swift in Sources */,
@@ -1209,6 +1224,7 @@
 				6EBA306D2314D4AB00E6DC54 /* RxLatestValueTests.swift in Sources */,
 				6E0ADF3F23492312004B4348 /* FeedPackageExternalDataServiceTests.swift in Sources */,
 				6EC666EB2321D6D90048068C /* FakeExerciseService.swift in Sources */,
+				6E0ADF42234927F1004B4348 /* FakeRandomizationService.swift in Sources */,
 				6EC667492324A08D0048068C /* FakeDatabaseService.swift in Sources */,
 				6EBE4E97230A1B7C0047A880 /* RootCoordinatorTests.swift in Sources */,
 				6EC667222324548B0048068C /* FakeMenuCoordinatorDelegate.swift in Sources */,
