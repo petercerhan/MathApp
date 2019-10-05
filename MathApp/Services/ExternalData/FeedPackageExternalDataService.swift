@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-protocol ExerciseExternalDataService {
+protocol FeedPackageExternalDataService {
     func getNextFeedPackage() -> Observable<FeedPackage>
     func getFeedPackage(introducedConceptID: Int) -> Observable<FeedPackage>
     func getFeedPackage(levelUpConceptID: Int) -> Observable<FeedPackage>
@@ -17,7 +17,7 @@ protocol ExerciseExternalDataService {
     func getExercise(id: Int) -> Observable<Exercise>
 }
 
-class ExerciseExternalDataServiceImpl: ExerciseExternalDataService {
+class FeedPackageExternalDataServiceImpl: FeedPackageExternalDataService {
 
     //MARK: - Dependencies
     
@@ -31,7 +31,7 @@ class ExerciseExternalDataServiceImpl: ExerciseExternalDataService {
         self.randomizationService = randomizationService
     }
     
-    //MARK: - ExerciseExternalDataService Interface
+    //MARK: - FeedPackageExternalDataService Interface
     
     func getNextFeedPackage() -> Observable<FeedPackage> {
         //pull concepts from user record
@@ -150,9 +150,36 @@ class ExerciseExternalDataServiceImpl: ExerciseExternalDataService {
 
         databaseService.incrementStrengthForUserConcept(conceptID: levelUpConceptID)
         
+        //Three cases:
+        
+        let userConcepts = databaseService.getUserConcepts()
+                .filter { $0.concept.id != levelUpConceptID }
+                .sorted { $0.concept.id < $1.concept.id }
+        
+        if let secondStrength1Concept = userConcepts.first(where: { $0.strength == 1 } ) {
+            //second, if there is another with strength 1, double concept exercise package
+        }
+        else if let introduceSecondConcept = userConcepts.first(where: { $0.strength == 0 } ) {
+            print("package to introduce concept \(introduceSecondConcept.concept.id)")
+            //third, if all other introduced concepts have strength 2+, then intro next unintroduced concept
+        }
+        
+        if allConceptsHaveStrengthTwoPlus(conceptArray: userConcepts) {
+            //first, if all other concepts in concept-family have strength 2+, single concept exercise package
+        }
+        
+        
         let exercises = getExercisesForConcept(conceptID: levelUpConceptID, strength: newStrength)
         return Observable.just(FeedPackage(feedPackageType: .exercises, exercises: exercises, transitionItem: nil))
     }
+    
+    private func allConceptsHaveStrengthTwoPlus(conceptArray: [UserConcept]) -> Bool {
+        let strengthLessThanTwoCount = conceptArray.reduce(0) { $0 + ($1.strength < 2 ? 1 : 0) }
+        return (strengthLessThanTwoCount > 0)
+    }
+    
+    
+    
     
     //get exercises for two focus concepts
     private func getExercises_prior() -> Observable<FeedPackage> {

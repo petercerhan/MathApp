@@ -16,7 +16,7 @@ class ExerciseCoordinator: Coordinator {
     private let compositionRoot: CompositionRoot
     private let containerVC: ContainerViewController
     private let randomizationService: RandomizationService
-    private let exerciseExternalDataService: ExerciseExternalDataService
+    private let feedPackageExternalDataService: FeedPackageExternalDataService
     private let resultsStore: ResultsStore
     private let feedPackageStore: FeedPackageStore
     
@@ -34,14 +34,14 @@ class ExerciseCoordinator: Coordinator {
     init(compositionRoot: CompositionRoot,
          containerVC: ContainerViewController,
          randomizationService: RandomizationService,
-         exerciseExternalDataService: ExerciseExternalDataService,
+         feedPackageExternalDataService: FeedPackageExternalDataService,
          resultsStore: ResultsStore,
          feedPackageStore: FeedPackageStore)
     {
         self.compositionRoot = compositionRoot
         self.containerVC = containerVC
         self.randomizationService = randomizationService
-        self.exerciseExternalDataService = exerciseExternalDataService
+        self.feedPackageExternalDataService = feedPackageExternalDataService
         self.resultsStore = resultsStore
         self.feedPackageStore = feedPackageStore
         
@@ -194,7 +194,7 @@ extension ExerciseCoordinator: MenuCoordinatorDelegate {
     }
     
     func loadExercise(_ menuCoordinator: MenuCoordinator, withID id: Int) {
-        exerciseExternalDataService.getExercise(id: id)
+        feedPackageExternalDataService.getExercise(id: id)
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [unowned self] exercise in
                 self.containerVC.dismissModal()

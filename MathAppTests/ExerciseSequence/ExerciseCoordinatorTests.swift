@@ -363,7 +363,7 @@ class ExerciseCoordinatorTests: XCTestCase {
         return ExerciseCoordinator(compositionRoot: inputCompositionRoot,
                                    containerVC: containerVC,
                                    randomizationService: RandomizationServiceImpl(),
-                                   exerciseExternalDataService: exerciseExternalDataService,
+                                   feedPackageExternalDataService: exerciseExternalDataService,
                                    resultsStore: FakeResultsStore(),
                                    feedPackageStore: feedPackageStore)
     }

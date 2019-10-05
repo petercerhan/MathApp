@@ -11,7 +11,7 @@ import UIKit
 class CompositionRoot {
     
     func composeRootCoordinator() -> Coordinator {
-        let feedPackageStore = FeedPackageStoreImpl(exerciseExternalDataService: exercisesExternalDataService)
+        let feedPackageStore = FeedPackageStoreImpl(feedPackageExternalDataService: feedPackageExternalDataService)
         return RootCoordinator(compositionRoot: self,
                                containerVC: ContainerViewController(),
                                databaseService: databaseService,
@@ -35,7 +35,7 @@ class CompositionRoot {
         return ExerciseCoordinator(compositionRoot: self,
                                    containerVC: FeedContainerViewController(viewModel: containerVM),
                                    randomizationService: RandomizationServiceImpl(),
-                                   exerciseExternalDataService: exercisesExternalDataService,
+                                   feedPackageExternalDataService: feedPackageExternalDataService,
                                    resultsStore: resultsStore,
                                    feedPackageStore: feedPackageStore)
     }
@@ -100,8 +100,8 @@ class CompositionRoot {
         DatabaseServiceImpl()
     }()
     
-    private lazy var exercisesExternalDataService: ExerciseExternalDataService =  {
-        ExerciseExternalDataServiceImpl(databaseService: databaseService, randomizationService: RandomizationServiceImpl())
+    private lazy var feedPackageExternalDataService: FeedPackageExternalDataService =  {
+        FeedPackageExternalDataServiceImpl(databaseService: databaseService, randomizationService: RandomizationServiceImpl())
     }()
     
 }

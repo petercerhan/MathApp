@@ -100,7 +100,7 @@ class FeedPackageStoreTests: XCTestCase {
         if let stubFeedPackage = stubFeedPackage {
             exerciseExternalDataService.getExercises_stubData = stubFeedPackage
         }
-        return FeedPackageStoreImpl(exerciseExternalDataService: exerciseExternalDataService)
+        return FeedPackageStoreImpl(feedPackageExternalDataService: exerciseExternalDataService)
     }
     
     func assertSecondEventIsLoadingState(observer: TestableObserver<LoadState<FeedPackage>>, file: StaticString = #file, line: UInt = #line) {

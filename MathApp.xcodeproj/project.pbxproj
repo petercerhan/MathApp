@@ -29,7 +29,7 @@
 		6E74FD53231C87F800730AEB /* FeedContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E74FD51231C87F800730AEB /* FeedContainerViewController.xib */; };
 		6E841618232B208E0035F381 /* FeedPackageStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E841617232B208E0035F381 /* FeedPackageStoreTests.swift */; };
 		6E84161B232B213D0035F381 /* FeedPackageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E84161A232B213D0035F381 /* FeedPackageStore.swift */; };
-		6E841620232B22F20035F381 /* ExerciseExternalDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E84161F232B22F20035F381 /* ExerciseExternalDataService.swift */; };
+		6E841620232B22F20035F381 /* FeedPackageExternalDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E84161F232B22F20035F381 /* FeedPackageExternalDataService.swift */; };
 		6E841623232B234F0035F381 /* FakeExerciseExternalDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E841622232B234F0035F381 /* FakeExerciseExternalDataService.swift */; };
 		6E883F8F233D8301004F0D0E /* FeedPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E883F8E233D8301004F0D0E /* FeedPackage.swift */; };
 		6E883F91233D85D6004F0D0E /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E883F90233D85D6004F0D0E /* FeedItem.swift */; };
@@ -172,7 +172,7 @@
 		6E74FD51231C87F800730AEB /* FeedContainerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedContainerViewController.xib; sourceTree = "<group>"; };
 		6E841617232B208E0035F381 /* FeedPackageStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPackageStoreTests.swift; sourceTree = "<group>"; };
 		6E84161A232B213D0035F381 /* FeedPackageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPackageStore.swift; sourceTree = "<group>"; };
-		6E84161F232B22F20035F381 /* ExerciseExternalDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseExternalDataService.swift; sourceTree = "<group>"; };
+		6E84161F232B22F20035F381 /* FeedPackageExternalDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPackageExternalDataService.swift; sourceTree = "<group>"; };
 		6E841622232B234F0035F381 /* FakeExerciseExternalDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeExerciseExternalDataService.swift; sourceTree = "<group>"; };
 		6E883F8E233D8301004F0D0E /* FeedPackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPackage.swift; sourceTree = "<group>"; };
 		6E883F90233D85D6004F0D0E /* FeedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
@@ -483,7 +483,7 @@
 		6E84161E232B22E10035F381 /* ExternalData */ = {
 			isa = PBXGroup;
 			children = (
-				6E84161F232B22F20035F381 /* ExerciseExternalDataService.swift */,
+				6E84161F232B22F20035F381 /* FeedPackageExternalDataService.swift */,
 				6EE60C42234420A900B0322B /* EnrichedUserConcept.swift */,
 			);
 			path = ExternalData;
@@ -1128,7 +1128,7 @@
 				6E557C1722FB9DCB00270F07 /* AppDelegate.swift in Sources */,
 				6E883F97233D92F2004F0D0E /* ConceptIntroViewController.swift in Sources */,
 				6EC6673B232494170048068C /* ConceptMapTableViewCell.swift in Sources */,
-				6E841620232B22F20035F381 /* ExerciseExternalDataService.swift in Sources */,
+				6E841620232B22F20035F381 /* FeedPackageExternalDataService.swift in Sources */,
 				6EBE4EA2230B66CD0047A880 /* Exercise.swift in Sources */,
 				6EBE4EA6230B68720047A880 /* ExerciseViewModel.swift in Sources */,
 				6EC6673E2324942A0048068C /* ConceptMapElement.swift in Sources */,

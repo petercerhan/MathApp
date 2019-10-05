@@ -30,7 +30,7 @@ class FeedPackageStoreImpl: FeedPackageStore {
     
     //MARK: - Dependencies
     
-    private let exerciseExternalDataService: ExerciseExternalDataService
+    private let feedPackageExternalDataService: FeedPackageExternalDataService
     
     //MARK: - Rx
     
@@ -38,8 +38,8 @@ class FeedPackageStoreImpl: FeedPackageStore {
     
     //MARK: - Initialization
     
-    init(exerciseExternalDataService: ExerciseExternalDataService) {
-        self.exerciseExternalDataService = exerciseExternalDataService
+    init(feedPackageExternalDataService: FeedPackageExternalDataService) {
+        self.feedPackageExternalDataService = feedPackageExternalDataService
     }
     
     //MARK: - ExercisesStore Interface
@@ -60,7 +60,7 @@ class FeedPackageStoreImpl: FeedPackageStore {
     private func handle_updateFeedPackage() {
         feedPackageSubject.onNext(.loading)
         
-        exerciseExternalDataService.getNextFeedPackage()
+        feedPackageExternalDataService.getNextFeedPackage()
             .subscribe(onNext: { [unowned self] feedPackage in
                 self.feedPackageSubject.onNext(.loaded(feedPackage))
             })
@@ -70,7 +70,7 @@ class FeedPackageStoreImpl: FeedPackageStore {
     private func handle_setConceptIntroSeen(conceptID: Int) {
         feedPackageSubject.onNext(.loading)
         
-        exerciseExternalDataService.getFeedPackage(introducedConceptID: conceptID)
+        feedPackageExternalDataService.getFeedPackage(introducedConceptID: conceptID)
             .subscribe(onNext: { [unowned self] feedPackage in
                 self.feedPackageSubject.onNext(.loaded(feedPackage))
             })
@@ -80,7 +80,7 @@ class FeedPackageStoreImpl: FeedPackageStore {
     private func handle_setLevelUpSeen(conceptID: Int) {
         feedPackageSubject.onNext(.loading)
         
-        exerciseExternalDataService.getFeedPackage(levelUpConceptID: conceptID)
+        feedPackageExternalDataService.getFeedPackage(levelUpConceptID: conceptID)
             .subscribe(onNext: { [unowned self] feedPackage in
                 self.feedPackageSubject.onNext(.loaded(feedPackage))
             })

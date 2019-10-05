@@ -60,7 +60,7 @@ class RootCoordinatorFakeCompositionRoot: CompositionRoot {
         return ExerciseCoordinator(compositionRoot: CompositionRoot(),
                                    containerVC: ContainerViewController(),
                                    randomizationService: RandomizationServiceImpl(),
-                                   exerciseExternalDataService: FakeExerciseExternalDataService(),
+                                   feedPackageExternalDataService: FakeExerciseExternalDataService(),
                                    resultsStore: FakeResultsStore(),
                                    feedPackageStore: FakeFeedPackageStore())
     }
