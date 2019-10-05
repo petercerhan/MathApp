@@ -29,7 +29,7 @@ class FeedPackageExternalDataServiceTests: XCTestCase {
         XCTAssertEqual(package.exercises.count, 3)
     }
     
-    func test_getFeedPackage_focusConcept1_concept1InProgress_shouldReturnExercisePackage() {
+    func test_getFeedPackage_focusConcept1_concept1InProgress_scoreBelow5_shouldReturnExercisePackage() {
         let stubDatabaseService = stubDatabaseServiceFor_focuseConcept1(status: .introductionInProgress)
         let fakeRandomizationService = FakeRandomizationService()
         
@@ -39,6 +39,28 @@ class FeedPackageExternalDataServiceTests: XCTestCase {
         XCTAssertEqual(package.feedPackageType, .exercises)
         XCTAssertEqual(package.exercises.count, 3)
     }
+    
+    func test_getFeedPackage_focusConcept1_concept1InProgress_score5_shouldReturnLevelUpPackage() {
+        let stubDatabaseService = stubDatabaseServiceFor_focuseConcept1(status: .introductionInProgress, currentScore: 5)
+        let fakeRandomizationService = FakeRandomizationService()
+        
+        let calculator = FeedPackageCalculator(databaseService: stubDatabaseService, randomizationService: fakeRandomizationService)
+        let package = calculator.getNextFeedPackage()
+        
+        XCTAssertEqual(package.feedPackageType, .levelUp)
+        XCTAssertEqual(package.exercises.count, 3)
+        guard let levelUpItem = package.transitionItem as? LevelUpItem else {
+            XCTFail("Transition item is not level up item")
+            return
+        }
+        XCTAssertEqual(levelUpItem.previousLevel, 0)
+        XCTAssertEqual(levelUpItem.newLevel, 1)
+    }
+    
+    
+    
+    
+    
     
     
     func test_getFeedPackageIntroducedConceptID_shouldUpdateConceptStatus() {
@@ -70,12 +92,12 @@ class FeedPackageExternalDataServiceTests: XCTestCase {
     
     //MARK: - DatabaseService Stubs
     
-    private func stubDatabaseServiceFor_focuseConcept1(status: EnrichedUserConcept.Status) -> FakeDatabaseService {
+    private func stubDatabaseServiceFor_focuseConcept1(status: EnrichedUserConcept.Status, currentScore: Int = 0) -> FakeDatabaseService {
         let stubDatabaseService = FakeDatabaseService()
         
         let stubUserConcepts = [UserConcept.constantRule, UserConcept.linearRule, UserConcept.powerRule, UserConcept.sumRule, UserConcept.differenceRule]
         let stubFocusConcepts = (1, 0)
-        let stubEnrichedUserConcept = EnrichedUserConcept(userConcept: UserConcept.constantRule, statusCode: status.rawValue, currentScore: 0)
+        let stubEnrichedUserConcept = EnrichedUserConcept(userConcept: UserConcept.constantRule, statusCode: status.rawValue, currentScore: currentScore)
         
         stubDatabaseService.stubUserConcepts = stubUserConcepts
         stubDatabaseService.getFocusConcepts_stub = stubFocusConcepts

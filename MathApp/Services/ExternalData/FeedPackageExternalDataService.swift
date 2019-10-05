@@ -50,6 +50,7 @@ class FeedPackageExternalDataServiceImpl: FeedPackageExternalDataService {
         
         print("concept 1 score: \(enrichedUserConcept_1.currentScore)")
 
+        
         if enrichedUserConcept_1.status == .unseen {
             print("concept intro for concept \(concept1_id)")
 
@@ -62,6 +63,7 @@ class FeedPackageExternalDataServiceImpl: FeedPackageExternalDataService {
             return wrapFeedPackage(feedPackage)
         }
         
+        
         if enrichedUserConcept_1.status == .introductionInProgress, enrichedUserConcept_1.currentScore < 5 {
             print("in progress exercises for concept \(concept1_id)")
             
@@ -69,8 +71,7 @@ class FeedPackageExternalDataServiceImpl: FeedPackageExternalDataService {
             let feedPackage = FeedPackage(feedPackageType: .exercises, exercises: exercises, transitionItem: nil)
             return wrapFeedPackage(feedPackage)
         }
-        
-        if enrichedUserConcept_1.status == .introductionInProgress, enrichedUserConcept_1.currentScore >= 5 {
+        else if enrichedUserConcept_1.status == .introductionInProgress, enrichedUserConcept_1.currentScore >= 5 {
             print("level up for concept \(enrichedUserConcept_1.userConcept.concept.id)")
             
             let exercises = getExercisesForConcept(conceptID: enrichedUserConcept_1.userConcept.concept.id, strength: enrichedUserConcept_1.userConcept.strength)
