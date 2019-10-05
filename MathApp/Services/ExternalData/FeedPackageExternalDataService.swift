@@ -52,8 +52,6 @@ class FeedPackageExternalDataServiceImpl: FeedPackageExternalDataService {
 
         
         if enrichedUserConcept_1.status == .unseen {
-            print("concept intro for concept \(concept1_id)")
-
             let conceptIntro = ConceptIntro(concept: concept1)
             
             //should actually be exercises for previous concept, (if none, no exercises (will this work?))
@@ -158,14 +156,20 @@ class FeedPackageExternalDataServiceImpl: FeedPackageExternalDataService {
                 .sorted { $0.concept.id < $1.concept.id }
         
         if let secondStrength1Concept = userConcepts.first(where: { $0.strength == 1 } ) {
+            print("/n/ncondition 1 satisfied")
             //second, if there is another with strength 1, double concept exercise package
         }
         else if let introduceSecondConcept = userConcepts.first(where: { $0.strength == 0 } ) {
+            print("/n/ncondition 2 satisfied")
             print("package to introduce concept \(introduceSecondConcept.concept.id)")
+            
+            
             //third, if all other introduced concepts have strength 2+, then intro next unintroduced concept
         }
         
         if allConceptsHaveStrengthTwoPlus(conceptArray: userConcepts) {
+            
+            print("/n/ncondition 3 satisfied")
             //first, if all other concepts in concept-family have strength 2+, single concept exercise package
         }
         

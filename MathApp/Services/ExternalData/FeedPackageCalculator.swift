@@ -90,14 +90,9 @@ class FeedPackageCalculator {
             while newExercise == nil {
                 let difficulty = difficulties[i]
                 let exercisePool = unfilteredExercises.filter { $0.difficulty == difficulty }
-                
-                print("exercise pool size \(exercisePool.count)")
-                
                 let exerciseIndex = randomizationService.intFromRange(min: 0, max: exercisePool.count - 1)
                 let exercise = exercisePool[exerciseIndex]
-                
-                print("got exercise \(exercise.id)")
-                
+
                 if let _ = exercises.first(where: { $0.id == exercise.id }) {
                     continue
                 } else {
@@ -157,6 +152,11 @@ class FeedPackageCalculator {
         }
         else if let introduceSecondConcept = userConcepts.first(where: { $0.strength == 0 } ) {
             print("package to introduce concept \(introduceSecondConcept.concept.id)")
+            
+            
+            //will need more tests - will have to dynamically choose new concept focus
+            databaseService.setFocusConcepts(concept1: 2, concept2: 0)
+            
             //third, if all other introduced concepts have strength 2+, then intro next unintroduced concept
         }
         

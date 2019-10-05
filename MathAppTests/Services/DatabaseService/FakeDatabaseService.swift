@@ -104,5 +104,16 @@ class FakeDatabaseService: DatabaseService {
         setUserConceptStatus_status.append(status)
         setUserConceptStatus_id.append(id)
     }
+    
+    //MARK: - setFocusConcepts(concept1: concept2: )
+    
+    var setFocusConcepts_callCount = 0
+    var setFocusConcepts_concept1 = [Int]()
+    var setFocusConcepts_concept2 = [Int]()
+    func setFocusConcepts(concept1: Int, concept2: Int) {
+        setFocusConcepts_callCount += 1
+        setFocusConcepts_concept1.append(concept1)
+        setFocusConcepts_concept2.append(concept2)
+    }
 }
 

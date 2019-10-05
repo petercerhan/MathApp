@@ -13,6 +13,8 @@ import RxTest
 
 class FeedPackageExternalDataServiceTests: XCTestCase {
     
+    //MARK: - getFeedPackage Tests
+    
     func test_getFeedPackage_focusConcept1_concept1Unseen_shouldReturnConceptIntro1() {
         let stubDatabaseService = stubDatabaseServiceFor_focuseConcept1(status: .unseen)
         let fakeRandomizationService = FakeRandomizationService()
@@ -61,7 +63,7 @@ class FeedPackageExternalDataServiceTests: XCTestCase {
     
     
     
-    
+    //MARK: - ConceptIntro Seen Tests
     
     func test_getFeedPackageIntroducedConceptID_shouldUpdateConceptStatus() {
         let mockDatabaseService = stubDatabaseServiceFor_focuseConcept1(status: .unseen)
@@ -87,6 +89,31 @@ class FeedPackageExternalDataServiceTests: XCTestCase {
     }
     
     
+    
+    
+    //MARK: - LevelUp Tests
+    
+    func test_getFeedPackageLevelUp_shouldUpdateConceptLevel() {
+        let mockDatabaseService = stubDatabaseServiceFor_focuseConcept1(status: .introductionInProgress)
+        let fakeRandomizationService = FakeRandomizationService()
+        
+        let calculator = FeedPackageCalculator(databaseService: mockDatabaseService, randomizationService: fakeRandomizationService)
+        let _ = calculator.getFeedPackage(levelUpConceptID: 1)
+        
+        XCTAssertEqual(mockDatabaseService.incrementStrengthForUserConcept_callCount, 1)
+    }
+    
+    func test_getFeedPackageLevelUp_level0to1_allAdditionalConceptsInFamilyHaveStrength0_shouldUpdateFocusToConcept2Only() {
+        let mockDatabaseService = stubDatabaseServiceFor_focuseConcept1(status: .introductionInProgress)
+        let fakeRandomizationService = FakeRandomizationService()
+        
+        let calculator = FeedPackageCalculator(databaseService: mockDatabaseService, randomizationService: fakeRandomizationService)
+        let _ = calculator.getFeedPackage(levelUpConceptID: 1)
+        
+        XCTAssertEqual(mockDatabaseService.setFocusConcepts_callCount, 1)
+    }
+    
+    //shouldSetConceptStatus
     
     
     

@@ -27,6 +27,8 @@ protocol DatabaseService {
     func getEnrichedUserConcept(conceptID: Int) -> EnrichedUserConcept?
     
     func setUserConceptStatus(_ status: Int, forID id: Int)
+
+    func setFocusConcepts(concept1: Int, concept2: Int)
 }
 
 class DatabaseServiceImpl: DatabaseService {
@@ -230,4 +232,9 @@ class DatabaseServiceImpl: DatabaseService {
         let query = UserConcept.table.filter(UserConcept.column_id == Int64(id))
         _ = try? db.run(query.update(UserConcept.column_status <- Int64(status)))
     }
+    
+    func setFocusConcepts(concept1: Int, concept2: Int) {
+        
+    }
+    
 }
