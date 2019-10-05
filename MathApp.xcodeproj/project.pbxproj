@@ -114,7 +114,6 @@
 		6EC6673C232494170048068C /* ConceptMapTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EC6673A232494170048068C /* ConceptMapTableViewCell.xib */; };
 		6EC6673E2324942A0048068C /* ConceptMapElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC6673D2324942A0048068C /* ConceptMapElement.swift */; };
 		6EC6674223249C300048068C /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC6674123249C300048068C /* DatabaseService.swift */; };
-		6EC6674523249CB20048068C /* DatabaseServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC6674423249CB20048068C /* DatabaseServiceTests.swift */; };
 		6EC6674723249D850048068C /* UserConcept.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC6674623249D850048068C /* UserConcept.swift */; };
 		6EC667492324A08D0048068C /* FakeDatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC667482324A08D0048068C /* FakeDatabaseService.swift */; };
 		6EC6674B2324A40C0048068C /* ConceptMapTableViewCell+utilites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC6674A2324A40C0048068C /* ConceptMapTableViewCell+utilites.swift */; };
@@ -260,7 +259,6 @@
 		6EC6673A232494170048068C /* ConceptMapTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConceptMapTableViewCell.xib; sourceTree = "<group>"; };
 		6EC6673D2324942A0048068C /* ConceptMapElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptMapElement.swift; sourceTree = "<group>"; };
 		6EC6674123249C300048068C /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
-		6EC6674423249CB20048068C /* DatabaseServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseServiceTests.swift; sourceTree = "<group>"; };
 		6EC6674623249D850048068C /* UserConcept.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserConcept.swift; sourceTree = "<group>"; };
 		6EC667482324A08D0048068C /* FakeDatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeDatabaseService.swift; sourceTree = "<group>"; };
 		6EC6674A2324A40C0048068C /* ConceptMapTableViewCell+utilites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConceptMapTableViewCell+utilites.swift"; sourceTree = "<group>"; };
@@ -884,7 +882,6 @@
 		6EC6674323249CA70048068C /* DatabaseService */ = {
 			isa = PBXGroup;
 			children = (
-				6EC6674423249CB20048068C /* DatabaseServiceTests.swift */,
 				6EC667482324A08D0048068C /* FakeDatabaseService.swift */,
 			);
 			path = DatabaseService;
@@ -1229,7 +1226,6 @@
 				6EBE4E97230A1B7C0047A880 /* RootCoordinatorTests.swift in Sources */,
 				6EC667222324548B0048068C /* FakeMenuCoordinatorDelegate.swift in Sources */,
 				6EC667332324673F0048068C /* ConceptMapSceneTests.swift in Sources */,
-				6EC6674523249CB20048068C /* DatabaseServiceTests.swift in Sources */,
 				6EC666E92321D4EF0048068C /* ExerciseServiceTests.swift in Sources */,
 				6EC66719232451350048068C /* FakeQuitableContainerViewModel.swift in Sources */,
 				6EBE4E91230A14A70047A880 /* FakeContainerViewController.swift in Sources */,

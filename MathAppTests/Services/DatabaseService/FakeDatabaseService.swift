@@ -76,11 +76,9 @@ class FakeDatabaseService: DatabaseService {
     //MARK: - reset
     
     var reset_callCount = 0
-    
     func reset() {
         reset_callCount += 1
     }
-    
     
     //MARK: - getFocusConcepts
     
@@ -98,8 +96,13 @@ class FakeDatabaseService: DatabaseService {
     
     //MARK: - setUserConceptStatus(_ : forID: )
     
+    var setUserConceptStatus_callCount = 0
+    var setUserConceptStatus_status = [Int]()
+    var setUserConceptStatus_id = [Int]()
     func setUserConceptStatus(_ status: Int, forID id: Int) {
-        
+        setUserConceptStatus_callCount += 1
+        setUserConceptStatus_status.append(status)
+        setUserConceptStatus_id.append(id)
     }
 }
 
