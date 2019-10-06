@@ -226,6 +226,6 @@ extension ExerciseCoordinator: ConceptIntroViewModelDelegate {
 
 extension ExerciseCoordinator: LevelUpViewModelDelegate {
     func next(_ levelUpViewModel: LevelUpViewModel) {
-        showNextFeedScene(animation: .fadeIn, canTransition: false)
+        showNextFeedScene(animation: .fadeIn, canTransition: true)
     }
 }

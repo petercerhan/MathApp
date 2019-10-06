@@ -323,6 +323,16 @@ class ExerciseCoordinatorTests: XCTestCase {
         XCTAssertEqual(mockFeedPackageStore.updateFeedPackage_callCount, 1)
     }
     
+    func test_levelUpRequestsNext_conceptIntroQueued_shouldShowConceptIntro() {
+        let mockContainer = FakeContainerViewController()
+        let coordinator = composeSUT(fakeContainerViewController: mockContainer, stubFeedPackages: [FeedPackage.constantRuleLevelUp, FeedPackage.constantRuleIntro])
+        
+        coordinator.start()
+        coordinator.next(TestLevelUpViewModel())
+        
+        mockContainer.verifyDidShow(viewControllerType: ConceptIntroViewController.self)
+    }
+    
     func test_levelUpRequestsNext_exercisesLoaded_shouldShowExerciseScene() {
         let mockContainer = FakeContainerViewController()
         let coordinator = composeSUT(fakeContainerViewController: mockContainer, stubFeedPackages: [FeedPackage.constantRuleLevelUp, FeedPackage.exercisesPackage])
