@@ -234,7 +234,8 @@ class DatabaseServiceImpl: DatabaseService {
     }
     
     func setFocusConcepts(concept1: Int, concept2: Int) {
-        
+        let query = User.table.filter(User.column_id == 1)
+        _ = try? db.run(query.update(User.column_focus_concept_1 <- Int64(concept1), User.column_focus_concept_2 <- Int64(concept2)))
     }
     
 }

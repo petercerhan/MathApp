@@ -25,6 +25,9 @@ class FeedPackageCalculator {
     //MARK: - FeedPackageCalculator Interface
         
     func getNextFeedPackage() -> FeedPackage {
+        
+        print("\ngetNextFeedPackage():")
+        
         let focusConcepts = databaseService.getFocusConcepts()
         let concept1_id = focusConcepts.0
 //        let concept2_id = focusConcepts.1
@@ -34,8 +37,6 @@ class FeedPackageCalculator {
         }
         let concept1 = enrichedUserConcept_1.userConcept.concept
         let strength1 = enrichedUserConcept_1.userConcept.strength
-        
-        print("concept 1 score: \(enrichedUserConcept_1.currentScore)")
 
         if enrichedUserConcept_1.status == .unseen {
             print("concept intro for concept \(concept1_id)")
@@ -66,14 +67,12 @@ class FeedPackageCalculator {
             return feedPackage
         }
         
+        print("Fall-through exercise package")
         
         return getExercises_prior()
     }
     
     private func getExercisesForConcept(conceptID: Int, strength: Int) -> [Exercise] {
-        
-        print("get exercises for concept: \(conceptID), strength: \(strength)")
-        
         let unfilteredExercises = databaseService.getExercises(forConceptID: conceptID)
         let weightTable = weightTableForStrength(strength)
         let difficulties = randomizationService.setFromRange(min: 1, max: 3, selectionCount: 3, weightTable: weightTable)
@@ -118,6 +117,9 @@ class FeedPackageCalculator {
     }
     
     func getFeedPackage(introducedConceptID: Int) -> FeedPackage {
+        
+        print("\ngetNextFeedPackage() introduced concept \(introducedConceptID):")
+        
         print("exercises package for introduced concept \(introducedConceptID)")
         
         databaseService.setUserConceptStatus(EnrichedUserConcept.Status.introductionInProgress.rawValue, forConceptID: introducedConceptID)
@@ -128,6 +130,8 @@ class FeedPackageCalculator {
     
     func getFeedPackage(levelUpConceptID: Int) -> FeedPackage {
         
+        print("\ngetNextFeedPackage() level up concept \(levelUpConceptID):")
+        
         guard let enrichedUserConcept = databaseService.getEnrichedUserConcept(conceptID: levelUpConceptID) else {
             return getExercises_prior()
         }
@@ -136,8 +140,6 @@ class FeedPackageCalculator {
         let userConcepts = databaseService.getUserConcepts()
                 .filter { $0.concept.id != levelUpConceptID }
                 .sorted { $0.concept.id < $1.concept.id }
-        
-        print("exercises package for level up concept \(levelUpConceptID), strength \(newStrength)")
 
         databaseService.incrementStrengthForUserConcept(conceptID: levelUpConceptID)
         
@@ -151,7 +153,7 @@ class FeedPackageCalculator {
             //second, if there is another with strength 1, double concept exercise package
         }
         else if let introduceSecondConcept = userConcepts.first(where: { $0.strength == 0 } ) {
-            print("package to introduce concept \(introduceSecondConcept.concept.id)")
+            print("concept intro package for: \(introduceSecondConcept.concept.id)")
             
             return conceptIntroPackage(forConcept: introduceSecondConcept.concept)
         }
@@ -159,6 +161,7 @@ class FeedPackageCalculator {
             //first, if all other concepts in concept-family have strength 2+, single concept exercise package
         }
         
+        print("fall-through exercise package")
         
         let exercises = getExercisesForConcept(conceptID: levelUpConceptID, strength: newStrength)
         return FeedPackage(feedPackageType: .exercises, exercises: exercises, transitionItem: nil)
