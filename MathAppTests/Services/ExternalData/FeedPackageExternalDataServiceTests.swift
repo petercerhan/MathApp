@@ -16,10 +16,9 @@ class FeedPackageExternalDataServiceTests: XCTestCase {
     //MARK: - getFeedPackage Tests
     
     func test_getFeedPackage_focusConcept1_concept1Unseen_shouldReturnConceptIntro1() {
-        let stubDatabaseService = stubDatabaseServiceFor_focusConcept1(status: .unseen)
-        let fakeRandomizationService = FakeRandomizationService()
-        
-        let calculator = FeedPackageCalculator(databaseService: stubDatabaseService, randomizationService: fakeRandomizationService)
+        let stubDatabaseService = getStubDatabaseService(status: .unseen)
+        let calculator = composeSUT(fakeDatabaseService: stubDatabaseService)
+
         let package = calculator.getNextFeedPackage()
         
         XCTAssertEqual(package.feedPackageType, .conceptIntro)
@@ -32,10 +31,9 @@ class FeedPackageExternalDataServiceTests: XCTestCase {
     }
     
     func test_getFeedPackage_focusConcept1_concept1InProgress_scoreBelow5_shouldReturnExercisePackage() {
-        let stubDatabaseService = stubDatabaseServiceFor_focusConcept1(status: .introductionInProgress)
-        let fakeRandomizationService = FakeRandomizationService()
-        
-        let calculator = FeedPackageCalculator(databaseService: stubDatabaseService, randomizationService: fakeRandomizationService)
+        let stubDatabaseService = getStubDatabaseService(status: .introductionInProgress)
+        let calculator = composeSUT(fakeDatabaseService: stubDatabaseService)
+
         let package = calculator.getNextFeedPackage()
         
         XCTAssertEqual(package.feedPackageType, .exercises)
@@ -43,10 +41,9 @@ class FeedPackageExternalDataServiceTests: XCTestCase {
     }
     
     func test_getFeedPackage_focusConcept1_concept1InProgress_score5_shouldReturnLevelUpPackage() {
-        let stubDatabaseService = stubDatabaseServiceFor_focusConcept1(status: .introductionInProgress, currentScore: 5)
-        let fakeRandomizationService = FakeRandomizationService()
-        
-        let calculator = FeedPackageCalculator(databaseService: stubDatabaseService, randomizationService: fakeRandomizationService)
+        let stubDatabaseService = getStubDatabaseService(status: .introductionInProgress, currentScore: 5)
+        let calculator = composeSUT(fakeDatabaseService: stubDatabaseService)
+
         let package = calculator.getNextFeedPackage()
         
         XCTAssertEqual(package.feedPackageType, .levelUp)
@@ -66,10 +63,9 @@ class FeedPackageExternalDataServiceTests: XCTestCase {
     //MARK: - ConceptIntro Seen Tests
     
     func test_getFeedPackageIntroducedConcept_shouldUpdateConceptStatus() {
-        let mockDatabaseService = stubDatabaseServiceFor_focusConcept1(status: .unseen)
-        let fakeRandomizationService = FakeRandomizationService()
-        
-        let calculator = FeedPackageCalculator(databaseService: mockDatabaseService, randomizationService: fakeRandomizationService)
+        let mockDatabaseService = getStubDatabaseService(status: .unseen)
+        let calculator = composeSUT(fakeDatabaseService: mockDatabaseService)
+
         let _ = calculator.getFeedPackage(introducedConceptID: 1)
         
         XCTAssertEqual(mockDatabaseService.setUserConceptStatus_callCount, 1)
@@ -78,10 +74,9 @@ class FeedPackageExternalDataServiceTests: XCTestCase {
     }
     
     func test_getFeedPackageIntroducedConcept_shouldUpdateFocusToIntroducedConcept() {
-        let mockDatabaseService = stubDatabaseServiceFor_focusConcept1(status: .unseen)
-        let fakeRandomizationService = FakeRandomizationService()
+        let mockDatabaseService = getStubDatabaseService(status: .unseen)
+        let calculator = composeSUT(fakeDatabaseService: mockDatabaseService)
         
-        let calculator = FeedPackageCalculator(databaseService: mockDatabaseService, randomizationService: fakeRandomizationService)
         let _ = calculator.getFeedPackage(introducedConceptID: 1)
         
         XCTAssertEqual(mockDatabaseService.setFocusConcepts_callCount, 1)
@@ -90,10 +85,9 @@ class FeedPackageExternalDataServiceTests: XCTestCase {
     }
     
     func test_getFeedPackageIntroducedConcept_shouldReturnExercisePackage() {
-        let stubDatabaseService = stubDatabaseServiceFor_focusConcept1(status: .unseen)
-        let fakeRandomizationService = FakeRandomizationService()
-        
-        let calculator = FeedPackageCalculator(databaseService: stubDatabaseService, randomizationService: fakeRandomizationService)
+        let stubDatabaseService = getStubDatabaseService(status: .unseen)
+        let calculator = composeSUT(fakeDatabaseService: stubDatabaseService)
+
         let package = calculator.getFeedPackage(introducedConceptID: 1)
         
         XCTAssertEqual(package.feedPackageType, .exercises)
@@ -106,10 +100,9 @@ class FeedPackageExternalDataServiceTests: XCTestCase {
     //MARK: - LevelUp Tests
     
     func test_getFeedPackageLevelUp_shouldUpdateConceptLevel() {
-        let mockDatabaseService = stubDatabaseServiceFor_focusConcept1(status: .introductionInProgress)
-        let fakeRandomizationService = FakeRandomizationService()
+        let mockDatabaseService = getStubDatabaseService(status: .introductionInProgress)
+        let calculator = composeSUT(fakeDatabaseService: mockDatabaseService)
         
-        let calculator = FeedPackageCalculator(databaseService: mockDatabaseService, randomizationService: fakeRandomizationService)
         let _ = calculator.getFeedPackage(levelUpConceptID: 1)
         
         XCTAssertEqual(mockDatabaseService.incrementStrengthForUserConcept_callCount, 1)
@@ -117,10 +110,9 @@ class FeedPackageExternalDataServiceTests: XCTestCase {
     }
     
     func test_getFeedPackageLevelUp_initialLevel0_shouldSetStatusToComplete() {
-        let mockDatabaseService = stubDatabaseServiceFor_focusConcept1(status: .introductionInProgress)
-        let fakeRandomizationService = FakeRandomizationService()
+        let mockDatabaseService = getStubDatabaseService(status: .introductionInProgress)
+        let calculator = composeSUT(fakeDatabaseService: mockDatabaseService)
         
-        let calculator = FeedPackageCalculator(databaseService: mockDatabaseService, randomizationService: fakeRandomizationService)
         let _ = calculator.getFeedPackage(levelUpConceptID: 1)
         
         XCTAssertEqual(mockDatabaseService.setUserConceptStatus_callCount, 1)
@@ -130,10 +122,9 @@ class FeedPackageExternalDataServiceTests: XCTestCase {
     
     //too complicated - introduce new concept conditions are, 1) no other concepts at level 1, 2) other concepts at level 0
     func test_getFeedPackageLevelUp_initialLevel0_introduceNewConceptConditions_shouldReturnConceptIntroPackage() {
-        let mockDatabaseService = stubDatabaseServiceFor_focusConcept1(status: .introductionInProgress)
-        let fakeRandomizationService = FakeRandomizationService()
+        let mockDatabaseService = getStubDatabaseService(status: .introductionInProgress)
+        let calculator = composeSUT(fakeDatabaseService: mockDatabaseService)
         
-        let calculator = FeedPackageCalculator(databaseService: mockDatabaseService, randomizationService: fakeRandomizationService)
         let package = calculator.getFeedPackage(levelUpConceptID: 1)
         
         XCTAssertEqual(package.feedPackageType, .conceptIntro)
@@ -145,22 +136,61 @@ class FeedPackageExternalDataServiceTests: XCTestCase {
         XCTAssertEqual(package.exercises.count, 3)
     }
     
+    //1) another concept at level 1
+    func test_getFeedPackageLevelUp_initialLevel0_practiceTwoConceptsCondition_shouldReturnExercisesPackage() {
+        let stubUserConcepts = userConcepts_1Level1
+        let mockDatabaseService = getStubDatabaseService(focus1ID: 2, status: .introductionInProgress, stubUserConcepts: stubUserConcepts)
+        let calculator = composeSUT(fakeDatabaseService: mockDatabaseService)
+        
+        let package = calculator.getFeedPackage(levelUpConceptID: 2)
+        
+        print("\nconcepts \(package.exercises.map { $0.concept.id })")
+        
+        XCTAssertEqual(package.feedPackageType, .exercises)
+    }
+    
+    //this should update focus to two concepts
+    
+    //MARK: - SUT Composition
+    
+    private func composeSUT(fakeDatabaseService: FakeDatabaseService? = nil) -> FeedPackageCalculator {
+        let databaseService = fakeDatabaseService ?? FakeDatabaseService()
+        let fakeRandomizationService = FakeRandomizationService()
+        fakeRandomizationService.setFromRange_stub = [0, 1, 0]
+        
+        return FeedPackageCalculator(databaseService: databaseService,
+                                     randomizationService: fakeRandomizationService,
+                                     exerciseSetCalculator: FakeExerciseSetCalculator())
+    }
     
     //MARK: - DatabaseService Stubs
     
-    private func stubDatabaseServiceFor_focusConcept1(status: EnrichedUserConcept.Status, currentScore: Int = 0) -> FakeDatabaseService {
+    private func getStubDatabaseService(focus1ID: Int = 1,
+                                     status: EnrichedUserConcept.Status = .unseen,
+                                     currentScore: Int = 0,
+                                     stubUserConcepts: [UserConcept]? = nil) -> FakeDatabaseService
+    {
         let stubDatabaseService = FakeDatabaseService()
         
-        let stubUserConcepts = [UserConcept.constantRule, UserConcept.linearRule, UserConcept.powerRule, UserConcept.sumRule, UserConcept.differenceRule]
-        let stubFocusConcepts = (1, 0)
+        let userConcepts = stubUserConcepts ?? userConcepts_allUnseen
+        let stubFocusConcepts = (focus1ID, 0)
         let stubEnrichedUserConcept = EnrichedUserConcept(userConcept: UserConcept.constantRule, statusCode: status.rawValue, currentScore: currentScore)
         
-        stubDatabaseService.stubUserConcepts = stubUserConcepts
+        stubDatabaseService.stubUserConcepts = userConcepts
         stubDatabaseService.getFocusConcepts_stub = stubFocusConcepts
         stubDatabaseService.getEnrichedUserConcept_stub = stubEnrichedUserConcept
         stubDatabaseService.getExercises_stubData = [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3]
         
         return stubDatabaseService
+    }
+    
+    private var userConcepts_allUnseen: [UserConcept] {
+        return [UserConcept.constantRule, UserConcept.linearRule, UserConcept.powerRule, UserConcept.sumRule, UserConcept.differenceRule]
+    }
+    
+    private var userConcepts_1Level1: [UserConcept] {
+        let constantRule = UserConcept(id: 1, concept: Concept.constantRule, strength: 1)
+        return [constantRule, UserConcept.linearRule, UserConcept.powerRule, UserConcept.sumRule, UserConcept.differenceRule]
     }
     
 }

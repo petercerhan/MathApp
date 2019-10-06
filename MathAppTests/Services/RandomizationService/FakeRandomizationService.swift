@@ -25,13 +25,22 @@ class FakeRandomizationService: RandomizationService {
         return result
     }
     
+    //MARK: - setFromRange(min: max: selectionCount: )
+    
+    var setFromRange_stub : [Int]?
     func setFromRange(min: Int, max: Int, selectionCount: Int) -> [Int] {
-        return Array<Int>(repeating: min, count: selectionCount)
+        let defaultStub = Array<Int>(repeating: min, count: selectionCount)
+        let stub = setFromRange_stub ?? defaultStub
+        return stub
     }
+    
+    //MARK: - setFromRange(min: max: selectionCount: weightTable: )
     
     func setFromRange(min: Int, max: Int, selectionCount: Int, weightTable: [Double]) -> [Int] {
         return Array<Int>(repeating: min, count: selectionCount)
     }
+    
+    //MARK: - nonRepeatingSetFromRange(min: max: selectionCount: )
     
     func nonRepeatingSetFromRange(min: Int, max: Int, selectionCount: Int) -> [Int] {
         var result = [Int]()

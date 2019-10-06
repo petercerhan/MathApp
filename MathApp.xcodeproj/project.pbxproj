@@ -12,6 +12,8 @@
 		6E0ADF3F23492312004B4348 /* FeedPackageExternalDataServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0ADF3E23492312004B4348 /* FeedPackageExternalDataServiceTests.swift */; };
 		6E0ADF42234927F1004B4348 /* FakeRandomizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0ADF41234927F1004B4348 /* FakeRandomizationService.swift */; };
 		6E0ADF4423492B2A004B4348 /* FeedPackageCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0ADF4323492B2A004B4348 /* FeedPackageCalculator.swift */; };
+		6E0ADF46234A9422004B4348 /* ExerciseSetCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0ADF45234A9422004B4348 /* ExerciseSetCalculator.swift */; };
+		6E0ADF48234A98C7004B4348 /* FakeExerciseSetCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0ADF47234A98C7004B4348 /* FakeExerciseSetCalculator.swift */; };
 		6E1E6B3222FFA8BD00AFB7A0 /* ContainerViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1E6B3122FFA8BD00AFB7A0 /* ContainerViewControllerTests.swift */; };
 		6E1E6B3522FFA95100AFB7A0 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1E6B3422FFA95100AFB7A0 /* ContainerViewController.swift */; };
 		6E1E6B3722FFA97800AFB7A0 /* TransitionAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1E6B3622FFA97800AFB7A0 /* TransitionAnimation.swift */; };
@@ -153,6 +155,8 @@
 		6E0ADF3E23492312004B4348 /* FeedPackageExternalDataServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPackageExternalDataServiceTests.swift; sourceTree = "<group>"; };
 		6E0ADF41234927F1004B4348 /* FakeRandomizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeRandomizationService.swift; sourceTree = "<group>"; };
 		6E0ADF4323492B2A004B4348 /* FeedPackageCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPackageCalculator.swift; sourceTree = "<group>"; };
+		6E0ADF45234A9422004B4348 /* ExerciseSetCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetCalculator.swift; sourceTree = "<group>"; };
+		6E0ADF47234A98C7004B4348 /* FakeExerciseSetCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeExerciseSetCalculator.swift; sourceTree = "<group>"; };
 		6E1E6B3122FFA8BD00AFB7A0 /* ContainerViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewControllerTests.swift; sourceTree = "<group>"; };
 		6E1E6B3422FFA95100AFB7A0 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		6E1E6B3622FFA97800AFB7A0 /* TransitionAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionAnimation.swift; sourceTree = "<group>"; };
@@ -497,6 +501,7 @@
 			children = (
 				6E84161F232B22F20035F381 /* FeedPackageExternalDataService.swift */,
 				6E0ADF4323492B2A004B4348 /* FeedPackageCalculator.swift */,
+				6E0ADF45234A9422004B4348 /* ExerciseSetCalculator.swift */,
 				6EE60C42234420A900B0322B /* EnrichedUserConcept.swift */,
 			);
 			path = ExternalData;
@@ -507,6 +512,7 @@
 			children = (
 				6E0ADF3E23492312004B4348 /* FeedPackageExternalDataServiceTests.swift */,
 				6E841622232B234F0035F381 /* FakeExerciseExternalDataService.swift */,
+				6E0ADF47234A98C7004B4348 /* FakeExerciseSetCalculator.swift */,
 			);
 			path = ExternalData;
 			sourceTree = "<group>";
@@ -1123,6 +1129,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E0ADF46234A9422004B4348 /* ExerciseSetCalculator.swift in Sources */,
 				6EBA303C230CAED200E6DC54 /* UIView+addShadow.swift in Sources */,
 				6EC667132324489F0048068C /* MenuViewController.swift in Sources */,
 				6E883F9D233D9E5D004F0D0E /* ConceptIntroViewModel.swift in Sources */,
@@ -1238,6 +1245,7 @@
 				6EC66729232462280048068C /* FakeMenuViewModelDelegate.swift in Sources */,
 				6E841623232B234F0035F381 /* FakeExerciseExternalDataService.swift in Sources */,
 				6EC6672423245D730048068C /* TestMenuCoordinator.swift in Sources */,
+				6E0ADF48234A98C7004B4348 /* FakeExerciseSetCalculator.swift in Sources */,
 				6E883F9F233DA2DE004F0D0E /* FakeConceptIntroViewModelDelegate.swift in Sources */,
 				6E74FD472318B53F00730AEB /* ExerciseChoiceConfiguration+stubs.swift in Sources */,
 			);

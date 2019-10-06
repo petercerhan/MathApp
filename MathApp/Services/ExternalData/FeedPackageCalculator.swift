@@ -14,12 +14,17 @@ class FeedPackageCalculator {
     
     private let databaseService: DatabaseService
     private let randomizationService: RandomizationService
+    private let exerciseSetCalculator: ExerciseSetCalculator
     
     //MARK: - Initialization
     
-    init(databaseService: DatabaseService, randomizationService: RandomizationService) {
+    init(databaseService: DatabaseService,
+         randomizationService: RandomizationService,
+         exerciseSetCalculator: ExerciseSetCalculator)
+    {
         self.databaseService = databaseService
         self.randomizationService = randomizationService
+        self.exerciseSetCalculator = exerciseSetCalculator
     }
     
     //MARK: - FeedPackageCalculator Interface
@@ -45,7 +50,7 @@ class FeedPackageCalculator {
             
             //should actually be exercises for previous concept, (if none, no exercises (will this work?))
             
-            let exercises = getExercisesForConcept(conceptID: enrichedUserConcept_1.userConcept.concept.id, strength: strength1)
+            let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID:  enrichedUserConcept_1.userConcept.concept.id, strength: strength1)
             let feedPackage = FeedPackage(feedPackageType: .conceptIntro, exercises: exercises, transitionItem: conceptIntro)
             return feedPackage
         }
@@ -53,7 +58,7 @@ class FeedPackageCalculator {
         if enrichedUserConcept_1.status == .introductionInProgress, enrichedUserConcept_1.currentScore < 5 {
             print("in progress exercises for concept \(concept1_id)")
             
-            let exercises = getExercisesForConcept(conceptID: concept1_id, strength: strength1)
+            let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID: concept1_id, strength: strength1)
             let feedPackage = FeedPackage(feedPackageType: .exercises, exercises: exercises, transitionItem: nil)
             return feedPackage
         }
@@ -61,7 +66,7 @@ class FeedPackageCalculator {
         if enrichedUserConcept_1.status == .introductionInProgress, enrichedUserConcept_1.currentScore >= 5 {
             print("level up for concept \(enrichedUserConcept_1.userConcept.concept.id)")
             
-            let exercises = getExercisesForConcept(conceptID: enrichedUserConcept_1.userConcept.concept.id, strength: enrichedUserConcept_1.userConcept.strength)
+            let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID: enrichedUserConcept_1.userConcept.concept.id, strength: enrichedUserConcept_1.userConcept.strength)
             let levelUpItem = LevelUpItem(concept: concept1, previousLevel: strength1, newLevel: strength1 + 1)
             let feedPackage = FeedPackage(feedPackageType: .levelUp, exercises: exercises, transitionItem: levelUpItem)
             return feedPackage
@@ -72,50 +77,6 @@ class FeedPackageCalculator {
         return getExercises_prior()
     }
     
-    private func getExercisesForConcept(conceptID: Int, strength: Int) -> [Exercise] {
-        let unfilteredExercises = databaseService.getExercises(forConceptID: conceptID)
-        let weightTable = weightTableForStrength(strength)
-        let difficulties = randomizationService.setFromRange(min: 1, max: 3, selectionCount: 3, weightTable: weightTable)
-        
-        var exercises = [Exercise]()
-        
-        for i in 0...2 {
-            var newExercise: Exercise? = nil
-
-            while newExercise == nil {
-                let difficulty = difficulties[i]
-                let exercisePool = unfilteredExercises.filter { $0.difficulty == difficulty }
-                let exerciseIndex = randomizationService.intFromRange(min: 0, max: exercisePool.count - 1)
-                let exercise = exercisePool[exerciseIndex]
-
-                if let _ = exercises.first(where: { $0.id == exercise.id }) {
-                    continue
-                } else {
-                    newExercise = exercise
-                }
-            }
-            
-            exercises.append(newExercise!)
-        }
-        
-        return exercises
-    }
-    
-    private func weightTableForStrength(_ strength: Int) -> [Double] {
-        switch strength {
-        case 0:
-            return [1.0, 0.0, 0.0]
-        case 1:
-            return [0.5, 0.5, 0.0]
-        case 2:
-            return [0.2, 0.6, 0.2]
-        case 3:
-            return [0.0, 0.4, 0.6]
-        default:
-            return [1.0, 0.0, 0.0]
-        }
-    }
-    
     func getFeedPackage(introducedConceptID: Int) -> FeedPackage {
         
         print("\ngetNextFeedPackage() introduced concept \(introducedConceptID):")
@@ -124,7 +85,8 @@ class FeedPackageCalculator {
         
         databaseService.setUserConceptStatus(EnrichedUserConcept.Status.introductionInProgress.rawValue, forConceptID: introducedConceptID)
         databaseService.setFocusConcepts(concept1: introducedConceptID, concept2: 0)
-        let exercises = getExercisesForConcept(conceptID: introducedConceptID, strength: 0)
+        
+        let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID: introducedConceptID, strength: 0)
         return FeedPackage(feedPackageType: .exercises, exercises: exercises, transitionItem: nil)
     }
     
@@ -150,7 +112,12 @@ class FeedPackageCalculator {
         //Three cases:
         
         if let secondStrength1Concept = userConcepts.first(where: { $0.strength == 1 } ) {
-            //second, if there is another with strength 1, double concept exercise package
+            //first, if there is another with strength 1, double concept exercise package
+            
+            print("exercises for two concepts \(levelUpConceptID) \(secondStrength1Concept.id)")
+
+            let exercises = exerciseSetCalculator.getExercisesTwoConcepts(concept1_id: levelUpConceptID, concept2_id: secondStrength1Concept.id)
+            return FeedPackage(feedPackageType: .exercises, exercises: exercises, transitionItem: nil)
         }
         else if let introduceSecondConcept = userConcepts.first(where: { $0.strength == 0 } ) {
             print("concept intro package for: \(introduceSecondConcept.concept.id)")
@@ -163,13 +130,13 @@ class FeedPackageCalculator {
         
         print("fall-through exercise package")
         
-        let exercises = getExercisesForConcept(conceptID: levelUpConceptID, strength: newStrength)
+        let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID: levelUpConceptID, strength: newStrength)
         return FeedPackage(feedPackageType: .exercises, exercises: exercises, transitionItem: nil)
     }
     
     private func conceptIntroPackage(forConcept concept: Concept) -> FeedPackage {
         let conceptIntro = ConceptIntro(concept: concept)
-        let exercises = getExercisesForConcept(conceptID: concept.id, strength: 0)
+        let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID: concept.id, strength: 0)
         let conceptIntroPackage = FeedPackage(feedPackageType: .conceptIntro, exercises: exercises, transitionItem: conceptIntro)
         return conceptIntroPackage
     }
@@ -179,75 +146,9 @@ class FeedPackageCalculator {
         return (strengthLessThanTwoCount > 0)
     }
     
-    
-    
-    //get exercises for two focus concepts
     private func getExercises_prior() -> FeedPackage {
-        let concept1 = Concept.constantRule
-        let concept2 = Concept.linearRule
-        
-        let exercises_concept1 = databaseService.getExercises(forConceptID: concept1.id)
-        let exercises_concept2 = databaseService.getExercises(forConceptID: concept2.id)
-        
-        //randomly select which concept to choose from
-        let conceptSelections = randomizationService.setFromRange(min: 0, max: 1, selectionCount: 3)
-        let concept1Count = conceptSelections.reduce(0) { $0 + ($1 == 0 ? 1 : 0) }
-        let concept2Count = conceptSelections.reduce(0) { $0 + ($1 == 1 ? 1 : 0)}
-        
-        //use weighted selection to choose difficulties
-        let concept1Difficulties = randomizationService.setFromRange(min: 1, max: 3, selectionCount: concept1Count, weightTable: [0.2, 0.6, 0.2])
-        let concept2Difficulties = randomizationService.setFromRange(min: 1, max: 3, selectionCount: concept2Count, weightTable: [0.2, 0.6, 0.2])
-        
-        //randomly choose from arrays filtered by criteria
-        var concept1DifficultyIndex = 0
-        var concept2DifficultyIndex = 0
-        
-        var exercises = [Exercise]()
-        
-        for i in 0...conceptSelections.count - 1 {
-            if conceptSelections[i] == 0 {
-                //add concept 1 items
-                var newExercise: Exercise? = nil
-                
-                while newExercise == nil {
-                    let difficulty = concept1Difficulties[concept1DifficultyIndex]
-                    let exercisePool = exercises_concept1.filter { $0.difficulty == difficulty }
-                    let exerciseIndex = randomizationService.intFromRange(min: 0, max: exercisePool.count - 1)
-                    let exercise = exercisePool[exerciseIndex]
-                    if let _ = exercises.first(where: { $0.id == exercise.id }) {
-                        continue
-                    } else {
-                        newExercise = exercise
-                    }
-                }
-                
-                exercises.append(newExercise!)
-                concept1DifficultyIndex += 1
-                
-            } else {
-                //add concept 2 items
-                var newExercise: Exercise? = nil
-                
-                while newExercise == nil {
-                    let difficulty = concept2Difficulties[concept2DifficultyIndex]
-                    let exercisePool = exercises_concept2.filter { $0.difficulty == difficulty }
-                    let exerciseIndex = randomizationService.intFromRange(min: 0, max: exercisePool.count - 1)
-                    let exercise = exercisePool[exerciseIndex]
-                    if let _ = exercises.first(where: { $0.id == exercise.id }) {
-                        continue
-                    } else {
-                        newExercise = exercise
-                    }
-                }
-                
-                exercises.append(newExercise!)
-                concept2DifficultyIndex += 1
-            }
-        }
-    
-        let feedPackage = FeedPackage(feedPackageType: .exercises, exercises: exercises, transitionItem: nil)
-        
-        return feedPackage
+        let exercises = exerciseSetCalculator.getExercisesTwoConcepts(concept1_id: Concept.constantRule.id, concept2_id: Concept.linearRule.id)
+        return FeedPackage(feedPackageType: .exercises, exercises: exercises, transitionItem: nil)
     }
     
     func getExercise(id: Int) -> Exercise {
