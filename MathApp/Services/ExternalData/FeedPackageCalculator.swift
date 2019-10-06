@@ -25,11 +25,7 @@ class FeedPackageCalculator {
     //MARK: - FeedPackageCalculator Interface
         
     func getNextFeedPackage() -> FeedPackage {
-        //pull concepts from user record
         let focusConcepts = databaseService.getFocusConcepts()
-        
-        print("focus concepts: \(focusConcepts)")
-        
         let concept1_id = focusConcepts.0
 //        let concept2_id = focusConcepts.1
         
@@ -125,6 +121,8 @@ class FeedPackageCalculator {
         print("exercises package for introduced concept \(introducedConceptID)")
         
         databaseService.setUserConceptStatus(EnrichedUserConcept.Status.introductionInProgress.rawValue, forID: introducedConceptID)
+        databaseService.setFocusConcepts(concept1: introducedConceptID, concept2: 0)
+
         let exercises = getExercisesForConcept(conceptID: introducedConceptID, strength: 0)
         return FeedPackage(feedPackageType: .exercises, exercises: exercises, transitionItem: nil)
     }
@@ -154,8 +152,6 @@ class FeedPackageCalculator {
             print("package to introduce concept \(introduceSecondConcept.concept.id)")
             
             
-            //will need more tests - will have to dynamically choose new concept focus
-            databaseService.setFocusConcepts(concept1: 2, concept2: 0)
             
             //third, if all other introduced concepts have strength 2+, then intro next unintroduced concept
         }
