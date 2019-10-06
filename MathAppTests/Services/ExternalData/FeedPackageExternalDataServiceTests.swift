@@ -115,8 +115,25 @@ class FeedPackageExternalDataServiceTests: XCTestCase {
         XCTAssertEqual(mockDatabaseService.incrementStrengthForUserConcept_callCount, 1)
     }
     
-    //should update level
     //should update status
+    
+    
+    //too complicated - introduce new concept conditions are, 1) no other concepts at level 1, 2) other concepts at level 0
+    func test_getFeedPackageLevelUp_initialLevel0_introduceNewConceptConditions_shouldReturnConceptIntroPackage() {
+        let mockDatabaseService = stubDatabaseServiceFor_focusConcept1(status: .introductionInProgress)
+        let fakeRandomizationService = FakeRandomizationService()
+        
+        let calculator = FeedPackageCalculator(databaseService: mockDatabaseService, randomizationService: fakeRandomizationService)
+        let package = calculator.getFeedPackage(levelUpConceptID: 1)
+        
+        XCTAssertEqual(package.feedPackageType, .conceptIntro)
+        guard let conceptIntro = package.transitionItem as? ConceptIntro else {
+            XCTFail("transition item is not concept intro")
+            return
+        }
+        XCTAssertEqual(conceptIntro.concept.id, 2)
+        XCTAssertEqual(package.exercises.count, 3)
+    }
     
     
     //MARK: - DatabaseService Stubs

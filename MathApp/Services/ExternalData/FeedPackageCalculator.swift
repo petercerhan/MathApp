@@ -122,7 +122,6 @@ class FeedPackageCalculator {
         
         databaseService.setUserConceptStatus(EnrichedUserConcept.Status.introductionInProgress.rawValue, forID: introducedConceptID)
         databaseService.setFocusConcepts(concept1: introducedConceptID, concept2: 0)
-
         let exercises = getExercisesForConcept(conceptID: introducedConceptID, strength: 0)
         return FeedPackage(feedPackageType: .exercises, exercises: exercises, transitionItem: nil)
     }
@@ -132,8 +131,11 @@ class FeedPackageCalculator {
         guard let enrichedUserConcept = databaseService.getEnrichedUserConcept(conceptID: levelUpConceptID) else {
             return getExercises_prior()
         }
-        let strength = enrichedUserConcept.userConcept.strength
-        let newStrength = min(strength + 1, 3)
+        let priorStrength = enrichedUserConcept.userConcept.strength
+        let newStrength = min(priorStrength + 1, 3)
+        let userConcepts = databaseService.getUserConcepts()
+                .filter { $0.concept.id != levelUpConceptID }
+                .sorted { $0.concept.id < $1.concept.id }
         
         print("exercises package for level up concept \(levelUpConceptID), strength \(newStrength)")
 
@@ -141,22 +143,15 @@ class FeedPackageCalculator {
         
         //Three cases:
         
-        let userConcepts = databaseService.getUserConcepts()
-                .filter { $0.concept.id != levelUpConceptID }
-                .sorted { $0.concept.id < $1.concept.id }
-        
         if let secondStrength1Concept = userConcepts.first(where: { $0.strength == 1 } ) {
             //second, if there is another with strength 1, double concept exercise package
         }
         else if let introduceSecondConcept = userConcepts.first(where: { $0.strength == 0 } ) {
             print("package to introduce concept \(introduceSecondConcept.concept.id)")
             
-            
-            
-            //third, if all other introduced concepts have strength 2+, then intro next unintroduced concept
+            return conceptIntroPackage(forConcept: introduceSecondConcept.concept)
         }
-        
-        if allConceptsHaveStrengthTwoPlus(conceptArray: userConcepts) {
+        else if allConceptsHaveStrengthTwoPlus(conceptArray: userConcepts) {
             //first, if all other concepts in concept-family have strength 2+, single concept exercise package
         }
         
@@ -165,11 +160,17 @@ class FeedPackageCalculator {
         return FeedPackage(feedPackageType: .exercises, exercises: exercises, transitionItem: nil)
     }
     
+    private func conceptIntroPackage(forConcept concept: Concept) -> FeedPackage {
+        let conceptIntro = ConceptIntro(concept: concept)
+        let exercises = getExercisesForConcept(conceptID: concept.id, strength: 0)
+        let conceptIntroPackage = FeedPackage(feedPackageType: .conceptIntro, exercises: exercises, transitionItem: conceptIntro)
+        return conceptIntroPackage
+    }
+    
     private func allConceptsHaveStrengthTwoPlus(conceptArray: [UserConcept]) -> Bool {
         let strengthLessThanTwoCount = conceptArray.reduce(0) { $0 + ($1.strength < 2 ? 1 : 0) }
         return (strengthLessThanTwoCount > 0)
     }
-    
     
     
     
