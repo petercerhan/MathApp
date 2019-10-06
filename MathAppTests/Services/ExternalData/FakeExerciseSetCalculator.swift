@@ -15,7 +15,14 @@ class FakeExerciseSetCalculator: ExerciseSetCalculator {
         return [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3]
     }
     
+    var getExercisesTwoConcepts_callCount = 0
+    var getExercisesTwoConcepts_concept1ID = [Int]()
+    var getExercisesTwoConcepts_concept2ID = [Int]()
     func getExercisesTwoConcepts(concept1_id: Int, concept2_id: Int) -> [Exercise] {
+        getExercisesTwoConcepts_callCount += 1
+        getExercisesTwoConcepts_concept1ID.append(concept1_id)
+        getExercisesTwoConcepts_concept2ID.append(concept2_id)
+        
         return [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3]
     }
     

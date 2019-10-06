@@ -144,23 +144,32 @@ class FeedPackageExternalDataServiceTests: XCTestCase {
         
         let package = calculator.getFeedPackage(levelUpConceptID: 2)
         
-        print("\nconcepts \(package.exercises.map { $0.concept.id })")
-        
         XCTAssertEqual(package.feedPackageType, .exercises)
+    }
+    
+    func test_getFeedPackageLevelUp_initialLevel0_practiceTwoConceptsCondition_shouldFetchTwoConceptExercises() {
+        let mockExerciseSetCalculator = FakeExerciseSetCalculator()
+        let stubDatabaseService = getStubDatabaseService(focus1ID: 2, status: .introductionInProgress, stubUserConcepts: userConcepts_1Level1)
+        let calculator = composeSUT(fakeDatabaseService: stubDatabaseService, fakeExerciseSetCalculator: mockExerciseSetCalculator)
+        
+        let _ = calculator.getFeedPackage(levelUpConceptID: 2)
+        
+        XCTAssertEqual(mockExerciseSetCalculator.getExercisesTwoConcepts_callCount, 1)
+        XCTAssertEqual(mockExerciseSetCalculator.getExercisesTwoConcepts_concept1ID.first, 2)
+        XCTAssertEqual(mockExerciseSetCalculator.getExercisesTwoConcepts_concept2ID.first, 1)
     }
     
     //this should update focus to two concepts
     
     //MARK: - SUT Composition
     
-    private func composeSUT(fakeDatabaseService: FakeDatabaseService? = nil) -> FeedPackageCalculator {
+    private func composeSUT(fakeDatabaseService: FakeDatabaseService? = nil, fakeExerciseSetCalculator: FakeExerciseSetCalculator? = nil) -> FeedPackageCalculator
+    {
         let databaseService = fakeDatabaseService ?? FakeDatabaseService()
-        let fakeRandomizationService = FakeRandomizationService()
-        fakeRandomizationService.setFromRange_stub = [0, 1, 0]
+        let exerciseSetCalculator = fakeExerciseSetCalculator ?? FakeExerciseSetCalculator()
         
         return FeedPackageCalculator(databaseService: databaseService,
-                                     randomizationService: fakeRandomizationService,
-                                     exerciseSetCalculator: FakeExerciseSetCalculator())
+                                     exerciseSetCalculator: exerciseSetCalculator)
     }
     
     //MARK: - DatabaseService Stubs

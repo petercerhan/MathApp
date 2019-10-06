@@ -13,17 +13,15 @@ class FeedPackageCalculator {
     //MARK: - Dependencies
     
     private let databaseService: DatabaseService
-    private let randomizationService: RandomizationService
+//    private let randomizationService: RandomizationService
     private let exerciseSetCalculator: ExerciseSetCalculator
     
     //MARK: - Initialization
     
     init(databaseService: DatabaseService,
-         randomizationService: RandomizationService,
          exerciseSetCalculator: ExerciseSetCalculator)
     {
         self.databaseService = databaseService
-        self.randomizationService = randomizationService
         self.exerciseSetCalculator = exerciseSetCalculator
     }
     
