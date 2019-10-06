@@ -99,7 +99,7 @@ class FakeDatabaseService: DatabaseService {
     var setUserConceptStatus_callCount = 0
     var setUserConceptStatus_status = [Int]()
     var setUserConceptStatus_id = [Int]()
-    func setUserConceptStatus(_ status: Int, forID id: Int) {
+    func setUserConceptStatus(_ status: Int, forConceptID id: Int) {
         setUserConceptStatus_callCount += 1
         setUserConceptStatus_status.append(status)
         setUserConceptStatus_id.append(id)

@@ -33,14 +33,14 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have leveled up the following skill:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YCb-rP-ZR6">
-                    <rect key="frame" x="16" y="78.5" width="308" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have leveled up the following skill:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YCb-rP-ZR6">
+                    <rect key="frame" x="16" y="78.5" width="343" height="21.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rule" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGu-DQ-YdR">
-                    <rect key="frame" x="16" y="190" width="35.5" height="21"/>
+                    <rect key="frame" x="16" y="190.5" width="35.5" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -57,6 +57,7 @@
                 <constraint firstItem="TGu-DQ-YdR" firstAttribute="top" secondItem="YCb-rP-ZR6" secondAttribute="bottom" constant="90.5" id="C2o-jn-emy"/>
                 <constraint firstItem="YCb-rP-ZR6" firstAttribute="top" secondItem="cg0-hy-Lxm" secondAttribute="bottom" constant="32" id="Juj-3r-2Lq"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="BCP-39-q5f" secondAttribute="bottom" constant="20" id="W8k-gN-l0f"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="YCb-rP-ZR6" secondAttribute="trailing" constant="16" id="XSE-LF-n2r"/>
                 <constraint firstItem="js1-A8-1Sy" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="bLQ-XJ-pPu"/>
                 <constraint firstItem="cg0-hy-Lxm" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="e0J-ZT-rQP"/>
                 <constraint firstItem="BCP-39-q5f" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="gfK-ir-agI"/>

@@ -120,7 +120,7 @@ class FeedPackageCalculator {
     func getFeedPackage(introducedConceptID: Int) -> FeedPackage {
         print("exercises package for introduced concept \(introducedConceptID)")
         
-        databaseService.setUserConceptStatus(EnrichedUserConcept.Status.introductionInProgress.rawValue, forID: introducedConceptID)
+        databaseService.setUserConceptStatus(EnrichedUserConcept.Status.introductionInProgress.rawValue, forConceptID: introducedConceptID)
         databaseService.setFocusConcepts(concept1: introducedConceptID, concept2: 0)
         let exercises = getExercisesForConcept(conceptID: introducedConceptID, strength: 0)
         return FeedPackage(feedPackageType: .exercises, exercises: exercises, transitionItem: nil)
@@ -140,6 +140,10 @@ class FeedPackageCalculator {
         print("exercises package for level up concept \(levelUpConceptID), strength \(newStrength)")
 
         databaseService.incrementStrengthForUserConcept(conceptID: levelUpConceptID)
+        
+        if priorStrength == 0 {
+            databaseService.setUserConceptStatus(EnrichedUserConcept.Status.introductionComplete.rawValue, forConceptID: levelUpConceptID)
+        }
         
         //Three cases:
         
