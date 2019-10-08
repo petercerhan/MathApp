@@ -11,7 +11,14 @@ import Foundation
 
 class FakeExerciseSetCalculator: ExerciseSetCalculator {
     
+    var getExercisesForConcept_callCount = 0
+    var getExercisesForConcept_conceptID = [Int]()
+    var getExercisesForConcept_strength = [Int]()
     func getExercisesForConcept(conceptID: Int, strength: Int) -> [Exercise] {
+        getExercisesForConcept_callCount += 1
+        getExercisesForConcept_conceptID.append(conceptID)
+        getExercisesForConcept_strength.append(strength)
+        
         return [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3]
     }
     

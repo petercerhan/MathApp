@@ -77,10 +77,10 @@ class FeedPackageExternalDataServiceTests: XCTestCase {
         let mockDatabaseService = getStubDatabaseService(status: .unseen)
         let calculator = composeSUT(fakeDatabaseService: mockDatabaseService)
         
-        let _ = calculator.getFeedPackage(introducedConceptID: 1)
+        let _ = calculator.getFeedPackage(introducedConceptID: 2)
         
         XCTAssertEqual(mockDatabaseService.setFocusConcepts_callCount, 1)
-        XCTAssertEqual(mockDatabaseService.setFocusConcepts_concept1.first, 1)
+        XCTAssertEqual(mockDatabaseService.setFocusConcepts_concept1.first, 2)
         XCTAssertEqual(mockDatabaseService.setFocusConcepts_concept2.first, 0)
     }
     
@@ -138,8 +138,7 @@ class FeedPackageExternalDataServiceTests: XCTestCase {
     
     //1) another concept at level 1
     func test_getFeedPackageLevelUp_initialLevel0_practiceTwoConceptsCondition_shouldReturnExercisesPackage() {
-        let stubUserConcepts = userConcepts_1Level1
-        let mockDatabaseService = getStubDatabaseService(focus1ID: 2, status: .introductionInProgress, stubUserConcepts: stubUserConcepts)
+        let mockDatabaseService = getStubDatabaseService(focus1ID: 2, status: .introductionInProgress, stubUserConcepts: userConcepts_1Level1)
         let calculator = composeSUT(fakeDatabaseService: mockDatabaseService)
         
         let package = calculator.getFeedPackage(levelUpConceptID: 2)
@@ -159,7 +158,29 @@ class FeedPackageExternalDataServiceTests: XCTestCase {
         XCTAssertEqual(mockExerciseSetCalculator.getExercisesTwoConcepts_concept2ID.first, 1)
     }
     
-    //this should update focus to two concepts
+    func test_getFeedPackageLevelUp_initialLevel0_practiceTwoConceptsCondition_shouldUpdateFocusToTwoConcepts() {
+        let mockDatabaseService = getStubDatabaseService(focus1ID: 2, status: .introductionInProgress, stubUserConcepts: userConcepts_1Level1)
+        let calculator = composeSUT(fakeDatabaseService: mockDatabaseService)
+        
+        let _ = calculator.getFeedPackage(levelUpConceptID: 2)
+        
+        XCTAssertEqual(mockDatabaseService.setFocusConcepts_callCount, 1)
+        XCTAssertEqual(mockDatabaseService.setFocusConcepts_concept1.first, 2)
+        XCTAssertEqual(mockDatabaseService.setFocusConcepts_concept2.first, 1)
+    }
+    
+    //all other concepts strength 2+
+    func test_getFeedPackageLevelUp_initialLevel0_practiceSingleConceptCondition_shouldFetchSingleConceptExercises() {
+        let mockExerciseSetCalculator = FakeExerciseSetCalculator()
+        let mockDatabaseService = getStubDatabaseService(focus1ID: 2, status: .introductionInProgress, stubUserConcepts: userConcepts_allLevel2)
+        let calculator = composeSUT(fakeDatabaseService: mockDatabaseService, fakeExerciseSetCalculator: mockExerciseSetCalculator)
+        
+        let package = calculator.getFeedPackage(levelUpConceptID: 2)
+        
+        XCTAssertEqual(package.feedPackageType, .exercises)
+        XCTAssertEqual(mockExerciseSetCalculator.getExercisesForConcept_callCount, 1)
+        XCTAssertEqual(mockExerciseSetCalculator.getExercisesForConcept_conceptID.first, 2)
+    }
     
     //MARK: - SUT Composition
     
@@ -200,6 +221,16 @@ class FeedPackageExternalDataServiceTests: XCTestCase {
     private var userConcepts_1Level1: [UserConcept] {
         let constantRule = UserConcept(id: 1, concept: Concept.constantRule, strength: 1)
         return [constantRule, UserConcept.linearRule, UserConcept.powerRule, UserConcept.sumRule, UserConcept.differenceRule]
+    }
+    
+    private var userConcepts_allLevel2: [UserConcept] {
+        let rule1 = UserConcept(id: 1, concept: Concept.constantRule, strength: 2)
+        let rule2 = UserConcept(id: 2, concept: Concept.linearRule, strength: 2)
+        let rule3 = UserConcept(id: 3, concept: Concept.powerRule, strength: 2)
+        let rule4 = UserConcept(id: 4, concept: Concept.sumRule, strength: 2)
+        let rule5 = UserConcept(id: 5, concept: Concept.differenceRule, strength: 2)
+        
+        return [rule1, rule2, rule3, rule4, rule5]
     }
     
 }

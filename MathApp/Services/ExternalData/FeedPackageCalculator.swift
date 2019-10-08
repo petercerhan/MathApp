@@ -109,10 +109,14 @@ class FeedPackageCalculator {
         
         //Three cases:
         
+        //These are strength 0 cases for now:
+        
         if let secondStrength1Concept = userConcepts.first(where: { $0.strength == 1 } ) {
             //first, if there is another with strength 1, double concept exercise package
             
             print("exercises for two concepts \(levelUpConceptID) \(secondStrength1Concept.id)")
+            
+            databaseService.setFocusConcepts(concept1: levelUpConceptID, concept2: secondStrength1Concept.id)
 
             let exercises = exerciseSetCalculator.getExercisesTwoConcepts(concept1_id: levelUpConceptID, concept2_id: secondStrength1Concept.id)
             return FeedPackage(feedPackageType: .exercises, exercises: exercises, transitionItem: nil)
@@ -122,14 +126,12 @@ class FeedPackageCalculator {
             
             return conceptIntroPackage(forConcept: introduceSecondConcept.concept)
         }
-        else if allConceptsHaveStrengthTwoPlus(conceptArray: userConcepts) {
-            //first, if all other concepts in concept-family have strength 2+, single concept exercise package
+        else {
+            print("exercise for single concept: \(levelUpConceptID)")
+
+            let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID: levelUpConceptID, strength: newStrength)
+            return FeedPackage(feedPackageType: .exercises, exercises: exercises, transitionItem: nil)
         }
-        
-        print("fall-through exercise package")
-        
-        let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID: levelUpConceptID, strength: newStrength)
-        return FeedPackage(feedPackageType: .exercises, exercises: exercises, transitionItem: nil)
     }
     
     private func conceptIntroPackage(forConcept concept: Concept) -> FeedPackage {
