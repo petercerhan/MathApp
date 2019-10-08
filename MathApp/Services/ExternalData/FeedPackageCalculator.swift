@@ -13,7 +13,6 @@ class FeedPackageCalculator {
     //MARK: - Dependencies
     
     private let databaseService: DatabaseService
-//    private let randomizationService: RandomizationService
     private let exerciseSetCalculator: ExerciseSetCalculator
     
     //MARK: - Initialization
@@ -33,30 +32,47 @@ class FeedPackageCalculator {
         
         let focusConcepts = databaseService.getFocusConcepts()
         let concept1_id = focusConcepts.0
-//        let concept2_id = focusConcepts.1
+        let concept2_id = focusConcepts.1
         
         guard let enrichedUserConcept_1 = databaseService.getEnrichedUserConcept(conceptID: concept1_id) else {
             return getExercises_prior()
         }
-        let concept1 = enrichedUserConcept_1.userConcept.concept
-        let strength1 = enrichedUserConcept_1.userConcept.strength
-
+        
+        
+        
+//        if concept2_id == 0 {
+//            return getSingleFocusFeedPackage(conceptID: concept1_id)
+//        }
+//
+//        //strategy.getNextFeedPackage()
+//
+//        print("Fall-through exercise package")
+//
+//        return getExercises_prior()
+    }
+    
+    private func getSingleFocusFeedPackage(conceptID: Int) -> FeedPackage {
+        guard let enrichedUserConcept_1 = databaseService.getEnrichedUserConcept(conceptID: conceptID) else {
+            return getExercises_prior()
+        }
+        let concept = enrichedUserConcept_1.userConcept.concept
+        let strength = enrichedUserConcept_1.userConcept.strength
+        
         if enrichedUserConcept_1.status == .unseen {
-            print("concept intro for concept \(concept1_id)")
+            print("concept intro for concept \(conceptID)")
 
-            let conceptIntro = ConceptIntro(concept: concept1)
+            let conceptIntro = ConceptIntro(concept: concept)
             
             //should actually be exercises for previous concept, (if none, no exercises (will this work?))
             
-            let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID:  enrichedUserConcept_1.userConcept.concept.id, strength: strength1)
+            let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID:  enrichedUserConcept_1.userConcept.concept.id, strength: strength)
             let feedPackage = FeedPackage(feedPackageType: .conceptIntro, exercises: exercises, transitionItem: conceptIntro)
             return feedPackage
         }
-        
-        if enrichedUserConcept_1.status == .introductionInProgress, enrichedUserConcept_1.currentScore < 5 {
-            print("in progress exercises for concept \(concept1_id)")
+        else if enrichedUserConcept_1.status == .introductionInProgress, enrichedUserConcept_1.currentScore < 5 {
+            print("single concept exercises for concept \(conceptID)")
             
-            let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID: concept1_id, strength: strength1)
+            let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID: conceptID, strength: strength)
             let feedPackage = FeedPackage(feedPackageType: .exercises, exercises: exercises, transitionItem: nil)
             return feedPackage
         }
@@ -65,7 +81,7 @@ class FeedPackageCalculator {
             print("level up for concept \(enrichedUserConcept_1.userConcept.concept.id)")
             
             let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID: enrichedUserConcept_1.userConcept.concept.id, strength: enrichedUserConcept_1.userConcept.strength)
-            let levelUpItem = LevelUpItem(concept: concept1, previousLevel: strength1, newLevel: strength1 + 1)
+            let levelUpItem = LevelUpItem(concept: concept, previousLevel: strength, newLevel: strength + 1)
             let feedPackage = FeedPackage(feedPackageType: .levelUp, exercises: exercises, transitionItem: levelUpItem)
             return feedPackage
         }
@@ -74,6 +90,10 @@ class FeedPackageCalculator {
         
         return getExercises_prior()
     }
+    
+    
+    
+    
     
     func getFeedPackage(introducedConceptID: Int) -> FeedPackage {
         
