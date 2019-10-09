@@ -59,8 +59,10 @@ class DefaultStandardFeedPackageStrategy: StandardFeedPackageStrategy {
             return feedPackage
         }
         else {
-            return FeedPackage(feedPackageType: .exercises, exercises: [], transitionItem: nil)
+            return emptyPackage
         }
     }
+    
+    private let emptyPackage = FeedPackage(feedPackageType: .exercises, exercises: [], transitionItem: nil)
     
 }
