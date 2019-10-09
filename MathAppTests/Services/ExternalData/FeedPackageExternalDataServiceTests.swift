@@ -13,7 +13,46 @@ import RxTest
 
 class FeedPackageExternalDataServiceTests: XCTestCase {
     
-    //MARK: - getFeedPackage Tests
+    //MARK: - Tests for strategy invocation
+    
+    func test_getFeedPackage_twoFocusConcepts_shouldSupplyValuesToStrategyFactory() {
+        let mockFeedPackageStrategyFactory = FakeFeedPackageStrategyFactory()
+        let stubDatabaseService = FakeDatabaseService()
+        stubDatabaseService.getFocusConcepts_stub = (2, 4)
+        let calculator = FeedPackageCalculator(databaseService: stubDatabaseService, exerciseSetCalculator: FakeExerciseSetCalculator(), strategyFactory: mockFeedPackageStrategyFactory)
+        
+        _ = calculator.getNextFeedPackage()
+        
+        XCTAssertEqual(mockFeedPackageStrategyFactory.createStandardFeedPackageStrategy_callCount, 1)
+        XCTAssertEqual(mockFeedPackageStrategyFactory.createStandardFeedPackageStrategy_concept1.first?.userConcept.concept.id, 2)
+        guard let enrichedConcept2 = mockFeedPackageStrategyFactory.createStandardFeedPackageStrategy_concept2.first else {
+            XCTFail("no second enriched concept received")
+            return
+        }
+        XCTAssertEqual(enrichedConcept2?.userConcept.concept.id, 4)
+    }
+    
+    func test_getFeedPackage_oneFocusConcept_shouldSupply1ValueToStrategyFactory() {
+        let mockFeedPackageStrategyFactory = FakeFeedPackageStrategyFactory()
+        let stubDatabaseService = FakeDatabaseService()
+        stubDatabaseService.getFocusConcepts_stub = (2, 0)
+        let calculator = FeedPackageCalculator(databaseService: stubDatabaseService, exerciseSetCalculator: FakeExerciseSetCalculator(), strategyFactory: mockFeedPackageStrategyFactory)
+        
+        _ = calculator.getNextFeedPackage()
+        
+        XCTAssertEqual(mockFeedPackageStrategyFactory.createStandardFeedPackageStrategy_callCount, 1)
+        XCTAssertEqual(mockFeedPackageStrategyFactory.createStandardFeedPackageStrategy_concept1.first?.userConcept.concept.id, 2)
+        guard let enrichedConcept2 = mockFeedPackageStrategyFactory.createStandardFeedPackageStrategy_concept2.first else {
+            XCTFail("no second enriched concept received")
+            return
+        }
+        XCTAssertNil(enrichedConcept2)
+    }
+    
+    
+    //MARK: - Prior Integration Tests
+    
+    //MARK: - getFeedPackage
     
     func test_getFeedPackage_focusConcept1_concept1Unseen_shouldReturnConceptIntro1() {
         let stubDatabaseService = getStubDatabaseService(status1: .unseen)
@@ -56,19 +95,6 @@ class FeedPackageExternalDataServiceTests: XCTestCase {
         XCTAssertEqual(levelUpItem.newLevel, 1)
     }
     
-    func test_getFeedPackage_twoFocusConcepts_bothScoresBelow5_shouldReturn2ConceptExercisePackage() {
-        
-        
-        
-        
-        
-        
-    }
-    
-    
-    
-    
-    
     //MARK: - ConceptIntro Seen Tests
     
     func test_getFeedPackageIntroducedConcept_shouldUpdateConceptStatus() {
@@ -102,9 +128,6 @@ class FeedPackageExternalDataServiceTests: XCTestCase {
         XCTAssertEqual(package.feedPackageType, .exercises)
         XCTAssertEqual(package.exercises.count, 3)
     }
-    
-    
-    
     
     //MARK: - LevelUp Tests
     
