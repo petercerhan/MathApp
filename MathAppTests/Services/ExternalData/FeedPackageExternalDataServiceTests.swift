@@ -198,8 +198,11 @@ class FeedPackageExternalDataServiceTests: XCTestCase {
         let databaseService = fakeDatabaseService ?? FakeDatabaseService()
         let exerciseSetCalculator = fakeExerciseSetCalculator ?? FakeExerciseSetCalculator()
         
+        let strategyFactory = DefaultFeedPackageStrategyFactory()
+        
         return FeedPackageCalculator(databaseService: databaseService,
-                                     exerciseSetCalculator: exerciseSetCalculator)
+                                     exerciseSetCalculator: exerciseSetCalculator,
+                                     strategyFactory: strategyFactory)
     }
     
     //MARK: - DatabaseService Stubs

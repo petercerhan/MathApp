@@ -102,7 +102,8 @@ class CompositionRoot {
     
     private lazy var feedPackageExternalDataService: FeedPackageExternalDataService =  {
         let exerciseSetCalculator = ExerciseSetCalculatorImpl(databaseService: databaseService, randomizationService: RandomizationServiceImpl())
-        let feedPackageCalculator = FeedPackageCalculator(databaseService: databaseService, exerciseSetCalculator: exerciseSetCalculator)
+        let strategyFactory = DefaultFeedPackageStrategyFactory()
+        let feedPackageCalculator = FeedPackageCalculator(databaseService: databaseService, exerciseSetCalculator: exerciseSetCalculator, strategyFactory: strategyFactory)
         return FeedPackageExternalDataServiceImpl(feedPackageCalculator: feedPackageCalculator,
                                                    databaseService: databaseService,
                                                    randomizationService: RandomizationServiceImpl())
