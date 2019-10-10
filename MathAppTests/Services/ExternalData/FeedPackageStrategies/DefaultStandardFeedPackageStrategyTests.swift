@@ -51,13 +51,27 @@ class DefaultStandardFeedPackageStrategyTests: XCTestCase {
     
     func test_levelAbove0Below3_scoreBelow5_shouldReturnExercisesPackage() {
         let strategy = composeSUT(stubCurrentScore: 1, stubLevel: 1)
-        
+
         let package = strategy.getFeedPackage()
-        
+
         XCTAssertEqual(package.feedPackageType, .exercises)
         XCTAssertGreaterThan(package.exercises.count, 0)
     }
     
+    func test_levelAbove0Below3_score5_shouldReturnLevelUpPackage() {
+        let strategy = composeSUT(stubCurrentScore: 5, stubLevel: 2)
+
+        let package = strategy.getFeedPackage()
+        
+        XCTAssertEqual(package.feedPackageType, .levelUp)
+        guard let levelUpItem = package.transitionItem as? LevelUpItem else {
+            XCTFail("No level up item found")
+            return
+        }
+        XCTAssertEqual(levelUpItem.concept.id, 2)
+        XCTAssertEqual(levelUpItem.previousLevel, 2)
+        XCTAssertEqual(levelUpItem.newLevel, 3)
+    }
     
     
     

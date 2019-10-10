@@ -17,6 +17,13 @@ class DefaultStandardFeedPackageStrategy: StandardFeedPackageStrategy {
     //MARK: - State
     
     private let enrichedUserConcept: EnrichedUserConcept
+    var concept: Concept {
+        return enrichedUserConcept.userConcept.concept
+    }
+    var strength: Int {
+        return enrichedUserConcept.userConcept.strength
+    }
+    
     
     //MARK: - Initialization
     
@@ -28,9 +35,17 @@ class DefaultStandardFeedPackageStrategy: StandardFeedPackageStrategy {
     //MARK: - StandardFeedPackageStrategy
     
     func getFeedPackage() -> FeedPackage {
-        let concept = enrichedUserConcept.userConcept.concept
-        let strength = enrichedUserConcept.userConcept.strength
         
+        print("default standard strategy get feed package")
+        
+        if strength == 0 {
+            return level0FeedPackage()
+        } else {
+            return level1PlusFeedPackage()
+        }
+    }
+    
+    private func level0FeedPackage() -> FeedPackage {
         if enrichedUserConcept.status == .unseen {
             print("concept intro for concept \(concept.id)")
 
@@ -42,15 +57,7 @@ class DefaultStandardFeedPackageStrategy: StandardFeedPackageStrategy {
             let feedPackage = FeedPackage(feedPackageType: .conceptIntro, exercises: exercises, transitionItem: conceptIntro)
             return feedPackage
         }
-        else if enrichedUserConcept.status == .introductionInProgress, enrichedUserConcept.currentScore < 5 {
-            print("single concept exercises for concept \(concept.id)")
-            
-            let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID: concept.id, strength: strength)
-            let feedPackage = FeedPackage(feedPackageType: .exercises, exercises: exercises, transitionItem: nil)
-            return feedPackage
-        }
-        
-        if enrichedUserConcept.status == .introductionInProgress, enrichedUserConcept.currentScore >= 5 {
+        else if enrichedUserConcept.currentScore >= 5 {
             print("level up for concept \(concept.id)")
             
             let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID: concept.id, strength: strength)
@@ -59,7 +66,25 @@ class DefaultStandardFeedPackageStrategy: StandardFeedPackageStrategy {
             return feedPackage
         }
         else {
-            return emptyPackage
+            print("single concept exercises for concept \(concept.id)")
+            
+            let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID: concept.id, strength: strength)
+            let feedPackage = FeedPackage(feedPackageType: .exercises, exercises: exercises, transitionItem: nil)
+            return feedPackage
+        }
+    }
+    
+    private func level1PlusFeedPackage() -> FeedPackage {
+        print("single concept exercises for concept \(concept.id)")
+        if strength < 5 {
+            let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID: concept.id, strength: strength)
+            let feedPackage = FeedPackage(feedPackageType: .exercises, exercises: exercises, transitionItem: nil)
+            return feedPackage
+        } else {
+            let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID: concept.id, strength: strength)
+            let levelUpItem = LevelUpItem(concept: concept, previousLevel: strength, newLevel: strength + 1)
+            let feedPackage = FeedPackage(feedPackageType: .levelUp, exercises: exercises, transitionItem: levelUpItem)
+            return feedPackage
         }
     }
     
