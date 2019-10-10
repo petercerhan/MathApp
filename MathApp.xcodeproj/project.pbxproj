@@ -16,6 +16,8 @@
 		6E01F07A234D640800371D0C /* FakeStandardFeedPackageStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E01F079234D640800371D0C /* FakeStandardFeedPackageStrategy.swift */; };
 		6E01F07C234D675900371D0C /* EnrichedUserConcept+stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E01F07B234D675900371D0C /* EnrichedUserConcept+stubs.swift */; };
 		6E01F07E234D6BF800371D0C /* DefaultStandardFeedPackageStrategyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E01F07D234D6BF800371D0C /* DefaultStandardFeedPackageStrategyTests.swift */; };
+		6E01F084234ECD0600371D0C /* TestingAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E01F083234ECD0600371D0C /* TestingAppDelegate.swift */; };
+		6E01F086234ECD9B00371D0C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E01F085234ECD9B00371D0C /* main.swift */; };
 		6E0ADF3F23492312004B4348 /* FeedPackageExternalDataServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0ADF3E23492312004B4348 /* FeedPackageExternalDataServiceTests.swift */; };
 		6E0ADF42234927F1004B4348 /* FakeRandomizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0ADF41234927F1004B4348 /* FakeRandomizationService.swift */; };
 		6E0ADF4423492B2A004B4348 /* FeedPackageCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0ADF4323492B2A004B4348 /* FeedPackageCalculator.swift */; };
@@ -167,6 +169,8 @@
 		6E01F079234D640800371D0C /* FakeStandardFeedPackageStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeStandardFeedPackageStrategy.swift; sourceTree = "<group>"; };
 		6E01F07B234D675900371D0C /* EnrichedUserConcept+stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EnrichedUserConcept+stubs.swift"; sourceTree = "<group>"; };
 		6E01F07D234D6BF800371D0C /* DefaultStandardFeedPackageStrategyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStandardFeedPackageStrategyTests.swift; sourceTree = "<group>"; };
+		6E01F083234ECD0600371D0C /* TestingAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingAppDelegate.swift; sourceTree = "<group>"; };
+		6E01F085234ECD9B00371D0C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		6E0ADF3E23492312004B4348 /* FeedPackageExternalDataServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPackageExternalDataServiceTests.swift; sourceTree = "<group>"; };
 		6E0ADF41234927F1004B4348 /* FakeRandomizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeRandomizationService.swift; sourceTree = "<group>"; };
 		6E0ADF4323492B2A004B4348 /* FeedPackageCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPackageCalculator.swift; sourceTree = "<group>"; };
@@ -407,6 +411,7 @@
 		6E557C1522FB9DCB00270F07 /* MathApp */ = {
 			isa = PBXGroup;
 			children = (
+				6E01F085234ECD9B00371D0C /* main.swift */,
 				6E557C1622FB9DCB00270F07 /* AppDelegate.swift */,
 				6E557C3622FB9EEB00270F07 /* CompositionRoot.swift */,
 				6E557C3822FBA0AE00270F07 /* Coordinator.swift */,
@@ -436,6 +441,7 @@
 				6EBE4E8D230A13AD0047A880 /* FeedSequence */,
 				6E1E6B3022FFA8A000AFB7A0 /* Containers */,
 				6EBA306B2314D49300E6DC54 /* Library */,
+				6E01F083234ECD0600371D0C /* TestingAppDelegate.swift */,
 				6E74FD412318A2B900730AEB /* TestUtilities.swift */,
 				6E557C2D22FB9DCD00270F07 /* Info.plist */,
 			);
@@ -1194,6 +1200,7 @@
 				6EC6673B232494170048068C /* ConceptMapTableViewCell.swift in Sources */,
 				6E841620232B22F20035F381 /* FeedPackageExternalDataService.swift in Sources */,
 				6EBE4EA2230B66CD0047A880 /* Exercise.swift in Sources */,
+				6E01F086234ECD9B00371D0C /* main.swift in Sources */,
 				6EBE4EA6230B68720047A880 /* ExerciseViewModel.swift in Sources */,
 				6EC6673E2324942A0048068C /* ConceptMapElement.swift in Sources */,
 				6E1E6B3522FFA95100AFB7A0 /* ContainerViewController.swift in Sources */,
@@ -1293,6 +1300,7 @@
 				6E841623232B234F0035F381 /* FakeExerciseExternalDataService.swift in Sources */,
 				6E01F07A234D640800371D0C /* FakeStandardFeedPackageStrategy.swift in Sources */,
 				6EC6672423245D730048068C /* TestMenuCoordinator.swift in Sources */,
+				6E01F084234ECD0600371D0C /* TestingAppDelegate.swift in Sources */,
 				6E0ADF48234A98C7004B4348 /* FakeExerciseSetCalculator.swift in Sources */,
 				6E883F9F233DA2DE004F0D0E /* FakeConceptIntroViewModelDelegate.swift in Sources */,
 				6E74FD472318B53F00730AEB /* ExerciseChoiceConfiguration+stubs.swift in Sources */,

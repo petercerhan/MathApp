@@ -75,8 +75,11 @@ class DefaultStandardFeedPackageStrategy: StandardFeedPackageStrategy {
     }
     
     private func level1PlusFeedPackage() -> FeedPackage {
+        
+        print("\n\nlevel1PlusFeedPackage strength: \(strength)")
+        
         print("single concept exercises for concept \(concept.id)")
-        if strength < 5 {
+        if enrichedUserConcept.currentScore < 5 {
             let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID: concept.id, strength: strength)
             let feedPackage = FeedPackage(feedPackageType: .exercises, exercises: exercises, transitionItem: nil)
             return feedPackage
