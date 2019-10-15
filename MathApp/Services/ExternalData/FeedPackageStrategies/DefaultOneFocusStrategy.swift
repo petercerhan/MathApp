@@ -8,7 +8,7 @@
 
 import Foundation
 
-class DefaultStandardFeedPackageStrategy: StandardFeedPackageStrategy {
+class DefaultOneFocusStrategy: OneFocusStrategy {
     
     //MARK: - Dependencies
     

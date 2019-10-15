@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol StandardFeedPackageStrategy {
+protocol OneFocusStrategy {
     func getFeedPackage() -> FeedPackage
 }

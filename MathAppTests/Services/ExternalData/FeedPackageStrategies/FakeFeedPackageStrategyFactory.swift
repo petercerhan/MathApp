@@ -11,15 +11,15 @@ import Foundation
 
 class FakeFeedPackageStrategyFactory: FeedPackageStrategyFactory {
 
-    var createStandardFeedPackageStrategy_callCount = 0
-    var createStandardFeedPackageStrategy_concept1 = [EnrichedUserConcept]()
-    var createStandardFeedPackageStrategy_concept2 = [EnrichedUserConcept?]()
-    func createStandardFeedPackageStrategy(exerciseSetCalculator: ExerciseSetCalculator, concept1: EnrichedUserConcept, concept2: EnrichedUserConcept?) -> StandardFeedPackageStrategy {
-        createStandardFeedPackageStrategy_callCount += 1
-        createStandardFeedPackageStrategy_concept1.append(concept1)
-        createStandardFeedPackageStrategy_concept2.append(concept2)
+    var createOneFocusStrategy_callCount = 0
+    var createOneFocusStrategy_concept1 = [EnrichedUserConcept]()
+    var createOneFocusStrategy_concept2 = [EnrichedUserConcept?]()
+    func createOneFocusStrategy(exerciseSetCalculator: ExerciseSetCalculator, concept1: EnrichedUserConcept, concept2: EnrichedUserConcept?) -> OneFocusStrategy {
+        createOneFocusStrategy_callCount += 1
+        createOneFocusStrategy_concept1.append(concept1)
+        createOneFocusStrategy_concept2.append(concept2)
         
-        return FakeStandardFeedPackageStrategy()
+        return FakeOneFocusStrategy()
     }
     
 }

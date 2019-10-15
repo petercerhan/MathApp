@@ -9,7 +9,7 @@
 import Foundation
 @testable import MathApp
 
-class FakeStandardFeedPackageStrategy: StandardFeedPackageStrategy {
+class FakeOneFocusStrategy: OneFocusStrategy {
     func getFeedPackage() -> FeedPackage {
         return FeedPackage.exercisesPackage
     }

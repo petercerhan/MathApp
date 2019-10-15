@@ -9,5 +9,5 @@
 import Foundation
 
 protocol FeedPackageStrategyFactory {
-    func createStandardFeedPackageStrategy(exerciseSetCalculator: ExerciseSetCalculator, concept1: EnrichedUserConcept, concept2: EnrichedUserConcept?) -> StandardFeedPackageStrategy
+    func createOneFocusStrategy(exerciseSetCalculator: ExerciseSetCalculator, concept1: EnrichedUserConcept, concept2: EnrichedUserConcept?) -> OneFocusStrategy
 }

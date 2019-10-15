@@ -42,7 +42,8 @@ class FeedPackageCalculator {
         }
         let enrichedUserConcept2 = databaseService.getEnrichedUserConcept(conceptID: concept2_id)
         
-        let strategy = strategyFactory.createStandardFeedPackageStrategy(exerciseSetCalculator: exerciseSetCalculator, concept1: enrichedUserConcept1, concept2: enrichedUserConcept2)
+        //only if one focus
+        let strategy = strategyFactory.createOneFocusStrategy(exerciseSetCalculator: exerciseSetCalculator, concept1: enrichedUserConcept1, concept2: enrichedUserConcept2)
         
         return strategy.getFeedPackage()
     }

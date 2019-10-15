@@ -23,9 +23,9 @@ class FeedPackageExternalDataServiceTests: XCTestCase {
         
         _ = calculator.getNextFeedPackage()
         
-        XCTAssertEqual(mockFeedPackageStrategyFactory.createStandardFeedPackageStrategy_callCount, 1)
-        XCTAssertEqual(mockFeedPackageStrategyFactory.createStandardFeedPackageStrategy_concept1.first?.userConcept.concept.id, 2)
-        guard let enrichedConcept2 = mockFeedPackageStrategyFactory.createStandardFeedPackageStrategy_concept2.first else {
+        XCTAssertEqual(mockFeedPackageStrategyFactory.createOneFocusStrategy_callCount, 1)
+        XCTAssertEqual(mockFeedPackageStrategyFactory.createOneFocusStrategy_concept1.first?.userConcept.concept.id, 2)
+        guard let enrichedConcept2 = mockFeedPackageStrategyFactory.createOneFocusStrategy_concept2.first else {
             XCTFail("no second enriched concept received")
             return
         }
@@ -40,9 +40,9 @@ class FeedPackageExternalDataServiceTests: XCTestCase {
         
         _ = calculator.getNextFeedPackage()
         
-        XCTAssertEqual(mockFeedPackageStrategyFactory.createStandardFeedPackageStrategy_callCount, 1)
-        XCTAssertEqual(mockFeedPackageStrategyFactory.createStandardFeedPackageStrategy_concept1.first?.userConcept.concept.id, 2)
-        guard let enrichedConcept2 = mockFeedPackageStrategyFactory.createStandardFeedPackageStrategy_concept2.first else {
+        XCTAssertEqual(mockFeedPackageStrategyFactory.createOneFocusStrategy_callCount, 1)
+        XCTAssertEqual(mockFeedPackageStrategyFactory.createOneFocusStrategy_concept1.first?.userConcept.concept.id, 2)
+        guard let enrichedConcept2 = mockFeedPackageStrategyFactory.createOneFocusStrategy_concept2.first else {
             XCTFail("no second enriched concept received")
             return
         }

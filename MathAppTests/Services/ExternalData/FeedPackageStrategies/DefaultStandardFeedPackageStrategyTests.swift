@@ -81,7 +81,7 @@ class DefaultStandardFeedPackageStrategyTests: XCTestCase {
     
     //MARK: - Compose SUT
     
-    private func composeSUT(stubStatusCode: Int? = nil, stubCurrentScore: Int? = nil, stubLevel: Int = 0) -> DefaultStandardFeedPackageStrategy {
+    private func composeSUT(stubStatusCode: Int? = nil, stubCurrentScore: Int? = nil, stubLevel: Int = 0) -> DefaultOneFocusStrategy {
         let statusCode = stubStatusCode ?? introductionCompleteCode
         let currentScore = stubCurrentScore ?? 0
         
@@ -89,7 +89,7 @@ class DefaultStandardFeedPackageStrategyTests: XCTestCase {
         let stubEnrichedUserConcept = EnrichedUserConcept(userConcept: userConcept, statusCode: statusCode, currentScore: currentScore)!
         let fakeExerciseSetCalculator = FakeExerciseSetCalculator()
         
-        return DefaultStandardFeedPackageStrategy(exerciseSetCalculator: fakeExerciseSetCalculator, enrichedUserConcept: stubEnrichedUserConcept)
+        return DefaultOneFocusStrategy(exerciseSetCalculator: fakeExerciseSetCalculator, enrichedUserConcept: stubEnrichedUserConcept)
     }
     
     var unseenCode: Int {
