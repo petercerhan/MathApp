@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 @testable import MathApp
 
-class DefaultStandardFeedPackageStrategyTests: XCTestCase {
+class DefaultOneFocusStrategyTests: XCTestCase {
         
     func test_level0_unseen_shouldReturnConceptIntroPackage() {
         let strategy = composeSUT(stubStatusCode: unseenCode)

@@ -10,4 +10,5 @@ import Foundation
 
 protocol FeedPackageStrategyFactory {
     func createOneFocusStrategy(exerciseSetCalculator: ExerciseSetCalculator, concept1: EnrichedUserConcept, concept2: EnrichedUserConcept?) -> OneFocusStrategy
+    func createTwoFocusStrategy(exerciseSetCalculator: ExerciseSetCalculator, concept1: EnrichedUserConcept, concept2: EnrichedUserConcept) -> TwoFocusStrategy
 }

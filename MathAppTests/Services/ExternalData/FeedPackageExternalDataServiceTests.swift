@@ -15,7 +15,7 @@ class FeedPackageExternalDataServiceTests: XCTestCase {
     
     //MARK: - Tests for strategy invocation
     
-    func test_getFeedPackage_twoFocusConcepts_shouldSupplyValuesToStrategyFactory() {
+    func test_getFeedPackage_twoFocusConcepts_shouldRequestTwoFocusStrategy() {
         let mockFeedPackageStrategyFactory = FakeFeedPackageStrategyFactory()
         let stubDatabaseService = FakeDatabaseService()
         stubDatabaseService.getFocusConcepts_stub = (2, 4)
@@ -23,16 +23,16 @@ class FeedPackageExternalDataServiceTests: XCTestCase {
         
         _ = calculator.getNextFeedPackage()
         
-        XCTAssertEqual(mockFeedPackageStrategyFactory.createOneFocusStrategy_callCount, 1)
-        XCTAssertEqual(mockFeedPackageStrategyFactory.createOneFocusStrategy_concept1.first?.userConcept.concept.id, 2)
-        guard let enrichedConcept2 = mockFeedPackageStrategyFactory.createOneFocusStrategy_concept2.first else {
+        XCTAssertEqual(mockFeedPackageStrategyFactory.createTwoFocusStrategy_callCount, 1)
+        XCTAssertEqual(mockFeedPackageStrategyFactory.createTwoFocusStrategy_concept1.first?.userConcept.concept.id, 2)
+        guard let enrichedConcept2 = mockFeedPackageStrategyFactory.createTwoFocusStrategy_concept2.first else {
             XCTFail("no second enriched concept received")
             return
         }
         XCTAssertEqual(enrichedConcept2?.userConcept.concept.id, 4)
     }
     
-    func test_getFeedPackage_oneFocusConcept_shouldSupply1ValueToStrategyFactory() {
+    func test_getFeedPackage_oneFocusConcept_shouldRequestOneFocusStrategy() {
         let mockFeedPackageStrategyFactory = FakeFeedPackageStrategyFactory()
         let stubDatabaseService = FakeDatabaseService()
         stubDatabaseService.getFocusConcepts_stub = (2, 0)
@@ -54,46 +54,46 @@ class FeedPackageExternalDataServiceTests: XCTestCase {
     
     //MARK: - getFeedPackage
     
-    func test_getFeedPackage_focusConcept1_concept1Unseen_shouldReturnConceptIntro1() {
-        let stubDatabaseService = getStubDatabaseService(status1: .unseen)
-        let calculator = composeSUT(fakeDatabaseService: stubDatabaseService)
-
-        let package = calculator.getNextFeedPackage()
-        
-        XCTAssertEqual(package.feedPackageType, .conceptIntro)
-        guard let conceptIntro = package.transitionItem as? ConceptIntro else {
-            XCTFail("transition item is not concept intro")
-            return
-        }
-        XCTAssertEqual(conceptIntro.concept.id, 1)
-        XCTAssertEqual(package.exercises.count, 3)
-    }
-    
-    func test_getFeedPackage_focusConcept1_concept1InProgress_scoreBelow5_shouldReturnExercisePackage() {
-        let stubDatabaseService = getStubDatabaseService(status1: .introductionInProgress)
-        let calculator = composeSUT(fakeDatabaseService: stubDatabaseService)
-
-        let package = calculator.getNextFeedPackage()
-        
-        XCTAssertEqual(package.feedPackageType, .exercises)
-        XCTAssertEqual(package.exercises.count, 3)
-    }
-    
-    func test_getFeedPackage_focusConcept1_concept1InProgress_score5_shouldReturnLevelUpPackage() {
-        let stubDatabaseService = getStubDatabaseService(status1: .introductionInProgress, currentScore: 5)
-        let calculator = composeSUT(fakeDatabaseService: stubDatabaseService)
-
-        let package = calculator.getNextFeedPackage()
-        
-        XCTAssertEqual(package.feedPackageType, .levelUp)
-        XCTAssertEqual(package.exercises.count, 3)
-        guard let levelUpItem = package.transitionItem as? LevelUpItem else {
-            XCTFail("Transition item is not level up item")
-            return
-        }
-        XCTAssertEqual(levelUpItem.previousLevel, 0)
-        XCTAssertEqual(levelUpItem.newLevel, 1)
-    }
+//    func test_getFeedPackage_focusConcept1_concept1Unseen_shouldReturnConceptIntro1() {
+//        let stubDatabaseService = getStubDatabaseService(status1: .unseen)
+//        let calculator = composeSUT(fakeDatabaseService: stubDatabaseService)
+//
+//        let package = calculator.getNextFeedPackage()
+//
+//        XCTAssertEqual(package.feedPackageType, .conceptIntro)
+//        guard let conceptIntro = package.transitionItem as? ConceptIntro else {
+//            XCTFail("transition item is not concept intro")
+//            return
+//        }
+//        XCTAssertEqual(conceptIntro.concept.id, 1)
+//        XCTAssertEqual(package.exercises.count, 3)
+//    }
+//
+//    func test_getFeedPackage_focusConcept1_concept1InProgress_scoreBelow5_shouldReturnExercisePackage() {
+//        let stubDatabaseService = getStubDatabaseService(status1: .introductionInProgress)
+//        let calculator = composeSUT(fakeDatabaseService: stubDatabaseService)
+//
+//        let package = calculator.getNextFeedPackage()
+//
+//        XCTAssertEqual(package.feedPackageType, .exercises)
+//        XCTAssertEqual(package.exercises.count, 3)
+//    }
+//
+//    func test_getFeedPackage_focusConcept1_concept1InProgress_score5_shouldReturnLevelUpPackage() {
+//        let stubDatabaseService = getStubDatabaseService(status1: .introductionInProgress, currentScore: 5)
+//        let calculator = composeSUT(fakeDatabaseService: stubDatabaseService)
+//
+//        let package = calculator.getNextFeedPackage()
+//
+//        XCTAssertEqual(package.feedPackageType, .levelUp)
+//        XCTAssertEqual(package.exercises.count, 3)
+//        guard let levelUpItem = package.transitionItem as? LevelUpItem else {
+//            XCTFail("Transition item is not level up item")
+//            return
+//        }
+//        XCTAssertEqual(levelUpItem.previousLevel, 0)
+//        XCTAssertEqual(levelUpItem.newLevel, 1)
+//    }
     
     //MARK: - ConceptIntro Seen Tests
     

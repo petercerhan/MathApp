@@ -40,12 +40,14 @@ class FeedPackageCalculator {
         guard let enrichedUserConcept1 = databaseService.getEnrichedUserConcept(conceptID: concept1_id) else {
             return getExercises_prior()
         }
-        let enrichedUserConcept2 = databaseService.getEnrichedUserConcept(conceptID: concept2_id)
-        
-        //only if one focus
-        let strategy = strategyFactory.createOneFocusStrategy(exerciseSetCalculator: exerciseSetCalculator, concept1: enrichedUserConcept1, concept2: enrichedUserConcept2)
-        
-        return strategy.getFeedPackage()
+        if let enrichedUserConcept2 = databaseService.getEnrichedUserConcept(conceptID: concept2_id) {
+            let strategy = strategyFactory.createTwoFocusStrategy(exerciseSetCalculator: exerciseSetCalculator, concept1: enrichedUserConcept1, concept2: enrichedUserConcept2)
+            return strategy.getFeedPackage()
+        }
+        else {
+            let strategy = strategyFactory.createOneFocusStrategy(exerciseSetCalculator: exerciseSetCalculator, concept1: enrichedUserConcept1, concept2: nil)
+            return strategy.getFeedPackage()
+        }
     }
     
     func getFeedPackage(introducedConceptID: Int) -> FeedPackage {
