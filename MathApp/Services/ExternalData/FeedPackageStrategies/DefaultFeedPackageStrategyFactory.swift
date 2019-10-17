@@ -14,7 +14,7 @@ class DefaultFeedPackageStrategyFactory: FeedPackageStrategyFactory {
     }
     
     func createTwoFocusStrategy(exerciseSetCalculator: ExerciseSetCalculator, concept1: EnrichedUserConcept, concept2: EnrichedUserConcept) -> TwoFocusStrategy {
-        return DefaultTwoFocusStrategy()
+        return DefaultTwoFocusStrategy(exerciseSetCalculator: exerciseSetCalculator, enrichedUserConcept1: concept1, enrichedUserConcept2: concept2)
     }
     
 }

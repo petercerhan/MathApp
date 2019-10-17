@@ -75,10 +75,6 @@ class DefaultOneFocusStrategyTests: XCTestCase {
     
     
     
-    
-    
-    
-    
     //MARK: - Compose SUT
     
     private func composeSUT(stubStatusCode: Int? = nil, stubCurrentScore: Int? = nil, stubLevel: Int = 0) -> DefaultOneFocusStrategy {

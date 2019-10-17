@@ -14,7 +14,7 @@ class DefaultOneFocusStrategy: OneFocusStrategy {
     
     private let exerciseSetCalculator: ExerciseSetCalculator
     
-    //MARK: - State
+    //MARK: - Config
     
     private let enrichedUserConcept: EnrichedUserConcept
     var concept: Concept {
@@ -23,7 +23,6 @@ class DefaultOneFocusStrategy: OneFocusStrategy {
     var strength: Int {
         return enrichedUserConcept.userConcept.strength
     }
-    
     
     //MARK: - Initialization
     
