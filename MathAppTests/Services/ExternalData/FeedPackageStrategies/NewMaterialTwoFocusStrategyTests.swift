@@ -54,7 +54,7 @@ class NewMaterialTwoFocusStrategyTests: XCTestCase {
     
     //MARK: - SUT Composition
     
-    func composeSUT(strength1: Int = 1, score1: Int = 0, strength2: Int = 1, score2: Int = 0) -> TwoFocusStrategy {
+    func composeSUT(strength1: Int = 1, score1: Int = 0, strength2: Int = 1, score2: Int = 0) -> DefaultTwoFocusStrategy {
         let userConcept1 = UserConcept(id: 1, concept: Concept.constantRule, strength: strength1)
         let stubEnrichedUserConcept1 = EnrichedUserConcept(userConcept: userConcept1, statusCode: introductionCompleteCode, currentScore: score1)!
         let userConcept2 = UserConcept(id: 2, concept: Concept.linearRule, strength: strength2)
