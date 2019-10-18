@@ -13,43 +13,6 @@ import RxTest
 
 class FeedPackageExternalDataServiceTests: XCTestCase {
     
-    //MARK: - Tests for strategy invocation
-    
-    func test_getFeedPackage_twoFocusConcepts_shouldRequestTwoFocusStrategy() {
-        let mockFeedPackageStrategyFactory = FakeFeedPackageStrategyFactory()
-        let stubDatabaseService = FakeDatabaseService()
-        stubDatabaseService.getFocusConcepts_stub = (2, 4)
-        let calculator = NewMaterialStandardCalculator(databaseService: stubDatabaseService, exerciseSetCalculator: FakeExerciseSetCalculator(), strategyFactory: mockFeedPackageStrategyFactory)
-        
-        _ = calculator.getNextFeedPackage()
-        
-        XCTAssertEqual(mockFeedPackageStrategyFactory.createTwoFocusStrategy_callCount, 1)
-        XCTAssertEqual(mockFeedPackageStrategyFactory.createTwoFocusStrategy_concept1.first?.userConcept.concept.id, 2)
-        guard let enrichedConcept2 = mockFeedPackageStrategyFactory.createTwoFocusStrategy_concept2.first else {
-            XCTFail("no second enriched concept received")
-            return
-        }
-        XCTAssertEqual(enrichedConcept2?.userConcept.concept.id, 4)
-    }
-    
-    func test_getFeedPackage_oneFocusConcept_shouldRequestOneFocusStrategy() {
-        let mockFeedPackageStrategyFactory = FakeFeedPackageStrategyFactory()
-        let stubDatabaseService = FakeDatabaseService()
-        stubDatabaseService.getFocusConcepts_stub = (2, 0)
-        let calculator = NewMaterialStandardCalculator(databaseService: stubDatabaseService, exerciseSetCalculator: FakeExerciseSetCalculator(), strategyFactory: mockFeedPackageStrategyFactory)
-        
-        _ = calculator.getNextFeedPackage()
-        
-        XCTAssertEqual(mockFeedPackageStrategyFactory.createOneFocusStrategy_callCount, 1)
-        XCTAssertEqual(mockFeedPackageStrategyFactory.createOneFocusStrategy_concept1.first?.userConcept.concept.id, 2)
-        guard let enrichedConcept2 = mockFeedPackageStrategyFactory.createOneFocusStrategy_concept2.first else {
-            XCTFail("no second enriched concept received")
-            return
-        }
-        XCTAssertNil(enrichedConcept2)
-    }
-    
-    
     //MARK: - Prior Integration Tests
     
     //MARK: - getFeedPackage
@@ -221,11 +184,8 @@ class FeedPackageExternalDataServiceTests: XCTestCase {
         let databaseService = fakeDatabaseService ?? FakeDatabaseService()
         let exerciseSetCalculator = fakeExerciseSetCalculator ?? FakeExerciseSetCalculator()
         
-        let strategyFactory = DefaultFeedPackageStrategyFactory()
-        
         return NewMaterialStandardCalculator(databaseService: databaseService,
-                                     exerciseSetCalculator: exerciseSetCalculator,
-                                     strategyFactory: strategyFactory)
+                                     exerciseSetCalculator: exerciseSetCalculator)
     }
     
     //MARK: - DatabaseService Stubs

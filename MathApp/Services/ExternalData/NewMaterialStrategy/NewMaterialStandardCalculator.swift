@@ -14,17 +14,14 @@ class NewMaterialStandardCalculator: FeedPackageCalculator {
     
     private let databaseService: DatabaseService
     private let exerciseSetCalculator: ExerciseSetCalculator
-    private let strategyFactory: FeedPackageStrategyFactory
     
     //MARK: - Initialization
     
     init(databaseService: DatabaseService,
-         exerciseSetCalculator: ExerciseSetCalculator,
-         strategyFactory: FeedPackageStrategyFactory)
+         exerciseSetCalculator: ExerciseSetCalculator)
     {
         self.databaseService = databaseService
         self.exerciseSetCalculator = exerciseSetCalculator
-        self.strategyFactory = strategyFactory
     }
     
     //MARK: - FeedPackageCalculator Interface
@@ -41,11 +38,11 @@ class NewMaterialStandardCalculator: FeedPackageCalculator {
             return getExercises_prior()
         }
         if let enrichedUserConcept2 = databaseService.getEnrichedUserConcept(conceptID: concept2_id) {
-            let strategy = strategyFactory.createTwoFocusStrategy(exerciseSetCalculator: exerciseSetCalculator, concept1: enrichedUserConcept1, concept2: enrichedUserConcept2)
+            let strategy = DefaultTwoFocusStrategy(exerciseSetCalculator: exerciseSetCalculator, enrichedUserConcept1: enrichedUserConcept1, enrichedUserConcept2: enrichedUserConcept2)
             return strategy.getFeedPackage()
         }
         else {
-            let strategy = strategyFactory.createOneFocusStrategy(exerciseSetCalculator: exerciseSetCalculator, concept1: enrichedUserConcept1, concept2: nil)
+            let strategy = DefaultOneFocusStrategy(exerciseSetCalculator: exerciseSetCalculator, enrichedUserConcept: enrichedUserConcept1)
             return strategy.getFeedPackage()
         }
     }
