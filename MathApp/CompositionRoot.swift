@@ -100,13 +100,18 @@ class CompositionRoot {
         DatabaseServiceImpl()
     }()
     
-    private lazy var feedPackageExternalDataService: FeedPackageExternalDataService =  {
+    private lazy var feedPackageExternalDataService: FeedPackageExternalDataService = {
         let exerciseSetCalculator = ExerciseSetCalculatorImpl(databaseService: databaseService, randomizationService: RandomizationServiceImpl())
         let strategyFactory = DefaultFeedPackageStrategyFactory()
-        let feedPackageCalculator = FeedPackageCalculator(databaseService: databaseService, exerciseSetCalculator: exerciseSetCalculator, strategyFactory: strategyFactory)
-        return FeedPackageExternalDataServiceImpl(feedPackageCalculator: feedPackageCalculator,
-                                                   databaseService: databaseService,
+        let feedPackageCalculator = NewMaterialStandardCalculator(databaseService: databaseService, exerciseSetCalculator: exerciseSetCalculator, strategyFactory: strategyFactory)
+        
+        let feedPackageAPIRouter = FeedPackageAPIRouter(feedPackageCalculator: feedPackageCalculator, databaseService: databaseService)
+        
+        return FeedPackageExternalDataServiceImpl(feedPackageAPIRouter: feedPackageAPIRouter,
                                                    randomizationService: RandomizationServiceImpl())
     }()
     
 }
+
+
+

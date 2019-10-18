@@ -52,12 +52,6 @@ class NewMaterialTwoFocusStrategyTests: XCTestCase {
         assertIsLevelUpPackage(package: package, conceptID: 2, initialLevel: 1)
     }
     
-    
-    
-    
-    
-    
-    
     //MARK: - SUT Composition
     
     func composeSUT(strength1: Int = 1, score1: Int = 0, strength2: Int = 1, score2: Int = 0) -> TwoFocusStrategy {

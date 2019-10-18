@@ -21,37 +21,35 @@ class FeedPackageExternalDataServiceImpl: FeedPackageExternalDataService {
 
     //MARK: - Dependencies
     
-    private let feedPackageCalculator: FeedPackageCalculator
-    private let databaseService: DatabaseService
+    private let feedPackageAPIRouter: FeedPackageAPIRouter
     private let randomizationService: RandomizationService
     
     //MARK: - Initialization
     
-    init(feedPackageCalculator: FeedPackageCalculator, databaseService: DatabaseService, randomizationService: RandomizationService) {
-        self.feedPackageCalculator = feedPackageCalculator
-        self.databaseService = databaseService
+    init(feedPackageAPIRouter: FeedPackageAPIRouter, randomizationService: RandomizationService) {
+        self.feedPackageAPIRouter = feedPackageAPIRouter
         self.randomizationService = randomizationService
     }
     
     //MARK: - FeedPackageExternalDataService Interface
     
     func getNextFeedPackage() -> Observable<FeedPackage> {
-        let feedPackage = feedPackageCalculator.getNextFeedPackage()
+        let feedPackage = feedPackageAPIRouter.getNextFeedPackage()
         return Observable.just(feedPackage)
     }
     
     func getFeedPackage(introducedConceptID: Int) -> Observable<FeedPackage> {
-        let feedPackage = feedPackageCalculator.getFeedPackage(introducedConceptID: introducedConceptID)
+        let feedPackage = feedPackageAPIRouter.getFeedPackage(introducedConceptID: introducedConceptID)
         return Observable.just(feedPackage)
     }
 
     func getFeedPackage(levelUpConceptID: Int) -> Observable<FeedPackage> {
-        let feedPackage = feedPackageCalculator.getFeedPackage(levelUpConceptID: levelUpConceptID)
+        let feedPackage = feedPackageAPIRouter.getFeedPackage(levelUpConceptID: levelUpConceptID)
         return Observable.just(feedPackage)
     }
     
     func getExercise(id: Int) -> Observable<Exercise> {
-        let exercise = feedPackageCalculator.getExercise(id: id)
+        let exercise = feedPackageAPIRouter.getExercise(id: id)
         return Observable.just(exercise)
     }
     

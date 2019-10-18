@@ -19,7 +19,7 @@ class FeedPackageExternalDataServiceTests: XCTestCase {
         let mockFeedPackageStrategyFactory = FakeFeedPackageStrategyFactory()
         let stubDatabaseService = FakeDatabaseService()
         stubDatabaseService.getFocusConcepts_stub = (2, 4)
-        let calculator = FeedPackageCalculator(databaseService: stubDatabaseService, exerciseSetCalculator: FakeExerciseSetCalculator(), strategyFactory: mockFeedPackageStrategyFactory)
+        let calculator = NewMaterialStandardCalculator(databaseService: stubDatabaseService, exerciseSetCalculator: FakeExerciseSetCalculator(), strategyFactory: mockFeedPackageStrategyFactory)
         
         _ = calculator.getNextFeedPackage()
         
@@ -36,7 +36,7 @@ class FeedPackageExternalDataServiceTests: XCTestCase {
         let mockFeedPackageStrategyFactory = FakeFeedPackageStrategyFactory()
         let stubDatabaseService = FakeDatabaseService()
         stubDatabaseService.getFocusConcepts_stub = (2, 0)
-        let calculator = FeedPackageCalculator(databaseService: stubDatabaseService, exerciseSetCalculator: FakeExerciseSetCalculator(), strategyFactory: mockFeedPackageStrategyFactory)
+        let calculator = NewMaterialStandardCalculator(databaseService: stubDatabaseService, exerciseSetCalculator: FakeExerciseSetCalculator(), strategyFactory: mockFeedPackageStrategyFactory)
         
         _ = calculator.getNextFeedPackage()
         
@@ -223,7 +223,7 @@ class FeedPackageExternalDataServiceTests: XCTestCase {
         
         let strategyFactory = DefaultFeedPackageStrategyFactory()
         
-        return FeedPackageCalculator(databaseService: databaseService,
+        return NewMaterialStandardCalculator(databaseService: databaseService,
                                      exerciseSetCalculator: exerciseSetCalculator,
                                      strategyFactory: strategyFactory)
     }
