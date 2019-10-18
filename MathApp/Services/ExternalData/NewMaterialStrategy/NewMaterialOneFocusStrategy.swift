@@ -8,7 +8,7 @@
 
 import Foundation
 
-class DefaultOneFocusStrategy {
+class NewMaterialOneFocusStrategy {
     
     //MARK: - Dependencies
     

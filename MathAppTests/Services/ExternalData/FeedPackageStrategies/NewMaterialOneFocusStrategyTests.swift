@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 @testable import MathApp
 
-class DefaultOneFocusStrategyTests: XCTestCase {
+class NewMaterialOneFocusStrategyTests: XCTestCase {
         
     func test_level0_unseen_shouldReturnConceptIntroPackage() {
         let strategy = composeSUT(stubStatusCode: unseenCode)
@@ -77,7 +77,7 @@ class DefaultOneFocusStrategyTests: XCTestCase {
     
     //MARK: - Compose SUT
     
-    private func composeSUT(stubStatusCode: Int? = nil, stubCurrentScore: Int? = nil, stubLevel: Int = 0) -> DefaultOneFocusStrategy {
+    private func composeSUT(stubStatusCode: Int? = nil, stubCurrentScore: Int? = nil, stubLevel: Int = 0) -> NewMaterialOneFocusStrategy {
         let statusCode = stubStatusCode ?? introductionCompleteCode
         let currentScore = stubCurrentScore ?? 0
         
@@ -85,7 +85,7 @@ class DefaultOneFocusStrategyTests: XCTestCase {
         let stubEnrichedUserConcept = EnrichedUserConcept(userConcept: userConcept, statusCode: statusCode, currentScore: currentScore)!
         let fakeExerciseSetCalculator = FakeExerciseSetCalculator()
         
-        return DefaultOneFocusStrategy(exerciseSetCalculator: fakeExerciseSetCalculator, enrichedUserConcept: stubEnrichedUserConcept)
+        return NewMaterialOneFocusStrategy(exerciseSetCalculator: fakeExerciseSetCalculator, enrichedUserConcept: stubEnrichedUserConcept)
     }
     
     var unseenCode: Int {

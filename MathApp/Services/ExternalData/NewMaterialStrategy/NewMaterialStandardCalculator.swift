@@ -38,11 +38,11 @@ class NewMaterialStandardCalculator: FeedPackageCalculator {
             return getExercises_prior()
         }
         if let enrichedUserConcept2 = databaseService.getEnrichedUserConcept(conceptID: concept2_id) {
-            let strategy = DefaultTwoFocusStrategy(exerciseSetCalculator: exerciseSetCalculator, enrichedUserConcept1: enrichedUserConcept1, enrichedUserConcept2: enrichedUserConcept2)
+            let strategy = NewMaterialTwoFocusStrategy(exerciseSetCalculator: exerciseSetCalculator, enrichedUserConcept1: enrichedUserConcept1, enrichedUserConcept2: enrichedUserConcept2)
             return strategy.getFeedPackage()
         }
         else {
-            let strategy = DefaultOneFocusStrategy(exerciseSetCalculator: exerciseSetCalculator, enrichedUserConcept: enrichedUserConcept1)
+            let strategy = NewMaterialOneFocusStrategy(exerciseSetCalculator: exerciseSetCalculator, enrichedUserConcept: enrichedUserConcept1)
             return strategy.getFeedPackage()
         }
     }
