@@ -70,8 +70,13 @@ class NewMaterialLevelUpStrategy {
     
     private func nextConceptIntroPackage() -> FeedPackage {
         let firstUnseen = familyUserConcepts.first(where: { $0.status == .unseen })!
-        let conceptIntro = ConceptIntro(concept: firstUnseen.userConcept.concept)
-        let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID: firstUnseen.userConcept.concept.id, strength: 0)
+        databaseService.setFocusConcepts(concept1: firstUnseen.userConcept.concept.id, concept2: 0)
+        return assembleNextConceptIntroPackage(userConcept: firstUnseen)
+    }
+    
+    private func assembleNextConceptIntroPackage(userConcept: EnrichedUserConcept) -> FeedPackage {
+        let conceptIntro = ConceptIntro(concept: userConcept.userConcept.concept)
+        let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID: userConcept.userConcept.concept.id, strength: 0)
         let package = FeedPackage(feedPackageType: .conceptIntro, exercises: exercises, transitionItem: conceptIntro)
         return package
     }

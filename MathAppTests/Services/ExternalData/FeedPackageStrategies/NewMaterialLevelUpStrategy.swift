@@ -33,8 +33,6 @@ class NewMaterialLevelUpStrategyTests: XCTestCase {
         XCTAssertEqual(mockDatabaseService.setUserConceptStatus_id.first, 1)
     }
     
-    //1 focus tests
-    
     func test_oneFocus_unseenInFamily_shouldReturnConceptIntroForFirstUnseenConcept() {
         let stubFamilyConcepts = family_concepts3and4Unseen
         let strategy = composeSUT(stubFamilyUserConcepts: stubFamilyConcepts)
@@ -49,6 +47,18 @@ class NewMaterialLevelUpStrategyTests: XCTestCase {
         XCTAssertEqual(conceptIntro.concept.id, 3)
         XCTAssertEqual(package.exercises.count, 3)
     }
+    
+    func test_oneFocus_unseenInFamily_shouldUpdateFocusToIntroConcept() {
+        let mockDatabaseService = FakeDatabaseService()
+        let strategy = composeSUT(fakeDatabaseService: mockDatabaseService, stubFamilyUserConcepts: family_concepts3and4Unseen)
+        
+        let _ = strategy.getFeedPackage()
+        
+        XCTAssertEqual(mockDatabaseService.setFocusConcepts_callCount, 1)
+        XCTAssertEqual(mockDatabaseService.setFocusConcepts_concept1.first, 3)
+        XCTAssertEqual(mockDatabaseService.setFocusConcepts_concept2.first, 0)
+    }
+    
     
     //MARK: - SUT Composition
     
