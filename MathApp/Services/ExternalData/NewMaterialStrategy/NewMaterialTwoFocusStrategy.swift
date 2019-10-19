@@ -51,6 +51,8 @@ class NewMaterialTwoFocusStrategy {
         self.enrichedUserConcept2 = enrichedUserConcept2
     }
     
+    //MARK: - NewMaterialTwoFocusStrategy Interface
+    
     func getFeedPackage() -> FeedPackage {
         if concept1Score >= 5 {
             return levelUpPackage(concept: concept1, strength: enrichedUserConcept1.userConcept.strength)
