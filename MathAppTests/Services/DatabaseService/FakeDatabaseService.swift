@@ -96,7 +96,7 @@ class FakeDatabaseService: DatabaseService {
         } else if conceptID == 0 {
             return nil
         } else {
-            return EnrichedUserConcept.getStub(conceptID: conceptID)
+            return EnrichedUserConcept.createStub(conceptID: conceptID)
         }
     }
     

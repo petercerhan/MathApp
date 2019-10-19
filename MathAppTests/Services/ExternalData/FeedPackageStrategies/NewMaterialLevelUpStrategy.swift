@@ -14,9 +14,7 @@ class NewMaterialLevelUpStrategyTests: XCTestCase {
     
     func test_shouldIncrementConceptLevel() {
         let mockDatabaseService = FakeDatabaseService()
-        let userConcept1 = UserConcept(id: 1, concept: Concept.constantRule, strength: 0)
-        let stubEnrichedUserConcept1 = EnrichedUserConcept(userConcept: userConcept1, statusCode: inProgressCode, currentScore: 5)!
-        let strategy = NewMaterialLevelUpStrategy(databaseService: mockDatabaseService, levelUpUserConcept: stubEnrichedUserConcept1)
+        let strategy = composeSUT(fakeDatabaseService: mockDatabaseService, levelUpConceptStrength: 0, stubLevelUpConceptStatusCode: inProgressCode)
         
         let _ = strategy.getFeedPackage()
         
@@ -26,9 +24,7 @@ class NewMaterialLevelUpStrategyTests: XCTestCase {
     
     func test_priorLevel0_shouldSetConceptStatusComplete() {
         let mockDatabaseService = FakeDatabaseService()
-        let userConcept1 = UserConcept(id: 1, concept: Concept.constantRule, strength: 0)
-        let stubEnrichedUserConcept1 = EnrichedUserConcept(userConcept: userConcept1, statusCode: inProgressCode, currentScore: 5)!
-        let strategy = NewMaterialLevelUpStrategy(databaseService: mockDatabaseService, levelUpUserConcept: stubEnrichedUserConcept1)
+        let strategy = composeSUT(fakeDatabaseService: mockDatabaseService, levelUpConceptStrength: 0, stubLevelUpConceptStatusCode: inProgressCode)
         
         let _ = strategy.getFeedPackage()
         
@@ -37,9 +33,54 @@ class NewMaterialLevelUpStrategyTests: XCTestCase {
         XCTAssertEqual(mockDatabaseService.setUserConceptStatus_id.first, 1)
     }
     
+    //1 focus tests
     
+    func test_oneFocus_unseenInFamily_shouldReturnConceptIntroForFirstUnseenConcept() {
+        let stubFamilyConcepts = family_concepts3and4Unseen
+        let strategy = composeSUT(stubFamilyUserConcepts: stubFamilyConcepts)
+        
+        let package = strategy.getFeedPackage()
+        
+        XCTAssertEqual(package.feedPackageType, .conceptIntro)
+        guard let conceptIntro = package.transitionItem as? ConceptIntro else {
+            XCTFail("transition item is not concept intro")
+            return
+        }
+        XCTAssertEqual(conceptIntro.concept.id, 3)
+        XCTAssertEqual(package.exercises.count, 3)
+    }
     
+    //MARK: - SUT Composition
     
+    private func composeSUT(fakeDatabaseService: FakeDatabaseService? = nil,
+                            levelUpConceptStrength: Int = 1,
+                            stubLevelUpConceptStatusCode: Int? = nil,
+                            stubFamilyUserConcepts: [EnrichedUserConcept]? = nil) -> NewMaterialLevelUpStrategy
+    {
+        let databaseService = fakeDatabaseService ?? FakeDatabaseService()
+        let levelUpConceptStatusCode = stubLevelUpConceptStatusCode ?? completeCode
+        
+        let levelUpConcept = UserConcept(id: 1, concept: Concept.constantRule, strength: levelUpConceptStrength)
+        let levelUpEnrichedConcept = EnrichedUserConcept(userConcept: levelUpConcept, statusCode: levelUpConceptStatusCode, currentScore: 5)!
+        
+        let familyUserConcepts = stubFamilyUserConcepts ?? family_concepts3and4Unseen
+        
+        return NewMaterialLevelUpStrategy(databaseService: databaseService,
+                                          exerciseSetCalculator: FakeExerciseSetCalculator(),
+                                          levelUpUserConcept: levelUpEnrichedConcept,
+                                          familyUserConcepts: familyUserConcepts)
+    }
+    
+    //MARK: - Helpers
+    
+    var family_concepts3and4Unseen: [EnrichedUserConcept] {
+        let concept1 = EnrichedUserConcept.createStub(conceptID: 1, status: .introductionComplete)
+        let concept2 = EnrichedUserConcept.createStub(conceptID: 2, status: .introductionComplete)
+        let concept3 = EnrichedUserConcept.createStub(conceptID: 3, status: .unseen)
+        let concept4 = EnrichedUserConcept.createStub(conceptID: 4, status: .unseen)
+        let concept5 = EnrichedUserConcept.createStub(conceptID: 5, status: .introductionComplete)
+        return [concept1, concept2, concept3, concept4, concept5]
+    }
     
     var inProgressCode: Int {
         return EnrichedUserConcept.Status.introductionInProgress.rawValue

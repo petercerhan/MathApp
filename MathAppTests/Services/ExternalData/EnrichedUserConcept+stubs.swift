@@ -10,9 +10,9 @@ import Foundation
 @testable import MathApp
 
 extension EnrichedUserConcept {
-    static func getStub(conceptID: Int = 1) -> EnrichedUserConcept {
+    static func createStub(conceptID: Int = 1, status: Status = .introductionComplete) -> EnrichedUserConcept {
         let concept = Concept(id: conceptID, name: "", description: "", rule: "", example: "")
         let userConcept = UserConcept(id: 1, concept: concept, strength: 1)
-        return EnrichedUserConcept(userConcept: userConcept, statusCode: 3, currentScore: 0)!
+        return EnrichedUserConcept(userConcept: userConcept, statusCode: status.rawValue, currentScore: 0)!
     }
 }

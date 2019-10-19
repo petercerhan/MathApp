@@ -13,30 +13,67 @@ class NewMaterialLevelUpStrategy {
     //MARK: - Dependencies
     
     private let databaseService: DatabaseService
+    private let exerciseSetCalculator: ExerciseSetCalculator
     
-    //MARK: - Config
+    //MARK: - Context
     
     private let levelUpUserConcept: EnrichedUserConcept
     private var levelUpConceptID: Int {
         return levelUpUserConcept.userConcept.concept.id
     }
+    private let familyUserConcepts: [EnrichedUserConcept]
     
     //MARK: - Initialization
     
-    init(databaseService: DatabaseService, levelUpUserConcept: EnrichedUserConcept) {
+    init(databaseService: DatabaseService,
+         exerciseSetCalculator: ExerciseSetCalculator,
+         levelUpUserConcept: EnrichedUserConcept,
+         familyUserConcepts: [EnrichedUserConcept])
+    {
         self.databaseService = databaseService
+        self.exerciseSetCalculator = exerciseSetCalculator
         self.levelUpUserConcept = levelUpUserConcept
+        self.familyUserConcepts = familyUserConcepts
     }
     
     //MARK: - NewMaterialLevelUpStrategy Interface
     
     func getFeedPackage() -> FeedPackage {
-        databaseService.incrementStrengthForUserConcept(conceptID: levelUpConceptID)
+        incrementLevelUpConceptStrength()
+        
         if levelUpUserConcept.userConcept.strength == 0 {
-            databaseService.setUserConceptStatus(EnrichedUserConcept.Status.introductionComplete.rawValue, forConceptID: levelUpConceptID)
+            setLevelUpConceptStatusComplete()
+        }
+        
+        if familyConceptsContainUnseen() {
+            return nextConceptIntroPackage()
         }
         
         return FeedPackage(feedPackageType: .exercises, exercises: [], transitionItem: nil)
+    }
+    
+    private func incrementLevelUpConceptStrength() {
+        databaseService.incrementStrengthForUserConcept(conceptID: levelUpConceptID)
+    }
+    
+    private func setLevelUpConceptStatusComplete() {
+        databaseService.setUserConceptStatus(EnrichedUserConcept.Status.introductionComplete.rawValue, forConceptID: levelUpConceptID)
+    }
+    
+    private func familyConceptsContainUnseen() -> Bool {
+        if let _ = familyUserConcepts.first(where: { $0.status == .unseen }) {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    private func nextConceptIntroPackage() -> FeedPackage {
+        let firstUnseen = familyUserConcepts.first(where: { $0.status == .unseen })!
+        let conceptIntro = ConceptIntro(concept: firstUnseen.userConcept.concept)
+        let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID: firstUnseen.userConcept.concept.id, strength: 0)
+        let package = FeedPackage(feedPackageType: .conceptIntro, exercises: exercises, transitionItem: conceptIntro)
+        return package
     }
     
     
