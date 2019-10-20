@@ -10,6 +10,9 @@ import Foundation
 import SQLite
 
 protocol DatabaseService {
+
+    var db: Connection! { get }
+
     func setup()
     func reset()
     
@@ -33,7 +36,7 @@ protocol DatabaseService {
 
 class DatabaseServiceImpl: DatabaseService {
     
-    private var db: Connection!
+    private(set) var db: Connection!
     
     private let databaseFilename = "db.sqlite3"
     
@@ -198,10 +201,7 @@ class DatabaseServiceImpl: DatabaseService {
             return (0, 0)
         }
         
-        let concept1 = Int(userRow[User.column_focus_concept_1])
-        let concept2 = Int(userRow[User.column_focus_concept_2])
-        
-        return (concept1, concept2)
+        return (0, 0)
     }
     
     func getEnrichedUserConcept(conceptID: Int) -> EnrichedUserConcept? {
@@ -234,8 +234,7 @@ class DatabaseServiceImpl: DatabaseService {
     }
     
     func setFocusConcepts(concept1: Int, concept2: Int) {
-        let query = User.table.filter(User.column_id == 1)
-        _ = try? db.run(query.update(User.column_focus_concept_1 <- Int64(concept1), User.column_focus_concept_2 <- Int64(concept2)))
+        
     }
     
 }

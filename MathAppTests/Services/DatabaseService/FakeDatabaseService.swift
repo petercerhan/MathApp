@@ -7,9 +7,12 @@
 //
 
 import Foundation
+import SQLite
 @testable import MathApp
 
 class FakeDatabaseService: DatabaseService {
+
+    var db: Connection!
 
     //MARK: - setup
     
