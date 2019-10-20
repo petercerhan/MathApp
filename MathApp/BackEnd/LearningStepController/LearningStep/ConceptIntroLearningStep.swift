@@ -9,5 +9,5 @@
 import Foundation
 
 struct ConceptIntroLearningStep: LearningStep {
-    
+    let conceptID: Int
 }

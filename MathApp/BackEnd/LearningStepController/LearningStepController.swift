@@ -24,7 +24,7 @@ class LearningStepController {
     
     func nextLearningStep() -> LearningStep {
         let strategy = learningStepStrategyFactory.getStrategy(learningStrategy: .newMaterial)
-        return ConceptIntroLearningStep()
+        return ConceptIntroLearningStep(conceptID: 1)
     }
     
 }

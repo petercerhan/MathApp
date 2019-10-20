@@ -9,5 +9,5 @@
 import Foundation
 
 protocol LearningStepStrategy {
-    
+    func nextLearningStep() -> LearningStep
 }

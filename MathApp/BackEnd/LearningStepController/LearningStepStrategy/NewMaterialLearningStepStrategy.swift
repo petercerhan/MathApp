@@ -9,5 +9,7 @@
 import Foundation
 
 class NewMaterialLearningStepStrategy: LearningStepStrategy {
-    
+    func nextLearningStep() -> LearningStep {
+        return ConceptIntroLearningStep(conceptID: 1)
+    }
 }
