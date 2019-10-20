@@ -12,11 +12,9 @@ import XCTest
 
 class NewMaterialLearningStepStrategyTests: XCTestCase {
     
-    func test_userConceptLevels_0_0_0_0_0_shouldReturnConceptIntro1() {
+    func test_scenario1_shouldReturnConceptIntro1() {
         let stubUserConcepts = userConceptsWithLevels(0, 0, 0, 0, 0)
-        let stubUserConceptRepository = FakeUserConceptRepository()
-        stubUserConceptRepository.list_stubUserConcepts = stubUserConcepts
-        let strategy = NewMaterialLearningStepStrategy(userConceptRepository: stubUserConceptRepository)
+        let strategy = composeSUT(stubUserConcepts: stubUserConcepts, focus1ID: 0, focus2ID: 0)
         
         let learningStep = strategy.nextLearningStep()
         
@@ -27,12 +25,55 @@ class NewMaterialLearningStepStrategyTests: XCTestCase {
         XCTAssertEqual(conceptIntro.conceptID, 1)
     }
     
-    func test_userConceptLevels_1_0_0_0_0_shouldReturnConceptIntro2() {
+    func test_scenario2_shouldReturnConceptIntro2() {
         let stubUserConcepts = userConceptsWithLevels(1, 0, 0, 0, 0)
+        let strategy = composeSUT(stubUserConcepts: stubUserConcepts, focus1ID: 0, focus2ID: 0)
         
+        let learningStep = strategy.nextLearningStep()
         
+        guard let conceptIntro = learningStep as? ConceptIntroLearningStep else {
+            XCTFail("Learning step is not concept intro")
+            return
+        }
+        XCTAssertEqual(conceptIntro.conceptID, 2)
+    }
+    
+    func test_scenario3_shouldReturnPracticeFocus2() {
+        let stubUserConcepts = userConceptsWithLevels(2, 1, 0, 0, 0)
+        let strategy = composeSUT(stubUserConcepts: stubUserConcepts, focus1ID: 1, focus2ID: 2)
         
+        let learningStep = strategy.nextLearningStep()
         
+        guard let practiceStep = learningStep as? PracticeOneConceptLearningStep else {
+            XCTFail("Learning step is not practice one concept. Is type \(learningStep.self)")
+            return
+        }
+        XCTAssertEqual(practiceStep.conceptID, 2)
+    }
+    
+    func test_scenario4_shouldReturnPracticeFocus2() {
+        let stubUserConcepts = userConceptsWithLevels(2, 1, 1, 0, 0)
+        let strategy = composeSUT(stubUserConcepts: stubUserConcepts, focus1ID: 1, focus2ID: 2)
+        
+        let learningStep = strategy.nextLearningStep()
+        
+        guard let practiceStep = learningStep as? PracticeOneConceptLearningStep else {
+            XCTFail("Learning step is not practice one concept. Is type \(learningStep.self)")
+            return
+        }
+        XCTAssertEqual(practiceStep.conceptID, 2)
+    }
+    
+    //MARK: - SUT Composition
+    
+    func composeSUT(stubUserConcepts: [UserConcept], focus1ID: Int, focus2ID: Int) -> NewMaterialLearningStepStrategy {
+        let stubUserConceptRepository = FakeUserConceptRepository()
+        stubUserConceptRepository.list_stubUserConcepts = stubUserConcepts
+        
+        let newMaterialStateRepository = FakeNewMaterialStateRepository()
+        newMaterialStateRepository.stubNewMaterialState = NewMaterialState.createStub(focusConcept1ID: focus1ID, focusConcept2ID: focus2ID)
+        
+        return NewMaterialLearningStepStrategy(userConceptRepository: stubUserConceptRepository, newMaterialStateRepository: newMaterialStateRepository)
     }
     
     func userConceptsWithLevels(_ strength1: Int, _ strength2: Int, _ strength3: Int, _ strength4: Int, _ strength5: Int) -> [UserConcept] {

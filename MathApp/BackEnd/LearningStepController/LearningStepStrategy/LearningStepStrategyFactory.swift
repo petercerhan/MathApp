@@ -17,17 +17,19 @@ class LearningStepStrategyFactoryImpl: LearningStepStrategyFactory {
     //MARK: - Dependencies
     
     private let userConceptRepository: UserConceptRepository
+    private let newMaterialStateRepository: NewMaterialStateRepository
     
     //MARK: - Initialization
     
-    init(userConceptRepository: UserConceptRepository) {
+    init(userConceptRepository: UserConceptRepository, newMaterialStateRepository: NewMaterialStateRepository) {
         self.userConceptRepository = userConceptRepository
+        self.newMaterialStateRepository = newMaterialStateRepository
     }
     
     //MARK: - LearningStepStrategyFactory Interface
     
     func getStrategy(learningStrategy: LearningStrategy) -> LearningStepStrategy {
-        return NewMaterialLearningStepStrategy(userConceptRepository: userConceptRepository)
+        return NewMaterialLearningStepStrategy(userConceptRepository: userConceptRepository, newMaterialStateRepository: newMaterialStateRepository)
     }
     
 }

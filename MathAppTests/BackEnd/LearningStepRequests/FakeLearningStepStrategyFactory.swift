@@ -18,7 +18,7 @@ class FakeLearningStepStrategyFactory: LearningStepStrategyFactory {
         getStrategy_callCount += 1
         getStrategy_learningStrategy.append(learningStrategy)
         
-        return NewMaterialLearningStepStrategy(userConceptRepository: FakeUserConceptRepository())
+        return NewMaterialLearningStepStrategy(userConceptRepository: FakeUserConceptRepository(), newMaterialStateRepository: FakeNewMaterialStateRepository())
     }
     
 }

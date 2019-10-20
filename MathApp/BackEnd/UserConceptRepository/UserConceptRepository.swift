@@ -10,7 +10,7 @@ import Foundation
 import SQLite
 
 protocol UserConceptRepository {
-    func list(conceptID: Int) -> [UserConcept]
+    func list() -> [UserConcept]
 }
 
 class UserConceptRepositoryImpl: UserConceptRepository {
@@ -27,7 +27,7 @@ class UserConceptRepositoryImpl: UserConceptRepository {
     
     //MARK: - UserConceptRepository Interface
     
-    func list(conceptID: Int) -> [UserConcept] {
+    func list() -> [UserConcept] {
         let query = Concept.table.join(UserConcept.table, on: UserConcept.column_conceptID == Concept.table[Concept.column_id])
         let result: [UserConcept]? = try? databaseService.db.prepare(query).compactMap { row -> UserConcept? in
             return UserConcept.createFromQueryResult(row)

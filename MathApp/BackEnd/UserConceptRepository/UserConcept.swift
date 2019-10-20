@@ -12,4 +12,8 @@ struct UserConcept {
     let id: Int
     let concept: Concept
     let strength: Int
+    
+    var conceptID: Int {
+        return concept.id
+    }
 }
