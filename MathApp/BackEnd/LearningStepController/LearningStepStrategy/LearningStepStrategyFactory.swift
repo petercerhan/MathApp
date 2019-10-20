@@ -14,8 +14,20 @@ protocol LearningStepStrategyFactory {
 
 class LearningStepStrategyFactoryImpl: LearningStepStrategyFactory {
     
+    //MARK: - Dependencies
+    
+    private let userConceptRepository: UserConceptRepository
+    
+    //MARK: - Initialization
+    
+    init(userConceptRepository: UserConceptRepository) {
+        self.userConceptRepository = userConceptRepository
+    }
+    
+    //MARK: - LearningStepStrategyFactory Interface
+    
     func getStrategy(learningStrategy: LearningStrategy) -> LearningStepStrategy {
-        return NewMaterialLearningStepStrategy()
+        return NewMaterialLearningStepStrategy(userConceptRepository: userConceptRepository)
     }
     
 }

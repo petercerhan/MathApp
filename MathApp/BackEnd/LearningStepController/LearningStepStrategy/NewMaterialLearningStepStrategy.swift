@@ -9,7 +9,19 @@
 import Foundation
 
 class NewMaterialLearningStepStrategy: LearningStepStrategy {
+    
+    //MARK: - Dependencies
+    
+    private let userConceptRepository: UserConceptRepository
+    
+    //MARK: - Initialization
+    
+    init(userConceptRepository: UserConceptRepository) {
+        self.userConceptRepository = userConceptRepository
+    }
+    
     func nextLearningStep() -> LearningStep {
         return ConceptIntroLearningStep(conceptID: 1)
     }
+    
 }

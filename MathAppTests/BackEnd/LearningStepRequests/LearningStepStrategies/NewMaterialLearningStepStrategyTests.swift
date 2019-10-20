@@ -14,7 +14,9 @@ class NewMaterialLearningStepStrategyTests: XCTestCase {
     
     func test_userConceptLevels_0_0_0_0_0_shouldReturnConceptIntro1() {
         let stubUserConcepts = userConceptsWithLevels(0, 0, 0, 0, 0)
-        let strategy = NewMaterialLearningStepStrategy()
+        let stubUserConceptRepository = FakeUserConceptRepository()
+        stubUserConceptRepository.list_stubUserConcepts = stubUserConcepts
+        let strategy = NewMaterialLearningStepStrategy(userConceptRepository: stubUserConceptRepository)
         
         let learningStep = strategy.nextLearningStep()
         
