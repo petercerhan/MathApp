@@ -66,11 +66,8 @@ class NewMaterialLearningStepStrategy: LearningStepStrategy {
             return ConceptIntroLearningStep(conceptID: 1)
         }
         
-        if userConcept1.strength == 1, let userConcept2 = userConcept2 {
-            
-            if userConcept2.strength == 0 {
-                return ConceptIntroLearningStep(conceptID: userConcept2.id)
-            }
+        if let nextStep = learningStepForSecondStrength0(userConcept1: userConcept1) {
+            return nextStep
         }
         
         return ConceptIntroLearningStep(conceptID: 1)
@@ -88,6 +85,14 @@ class NewMaterialLearningStepStrategy: LearningStepStrategy {
     
     private func userConceptIsContinuedFromTwoConceptPractice(_ userConcept: UserConcept) -> Bool {
         return (userConcept.conceptID == focus1ID || userConcept.conceptID == focus2ID)
+    }
+    
+    private func learningStepForSecondStrength0(userConcept1: UserConcept) -> LearningStep? {
+        if userConcept1.strength == 1, let userConcept2 = userConcept2, userConcept2.strength == 0 {
+            return ConceptIntroLearningStep(conceptID: userConcept2.id)
+        } else {
+            return nil
+        }
     }
     
 }
