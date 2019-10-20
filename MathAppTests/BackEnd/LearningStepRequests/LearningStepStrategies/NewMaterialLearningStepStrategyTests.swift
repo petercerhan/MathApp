@@ -64,6 +64,37 @@ class NewMaterialLearningStepStrategyTests: XCTestCase {
         XCTAssertEqual(practiceStep.conceptID, 2)
     }
     
+    func test_scenario5_shouldReturnPracticeFocus1And2() {
+        let stubUserConcepts = userConceptsWithLevels(1, 1, 0, 0, 0)
+        let strategy = composeSUT(stubUserConcepts: stubUserConcepts, focus1ID: 2, focus2ID: 0)
+        
+        let learningStep = strategy.nextLearningStep()
+        
+        guard let practiceStep = learningStep as? PracticeTwoConceptsLearningStep else {
+            XCTFail("Learning step is not practice two concepts. Is type \(learningStep.self)")
+            return
+        }
+        XCTAssertEqual(practiceStep.concept1ID, 1)
+        XCTAssertEqual(practiceStep.concept2ID, 2)
+    }
+    
+//    func test_scenario6_shouldReturnGeneralPracticeStart() {
+//        let stubUserConcepts = userConceptsWithLevels(2, 2, 2, 2, 2)
+//        let strategy = composeSUT(stubUserConcepts: stubUserConcepts, focus1ID: 1, focus2ID: 0)
+//        
+//        let learningStep = strategy.nextLearningStep()
+//        
+//        
+//        
+//    }
+    
+    
+    
+    //MARK: - Cross Check Scenarios
+    
+    
+    
+    
     //MARK: - SUT Composition
     
     func composeSUT(stubUserConcepts: [UserConcept], focus1ID: Int, focus2ID: Int) -> NewMaterialLearningStepStrategy {

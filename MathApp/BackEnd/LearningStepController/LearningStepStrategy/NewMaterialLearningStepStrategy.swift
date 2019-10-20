@@ -58,15 +58,19 @@ class NewMaterialLearningStepStrategy: LearningStepStrategy {
             return ConceptIntroLearningStep(conceptID: 1)
         }
         
-        if let nextStep = learningStepForContinuedTwoConceptPractice(userConcept1: userConcept1) {
-            return nextStep
-        }
-        
         if userConcept1.strength == 0 {
             return ConceptIntroLearningStep(conceptID: 1)
         }
         
+        if let nextStep = learningStepForContinuedTwoConceptPractice(userConcept1: userConcept1) {
+            return nextStep
+        }
+        
         if let nextStep = learningStepForSecondStrength0(userConcept1: userConcept1) {
+            return nextStep
+        }
+        
+        if let nextStep = learningStepForSecondStrength1(userConcept1: userConcept1) {
             return nextStep
         }
         
@@ -88,8 +92,19 @@ class NewMaterialLearningStepStrategy: LearningStepStrategy {
     }
     
     private func learningStepForSecondStrength0(userConcept1: UserConcept) -> LearningStep? {
-        if userConcept1.strength == 1, let userConcept2 = userConcept2, userConcept2.strength == 0 {
+        if userConcept1.strength == 1,
+            let userConcept2 = userConcept2,
+            userConcept2.strength == 0
+        {
             return ConceptIntroLearningStep(conceptID: userConcept2.id)
+        } else {
+            return nil
+        }
+    }
+    
+    private func learningStepForSecondStrength1(userConcept1: UserConcept) -> LearningStep? {
+        if userConcept1.strength == 1, let userConcept2 = userConcept2, userConcept2.strength == 1 {
+            return PracticeTwoConceptsLearningStep(concept1ID: userConcept1.conceptID, concept2ID: userConcept2.conceptID)
         } else {
             return nil
         }
