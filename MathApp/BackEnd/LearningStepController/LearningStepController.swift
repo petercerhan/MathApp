@@ -8,7 +8,11 @@
 
 import Foundation
 
-class LearningStepController {
+protocol LearningStepController {
+    func nextLearningStep() -> LearningStep
+}
+
+class LearningStepControllerImpl: LearningStepController {
     
     //MARK: - Dependencies
     

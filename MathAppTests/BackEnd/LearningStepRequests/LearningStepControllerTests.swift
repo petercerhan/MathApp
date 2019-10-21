@@ -14,7 +14,7 @@ class LearningStepControllerTests: XCTestCase {
     
     func test_getLearningStep_newMaterialStrategy_shouldRequestNewMaterialLearningStepStrategy() {
         let mockLearningStepStrategyFactory = FakeLearningStepStrategyFactory()
-        let controller = LearningStepController(learningStepStrategyFactory: mockLearningStepStrategyFactory)
+        let controller = LearningStepControllerImpl(learningStepStrategyFactory: mockLearningStepStrategyFactory)
         
         let _ = controller.nextLearningStep()
         

@@ -31,6 +31,9 @@
 		6E1E6B3222FFA8BD00AFB7A0 /* ContainerViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1E6B3122FFA8BD00AFB7A0 /* ContainerViewControllerTests.swift */; };
 		6E1E6B3522FFA95100AFB7A0 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1E6B3422FFA95100AFB7A0 /* ContainerViewController.swift */; };
 		6E1E6B3722FFA97800AFB7A0 /* TransitionAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1E6B3622FFA97800AFB7A0 /* TransitionAnimation.swift */; };
+		6E3C9EEC235E726B00CD81C9 /* LearningStepExternalDataServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3C9EEB235E726B00CD81C9 /* LearningStepExternalDataServiceTests.swift */; };
+		6E3C9EEE235E75F500CD81C9 /* FakeLearningStepController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3C9EED235E75F500CD81C9 /* FakeLearningStepController.swift */; };
+		6E3C9EF0235E765400CD81C9 /* LearningStepExternalDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3C9EEF235E765400CD81C9 /* LearningStepExternalDataService.swift */; };
 		6E557C1722FB9DCB00270F07 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E557C1622FB9DCB00270F07 /* AppDelegate.swift */; };
 		6E557C1E22FB9DCC00270F07 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E557C1D22FB9DCC00270F07 /* Assets.xcassets */; };
 		6E557C2122FB9DCC00270F07 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E557C1F22FB9DCC00270F07 /* LaunchScreen.storyboard */; };
@@ -208,6 +211,9 @@
 		6E1E6B3122FFA8BD00AFB7A0 /* ContainerViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewControllerTests.swift; sourceTree = "<group>"; };
 		6E1E6B3422FFA95100AFB7A0 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		6E1E6B3622FFA97800AFB7A0 /* TransitionAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionAnimation.swift; sourceTree = "<group>"; };
+		6E3C9EEB235E726B00CD81C9 /* LearningStepExternalDataServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningStepExternalDataServiceTests.swift; sourceTree = "<group>"; };
+		6E3C9EED235E75F500CD81C9 /* FakeLearningStepController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeLearningStepController.swift; sourceTree = "<group>"; };
+		6E3C9EEF235E765400CD81C9 /* LearningStepExternalDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningStepExternalDataService.swift; sourceTree = "<group>"; };
 		6E557C1322FB9DCB00270F07 /* MathApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MathApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E557C1622FB9DCB00270F07 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6E557C1D22FB9DCC00270F07 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -467,6 +473,23 @@
 			path = ContainerViewControllers;
 			sourceTree = "<group>";
 		};
+		6E3C9EE9235E722C00CD81C9 /* ExerciseExternalDataService */ = {
+			isa = PBXGroup;
+			children = (
+				6E0ADF3E23492312004B4348 /* FeedPackageExternalDataServiceTests.swift */,
+				6E841622232B234F0035F381 /* FakeExerciseExternalDataService.swift */,
+			);
+			path = ExerciseExternalDataService;
+			sourceTree = "<group>";
+		};
+		6E3C9EEA235E724200CD81C9 /* LearningStepExternalDataService */ = {
+			isa = PBXGroup;
+			children = (
+				6E3C9EEB235E726B00CD81C9 /* LearningStepExternalDataServiceTests.swift */,
+			);
+			path = LearningStepExternalDataService;
+			sourceTree = "<group>";
+		};
 		6E51E29F235E6EDD00DA920E /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
@@ -553,7 +576,6 @@
 		6E74FD482318CB8900730AEB /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				6EC6674023249C100048068C /* DatabaseService */,
 				6E84161E232B22E10035F381 /* ExternalData */,
 				6E74FD492318CB9700730AEB /* RandomizationService */,
 			);
@@ -632,6 +654,7 @@
 				6E01F073234D57B000371D0C /* FeedPackageStrategies */,
 				6E0ADF45234A9422004B4348 /* ExerciseSetCalculator.swift */,
 				6EE60C42234420A900B0322B /* EnrichedUserConcept.swift */,
+				6E3C9EEF235E765400CD81C9 /* LearningStepExternalDataService.swift */,
 			);
 			path = ExternalData;
 			sourceTree = "<group>";
@@ -639,8 +662,8 @@
 		6E841621232B233C0035F381 /* ExternalData */ = {
 			isa = PBXGroup;
 			children = (
-				6E0ADF3E23492312004B4348 /* FeedPackageExternalDataServiceTests.swift */,
-				6E841622232B234F0035F381 /* FakeExerciseExternalDataService.swift */,
+				6E3C9EEA235E724200CD81C9 /* LearningStepExternalDataService */,
+				6E3C9EE9235E722C00CD81C9 /* ExerciseExternalDataService */,
 				6E0ADF47234A98C7004B4348 /* FakeExerciseSetCalculator.swift */,
 				6E01F07B234D675900371D0C /* EnrichedUserConcept+stubs.swift */,
 				6E01F076234D635400371D0C /* FeedPackageStrategies */,
@@ -695,6 +718,7 @@
 		6EB0FEDE235BE100005F23DE /* BackEnd */ = {
 			isa = PBXGroup;
 			children = (
+				6EC6674023249C100048068C /* DatabaseService */,
 				6E51E29F235E6EDD00DA920E /* Repositories */,
 				6EB0FEE4235BE50D005F23DE /* LearningStepController */,
 			);
@@ -756,6 +780,7 @@
 			isa = PBXGroup;
 			children = (
 				6EB0FEE6235BE561005F23DE /* LearningStepControllerTests.swift */,
+				6E3C9EED235E75F500CD81C9 /* FakeLearningStepController.swift */,
 				6EB0FEEA235BE69E005F23DE /* FakeLearningStepStrategyFactory.swift */,
 				6EB0FEFB235BEFF7005F23DE /* LearningStepStrategies */,
 			);
@@ -775,6 +800,7 @@
 			children = (
 				6EB0FEFF235BF2A9005F23DE /* UserConceptRepository.swift */,
 				6EC6674623249D850048068C /* UserConcept.swift */,
+				6ECC41292328842A00E8F3E1 /* UserConcept+sqlite.swift */,
 				6ECC412B23288BC500E8F3E1 /* UserConcept+data.swift */,
 			);
 			path = UserConceptRepository;
@@ -1106,7 +1132,6 @@
 			children = (
 				6EC6674123249C300048068C /* DatabaseService.swift */,
 				6ECC412723287BAE00E8F3E1 /* Concept+sqlite.swift */,
-				6ECC41292328842A00E8F3E1 /* UserConcept+sqlite.swift */,
 				6E713091233443F5009FEFBB /* Exercise+sqlite.swift */,
 			);
 			path = DatabaseService;
@@ -1441,6 +1466,7 @@
 				6EB0FEE3235BE2F2005F23DE /* User.swift in Sources */,
 				6EBA304F230E07AE00E6DC54 /* CheckmarkImageView.swift in Sources */,
 				6EC666F22321E64A0048068C /* InfoViewController.swift in Sources */,
+				6E3C9EF0235E765400CD81C9 /* LearningStepExternalDataService.swift in Sources */,
 				6ECC412823287BAE00E8F3E1 /* Concept+sqlite.swift in Sources */,
 				6E60BF4323569242000AC6BD /* NewMaterialTwoFocusStrategy.swift in Sources */,
 				6EB933B22331AB3800E38B52 /* Queue.swift in Sources */,
@@ -1491,6 +1517,7 @@
 				6EB0FEEB235BE69E005F23DE /* FakeLearningStepStrategyFactory.swift in Sources */,
 				6EBD5313233AF9A50057F28A /* ChooseExerciseSceneTests.swift in Sources */,
 				6E883F9B233D9B96004F0D0E /* ConceptIntroSceneTests.swift in Sources */,
+				6E3C9EEE235E75F500CD81C9 /* FakeLearningStepController.swift in Sources */,
 				6EBA306D2314D4AB00E6DC54 /* RxLatestValueTests.swift in Sources */,
 				6E0ADF3F23492312004B4348 /* FeedPackageExternalDataServiceTests.swift in Sources */,
 				6EC666EB2321D6D90048068C /* FakeExerciseService.swift in Sources */,
@@ -1503,6 +1530,7 @@
 				6EC666E92321D4EF0048068C /* ExerciseServiceTests.swift in Sources */,
 				6EE7A3B72357DD3A00DF0F45 /* NewMaterialTwoFocusStrategyTests.swift in Sources */,
 				6EC66719232451350048068C /* FakeQuitableContainerViewModel.swift in Sources */,
+				6E3C9EEC235E726B00CD81C9 /* LearningStepExternalDataServiceTests.swift in Sources */,
 				6EBE4E91230A14A70047A880 /* FakeContainerViewController.swift in Sources */,
 				6EBD5315233AF9E20057F28A /* FakeChooseExerciseViewModelDelegate.swift in Sources */,
 				6EB933AC233076E500E38B52 /* FakeLoadExercisesViewModelDelegate.swift in Sources */,
