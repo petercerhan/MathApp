@@ -467,6 +467,16 @@
 			path = ContainerViewControllers;
 			sourceTree = "<group>";
 		};
+		6E51E29F235E6EDD00DA920E /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				6E1CCC5E235CEAB100451CD7 /* NewMaterialStateRepository */,
+				6EB0FEFE235BF293005F23DE /* UserConceptRepository */,
+				6EB0FEDF235BE11A005F23DE /* UserRepository */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
 		6E557C0A22FB9DCB00270F07 = {
 			isa = PBXGroup;
 			children = (
@@ -685,10 +695,8 @@
 		6EB0FEDE235BE100005F23DE /* BackEnd */ = {
 			isa = PBXGroup;
 			children = (
+				6E51E29F235E6EDD00DA920E /* Repositories */,
 				6EB0FEE4235BE50D005F23DE /* LearningStepController */,
-				6E1CCC5E235CEAB100451CD7 /* NewMaterialStateRepository */,
-				6EB0FEDF235BE11A005F23DE /* UserRepository */,
-				6EB0FEFE235BF293005F23DE /* UserConceptRepository */,
 			);
 			path = BackEnd;
 			sourceTree = "<group>";
