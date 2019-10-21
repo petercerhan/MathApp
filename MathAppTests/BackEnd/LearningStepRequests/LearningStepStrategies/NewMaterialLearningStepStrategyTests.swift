@@ -37,8 +37,7 @@ class NewMaterialLearningStepStrategyTests: XCTestCase {
     }
     
     func test_scenario2_shouldReturnConceptIntro2() {
-        let stubUserConcepts = userConceptsWithLevels(1, 0, 0, 0, 0)
-        let strategy = composeSUT(stubUserConcepts: stubUserConcepts, focus1ID: 0, focus2ID: 0)
+        let strategy = composeSUT(stubUserConcepts: userConceptsWithLevels(1, 0, 0, 0, 0), focus1ID: 0, focus2ID: 0)
         
         let learningStep = strategy.nextLearningStep()
         
@@ -49,8 +48,42 @@ class NewMaterialLearningStepStrategyTests: XCTestCase {
         XCTAssertEqual(conceptIntro.conceptID, 2)
     }
     
-    func test_scenario3_shouldReturnPracticeFocus2() {
-        let stubUserConcepts = userConceptsWithLevels(2, 1, 0, 0, 0)
+    func test_scenario2_shouldSetFocusAs20() {
+        let mockNewMaterialStateRepository = FakeNewMaterialStateRepository()
+        let strategy = composeSUT(stubUserConcepts: userConceptsWithLevels(1, 0, 0, 0, 0), focus1ID: 0, focus2ID: 0, fakeNewMaterialStateRepository: mockNewMaterialStateRepository)
+        
+        let _ = strategy.nextLearningStep()
+        
+        XCTAssertEqual(mockNewMaterialStateRepository.setFocus_callCount, 1)
+        XCTAssertEqual(mockNewMaterialStateRepository.setFocus_concept1ID.first, 2)
+        XCTAssertEqual(mockNewMaterialStateRepository.setFocus_concept2ID.first, 0)
+    }
+    
+    func test_scenario3_shouldReturnPracticeConcept2() {
+        let strategy = composeSUT(stubUserConcepts: userConceptsWithLevels(2, 1, 0, 0, 0), focus1ID: 1, focus2ID: 2)
+        
+        let learningStep = strategy.nextLearningStep()
+        
+        guard let practiceStep = learningStep as? PracticeOneConceptLearningStep else {
+            XCTFail("Learning step is not practice one concept. Is type \(learningStep.self)")
+            return
+        }
+        XCTAssertEqual(practiceStep.conceptID, 2)
+    }
+    
+    func test_scenario3_shouldSetFocus20() {
+        let mockNewMaterialStateRepository = FakeNewMaterialStateRepository()
+        let strategy = composeSUT(stubUserConcepts: userConceptsWithLevels(2, 1, 0, 0, 0), focus1ID: 1, focus2ID: 2, fakeNewMaterialStateRepository: mockNewMaterialStateRepository)
+        
+        let _ = strategy.nextLearningStep()
+        
+        XCTAssertEqual(mockNewMaterialStateRepository.setFocus_callCount, 1)
+        XCTAssertEqual(mockNewMaterialStateRepository.setFocus_concept1ID.first, 2)
+        XCTAssertEqual(mockNewMaterialStateRepository.setFocus_concept2ID.first, 0)
+    }
+    
+    func test_scenario4_shouldReturnPracticeConcept2() {
+        let stubUserConcepts = userConceptsWithLevels(2, 1, 1, 0, 0)
         let strategy = composeSUT(stubUserConcepts: stubUserConcepts, focus1ID: 1, focus2ID: 2)
         
         let learningStep = strategy.nextLearningStep()
@@ -62,17 +95,15 @@ class NewMaterialLearningStepStrategyTests: XCTestCase {
         XCTAssertEqual(practiceStep.conceptID, 2)
     }
     
-    func test_scenario4_shouldReturnPracticeFocus2() {
-        let stubUserConcepts = userConceptsWithLevels(2, 1, 1, 0, 0)
-        let strategy = composeSUT(stubUserConcepts: stubUserConcepts, focus1ID: 1, focus2ID: 2)
+    func test_scenario4_shouldSetFocus20() {
+        let mockNewMaterialStateRepository = FakeNewMaterialStateRepository()
+        let strategy = composeSUT(stubUserConcepts: userConceptsWithLevels(2, 1, 1, 0, 0), focus1ID: 1, focus2ID: 2, fakeNewMaterialStateRepository: mockNewMaterialStateRepository)
         
-        let learningStep = strategy.nextLearningStep()
+        let _ = strategy.nextLearningStep()
         
-        guard let practiceStep = learningStep as? PracticeOneConceptLearningStep else {
-            XCTFail("Learning step is not practice one concept. Is type \(learningStep.self)")
-            return
-        }
-        XCTAssertEqual(practiceStep.conceptID, 2)
+        XCTAssertEqual(mockNewMaterialStateRepository.setFocus_callCount, 1)
+        XCTAssertEqual(mockNewMaterialStateRepository.setFocus_concept1ID.first, 2)
+        XCTAssertEqual(mockNewMaterialStateRepository.setFocus_concept2ID.first, 0)
     }
     
     func test_scenario5_shouldReturnPracticeFocus1And2() {
@@ -89,19 +120,37 @@ class NewMaterialLearningStepStrategyTests: XCTestCase {
         XCTAssertEqual(practiceStep.concept2ID, 2)
     }
     
+    func test_scenario5_shouldSetFocus12() {
+        let mockNewMaterialStateRepository = FakeNewMaterialStateRepository()
+        let strategy = composeSUT(stubUserConcepts: userConceptsWithLevels(1, 1, 0, 0, 0), focus1ID: 2, focus2ID: 0, fakeNewMaterialStateRepository: mockNewMaterialStateRepository)
+        
+        let _ = strategy.nextLearningStep()
+        
+        XCTAssertEqual(mockNewMaterialStateRepository.setFocus_callCount, 1)
+        XCTAssertEqual(mockNewMaterialStateRepository.setFocus_concept1ID.first, 1)
+        XCTAssertEqual(mockNewMaterialStateRepository.setFocus_concept2ID.first, 2)
+    }
+    
     func test_scenario6_shouldReturnPracticeFamilyStart() {
         let stubUserConcepts = userConceptsWithLevels(2, 2, 2, 2, 2)
         let strategy = composeSUT(stubUserConcepts: stubUserConcepts, focus1ID: 1, focus2ID: 0)
         
         let learningStep = strategy.nextLearningStep()
         
-        guard let practiceFamilyStep = learningStep as? PracticeFamilyLearningStep else {
+        guard let _ = learningStep as? PracticeFamilyLearningStep else {
             XCTFail("Learning step is not practice family. Is type \(learningStep.self)")
             return
         }
-        
     }
     
+    func test_scenario6_shouldResetNewMaterialState() {
+        let mockNewMaterialStateRepository = FakeNewMaterialStateRepository()
+        let strategy = composeSUT(stubUserConcepts: userConceptsWithLevels(2, 2, 2, 2, 2), focus1ID: 1, focus2ID: 0, fakeNewMaterialStateRepository: mockNewMaterialStateRepository)
+        
+        let _ = strategy.nextLearningStep()
+        
+        XCTAssertEqual(mockNewMaterialStateRepository.reset_callCount, 1)
+    }
     
     
     //MARK: - Cross Check Scenarios

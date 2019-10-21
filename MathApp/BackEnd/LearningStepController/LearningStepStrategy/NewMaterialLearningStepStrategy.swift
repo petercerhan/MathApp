@@ -54,7 +54,7 @@ class NewMaterialLearningStepStrategy: LearningStepStrategy {
     
     func nextLearningStep() -> LearningStep {
         guard let userConcept1 = userConcept1 else {
-            return PracticeFamilyLearningStep()
+            return practiceFamilyLearningStep()
         }
         
         if userConcept1.strength == 0 {
@@ -63,18 +63,23 @@ class NewMaterialLearningStepStrategy: LearningStepStrategy {
         }
         
         if let nextStep = learningStepForContinuedTwoConceptPractice(userConcept1: userConcept1) {
+            newMaterialStateRepository.setFocus(concept1ID: userConcept1.conceptID, concept2ID: 0)
             return nextStep
         }
         
         if let nextStep = learningStepForSecondStrength0(userConcept1: userConcept1) {
+            let conceptID = userConcept2?.conceptID ?? 0
+            newMaterialStateRepository.setFocus(concept1ID: conceptID, concept2ID: 0)
             return nextStep
         }
         
         if let nextStep = learningStepForSecondStrength1(userConcept1: userConcept1) {
+            let concept2ID = userConcept2?.conceptID ?? 0
+            newMaterialStateRepository.setFocus(concept1ID: userConcept1.conceptID, concept2ID: concept2ID)
             return nextStep
         }
         
-        return PracticeFamilyLearningStep()
+        return practiceFamilyLearningStep()
     }
     
     private func learningStepForContinuedTwoConceptPractice(userConcept1: UserConcept) -> LearningStep? {
@@ -108,6 +113,11 @@ class NewMaterialLearningStepStrategy: LearningStepStrategy {
         } else {
             return nil
         }
+    }
+    
+    private func practiceFamilyLearningStep() -> LearningStep {
+        newMaterialStateRepository.reset()
+        return PracticeFamilyLearningStep()
     }
     
 }
