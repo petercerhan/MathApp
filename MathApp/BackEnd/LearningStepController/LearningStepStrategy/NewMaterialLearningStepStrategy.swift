@@ -54,11 +54,11 @@ class NewMaterialLearningStepStrategy: LearningStepStrategy {
     
     func nextLearningStep() -> LearningStep {
         guard let userConcept1 = userConcept1 else {
-            #warning("Should return practice family")
-            return ConceptIntroLearningStep(conceptID: 1)
+            return PracticeFamilyLearningStep()
         }
         
         if userConcept1.strength == 0 {
+            newMaterialStateRepository.setFocus(concept1ID: userConcept1.conceptID, concept2ID: 0)
             return ConceptIntroLearningStep(conceptID: 1)
         }
         
@@ -74,7 +74,7 @@ class NewMaterialLearningStepStrategy: LearningStepStrategy {
             return nextStep
         }
         
-        return ConceptIntroLearningStep(conceptID: 1)
+        return PracticeFamilyLearningStep()
     }
     
     private func learningStepForContinuedTwoConceptPractice(userConcept1: UserConcept) -> LearningStep? {

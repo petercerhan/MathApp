@@ -16,4 +16,14 @@ class FakeNewMaterialStateRepository: NewMaterialStateRepository {
     func get() -> NewMaterialState {
         return stubNewMaterialState
     }
+    
+    var setFocus_callCount = 0
+    var setFocus_concept1ID = [Int]()
+    var setFocus_concept2ID = [Int]()
+    
+    func setFocus(concept1ID: Int, concept2ID: Int) {
+        setFocus_callCount += 1
+        setFocus_concept1ID.append(concept1ID)
+        setFocus_concept2ID.append(concept2ID)
+    }
 }

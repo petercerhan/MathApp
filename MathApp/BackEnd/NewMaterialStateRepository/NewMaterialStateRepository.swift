@@ -11,6 +11,7 @@ import SQLite
 
 protocol NewMaterialStateRepository {
     func get() -> NewMaterialState
+    func setFocus(concept1ID: Int, concept2ID: Int)
 }
 
 class NewMaterialStateRepositoryImpl: NewMaterialStateRepository {
@@ -29,6 +30,10 @@ class NewMaterialStateRepositoryImpl: NewMaterialStateRepository {
     
     func get() -> NewMaterialState {
         return NewMaterialState(id: 1, userID: 1, focusConcept1ID: 0, focusConcept2ID: 0)
+    }
+    
+    func setFocus(concept1ID: Int, concept2ID: Int) {
+        
     }
     
 }

@@ -25,6 +25,17 @@ class NewMaterialLearningStepStrategyTests: XCTestCase {
         XCTAssertEqual(conceptIntro.conceptID, 1)
     }
     
+    func test_scenario1_shouldSetFocusAs10() {
+        let mockNewMaterialStateRepository = FakeNewMaterialStateRepository()
+        let strategy = composeSUT(stubUserConcepts: userConceptsWithLevels(0, 0, 0, 0, 0), focus1ID: 0, focus2ID: 0, fakeNewMaterialStateRepository: mockNewMaterialStateRepository)
+        
+        let _ = strategy.nextLearningStep()
+        
+        XCTAssertEqual(mockNewMaterialStateRepository.setFocus_callCount, 1)
+        XCTAssertEqual(mockNewMaterialStateRepository.setFocus_concept1ID.first, 1)
+        XCTAssertEqual(mockNewMaterialStateRepository.setFocus_concept2ID.first, 0)
+    }
+    
     func test_scenario2_shouldReturnConceptIntro2() {
         let stubUserConcepts = userConceptsWithLevels(1, 0, 0, 0, 0)
         let strategy = composeSUT(stubUserConcepts: stubUserConcepts, focus1ID: 0, focus2ID: 0)
@@ -78,15 +89,18 @@ class NewMaterialLearningStepStrategyTests: XCTestCase {
         XCTAssertEqual(practiceStep.concept2ID, 2)
     }
     
-//    func test_scenario6_shouldReturnGeneralPracticeStart() {
-//        let stubUserConcepts = userConceptsWithLevels(2, 2, 2, 2, 2)
-//        let strategy = composeSUT(stubUserConcepts: stubUserConcepts, focus1ID: 1, focus2ID: 0)
-//        
-//        let learningStep = strategy.nextLearningStep()
-//        
-//        
-//        
-//    }
+    func test_scenario6_shouldReturnPracticeFamilyStart() {
+        let stubUserConcepts = userConceptsWithLevels(2, 2, 2, 2, 2)
+        let strategy = composeSUT(stubUserConcepts: stubUserConcepts, focus1ID: 1, focus2ID: 0)
+        
+        let learningStep = strategy.nextLearningStep()
+        
+        guard let practiceFamilyStep = learningStep as? PracticeFamilyLearningStep else {
+            XCTFail("Learning step is not practice family. Is type \(learningStep.self)")
+            return
+        }
+        
+    }
     
     
     
@@ -97,11 +111,11 @@ class NewMaterialLearningStepStrategyTests: XCTestCase {
     
     //MARK: - SUT Composition
     
-    func composeSUT(stubUserConcepts: [UserConcept], focus1ID: Int, focus2ID: Int) -> NewMaterialLearningStepStrategy {
+    func composeSUT(stubUserConcepts: [UserConcept], focus1ID: Int, focus2ID: Int, fakeNewMaterialStateRepository: FakeNewMaterialStateRepository? = nil) -> NewMaterialLearningStepStrategy {
         let stubUserConceptRepository = FakeUserConceptRepository()
         stubUserConceptRepository.list_stubUserConcepts = stubUserConcepts
         
-        let newMaterialStateRepository = FakeNewMaterialStateRepository()
+        let newMaterialStateRepository = fakeNewMaterialStateRepository ?? FakeNewMaterialStateRepository()
         newMaterialStateRepository.stubNewMaterialState = NewMaterialState.createStub(focusConcept1ID: focus1ID, focusConcept2ID: focus2ID)
         
         return NewMaterialLearningStepStrategy(userConceptRepository: stubUserConceptRepository, newMaterialStateRepository: newMaterialStateRepository)
