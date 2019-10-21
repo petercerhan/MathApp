@@ -26,6 +26,7 @@
 		6E1CCC66235CEC2200451CD7 /* NewMaterialState+stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1CCC65235CEC2200451CD7 /* NewMaterialState+stubs.swift */; };
 		6E1CCC68235D066600451CD7 /* PracticeTwoConceptsLearningStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1CCC67235D066600451CD7 /* PracticeTwoConceptsLearningStep.swift */; };
 		6E1CCC6A235D0AC400451CD7 /* PracticeFamilyLearningStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1CCC69235D0AC400451CD7 /* PracticeFamilyLearningStep.swift */; };
+		6E1CCC6C235D37D300451CD7 /* NewMaterialState+sqlite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1CCC6B235D37D300451CD7 /* NewMaterialState+sqlite.swift */; };
 		6E1E6B3222FFA8BD00AFB7A0 /* ContainerViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1E6B3122FFA8BD00AFB7A0 /* ContainerViewControllerTests.swift */; };
 		6E1E6B3522FFA95100AFB7A0 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1E6B3422FFA95100AFB7A0 /* ContainerViewController.swift */; };
 		6E1E6B3722FFA97800AFB7A0 /* TransitionAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1E6B3622FFA97800AFB7A0 /* TransitionAnimation.swift */; };
@@ -201,6 +202,7 @@
 		6E1CCC65235CEC2200451CD7 /* NewMaterialState+stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NewMaterialState+stubs.swift"; sourceTree = "<group>"; };
 		6E1CCC67235D066600451CD7 /* PracticeTwoConceptsLearningStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeTwoConceptsLearningStep.swift; sourceTree = "<group>"; };
 		6E1CCC69235D0AC400451CD7 /* PracticeFamilyLearningStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeFamilyLearningStep.swift; sourceTree = "<group>"; };
+		6E1CCC6B235D37D300451CD7 /* NewMaterialState+sqlite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NewMaterialState+sqlite.swift"; sourceTree = "<group>"; };
 		6E1E6B3122FFA8BD00AFB7A0 /* ContainerViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewControllerTests.swift; sourceTree = "<group>"; };
 		6E1E6B3422FFA95100AFB7A0 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		6E1E6B3622FFA97800AFB7A0 /* TransitionAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionAnimation.swift; sourceTree = "<group>"; };
@@ -413,6 +415,7 @@
 			children = (
 				6E1CCC5F235CEADD00451CD7 /* NewMaterialStateRepository.swift */,
 				6E1CCC61235CEB0600451CD7 /* NewMaterialState.swift */,
+				6E1CCC6B235D37D300451CD7 /* NewMaterialState+sqlite.swift */,
 			);
 			path = NewMaterialStateRepository;
 			sourceTree = "<group>";
@@ -1383,6 +1386,7 @@
 				6E883F8F233D8301004F0D0E /* FeedPackage.swift in Sources */,
 				6EBE4EA4230B675B0047A880 /* Exercise+data.swift in Sources */,
 				6EE7A3DD23593B3700DF0F45 /* FeedPackageAPIRouter.swift in Sources */,
+				6E1CCC6C235D37D300451CD7 /* NewMaterialState+sqlite.swift in Sources */,
 				6E1CCC6A235D0AC400451CD7 /* PracticeFamilyLearningStep.swift in Sources */,
 				6EBE4E9B230B614B0047A880 /* ExerciseViewController.swift in Sources */,
 				6E0ADF4423492B2A004B4348 /* FeedPackageCalculator.swift in Sources */,

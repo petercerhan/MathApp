@@ -29,11 +29,19 @@ class NewMaterialStateRepositoryImpl: NewMaterialStateRepository {
     //MARK: - NewMaterialStateRepository Interface
     
     func get() -> NewMaterialState {
-        return NewMaterialState(id: 1, userID: 1, focusConcept1ID: 0, focusConcept2ID: 0)
+        let query = NewMaterialState.table.filter(NewMaterialState.column_id == 1)
+        
+        guard let row = try? databaseService.db.pluck(query) else {
+            return NewMaterialState(id: 1, userID: 1, focusConcept1ID: 0, focusConcept2ID: 0)
+        }
+        
+        return NewMaterialState.createFromQueryResult(row)
     }
     
     func setFocus(concept1ID: Int, concept2ID: Int) {
-        
+        let query = NewMaterialState.table.filter(NewMaterialState.column_userID == Int64(1))
+        _ = try? databaseService.db.run(query.update(NewMaterialState.column_focusConcept1 <- Int64(concept1ID),
+                                     NewMaterialState.column_focusConcept2 <- Int64(concept2ID)))
     }
     
 }
