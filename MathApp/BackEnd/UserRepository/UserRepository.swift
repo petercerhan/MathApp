@@ -11,6 +11,7 @@ import SQLite
 
 protocol UserRepository {
     func get() -> User?
+    func setLearningStrategy(_ strategy: LearningStrategy)
 }
 
 class UserRepositoryImpl: UserRepository {
@@ -40,4 +41,8 @@ class UserRepositoryImpl: UserRepository {
         return User(id: id, learningStrategyID: learningStrategyID)
     }
     
+    func setLearningStrategy(_ strategy: LearningStrategy) {
+        let query = User.table.filter(User.column_id == Int64(1))
+        _ = try? databaseService.db.run(query.update(User.column_learningStrategyID <- Int64(strategy.rawValue)))
+    }
 }

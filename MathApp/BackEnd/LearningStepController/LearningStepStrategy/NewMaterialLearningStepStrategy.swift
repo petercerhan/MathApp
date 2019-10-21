@@ -14,6 +14,7 @@ class NewMaterialLearningStepStrategy: LearningStepStrategy {
     
     private let userConceptRepository: UserConceptRepository
     private let newMaterialStateRepository: NewMaterialStateRepository
+    private let userRepository: UserRepository
     
     //MARK: - Context
     
@@ -24,9 +25,13 @@ class NewMaterialLearningStepStrategy: LearningStepStrategy {
     
     //MARK: - Initialization
     
-    init(userConceptRepository: UserConceptRepository, newMaterialStateRepository: NewMaterialStateRepository) {
+    init(userConceptRepository: UserConceptRepository,
+         newMaterialStateRepository: NewMaterialStateRepository,
+         userRepository: UserRepository)
+    {
         self.userConceptRepository = userConceptRepository
         self.newMaterialStateRepository = newMaterialStateRepository
+        self.userRepository = userRepository
         
         let newMaterialLearningStep = newMaterialStateRepository.get()
         focus1ID = newMaterialLearningStep.focusConcept1ID
@@ -117,6 +122,7 @@ class NewMaterialLearningStepStrategy: LearningStepStrategy {
     
     private func practiceFamilyLearningStep() -> LearningStep {
         newMaterialStateRepository.reset()
+        userRepository.setLearningStrategy(.practiceFamily)
         return PracticeFamilyLearningStep()
     }
     

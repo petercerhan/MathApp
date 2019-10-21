@@ -132,8 +132,7 @@ class NewMaterialLearningStepStrategyTests: XCTestCase {
     }
     
     func test_scenario6_shouldReturnPracticeFamilyStart() {
-        let stubUserConcepts = userConceptsWithLevels(2, 2, 2, 2, 2)
-        let strategy = composeSUT(stubUserConcepts: stubUserConcepts, focus1ID: 1, focus2ID: 0)
+        let strategy = composeSUT(stubUserConcepts: userConceptsWithLevels(2, 2, 2, 2, 2), focus1ID: 1, focus2ID: 0)
         
         let learningStep = strategy.nextLearningStep()
         
@@ -152,6 +151,15 @@ class NewMaterialLearningStepStrategyTests: XCTestCase {
         XCTAssertEqual(mockNewMaterialStateRepository.reset_callCount, 1)
     }
     
+    func test_scenario6_shouldSetLearningStrategyPracticeFamily() {
+        let mockUserRepository = FakeUserRepository()
+        let strategy = composeSUT(stubUserConcepts: userConceptsWithLevels(2, 2, 2, 2, 2), focus1ID: 1, focus2ID: 0, fakeUserRepository: mockUserRepository)
+        
+        let _ = strategy.nextLearningStep()
+        
+        XCTAssertEqual(mockUserRepository.setLearningStrategy_callCount, 1)
+        XCTAssertEqual(mockUserRepository.setLearningStrategy_strategy.first, .practiceFamily)
+    }
     
     //MARK: - Cross Check Scenarios
     
@@ -160,14 +168,23 @@ class NewMaterialLearningStepStrategyTests: XCTestCase {
     
     //MARK: - SUT Composition
     
-    func composeSUT(stubUserConcepts: [UserConcept], focus1ID: Int, focus2ID: Int, fakeNewMaterialStateRepository: FakeNewMaterialStateRepository? = nil) -> NewMaterialLearningStepStrategy {
+    func composeSUT(stubUserConcepts: [UserConcept],
+                    focus1ID: Int,
+                    focus2ID: Int,
+                    fakeNewMaterialStateRepository: FakeNewMaterialStateRepository? = nil,
+                    fakeUserRepository: FakeUserRepository? = nil) -> NewMaterialLearningStepStrategy
+    {
         let stubUserConceptRepository = FakeUserConceptRepository()
         stubUserConceptRepository.list_stubUserConcepts = stubUserConcepts
         
         let newMaterialStateRepository = fakeNewMaterialStateRepository ?? FakeNewMaterialStateRepository()
         newMaterialStateRepository.stubNewMaterialState = NewMaterialState.createStub(focusConcept1ID: focus1ID, focusConcept2ID: focus2ID)
         
-        return NewMaterialLearningStepStrategy(userConceptRepository: stubUserConceptRepository, newMaterialStateRepository: newMaterialStateRepository)
+        let userRepository = fakeUserRepository ?? FakeUserRepository()
+        
+        return NewMaterialLearningStepStrategy(userConceptRepository: stubUserConceptRepository,
+                                               newMaterialStateRepository: newMaterialStateRepository,
+                                               userRepository: userRepository)
     }
     
     func userConceptsWithLevels(_ strength1: Int, _ strength2: Int, _ strength3: Int, _ strength4: Int, _ strength5: Int) -> [UserConcept] {

@@ -27,6 +27,7 @@
 		6E1CCC68235D066600451CD7 /* PracticeTwoConceptsLearningStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1CCC67235D066600451CD7 /* PracticeTwoConceptsLearningStep.swift */; };
 		6E1CCC6A235D0AC400451CD7 /* PracticeFamilyLearningStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1CCC69235D0AC400451CD7 /* PracticeFamilyLearningStep.swift */; };
 		6E1CCC6C235D37D300451CD7 /* NewMaterialState+sqlite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1CCC6B235D37D300451CD7 /* NewMaterialState+sqlite.swift */; };
+		6E1CCC71235D545400451CD7 /* FakeUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1CCC70235D545400451CD7 /* FakeUserRepository.swift */; };
 		6E1E6B3222FFA8BD00AFB7A0 /* ContainerViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1E6B3122FFA8BD00AFB7A0 /* ContainerViewControllerTests.swift */; };
 		6E1E6B3522FFA95100AFB7A0 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1E6B3422FFA95100AFB7A0 /* ContainerViewController.swift */; };
 		6E1E6B3722FFA97800AFB7A0 /* TransitionAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1E6B3622FFA97800AFB7A0 /* TransitionAnimation.swift */; };
@@ -203,6 +204,7 @@
 		6E1CCC67235D066600451CD7 /* PracticeTwoConceptsLearningStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeTwoConceptsLearningStep.swift; sourceTree = "<group>"; };
 		6E1CCC69235D0AC400451CD7 /* PracticeFamilyLearningStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeFamilyLearningStep.swift; sourceTree = "<group>"; };
 		6E1CCC6B235D37D300451CD7 /* NewMaterialState+sqlite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NewMaterialState+sqlite.swift"; sourceTree = "<group>"; };
+		6E1CCC70235D545400451CD7 /* FakeUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeUserRepository.swift; sourceTree = "<group>"; };
 		6E1E6B3122FFA8BD00AFB7A0 /* ContainerViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewControllerTests.swift; sourceTree = "<group>"; };
 		6E1E6B3422FFA95100AFB7A0 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		6E1E6B3622FFA97800AFB7A0 /* TransitionAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionAnimation.swift; sourceTree = "<group>"; };
@@ -418,6 +420,31 @@
 				6E1CCC6B235D37D300451CD7 /* NewMaterialState+sqlite.swift */,
 			);
 			path = NewMaterialStateRepository;
+			sourceTree = "<group>";
+		};
+		6E1CCC6D235D540C00451CD7 /* UserConceptRepository */ = {
+			isa = PBXGroup;
+			children = (
+				6EB0FF02235BF457005F23DE /* FakeUserConceptRepository.swift */,
+			);
+			path = UserConceptRepository;
+			sourceTree = "<group>";
+		};
+		6E1CCC6E235D541900451CD7 /* NewMaterialStateRepository */ = {
+			isa = PBXGroup;
+			children = (
+				6E1CCC63235CEBC100451CD7 /* FakeNewMaterialStateRepository.swift */,
+				6E1CCC65235CEC2200451CD7 /* NewMaterialState+stubs.swift */,
+			);
+			path = NewMaterialStateRepository;
+			sourceTree = "<group>";
+		};
+		6E1CCC6F235D542900451CD7 /* UserRepository */ = {
+			isa = PBXGroup;
+			children = (
+				6E1CCC70235D545400451CD7 /* FakeUserRepository.swift */,
+			);
+			path = UserRepository;
 			sourceTree = "<group>";
 		};
 		6E1E6B3022FFA8A000AFB7A0 /* Containers */ = {
@@ -748,9 +775,9 @@
 		6EB0FF01235BF447005F23DE /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				6EB0FF02235BF457005F23DE /* FakeUserConceptRepository.swift */,
-				6E1CCC63235CEBC100451CD7 /* FakeNewMaterialStateRepository.swift */,
-				6E1CCC65235CEC2200451CD7 /* NewMaterialState+stubs.swift */,
+				6E1CCC6F235D542900451CD7 /* UserRepository */,
+				6E1CCC6E235D541900451CD7 /* NewMaterialStateRepository */,
+				6E1CCC6D235D540C00451CD7 /* UserConceptRepository */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -1428,6 +1455,7 @@
 			files = (
 				6EC6674B2324A40C0048068C /* ConceptMapTableViewCell+utilites.swift in Sources */,
 				6EBE4E8F230A13D80047A880 /* ExerciseCoordinatorTests.swift in Sources */,
+				6E1CCC71235D545400451CD7 /* FakeUserRepository.swift in Sources */,
 				6EE60C4E2344370500B0322B /* PrepareFeedSceneTests.swift in Sources */,
 				6EB933A8233071D800E38B52 /* LoadExercisesSceneTests.swift in Sources */,
 				6EB0FF03235BF457005F23DE /* FakeUserConceptRepository.swift in Sources */,
