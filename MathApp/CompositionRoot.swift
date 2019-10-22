@@ -10,6 +10,26 @@ import UIKit
 
 class CompositionRoot {
     
+    //MARK: - Back End
+    
+    private(set) lazy var learningStepController: LearningStepController = {
+        let userConceptRepository = UserConceptRepositoryImpl(databaseService: databaseService)
+        let newMaterialStateRepository = NewMaterialStateRepositoryImpl(databaseService: databaseService)
+        let userRepository = UserRepositoryImpl(databaseService: databaseService)
+        
+        return LearningStepControllerImpl(learningStepStrategyFactory: LearningStepStrategyFactoryImpl(userConceptRepository: userConceptRepository,
+                                                                                                       newMaterialStateRepository: newMaterialStateRepository,
+                                                                                                       userRepository: userRepository))
+    }()
+    
+    private(set) lazy var learningStepStore: LearningStepStore = {
+        let learningStepEDS = LearningStepExternalDataServiceImpl(learningStepController: learningStepController)
+        return LearningStepStoreImpl(learningStepExternalDataService: learningStepEDS)
+    }()
+    
+    
+    //MARK: - Application Base
+    
     func composeRootCoordinator() -> Coordinator {
         let feedPackageStore = FeedPackageStoreImpl(feedPackageExternalDataService: feedPackageExternalDataService)
         return RootCoordinator(compositionRoot: self,
@@ -23,7 +43,7 @@ class CompositionRoot {
     }
     
     func composePrepareFeedScene(delegate: PrepareFeedViewModelDelegate, feedPackageStore: FeedPackageStore) -> UIViewController {
-        let vm = PrepareFeedViewModel(delegate: delegate, feedPackageStore: feedPackageStore)
+        let vm = PrepareFeedViewModel(delegate: delegate, learningStepStore: learningStepStore)
         return PrepareFeedViewController(viewModel: vm)
     }
     

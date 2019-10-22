@@ -66,13 +66,13 @@ class RootCoordinatorFakeCompositionRoot: CompositionRoot {
     }
     
     override func composePrepareFeedScene(delegate: PrepareFeedViewModelDelegate, feedPackageStore: FeedPackageStore) -> UIViewController {
-        let vm = PrepareFeedViewModel(delegate: delegate, feedPackageStore: FakeFeedPackageStore())
+        let vm = PrepareFeedViewModel(delegate: delegate, learningStepStore: FakeLearningStepStore())
         return PrepareFeedViewController(viewModel: vm)
     }
 }
 
 class TestPrepareFeedViewModel: PrepareFeedViewModel {
     init() {
-        super.init(delegate: FakePrepareFeedViewModelDelegate(), feedPackageStore: FakeFeedPackageStore())
+        super.init(delegate: FakePrepareFeedViewModelDelegate(), learningStepStore: FakeLearningStepStore())
     }
 }

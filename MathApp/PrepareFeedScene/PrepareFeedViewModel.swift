@@ -18,7 +18,7 @@ class PrepareFeedViewModel {
     //MARK: - Dependencies
     
     private weak var delegate: PrepareFeedViewModelDelegate?
-    private let feedPackageStore: FeedPackageStore
+    private let learningStepStore: LearningStepStore
     
     //MARK: - Rx
     
@@ -26,15 +26,15 @@ class PrepareFeedViewModel {
     
     //MARK: - Initialization
     
-    init(delegate: PrepareFeedViewModelDelegate, feedPackageStore: FeedPackageStore) {
+    init(delegate: PrepareFeedViewModelDelegate, learningStepStore: LearningStepStore) {
         self.delegate = delegate
-        self.feedPackageStore = feedPackageStore
+        self.learningStepStore = learningStepStore
         bindFeedPackageLoad()
-        feedPackageStore.dispatch(action: .updateFeedPackage)
+        learningStepStore.dispatch(action: .next)
     }
     
     private func bindFeedPackageLoad() {
-        feedPackageStore.feedPackage
+        learningStepStore.learningStep
             .observeOn(MainScheduler.instance)
             .filter { $0.isLoaded }
             .take(1)

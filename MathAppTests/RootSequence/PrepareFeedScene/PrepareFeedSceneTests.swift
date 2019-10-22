@@ -8,36 +8,32 @@
 
 import Foundation
 import XCTest
+import RxSwift
 @testable import MathApp
 
 class PrepareFeedSceneTests: XCTestCase {
     
-    func test_onLoad_shouldRequestNewFeedPackage() {
-        let mockFeedPackageStore = FakeFeedPackageStore()
-        let vm = PrepareFeedViewModel(delegate: FakePrepareFeedViewModelDelegate(), feedPackageStore: mockFeedPackageStore)
+    func test_onLoad_shouldRequestLearningStep() {
+        let mockLearningStepStore = FakeLearningStepStore()
+        let vm = PrepareFeedViewModel(delegate: FakePrepareFeedViewModelDelegate(), learningStepStore: mockLearningStepStore)
         let vc = PrepareFeedViewController(viewModel: vm)
         
         vc.loadViewIfNeeded()
         
-        XCTAssertEqual(mockFeedPackageStore.updateFeedPackage_callCount, 1)
+        XCTAssertEqual(mockLearningStepStore.next_callCount, 1)
     }
     
-    func test_feedPackageLoaded_shouldRequestNextScene() {
+    func test_learningStepLoaded_shouldRequestNextScene() {
         let mockDelegate = FakePrepareFeedViewModelDelegate()
-        let stubFeedPackageStore = FakeFeedPackageStore()
-        stubFeedPackageStore.setStubFeedPackage_doNotEmit(FeedPackage.exercisesPackage)
-        let vm = PrepareFeedViewModel(delegate: mockDelegate, feedPackageStore: stubFeedPackageStore)
+        let stubLearningStepStore = FakeLearningStepStore()
+        stubLearningStepStore.learningStep = Observable.just(.loaded(ConceptIntroLearningStep(conceptID: 1)))
+        let vm = PrepareFeedViewModel(delegate: mockDelegate, learningStepStore: stubLearningStepStore)
         let vc = PrepareFeedViewController(viewModel: vm)
         
         vc.loadViewIfNeeded()
         
-        let assertion = {
-            XCTAssertEqual(mockDelegate.next_callCount, 1)
-        }
-        delayedAssertion(assertion)
+        XCTAssertEqual(mockDelegate.next_callCount, 1)
     }
-    
-    
-    
     
 }
+
