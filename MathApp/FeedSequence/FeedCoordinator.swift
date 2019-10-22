@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 
-class ExerciseCoordinator: Coordinator {
+class FeedCoordinator: Coordinator {
     
     //MARK: - Dependencies
     
@@ -19,6 +19,7 @@ class ExerciseCoordinator: Coordinator {
     private let feedPackageExternalDataService: FeedPackageExternalDataService
     private let resultsStore: ResultsStore
     private let feedPackageStore: FeedPackageStore
+    private let learningStepStore: LearningStepStore
     
     //MARK: - State
     
@@ -36,7 +37,8 @@ class ExerciseCoordinator: Coordinator {
          randomizationService: RandomizationService,
          feedPackageExternalDataService: FeedPackageExternalDataService,
          resultsStore: ResultsStore,
-         feedPackageStore: FeedPackageStore)
+         feedPackageStore: FeedPackageStore,
+         learningStepStore: LearningStepStore)
     {
         self.compositionRoot = compositionRoot
         self.containerVC = containerVC
@@ -44,6 +46,7 @@ class ExerciseCoordinator: Coordinator {
         self.feedPackageExternalDataService = feedPackageExternalDataService
         self.resultsStore = resultsStore
         self.feedPackageStore = feedPackageStore
+        self.learningStepStore = learningStepStore
         
         if let feedContainer = containerVC as? FeedContainerViewController {
             feedContainer.viewModel.setDelegate(self)
@@ -58,6 +61,7 @@ class ExerciseCoordinator: Coordinator {
     
     func start() {
         containerVC.loadViewIfNeeded()
+        
         showNextFeedScene(animation: .none, canTransition: true)
     }
     
@@ -156,7 +160,7 @@ class ExerciseCoordinator: Coordinator {
 
 //MARK: - FeedContainerViewModelDelegate
 
-extension ExerciseCoordinator: FeedContainerViewModelDelegate {
+extension FeedCoordinator: FeedContainerViewModelDelegate {
     func menu(_ feedContainerViewModel: FeedContainerViewModel) {
         let coordinator = compositionRoot.composeMenuCoordinator(delegate: self)
         containerVC.presentModal(viewController: coordinator.containerViewController)
@@ -167,7 +171,7 @@ extension ExerciseCoordinator: FeedContainerViewModelDelegate {
 
 //MARK: - ExerciseViewModelDelegate
 
-extension ExerciseCoordinator: ExerciseViewModelDelegate {
+extension FeedCoordinator: ExerciseViewModelDelegate {
     func next(_ exerciseViewModel: ExerciseViewModel, correctAnswer: Bool) {
         showNextFeedScene(animation: .fadeIn, canTransition: correctAnswer)
     }
@@ -180,7 +184,7 @@ extension ExerciseCoordinator: ExerciseViewModelDelegate {
 
 //MARK: - InfoViewModelDelegate
 
-extension ExerciseCoordinator: InfoViewModelDelegate {
+extension FeedCoordinator: InfoViewModelDelegate {
     func quit(_ infoViewModel: InfoViewModelImpl) {
         containerVC.dismissModal(animation: .uncoverFade)
     }
@@ -188,7 +192,7 @@ extension ExerciseCoordinator: InfoViewModelDelegate {
 
 //MARK: - MenuCoordinatorDelegate
 
-extension ExerciseCoordinator: MenuCoordinatorDelegate {
+extension FeedCoordinator: MenuCoordinatorDelegate {
     func quit(_ menuCoordinator: MenuCoordinator) {
         containerVC.dismissModal()
     }
@@ -206,7 +210,7 @@ extension ExerciseCoordinator: MenuCoordinatorDelegate {
 
 //MARK: - LoadExercisesViewModelDelegate
 
-extension ExerciseCoordinator: LoadExercisesViewModelDelegate {
+extension FeedCoordinator: LoadExercisesViewModelDelegate {
     func next(_ loadExercisesViewModel: LoadExercisesViewModel) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.005) { [weak self] in
             self?.showNextFeedScene(animation: .fadeIn, canTransition: false)
@@ -216,7 +220,7 @@ extension ExerciseCoordinator: LoadExercisesViewModelDelegate {
 
 //MARK: - ConceptIntroViewModelDelegate
 
-extension ExerciseCoordinator: ConceptIntroViewModelDelegate {
+extension FeedCoordinator: ConceptIntroViewModelDelegate {
     func next(_ conceptIntroViewModel: ConceptIntroViewModel) {
         showNextFeedScene(animation: .fadeIn, canTransition: false)
     }
@@ -224,7 +228,7 @@ extension ExerciseCoordinator: ConceptIntroViewModelDelegate {
 
 //MARK: - LevelUpViewModelDelegate
 
-extension ExerciseCoordinator: LevelUpViewModelDelegate {
+extension FeedCoordinator: LevelUpViewModelDelegate {
     func next(_ levelUpViewModel: LevelUpViewModel) {
         showNextFeedScene(animation: .fadeIn, canTransition: true)
     }

@@ -18,11 +18,11 @@ class NewMaterialLearningStepStrategyTests: XCTestCase {
         
         let learningStep = strategy.nextLearningStep()
         
-        guard let conceptIntro = learningStep as? ConceptIntroLearningStep else {
+        guard let conceptIntroStep = learningStep as? ConceptIntroLearningStep else {
             XCTFail("Learning step is not concept intro")
             return
         }
-        XCTAssertEqual(conceptIntro.conceptID, 1)
+        XCTAssertEqual(conceptIntroStep.conceptIntro.concept.id, 1)
     }
     
     func test_scenario1_shouldSetFocusAs10() {
@@ -41,11 +41,11 @@ class NewMaterialLearningStepStrategyTests: XCTestCase {
         
         let learningStep = strategy.nextLearningStep()
         
-        guard let conceptIntro = learningStep as? ConceptIntroLearningStep else {
+        guard let conceptIntroStep = learningStep as? ConceptIntroLearningStep else {
             XCTFail("Learning step is not concept intro")
             return
         }
-        XCTAssertEqual(conceptIntro.conceptID, 2)
+        XCTAssertEqual(conceptIntroStep.conceptIntro.concept.id, 2)
     }
     
     func test_scenario2_shouldSetFocusAs20() {

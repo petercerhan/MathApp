@@ -49,15 +49,16 @@ class CompositionRoot {
     
     //MARK: - Exercise sequence
     
-    func composeExerciseCoordinator(feedPackageStore: FeedPackageStore) -> ExerciseCoordinator {
+    func composeExerciseCoordinator(feedPackageStore: FeedPackageStore) -> FeedCoordinator {
         let resultsStore = ResultsStoreImpl(databaseService: databaseService)
         let containerVM = FeedContainerViewModel(delegate: nil, resultsStore: resultsStore)
-        return ExerciseCoordinator(compositionRoot: self,
+        return FeedCoordinator(compositionRoot: self,
                                    containerVC: FeedContainerViewController(viewModel: containerVM),
                                    randomizationService: RandomizationServiceImpl(),
                                    feedPackageExternalDataService: feedPackageExternalDataService,
                                    resultsStore: resultsStore,
-                                   feedPackageStore: feedPackageStore)
+                                   feedPackageStore: feedPackageStore,
+                                   learningStepStore: learningStepStore)
     }
     
     func composeExerciseScene(delegate: ExerciseViewModelDelegate,

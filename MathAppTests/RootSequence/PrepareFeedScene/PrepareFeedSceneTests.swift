@@ -26,7 +26,7 @@ class PrepareFeedSceneTests: XCTestCase {
     func test_learningStepLoaded_shouldRequestNextScene() {
         let mockDelegate = FakePrepareFeedViewModelDelegate()
         let stubLearningStepStore = FakeLearningStepStore()
-        stubLearningStepStore.learningStep = Observable.just(.loaded(ConceptIntroLearningStep(conceptID: 1)))
+        stubLearningStepStore.learningStep = Observable.just(.loaded(ConceptIntroLearningStep.createWithConceptID(conceptID: 1)))
         let vm = PrepareFeedViewModel(delegate: mockDelegate, learningStepStore: stubLearningStepStore)
         let vc = PrepareFeedViewController(viewModel: vm)
         

@@ -12,7 +12,7 @@ import RxSwift
 
 class FakeLearningStepExternalDataService: LearningStepExternalDataService {
 
-    var stubLearningStep = ConceptIntroLearningStep(conceptID: 1)
+    var stubLearningStep: LearningStep = PracticeOneConceptLearningStep(conceptID: 1)
     var getNext_callCount = 0
     
     func getNext() -> Observable<LearningStep> {

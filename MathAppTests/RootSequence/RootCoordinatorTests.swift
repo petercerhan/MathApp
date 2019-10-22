@@ -39,7 +39,7 @@ class RootCoordinatorTests: XCTestCase {
         
         let assertion = {
             mockContainer.verifyDidShow(viewControllerType: ContainerViewController.self)
-            XCTAssert(coordinator.childCoordinator is ExerciseCoordinator)
+            XCTAssert(coordinator.childCoordinator is FeedCoordinator)
         }
         delayedAssertion(delay: 0.2, assertion)
     }
@@ -56,13 +56,14 @@ class RootCoordinatorTests: XCTestCase {
 }
 
 class RootCoordinatorFakeCompositionRoot: CompositionRoot {
-    override func composeExerciseCoordinator(feedPackageStore: FeedPackageStore) -> ExerciseCoordinator {
-        return ExerciseCoordinator(compositionRoot: CompositionRoot(),
+    override func composeExerciseCoordinator(feedPackageStore: FeedPackageStore) -> FeedCoordinator {
+        return FeedCoordinator(compositionRoot: CompositionRoot(),
                                    containerVC: ContainerViewController(),
                                    randomizationService: RandomizationServiceImpl(),
                                    feedPackageExternalDataService: FakeExerciseExternalDataService(),
                                    resultsStore: FakeResultsStore(),
-                                   feedPackageStore: FakeFeedPackageStore())
+                                   feedPackageStore: FakeFeedPackageStore(),
+                                   learningStepStore: FakeLearningStepStore())
     }
     
     override func composePrepareFeedScene(delegate: PrepareFeedViewModelDelegate, feedPackageStore: FeedPackageStore) -> UIViewController {

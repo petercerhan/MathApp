@@ -45,7 +45,7 @@ class LearningStepStoreTests: XCTestCase {
     
     func test_next_shouldEmitLearningStep() {
         let stubLearningStepEDS = FakeLearningStepExternalDataService()
-        stubLearningStepEDS.stubLearningStep = ConceptIntroLearningStep(conceptID: 2)
+        stubLearningStepEDS.stubLearningStep = ConceptIntroLearningStep.createWithConceptID(conceptID: 2)
         let learningStepStore = composeSUT(fakeLearningStepEDS: stubLearningStepEDS)
         
         learningStepStore.dispatch(action: .next)
@@ -54,7 +54,7 @@ class LearningStepStoreTests: XCTestCase {
             XCTFail("Latest value is not concept intro")
             return
         }
-        XCTAssertEqual(conceptIntro.conceptID, 2)
+        XCTAssertEqual(conceptIntro.conceptIntro.concept.id, 2)
     }
     
     //MARK: - SUT Composition

@@ -8,9 +8,18 @@
 
 import UIKit
 import XCTest
+import RxSwift
 @testable import MathApp
 
-class ExerciseCoordinatorTests: XCTestCase {
+class FeedCoordinatorTests: XCTestCase {
+    
+    func test_start_conceptIntroLearningStep_shouldShowConceptIntro() {
+        let stubLearningStepStore = FakeLearningStepStore()
+        stubLearningStepStore.learningStep = Observable.just(.loaded(ConceptIntroLearningStep.createWithConceptID(conceptID: 1)))
+        
+        
+        
+    }
     
     //MARK: - Exercise Packages
     
@@ -351,7 +360,7 @@ class ExerciseCoordinatorTests: XCTestCase {
                     stubFeedPackage: FeedPackage? = nil,
                     stubFeedPackages: [FeedPackage]? = nil,
                     feedPackageLoadState: LoadState<FeedPackage>? = nil,
-                    compositionRoot: CompositionRoot? = nil) -> ExerciseCoordinator {
+                    compositionRoot: CompositionRoot? = nil) -> FeedCoordinator {
         
         let containerVC = fakeContainerViewController ?? FakeContainerViewController()
         let exerciseExternalDataService = fakeExerciseExternalDataService ?? FakeExerciseExternalDataService()
@@ -370,12 +379,13 @@ class ExerciseCoordinatorTests: XCTestCase {
         
         let inputCompositionRoot = compositionRoot ?? CompositionRoot()
         
-        return ExerciseCoordinator(compositionRoot: inputCompositionRoot,
+        return FeedCoordinator(compositionRoot: inputCompositionRoot,
                                    containerVC: containerVC,
                                    randomizationService: RandomizationServiceImpl(),
                                    feedPackageExternalDataService: exerciseExternalDataService,
                                    resultsStore: FakeResultsStore(),
-                                   feedPackageStore: feedPackageStore)
+                                   feedPackageStore: feedPackageStore,
+                                   learningStepStore: FakeLearningStepStore())
     }
     
 }
