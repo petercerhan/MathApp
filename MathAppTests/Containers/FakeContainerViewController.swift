@@ -21,7 +21,10 @@ class FakeContainerViewController: ContainerViewController {
     }
     
     func verifyDidShow<T>(viewControllerType: T.Type, file: StaticString = #file, line: UInt = #line) {
-        XCTAssert(show_callCount > 0, file: file, line: line)
+        if show_callCount == 0 {
+            XCTFail("show never called", file: file, line: line)
+            return
+        }
         if !(show_viewController.last is T) {
             XCTFail("Displayed View Controller type \(type(of: show_viewController.last!)) does not match expected type \(viewControllerType.self)", file: file, line: line)
         }

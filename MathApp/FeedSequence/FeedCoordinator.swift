@@ -62,8 +62,26 @@ class FeedCoordinator: Coordinator {
     func start() {
         containerVC.loadViewIfNeeded()
         
-        showNextFeedScene(animation: .none, canTransition: true)
+        showNextLearningStepScene()
+//        showNextFeedScene(animation: .none, canTransition: true)
     }
+    
+    func showNextLearningStepScene() {
+        guard let learningStep = latestValue(of: learningStepStore.learningStep, disposeBag: disposeBag)?.data else {
+            //load learning step scene
+            print("\n\nno learning step")
+            return
+        }
+        if let conceptIntroStep = learningStep as? ConceptIntroLearningStep {
+            print("\n\nWill Go to concept intro scene")
+            showConceptIntroScene(conceptIntro: conceptIntroStep.conceptIntro)
+        }
+    }
+    
+    
+    //show next exercises scene
+    
+    
     
     private func showNextFeedScene(animation: TransitionAnimation, canTransition: Bool) {
         if canTransition,
@@ -92,6 +110,7 @@ class FeedCoordinator: Coordinator {
     private func showConceptIntroScene(conceptIntro: ConceptIntro) {
         let vc = compositionRoot.composeConceptIntroScene(delegate: self, conceptIntro: conceptIntro)
         containerVC.show(viewController: vc, animation: .fadeIn)
+        
         feedPackageStore.dispatch(action: .setConceptIntroSeen(conceptID: conceptIntro.concept.id))
         exerciseQueue = Queue<Exercise>()
     }
