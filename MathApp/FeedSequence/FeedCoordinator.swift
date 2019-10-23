@@ -63,47 +63,15 @@ class FeedCoordinator: Coordinator {
         containerVC.loadViewIfNeeded()
         
         showNextLearningStepScene()
-//        showNextFeedScene(animation: .none, canTransition: true)
     }
     
     func showNextLearningStepScene() {
         guard let learningStep = latestValue(of: learningStepStore.learningStep, disposeBag: disposeBag)?.data else {
             //load learning step scene
-            print("\n\nno learning step")
             return
         }
         if let conceptIntroStep = learningStep as? ConceptIntroLearningStep {
-            print("\n\nWill Go to concept intro scene")
             showConceptIntroScene(conceptIntro: conceptIntroStep.conceptIntro)
-        }
-    }
-    
-    
-    //show next exercises scene
-    
-    
-    
-    private func showNextFeedScene(animation: TransitionAnimation, canTransition: Bool) {
-        if canTransition,
-            let feedPackage = latestValue(of: feedPackageStore.feedPackage, disposeBag: disposeBag)?.data,
-            let transitionItem = feedPackage.transitionItem
-        {
-            showTransitionItem(transitionItem)
-            return
-        }
-        
-        if exerciseQueue.count > 0 {
-            showNextExerciseScene(animation: animation)
-        } else {
-            updateExerciseQueue(animation: animation)
-        }
-    }
-    
-    private func showTransitionItem(_ transitionItem: FeedItem) {
-        if let conceptIntro = transitionItem as? ConceptIntro {
-            showConceptIntroScene(conceptIntro: conceptIntro)
-        } else if let levelUpItem = transitionItem as? LevelUpItem  {
-            showLevelUpScene(levelUpItem: levelUpItem)
         }
     }
     
@@ -115,11 +83,21 @@ class FeedCoordinator: Coordinator {
         exerciseQueue = Queue<Exercise>()
     }
     
-    private func showLevelUpScene(levelUpItem: LevelUpItem) {
-        let vc = compositionRoot.composeLevelUpScene(delegate: self, levelUpItem: levelUpItem)
-        containerVC.show(viewController: vc, animation: .fadeIn)
-        feedPackageStore.dispatch(action: .setLevelUpSeen(conceptID: levelUpItem.concept.id))
-        exerciseQueue = Queue<Exercise>()
+    
+    //show next exercises scene
+    
+    
+    
+    private func showNextFeedScene(animation: TransitionAnimation) {
+        //if show exercises condition
+        if exerciseQueue.count > 0 {
+            showNextExerciseScene(animation: animation)
+        } else {
+            updateExerciseQueue(animation: animation)
+        }
+        
+        //else if step complete condition, show step complete feed item
+        
     }
     
     private func showNextExerciseScene(animation: TransitionAnimation) {
@@ -136,17 +114,6 @@ class FeedCoordinator: Coordinator {
     
     private func refreshFeedPackageIfNeeded() {
         
-        if exerciseQueue.count == 0, !transitionItemQueued() {
-            feedPackageStore.dispatch(action: .updateFeedPackage)
-        }
-    }
-    
-    private func transitionItemQueued() -> Bool {
-        guard let feedPackage = latestValue(of: feedPackageStore.feedPackage, disposeBag: disposeBag)?.data else {
-            return false
-        }
-        
-        return (feedPackage.transitionItem != nil)
     }
     
     private func updateExerciseQueue(animation: TransitionAnimation) {
@@ -158,7 +125,7 @@ class FeedCoordinator: Coordinator {
         }
         
         exerciseQueue.enqueue(elements: exercises)
-        showNextFeedScene(animation: animation, canTransition: false)
+        showNextFeedScene(animation: animation)
     }
     
     private func composeExerciseScene(forExercise exercise: Exercise) -> UIViewController {
@@ -174,7 +141,19 @@ class FeedCoordinator: Coordinator {
         let vc = compositionRoot.composeLoadExercisesScene(delegate: self, feedPackageStore: feedPackageStore)
         containerVC.show(viewController: vc, animation: .none)
     }
+    
+    
+    
+    
+    
+    private func showLevelUpScene(levelUpItem: LevelUpItem) {
+        let vc = compositionRoot.composeLevelUpScene(delegate: self, levelUpItem: levelUpItem)
+        containerVC.show(viewController: vc, animation: .fadeIn)
+        feedPackageStore.dispatch(action: .setLevelUpSeen(conceptID: levelUpItem.concept.id))
+        exerciseQueue = Queue<Exercise>()
+    }
 
+    
 }
 
 //MARK: - FeedContainerViewModelDelegate
@@ -192,7 +171,7 @@ extension FeedCoordinator: FeedContainerViewModelDelegate {
 
 extension FeedCoordinator: ExerciseViewModelDelegate {
     func next(_ exerciseViewModel: ExerciseViewModel, correctAnswer: Bool) {
-        showNextFeedScene(animation: .fadeIn, canTransition: correctAnswer)
+        showNextFeedScene(animation: .fadeIn)
     }
     
     func info(_ exerciseViewModel: ExerciseViewModel, concept: Concept) {
@@ -232,7 +211,7 @@ extension FeedCoordinator: MenuCoordinatorDelegate {
 extension FeedCoordinator: LoadExercisesViewModelDelegate {
     func next(_ loadExercisesViewModel: LoadExercisesViewModel) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.005) { [weak self] in
-            self?.showNextFeedScene(animation: .fadeIn, canTransition: false)
+            self?.showNextFeedScene(animation: .fadeIn)
         }
     }
 }
@@ -241,7 +220,7 @@ extension FeedCoordinator: LoadExercisesViewModelDelegate {
 
 extension FeedCoordinator: ConceptIntroViewModelDelegate {
     func next(_ conceptIntroViewModel: ConceptIntroViewModel) {
-        showNextFeedScene(animation: .fadeIn, canTransition: false)
+        showNextFeedScene(animation: .fadeIn)
     }
 }
 
@@ -249,6 +228,6 @@ extension FeedCoordinator: ConceptIntroViewModelDelegate {
 
 extension FeedCoordinator: LevelUpViewModelDelegate {
     func next(_ levelUpViewModel: LevelUpViewModel) {
-        showNextFeedScene(animation: .fadeIn, canTransition: true)
+        showNextFeedScene(animation: .fadeIn)
     }
 }
