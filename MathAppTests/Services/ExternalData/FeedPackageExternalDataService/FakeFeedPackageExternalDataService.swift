@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 @testable import MathApp
 
-class FakeExerciseExternalDataService: FeedPackageExternalDataService {
+class FakeFeedPackageExternalDataService: FeedPackageExternalDataService {
     
     //MARK: - getNextFeedPackage()
 

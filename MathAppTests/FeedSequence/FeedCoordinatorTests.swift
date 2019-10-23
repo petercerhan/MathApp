@@ -35,7 +35,7 @@ class FeedCoordinatorTests: XCTestCase {
         return FeedCoordinator(compositionRoot: CompositionRoot(),
                                    containerVC: containerVC,
                                    randomizationService: RandomizationServiceImpl(),
-                                   feedPackageExternalDataService: FakeExerciseExternalDataService(),
+                                   feedPackageExternalDataService: FakeFeedPackageExternalDataService(),
                                    resultsStore: FakeResultsStore(),
                                    feedPackageStore: FakeFeedPackageStore(),
                                    learningStepStore: learningStepStore)

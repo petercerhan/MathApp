@@ -17,7 +17,7 @@ class FeedPackageStoreTests: XCTestCase {
     private let disposeBag = DisposeBag()
     
     func test_updateFeedPackage_requestsNewFeedPackage() {
-        let mockExerciseExternalDataService = FakeExerciseExternalDataService()
+        let mockExerciseExternalDataService = FakeFeedPackageExternalDataService()
         let feedPackageStore = composeSUT(fakeExerciseExternalDataService: mockExerciseExternalDataService)
         
         feedPackageStore.dispatch(action: .updateFeedPackage)
@@ -58,7 +58,7 @@ class FeedPackageStoreTests: XCTestCase {
     }
     
     func test_setConceptIntroSeen_shouldRequestsNewFeedPackageWithIntroducedConceptID() {
-        let mockExerciseExternalDataService = FakeExerciseExternalDataService()
+        let mockExerciseExternalDataService = FakeFeedPackageExternalDataService()
         let feedPackageStore = composeSUT(fakeExerciseExternalDataService: mockExerciseExternalDataService)
         
         feedPackageStore.dispatch(action: .setConceptIntroSeen(conceptID: 2))
@@ -78,7 +78,7 @@ class FeedPackageStoreTests: XCTestCase {
     }
     
     func test_setLevelUpSeen_shouldRequestNewFeedPackageWithLevelUpConceptID() {
-        let mockExerciseExternalDataService = FakeExerciseExternalDataService()
+        let mockExerciseExternalDataService = FakeFeedPackageExternalDataService()
         let feedPackageStore = composeSUT(fakeExerciseExternalDataService: mockExerciseExternalDataService)
         
         feedPackageStore.dispatch(action: .setLevelUpSeen(conceptID: 2))
@@ -89,11 +89,11 @@ class FeedPackageStoreTests: XCTestCase {
     
     //MARK: - SUT Composition
     
-    func composeSUT(fakeExerciseExternalDataService: FakeExerciseExternalDataService? = nil,
+    func composeSUT(fakeExerciseExternalDataService: FakeFeedPackageExternalDataService? = nil,
                     stubExercises: [Exercise]? = nil,
                     stubFeedPackage: FeedPackage? = nil) -> FeedPackageStore
     {
-        let exerciseExternalDataService = fakeExerciseExternalDataService ?? FakeExerciseExternalDataService()
+        let exerciseExternalDataService = fakeExerciseExternalDataService ?? FakeFeedPackageExternalDataService()
         if let stubExercises = stubExercises {
             exerciseExternalDataService.getExercises_stubData = FeedPackage(feedPackageType: .exercises, exercises: stubExercises, transitionItem: nil)
         }
