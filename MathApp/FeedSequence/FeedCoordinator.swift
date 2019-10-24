@@ -83,11 +83,6 @@ class FeedCoordinator: Coordinator {
         exerciseQueue = Queue<Exercise>()
     }
     
-    
-    //show next exercises scene
-    
-    
-    
     private func showNextFeedScene(animation: TransitionAnimation) {
         //if show exercises condition
         if exerciseQueue.count > 0 {
