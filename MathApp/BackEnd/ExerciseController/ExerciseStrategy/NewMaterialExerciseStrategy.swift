@@ -27,8 +27,6 @@ class NewMaterialExerciseStrategy: ExerciseStrategy {
     //MARK: - NewMaterialExerciseStrategy Interface
     
     func getExercises() -> [Exercise] {
-        //pull focusses
-        //invoke calculator
         let newMaterialState = newMaterialStateRepository.get()
         let concept1 = newMaterialState.focusConcept1ID
         let concept2 = newMaterialState.focusConcept2ID

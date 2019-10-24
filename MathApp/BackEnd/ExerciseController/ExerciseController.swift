@@ -32,7 +32,7 @@ class ExerciseControllerImpl: ExerciseController {
     
     func getExercises() -> [Exercise] {
         let strategy = exerciseStrategyFactory.createStrategy(learningStrategy: .newMaterial)
-        return []
+        return strategy.getExercises()
     }
     
 }
