@@ -73,6 +73,7 @@
 		6EAB211C2361387A007186A4 /* FeedExercisesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAB211B2361387A007186A4 /* FeedExercisesStore.swift */; };
 		6EAB211E23613B0E007186A4 /* FakeExerciseExternalDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAB211D23613B0E007186A4 /* FakeExerciseExternalDataService.swift */; };
 		6EAB2120236144AB007186A4 /* FakeFeedExercisesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAB211F236144AB007186A4 /* FakeFeedExercisesStore.swift */; };
+		6EAB212B236260CB007186A4 /* db.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 6EAB212A236260CA007186A4 /* db.sqlite3 */; };
 		6EB0FEE1235BE1D9005F23DE /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB0FEE0235BE1D9005F23DE /* UserRepository.swift */; };
 		6EB0FEE3235BE2F2005F23DE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB0FEE2235BE2F2005F23DE /* User.swift */; };
 		6EB0FEE7235BE561005F23DE /* LearningStepControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB0FEE6235BE561005F23DE /* LearningStepControllerTests.swift */; };
@@ -170,7 +171,6 @@
 		6EE60C4E2344370500B0322B /* PrepareFeedSceneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE60C4D2344370500B0322B /* PrepareFeedSceneTests.swift */; };
 		6EE60C502344399900B0322B /* PrepareFeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE60C4F2344399900B0322B /* PrepareFeedViewModel.swift */; };
 		6EE60C5523456DCF00B0322B /* FakePrepareFeedViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE60C5423456DCF00B0322B /* FakePrepareFeedViewModelDelegate.swift */; };
-		6EE60C572345898800B0322B /* db.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 6EE60C562345898800B0322B /* db.sqlite3 */; };
 		6EE60C5B23458DBD00B0322B /* LevelUpItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE60C5A23458DBD00B0322B /* LevelUpItem.swift */; };
 		6EE60C5F2345900900B0322B /* LevelUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE60C5D2345900900B0322B /* LevelUpViewController.swift */; };
 		6EE60C602345900900B0322B /* LevelUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EE60C5E2345900900B0322B /* LevelUpViewController.xib */; };
@@ -260,6 +260,7 @@
 		6EAB211B2361387A007186A4 /* FeedExercisesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedExercisesStore.swift; sourceTree = "<group>"; };
 		6EAB211D23613B0E007186A4 /* FakeExerciseExternalDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeExerciseExternalDataService.swift; sourceTree = "<group>"; };
 		6EAB211F236144AB007186A4 /* FakeFeedExercisesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeFeedExercisesStore.swift; sourceTree = "<group>"; };
+		6EAB212A236260CA007186A4 /* db.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = db.sqlite3; sourceTree = "<group>"; };
 		6EB0FEE0235BE1D9005F23DE /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		6EB0FEE2235BE2F2005F23DE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		6EB0FEE6235BE561005F23DE /* LearningStepControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningStepControllerTests.swift; sourceTree = "<group>"; };
@@ -357,7 +358,6 @@
 		6EE60C4D2344370500B0322B /* PrepareFeedSceneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepareFeedSceneTests.swift; sourceTree = "<group>"; };
 		6EE60C4F2344399900B0322B /* PrepareFeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepareFeedViewModel.swift; sourceTree = "<group>"; };
 		6EE60C5423456DCF00B0322B /* FakePrepareFeedViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakePrepareFeedViewModelDelegate.swift; sourceTree = "<group>"; };
-		6EE60C562345898800B0322B /* db.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = db.sqlite3; sourceTree = "<group>"; };
 		6EE60C5A23458DBD00B0322B /* LevelUpItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelUpItem.swift; sourceTree = "<group>"; };
 		6EE60C5D2345900900B0322B /* LevelUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelUpViewController.swift; sourceTree = "<group>"; };
 		6EE60C5E2345900900B0322B /* LevelUpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LevelUpViewController.xib; sourceTree = "<group>"; };
@@ -881,7 +881,7 @@
 		6EB933B32331CBA900E38B52 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
-				6EE60C562345898800B0322B /* db.sqlite3 */,
+				6EAB212A236260CA007186A4 /* db.sqlite3 */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -1334,6 +1334,7 @@
 				6EC667142324489F0048068C /* MenuViewController.xib in Resources */,
 				6E883F98233D92F2004F0D0E /* ConceptIntroViewController.xib in Resources */,
 				6EE60C602345900900B0322B /* LevelUpViewController.xib in Resources */,
+				6EAB212B236260CB007186A4 /* db.sqlite3 in Resources */,
 				6E557C1E22FB9DCC00270F07 /* Assets.xcassets in Resources */,
 				6EC6671E232451760048068C /* QuitableContainerViewController.xib in Resources */,
 				6E74FD53231C87F800730AEB /* FeedContainerViewController.xib in Resources */,
@@ -1342,7 +1343,6 @@
 				6EC66730232464B20048068C /* ConceptMapViewController.xib in Resources */,
 				6EBE4E9C230B614B0047A880 /* ExerciseViewController.xib in Resources */,
 				6EE60C4A2344347A00B0322B /* PrepareFeedViewController.xib in Resources */,
-				6EE60C572345898800B0322B /* db.sqlite3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

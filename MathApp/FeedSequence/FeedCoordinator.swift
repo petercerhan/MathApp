@@ -76,6 +76,7 @@ class FeedCoordinator: Coordinator {
         let vc = compositionRoot.composeConceptIntroScene(delegate: self, conceptIntro: conceptIntro)
         containerVC.show(viewController: vc, animation: .fadeIn)
         exerciseQueue = Queue<Exercise>()
+        exercisesStore.dispatch(action: .refresh)
     }
     
     private func showNextFeedScene(animation: TransitionAnimation) {

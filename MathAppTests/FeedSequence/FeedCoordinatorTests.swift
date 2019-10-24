@@ -14,13 +14,23 @@ import RxSwift
 class FeedCoordinatorTests: XCTestCase {
     
     func test_start_conceptIntroLearningStep_shouldShowConceptIntro() {
-        let stubLearningStep = ConceptIntroLearningStep.createWithConceptID(conceptID: 1)
         let mockContainerVC = FakeContainerViewController()
-        let coordinator = composeSUT(fakeContainerViewController: mockContainerVC, stubLearningStep: stubLearningStep)
+        let coordinator = composeSUT(fakeContainerViewController: mockContainerVC, stubLearningStep: conceptIntroLS1)
         
         coordinator.start()
         
         mockContainerVC.verifyDidShow(viewControllerType: ConceptIntroViewController.self)
+    }
+    
+    func test_conceptIntroLearningStep_shouldRefreshExercises() {
+        let mockExerciseStore = FakeFeedExercisesStore()
+        let coordinator = composeSUT(fakeExerciseStore: mockExerciseStore,
+                                     stubLearningStep: conceptIntroLS1,
+                                     stubExercises: [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3])
+        
+        coordinator.start()
+        
+        XCTAssertEqual(mockExerciseStore.refresh_callCount, 1)
     }
     
     func test_conceptIntroRequestsNext_shouldShowExerciseScene() {
@@ -39,6 +49,7 @@ class FeedCoordinatorTests: XCTestCase {
     
     func composeSUT(fakeContainerViewController: ContainerViewController? = nil,
                     fakeLearningStepStore: FakeLearningStepStore? = nil,
+                    fakeExerciseStore: FakeFeedExercisesStore? = nil,
                     stubLearningStep: LearningStep? = nil,
                     stubExercises: [Exercise]? = nil) -> FeedCoordinator {
         
@@ -47,7 +58,7 @@ class FeedCoordinatorTests: XCTestCase {
         if let stubLearningStep = stubLearningStep {
             learningStepStore.learningStep = Observable.just(.loaded(stubLearningStep))
         }
-        let exercisesStore = FakeFeedExercisesStore()
+        let exercisesStore = fakeExerciseStore ?? FakeFeedExercisesStore()
         if let stubExercises = stubExercises {
             exercisesStore.exercises = Observable.just(.loaded(stubExercises))
         }
@@ -59,6 +70,10 @@ class FeedCoordinatorTests: XCTestCase {
                                    learningStepStore: learningStepStore,
                                    exercisesStore: exercisesStore)
     }
+    
+    //MARK: - Stubs
+    
+    var conceptIntroLS1: ConceptIntroLearningStep = ConceptIntroLearningStep.createWithConceptID(conceptID: 1)
     
 }
 

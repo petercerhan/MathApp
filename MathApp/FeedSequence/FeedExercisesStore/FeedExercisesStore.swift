@@ -53,8 +53,9 @@ class FeedExercisesStoreImpl: FeedExercisesStore {
     
     private func handle_refresh() {
         exercisesSubject.onNext(.loading)
-        let exercises = exerciseExternalDataService.getNext()
+        exerciseExternalDataService.getNext()
             .subscribe(onNext: { [unowned self] exercises in
+                print("store received exercises with count \(exercises.count)")
                 self.exercisesSubject.onNext(.loaded(exercises))
             })
             .disposed(by: disposeBag)

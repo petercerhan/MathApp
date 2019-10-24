@@ -10,7 +10,7 @@ import Foundation
 import SQLite
 
 extension NewMaterialState {
-    static let table = Table("NewMaterialState")
+    static let table = Table("NewMaterialStates")
     
     static let column_id = Expression<Int64>("id")
     static let column_userID = Expression<Int64>("user_id")
@@ -18,11 +18,10 @@ extension NewMaterialState {
     static let column_focusConcept2 = Expression<Int64>("focus_concept_2")
     
     static func createFromQueryResult(_ row: Row) -> NewMaterialState {
-        let tableName = NewMaterialState.table
-        let id = Int(row[tableName[NewMaterialState.column_id]])
-        let userID = Int(row[tableName[NewMaterialState.column_userID]])
-        let focusConcept1 = Int(row[tableName[NewMaterialState.column_focusConcept1]])
-        let focusConcept2 = Int(row[tableName[NewMaterialState.column_focusConcept2]])
+        let id = Int(row[NewMaterialState.column_id])
+        let userID = Int(row[NewMaterialState.column_userID])
+        let focusConcept1 = Int(row[NewMaterialState.column_focusConcept1])
+        let focusConcept2 = Int(row[NewMaterialState.column_focusConcept2])
         
         return NewMaterialState(id: id,
                                 userID: userID,

@@ -41,8 +41,12 @@ class NewMaterialStateRepositoryImpl: NewMaterialStateRepository {
     
     func setFocus(concept1ID: Int, concept2ID: Int) {
         let query = NewMaterialState.table.filter(NewMaterialState.column_userID == Int64(1))
-        _ = try? databaseService.db.run(query.update(NewMaterialState.column_focusConcept1 <- Int64(concept1ID),
-                                                     NewMaterialState.column_focusConcept2 <- Int64(concept2ID)))
+        do {
+            try databaseService.db.run(query.update(NewMaterialState.column_focusConcept1 <- Int64(concept1ID),
+            NewMaterialState.column_focusConcept2 <- Int64(concept2ID)))
+        } catch {
+            print("error: \(error)")
+        }
     }
     
     func reset() {

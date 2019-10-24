@@ -12,13 +12,15 @@ import RxSwift
 
 class FakeFeedExercisesStore: FeedExercisesStore {
     
-    
     var exercises = Observable<LoadState<[Exercise]>>.just(.noData)
     
-    
+    var refresh_callCount = 0
     
     func dispatch(action: FeedExerciseStoreAction) {
-        
+        switch action {
+        case .refresh:
+            refresh_callCount += 1
+        }
     }
     
     
