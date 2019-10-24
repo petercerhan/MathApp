@@ -78,6 +78,9 @@
 		6EAB21122361332F007186A4 /* ExerciseExternalDataServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAB21112361332F007186A4 /* ExerciseExternalDataServiceTests.swift */; };
 		6EAB2114236133E8007186A4 /* FakeExerciseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAB2113236133E8007186A4 /* FakeExerciseController.swift */; };
 		6EAB211623613468007186A4 /* ExerciseExternalDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAB211523613468007186A4 /* ExerciseExternalDataService.swift */; };
+		6EAB2119236137C2007186A4 /* FeedExercisesStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAB2118236137C2007186A4 /* FeedExercisesStoreTests.swift */; };
+		6EAB211C2361387A007186A4 /* FeedExercisesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAB211B2361387A007186A4 /* FeedExercisesStore.swift */; };
+		6EAB211E23613B0E007186A4 /* FakeExerciseExternalDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAB211D23613B0E007186A4 /* FakeExerciseExternalDataService.swift */; };
 		6EB0FEDB235A7E9C005F23DE /* NewMaterialLevelUpStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB0FEDA235A7E9C005F23DE /* NewMaterialLevelUpStrategy.swift */; };
 		6EB0FEDD235B849A005F23DE /* NewMaterialLevelUpStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB0FEDC235B849A005F23DE /* NewMaterialLevelUpStrategy.swift */; };
 		6EB0FEE1235BE1D9005F23DE /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB0FEE0235BE1D9005F23DE /* UserRepository.swift */; };
@@ -279,6 +282,9 @@
 		6EAB21112361332F007186A4 /* ExerciseExternalDataServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseExternalDataServiceTests.swift; sourceTree = "<group>"; };
 		6EAB2113236133E8007186A4 /* FakeExerciseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeExerciseController.swift; sourceTree = "<group>"; };
 		6EAB211523613468007186A4 /* ExerciseExternalDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseExternalDataService.swift; sourceTree = "<group>"; };
+		6EAB2118236137C2007186A4 /* FeedExercisesStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedExercisesStoreTests.swift; sourceTree = "<group>"; };
+		6EAB211B2361387A007186A4 /* FeedExercisesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedExercisesStore.swift; sourceTree = "<group>"; };
+		6EAB211D23613B0E007186A4 /* FakeExerciseExternalDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeExerciseExternalDataService.swift; sourceTree = "<group>"; };
 		6EB0FEDA235A7E9C005F23DE /* NewMaterialLevelUpStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMaterialLevelUpStrategy.swift; sourceTree = "<group>"; };
 		6EB0FEDC235B849A005F23DE /* NewMaterialLevelUpStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMaterialLevelUpStrategy.swift; sourceTree = "<group>"; };
 		6EB0FEE0235BE1D9005F23DE /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
@@ -765,6 +771,7 @@
 			isa = PBXGroup;
 			children = (
 				6EAB21112361332F007186A4 /* ExerciseExternalDataServiceTests.swift */,
+				6EAB211D23613B0E007186A4 /* FakeExerciseExternalDataService.swift */,
 			);
 			path = ExerciseExternalDataService;
 			sourceTree = "<group>";
@@ -805,6 +812,22 @@
 				6EAB210E23611FF6007186A4 /* FakeExerciseStrategyFactory.swift */,
 			);
 			path = ExerciseStrategy;
+			sourceTree = "<group>";
+		};
+		6EAB211723613794007186A4 /* FeedExercisesStore */ = {
+			isa = PBXGroup;
+			children = (
+				6EAB2118236137C2007186A4 /* FeedExercisesStoreTests.swift */,
+			);
+			path = FeedExercisesStore;
+			sourceTree = "<group>";
+		};
+		6EAB211A23613865007186A4 /* FeedExercisesStore */ = {
+			isa = PBXGroup;
+			children = (
+				6EAB211B2361387A007186A4 /* FeedExercisesStore.swift */,
+			);
+			path = FeedExercisesStore;
 			sourceTree = "<group>";
 		};
 		6EB0FEDE235BE100005F23DE /* BackEnd */ = {
@@ -1004,6 +1027,7 @@
 				6EC666E72321D4DF0048068C /* ExerciseService */,
 				6E927E7C231CA74000822EBA /* ResultsStore */,
 				6E841616232B20770035F381 /* FeedPackageStore */,
+				6EAB211723613794007186A4 /* FeedExercisesStore */,
 				6E3C9EF3235E7A2100CD81C9 /* LearningStepStore */,
 				6E74FD452318B52F00730AEB /* Models */,
 				6EBE4E9D230B64240047A880 /* ExerciseScene */,
@@ -1024,6 +1048,7 @@
 				6EBE4EA0230B663F0047A880 /* Models */,
 				6E927E7F231CA80700822EBA /* ResultsStore */,
 				6E841619232B212D0035F381 /* FeedPackageStore */,
+				6EAB211A23613865007186A4 /* FeedExercisesStore */,
 				6E3C9EF8235E7C4F00CD81C9 /* LearningStepStore */,
 				6EBE4E98230B60F00047A880 /* ExerciseScene */,
 				6E883F94233D92CD004F0D0E /* ConceptIntroScene */,
@@ -1578,6 +1603,7 @@
 				6EB0FEDD235B849A005F23DE /* NewMaterialLevelUpStrategy.swift in Sources */,
 				6EAB211623613468007186A4 /* ExerciseExternalDataService.swift in Sources */,
 				6EC6670A23243B870048068C /* MenuCoordinator.swift in Sources */,
+				6EAB211C2361387A007186A4 /* FeedExercisesStore.swift in Sources */,
 				6EBD530F233AF7A70057F28A /* ChooseExerciseViewController.swift in Sources */,
 				6EAB210823611E16007186A4 /* ExerciseStrategyFactory.swift in Sources */,
 				6E1CCC62235CEB0600451CD7 /* NewMaterialState.swift in Sources */,
@@ -1668,6 +1694,8 @@
 				6EC66719232451350048068C /* FakeQuitableContainerViewModel.swift in Sources */,
 				6E3C9EEC235E726B00CD81C9 /* LearningStepExternalDataServiceTests.swift in Sources */,
 				6EBE4E91230A14A70047A880 /* FakeContainerViewController.swift in Sources */,
+				6EAB211E23613B0E007186A4 /* FakeExerciseExternalDataService.swift in Sources */,
+				6EAB2119236137C2007186A4 /* FeedExercisesStoreTests.swift in Sources */,
 				6EAB21002361185B007186A4 /* ExerciseControllerTests.swift in Sources */,
 				6EBD5315233AF9E20057F28A /* FakeChooseExerciseViewModelDelegate.swift in Sources */,
 				6E3C9EF7235E7BC200CD81C9 /* FakeLearningStepExternalDataService.swift in Sources */,
