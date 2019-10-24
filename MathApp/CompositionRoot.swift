@@ -71,7 +71,6 @@ class CompositionRoot {
                                    randomizationService: RandomizationServiceImpl(),
                                    feedPackageExternalDataService: feedPackageExternalDataService,
                                    resultsStore: resultsStore,
-                                   feedPackageStore: feedPackageStore,
                                    learningStepStore: learningStepStore,
                                    exercisesStore: exercisesStore)
     }

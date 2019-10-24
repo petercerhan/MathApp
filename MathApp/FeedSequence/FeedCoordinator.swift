@@ -18,7 +18,6 @@ class FeedCoordinator: Coordinator {
     private let randomizationService: RandomizationService
     private let feedPackageExternalDataService: FeedPackageExternalDataService
     private let resultsStore: ResultsStore
-    private let feedPackageStore: FeedPackageStore
     private let learningStepStore: LearningStepStore
     private let exercisesStore: FeedExercisesStore
     
@@ -38,7 +37,6 @@ class FeedCoordinator: Coordinator {
          randomizationService: RandomizationService,
          feedPackageExternalDataService: FeedPackageExternalDataService,
          resultsStore: ResultsStore,
-         feedPackageStore: FeedPackageStore,
          learningStepStore: LearningStepStore,
          exercisesStore: FeedExercisesStore)
     {
@@ -47,7 +45,6 @@ class FeedCoordinator: Coordinator {
         self.randomizationService = randomizationService
         self.feedPackageExternalDataService = feedPackageExternalDataService
         self.resultsStore = resultsStore
-        self.feedPackageStore = feedPackageStore
         self.learningStepStore = learningStepStore
         self.exercisesStore = exercisesStore
         
@@ -81,8 +78,6 @@ class FeedCoordinator: Coordinator {
     private func showConceptIntroScene(conceptIntro: ConceptIntro) {
         let vc = compositionRoot.composeConceptIntroScene(delegate: self, conceptIntro: conceptIntro)
         containerVC.show(viewController: vc, animation: .fadeIn)
-        
-        feedPackageStore.dispatch(action: .setConceptIntroSeen(conceptID: conceptIntro.concept.id))
         exerciseQueue = Queue<Exercise>()
     }
     
@@ -136,8 +131,8 @@ class FeedCoordinator: Coordinator {
     }
     
     private func loadNewExercises() {
-        let vc = compositionRoot.composeLoadExercisesScene(delegate: self, feedPackageStore: feedPackageStore)
-        containerVC.show(viewController: vc, animation: .none)
+//        let vc = compositionRoot.composeLoadExercisesScene(delegate: self, feedPackageStore: feedPackageStore)
+//        containerVC.show(viewController: vc, animation: .none)
     }
     
     
@@ -147,7 +142,6 @@ class FeedCoordinator: Coordinator {
     private func showLevelUpScene(levelUpItem: LevelUpItem) {
         let vc = compositionRoot.composeLevelUpScene(delegate: self, levelUpItem: levelUpItem)
         containerVC.show(viewController: vc, animation: .fadeIn)
-        feedPackageStore.dispatch(action: .setLevelUpSeen(conceptID: levelUpItem.concept.id))
         exerciseQueue = Queue<Exercise>()
     }
 

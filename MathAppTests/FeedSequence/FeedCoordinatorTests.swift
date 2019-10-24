@@ -57,7 +57,6 @@ class FeedCoordinatorTests: XCTestCase {
                                    randomizationService: RandomizationServiceImpl(),
                                    feedPackageExternalDataService: FakeFeedPackageExternalDataService(),
                                    resultsStore: FakeResultsStore(),
-                                   feedPackageStore: FakeFeedPackageStore(),
                                    learningStepStore: learningStepStore,
                                    exercisesStore: exercisesStore)
     }
