@@ -64,18 +64,6 @@ class FakeDatabaseService: DatabaseService {
         return nil
     }
     
-    //MARK: - recordResult(concept_id: correct: )
-    
-    var recordResult_callCount = 0
-    var recordResult_concept_id = [Int]()
-    var recordResult_correct = [Bool]()
-    
-    func recordResult(concept_id: Int, correct: Bool) {
-        recordResult_callCount += 1
-        recordResult_concept_id.append(concept_id)
-        recordResult_correct.append(correct)
-    }
-    
     //MARK: - reset
     
     var reset_callCount = 0

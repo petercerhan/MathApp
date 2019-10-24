@@ -26,19 +26,9 @@ extension ResultsStore where Self: ResultsStoreImpl {
 
 class ResultsStoreImpl: ResultsStore {
     
-    //MARK: - DatabaseService
-    
-    private let databaseService: DatabaseService
-    
     //MARK: - Rx
     
     private let disposeBag = DisposeBag()
-    
-    //MARK: - Initialization
-    
-    init(databaseService: DatabaseService) {
-        self.databaseService = databaseService
-    }
     
     //MARK: - ResultsStore Interface
     
@@ -52,7 +42,6 @@ class ResultsStoreImpl: ResultsStore {
     }
     
     private func handle_processResult(_ result: ExerciseResult) {
-        databaseService.recordResult(concept_id: result.conceptID, correct: result.correct)
         reevaluatePoints(result: result)
     }
     

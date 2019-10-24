@@ -42,31 +42,10 @@ class ResultsStoreTests: XCTestCase {
         XCTAssertEqual(correct, 0)
     }
     
-    func test_correctResult_shouldSendCorrectResultToExternalDataService() {
-        let mockDatabaseService = FakeDatabaseService()
-        let store = composeSUT(fakeDatabaseService: mockDatabaseService)
-        
-        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
-        
-        XCTAssertEqual(mockDatabaseService.recordResult_callCount, 1)
-        XCTAssertEqual(mockDatabaseService.recordResult_correct.last, true)
-    }
-    
-    func test_incorrectResult_shouldSendIncorrectResultToExternalDataService() {
-        let mockDatabaseService = FakeDatabaseService()
-        let store = composeSUT(fakeDatabaseService: mockDatabaseService)
-        
-        store.dispatch(action: .processResult(ExerciseResult(correct: false, conceptID: 1)))
-        
-        XCTAssertEqual(mockDatabaseService.recordResult_callCount, 1)
-        XCTAssertEqual(mockDatabaseService.recordResult_correct.last, false)
-    }
-    
     //MARK: - Compose SUT
     
     func composeSUT(fakeDatabaseService: DatabaseService? = nil) -> ResultsStore {
-        let databaseService = fakeDatabaseService ?? FakeDatabaseService()
-        return ResultsStoreImpl(databaseService: databaseService)
+        return ResultsStoreImpl()
     }
     
 }

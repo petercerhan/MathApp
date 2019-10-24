@@ -788,6 +788,7 @@
 		6EB0FEE5235BE542005F23DE /* BackEnd */ = {
 			isa = PBXGroup;
 			children = (
+				6EC6674323249CA70048068C /* DatabaseService */,
 				6EB0FF01235BF447005F23DE /* Repositories */,
 				6EB0FEF8235BEBD0005F23DE /* LearningStepController */,
 				6EAB20FE23611844007186A4 /* ExerciseController */,
@@ -1154,7 +1155,6 @@
 		6EC6673F23249B960048068C /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				6EC6674323249CA70048068C /* DatabaseService */,
 				6E841621232B233C0035F381 /* ExternalData */,
 				6E0ADF40234927DB004B4348 /* RandomizationService */,
 			);

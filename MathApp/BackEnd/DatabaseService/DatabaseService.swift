@@ -24,8 +24,6 @@ protocol DatabaseService {
     func getExercises(forConceptID conceptID: Int) -> [Exercise]
     func getExercise(id: Int) -> Exercise?
     
-    func recordResult(concept_id: Int, correct: Bool)
-    
     func getFocusConcepts() -> (Int, Int)
     
     func setUserConceptStatus(_ status: Int, forConceptID conceptID: Int)
@@ -131,25 +129,6 @@ class DatabaseServiceImpl: DatabaseService {
         }
         
         return Exercise.createFromQueryResult(exerciseRow)
-    }
-    
-    func recordResult(concept_id: Int, correct: Bool) {
-        let query = userConceptsTable.filter(UserConcept.column_conceptID == Int64(concept_id))
-        
-        guard let userConceptRow = try? db.pluck(query) else {
-            return
-        }
-        
-        let latestResultIndex = Int(userConceptRow[UserConcept.column_latest_result_index])
-        let newResultIndex = (latestResultIndex + 1) % 7
-        
-        let resultValue: Int64 = correct ? 1 : 0
-        let resultColumn = resultColumnFromIndex(newResultIndex)
-        let indexColumn = UserConcept.column_latest_result_index
-        
-        _ = try? db.run(query.update(resultColumn <- resultValue, indexColumn <- Int64(newResultIndex)))
-        
-//        printCurrentUserConceptStatus(concept_id: concept_id)
     }
     
     private func printCurrentUserConceptStatus(concept_id: Int) {

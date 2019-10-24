@@ -61,7 +61,7 @@ class CompositionRoot {
     //MARK: - Exercise sequence
     
     func composeExerciseCoordinator() -> FeedCoordinator {
-        let resultsStore = ResultsStoreImpl(databaseService: databaseService)
+        let resultsStore = ResultsStoreImpl()
         let exercisesStore = FeedExercisesStoreImpl(exerciseExternalDataService: ExerciseExternalDataServiceImpl(exerciseController: exerciseController))
         let containerVM = FeedContainerViewModel(delegate: nil, resultsStore: resultsStore)
         return FeedCoordinator(compositionRoot: self,
