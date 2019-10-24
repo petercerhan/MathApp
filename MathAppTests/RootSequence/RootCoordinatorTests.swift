@@ -63,7 +63,8 @@ class RootCoordinatorFakeCompositionRoot: CompositionRoot {
                                    feedPackageExternalDataService: FakeFeedPackageExternalDataService(),
                                    resultsStore: FakeResultsStore(),
                                    feedPackageStore: FakeFeedPackageStore(),
-                                   learningStepStore: FakeLearningStepStore())
+                                   learningStepStore: FakeLearningStepStore(),
+                                   exercisesStore: FakeFeedExercisesStore())
     }
     
     override func composePrepareFeedScene(delegate: PrepareFeedViewModelDelegate, feedPackageStore: FeedPackageStore) -> UIViewController {

@@ -14,23 +14,43 @@ import RxSwift
 class FeedCoordinatorTests: XCTestCase {
     
     func test_start_conceptIntroLearningStep_shouldShowConceptIntro() {
-        let stubLearningStepStore = FakeLearningStepStore()
-        stubLearningStepStore.learningStep = Observable.just(.loaded(ConceptIntroLearningStep.createWithConceptID(conceptID: 1)))
+        let stubLearningStep = ConceptIntroLearningStep.createWithConceptID(conceptID: 1)
         let mockContainerVC = FakeContainerViewController()
-        let coordinator = composeSUT(fakeContainerViewController: mockContainerVC, fakeLearningStepStore: stubLearningStepStore)
+        let coordinator = composeSUT(fakeContainerViewController: mockContainerVC, stubLearningStep: stubLearningStep)
         
         coordinator.start()
         
         mockContainerVC.verifyDidShow(viewControllerType: ConceptIntroViewController.self)
     }
     
+    func test_conceptIntroRequestsNext_shouldShowExerciseScene() {
+        let stubLearningStep = ConceptIntroLearningStep.createWithConceptID(conceptID: 1)
+        let stubExercises = [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3]
+        let mockContainerVC = FakeContainerViewController()
+        let coordinator = composeSUT(fakeContainerViewController: mockContainerVC, stubLearningStep: stubLearningStep, stubExercises: stubExercises)
+        
+        coordinator.start()
+        coordinator.next(TestConceptIntroViewModel())
+        
+        mockContainerVC.verifyDidShow(viewControllerType: ExerciseViewController.self)
+    }
+    
     //MARK: - SUT Composition
     
     func composeSUT(fakeContainerViewController: ContainerViewController? = nil,
-                    fakeLearningStepStore: FakeLearningStepStore? = nil) -> FeedCoordinator {
+                    fakeLearningStepStore: FakeLearningStepStore? = nil,
+                    stubLearningStep: LearningStep? = nil,
+                    stubExercises: [Exercise]? = nil) -> FeedCoordinator {
         
         let containerVC = fakeContainerViewController ?? FakeContainerViewController()
         let learningStepStore = fakeLearningStepStore ?? FakeLearningStepStore()
+        if let stubLearningStep = stubLearningStep {
+            learningStepStore.learningStep = Observable.just(.loaded(stubLearningStep))
+        }
+        let exercisesStore = FakeFeedExercisesStore()
+        if let stubExercises = stubExercises {
+            exercisesStore.exercises = Observable.just(.loaded(stubExercises))
+        }
         
         return FeedCoordinator(compositionRoot: CompositionRoot(),
                                    containerVC: containerVC,
@@ -38,7 +58,8 @@ class FeedCoordinatorTests: XCTestCase {
                                    feedPackageExternalDataService: FakeFeedPackageExternalDataService(),
                                    resultsStore: FakeResultsStore(),
                                    feedPackageStore: FakeFeedPackageStore(),
-                                   learningStepStore: learningStepStore)
+                                   learningStepStore: learningStepStore,
+                                   exercisesStore: exercisesStore)
     }
     
 }

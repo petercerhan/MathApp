@@ -22,6 +22,19 @@ class CompositionRoot {
                                                                                                        userRepository: userRepository))
     }()
     
+    private(set) lazy var exerciseController: ExerciseController = {
+        let userRepository = UserRepositoryImpl(databaseService: databaseService)
+        let userConceptRepository = UserConceptRepositoryImpl(databaseService: databaseService)
+        let newMaterialStateRepository = NewMaterialStateRepositoryImpl(databaseService: databaseService)
+        let exerciseRepository = ExerciseRepositoryImpl(databaseService: databaseService)
+        let exerciseSetCalculator = ExerciseSetCalculatorImpl(randomizationService: RandomizationServiceImpl(),
+                                                              userConceptRepository: userConceptRepository,
+                                                              exerciseRepository: exerciseRepository)
+        
+        let exerciseStrategyFactory = ExerciseStrategyFactoryImpl(exerciseSetCalculator: exerciseSetCalculator, newMaterialStateRepository: newMaterialStateRepository)
+        return ExerciseControllerImpl(userRepository: userRepository, exerciseStrategyFactory: exerciseStrategyFactory)
+    }()
+    
     private(set) lazy var learningStepStore: LearningStepStore = {
         let learningStepEDS = LearningStepExternalDataServiceImpl(learningStepController: learningStepController)
         return LearningStepStoreImpl(learningStepExternalDataService: learningStepEDS)
@@ -51,6 +64,7 @@ class CompositionRoot {
     
     func composeExerciseCoordinator(feedPackageStore: FeedPackageStore) -> FeedCoordinator {
         let resultsStore = ResultsStoreImpl(databaseService: databaseService)
+        let exercisesStore = FeedExercisesStoreImpl(exerciseExternalDataService: ExerciseExternalDataServiceImpl(exerciseController: exerciseController))
         let containerVM = FeedContainerViewModel(delegate: nil, resultsStore: resultsStore)
         return FeedCoordinator(compositionRoot: self,
                                    containerVC: FeedContainerViewController(viewModel: containerVM),
@@ -58,7 +72,8 @@ class CompositionRoot {
                                    feedPackageExternalDataService: feedPackageExternalDataService,
                                    resultsStore: resultsStore,
                                    feedPackageStore: feedPackageStore,
-                                   learningStepStore: learningStepStore)
+                                   learningStepStore: learningStepStore,
+                                   exercisesStore: exercisesStore)
     }
     
     func composeExerciseScene(delegate: ExerciseViewModelDelegate,

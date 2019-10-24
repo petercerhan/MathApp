@@ -20,6 +20,7 @@ class FeedCoordinator: Coordinator {
     private let resultsStore: ResultsStore
     private let feedPackageStore: FeedPackageStore
     private let learningStepStore: LearningStepStore
+    private let exercisesStore: FeedExercisesStore
     
     //MARK: - State
     
@@ -38,7 +39,8 @@ class FeedCoordinator: Coordinator {
          feedPackageExternalDataService: FeedPackageExternalDataService,
          resultsStore: ResultsStore,
          feedPackageStore: FeedPackageStore,
-         learningStepStore: LearningStepStore)
+         learningStepStore: LearningStepStore,
+         exercisesStore: FeedExercisesStore)
     {
         self.compositionRoot = compositionRoot
         self.containerVC = containerVC
@@ -47,6 +49,7 @@ class FeedCoordinator: Coordinator {
         self.resultsStore = resultsStore
         self.feedPackageStore = feedPackageStore
         self.learningStepStore = learningStepStore
+        self.exercisesStore = exercisesStore
         
         if let feedContainer = containerVC as? FeedContainerViewController {
             feedContainer.viewModel.setDelegate(self)
@@ -112,7 +115,7 @@ class FeedCoordinator: Coordinator {
     }
     
     private func updateExerciseQueue(animation: TransitionAnimation) {
-        guard let exercises = latestValue(of: feedPackageStore.feedPackage, disposeBag: disposeBag)?.data?.exercises,
+        guard let exercises = latestValue(of: exercisesStore.exercises, disposeBag: disposeBag)?.data,
             exercises.count > 0
         else {
             loadNewExercises()
