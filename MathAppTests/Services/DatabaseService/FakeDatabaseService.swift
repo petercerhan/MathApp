@@ -90,19 +90,6 @@ class FakeDatabaseService: DatabaseService {
         return getFocusConcepts_stub
     }
     
-    //MARK: - getEnrichedUserConcept(conceptID: )
-    
-    var getEnrichedUserConcept_stub: EnrichedUserConcept?
-    func getEnrichedUserConcept(conceptID: Int) -> EnrichedUserConcept? {
-        if let stub = getEnrichedUserConcept_stub {
-            return stub
-        } else if conceptID == 0 {
-            return nil
-        } else {
-            return EnrichedUserConcept.createStub(conceptID: conceptID)
-        }
-    }
-    
     //MARK: - setUserConceptStatus(_ : forID: )
     
     var setUserConceptStatus_callCount = 0

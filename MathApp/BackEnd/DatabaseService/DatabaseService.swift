@@ -27,7 +27,6 @@ protocol DatabaseService {
     func recordResult(concept_id: Int, correct: Bool)
     
     func getFocusConcepts() -> (Int, Int)
-    func getEnrichedUserConcept(conceptID: Int) -> EnrichedUserConcept?
     
     func setUserConceptStatus(_ status: Int, forConceptID conceptID: Int)
 
@@ -82,24 +81,24 @@ class DatabaseServiceImpl: DatabaseService {
     }
     
     func incrementStrengthForUserConcept(conceptID: Int) {
-        let userConceptQuery = userConceptsTable.filter(UserConcept.column_conceptID == Int64(conceptID))
-        guard let userConceptRow = try? db.pluck(userConceptQuery) else {
-            return
-        }
-        let priorStrength = userConceptRow[UserConcept.column_strength]
-        let newStrength = min(priorStrength + 1, 3)
-        let completeStatusCode = Int64(EnrichedUserConcept.Status.introductionComplete.rawValue)
-        
-        _ = try? db.run(userConceptQuery.update(UserConcept.column_strength <- newStrength,
-                                                UserConcept.column_status <- completeStatusCode,
-                                                UserConcept.column_exercise_result_0 <- 0,
-                                                UserConcept.column_exercise_result_1 <- 0,
-                                                UserConcept.column_exercise_result_2 <- 0,
-                                                UserConcept.column_exercise_result_3 <- 0,
-                                                UserConcept.column_exercise_result_4 <- 0,
-                                                UserConcept.column_exercise_result_5 <- 0,
-                                                UserConcept.column_exercise_result_6 <- 0,
-                                                UserConcept.column_latest_result_index <- 6))
+//        let userConceptQuery = userConceptsTable.filter(UserConcept.column_conceptID == Int64(conceptID))
+//        guard let userConceptRow = try? db.pluck(userConceptQuery) else {
+//            return
+//        }
+//        let priorStrength = userConceptRow[UserConcept.column_strength]
+//        let newStrength = min(priorStrength + 1, 3)
+//        let completeStatusCode = Int64(EnrichedUserConcept.Status.introductionComplete.rawValue)
+//        
+//        _ = try? db.run(userConceptQuery.update(UserConcept.column_strength <- newStrength,
+//                                                UserConcept.column_status <- completeStatusCode,
+//                                                UserConcept.column_exercise_result_0 <- 0,
+//                                                UserConcept.column_exercise_result_1 <- 0,
+//                                                UserConcept.column_exercise_result_2 <- 0,
+//                                                UserConcept.column_exercise_result_3 <- 0,
+//                                                UserConcept.column_exercise_result_4 <- 0,
+//                                                UserConcept.column_exercise_result_5 <- 0,
+//                                                UserConcept.column_exercise_result_6 <- 0,
+//                                                UserConcept.column_latest_result_index <- 6))
     }
     
     func decrementStrengthForUserConcept(conceptID: Int) {
@@ -202,30 +201,6 @@ class DatabaseServiceImpl: DatabaseService {
         }
         
         return (0, 0)
-    }
-    
-    func getEnrichedUserConcept(conceptID: Int) -> EnrichedUserConcept? {
-        let query = conceptsTable.join(userConceptsTable, on: UserConcept.column_conceptID == conceptsTable[Concept.column_id])
-                                .filter(UserConcept.column_conceptID == Int64(conceptID))
-        
-        guard let userConceptRow = try? db.pluck(query),
-            let userConcept = UserConcept.createFromQueryResult(userConceptRow)
-        else {
-            return nil
-        }
-
-        let results = [Int(userConceptRow[UserConcept.column_exercise_result_0]),
-                       Int(userConceptRow[UserConcept.column_exercise_result_1]),
-                       Int(userConceptRow[UserConcept.column_exercise_result_2]),
-                       Int(userConceptRow[UserConcept.column_exercise_result_3]),
-                       Int(userConceptRow[UserConcept.column_exercise_result_4]),
-                       Int(userConceptRow[UserConcept.column_exercise_result_5]),
-                       Int(userConceptRow[UserConcept.column_exercise_result_6]) ]
-
-        let score = results.reduce(0) { $0 + $1 }
-        let status = Int(userConceptRow[UserConcept.column_status])
-
-        return EnrichedUserConcept(userConcept: userConcept, statusCode: status, currentScore: score)
     }
     
     func setUserConceptStatus(_ status: Int, forConceptID conceptID: Int) {

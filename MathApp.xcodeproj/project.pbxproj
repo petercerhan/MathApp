@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		6E00E487233FEAD500BFF274 /* LoadState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E00E486233FEAD500BFF274 /* LoadState.swift */; };
 		6E00E489233FF17800BFF274 /* FeedPackage+stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E00E488233FF17800BFF274 /* FeedPackage+stubs.swift */; };
-		6E01F07C234D675900371D0C /* EnrichedUserConcept+stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E01F07B234D675900371D0C /* EnrichedUserConcept+stubs.swift */; };
 		6E01F084234ECD0600371D0C /* TestingAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E01F083234ECD0600371D0C /* TestingAppDelegate.swift */; };
 		6E01F086234ECD9B00371D0C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E01F085234ECD9B00371D0C /* main.swift */; };
 		6E0ADF42234927F1004B4348 /* FakeRandomizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0ADF41234927F1004B4348 /* FakeRandomizationService.swift */; };
@@ -193,7 +192,6 @@
 		5D09B98DEB05D4438C6DF54D /* Pods-MathAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MathAppTests.debug.xcconfig"; path = "Target Support Files/Pods-MathAppTests/Pods-MathAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6E00E486233FEAD500BFF274 /* LoadState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadState.swift; sourceTree = "<group>"; };
 		6E00E488233FF17800BFF274 /* FeedPackage+stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedPackage+stubs.swift"; sourceTree = "<group>"; };
-		6E01F07B234D675900371D0C /* EnrichedUserConcept+stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EnrichedUserConcept+stubs.swift"; sourceTree = "<group>"; };
 		6E01F083234ECD0600371D0C /* TestingAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingAppDelegate.swift; sourceTree = "<group>"; };
 		6E01F085234ECD9B00371D0C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		6E0ADF41234927F1004B4348 /* FakeRandomizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeRandomizationService.swift; sourceTree = "<group>"; };
@@ -643,8 +641,6 @@
 			children = (
 				6EAB20FD236117F4007186A4 /* ExerciseExternalDataService */,
 				6E3C9EEA235E724200CD81C9 /* LearningStepExternalDataService */,
-				6E0ADF47234A98C7004B4348 /* FakeExerciseSetCalculator.swift */,
-				6E01F07B234D675900371D0C /* EnrichedUserConcept+stubs.swift */,
 			);
 			path = ExternalData;
 			sourceTree = "<group>";
@@ -707,6 +703,7 @@
 			children = (
 				6EAB20FF2361185B007186A4 /* ExerciseControllerTests.swift */,
 				6EAB2113236133E8007186A4 /* FakeExerciseController.swift */,
+				6E0ADF47234A98C7004B4348 /* FakeExerciseSetCalculator.swift */,
 				6EAB210D23611FD7007186A4 /* ExerciseStrategy */,
 			);
 			path = ExerciseController;
@@ -1596,7 +1593,6 @@
 				6E74FD4E231C86FC00730AEB /* FeedContainerViewControllerTests.swift in Sources */,
 				6EB0FEFA235BEBF7005F23DE /* NewMaterialLearningStepStrategyTests.swift in Sources */,
 				6EE1AC41235FC410008546DB /* Concept+stubs.swift in Sources */,
-				6E01F07C234D675900371D0C /* EnrichedUserConcept+stubs.swift in Sources */,
 				6EBC1BCA2346D41200654285 /* LevelUpItem+stubs.swift in Sources */,
 				6EC66729232462280048068C /* FakeMenuViewModelDelegate.swift in Sources */,
 				6EC6672423245D730048068C /* TestMenuCoordinator.swift in Sources */,
