@@ -56,7 +56,7 @@ class NewMaterialStandardCalculator: FeedPackageCalculator {
         databaseService.setUserConceptStatus(EnrichedUserConcept.Status.introductionInProgress.rawValue, forConceptID: introducedConceptID)
         databaseService.setFocusConcepts(concept1: introducedConceptID, concept2: 0)
         
-        let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID: introducedConceptID, strength: 0)
+        let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID: introducedConceptID)
         return FeedPackage(feedPackageType: .exercises, exercises: exercises, transitionItem: nil)
     }
     
@@ -101,14 +101,14 @@ class NewMaterialStandardCalculator: FeedPackageCalculator {
         else {
             print("exercise for single concept: \(levelUpConceptID)")
 
-            let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID: levelUpConceptID, strength: newStrength)
+            let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID: levelUpConceptID)
             return FeedPackage(feedPackageType: .exercises, exercises: exercises, transitionItem: nil)
         }
     }
     
     private func conceptIntroPackage(forConcept concept: Concept) -> FeedPackage {
         let conceptIntro = ConceptIntro(concept: concept)
-        let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID: concept.id, strength: 0)
+        let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID: concept.id)
         let conceptIntroPackage = FeedPackage(feedPackageType: .conceptIntro, exercises: exercises, transitionItem: conceptIntro)
         return conceptIntroPackage
     }

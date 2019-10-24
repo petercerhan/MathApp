@@ -11,6 +11,7 @@ import SQLite
 
 protocol UserConceptRepository {
     func list() -> [UserConcept]
+    func get(conceptID: Int) -> UserConcept?
 }
 
 class UserConceptRepositoryImpl: UserConceptRepository {
@@ -33,6 +34,17 @@ class UserConceptRepositoryImpl: UserConceptRepository {
             return UserConcept.createFromQueryResult(row)
         }
         return result ?? [UserConcept]()
+    }
+    
+    func get(conceptID: Int) -> UserConcept? {
+        let query = UserConcept.table.join(Concept.table, on: Concept.table[Concept.column_id] == UserConcept.table[UserConcept.column_conceptID])
+            .filter(Concept.table[Concept.column_id] == Int64(conceptID))
+        
+        guard let userConceptRow = try? databaseService.db.pluck(query) else {
+            return nil
+        }
+        
+        return UserConcept.createFromQueryResult(userConceptRow)
     }
     
 }

@@ -15,7 +15,8 @@ class FakeExerciseStrategyFactory: ExerciseStrategyFactory {
 
     func createStrategy(learningStrategy: LearningStrategy) -> ExerciseStrategy {
         createStrategy_callCount += 1
-        return NewMaterialExerciseStrategy()
+        return NewMaterialExerciseStrategy(exerciseSetCalculator: FakeExerciseSetCalculator(),
+                                           newMaterialStateRepository: FakeNewMaterialStateRepository())
     }
     
     

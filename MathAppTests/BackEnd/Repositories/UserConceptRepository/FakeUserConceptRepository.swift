@@ -16,4 +16,10 @@ class FakeUserConceptRepository: UserConceptRepository {
     func list() -> [UserConcept] {
         return list_stubUserConcepts
     }
+    
+    
+    func get(conceptID: Int) -> UserConcept? {
+        return nil
+    }
+    
 }

@@ -66,7 +66,7 @@ class NewMaterialTwoFocusStrategy {
     }
     
     private func levelUpPackage(concept: Concept, strength: Int) -> FeedPackage {
-        let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID: concept.id, strength: strength)
+        let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID: concept.id)
         let levelUpItem = LevelUpItem(concept: concept, previousLevel: strength, newLevel: strength + 1)
         return FeedPackage(feedPackageType: .levelUp, exercises: exercises, transitionItem: levelUpItem)
     }

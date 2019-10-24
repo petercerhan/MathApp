@@ -52,14 +52,14 @@ class NewMaterialOneFocusStrategy {
             
             //should actually be exercises for previous concept, (if none, no exercises (will this work?))
             
-            let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID: concept.id, strength: strength)
+            let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID: concept.id)
             let feedPackage = FeedPackage(feedPackageType: .conceptIntro, exercises: exercises, transitionItem: conceptIntro)
             return feedPackage
         }
         else if enrichedUserConcept.currentScore >= 5 {
             print("level up for concept \(concept.id)")
             
-            let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID: concept.id, strength: strength)
+            let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID: concept.id)
             let levelUpItem = LevelUpItem(concept: concept, previousLevel: strength, newLevel: strength + 1)
             let feedPackage = FeedPackage(feedPackageType: .levelUp, exercises: exercises, transitionItem: levelUpItem)
             return feedPackage
@@ -67,7 +67,7 @@ class NewMaterialOneFocusStrategy {
         else {
             print("single concept exercises for concept \(concept.id)")
             
-            let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID: concept.id, strength: strength)
+            let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID: concept.id)
             let feedPackage = FeedPackage(feedPackageType: .exercises, exercises: exercises, transitionItem: nil)
             return feedPackage
         }
@@ -79,11 +79,11 @@ class NewMaterialOneFocusStrategy {
         
         print("single concept exercises for concept \(concept.id)")
         if enrichedUserConcept.currentScore < 5 {
-            let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID: concept.id, strength: strength)
+            let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID: concept.id)
             let feedPackage = FeedPackage(feedPackageType: .exercises, exercises: exercises, transitionItem: nil)
             return feedPackage
         } else {
-            let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID: concept.id, strength: strength)
+            let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID: concept.id)
             let levelUpItem = LevelUpItem(concept: concept, previousLevel: strength, newLevel: strength + 1)
             let feedPackage = FeedPackage(feedPackageType: .levelUp, exercises: exercises, transitionItem: levelUpItem)
             return feedPackage

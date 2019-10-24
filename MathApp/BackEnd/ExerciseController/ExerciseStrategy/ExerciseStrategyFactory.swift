@@ -14,10 +14,22 @@ protocol ExerciseStrategyFactory {
 
 class ExerciseStrategyFactoryImpl: ExerciseStrategyFactory {
     
+    //MARK: - Dependencies
+    
+    private let exerciseSetCalculator: ExerciseSetCalculator
+    private let newMaterialStateRepository: NewMaterialStateRepository
+    
+    //MARK: - Initiation
+    
+    init(exerciseSetCalculator: ExerciseSetCalculator, newMaterialStateRepository: NewMaterialStateRepository) {
+        self.exerciseSetCalculator = exerciseSetCalculator
+        self.newMaterialStateRepository = newMaterialStateRepository
+    }
+    
     //MARK: - ExerciseStrategyFactory Interface
     
     func createStrategy(learningStrategy: LearningStrategy) -> ExerciseStrategy {
-        return NewMaterialExerciseStrategy()
+        return NewMaterialExerciseStrategy(exerciseSetCalculator: exerciseSetCalculator, newMaterialStateRepository: newMaterialStateRepository)
     }
     
 }

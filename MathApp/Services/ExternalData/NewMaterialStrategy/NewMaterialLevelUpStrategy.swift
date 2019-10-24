@@ -76,7 +76,7 @@ class NewMaterialLevelUpStrategy {
     
     private func assembleNextConceptIntroPackage(userConcept: EnrichedUserConcept) -> FeedPackage {
         let conceptIntro = ConceptIntro(concept: userConcept.userConcept.concept)
-        let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID: userConcept.userConcept.concept.id, strength: 0)
+        let exercises = exerciseSetCalculator.getExercisesForConcept(conceptID: userConcept.userConcept.concept.id)
         let package = FeedPackage(feedPackageType: .conceptIntro, exercises: exercises, transitionItem: conceptIntro)
         return package
     }

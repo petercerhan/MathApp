@@ -9,8 +9,36 @@
 import Foundation
 
 class NewMaterialExerciseStrategy: ExerciseStrategy {
+
+    //MARK: - Dependencies
     
+    let exerciseSetCalculator: ExerciseSetCalculator
+    let newMaterialStateRepository: NewMaterialStateRepository
     
+    //MARK: - Initialization
+    
+    init(exerciseSetCalculator: ExerciseSetCalculator,
+         newMaterialStateRepository: NewMaterialStateRepository)
+    {
+        self.exerciseSetCalculator = exerciseSetCalculator
+        self.newMaterialStateRepository = newMaterialStateRepository
+    }
+    
+    //MARK: - NewMaterialExerciseStrategy Interface
+    
+    func getExercises() -> [Exercise] {
+        //pull focusses
+        //invoke calculator
+        let newMaterialState = newMaterialStateRepository.get()
+        let concept1 = newMaterialState.focusConcept1ID
+        let concept2 = newMaterialState.focusConcept2ID
+        
+        if concept2 == 0 {
+            return exerciseSetCalculator.getExercisesForConcept(conceptID: concept1)
+        } else {
+            return exerciseSetCalculator.getExercisesTwoConcepts(concept1_id: concept1, concept2_id: concept2)
+        }
+    }
     
     
 }

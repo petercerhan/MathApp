@@ -9,5 +9,5 @@
 import Foundation
 
 protocol ExerciseStrategy {
-    
+    func getExercises() -> [Exercise]
 }
