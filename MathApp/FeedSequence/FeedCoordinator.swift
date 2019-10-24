@@ -16,7 +16,6 @@ class FeedCoordinator: Coordinator {
     private let compositionRoot: CompositionRoot
     private let containerVC: ContainerViewController
     private let randomizationService: RandomizationService
-    private let feedPackageExternalDataService: FeedPackageExternalDataService
     private let resultsStore: ResultsStore
     private let learningStepStore: LearningStepStore
     private let exercisesStore: FeedExercisesStore
@@ -35,7 +34,6 @@ class FeedCoordinator: Coordinator {
     init(compositionRoot: CompositionRoot,
          containerVC: ContainerViewController,
          randomizationService: RandomizationService,
-         feedPackageExternalDataService: FeedPackageExternalDataService,
          resultsStore: ResultsStore,
          learningStepStore: LearningStepStore,
          exercisesStore: FeedExercisesStore)
@@ -43,7 +41,6 @@ class FeedCoordinator: Coordinator {
         self.compositionRoot = compositionRoot
         self.containerVC = containerVC
         self.randomizationService = randomizationService
-        self.feedPackageExternalDataService = feedPackageExternalDataService
         self.resultsStore = resultsStore
         self.learningStepStore = learningStepStore
         self.exercisesStore = exercisesStore
@@ -188,13 +185,13 @@ extension FeedCoordinator: MenuCoordinatorDelegate {
     }
     
     func loadExercise(_ menuCoordinator: MenuCoordinator, withID id: Int) {
-        feedPackageExternalDataService.getExercise(id: id)
-            .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [unowned self] exercise in
-                self.containerVC.dismissModal()
-                self.showExerciseScene(exercise, animation: .fadeIn)
-            })
-            .disposed(by: disposeBag)
+//        feedPackageExternalDataService.getExercise(id: id)
+//            .observeOn(MainScheduler.instance)
+//            .subscribe(onNext: { [unowned self] exercise in
+//                self.containerVC.dismissModal()
+//                self.showExerciseScene(exercise, animation: .fadeIn)
+//            })
+//            .disposed(by: disposeBag)
     }
 }
 

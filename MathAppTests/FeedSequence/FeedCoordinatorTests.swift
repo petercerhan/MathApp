@@ -55,7 +55,6 @@ class FeedCoordinatorTests: XCTestCase {
         return FeedCoordinator(compositionRoot: CompositionRoot(),
                                    containerVC: containerVC,
                                    randomizationService: RandomizationServiceImpl(),
-                                   feedPackageExternalDataService: FakeFeedPackageExternalDataService(),
                                    resultsStore: FakeResultsStore(),
                                    learningStepStore: learningStepStore,
                                    exercisesStore: exercisesStore)
@@ -86,7 +85,7 @@ class TestFeedContainerViewModel: FeedContainerViewModel {
 
 class TestLoadExercisesViewModel: LoadExercisesViewModel {
     init() {
-        super.init(delegate: FakeLoadExercisesViewModelDelegate(), feedPackageStore: FakeFeedPackageStore())
+        super.init(delegate: FakeLoadExercisesViewModelDelegate())
     }
 }
 
@@ -103,8 +102,8 @@ class TestLevelUpViewModel: LevelUpViewModel {
 }
 
 class CompositionRoot_deadLoadScene: CompositionRoot {
-    override func composeLoadExercisesScene(delegate: LoadExercisesViewModelDelegate, feedPackageStore: FeedPackageStore) -> UIViewController {
-        let vm = LoadExercisesViewModel(delegate: FakeLoadExercisesViewModelDelegate(), feedPackageStore: feedPackageStore)
+    override func composeLoadExercisesScene(delegate: LoadExercisesViewModelDelegate) -> UIViewController {
+        let vm = LoadExercisesViewModel(delegate: FakeLoadExercisesViewModelDelegate())
         return LoadExercisesViewController(viewModel: vm)
     }
 }

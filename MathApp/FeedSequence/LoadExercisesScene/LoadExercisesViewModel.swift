@@ -18,7 +18,6 @@ class LoadExercisesViewModel {
     //MARK: - Dependencies
     
     private weak var delegate: LoadExercisesViewModelDelegate?
-    private let feedPackageStore: FeedPackageStore
     
     //MARK: - Rx
     
@@ -26,23 +25,22 @@ class LoadExercisesViewModel {
     
     //MARK: - Initialization
     
-    init(delegate: LoadExercisesViewModelDelegate, feedPackageStore: FeedPackageStore) {
+    init(delegate: LoadExercisesViewModelDelegate) {
         self.delegate = delegate
-        self.feedPackageStore = feedPackageStore
         
         bindExercisesUpdate()
-        feedPackageStore.dispatch(action: .updateFeedPackage)
+//        feedPackageStore.dispatch(action: .updateFeedPackage)
     }
     
     private func bindExercisesUpdate() {
-        feedPackageStore.feedPackage
-            .compactMap { $0.data }
-            .take(1)
-            .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [unowned self] _ in
-                self.delegate?.next(self)
-            })
-            .disposed(by: disposeBag)
+//        feedPackageStore.feedPackage
+//            .compactMap { $0.data }
+//            .take(1)
+//            .observeOn(MainScheduler.instance)
+//            .subscribe(onNext: { [unowned self] _ in
+//                self.delegate?.next(self)
+//            })
+//            .disposed(by: disposeBag)
     }
     
 }

@@ -44,32 +44,29 @@ class CompositionRoot {
     //MARK: - Application Base
     
     func composeRootCoordinator() -> Coordinator {
-        let feedPackageStore = FeedPackageStoreImpl(feedPackageExternalDataService: feedPackageExternalDataService)
         return RootCoordinator(compositionRoot: self,
                                containerVC: ContainerViewController(),
-                               databaseService: databaseService,
-                               feedPackageStore: feedPackageStore)
+                               databaseService: databaseService)
     }
     
     func composeWindow() -> UIWindow {
         return UIWindow(frame: UIScreen.main.bounds)
     }
     
-    func composePrepareFeedScene(delegate: PrepareFeedViewModelDelegate, feedPackageStore: FeedPackageStore) -> UIViewController {
+    func composePrepareFeedScene(delegate: PrepareFeedViewModelDelegate) -> UIViewController {
         let vm = PrepareFeedViewModel(delegate: delegate, learningStepStore: learningStepStore)
         return PrepareFeedViewController(viewModel: vm)
     }
     
     //MARK: - Exercise sequence
     
-    func composeExerciseCoordinator(feedPackageStore: FeedPackageStore) -> FeedCoordinator {
+    func composeExerciseCoordinator() -> FeedCoordinator {
         let resultsStore = ResultsStoreImpl(databaseService: databaseService)
         let exercisesStore = FeedExercisesStoreImpl(exerciseExternalDataService: ExerciseExternalDataServiceImpl(exerciseController: exerciseController))
         let containerVM = FeedContainerViewModel(delegate: nil, resultsStore: resultsStore)
         return FeedCoordinator(compositionRoot: self,
                                    containerVC: FeedContainerViewController(viewModel: containerVM),
                                    randomizationService: RandomizationServiceImpl(),
-                                   feedPackageExternalDataService: feedPackageExternalDataService,
                                    resultsStore: resultsStore,
                                    learningStepStore: learningStepStore,
                                    exercisesStore: exercisesStore)
@@ -101,8 +98,8 @@ class CompositionRoot {
         return InfoViewController(viewModel: vm)
     }
     
-    func composeLoadExercisesScene(delegate: LoadExercisesViewModelDelegate, feedPackageStore: FeedPackageStore) -> UIViewController {
-        let vm = LoadExercisesViewModel(delegate: delegate, feedPackageStore: feedPackageStore)
+    func composeLoadExercisesScene(delegate: LoadExercisesViewModelDelegate) -> UIViewController {
+        let vm = LoadExercisesViewModel(delegate: delegate)
         return LoadExercisesViewController(viewModel: vm)
     }
     
@@ -135,19 +132,19 @@ class CompositionRoot {
         DatabaseServiceImpl()
     }()
     
-    private lazy var feedPackageExternalDataService: FeedPackageExternalDataService = {
-        let userConceptRepository = UserConceptRepositoryImpl(databaseService: databaseService)
-        let exerciseRepository = ExerciseRepositoryImpl(databaseService: databaseService)
-        let exerciseSetCalculator = ExerciseSetCalculatorImpl(randomizationService: RandomizationServiceImpl(),
-                                                              userConceptRepository: userConceptRepository,
-                                                              exerciseRepository: exerciseRepository)
-        let feedPackageCalculator = NewMaterialStandardCalculator(databaseService: databaseService, exerciseSetCalculator: exerciseSetCalculator)
-        
-        let feedPackageAPIRouter = FeedPackageAPIRouter(feedPackageCalculator: feedPackageCalculator, databaseService: databaseService)
-        
-        return FeedPackageExternalDataServiceImpl(feedPackageAPIRouter: feedPackageAPIRouter,
-                                                   randomizationService: RandomizationServiceImpl())
-    }()
+//    private lazy var feedPackageExternalDataService: FeedPackageExternalDataService = {
+//        let userConceptRepository = UserConceptRepositoryImpl(databaseService: databaseService)
+//        let exerciseRepository = ExerciseRepositoryImpl(databaseService: databaseService)
+//        let exerciseSetCalculator = ExerciseSetCalculatorImpl(randomizationService: RandomizationServiceImpl(),
+//                                                              userConceptRepository: userConceptRepository,
+//                                                              exerciseRepository: exerciseRepository)
+//        let feedPackageCalculator = NewMaterialStandardCalculator(databaseService: databaseService, exerciseSetCalculator: exerciseSetCalculator)
+//        
+//        let feedPackageAPIRouter = FeedPackageAPIRouter(feedPackageCalculator: feedPackageCalculator, databaseService: databaseService)
+//        
+//        return FeedPackageExternalDataServiceImpl(feedPackageAPIRouter: feedPackageAPIRouter,
+//                                                   randomizationService: RandomizationServiceImpl())
+//    }()
     
 }
 

@@ -10,15 +10,11 @@
 		6E00E487233FEAD500BFF274 /* LoadState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E00E486233FEAD500BFF274 /* LoadState.swift */; };
 		6E00E489233FF17800BFF274 /* FeedPackage+stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E00E488233FF17800BFF274 /* FeedPackage+stubs.swift */; };
 		6E01F07C234D675900371D0C /* EnrichedUserConcept+stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E01F07B234D675900371D0C /* EnrichedUserConcept+stubs.swift */; };
-		6E01F07E234D6BF800371D0C /* NewMaterialOneFocusStrategyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E01F07D234D6BF800371D0C /* NewMaterialOneFocusStrategyTests.swift */; };
 		6E01F084234ECD0600371D0C /* TestingAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E01F083234ECD0600371D0C /* TestingAppDelegate.swift */; };
 		6E01F086234ECD9B00371D0C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E01F085234ECD9B00371D0C /* main.swift */; };
-		6E0ADF3F23492312004B4348 /* FeedPackageExternalDataServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0ADF3E23492312004B4348 /* FeedPackageExternalDataServiceTests.swift */; };
 		6E0ADF42234927F1004B4348 /* FakeRandomizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0ADF41234927F1004B4348 /* FakeRandomizationService.swift */; };
-		6E0ADF4423492B2A004B4348 /* FeedPackageCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0ADF4323492B2A004B4348 /* FeedPackageCalculator.swift */; };
 		6E0ADF46234A9422004B4348 /* ExerciseSetCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0ADF45234A9422004B4348 /* ExerciseSetCalculator.swift */; };
 		6E0ADF48234A98C7004B4348 /* FakeExerciseSetCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0ADF47234A98C7004B4348 /* FakeExerciseSetCalculator.swift */; };
-		6E0ADF65234C188F004B4348 /* NewMaterialOneFocusStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0ADF64234C188F004B4348 /* NewMaterialOneFocusStrategy.swift */; };
 		6E1CCC5D235CE73000451CD7 /* PracticeOneConceptLearningStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1CCC5C235CE73000451CD7 /* PracticeOneConceptLearningStep.swift */; };
 		6E1CCC60235CEADD00451CD7 /* NewMaterialStateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1CCC5F235CEADD00451CD7 /* NewMaterialStateRepository.swift */; };
 		6E1CCC62235CEB0600451CD7 /* NewMaterialState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1CCC61235CEB0600451CD7 /* NewMaterialState.swift */; };
@@ -43,7 +39,6 @@
 		6E557C3722FB9EEB00270F07 /* CompositionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E557C3622FB9EEB00270F07 /* CompositionRoot.swift */; };
 		6E557C3922FBA0AE00270F07 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E557C3822FBA0AE00270F07 /* Coordinator.swift */; };
 		6E557C3B22FBA0DC00270F07 /* RootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E557C3A22FBA0DC00270F07 /* RootCoordinator.swift */; };
-		6E60BF4323569242000AC6BD /* NewMaterialTwoFocusStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E60BF4223569242000AC6BD /* NewMaterialTwoFocusStrategy.swift */; };
 		6E713092233443F5009FEFBB /* Exercise+sqlite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E713091233443F5009FEFBB /* Exercise+sqlite.swift */; };
 		6E74FD402318A1F500730AEB /* FakeExerciseViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E74FD3F2318A1F500730AEB /* FakeExerciseViewModelDelegate.swift */; };
 		6E74FD422318A2B900730AEB /* TestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E74FD412318A2B900730AEB /* TestUtilities.swift */; };
@@ -53,10 +48,7 @@
 		6E74FD4E231C86FC00730AEB /* FeedContainerViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E74FD4D231C86FC00730AEB /* FeedContainerViewControllerTests.swift */; };
 		6E74FD52231C87F800730AEB /* FeedContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E74FD50231C87F800730AEB /* FeedContainerViewController.swift */; };
 		6E74FD53231C87F800730AEB /* FeedContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E74FD51231C87F800730AEB /* FeedContainerViewController.xib */; };
-		6E841618232B208E0035F381 /* FeedPackageStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E841617232B208E0035F381 /* FeedPackageStoreTests.swift */; };
 		6E84161B232B213D0035F381 /* FeedPackageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E84161A232B213D0035F381 /* FeedPackageStore.swift */; };
-		6E841620232B22F20035F381 /* FeedPackageExternalDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E84161F232B22F20035F381 /* FeedPackageExternalDataService.swift */; };
-		6E841623232B234F0035F381 /* FakeFeedPackageExternalDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E841622232B234F0035F381 /* FakeFeedPackageExternalDataService.swift */; };
 		6E883F8F233D8301004F0D0E /* FeedPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E883F8E233D8301004F0D0E /* FeedPackage.swift */; };
 		6E883F91233D85D6004F0D0E /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E883F90233D85D6004F0D0E /* FeedItem.swift */; };
 		6E883F93233D8674004F0D0E /* ConceptIntro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E883F92233D8674004F0D0E /* ConceptIntro.swift */; };
@@ -82,8 +74,6 @@
 		6EAB211C2361387A007186A4 /* FeedExercisesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAB211B2361387A007186A4 /* FeedExercisesStore.swift */; };
 		6EAB211E23613B0E007186A4 /* FakeExerciseExternalDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAB211D23613B0E007186A4 /* FakeExerciseExternalDataService.swift */; };
 		6EAB2120236144AB007186A4 /* FakeFeedExercisesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAB211F236144AB007186A4 /* FakeFeedExercisesStore.swift */; };
-		6EB0FEDB235A7E9C005F23DE /* NewMaterialLevelUpStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB0FEDA235A7E9C005F23DE /* NewMaterialLevelUpStrategy.swift */; };
-		6EB0FEDD235B849A005F23DE /* NewMaterialLevelUpStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB0FEDC235B849A005F23DE /* NewMaterialLevelUpStrategy.swift */; };
 		6EB0FEE1235BE1D9005F23DE /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB0FEE0235BE1D9005F23DE /* UserRepository.swift */; };
 		6EB0FEE3235BE2F2005F23DE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB0FEE2235BE2F2005F23DE /* User.swift */; };
 		6EB0FEE7235BE561005F23DE /* LearningStepControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB0FEE6235BE561005F23DE /* LearningStepControllerTests.swift */; };
@@ -98,7 +88,6 @@
 		6EB0FEFD235BF04E005F23DE /* UserConcept+stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB0FEFC235BF04E005F23DE /* UserConcept+stubs.swift */; };
 		6EB0FF00235BF2A9005F23DE /* UserConceptRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB0FEFF235BF2A9005F23DE /* UserConceptRepository.swift */; };
 		6EB0FF03235BF457005F23DE /* FakeUserConceptRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB0FF02235BF457005F23DE /* FakeUserConceptRepository.swift */; };
-		6EB9339B23305A3F00E38B52 /* FakeFeedPackageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB9339A23305A3F00E38B52 /* FakeFeedPackageStore.swift */; };
 		6EB933A42330702C00E38B52 /* LoadExercisesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB933A22330702C00E38B52 /* LoadExercisesViewController.swift */; };
 		6EB933A52330702C00E38B52 /* LoadExercisesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EB933A32330702C00E38B52 /* LoadExercisesViewController.xib */; };
 		6EB933A8233071D800E38B52 /* LoadExercisesSceneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB933A7233071D800E38B52 /* LoadExercisesSceneTests.swift */; };
@@ -186,9 +175,6 @@
 		6EE60C5B23458DBD00B0322B /* LevelUpItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE60C5A23458DBD00B0322B /* LevelUpItem.swift */; };
 		6EE60C5F2345900900B0322B /* LevelUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE60C5D2345900900B0322B /* LevelUpViewController.swift */; };
 		6EE60C602345900900B0322B /* LevelUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EE60C5E2345900900B0322B /* LevelUpViewController.xib */; };
-		6EE7A3B72357DD3A00DF0F45 /* NewMaterialTwoFocusStrategyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE7A3B62357DD3A00DF0F45 /* NewMaterialTwoFocusStrategyTests.swift */; };
-		6EE7A3DD23593B3700DF0F45 /* FeedPackageAPIRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE7A3DC23593B3700DF0F45 /* FeedPackageAPIRouter.swift */; };
-		6EE7A3DF2359445800DF0F45 /* NewMaterialStandardCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE7A3DE2359445800DF0F45 /* NewMaterialStandardCalculator.swift */; };
 		BCB14F255178DFA21D82194D /* Pods_MathAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE993BEBDF1A3B96DC4714AA /* Pods_MathAppTests.framework */; };
 		C99DA79539000A5618FB589C /* Pods_MathApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1CE43285555BFADE6DC3070 /* Pods_MathApp.framework */; };
 /* End PBXBuildFile section */
@@ -208,15 +194,11 @@
 		6E00E486233FEAD500BFF274 /* LoadState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadState.swift; sourceTree = "<group>"; };
 		6E00E488233FF17800BFF274 /* FeedPackage+stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedPackage+stubs.swift"; sourceTree = "<group>"; };
 		6E01F07B234D675900371D0C /* EnrichedUserConcept+stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EnrichedUserConcept+stubs.swift"; sourceTree = "<group>"; };
-		6E01F07D234D6BF800371D0C /* NewMaterialOneFocusStrategyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMaterialOneFocusStrategyTests.swift; sourceTree = "<group>"; };
 		6E01F083234ECD0600371D0C /* TestingAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingAppDelegate.swift; sourceTree = "<group>"; };
 		6E01F085234ECD9B00371D0C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		6E0ADF3E23492312004B4348 /* FeedPackageExternalDataServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPackageExternalDataServiceTests.swift; sourceTree = "<group>"; };
 		6E0ADF41234927F1004B4348 /* FakeRandomizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeRandomizationService.swift; sourceTree = "<group>"; };
-		6E0ADF4323492B2A004B4348 /* FeedPackageCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPackageCalculator.swift; sourceTree = "<group>"; };
 		6E0ADF45234A9422004B4348 /* ExerciseSetCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetCalculator.swift; sourceTree = "<group>"; };
 		6E0ADF47234A98C7004B4348 /* FakeExerciseSetCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeExerciseSetCalculator.swift; sourceTree = "<group>"; };
-		6E0ADF64234C188F004B4348 /* NewMaterialOneFocusStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMaterialOneFocusStrategy.swift; sourceTree = "<group>"; };
 		6E1CCC5C235CE73000451CD7 /* PracticeOneConceptLearningStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeOneConceptLearningStep.swift; sourceTree = "<group>"; };
 		6E1CCC5F235CEADD00451CD7 /* NewMaterialStateRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMaterialStateRepository.swift; sourceTree = "<group>"; };
 		6E1CCC61235CEB0600451CD7 /* NewMaterialState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMaterialState.swift; sourceTree = "<group>"; };
@@ -245,7 +227,6 @@
 		6E557C3622FB9EEB00270F07 /* CompositionRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionRoot.swift; sourceTree = "<group>"; };
 		6E557C3822FBA0AE00270F07 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		6E557C3A22FBA0DC00270F07 /* RootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCoordinator.swift; sourceTree = "<group>"; };
-		6E60BF4223569242000AC6BD /* NewMaterialTwoFocusStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMaterialTwoFocusStrategy.swift; sourceTree = "<group>"; };
 		6E713091233443F5009FEFBB /* Exercise+sqlite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exercise+sqlite.swift"; sourceTree = "<group>"; };
 		6E74FD3F2318A1F500730AEB /* FakeExerciseViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeExerciseViewModelDelegate.swift; sourceTree = "<group>"; };
 		6E74FD412318A2B900730AEB /* TestUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtilities.swift; sourceTree = "<group>"; };
@@ -255,10 +236,7 @@
 		6E74FD4D231C86FC00730AEB /* FeedContainerViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedContainerViewControllerTests.swift; sourceTree = "<group>"; };
 		6E74FD50231C87F800730AEB /* FeedContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedContainerViewController.swift; sourceTree = "<group>"; };
 		6E74FD51231C87F800730AEB /* FeedContainerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedContainerViewController.xib; sourceTree = "<group>"; };
-		6E841617232B208E0035F381 /* FeedPackageStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPackageStoreTests.swift; sourceTree = "<group>"; };
 		6E84161A232B213D0035F381 /* FeedPackageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPackageStore.swift; sourceTree = "<group>"; };
-		6E84161F232B22F20035F381 /* FeedPackageExternalDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPackageExternalDataService.swift; sourceTree = "<group>"; };
-		6E841622232B234F0035F381 /* FakeFeedPackageExternalDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeFeedPackageExternalDataService.swift; sourceTree = "<group>"; };
 		6E883F8E233D8301004F0D0E /* FeedPackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPackage.swift; sourceTree = "<group>"; };
 		6E883F90233D85D6004F0D0E /* FeedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
 		6E883F92233D8674004F0D0E /* ConceptIntro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptIntro.swift; sourceTree = "<group>"; };
@@ -284,8 +262,6 @@
 		6EAB211B2361387A007186A4 /* FeedExercisesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedExercisesStore.swift; sourceTree = "<group>"; };
 		6EAB211D23613B0E007186A4 /* FakeExerciseExternalDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeExerciseExternalDataService.swift; sourceTree = "<group>"; };
 		6EAB211F236144AB007186A4 /* FakeFeedExercisesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeFeedExercisesStore.swift; sourceTree = "<group>"; };
-		6EB0FEDA235A7E9C005F23DE /* NewMaterialLevelUpStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMaterialLevelUpStrategy.swift; sourceTree = "<group>"; };
-		6EB0FEDC235B849A005F23DE /* NewMaterialLevelUpStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMaterialLevelUpStrategy.swift; sourceTree = "<group>"; };
 		6EB0FEE0235BE1D9005F23DE /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		6EB0FEE2235BE2F2005F23DE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		6EB0FEE6235BE561005F23DE /* LearningStepControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningStepControllerTests.swift; sourceTree = "<group>"; };
@@ -300,7 +276,6 @@
 		6EB0FEFC235BF04E005F23DE /* UserConcept+stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserConcept+stubs.swift"; sourceTree = "<group>"; };
 		6EB0FEFF235BF2A9005F23DE /* UserConceptRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserConceptRepository.swift; sourceTree = "<group>"; };
 		6EB0FF02235BF457005F23DE /* FakeUserConceptRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeUserConceptRepository.swift; sourceTree = "<group>"; };
-		6EB9339A23305A3F00E38B52 /* FakeFeedPackageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeFeedPackageStore.swift; sourceTree = "<group>"; };
 		6EB933A22330702C00E38B52 /* LoadExercisesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadExercisesViewController.swift; sourceTree = "<group>"; };
 		6EB933A32330702C00E38B52 /* LoadExercisesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadExercisesViewController.xib; sourceTree = "<group>"; };
 		6EB933A7233071D800E38B52 /* LoadExercisesSceneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadExercisesSceneTests.swift; sourceTree = "<group>"; };
@@ -388,9 +363,6 @@
 		6EE60C5A23458DBD00B0322B /* LevelUpItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelUpItem.swift; sourceTree = "<group>"; };
 		6EE60C5D2345900900B0322B /* LevelUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelUpViewController.swift; sourceTree = "<group>"; };
 		6EE60C5E2345900900B0322B /* LevelUpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LevelUpViewController.xib; sourceTree = "<group>"; };
-		6EE7A3B62357DD3A00DF0F45 /* NewMaterialTwoFocusStrategyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMaterialTwoFocusStrategyTests.swift; sourceTree = "<group>"; };
-		6EE7A3DC23593B3700DF0F45 /* FeedPackageAPIRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPackageAPIRouter.swift; sourceTree = "<group>"; };
-		6EE7A3DE2359445800DF0F45 /* NewMaterialStandardCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMaterialStandardCalculator.swift; sourceTree = "<group>"; };
 		9BCF43D90809ABFC7320F5BB /* Pods-MathApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MathApp.release.xcconfig"; path = "Target Support Files/Pods-MathApp/Pods-MathApp.release.xcconfig"; sourceTree = "<group>"; };
 		A1CE43285555BFADE6DC3070 /* Pods_MathApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MathApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACC8CBE54D6FE6BB00980A70 /* Pods-MathApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MathApp.debug.xcconfig"; path = "Target Support Files/Pods-MathApp/Pods-MathApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -427,23 +399,6 @@
 				D78E7824CF595603FD9FDFEE /* Pods-MathAppTests.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		6E01F073234D57B000371D0C /* FeedPackageStrategies */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = FeedPackageStrategies;
-			sourceTree = "<group>";
-		};
-		6E01F076234D635400371D0C /* FeedPackageStrategies */ = {
-			isa = PBXGroup;
-			children = (
-				6E01F07D234D6BF800371D0C /* NewMaterialOneFocusStrategyTests.swift */,
-				6EE7A3B62357DD3A00DF0F45 /* NewMaterialTwoFocusStrategyTests.swift */,
-				6EB0FEDA235A7E9C005F23DE /* NewMaterialLevelUpStrategy.swift */,
-			);
-			path = FeedPackageStrategies;
 			sourceTree = "<group>";
 		};
 		6E0ADF40234927DB004B4348 /* RandomizationService */ = {
@@ -507,15 +462,6 @@
 				6EC6671A232451530048068C /* QuitableContainerViewController */,
 			);
 			path = ContainerViewControllers;
-			sourceTree = "<group>";
-		};
-		6E3C9EE9235E722C00CD81C9 /* FeedPackageExternalDataService */ = {
-			isa = PBXGroup;
-			children = (
-				6E0ADF3E23492312004B4348 /* FeedPackageExternalDataServiceTests.swift */,
-				6E841622232B234F0035F381 /* FakeFeedPackageExternalDataService.swift */,
-			);
-			path = FeedPackageExternalDataService;
 			sourceTree = "<group>";
 		};
 		6E3C9EEA235E724200CD81C9 /* LearningStepExternalDataService */ = {
@@ -674,15 +620,6 @@
 			path = Concept;
 			sourceTree = "<group>";
 		};
-		6E841616232B20770035F381 /* FeedPackageStore */ = {
-			isa = PBXGroup;
-			children = (
-				6E841617232B208E0035F381 /* FeedPackageStoreTests.swift */,
-				6EB9339A23305A3F00E38B52 /* FakeFeedPackageStore.swift */,
-			);
-			path = FeedPackageStore;
-			sourceTree = "<group>";
-		};
 		6E841619232B212D0035F381 /* FeedPackageStore */ = {
 			isa = PBXGroup;
 			children = (
@@ -694,11 +631,6 @@
 		6E84161E232B22E10035F381 /* ExternalData */ = {
 			isa = PBXGroup;
 			children = (
-				6E84161F232B22F20035F381 /* FeedPackageExternalDataService.swift */,
-				6EE7A3DC23593B3700DF0F45 /* FeedPackageAPIRouter.swift */,
-				6E0ADF4323492B2A004B4348 /* FeedPackageCalculator.swift */,
-				6EEAB943235A7743001D1A55 /* NewMaterialStrategy */,
-				6E01F073234D57B000371D0C /* FeedPackageStrategies */,
 				6EE60C42234420A900B0322B /* EnrichedUserConcept.swift */,
 				6E3C9EEF235E765400CD81C9 /* LearningStepExternalDataService.swift */,
 				6EAB211523613468007186A4 /* ExerciseExternalDataService.swift */,
@@ -710,11 +642,9 @@
 			isa = PBXGroup;
 			children = (
 				6EAB20FD236117F4007186A4 /* ExerciseExternalDataService */,
-				6E3C9EE9235E722C00CD81C9 /* FeedPackageExternalDataService */,
 				6E3C9EEA235E724200CD81C9 /* LearningStepExternalDataService */,
 				6E0ADF47234A98C7004B4348 /* FakeExerciseSetCalculator.swift */,
 				6E01F07B234D675900371D0C /* EnrichedUserConcept+stubs.swift */,
-				6E01F076234D635400371D0C /* FeedPackageStrategies */,
 			);
 			path = ExternalData;
 			sourceTree = "<group>";
@@ -1022,7 +952,6 @@
 				6EBE4E8E230A13D80047A880 /* FeedCoordinatorTests.swift */,
 				6E74FD4C231C866F00730AEB /* FeedContainer */,
 				6E927E7C231CA74000822EBA /* ResultsStore */,
-				6E841616232B20770035F381 /* FeedPackageStore */,
 				6EAB211723613794007186A4 /* FeedExercisesStore */,
 				6E3C9EF3235E7A2100CD81C9 /* LearningStepStore */,
 				6E74FD452318B52F00730AEB /* Models */,
@@ -1308,17 +1237,6 @@
 			path = LevelUpScene;
 			sourceTree = "<group>";
 		};
-		6EEAB943235A7743001D1A55 /* NewMaterialStrategy */ = {
-			isa = PBXGroup;
-			children = (
-				6EE7A3DE2359445800DF0F45 /* NewMaterialStandardCalculator.swift */,
-				6E60BF4223569242000AC6BD /* NewMaterialTwoFocusStrategy.swift */,
-				6E0ADF64234C188F004B4348 /* NewMaterialOneFocusStrategy.swift */,
-				6EB0FEDC235B849A005F23DE /* NewMaterialLevelUpStrategy.swift */,
-			);
-			path = NewMaterialStrategy;
-			sourceTree = "<group>";
-		};
 		F76851D247041C4492AC41F1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1544,7 +1462,6 @@
 				6ECC412C23288BC500E8F3E1 /* UserConcept+data.swift in Sources */,
 				6EC666E2232099860048068C /* FeedContainerViewModel.swift in Sources */,
 				6E713092233443F5009FEFBB /* Exercise+sqlite.swift in Sources */,
-				6E0ADF65234C188F004B4348 /* NewMaterialOneFocusStrategy.swift in Sources */,
 				6EC6671D232451760048068C /* QuitableContainerViewController.swift in Sources */,
 				6EBA305E231098F600E6DC54 /* ExerciseChoiceConfiguration.swift in Sources */,
 				6E557C1722FB9DCB00270F07 /* AppDelegate.swift in Sources */,
@@ -1552,9 +1469,7 @@
 				6EB0FEF0235BE80A005F23DE /* LearningStep.swift in Sources */,
 				6EC6673B232494170048068C /* ConceptMapTableViewCell.swift in Sources */,
 				6EB0FF00235BF2A9005F23DE /* UserConceptRepository.swift in Sources */,
-				6E841620232B22F20035F381 /* FeedPackageExternalDataService.swift in Sources */,
 				6EB0FEF7235BE9B5005F23DE /* NewMaterialLearningStepStrategy.swift in Sources */,
-				6EE7A3DF2359445800DF0F45 /* NewMaterialStandardCalculator.swift in Sources */,
 				6EB0FEE9235BE676005F23DE /* LearningStepStrategyFactory.swift in Sources */,
 				6EE1AC47235FE7A0008546DB /* ExerciseRepository.swift in Sources */,
 				6EBE4EA2230B66CD0047A880 /* Exercise.swift in Sources */,
@@ -1581,12 +1496,9 @@
 				6EE60C5B23458DBD00B0322B /* LevelUpItem.swift in Sources */,
 				6E883F8F233D8301004F0D0E /* FeedPackage.swift in Sources */,
 				6EBE4EA4230B675B0047A880 /* Exercise+data.swift in Sources */,
-				6EE7A3DD23593B3700DF0F45 /* FeedPackageAPIRouter.swift in Sources */,
 				6E1CCC6C235D37D300451CD7 /* NewMaterialState+sqlite.swift in Sources */,
 				6E1CCC6A235D0AC400451CD7 /* PracticeFamilyLearningStep.swift in Sources */,
 				6EBE4E9B230B614B0047A880 /* ExerciseViewController.swift in Sources */,
-				6E0ADF4423492B2A004B4348 /* FeedPackageCalculator.swift in Sources */,
-				6EB0FEDD235B849A005F23DE /* NewMaterialLevelUpStrategy.swift in Sources */,
 				6EAB211623613468007186A4 /* ExerciseExternalDataService.swift in Sources */,
 				6EC6670A23243B870048068C /* MenuCoordinator.swift in Sources */,
 				6EAB211C2361387A007186A4 /* FeedExercisesStore.swift in Sources */,
@@ -1609,7 +1521,6 @@
 				6EAB210A23611F43007186A4 /* ExerciseStrategy.swift in Sources */,
 				6EAB210C23611F64007186A4 /* NewMaterialExerciseStrategy.swift in Sources */,
 				6ECC412823287BAE00E8F3E1 /* Concept+sqlite.swift in Sources */,
-				6E60BF4323569242000AC6BD /* NewMaterialTwoFocusStrategy.swift in Sources */,
 				6EB933B22331AB3800E38B52 /* Queue.swift in Sources */,
 				6ECC412A2328842A00E8F3E1 /* UserConcept+sqlite.swift in Sources */,
 				6E1CCC68235D066600451CD7 /* PracticeTwoConceptsLearningStep.swift in Sources */,
@@ -1637,9 +1548,7 @@
 				6EB933A8233071D800E38B52 /* LoadExercisesSceneTests.swift in Sources */,
 				6EB0FF03235BF457005F23DE /* FakeUserConceptRepository.swift in Sources */,
 				6EE1AC38235E8996008546DB /* FakeLearningStepStore.swift in Sources */,
-				6EB9339B23305A3F00E38B52 /* FakeFeedPackageStore.swift in Sources */,
 				6EC666FC232209980048068C /* FakeInfoViewModelDelegate.swift in Sources */,
-				6EB0FEDB235A7E9C005F23DE /* NewMaterialLevelUpStrategy.swift in Sources */,
 				6E1E6B3222FFA8BD00AFB7A0 /* ContainerViewControllerTests.swift in Sources */,
 				6EBE4E9F230B644E0047A880 /* ExerciseSceneTests.swift in Sources */,
 				6EB0FEE7235BE561005F23DE /* LearningStepControllerTests.swift in Sources */,
@@ -1660,21 +1569,18 @@
 				6EC66735232467840048068C /* FakeConceptMapViewModelDelegate.swift in Sources */,
 				6EBC1BC82346BBDA00654285 /* FakeLevelUpViewModelDelegate.swift in Sources */,
 				6EE1AC3F235FC391008546DB /* ConceptIntroLearningStep+stubs.swift in Sources */,
-				6E841618232B208E0035F381 /* FeedPackageStoreTests.swift in Sources */,
 				6EAB210F23611FF6007186A4 /* FakeExerciseStrategyFactory.swift in Sources */,
 				6EB0FEEB235BE69E005F23DE /* FakeLearningStepStrategyFactory.swift in Sources */,
 				6EBD5313233AF9A50057F28A /* ChooseExerciseSceneTests.swift in Sources */,
 				6E883F9B233D9B96004F0D0E /* ConceptIntroSceneTests.swift in Sources */,
 				6E3C9EEE235E75F500CD81C9 /* FakeLearningStepController.swift in Sources */,
 				6EBA306D2314D4AB00E6DC54 /* RxLatestValueTests.swift in Sources */,
-				6E0ADF3F23492312004B4348 /* FeedPackageExternalDataServiceTests.swift in Sources */,
 				6EB0FEFD235BF04E005F23DE /* UserConcept+stubs.swift in Sources */,
 				6E0ADF42234927F1004B4348 /* FakeRandomizationService.swift in Sources */,
 				6EC667492324A08D0048068C /* FakeDatabaseService.swift in Sources */,
 				6EBE4E97230A1B7C0047A880 /* RootCoordinatorTests.swift in Sources */,
 				6EC667222324548B0048068C /* FakeMenuCoordinatorDelegate.swift in Sources */,
 				6EC667332324673F0048068C /* ConceptMapSceneTests.swift in Sources */,
-				6EE7A3B72357DD3A00DF0F45 /* NewMaterialTwoFocusStrategyTests.swift in Sources */,
 				6EC66719232451350048068C /* FakeQuitableContainerViewModel.swift in Sources */,
 				6E3C9EEC235E726B00CD81C9 /* LearningStepExternalDataServiceTests.swift in Sources */,
 				6EBE4E91230A14A70047A880 /* FakeContainerViewController.swift in Sources */,
@@ -1688,13 +1594,11 @@
 				6EAB2114236133E8007186A4 /* FakeExerciseController.swift in Sources */,
 				6E927E7E231CA75100822EBA /* ResultsStoreTests.swift in Sources */,
 				6E74FD4E231C86FC00730AEB /* FeedContainerViewControllerTests.swift in Sources */,
-				6E01F07E234D6BF800371D0C /* NewMaterialOneFocusStrategyTests.swift in Sources */,
 				6EB0FEFA235BEBF7005F23DE /* NewMaterialLearningStepStrategyTests.swift in Sources */,
 				6EE1AC41235FC410008546DB /* Concept+stubs.swift in Sources */,
 				6E01F07C234D675900371D0C /* EnrichedUserConcept+stubs.swift in Sources */,
 				6EBC1BCA2346D41200654285 /* LevelUpItem+stubs.swift in Sources */,
 				6EC66729232462280048068C /* FakeMenuViewModelDelegate.swift in Sources */,
-				6E841623232B234F0035F381 /* FakeFeedPackageExternalDataService.swift in Sources */,
 				6EC6672423245D730048068C /* TestMenuCoordinator.swift in Sources */,
 				6E01F084234ECD0600371D0C /* TestingAppDelegate.swift in Sources */,
 				6E0ADF48234A98C7004B4348 /* FakeExerciseSetCalculator.swift in Sources */,
