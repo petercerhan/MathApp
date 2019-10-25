@@ -58,7 +58,6 @@ class FeedCoordinator: Coordinator {
     
     func start() {
         containerVC.loadViewIfNeeded()
-        
         showNextLearningStepScene()
     }
     
@@ -85,17 +84,30 @@ class FeedCoordinator: Coordinator {
         }
         
         if progressState.complete {
-            let levelUpItem = LevelUpItem(concept: Concept.linearRule, previousLevel: 1, newLevel: 2)
-            showLevelUpScene(levelUpItem: levelUpItem)
+            showLevelUpScene()
         } else {
             showNextExerciseScene(animation: animation)
         }
     }
     
-    private func showLevelUpScene(levelUpItem: LevelUpItem) {
-        let vc = compositionRoot.composeLevelUpScene(delegate: self, levelUpItem: levelUpItem)
-        containerVC.show(viewController: vc, animation: .fadeIn)
-        exerciseQueue = Queue<Exercise>()
+    private func showLevelUpScene() {
+        guard let learningStep = latestValue(of: resultsStore.learningStep, disposeBag: disposeBag) else {
+            return
+        }
+        if let conceptIntroStep = learningStep as? ConceptIntroLearningStep {
+            let levelUpItem = LevelUpItem(concept: conceptIntroStep.conceptIntro.concept, previousLevel: 0, newLevel: 1)
+            let vc = compositionRoot.composeLevelUpScene(delegate: self, levelUpItem: levelUpItem)
+            containerVC.show(viewController: vc, animation: .fadeIn)
+            exerciseQueue = Queue<Exercise>()
+        } else {
+            
+            //Fall through
+            
+            let levelUpItem = LevelUpItem(concept: Concept.linearRule, previousLevel: 1, newLevel: 2)
+            let vc = compositionRoot.composeLevelUpScene(delegate: self, levelUpItem: levelUpItem)
+            containerVC.show(viewController: vc, animation: .fadeIn)
+            exerciseQueue = Queue<Exercise>()
+        }
     }
     
     private func showNextExerciseScene(animation: TransitionAnimation) {

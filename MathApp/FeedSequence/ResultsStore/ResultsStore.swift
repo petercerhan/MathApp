@@ -12,6 +12,7 @@ import RxSwift
 protocol ResultsStore {
     var progressState: Observable<ProgressState> { get }
     var points: Observable<Int> { get }
+    var learningStep: Observable<LearningStep?> { get }
     func dispatch(action: ResultsStoreAction)
 }
 
@@ -22,6 +23,9 @@ enum ResultsStoreAction {
 extension ResultsStore where Self: ResultsStoreImpl {
     var progressState: Observable<ProgressState> {
         return progressStateSubject.asObservable()
+    }
+    var learningStep: Observable<LearningStep?> {
+        return learningStepSubject.asObservable()
     }
     var points: Observable<Int> {
         return pointsSubject.asObservable()
@@ -41,8 +45,8 @@ class ResultsStoreImpl: ResultsStore {
     //MARK: - ResultsStore Interface
     
     let progressStateSubject = BehaviorSubject<ProgressState>(value: ProgressState(required: 5, correct: 0))
-    
     let pointsSubject = BehaviorSubject<Int>(value: 0)
+    let learningStepSubject = BehaviorSubject<LearningStep?>(value: nil)
     
     func dispatch(action: ResultsStoreAction) {
         switch action {

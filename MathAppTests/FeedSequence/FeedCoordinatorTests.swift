@@ -58,7 +58,7 @@ class FeedCoordinatorTests: XCTestCase {
         mockContainerVC.verifyDidShow(viewControllerType: ExerciseViewController.self)
     }
     
-    func test_exerciseRequestsNext_progressStateComplete_shouldShowLevelUpScene() {
+    func test_exerciseRequestsNext_progressStateComplete_conceptIntroLS1_shouldShowLevelUpScene() {
         let stubProgressState = ProgressState(required: 5, correct: 5)
         let mockContainerVC = FakeContainerViewController()
         let coordinator = composeSUT(fakeContainerViewController: mockContainerVC, stubProgressState: stubProgressState)
@@ -66,7 +66,13 @@ class FeedCoordinatorTests: XCTestCase {
         coordinator.start()
         coordinator.next(TestExerciseViewModel(), correctAnswer: true)
         
-        mockContainerVC.verifyDidShow(viewControllerType: LevelUpViewController.self)
+        guard let levelUpVC = mockContainerVC.show_viewController.last as? LevelUpViewController else {
+            XCTFail("Level up vc not displayed")
+            return
+        }
+        levelUpVC.loadViewIfNeeded()
+        XCTAssertEqual(levelUpVC.levelUpLabel.text, "Level *0* to level *1*")
+        XCTAssertEqual(levelUpVC.conceptLabel.text, "Stub rule")
     }
     
     //MARK: - SUT Composition
@@ -95,6 +101,7 @@ class FeedCoordinatorTests: XCTestCase {
         }
         
         let resultsStore = FakeResultsStore()
+        resultsStore.learningStep = Observable.just(stubLearningStep ?? conceptIntroLS1)
         if let progressState = stubProgressState {
             resultsStore.progressState = Observable.just(progressState)
         }

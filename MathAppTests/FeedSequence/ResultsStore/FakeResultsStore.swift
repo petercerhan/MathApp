@@ -13,6 +13,8 @@ import RxSwift
 
 class FakeResultsStore: ResultsStore {
     
+    var learningStep = Observable<LearningStep?>.just(nil)
+    
     var progressState = Observable<ProgressState>.just(ProgressState(required: 5, correct: 0))
 
     var points = Observable<Int>.just(0)

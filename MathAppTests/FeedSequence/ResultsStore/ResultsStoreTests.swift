@@ -42,6 +42,16 @@ class ResultsStoreTests: XCTestCase {
         XCTAssertEqual(correct, 0)
     }
     
+    func test_learningStep_initialState_shouldBeNil() {
+        let store = composeSUT()
+        
+        guard let learningStep = latestValue(of: store.learningStep, disposeBag: disposeBag) else {
+            XCTFail("Could not get learning step value")
+            return
+        }
+        XCTAssertNil(learningStep)
+    }
+    
     //MARK: - Progress Indicator Tests
     
     func test_initialState_shouldShow0Of5() {
