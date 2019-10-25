@@ -12,6 +12,8 @@ import RxSwift
 @testable import MathApp
 
 class FakeResultsStore: ResultsStore {
+    
+    var progressState = Observable<ProgressState>.just(ProgressState(required: 7, correct: 0))
 
     var points = Observable<Int>.just(0)
     

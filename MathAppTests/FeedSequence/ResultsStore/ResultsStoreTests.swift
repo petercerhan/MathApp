@@ -42,18 +42,106 @@ class ResultsStoreTests: XCTestCase {
         XCTAssertEqual(correct, 0)
     }
     
-//    func test_scenario1_shouldShow1Of1() {
-//        let store = composeSUT()
-//        
-//        store.dispatch(action: .processResult(ExerciseResult(correct: false, conceptID: 1)))
-//        
-//        
-//    }
+    //MARK: - Progress Indicator Tests
+    
+    func test_initialState_shouldShow0Of5() {
+        let store = composeSUT()
+        
+        assertProgressStateIs(correct: 0, required: 5, complete: false, store: store)
+    }
+    
+    func test_5of7_scenario1_shouldShow0of5() {
+        let store = composeSUT()
+        
+        store.dispatch(action: .processResult(ExerciseResult(correct: false, conceptID: 1)))
+        
+        assertProgressStateIs(correct: 0, required: 5, complete: false, store: store)
+    }
+    
+    func test_5of7_scenario2_shouldShow10f5() {
+        let store = composeSUT()
+        
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        
+        assertProgressStateIs(correct: 1, required: 5, complete: false, store: store)
+    }
+    
+    func test_5of7_scenario3_shouldShow3Of5() {
+        let store = composeSUT()
+        
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: false, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: false, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        
+        assertProgressStateIs(correct: 3, required: 5, complete: false, store: store)
+    }
+    
+    func test_5of7_scenario4_shouldShow5of5() {
+        let store = composeSUT()
+        
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        
+        assertProgressStateIs(correct: 5, required: 5, complete: true, store: store)
+    }
+    
+    func test_5of7_scenario5_shouldShow4of5() {
+        let store = composeSUT()
+        
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: false, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: false, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: false, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: false, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        
+        assertProgressStateIs(correct: 4, required: 5, complete: false, store: store)
+    }
+    
+    func test_5of7_scenario6_shouldShow5of5() {
+        let store = composeSUT()
+        
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: false, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: false, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: false, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: false, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        
+        assertProgressStateIs(correct: 5, required: 5, complete: true, store: store)
+    }
     
     //MARK: - Compose SUT
     
     func composeSUT(fakeDatabaseService: DatabaseService? = nil) -> ResultsStore {
         return ResultsStoreImpl()
+    }
+    
+    //MARK: - Assertions
+    
+    func assertProgressStateIs(correct: Int, required: Int, complete: Bool, store: ResultsStore, file: StaticString = #file, line: UInt = #line) {
+        guard let progressState = latestValue(of: store.progressState, disposeBag: disposeBag) else {
+            XCTFail("could not get progress state", file: file, line: line)
+            return
+        }
+        XCTAssertEqual(progressState.correct, correct, file: file, line: line)
+        XCTAssertEqual(progressState.required, required, file: file, line: line)
+        XCTAssertEqual(progressState.complete, complete, file: file, line: line)
     }
     
 }

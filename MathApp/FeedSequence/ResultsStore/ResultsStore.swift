@@ -10,6 +10,7 @@ import Foundation
 import RxSwift
 
 protocol ResultsStore {
+    var progressState: Observable<ProgressState> { get }
     var points: Observable<Int> { get }
     func dispatch(action: ResultsStoreAction)
 }
@@ -19,6 +20,9 @@ enum ResultsStoreAction {
 }
 
 extension ResultsStore where Self: ResultsStoreImpl {
+    var progressState: Observable<ProgressState> {
+        return progressStateSubject.asObservable()
+    }
     var points: Observable<Int> {
         return pointsSubject.asObservable()
     }
@@ -36,6 +40,8 @@ class ResultsStoreImpl: ResultsStore {
     
     //MARK: - ResultsStore Interface
     
+    let progressStateSubject = BehaviorSubject<ProgressState>(value: ProgressState(required: 5, correct: 0))
+    
     let pointsSubject = BehaviorSubject<Int>(value: 0)
     
     func dispatch(action: ResultsStoreAction) {
@@ -46,8 +52,17 @@ class ResultsStoreImpl: ResultsStore {
     }
     
     private func handle_processResult(_ result: ExerciseResult) {
-        results.append(result)
+        reevaluateProgressState(result: result)
         reevaluatePoints(result: result)
+    }
+    
+    private func reevaluateProgressState(result: ExerciseResult) {
+        results.insert(result, at: 0)
+        let recentResults = Array(results.prefix(7))
+        var correct = recentResults.reduce(0) { $0 + ($1.correct ? 1 : 0) }
+        correct = min(correct, 5)
+        let progressState = ProgressState(required: 5, correct: correct)
+        progressStateSubject.onNext(progressState)
     }
     
     private func reevaluatePoints(result: ExerciseResult) {
@@ -60,3 +75,4 @@ class ResultsStoreImpl: ResultsStore {
     }
     
 }
+
