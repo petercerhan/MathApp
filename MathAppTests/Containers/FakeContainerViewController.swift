@@ -30,6 +30,16 @@ class FakeContainerViewController: ContainerViewController {
         }
     }
     
+    func show_verifyPrior<T>(viewControllerType: T.Type, file: StaticString = #file, line: UInt = #line) {
+        if show_callCount < 2 {
+            XCTFail("show not called 2+ times", file: file, line: line)
+            return
+        }
+        if !(show_viewController.last is T) {
+            XCTFail("Displayed View Controller type \(type(of: show_viewController[show_viewController.count - 1])) does not match expected type \(viewControllerType.self)", file: file, line: line)
+        }
+    }
+    
     var presentModal_callCount = 0
     var presentModal_viewController = [UIViewController]()
     

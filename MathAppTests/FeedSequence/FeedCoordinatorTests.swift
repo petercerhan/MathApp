@@ -34,15 +34,39 @@ class FeedCoordinatorTests: XCTestCase {
     }
     
     func test_conceptIntroRequestsNext_shouldShowExerciseScene() {
-        let stubLearningStep = ConceptIntroLearningStep.createWithConceptID(conceptID: 1)
         let stubExercises = [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3]
         let mockContainerVC = FakeContainerViewController()
-        let coordinator = composeSUT(fakeContainerViewController: mockContainerVC, stubLearningStep: stubLearningStep, stubExercises: stubExercises)
+        let coordinator = composeSUT(fakeContainerViewController: mockContainerVC, stubLearningStep: conceptIntroLS1, stubExercises: stubExercises)
         
         coordinator.start()
         coordinator.next(TestConceptIntroViewModel())
         
         mockContainerVC.verifyDidShow(viewControllerType: ExerciseViewController.self)
+    }
+    
+    func test_exerciseRequestsNext_progressStateNotComplete_shouldShowExerciseScene() {
+        let stubProgressState = ProgressState(required: 2, correct: 5)
+        let mockContainerVC = FakeContainerViewController()
+        let coordinator = composeSUT(fakeContainerViewController: mockContainerVC, stubProgressState: stubProgressState)
+        
+        coordinator.start()
+        coordinator.next(TestConceptIntroViewModel())
+        coordinator.next(TestExerciseViewModel(), correctAnswer: true)
+        
+        XCTAssertEqual(mockContainerVC.show_callCount, 3)
+        mockContainerVC.show_verifyPrior(viewControllerType: ExerciseViewController.self)
+        mockContainerVC.verifyDidShow(viewControllerType: ExerciseViewController.self)
+    }
+    
+    func test_exerciseRequestsNext_progressStateComplete_shouldShowLevelUpScene() {
+        let stubProgressState = ProgressState(required: 5, correct: 5)
+        let mockContainerVC = FakeContainerViewController()
+        let coordinator = composeSUT(fakeContainerViewController: mockContainerVC, stubProgressState: stubProgressState)
+        
+        coordinator.start()
+        coordinator.next(TestExerciseViewModel(), correctAnswer: true)
+        
+        mockContainerVC.verifyDidShow(viewControllerType: LevelUpViewController.self)
     }
     
     //MARK: - SUT Composition
@@ -51,22 +75,34 @@ class FeedCoordinatorTests: XCTestCase {
                     fakeLearningStepStore: FakeLearningStepStore? = nil,
                     fakeExerciseStore: FakeFeedExercisesStore? = nil,
                     stubLearningStep: LearningStep? = nil,
-                    stubExercises: [Exercise]? = nil) -> FeedCoordinator {
+                    stubExercises: [Exercise]? = nil,
+                    stubProgressState: ProgressState? = nil) -> FeedCoordinator {
         
         let containerVC = fakeContainerViewController ?? FakeContainerViewController()
+        
         let learningStepStore = fakeLearningStepStore ?? FakeLearningStepStore()
         if let stubLearningStep = stubLearningStep {
             learningStepStore.learningStep = Observable.just(.loaded(stubLearningStep))
+        } else {
+            learningStepStore.learningStep = Observable.just(.loaded(conceptIntroLS1))
         }
+        
         let exercisesStore = fakeExerciseStore ?? FakeFeedExercisesStore()
         if let stubExercises = stubExercises {
             exercisesStore.exercises = Observable.just(.loaded(stubExercises))
+        } else {
+            exercisesStore.exercises = Observable.just(.loaded([Exercise.exercise1, Exercise.exercise2, Exercise.exercise3]))
+        }
+        
+        let resultsStore = FakeResultsStore()
+        if let progressState = stubProgressState {
+            resultsStore.progressState = Observable.just(progressState)
         }
         
         return FeedCoordinator(compositionRoot: CompositionRoot(),
                                    containerVC: containerVC,
                                    randomizationService: RandomizationServiceImpl(),
-                                   resultsStore: FakeResultsStore(),
+                                   resultsStore: resultsStore,
                                    learningStepStore: learningStepStore,
                                    exercisesStore: exercisesStore)
     }

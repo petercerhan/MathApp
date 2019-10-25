@@ -80,20 +80,29 @@ class FeedCoordinator: Coordinator {
     }
     
     private func showNextFeedScene(animation: TransitionAnimation) {
-        //if show exercises condition
-        if exerciseQueue.count > 0 {
-            showNextExerciseScene(animation: animation)
-        } else {
-            updateExerciseQueue(animation: animation)
+        guard let progressState = latestValue(of: resultsStore.progressState, disposeBag: disposeBag) else {
+            return
         }
         
-        //else if step complete condition, show step complete feed item
-        
+        if progressState.complete {
+            let levelUpItem = LevelUpItem(concept: Concept.linearRule, previousLevel: 1, newLevel: 2)
+            showLevelUpScene(levelUpItem: levelUpItem)
+        } else {
+            showNextExerciseScene(animation: animation)
+        }
+    }
+    
+    private func showLevelUpScene(levelUpItem: LevelUpItem) {
+        let vc = compositionRoot.composeLevelUpScene(delegate: self, levelUpItem: levelUpItem)
+        containerVC.show(viewController: vc, animation: .fadeIn)
+        exerciseQueue = Queue<Exercise>()
     }
     
     private func showNextExerciseScene(animation: TransitionAnimation) {
-        if let exercise = exerciseQueue.dequeue() {
+        if let exercise = exerciseQueue.dequeue()  {
             showExerciseScene(exercise, animation: animation)
+        } else {
+            updateExerciseQueue(animation: animation)
         }
     }
     
@@ -137,11 +146,6 @@ class FeedCoordinator: Coordinator {
     
     
     
-    private func showLevelUpScene(levelUpItem: LevelUpItem) {
-        let vc = compositionRoot.composeLevelUpScene(delegate: self, levelUpItem: levelUpItem)
-        containerVC.show(viewController: vc, animation: .fadeIn)
-        exerciseQueue = Queue<Exercise>()
-    }
 
     
 }
