@@ -18,7 +18,7 @@ class ResultsStoreTests: XCTestCase {
     func test_correct_initialState_shouldBe0() {
         let store = composeSUT()
         
-        let correct = latestValue(of: store.correct, disposeBag: disposeBag) ?? -1
+        let correct = latestValue(of: store.points, disposeBag: disposeBag) ?? -1
         XCTAssertEqual(correct, 0)
     }
     
@@ -28,7 +28,7 @@ class ResultsStoreTests: XCTestCase {
         let result = ExerciseResult(correct: true, conceptID: 1)
         store.dispatch(action: .processResult(result))
         
-        let correct = latestValue(of: store.correct, disposeBag: disposeBag) ?? -1
+        let correct = latestValue(of: store.points, disposeBag: disposeBag) ?? -1
         XCTAssertEqual(correct, 1)
     }
     
@@ -38,9 +38,17 @@ class ResultsStoreTests: XCTestCase {
         let result = ExerciseResult(correct: false, conceptID: 1)
         store.dispatch(action: .processResult(result))
         
-        let correct = latestValue(of: store.correct, disposeBag: disposeBag) ?? -1
+        let correct = latestValue(of: store.points, disposeBag: disposeBag) ?? -1
         XCTAssertEqual(correct, 0)
     }
+    
+//    func test_scenario1_shouldShow1Of1() {
+//        let store = composeSUT()
+//        
+//        store.dispatch(action: .processResult(ExerciseResult(correct: false, conceptID: 1)))
+//        
+//        
+//    }
     
     //MARK: - Compose SUT
     

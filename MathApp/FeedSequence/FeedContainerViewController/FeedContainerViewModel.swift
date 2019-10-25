@@ -34,7 +34,7 @@ class FeedContainerViewModel {
     //MARK: - FeedContainerViewModel Interface
     
     private(set) lazy var points: Observable<Int> = {
-        resultsStore.correct
+        resultsStore.points
             .share(replay: 1)
     }()
     

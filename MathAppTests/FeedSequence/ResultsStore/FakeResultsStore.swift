@@ -13,7 +13,7 @@ import RxSwift
 
 class FakeResultsStore: ResultsStore {
 
-    var correct = Observable<Int>.just(0)
+    var points = Observable<Int>.just(0)
     
     var dispatch_callCount = 0
     var dispatch_action = [ResultsStoreAction]()

@@ -685,6 +685,7 @@
 			isa = PBXGroup;
 			children = (
 				6E927E80231CA88600822EBA /* ResultsStore.swift */,
+				6EC6674C2324AA040048068C /* ExerciseResult.swift */,
 			);
 			path = ResultsStore;
 			sourceTree = "<group>";
@@ -1018,7 +1019,6 @@
 				6EE60C5A23458DBD00B0322B /* LevelUpItem.swift */,
 				6E883F8D233D82E7004F0D0E /* FeedPackage */,
 				6E84160A2329BD740035F381 /* Concept */,
-				6EC6674C2324AA040048068C /* ExerciseResult.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";

@@ -52,7 +52,7 @@ class FeedContainerViewControllerTests: XCTestCase {
     
     func stubStore_oneCorrect() -> ResultsStore {
         let stubStore = FakeResultsStore()
-        stubStore.correct = Observable.just(1)
+        stubStore.points = Observable.just(1)
         return stubStore
     }
     

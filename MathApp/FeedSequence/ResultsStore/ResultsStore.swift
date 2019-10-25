@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 protocol ResultsStore {
-    var correct: Observable<Int> { get }
+    var points: Observable<Int> { get }
     func dispatch(action: ResultsStoreAction)
 }
 
@@ -19,8 +19,8 @@ enum ResultsStoreAction {
 }
 
 extension ResultsStore where Self: ResultsStoreImpl {
-    var correct: Observable<Int> {
-        return correctSubject.asObservable()
+    var points: Observable<Int> {
+        return pointsSubject.asObservable()
     }
 }
 
@@ -30,9 +30,13 @@ class ResultsStoreImpl: ResultsStore {
     
     private let disposeBag = DisposeBag()
     
+    //MARK: - State
+    
+    private var results = [ExerciseResult]()
+    
     //MARK: - ResultsStore Interface
     
-    let correctSubject = BehaviorSubject<Int>(value: 0)
+    let pointsSubject = BehaviorSubject<Int>(value: 0)
     
     func dispatch(action: ResultsStoreAction) {
         switch action {
@@ -42,15 +46,16 @@ class ResultsStoreImpl: ResultsStore {
     }
     
     private func handle_processResult(_ result: ExerciseResult) {
+        results.append(result)
         reevaluatePoints(result: result)
     }
     
     private func reevaluatePoints(result: ExerciseResult) {
-        guard let priorCorrectValue = latestValue(of: correct, disposeBag: disposeBag) else {
+        guard let priorCorrectValue = latestValue(of: points, disposeBag: disposeBag) else {
             return
         }
         if result.correct {
-            correctSubject.onNext(priorCorrectValue + 1)
+            pointsSubject.onNext(priorCorrectValue + 1)
         }
     }
     
