@@ -18,6 +18,7 @@ protocol ResultsStore {
 
 enum ResultsStoreAction {
     case processResult(ExerciseResult)
+    case setLearningStep(LearningStep)
 }
 
 extension ResultsStore where Self: ResultsStoreImpl {
@@ -52,6 +53,8 @@ class ResultsStoreImpl: ResultsStore {
         switch action {
         case .processResult(let result):
             handle_processResult(result)
+        case .setLearningStep(let learningStep):
+            handle_setLearningStep(learningStep)
         }
     }
     
@@ -76,6 +79,10 @@ class ResultsStoreImpl: ResultsStore {
         if result.correct {
             pointsSubject.onNext(priorCorrectValue + 1)
         }
+    }
+    
+    private func handle_setLearningStep(_ learningStep: LearningStep) {
+        learningStepSubject.onNext(learningStep)
     }
     
 }

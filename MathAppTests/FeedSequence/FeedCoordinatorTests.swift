@@ -13,6 +13,15 @@ import RxSwift
 
 class FeedCoordinatorTests: XCTestCase {
     
+    func test_start_learningStepLoaded_shouldSetLearningStep() {
+        let mockResultsStore = FakeResultsStore()
+        let coordinator = composeSUT(fakeResultsStore: mockResultsStore)
+        
+        coordinator.start()
+        
+        XCTAssertEqual(mockResultsStore.setLearningStep_callCount, 1)
+    }
+    
     func test_start_conceptIntroLearningStep_shouldShowConceptIntro() {
         let mockContainerVC = FakeContainerViewController()
         let coordinator = composeSUT(fakeContainerViewController: mockContainerVC, stubLearningStep: conceptIntroLS1)
@@ -80,6 +89,7 @@ class FeedCoordinatorTests: XCTestCase {
     func composeSUT(fakeContainerViewController: ContainerViewController? = nil,
                     fakeLearningStepStore: FakeLearningStepStore? = nil,
                     fakeExerciseStore: FakeFeedExercisesStore? = nil,
+                    fakeResultsStore: FakeResultsStore? = nil,
                     stubLearningStep: LearningStep? = nil,
                     stubExercises: [Exercise]? = nil,
                     stubProgressState: ProgressState? = nil) -> FeedCoordinator {
@@ -100,7 +110,7 @@ class FeedCoordinatorTests: XCTestCase {
             exercisesStore.exercises = Observable.just(.loaded([Exercise.exercise1, Exercise.exercise2, Exercise.exercise3]))
         }
         
-        let resultsStore = FakeResultsStore()
+        let resultsStore = fakeResultsStore ?? FakeResultsStore()
         resultsStore.learningStep = Observable.just(stubLearningStep ?? conceptIntroLS1)
         if let progressState = stubProgressState {
             resultsStore.progressState = Observable.just(progressState)

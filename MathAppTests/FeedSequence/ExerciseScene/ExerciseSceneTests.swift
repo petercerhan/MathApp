@@ -57,7 +57,8 @@ class ExerciseSceneTests: XCTestCase {
         vc.loadViewIfNeeded()
         vc.choice1Button.sendActions(for: .touchUpInside)
         
-        mockStore.verifyProcessResultDispatched(correct: true)
+        XCTAssertEqual(mockStore.processResult_callCount, 1)
+        XCTAssertEqual(mockStore.processResult_result.first?.correct, true)
     }
     
     func test_firstChoiceSelected_firstChoiceIncorrect_shouldDispatchIncorrectResult() {
@@ -68,7 +69,8 @@ class ExerciseSceneTests: XCTestCase {
         vc.loadViewIfNeeded()
         vc.choice1Button.sendActions(for: .touchUpInside)
         
-        mockStore.verifyProcessResultDispatched(correct: false)
+        XCTAssertEqual(mockStore.processResult_callCount, 1)
+        XCTAssertEqual(mockStore.processResult_result.first?.correct, false)
     }
     
     func test_secondChoiceSelected_secondChoiceCorrect_shouldDispatchCorrectResult() {
@@ -79,7 +81,8 @@ class ExerciseSceneTests: XCTestCase {
         vc.loadViewIfNeeded()
         vc.choice2Button.sendActions(for: .touchUpInside)
         
-        mockStore.verifyProcessResultDispatched(correct: true)
+        XCTAssertEqual(mockStore.processResult_callCount, 1)
+        XCTAssertEqual(mockStore.processResult_result.first?.correct, true)
     }
     
     func test_secondChoiceSelected_secondChoiceIncorrect_shouldDispatchIncorrectResult() {
@@ -90,7 +93,8 @@ class ExerciseSceneTests: XCTestCase {
         vc.loadViewIfNeeded()
         vc.choice2Button.sendActions(for: .touchUpInside)
         
-        mockStore.verifyProcessResultDispatched(correct: false)
+        XCTAssertEqual(mockStore.processResult_callCount, 1)
+        XCTAssertEqual(mockStore.processResult_result.first?.correct, false)
     }
     
     func test_thirdChoiceSelected_thirdChoiceCorrect_shouldDispatchCorrectResult() {
@@ -101,7 +105,8 @@ class ExerciseSceneTests: XCTestCase {
         vc.loadViewIfNeeded()
         vc.choice3Button.sendActions(for: .touchUpInside)
         
-        mockStore.verifyProcessResultDispatched(correct: true)
+        XCTAssertEqual(mockStore.processResult_callCount, 1)
+        XCTAssertEqual(mockStore.processResult_result.first?.correct, true)
     }
     
     func test_thirdChoiceSelected_thirdChoiceIncorrect_shouldDispatchIncorrectResult() {
@@ -112,7 +117,8 @@ class ExerciseSceneTests: XCTestCase {
         vc.loadViewIfNeeded()
         vc.choice3Button.sendActions(for: .touchUpInside)
         
-        mockStore.verifyProcessResultDispatched(correct: false)
+        XCTAssertEqual(mockStore.processResult_callCount, 1)
+        XCTAssertEqual(mockStore.processResult_result.first?.correct, false)
     }
     
     func test_firstChoiceSelected_firstChoiceCorrect_showsFirstCorrectImage() {

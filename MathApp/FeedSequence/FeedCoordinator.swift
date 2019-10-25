@@ -66,6 +66,7 @@ class FeedCoordinator: Coordinator {
             //load learning step scene
             return
         }
+        resultsStore.dispatch(action: .setLearningStep(learningStep))
         if let conceptIntroStep = learningStep as? ConceptIntroLearningStep {
             showConceptIntroScene(conceptIntro: conceptIntroStep.conceptIntro)
         }
