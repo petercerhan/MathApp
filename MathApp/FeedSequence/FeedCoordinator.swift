@@ -19,6 +19,7 @@ class FeedCoordinator: Coordinator {
     private let resultsStore: ResultsStore
     private let learningStepStore: LearningStepStore
     private let exercisesStore: FeedExercisesStore
+    private let userConceptEDS: UserConceptExternalDataService
     
     //MARK: - State
     
@@ -36,7 +37,8 @@ class FeedCoordinator: Coordinator {
          randomizationService: RandomizationService,
          resultsStore: ResultsStore,
          learningStepStore: LearningStepStore,
-         exercisesStore: FeedExercisesStore)
+         exercisesStore: FeedExercisesStore,
+         userConceptEDS: UserConceptExternalDataService)
     {
         self.compositionRoot = compositionRoot
         self.containerVC = containerVC
@@ -44,6 +46,7 @@ class FeedCoordinator: Coordinator {
         self.resultsStore = resultsStore
         self.learningStepStore = learningStepStore
         self.exercisesStore = exercisesStore
+        self.userConceptEDS = userConceptEDS
         
         if let feedContainer = containerVC as? FeedContainerViewController {
             feedContainer.viewModel.setDelegate(self)
@@ -96,10 +99,12 @@ class FeedCoordinator: Coordinator {
             return
         }
         if let conceptIntroStep = learningStep as? ConceptIntroLearningStep {
-            let levelUpItem = LevelUpItem(concept: conceptIntroStep.conceptIntro.concept, previousLevel: 0, newLevel: 1)
+            let concept = conceptIntroStep.conceptIntro.concept
+            let levelUpItem = LevelUpItem(concept: concept, previousLevel: 0, newLevel: 1)
             let vc = compositionRoot.composeLevelUpScene(delegate: self, levelUpItem: levelUpItem)
             containerVC.show(viewController: vc, animation: .fadeIn)
             exerciseQueue = Queue<Exercise>()
+            updateUserConceptLevel(conceptID: concept.id, newStrength: 1)
         } else {
             
             //Fall through
@@ -109,6 +114,11 @@ class FeedCoordinator: Coordinator {
             containerVC.show(viewController: vc, animation: .fadeIn)
             exerciseQueue = Queue<Exercise>()
         }
+    }
+    
+    private func updateUserConceptLevel(conceptID: Int, newStrength: Int) {
+        let fields = ["strength": "\(newStrength)"]
+        userConceptEDS.update(id: conceptID, fields: fields)
     }
     
     private func showNextExerciseScene(animation: TransitionAnimation) {

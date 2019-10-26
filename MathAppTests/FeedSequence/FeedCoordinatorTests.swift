@@ -84,6 +84,19 @@ class FeedCoordinatorTests: XCTestCase {
         XCTAssertEqual(levelUpVC.conceptLabel.text, "Stub rule")
     }
     
+    func test_exerciseRequestsNext_progressStateComplete_conceptIntroLS1_shouldUpdateUserConceptStrength() {
+        let stubProgressState = ProgressState(required: 5, correct: 5)
+        let mockUserConceptEDS = FakeUserConceptExternalDataService()
+        let coordinator = composeSUT(stubProgressState: stubProgressState, fakeUserConceptEDS: mockUserConceptEDS)
+        
+        coordinator.start()
+        coordinator.next(TestExerciseViewModel(), correctAnswer: true)
+        
+        XCTAssertEqual(mockUserConceptEDS.update_callCount, 1)
+        XCTAssertEqual(mockUserConceptEDS.update_id.first, 1)
+        XCTAssertEqual(mockUserConceptEDS.update_fields.first?["strength"], "1")
+    }
+    
     //MARK: - SUT Composition
     
     func composeSUT(fakeContainerViewController: ContainerViewController? = nil,
@@ -92,7 +105,8 @@ class FeedCoordinatorTests: XCTestCase {
                     fakeResultsStore: FakeResultsStore? = nil,
                     stubLearningStep: LearningStep? = nil,
                     stubExercises: [Exercise]? = nil,
-                    stubProgressState: ProgressState? = nil) -> FeedCoordinator {
+                    stubProgressState: ProgressState? = nil,
+                    fakeUserConceptEDS: FakeUserConceptExternalDataService? = nil) -> FeedCoordinator {
         
         let containerVC = fakeContainerViewController ?? FakeContainerViewController()
         
@@ -116,12 +130,15 @@ class FeedCoordinatorTests: XCTestCase {
             resultsStore.progressState = Observable.just(progressState)
         }
         
+        let userConceptEDS = fakeUserConceptEDS ?? FakeUserConceptExternalDataService()
+        
         return FeedCoordinator(compositionRoot: CompositionRoot(),
                                    containerVC: containerVC,
                                    randomizationService: RandomizationServiceImpl(),
                                    resultsStore: resultsStore,
                                    learningStepStore: learningStepStore,
-                                   exercisesStore: exercisesStore)
+                                   exercisesStore: exercisesStore,
+                                   userConceptEDS: userConceptEDS)
     }
     
     //MARK: - Stubs

@@ -12,6 +12,7 @@ import SQLite
 protocol UserConceptRepository {
     func list() -> [UserConcept]
     func get(conceptID: Int) -> UserConcept?
+    func set(id: Int, fields: [String: String])
 }
 
 class UserConceptRepositoryImpl: UserConceptRepository {
@@ -47,4 +48,13 @@ class UserConceptRepositoryImpl: UserConceptRepository {
         return UserConcept.createFromQueryResult(userConceptRow)
     }
     
+    func set(id: Int, fields: [String: String]) {
+        let query = UserConcept.table.filter(UserConcept.column_id == Int64(id))
+        
+        if let newStrengthData = fields["strength"], let newStrength = Int64(newStrengthData) {
+            _ = try? databaseService.db.run(query.update(UserConcept.column_strength <- newStrength))
+        }
+    }
+    
 }
+

@@ -35,6 +35,11 @@ class CompositionRoot {
         return ExerciseControllerImpl(userRepository: userRepository, exerciseStrategyFactory: exerciseStrategyFactory)
     }()
     
+    private(set) lazy var userConceptController: UserConceptController = {
+        let userConceptRepository = UserConceptRepositoryImpl(databaseService: databaseService)
+        return UserConceptControllerImpl(userConceptRepository: userConceptRepository)
+    }()
+    
     private(set) lazy var learningStepStore: LearningStepStore = {
         let learningStepEDS = LearningStepExternalDataServiceImpl(learningStepController: learningStepController)
         return LearningStepStoreImpl(learningStepExternalDataService: learningStepEDS)
@@ -64,12 +69,14 @@ class CompositionRoot {
         let resultsStore = ResultsStoreImpl()
         let exercisesStore = FeedExercisesStoreImpl(exerciseExternalDataService: ExerciseExternalDataServiceImpl(exerciseController: exerciseController))
         let containerVM = FeedContainerViewModel(delegate: nil, resultsStore: resultsStore)
+        let userConceptEDS = UserConceptExternalDataServiceImpl(userConceptController: userConceptController)
         return FeedCoordinator(compositionRoot: self,
                                    containerVC: FeedContainerViewController(viewModel: containerVM),
                                    randomizationService: RandomizationServiceImpl(),
                                    resultsStore: resultsStore,
                                    learningStepStore: learningStepStore,
-                                   exercisesStore: exercisesStore)
+                                   exercisesStore: exercisesStore,
+                                   userConceptEDS: userConceptEDS)
     }
     
     func composeExerciseScene(delegate: ExerciseViewModelDelegate,

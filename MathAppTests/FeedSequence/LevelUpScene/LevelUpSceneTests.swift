@@ -12,6 +12,10 @@ import XCTest
 
 class LevelUpSceneTests: XCTestCase {
     
+    func test_shouldSetConceptLevel() {
+        
+    }
+    
     func test_level0To1_shouldShow0to1Transition() {
         let stubLevelUpItem = LevelUpItem(concept: Concept.constantRule, previousLevel: 0, newLevel: 1)
         let vc = composeSUT(stubLevelUpItem: stubLevelUpItem)

@@ -17,9 +17,17 @@ class FakeUserConceptRepository: UserConceptRepository {
         return list_stubUserConcepts
     }
     
-    
     func get(conceptID: Int) -> UserConcept? {
         return nil
+    }
+    
+    
+    var set_callCount = 0
+    var set_fields = [[String: String]]()
+    
+    func set(id: Int, fields: [String: String]) {
+        set_callCount += 1
+        set_fields.append(fields)
     }
     
 }
