@@ -108,6 +108,17 @@ class FeedCoordinatorTests: XCTestCase {
         XCTAssertEqual(mockLearningStepStore.next_callCount, 1)
     }
     
+    func test_levelUpRequestsNext_conceptIntroLearningStep_shouldShowConceptIntro() {
+        let mockContainerVC = FakeContainerViewController()
+        let coordinator = composeSUT(fakeContainerViewController: mockContainerVC, stubLearningStep: conceptIntroLS1)
+        
+        coordinator.start()
+        coordinator.next(TestLevelUpViewModel())
+        
+        XCTAssertEqual(mockContainerVC.show_callCount, 2)
+        mockContainerVC.verifyDidShow(viewControllerType: ConceptIntroViewController.self)
+    }
+    
     //MARK: - SUT Composition
     
     func composeSUT(fakeContainerViewController: ContainerViewController? = nil,
