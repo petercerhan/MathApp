@@ -49,7 +49,6 @@
 		6E74FD52231C87F800730AEB /* FeedContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E74FD50231C87F800730AEB /* FeedContainerViewController.swift */; };
 		6E74FD53231C87F800730AEB /* FeedContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E74FD51231C87F800730AEB /* FeedContainerViewController.xib */; };
 		6E84161B232B213D0035F381 /* FeedPackageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E84161A232B213D0035F381 /* FeedPackageStore.swift */; };
-		6E883F8F233D8301004F0D0E /* FeedPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E883F8E233D8301004F0D0E /* FeedPackage.swift */; };
 		6E883F97233D92F2004F0D0E /* ConceptIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E883F95233D92F2004F0D0E /* ConceptIntroViewController.swift */; };
 		6E883F98233D92F2004F0D0E /* ConceptIntroViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E883F96233D92F2004F0D0E /* ConceptIntroViewController.xib */; };
 		6E883F9B233D9B96004F0D0E /* ConceptIntroSceneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E883F9A233D9B96004F0D0E /* ConceptIntroSceneTests.swift */; };
@@ -241,7 +240,6 @@
 		6E74FD50231C87F800730AEB /* FeedContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedContainerViewController.swift; sourceTree = "<group>"; };
 		6E74FD51231C87F800730AEB /* FeedContainerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedContainerViewController.xib; sourceTree = "<group>"; };
 		6E84161A232B213D0035F381 /* FeedPackageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPackageStore.swift; sourceTree = "<group>"; };
-		6E883F8E233D8301004F0D0E /* FeedPackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPackage.swift; sourceTree = "<group>"; };
 		6E883F95233D92F2004F0D0E /* ConceptIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptIntroViewController.swift; sourceTree = "<group>"; };
 		6E883F96233D92F2004F0D0E /* ConceptIntroViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConceptIntroViewController.xib; sourceTree = "<group>"; };
 		6E883F9A233D9B96004F0D0E /* ConceptIntroSceneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptIntroSceneTests.swift; sourceTree = "<group>"; };
@@ -657,14 +655,6 @@
 			path = ExternalData;
 			sourceTree = "<group>";
 		};
-		6E883F8D233D82E7004F0D0E /* FeedPackage */ = {
-			isa = PBXGroup;
-			children = (
-				6E883F8E233D8301004F0D0E /* FeedPackage.swift */,
-			);
-			path = FeedPackage;
-			sourceTree = "<group>";
-		};
 		6E883F94233D92CD004F0D0E /* ConceptIntroScene */ = {
 			isa = PBXGroup;
 			children = (
@@ -1029,7 +1019,6 @@
 		6EBE4EA0230B663F0047A880 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				6E883F8D233D82E7004F0D0E /* FeedPackage */,
 				6E84160A2329BD740035F381 /* Concept */,
 			);
 			path = Models;
@@ -1529,7 +1518,6 @@
 				6EC6674723249D850048068C /* UserConcept.swift in Sources */,
 				6EC6674223249C300048068C /* DatabaseService.swift in Sources */,
 				6EE60C5B23458DBD00B0322B /* LevelUpItem.swift in Sources */,
-				6E883F8F233D8301004F0D0E /* FeedPackage.swift in Sources */,
 				6EBE4EA4230B675B0047A880 /* Exercise+data.swift in Sources */,
 				6E1CCC6C235D37D300451CD7 /* NewMaterialState+sqlite.swift in Sources */,
 				6E1CCC6A235D0AC400451CD7 /* PracticeFamilyLearningStep.swift in Sources */,
