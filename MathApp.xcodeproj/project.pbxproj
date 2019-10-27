@@ -50,8 +50,6 @@
 		6E74FD53231C87F800730AEB /* FeedContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E74FD51231C87F800730AEB /* FeedContainerViewController.xib */; };
 		6E84161B232B213D0035F381 /* FeedPackageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E84161A232B213D0035F381 /* FeedPackageStore.swift */; };
 		6E883F8F233D8301004F0D0E /* FeedPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E883F8E233D8301004F0D0E /* FeedPackage.swift */; };
-		6E883F91233D85D6004F0D0E /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E883F90233D85D6004F0D0E /* FeedItem.swift */; };
-		6E883F93233D8674004F0D0E /* ConceptIntro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E883F92233D8674004F0D0E /* ConceptIntro.swift */; };
 		6E883F97233D92F2004F0D0E /* ConceptIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E883F95233D92F2004F0D0E /* ConceptIntroViewController.swift */; };
 		6E883F98233D92F2004F0D0E /* ConceptIntroViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E883F96233D92F2004F0D0E /* ConceptIntroViewController.xib */; };
 		6E883F9B233D9B96004F0D0E /* ConceptIntroSceneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E883F9A233D9B96004F0D0E /* ConceptIntroSceneTests.swift */; };
@@ -244,8 +242,6 @@
 		6E74FD51231C87F800730AEB /* FeedContainerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedContainerViewController.xib; sourceTree = "<group>"; };
 		6E84161A232B213D0035F381 /* FeedPackageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPackageStore.swift; sourceTree = "<group>"; };
 		6E883F8E233D8301004F0D0E /* FeedPackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPackage.swift; sourceTree = "<group>"; };
-		6E883F90233D85D6004F0D0E /* FeedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
-		6E883F92233D8674004F0D0E /* ConceptIntro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptIntro.swift; sourceTree = "<group>"; };
 		6E883F95233D92F2004F0D0E /* ConceptIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptIntroViewController.swift; sourceTree = "<group>"; };
 		6E883F96233D92F2004F0D0E /* ConceptIntroViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConceptIntroViewController.xib; sourceTree = "<group>"; };
 		6E883F9A233D9B96004F0D0E /* ConceptIntroSceneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptIntroSceneTests.swift; sourceTree = "<group>"; };
@@ -1033,9 +1029,6 @@
 		6EBE4EA0230B663F0047A880 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				6E883F90233D85D6004F0D0E /* FeedItem.swift */,
-				6E883F92233D8674004F0D0E /* ConceptIntro.swift */,
-				6EE60C5A23458DBD00B0322B /* LevelUpItem.swift */,
 				6E883F8D233D82E7004F0D0E /* FeedPackage */,
 				6E84160A2329BD740035F381 /* Concept */,
 			);
@@ -1247,6 +1240,7 @@
 			isa = PBXGroup;
 			children = (
 				6EE60C5D2345900900B0322B /* LevelUpViewController.swift */,
+				6EE60C5A23458DBD00B0322B /* LevelUpItem.swift */,
 				6EBC1BC52346B85100654285 /* LevelUpViewModel.swift */,
 				6EE60C5E2345900900B0322B /* LevelUpViewController.xib */,
 			);
@@ -1524,13 +1518,11 @@
 				6EC6670723233A140048068C /* InfoViewContentElement.swift in Sources */,
 				6EE60C502344399900B0322B /* PrepareFeedViewModel.swift in Sources */,
 				6EB0FEF2235BE822005F23DE /* ConceptIntroLearningStep.swift in Sources */,
-				6E883F91233D85D6004F0D0E /* FeedItem.swift in Sources */,
 				6EC666EE2321DFA60048068C /* Colors.swift in Sources */,
 				6E1E6B3722FFA97800AFB7A0 /* TransitionAnimation.swift in Sources */,
 				6EC6672F232464B20048068C /* ConceptMapViewController.swift in Sources */,
 				6EB933AA233073C700E38B52 /* LoadExercisesViewModel.swift in Sources */,
 				6EB0FEE1235BE1D9005F23DE /* UserRepository.swift in Sources */,
-				6E883F93233D8674004F0D0E /* ConceptIntro.swift in Sources */,
 				6EE60C4123441C3700B0322B /* User+sqlite.swift in Sources */,
 				6EB933A42330702C00E38B52 /* LoadExercisesViewController.swift in Sources */,
 				6EC666FE232324F70048068C /* Concept.swift in Sources */,

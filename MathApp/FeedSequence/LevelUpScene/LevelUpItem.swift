@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct LevelUpItem: FeedItem {
+struct LevelUpItem {
     let concept: Concept
     let previousLevel: Int
     let newLevel: Int
