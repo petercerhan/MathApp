@@ -176,7 +176,7 @@ class TestLoadExercisesViewModel: LoadExercisesViewModel {
 
 class TestConceptIntroViewModel: ConceptIntroViewModel {
     init() {
-        super.init(delegate: FakeConceptIntroViewModelDelegate(), conceptIntro: ConceptIntro(concept: Concept.constantRule))
+        super.init(delegate: FakeConceptIntroViewModelDelegate(), conceptIntro: ConceptIntroLearningStep.createStub())
     }
 }
 

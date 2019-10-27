@@ -14,19 +14,19 @@ import iosMath
 class ConceptIntroSceneTests: XCTestCase {
     
     func test_constantRule_displaysConstantRuleDescription() {
-        let conceptIntro = ConceptIntro(concept: Concept.constantRule)
+        let conceptIntro = ConceptIntroLearningStep.createWithConcept(concept: Concept.constantRule)
         let vm = ConceptIntroViewModel(delegate: FakeConceptIntroViewModelDelegate(), conceptIntro: conceptIntro)
         let vc = ConceptIntroViewController(viewModel: vm)
         
         vc.loadViewIfNeeded()
         
-        XCTAssertEqual(vc.conceptNameLabel.text, conceptIntro.concept.name)
-        XCTAssertEqual(vc.conceptDescriptionLabel.text, conceptIntro.concept.description)
-        XCTAssertEqual(vc.ruleLatexLabel.latex, conceptIntro.concept.rule)
+        XCTAssertEqual(vc.conceptNameLabel.text, conceptIntro.userConcept.concept.name)
+        XCTAssertEqual(vc.conceptDescriptionLabel.text, conceptIntro.userConcept.concept.description)
+        XCTAssertEqual(vc.ruleLatexLabel.latex, conceptIntro.userConcept.concept.rule)
     }
     
     func test_nextButton_shouldRequestNext() {
-        let conceptIntro = ConceptIntro(concept: Concept.constantRule)
+        let conceptIntro = ConceptIntroLearningStep.createWithConcept(concept: Concept.constantRule)
         let mockDelegate = FakeConceptIntroViewModelDelegate()
         let vm = ConceptIntroViewModel(delegate: mockDelegate, conceptIntro: conceptIntro)
         let vc = ConceptIntroViewController(viewModel: vm)

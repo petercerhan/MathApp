@@ -22,7 +22,7 @@ class NewMaterialLearningStepStrategyTests: XCTestCase {
             XCTFail("Learning step is not concept intro")
             return
         }
-        XCTAssertEqual(conceptIntroStep.conceptIntro.concept.id, 1)
+        XCTAssertEqual(conceptIntroStep.userConcept.concept.id, 1)
     }
     
     func test_scenario1_shouldSetFocusAs10() {
@@ -45,7 +45,7 @@ class NewMaterialLearningStepStrategyTests: XCTestCase {
             XCTFail("Learning step is not concept intro")
             return
         }
-        XCTAssertEqual(conceptIntroStep.conceptIntro.concept.id, 2)
+        XCTAssertEqual(conceptIntroStep.userConcept.concept.id, 2)
     }
     
     func test_scenario2_shouldSetFocusAs20() {

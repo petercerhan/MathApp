@@ -71,11 +71,11 @@ class FeedCoordinator: Coordinator {
         }
         resultsStore.dispatch(action: .setLearningStep(learningStep))
         if let conceptIntroStep = learningStep as? ConceptIntroLearningStep {
-            showConceptIntroScene(conceptIntro: conceptIntroStep.conceptIntro)
+            showConceptIntroScene(conceptIntro: conceptIntroStep)
         }
     }
     
-    private func showConceptIntroScene(conceptIntro: ConceptIntro) {
+    private func showConceptIntroScene(conceptIntro: ConceptIntroLearningStep) {
         let vc = compositionRoot.composeConceptIntroScene(delegate: self, conceptIntro: conceptIntro)
         containerVC.show(viewController: vc, animation: .fadeIn)
         exerciseQueue = Queue<Exercise>()
@@ -99,12 +99,12 @@ class FeedCoordinator: Coordinator {
             return
         }
         if let conceptIntroStep = learningStep as? ConceptIntroLearningStep {
-            let concept = conceptIntroStep.conceptIntro.concept
+            let concept = conceptIntroStep.userConcept.concept
             let levelUpItem = LevelUpItem(concept: concept, previousLevel: 0, newLevel: 1)
             let vc = compositionRoot.composeLevelUpScene(delegate: self, levelUpItem: levelUpItem)
             containerVC.show(viewController: vc, animation: .fadeIn)
             exerciseQueue = Queue<Exercise>()
-            updateUserConceptLevel(conceptID: concept.id, newStrength: 1)
+            updateUserConceptLevel(id: concept.id, newStrength: 1)
         } else {
             
             //Fall through
@@ -116,9 +116,9 @@ class FeedCoordinator: Coordinator {
         }
     }
     
-    private func updateUserConceptLevel(conceptID: Int, newStrength: Int) {
+    private func updateUserConceptLevel(id: Int, newStrength: Int) {
         let fields = ["strength": "\(newStrength)"]
-        userConceptEDS.update(id: conceptID, fields: fields)
+        userConceptEDS.update(id: id, fields: fields)
     }
     
     private func showNextExerciseScene(animation: TransitionAnimation) {

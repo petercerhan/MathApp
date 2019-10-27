@@ -24,12 +24,13 @@ class ConceptIntroViewModel {
     
     //MARK: - Initialization
     
-    init(delegate: ConceptIntroViewModelDelegate, conceptIntro: ConceptIntro) {
+    init(delegate: ConceptIntroViewModelDelegate, conceptIntro: ConceptIntroLearningStep) {
         self.delegate = delegate
         
-        name = conceptIntro.concept.name
-        description = conceptIntro.concept.description
-        ruleLatex = conceptIntro.concept.rule
+        let concept = conceptIntro.userConcept.concept
+        name = concept.name
+        description = concept.description
+        ruleLatex = concept.rule
     }
     
     //MARK: - ConceptIntroViewModel Interface

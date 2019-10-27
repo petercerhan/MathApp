@@ -54,7 +54,7 @@ class LearningStepStoreTests: XCTestCase {
             XCTFail("Latest value is not concept intro")
             return
         }
-        XCTAssertEqual(conceptIntro.conceptIntro.concept.id, 2)
+        XCTAssertEqual(conceptIntro.userConcept.concept.id, 2)
     }
     
     //MARK: - SUT Composition

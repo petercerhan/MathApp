@@ -64,8 +64,7 @@ class NewMaterialLearningStepStrategy: LearningStepStrategy {
         
         if userConcept1.strength == 0 {
             newMaterialStateRepository.setFocus(concept1ID: userConcept1.conceptID, concept2ID: 0)
-            let conceptIntro = ConceptIntro(concept: userConcept1.concept)
-            return ConceptIntroLearningStep(conceptIntro: conceptIntro)
+            return ConceptIntroLearningStep(userConcept: userConcept1)
         }
         
         if let nextStep = learningStepForContinuedTwoConceptPractice(userConcept1: userConcept1) {
@@ -107,8 +106,7 @@ class NewMaterialLearningStepStrategy: LearningStepStrategy {
             let userConcept2 = userConcept2,
             userConcept2.strength == 0
         {
-            let conceptIntro = ConceptIntro(concept: userConcept2.concept)
-            return ConceptIntroLearningStep(conceptIntro: conceptIntro)
+            return ConceptIntroLearningStep(userConcept: userConcept2)
         } else {
             return nil
         }
