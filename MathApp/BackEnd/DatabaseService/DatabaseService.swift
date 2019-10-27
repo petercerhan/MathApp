@@ -18,7 +18,6 @@ protocol DatabaseService {
     
     func getUserConcepts() -> [UserConcept]
     
-    func incrementStrengthForUserConcept(conceptID: Int)
     func decrementStrengthForUserConcept(conceptID: Int)
     
     func getExercises(forConceptID conceptID: Int) -> [Exercise]
@@ -76,27 +75,6 @@ class DatabaseServiceImpl: DatabaseService {
             return UserConcept.createFromQueryResult(row)
         }
         return result ?? [UserConcept]()
-    }
-    
-    func incrementStrengthForUserConcept(conceptID: Int) {
-//        let userConceptQuery = userConceptsTable.filter(UserConcept.column_conceptID == Int64(conceptID))
-//        guard let userConceptRow = try? db.pluck(userConceptQuery) else {
-//            return
-//        }
-//        let priorStrength = userConceptRow[UserConcept.column_strength]
-//        let newStrength = min(priorStrength + 1, 3)
-//        let completeStatusCode = Int64(EnrichedUserConcept.Status.introductionComplete.rawValue)
-//        
-//        _ = try? db.run(userConceptQuery.update(UserConcept.column_strength <- newStrength,
-//                                                UserConcept.column_status <- completeStatusCode,
-//                                                UserConcept.column_exercise_result_0 <- 0,
-//                                                UserConcept.column_exercise_result_1 <- 0,
-//                                                UserConcept.column_exercise_result_2 <- 0,
-//                                                UserConcept.column_exercise_result_3 <- 0,
-//                                                UserConcept.column_exercise_result_4 <- 0,
-//                                                UserConcept.column_exercise_result_5 <- 0,
-//                                                UserConcept.column_exercise_result_6 <- 0,
-//                                                UserConcept.column_latest_result_index <- 6))
     }
     
     func decrementStrengthForUserConcept(conceptID: Int) {

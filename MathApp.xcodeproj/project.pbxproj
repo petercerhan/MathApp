@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		6E00E487233FEAD500BFF274 /* LoadState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E00E486233FEAD500BFF274 /* LoadState.swift */; };
-		6E00E489233FF17800BFF274 /* FeedPackage+stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E00E488233FF17800BFF274 /* FeedPackage+stubs.swift */; };
 		6E01F084234ECD0600371D0C /* TestingAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E01F083234ECD0600371D0C /* TestingAppDelegate.swift */; };
 		6E01F086234ECD9B00371D0C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E01F085234ECD9B00371D0C /* main.swift */; };
 		6E0ADF42234927F1004B4348 /* FakeRandomizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0ADF41234927F1004B4348 /* FakeRandomizationService.swift */; };
@@ -163,7 +162,6 @@
 		6EE1AC41235FC410008546DB /* Concept+stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE1AC40235FC410008546DB /* Concept+stubs.swift */; };
 		6EE1AC47235FE7A0008546DB /* ExerciseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE1AC46235FE7A0008546DB /* ExerciseRepository.swift */; };
 		6EE60C4123441C3700B0322B /* User+sqlite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE60C4023441C3700B0322B /* User+sqlite.swift */; };
-		6EE60C43234420A900B0322B /* EnrichedUserConcept.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE60C42234420A900B0322B /* EnrichedUserConcept.swift */; };
 		6EE60C492344347A00B0322B /* PrepareFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE60C472344347A00B0322B /* PrepareFeedViewController.swift */; };
 		6EE60C4A2344347A00B0322B /* PrepareFeedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EE60C482344347A00B0322B /* PrepareFeedViewController.xib */; };
 		6EE60C4E2344370500B0322B /* PrepareFeedSceneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE60C4D2344370500B0322B /* PrepareFeedSceneTests.swift */; };
@@ -195,7 +193,6 @@
 /* Begin PBXFileReference section */
 		5D09B98DEB05D4438C6DF54D /* Pods-MathAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MathAppTests.debug.xcconfig"; path = "Target Support Files/Pods-MathAppTests/Pods-MathAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6E00E486233FEAD500BFF274 /* LoadState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadState.swift; sourceTree = "<group>"; };
-		6E00E488233FF17800BFF274 /* FeedPackage+stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedPackage+stubs.swift"; sourceTree = "<group>"; };
 		6E01F083234ECD0600371D0C /* TestingAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingAppDelegate.swift; sourceTree = "<group>"; };
 		6E01F085234ECD9B00371D0C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		6E0ADF41234927F1004B4348 /* FakeRandomizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeRandomizationService.swift; sourceTree = "<group>"; };
@@ -354,7 +351,6 @@
 		6EE1AC40235FC410008546DB /* Concept+stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Concept+stubs.swift"; sourceTree = "<group>"; };
 		6EE1AC46235FE7A0008546DB /* ExerciseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseRepository.swift; sourceTree = "<group>"; };
 		6EE60C4023441C3700B0322B /* User+sqlite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+sqlite.swift"; sourceTree = "<group>"; };
-		6EE60C42234420A900B0322B /* EnrichedUserConcept.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrichedUserConcept.swift; sourceTree = "<group>"; };
 		6EE60C472344347A00B0322B /* PrepareFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepareFeedViewController.swift; sourceTree = "<group>"; };
 		6EE60C482344347A00B0322B /* PrepareFeedViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PrepareFeedViewController.xib; sourceTree = "<group>"; };
 		6EE60C4D2344370500B0322B /* PrepareFeedSceneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepareFeedSceneTests.swift; sourceTree = "<group>"; };
@@ -573,7 +569,6 @@
 			isa = PBXGroup;
 			children = (
 				6E74FD462318B53F00730AEB /* ExerciseChoiceConfiguration+stubs.swift */,
-				6E00E488233FF17800BFF274 /* FeedPackage+stubs.swift */,
 				6EBC1BC92346D41200654285 /* LevelUpItem+stubs.swift */,
 				6EB0FEFC235BF04E005F23DE /* UserConcept+stubs.swift */,
 				6EE1AC40235FC410008546DB /* Concept+stubs.swift */,
@@ -637,7 +632,6 @@
 		6E84161E232B22E10035F381 /* ExternalData */ = {
 			isa = PBXGroup;
 			children = (
-				6EE60C42234420A900B0322B /* EnrichedUserConcept.swift */,
 				6EAB211523613468007186A4 /* ExerciseExternalDataService.swift */,
 				6E3C9EEF235E765400CD81C9 /* LearningStepExternalDataService.swift */,
 				6EEEB6682364F176008D0FD6 /* UserConceptExternalDataService.swift */,
@@ -1530,7 +1524,6 @@
 				6EAB210823611E16007186A4 /* ExerciseStrategyFactory.swift in Sources */,
 				6E1CCC62235CEB0600451CD7 /* NewMaterialState.swift in Sources */,
 				6EEEB6692364F176008D0FD6 /* UserConceptExternalDataService.swift in Sources */,
-				6EE60C43234420A900B0322B /* EnrichedUserConcept.swift in Sources */,
 				6EBA303A230CADCB00E6DC54 /* AnimatedButton.swift in Sources */,
 				6E927E81231CA88600822EBA /* ResultsStore.swift in Sources */,
 				6EC6672B2324627E0048068C /* MenuViewModel.swift in Sources */,
@@ -1590,7 +1583,6 @@
 				6EC6670F232447C40048068C /* MenuCoordinatorTests.swift in Sources */,
 				6E74FD402318A1F500730AEB /* FakeExerciseViewModelDelegate.swift in Sources */,
 				6EE60C5523456DCF00B0322B /* FakePrepareFeedViewModelDelegate.swift in Sources */,
-				6E00E489233FF17800BFF274 /* FeedPackage+stubs.swift in Sources */,
 				6EC66717232451080048068C /* QuitableContainerViewControllerTests.swift in Sources */,
 				6EC66735232467840048068C /* FakeConceptMapViewModelDelegate.swift in Sources */,
 				6EBC1BC82346BBDA00654285 /* FakeLevelUpViewModelDelegate.swift in Sources */,
