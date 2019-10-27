@@ -98,6 +98,9 @@ class FeedCoordinator: Coordinator {
         guard let learningStep = latestValue(of: resultsStore.learningStep, disposeBag: disposeBag) else {
             return
         }
+        
+        learningStepStore.dispatch(action: .next)
+        
         if let conceptIntroStep = learningStep as? ConceptIntroLearningStep {
             let concept = conceptIntroStep.userConcept.concept
             let levelUpItem = LevelUpItem(concept: concept, previousLevel: 0, newLevel: 1)

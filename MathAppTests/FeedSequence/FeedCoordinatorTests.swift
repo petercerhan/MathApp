@@ -97,6 +97,17 @@ class FeedCoordinatorTests: XCTestCase {
         XCTAssertEqual(mockUserConceptEDS.update_fields.first?["strength"], "1")
     }
     
+    func test_levelUp_shouldGetNextLearningStep() {
+        let mockLearningStepStore = FakeLearningStepStore()
+        let stubProgressState = ProgressState(required: 5, correct: 5)
+        let coordinator = composeSUT(fakeLearningStepStore: mockLearningStepStore, stubProgressState: stubProgressState)
+        
+        coordinator.start()
+        coordinator.next(TestExerciseViewModel(), correctAnswer: true)
+        
+        XCTAssertEqual(mockLearningStepStore.next_callCount, 1)
+    }
+    
     //MARK: - SUT Composition
     
     func composeSUT(fakeContainerViewController: ContainerViewController? = nil,
