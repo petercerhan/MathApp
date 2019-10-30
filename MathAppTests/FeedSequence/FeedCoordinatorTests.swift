@@ -132,6 +132,18 @@ class FeedCoordinatorTests: XCTestCase {
         mockContainerVC.verifyDidShow(viewControllerType: ConceptIntroViewController.self)
     }
     
+    func test_levelUpRequestsNext_practiceTwoLearningStep_shouldShowPracticeIntro() {
+        let mockContainerVC = FakeContainerViewController()
+        let coordinator = composeSUT(fakeContainerViewController: mockContainerVC, stubLearningStep: practiceLS1_2)
+        
+        coordinator.start()
+        coordinator.next(TestLevelUpViewModel())
+        
+        XCTAssertEqual(mockContainerVC.show_callCount, 2)
+        mockContainerVC.verifyDidShow(viewControllerType: PracticeIntroViewController.self)
+    }
+    
+    
     //MARK: - SUT Composition
     
     func composeSUT(fakeContainerViewController: ContainerViewController? = nil,
@@ -179,6 +191,8 @@ class FeedCoordinatorTests: XCTestCase {
     //MARK: - Stubs
     
     var conceptIntroLS1: ConceptIntroLearningStep = ConceptIntroLearningStep.createWithConceptID(conceptID: 1)
+    
+    var practiceLS1_2: PracticeTwoConceptsLearningStep = PracticeTwoConceptsLearningStep.createStub(id1: 1, id2: 2)
     
 }
 

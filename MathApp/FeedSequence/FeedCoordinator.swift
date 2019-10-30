@@ -65,7 +65,6 @@ class FeedCoordinator: Coordinator {
     }
     
     func showNextLearningStepScene() {
-        
         guard let learningStep = latestValue(of: learningStepStore.learningStep, disposeBag: disposeBag)?.data else {
             //load learning step scene
             return
@@ -73,6 +72,9 @@ class FeedCoordinator: Coordinator {
         resultsStore.dispatch(action: .setLearningStep(learningStep))
         if let conceptIntroStep = learningStep as? ConceptIntroLearningStep {
             showConceptIntroScene(conceptIntro: conceptIntroStep)
+        }
+        else if let _ = learningStep as? PracticeTwoConceptsLearningStep {
+            showPracticeIntroScene()
         }
         else {
             print("did not recognize learning step type \(learningStep)")
@@ -84,6 +86,12 @@ class FeedCoordinator: Coordinator {
         containerVC.show(viewController: vc, animation: .fadeIn)
         exerciseQueue = Queue<Exercise>()
         exercisesStore.dispatch(action: .refresh)
+    }
+    
+    private func showPracticeIntroScene() {
+        let vc = compositionRoot.composePracticeIntroScene()
+        containerVC.show(viewController: vc, animation: .fadeIn)
+        exerciseQueue = Queue<Exercise>()
     }
     
     private func showNextFeedScene(animation: TransitionAnimation) {
