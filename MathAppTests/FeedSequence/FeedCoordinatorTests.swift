@@ -154,6 +154,19 @@ class FeedCoordinatorTests: XCTestCase {
         XCTAssertEqual(mockExerciseStore.refresh_callCount, 1)
     }
     
+    //MARK: - Practice Intro
+    
+    func test_practiceIntroRequestsNext_shouldShowExerciseScene() {
+        let stubExercises = [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3]
+        let mockContainerVC = FakeContainerViewController()
+        let coordinator = composeSUT(fakeContainerViewController: mockContainerVC, stubLearningStep: conceptIntroLS1, stubExercises: stubExercises)
+        
+        coordinator.start()
+        coordinator.next(TestPracticeIntroViewModel())
+        
+        mockContainerVC.verifyDidShow(viewControllerType: ExerciseViewController.self)
+    }
+    
     
     //MARK: - SUT Composition
     
@@ -243,6 +256,12 @@ class TestConceptIntroViewModel: ConceptIntroViewModel {
 class TestLevelUpViewModel: LevelUpViewModel {
     init() {
         super.init(delegate: FakeLevelUpViewModelDelegate(), levelUpItem: LevelUpItem.constantRuleItem)
+    }
+}
+
+class TestPracticeIntroViewModel: PracticeIntroViewModel {
+    init() {
+        super.init(delegate: FakePracticeIntroViewModelDelegate())
     }
 }
 

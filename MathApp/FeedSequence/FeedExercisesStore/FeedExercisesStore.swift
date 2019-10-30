@@ -55,7 +55,6 @@ class FeedExercisesStoreImpl: FeedExercisesStore {
         exercisesSubject.onNext(.loading)
         exerciseExternalDataService.getNext()
             .subscribe(onNext: { [unowned self] exercises in
-                print("store received exercises with count \(exercises.count)")
                 self.exercisesSubject.onNext(.loaded(exercises))
             })
             .disposed(by: disposeBag)

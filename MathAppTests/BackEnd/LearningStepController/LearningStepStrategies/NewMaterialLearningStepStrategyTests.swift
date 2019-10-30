@@ -71,6 +71,7 @@ class NewMaterialLearningStepStrategyTests: XCTestCase {
         XCTAssertEqual(conceptIntroStep.userConcept.concept.id, 2)
     }
     
+    //Continue second concept practice after single level up (remove?)
     func test_scenario3_shouldReturnPracticeConcept2() {
         let strategy = composeSUT(stubUserConcepts: userConceptsWithLevels(2, 1, 0, 0, 0), focus1ID: 1, focus2ID: 2)
         
@@ -171,6 +172,20 @@ class NewMaterialLearningStepStrategyTests: XCTestCase {
         
         XCTAssertEqual(mockUserRepository.setLearningStrategy_callCount, 1)
         XCTAssertEqual(mockUserRepository.setLearningStrategy_strategy.first, .practiceFamily)
+    }
+    
+    func test_scenario7_shouldReturnPracticeFocus1And2() {
+        let stubUserConcepts = userConceptsWithLevels(1, 1, 0, 0, 0)
+        let strategy = composeSUT(stubUserConcepts: stubUserConcepts, focus1ID: 1, focus2ID: 2)
+        
+        let learningStep = strategy.nextLearningStep()
+        
+        guard let practiceStep = learningStep as? PracticeTwoConceptsLearningStep else {
+            XCTFail("Learning step is not practice two concepts. Is type \(learningStep.self)")
+            return
+        }
+        XCTAssertEqual(practiceStep.concept1ID, 1)
+        XCTAssertEqual(practiceStep.concept2ID, 2)
     }
     
     //MARK: - Cross Check Scenarios

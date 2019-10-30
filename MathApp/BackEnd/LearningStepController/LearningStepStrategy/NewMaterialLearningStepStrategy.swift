@@ -68,7 +68,7 @@ class NewMaterialLearningStepStrategy: LearningStepStrategy {
             return ConceptIntroLearningStep(userConcept: userConcept1)
         }
         
-        if let nextStep = learningStepForContinuedTwoConceptPractice(userConcept1: userConcept1) {
+        if let nextStep = learningStepForContinuedTwoConceptPractice(userConcept1: userConcept1, concept2ID: userConcept2?.conceptID) {
             print("continued two step practice")
             newMaterialStateRepository.setFocus(concept1ID: userConcept1.conceptID, concept2ID: 0)
             return nextStep
@@ -91,9 +91,9 @@ class NewMaterialLearningStepStrategy: LearningStepStrategy {
         return practiceFamilyLearningStep()
     }
     
-    private func learningStepForContinuedTwoConceptPractice(userConcept1: UserConcept) -> LearningStep? {
+    private func learningStepForContinuedTwoConceptPractice(userConcept1: UserConcept, concept2ID: Int?) -> LearningStep? {
         if userConcept1.strength == 1,
-            userConceptIsContinuedFromTwoConceptPractice(userConcept1)
+            userConceptIsContinuedFromTwoConceptPractice(userConcept1, concept2ID: concept2ID)
         {
             return PracticeOneConceptLearningStep(conceptID: userConcept1.conceptID)
         } else {
@@ -101,11 +101,17 @@ class NewMaterialLearningStepStrategy: LearningStepStrategy {
         }
     }
     
-    private func userConceptIsContinuedFromTwoConceptPractice(_ userConcept: UserConcept) -> Bool {
+    private func userConceptIsContinuedFromTwoConceptPractice(_ userConcept: UserConcept, concept2ID: Int?) -> Bool {
         if focus2ID == 0 {
             return false
         }
-        return (userConcept.conceptID == focus1ID || userConcept.conceptID == focus2ID)
+        let firstConceptIsFocussed = (userConcept.conceptID == focus1ID || userConcept.conceptID == focus2ID)
+        if concept2ID == nil {
+            return firstConceptIsFocussed
+        } else {
+            let secondConceptIsFocussed = (concept2ID! == focus1ID || concept2ID! == focus2ID)
+            return firstConceptIsFocussed && !secondConceptIsFocussed
+        }
     }
     
     private func learningStepForSecondStrength0(userConcept1: UserConcept) -> LearningStep? {

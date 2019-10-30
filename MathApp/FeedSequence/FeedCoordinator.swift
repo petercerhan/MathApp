@@ -266,9 +266,6 @@ extension FeedCoordinator: ConceptIntroViewModelDelegate {
 
 extension FeedCoordinator: LevelUpViewModelDelegate {
     func next(_ levelUpViewModel: LevelUpViewModel) {
-        
-        print("level up requests next")
-        
         showNextLearningStepScene()
     }
 }
@@ -277,6 +274,6 @@ extension FeedCoordinator: LevelUpViewModelDelegate {
 
 extension FeedCoordinator: PracticeIntroViewModelDelegate {
     func next(_ practiceIntroViewModel: PracticeIntroViewModel) {
-        
+        showNextFeedScene(animation: .fadeIn)
     }
 }
