@@ -15,9 +15,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var rootCoordinator: Coordinator!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-        print("Real App Delegate")
-        
         compositionRoot = CompositionRoot()
         rootCoordinator = compositionRoot.composeRootCoordinator()
         rootCoordinator.start()

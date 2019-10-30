@@ -65,13 +65,25 @@ class FeedCoordinator: Coordinator {
     }
     
     func showNextLearningStepScene() {
+        
+        print("show next learning step")
+        
         guard let learningStep = latestValue(of: learningStepStore.learningStep, disposeBag: disposeBag)?.data else {
             //load learning step scene
+            
+            print("could not get learning step")
+            
             return
         }
         resultsStore.dispatch(action: .setLearningStep(learningStep))
         if let conceptIntroStep = learningStep as? ConceptIntroLearningStep {
+            
+            print("got concept intro learning step")
+            
             showConceptIntroScene(conceptIntro: conceptIntroStep)
+        }
+        else {
+            print("did not recognize learning step type \(learningStep)")
         }
     }
     
@@ -95,11 +107,10 @@ class FeedCoordinator: Coordinator {
     }
     
     private func showLevelUpScene() {
+        
         guard let learningStep = latestValue(of: resultsStore.learningStep, disposeBag: disposeBag) else {
             return
         }
-        
-        learningStepStore.dispatch(action: .next)
         
         if let conceptIntroStep = learningStep as? ConceptIntroLearningStep {
             let concept = conceptIntroStep.userConcept.concept
@@ -117,6 +128,9 @@ class FeedCoordinator: Coordinator {
             containerVC.show(viewController: vc, animation: .fadeIn)
             exerciseQueue = Queue<Exercise>()
         }
+        
+        learningStepStore.dispatch(action: .next)
+        
     }
     
     private func updateUserConceptLevel(id: Int, newStrength: Int) {
@@ -248,6 +262,9 @@ extension FeedCoordinator: ConceptIntroViewModelDelegate {
 
 extension FeedCoordinator: LevelUpViewModelDelegate {
     func next(_ levelUpViewModel: LevelUpViewModel) {
+        
+        print("level up requests next")
+        
         showNextLearningStepScene()
     }
 }

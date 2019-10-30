@@ -59,6 +59,18 @@ class NewMaterialLearningStepStrategyTests: XCTestCase {
         XCTAssertEqual(mockNewMaterialStateRepository.setFocus_concept2ID.first, 0)
     }
     
+    func test_scenario2b_shouldReturnConceptIntro2() {
+        let strategy = composeSUT(stubUserConcepts: userConceptsWithLevels(1, 0, 0, 0, 0), focus1ID: 1, focus2ID: 0)
+        
+        let learningStep = strategy.nextLearningStep()
+        
+        guard let conceptIntroStep = learningStep as? ConceptIntroLearningStep else {
+            XCTFail("Learning step is not concept intro")
+            return
+        }
+        XCTAssertEqual(conceptIntroStep.userConcept.concept.id, 2)
+    }
+    
     func test_scenario3_shouldReturnPracticeConcept2() {
         let strategy = composeSUT(stubUserConcepts: userConceptsWithLevels(2, 1, 0, 0, 0), focus1ID: 1, focus2ID: 2)
         

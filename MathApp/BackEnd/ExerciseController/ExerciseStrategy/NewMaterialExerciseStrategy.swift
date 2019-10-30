@@ -30,9 +30,7 @@ class NewMaterialExerciseStrategy: ExerciseStrategy {
         let newMaterialState = newMaterialStateRepository.get()
         let concept1 = newMaterialState.focusConcept1ID
         let concept2 = newMaterialState.focusConcept2ID
-        
-        print("new material state gave 1: \(concept1), 2: \(concept2)")
-        
+
         if concept2 == 0 {
             return exerciseSetCalculator.getExercisesForConcept(conceptID: concept1)
         } else {
