@@ -36,6 +36,7 @@ class RootCoordinator: Coordinator {
     }
     
     func start() {
+        databaseService.reset()
         databaseService.setup()
 
         let vc = compositionRoot.composePrepareFeedScene(delegate: self)

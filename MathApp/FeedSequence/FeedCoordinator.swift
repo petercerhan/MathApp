@@ -66,20 +66,12 @@ class FeedCoordinator: Coordinator {
     
     func showNextLearningStepScene() {
         
-        print("show next learning step")
-        
         guard let learningStep = latestValue(of: learningStepStore.learningStep, disposeBag: disposeBag)?.data else {
             //load learning step scene
-            
-            print("could not get learning step")
-            
             return
         }
         resultsStore.dispatch(action: .setLearningStep(learningStep))
         if let conceptIntroStep = learningStep as? ConceptIntroLearningStep {
-            
-            print("got concept intro learning step")
-            
             showConceptIntroScene(conceptIntro: conceptIntroStep)
         }
         else {
@@ -117,8 +109,11 @@ class FeedCoordinator: Coordinator {
             let levelUpItem = LevelUpItem(concept: concept, previousLevel: 0, newLevel: 1)
             let vc = compositionRoot.composeLevelUpScene(delegate: self, levelUpItem: levelUpItem)
             containerVC.show(viewController: vc, animation: .fadeIn)
+
             exerciseQueue = Queue<Exercise>()
+            resultsStore.dispatch(action: .reset)
             updateUserConceptLevel(id: concept.id, newStrength: 1)
+
         } else {
             
             //Fall through

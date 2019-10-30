@@ -97,6 +97,8 @@ class FeedCoordinatorTests: XCTestCase {
         XCTAssertEqual(mockUserConceptEDS.update_fields.first?["strength"], "1")
     }
     
+    //MARK: - Level Up
+    
     func test_levelUp_shouldGetNextLearningStep() {
         let mockLearningStepStore = FakeLearningStepStore()
         let stubProgressState = ProgressState(required: 5, correct: 5)
@@ -106,6 +108,17 @@ class FeedCoordinatorTests: XCTestCase {
         coordinator.next(TestExerciseViewModel(), correctAnswer: true)
         
         XCTAssertEqual(mockLearningStepStore.next_callCount, 1)
+    }
+    
+    func test_levelUp_shouldResetResultsStore() {
+        let mockResultsStore = FakeResultsStore()
+        let stubProgressState = ProgressState(required: 5, correct: 5)
+        let coordinator = composeSUT(fakeResultsStore: mockResultsStore, stubProgressState: stubProgressState)
+
+        coordinator.start()
+        coordinator.next(TestExerciseViewModel(), correctAnswer: true)
+
+        XCTAssertEqual(mockResultsStore.reset_callCount, 1)
     }
     
     func test_levelUpRequestsNext_conceptIntroLearningStep_shouldShowConceptIntro() {

@@ -19,6 +19,7 @@ protocol ResultsStore {
 enum ResultsStoreAction {
     case processResult(ExerciseResult)
     case setLearningStep(LearningStep)
+    case reset
 }
 
 extension ResultsStore where Self: ResultsStoreImpl {
@@ -55,16 +56,22 @@ class ResultsStoreImpl: ResultsStore {
             handle_processResult(result)
         case .setLearningStep(let learningStep):
             handle_setLearningStep(learningStep)
+        case .reset:
+            handle_reset()
         }
     }
     
     private func handle_processResult(_ result: ExerciseResult) {
-        reevaluateProgressState(result: result)
+        recordResult(result: result)
+        reevaluateProgressState()
         reevaluatePoints(result: result)
     }
     
-    private func reevaluateProgressState(result: ExerciseResult) {
+    private func recordResult(result: ExerciseResult) {
         results.insert(result, at: 0)
+    }
+    
+    private func reevaluateProgressState() {
         let recentResults = Array(results.prefix(7))
         var correct = recentResults.reduce(0) { $0 + ($1.correct ? 1 : 0) }
         correct = min(correct, 5)
@@ -83,6 +90,11 @@ class ResultsStoreImpl: ResultsStore {
     
     private func handle_setLearningStep(_ learningStep: LearningStep) {
         learningStepSubject.onNext(learningStep)
+    }
+    
+    private func handle_reset() {
+        results = []
+        reevaluateProgressState()
     }
     
 }
