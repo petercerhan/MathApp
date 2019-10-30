@@ -89,9 +89,10 @@ class FeedCoordinator: Coordinator {
     }
     
     private func showPracticeIntroScene() {
-        let vc = compositionRoot.composePracticeIntroScene()
+        let vc = compositionRoot.composePracticeIntroScene(delegate: self)
         containerVC.show(viewController: vc, animation: .fadeIn)
         exerciseQueue = Queue<Exercise>()
+        exercisesStore.dispatch(action: .refresh)
     }
     
     private func showNextFeedScene(animation: TransitionAnimation) {
@@ -269,5 +270,13 @@ extension FeedCoordinator: LevelUpViewModelDelegate {
         print("level up requests next")
         
         showNextLearningStepScene()
+    }
+}
+
+//MARK: - PracticeIntroViewModelDelegate
+
+extension FeedCoordinator: PracticeIntroViewModelDelegate {
+    func next(_ practiceIntroViewModel: PracticeIntroViewModel) {
+        
     }
 }

@@ -143,6 +143,17 @@ class FeedCoordinatorTests: XCTestCase {
         mockContainerVC.verifyDidShow(viewControllerType: PracticeIntroViewController.self)
     }
     
+    func test_levelUpRequestsNext_practiceTwoLearningStep_shouldRefreshExercises() {
+        let mockExerciseStore = FakeFeedExercisesStore()
+        let coordinator = composeSUT(fakeExerciseStore: mockExerciseStore,
+                                     stubLearningStep: practiceLS1_2,
+                                     stubExercises: [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3])
+        
+        coordinator.start()
+        
+        XCTAssertEqual(mockExerciseStore.refresh_callCount, 1)
+    }
+    
     
     //MARK: - SUT Composition
     

@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PracticeIntroViewController" customModule="MathApp" customModuleProvider="target">
             <connections>
+                <outlet property="nextButton" destination="X9v-UP-oz0" id="Tuv-0f-G70"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

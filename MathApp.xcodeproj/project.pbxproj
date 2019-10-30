@@ -164,6 +164,9 @@
 		6EE57091236929E7002C63F8 /* PracticeTwoConceptsLearningStep+stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE57090236929E7002C63F8 /* PracticeTwoConceptsLearningStep+stubs.swift */; };
 		6EE5709523692B1D002C63F8 /* PracticeIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE5709323692B1D002C63F8 /* PracticeIntroViewController.swift */; };
 		6EE5709623692B1D002C63F8 /* PracticeIntroViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EE5709423692B1D002C63F8 /* PracticeIntroViewController.xib */; };
+		6EE5709923692EC1002C63F8 /* PracticeIntroSceneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE5709823692EC1002C63F8 /* PracticeIntroSceneTests.swift */; };
+		6EE5709B23692EF8002C63F8 /* FakePracticeIntroViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE5709A23692EF8002C63F8 /* FakePracticeIntroViewModelDelegate.swift */; };
+		6EE5709D23692F09002C63F8 /* PracticeIntroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE5709C23692F09002C63F8 /* PracticeIntroViewModel.swift */; };
 		6EE60C4123441C3700B0322B /* User+sqlite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE60C4023441C3700B0322B /* User+sqlite.swift */; };
 		6EE60C492344347A00B0322B /* PrepareFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE60C472344347A00B0322B /* PrepareFeedViewController.swift */; };
 		6EE60C4A2344347A00B0322B /* PrepareFeedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EE60C482344347A00B0322B /* PrepareFeedViewController.xib */; };
@@ -356,6 +359,9 @@
 		6EE57090236929E7002C63F8 /* PracticeTwoConceptsLearningStep+stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PracticeTwoConceptsLearningStep+stubs.swift"; sourceTree = "<group>"; };
 		6EE5709323692B1D002C63F8 /* PracticeIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeIntroViewController.swift; sourceTree = "<group>"; };
 		6EE5709423692B1D002C63F8 /* PracticeIntroViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PracticeIntroViewController.xib; sourceTree = "<group>"; };
+		6EE5709823692EC1002C63F8 /* PracticeIntroSceneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeIntroSceneTests.swift; sourceTree = "<group>"; };
+		6EE5709A23692EF8002C63F8 /* FakePracticeIntroViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakePracticeIntroViewModelDelegate.swift; sourceTree = "<group>"; };
+		6EE5709C23692F09002C63F8 /* PracticeIntroViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeIntroViewModel.swift; sourceTree = "<group>"; };
 		6EE60C4023441C3700B0322B /* User+sqlite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+sqlite.swift"; sourceTree = "<group>"; };
 		6EE60C472344347A00B0322B /* PrepareFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepareFeedViewController.swift; sourceTree = "<group>"; };
 		6EE60C482344347A00B0322B /* PrepareFeedViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PrepareFeedViewController.xib; sourceTree = "<group>"; };
@@ -961,6 +967,7 @@
 				6E74FD452318B52F00730AEB /* Models */,
 				6EBE4E9D230B64240047A880 /* ExerciseScene */,
 				6E883F99233D9B7B004F0D0E /* ConceptIntroScene */,
+				6EE5709723692EB0002C63F8 /* PracticeIntroScene */,
 				6EBC1BC22346B6CF00654285 /* LevelUpScene */,
 				6EB933A6233071A800E38B52 /* LoadExercisesSceneTests */,
 				6EC666F4232204170048068C /* InfoScene */,
@@ -1212,7 +1219,17 @@
 			isa = PBXGroup;
 			children = (
 				6EE5709323692B1D002C63F8 /* PracticeIntroViewController.swift */,
+				6EE5709C23692F09002C63F8 /* PracticeIntroViewModel.swift */,
 				6EE5709423692B1D002C63F8 /* PracticeIntroViewController.xib */,
+			);
+			path = PracticeIntroScene;
+			sourceTree = "<group>";
+		};
+		6EE5709723692EB0002C63F8 /* PracticeIntroScene */ = {
+			isa = PBXGroup;
+			children = (
+				6EE5709823692EC1002C63F8 /* PracticeIntroSceneTests.swift */,
+				6EE5709A23692EF8002C63F8 /* FakePracticeIntroViewModelDelegate.swift */,
 			);
 			path = PracticeIntroScene;
 			sourceTree = "<group>";
@@ -1493,6 +1510,7 @@
 				6E1CCC5D235CE73000451CD7 /* PracticeOneConceptLearningStep.swift in Sources */,
 				6E557C3B22FBA0DC00270F07 /* RootCoordinator.swift in Sources */,
 				6E84161B232B213D0035F381 /* FeedPackageStore.swift in Sources */,
+				6EE5709D23692F09002C63F8 /* PracticeIntroViewModel.swift in Sources */,
 				6EC666F8232208FA0048068C /* InfoViewModelImpl.swift in Sources */,
 				6EB0FEF5235BE9A0005F23DE /* LearningStepStrategy.swift in Sources */,
 				6E3659D62362756B008270F3 /* ProgressState.swift in Sources */,
@@ -1588,6 +1606,7 @@
 				6EE1AC38235E8996008546DB /* FakeLearningStepStore.swift in Sources */,
 				6EC666FC232209980048068C /* FakeInfoViewModelDelegate.swift in Sources */,
 				6E1E6B3222FFA8BD00AFB7A0 /* ContainerViewControllerTests.swift in Sources */,
+				6EE5709923692EC1002C63F8 /* PracticeIntroSceneTests.swift in Sources */,
 				6EBE4E9F230B644E0047A880 /* ExerciseSceneTests.swift in Sources */,
 				6EB0FEE7235BE561005F23DE /* LearningStepControllerTests.swift in Sources */,
 				6E927E83231CAE2400822EBA /* FakeResultsStore.swift in Sources */,
@@ -1633,6 +1652,7 @@
 				6EAB2114236133E8007186A4 /* FakeExerciseController.swift in Sources */,
 				6E927E7E231CA75100822EBA /* ResultsStoreTests.swift in Sources */,
 				6E74FD4E231C86FC00730AEB /* FeedContainerViewControllerTests.swift in Sources */,
+				6EE5709B23692EF8002C63F8 /* FakePracticeIntroViewModelDelegate.swift in Sources */,
 				6EB0FEFA235BEBF7005F23DE /* NewMaterialLearningStepStrategyTests.swift in Sources */,
 				6EE1AC41235FC410008546DB /* Concept+stubs.swift in Sources */,
 				6EBC1BCA2346D41200654285 /* LevelUpItem+stubs.swift in Sources */,

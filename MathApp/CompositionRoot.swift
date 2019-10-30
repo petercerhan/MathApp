@@ -95,8 +95,9 @@ class CompositionRoot {
         return ConceptIntroViewController(viewModel: vm)
     }
     
-    func composePracticeIntroScene() -> UIViewController {
-        return PracticeIntroViewController()
+    func composePracticeIntroScene(delegate: PracticeIntroViewModelDelegate) -> UIViewController {
+        let vm = PracticeIntroViewModel(delegate: delegate)
+        return PracticeIntroViewController(viewModel: vm)
     }
     
     func composeLevelUpScene(delegate: LevelUpViewModelDelegate, levelUpItem: LevelUpItem) -> UIViewController {
