@@ -31,6 +31,24 @@ class FeedCoordinatorTests: XCTestCase {
         mockContainerVC.verifyDidShow(viewControllerType: ConceptIntroViewController.self)
     }
     
+    //MARK: - Concept Intro Learning Step
+    
+    func test_conceptIntroLearningStep_shouldSetResultBenchmarks() {
+        let mockResultsStore = FakeResultsStore()
+        let coordinator = composeSUT(fakeResultsStore: mockResultsStore, stubLearningStep: conceptIntroLS1)
+        
+        coordinator.start()
+        
+        XCTAssertEqual(mockResultsStore.setBenchmarks_callCount, 1)
+        guard let benchmarks = mockResultsStore.setBenchmarks_benchmarks.first, let firstBenchmark = benchmarks.first else {
+            XCTFail("benchmarks not set")
+            return
+        }
+        XCTAssertEqual(firstBenchmark.conceptID, 1)
+        XCTAssertEqual(firstBenchmark.correctAnswersRequired, 5)
+        XCTAssertEqual(firstBenchmark.correctAnswersOutOf, 7)
+    }
+    
     func test_conceptIntroLearningStep_shouldRefreshExercises() {
         let mockExerciseStore = FakeFeedExercisesStore()
         let coordinator = composeSUT(fakeExerciseStore: mockExerciseStore,
@@ -52,6 +70,44 @@ class FeedCoordinatorTests: XCTestCase {
         
         mockContainerVC.verifyDidShow(viewControllerType: ExerciseViewController.self)
     }
+    
+    //MARK: - Practice Intro Learning Step
+    
+    func test_practiceTwoConceptsLearningStep_shouldSetResultBenchmarks() {
+        let mockResultsStore = FakeResultsStore()
+        let coordinator = composeSUT(fakeResultsStore: mockResultsStore, stubLearningStep: practiceLS1_2)
+        
+        coordinator.start()
+        
+        XCTAssertEqual(mockResultsStore.setBenchmarks_callCount, 1)
+        guard let benchmarks = mockResultsStore.setBenchmarks_benchmarks.first,
+            benchmarks.count > 1
+        else {
+            XCTFail("benchmarks not set")
+            return
+        }
+        XCTAssertEqual(benchmarks[0].conceptID, 1)
+        XCTAssertEqual(benchmarks[0].correctAnswersRequired, 4)
+        XCTAssertEqual(benchmarks[0].correctAnswersOutOf, 6)
+        XCTAssertEqual(benchmarks[1].conceptID, 2)
+        XCTAssertEqual(benchmarks[1].correctAnswersRequired, 4)
+        XCTAssertEqual(benchmarks[1].correctAnswersOutOf, 6)
+    }
+    
+    //MARK: - Practice Intro Delegate
+    
+    func test_practiceIntroRequestsNext_shouldShowExerciseScene() {
+        let stubExercises = [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3]
+        let mockContainerVC = FakeContainerViewController()
+        let coordinator = composeSUT(fakeContainerViewController: mockContainerVC, stubLearningStep: conceptIntroLS1, stubExercises: stubExercises)
+        
+        coordinator.start()
+        coordinator.next(TestPracticeIntroViewModel())
+        
+        mockContainerVC.verifyDidShow(viewControllerType: ExerciseViewController.self)
+    }
+    
+    //MARK: - Exercises
     
     func test_exerciseRequestsNext_progressStateNotComplete_shouldShowExerciseScene() {
         let stubProgressState = ProgressState(required: 2, correct: 5)
@@ -152,19 +208,6 @@ class FeedCoordinatorTests: XCTestCase {
         coordinator.start()
         
         XCTAssertEqual(mockExerciseStore.refresh_callCount, 1)
-    }
-    
-    //MARK: - Practice Intro
-    
-    func test_practiceIntroRequestsNext_shouldShowExerciseScene() {
-        let stubExercises = [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3]
-        let mockContainerVC = FakeContainerViewController()
-        let coordinator = composeSUT(fakeContainerViewController: mockContainerVC, stubLearningStep: conceptIntroLS1, stubExercises: stubExercises)
-        
-        coordinator.start()
-        coordinator.next(TestPracticeIntroViewModel())
-        
-        mockContainerVC.verifyDidShow(viewControllerType: ExerciseViewController.self)
     }
     
     

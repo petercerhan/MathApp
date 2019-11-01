@@ -27,6 +27,9 @@ class FakeResultsStore: ResultsStore {
     
     var reset_callCount = 0
     
+    var setBenchmarks_callCount = 0
+    var setBenchmarks_benchmarks = [[ResultBenchmark]]()
+    
     func dispatch(action: ResultsStoreAction) {
         switch action {
         case .setLearningStep:
@@ -36,6 +39,9 @@ class FakeResultsStore: ResultsStore {
             processResult_result.append(exerciseResult)
         case .reset:
             reset_callCount += 1
+        case .setBenchmarks(let benchmarks):
+            setBenchmarks_callCount += 1
+            setBenchmarks_benchmarks.append(benchmarks)
         }
     }
     

@@ -61,36 +61,45 @@ class FeedCoordinator: Coordinator {
     
     func start() {
         containerVC.loadViewIfNeeded()
-        showNextLearningStepScene()
+        beginNextLearningStep()
     }
     
-    func showNextLearningStepScene() {
+    func beginNextLearningStep() {
         guard let learningStep = latestValue(of: learningStepStore.learningStep, disposeBag: disposeBag)?.data else {
             //load learning step scene
             return
         }
         resultsStore.dispatch(action: .setLearningStep(learningStep))
         if let conceptIntroStep = learningStep as? ConceptIntroLearningStep {
-            showConceptIntroScene(conceptIntro: conceptIntroStep)
+            beginConceptIntroStep(conceptIntro: conceptIntroStep)
         }
-        else if let _ = learningStep as? PracticeTwoConceptsLearningStep {
-            showPracticeIntroScene()
+        else if let learningStep = learningStep as? PracticeTwoConceptsLearningStep {
+            beginPracticeTwoConceptsStep(learningStep: learningStep)
         }
         else {
             print("did not recognize learning step type \(learningStep)")
         }
     }
     
-    private func showConceptIntroScene(conceptIntro: ConceptIntroLearningStep) {
+    private func beginConceptIntroStep(conceptIntro: ConceptIntroLearningStep) {
         let vc = compositionRoot.composeConceptIntroScene(delegate: self, conceptIntro: conceptIntro)
         containerVC.show(viewController: vc, animation: .fadeIn)
+        
+        let benchmark = ResultBenchmark(conceptID: conceptIntro.userConcept.conceptID, correctAnswersRequired: 5, correctAnswersOutOf: 7)
+        resultsStore.dispatch(action: .setBenchmarks([benchmark]))
+        
         exerciseQueue = Queue<Exercise>()
         exercisesStore.dispatch(action: .refresh)
     }
     
-    private func showPracticeIntroScene() {
+    private func beginPracticeTwoConceptsStep(learningStep: PracticeTwoConceptsLearningStep) {
         let vc = compositionRoot.composePracticeIntroScene(delegate: self)
         containerVC.show(viewController: vc, animation: .fadeIn)
+        
+        let benchmark1 = ResultBenchmark(conceptID: learningStep.concept1ID, correctAnswersRequired: 4, correctAnswersOutOf: 6)
+        let benchmark2 = ResultBenchmark(conceptID: learningStep.concept2ID, correctAnswersRequired: 4, correctAnswersOutOf: 6)
+        resultsStore.dispatch(action: .setBenchmarks([benchmark1, benchmark2]))
+        
         exerciseQueue = Queue<Exercise>()
         exercisesStore.dispatch(action: .refresh)
     }
@@ -266,7 +275,7 @@ extension FeedCoordinator: ConceptIntroViewModelDelegate {
 
 extension FeedCoordinator: LevelUpViewModelDelegate {
     func next(_ levelUpViewModel: LevelUpViewModel) {
-        showNextLearningStepScene()
+        beginNextLearningStep()
     }
 }
 

@@ -20,6 +20,7 @@ enum ResultsStoreAction {
     case processResult(ExerciseResult)
     case setLearningStep(LearningStep)
     case reset
+    case setBenchmarks([ResultBenchmark])
 }
 
 extension ResultsStore where Self: ResultsStoreImpl {
@@ -43,6 +44,7 @@ class ResultsStoreImpl: ResultsStore {
     //MARK: - State
     
     private var results = [ExerciseResult]()
+    private var practiceBenchmarks = [ResultBenchmark(conceptID: 0, correctAnswersRequired: 5, correctAnswersOutOf: 7)]
     
     //MARK: - ResultsStore Interface
     
@@ -58,6 +60,8 @@ class ResultsStoreImpl: ResultsStore {
             handle_setLearningStep(learningStep)
         case .reset:
             handle_reset()
+        case .setBenchmarks(let benchmarks):
+            handle_setBenchmarks(benchmarks)
         }
     }
     
@@ -76,6 +80,7 @@ class ResultsStoreImpl: ResultsStore {
         var correct = recentResults.reduce(0) { $0 + ($1.correct ? 1 : 0) }
         correct = min(correct, 5)
         let progressState = ProgressState(required: 5, correct: correct)
+        
         progressStateSubject.onNext(progressState)
     }
     
@@ -95,6 +100,10 @@ class ResultsStoreImpl: ResultsStore {
     private func handle_reset() {
         results = []
         reevaluateProgressState()
+    }
+    
+    private func handle_setBenchmarks(_ benchmarks: [ResultBenchmark]) {
+        
     }
     
 }
