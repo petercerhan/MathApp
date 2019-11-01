@@ -13,12 +13,10 @@ import RxSwift
 
 class ResultsStoreTests: XCTestCase {
     
-    let disposeBag = DisposeBag()
-    
     func test_correct_initialState_shouldBe0() {
         let store = composeSUT()
         
-        let correct = latestValue(of: store.points, disposeBag: disposeBag) ?? -1
+        let correct = latestValue(of: store.points) ?? -1
         XCTAssertEqual(correct, 0)
     }
     
@@ -28,7 +26,7 @@ class ResultsStoreTests: XCTestCase {
         let result = ExerciseResult(correct: true, conceptID: 1)
         store.dispatch(action: .processResult(result))
         
-        let correct = latestValue(of: store.points, disposeBag: disposeBag) ?? -1
+        let correct = latestValue(of: store.points) ?? -1
         XCTAssertEqual(correct, 1)
     }
     
@@ -38,14 +36,14 @@ class ResultsStoreTests: XCTestCase {
         let result = ExerciseResult(correct: false, conceptID: 1)
         store.dispatch(action: .processResult(result))
         
-        let correct = latestValue(of: store.points, disposeBag: disposeBag) ?? -1
+        let correct = latestValue(of: store.points) ?? -1
         XCTAssertEqual(correct, 0)
     }
     
     func test_learningStep_initialState_shouldBeNil() {
         let store = composeSUT()
         
-        guard let learningStep = latestValue(of: store.learningStep, disposeBag: disposeBag) else {
+        guard let learningStep = latestValue(of: store.learningStep) else {
             XCTFail("Could not get learning step value")
             return
         }
@@ -57,7 +55,7 @@ class ResultsStoreTests: XCTestCase {
         
         store.dispatch(action: .setLearningStep(ConceptIntroLearningStep.createStub()))
         
-        guard let learningStep = latestValue(of: store.learningStep, disposeBag: disposeBag) else {
+        guard let learningStep = latestValue(of: store.learningStep) else {
             XCTFail("Could not get learning step value")
             return
         }
@@ -97,8 +95,7 @@ class ResultsStoreTests: XCTestCase {
         
         store.dispatch(action: .setBenchmarks([ResultBenchmark(conceptID: 1, correctAnswersRequired: 4, correctAnswersOutOf: 6)]))
         
-        let disposeBag = DisposeBag()
-        XCTAssertEqual(latestValue(of: store.practiceConcepts, disposeBag: disposeBag), [1])
+        XCTAssertEqual(latestValue(of: store.practiceConcepts), [1])
     }
     
     func test_setBenchmarks_twoBenchmarks_shouldUpdatePracticeConcepts() {
@@ -107,8 +104,7 @@ class ResultsStoreTests: XCTestCase {
         store.dispatch(action: .setBenchmarks([ResultBenchmark(conceptID: 1, correctAnswersRequired: 4, correctAnswersOutOf: 6),
                                                ResultBenchmark(conceptID: 2, correctAnswersRequired: 5, correctAnswersOutOf: 7)]))
         
-        let disposeBag = DisposeBag()
-        XCTAssertEqual(latestValue(of: store.practiceConcepts, disposeBag: disposeBag), [1, 2])
+        XCTAssertEqual(latestValue(of: store.practiceConcepts), [1, 2])
     }
     
     //MARK: - Progress Indicator Tests
@@ -217,7 +213,7 @@ class ResultsStoreTests: XCTestCase {
     //MARK: - Assertions
     
     func assertProgressStateIs(correct: Int, required: Int, complete: Bool, store: ResultsStore, file: StaticString = #file, line: UInt = #line) {
-        guard let progressState = latestValue(of: store.progressState, disposeBag: disposeBag) else {
+        guard let progressState = latestValue(of: store.progressState) else {
             XCTFail("could not get progress state", file: file, line: line)
             return
         }
