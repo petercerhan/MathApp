@@ -64,6 +64,53 @@ class ResultsStoreTests: XCTestCase {
         XCTAssertNotNil(learningStep)
     }
     
+    //MARK: - Benchmark Tests
+    
+    func test_setBenchmarks_oneBenchmark_shouldUpdateProgressState() {
+        let store = composeSUT()
+        
+        store.dispatch(action: .setBenchmarks([ResultBenchmark(conceptID: 1, correctAnswersRequired: 4, correctAnswersOutOf: 6)]))
+        
+        assertProgressStateIs(correct: 0, required: 4, complete: false, store: store)
+    }
+    
+    func test_setBenchmarks_twoBenchmarks_shouldUpdateProgressState() {
+        let store = composeSUT()
+        
+        store.dispatch(action: .setBenchmarks([ResultBenchmark(conceptID: 1, correctAnswersRequired: 4, correctAnswersOutOf: 6),
+                                               ResultBenchmark(conceptID: 2, correctAnswersRequired: 5, correctAnswersOutOf: 7)]))
+        
+        assertProgressStateIs(correct: 0, required: 9, complete: false, store: store)
+    }
+    
+    func test_setBenchmarks_oneBenchmark_shouldClearCorrectInProgressState() {
+        let store = composeSUT()
+        
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .setBenchmarks([ResultBenchmark(conceptID: 1, correctAnswersRequired: 4, correctAnswersOutOf: 6)]))
+        
+        assertProgressStateIs(correct: 1, required: 4, complete: false, store: store)
+    }
+    
+    func test_setBenchmarks_oneBenchmark_shouldUpdatePracticeConcepts() {
+        let store = composeSUT()
+        
+        store.dispatch(action: .setBenchmarks([ResultBenchmark(conceptID: 1, correctAnswersRequired: 4, correctAnswersOutOf: 6)]))
+        
+        let disposeBag = DisposeBag()
+        XCTAssertEqual(latestValue(of: store.practiceConcepts, disposeBag: disposeBag), [1])
+    }
+    
+    func test_setBenchmarks_twoBenchmarks_shouldUpdatePracticeConcepts() {
+        let store = composeSUT()
+        
+        store.dispatch(action: .setBenchmarks([ResultBenchmark(conceptID: 1, correctAnswersRequired: 4, correctAnswersOutOf: 6),
+                                               ResultBenchmark(conceptID: 2, correctAnswersRequired: 5, correctAnswersOutOf: 7)]))
+        
+        let disposeBag = DisposeBag()
+        XCTAssertEqual(latestValue(of: store.practiceConcepts, disposeBag: disposeBag), [1, 2])
+    }
+    
     //MARK: - Progress Indicator Tests
     
     func test_initialState_shouldShow0Of5() {
@@ -71,6 +118,8 @@ class ResultsStoreTests: XCTestCase {
         
         assertProgressStateIs(correct: 0, required: 5, complete: false, store: store)
     }
+    
+    //MARK: - Single Benchmark
     
     func test_5of7_scenario1_shouldShow0of5() {
         let store = composeSUT()

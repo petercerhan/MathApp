@@ -13,6 +13,7 @@ protocol ResultsStore {
     var progressState: Observable<ProgressState> { get }
     var points: Observable<Int> { get }
     var learningStep: Observable<LearningStep?> { get }
+    var practiceConcepts: Observable<[Int]> { get }
     func dispatch(action: ResultsStoreAction)
 }
 
@@ -33,6 +34,9 @@ extension ResultsStore where Self: ResultsStoreImpl {
     var points: Observable<Int> {
         return pointsSubject.asObservable()
     }
+    var practiceConcepts: Observable<[Int]> {
+        return practiceConceptsSubject.asObservable()
+    }
 }
 
 class ResultsStoreImpl: ResultsStore {
@@ -44,13 +48,14 @@ class ResultsStoreImpl: ResultsStore {
     //MARK: - State
     
     private var results = [ExerciseResult]()
-    private var practiceBenchmarks = [ResultBenchmark(conceptID: 0, correctAnswersRequired: 5, correctAnswersOutOf: 7)]
+    private var benchmarks = [ResultBenchmark(conceptID: 0, correctAnswersRequired: 5, correctAnswersOutOf: 7)]
     
     //MARK: - ResultsStore Interface
     
     let progressStateSubject = BehaviorSubject<ProgressState>(value: ProgressState(required: 5, correct: 0))
     let pointsSubject = BehaviorSubject<Int>(value: 0)
     let learningStepSubject = BehaviorSubject<LearningStep?>(value: nil)
+    let practiceConceptsSubject = BehaviorSubject<[Int]>(value: [])
     
     func dispatch(action: ResultsStoreAction) {
         switch action {
@@ -76,10 +81,12 @@ class ResultsStoreImpl: ResultsStore {
     }
     
     private func reevaluateProgressState() {
+        let required = benchmarks.reduce(0) { $0 + $1.correctAnswersRequired }
+        
         let recentResults = Array(results.prefix(7))
         var correct = recentResults.reduce(0) { $0 + ($1.correct ? 1 : 0) }
         correct = min(correct, 5)
-        let progressState = ProgressState(required: 5, correct: correct)
+        let progressState = ProgressState(required: required, correct: correct)
         
         progressStateSubject.onNext(progressState)
     }
@@ -103,7 +110,10 @@ class ResultsStoreImpl: ResultsStore {
     }
     
     private func handle_setBenchmarks(_ benchmarks: [ResultBenchmark]) {
-        
+        self.benchmarks = benchmarks
+        reevaluateProgressState()
+        let practiceConcepts = benchmarks.map { $0.conceptID }
+        practiceConceptsSubject.onNext(practiceConcepts)
     }
     
 }
