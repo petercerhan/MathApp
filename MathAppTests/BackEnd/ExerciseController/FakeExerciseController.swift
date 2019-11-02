@@ -11,13 +11,6 @@ import Foundation
 
 class FakeExerciseController: ExerciseController {
     
-    var getExercises_callCount = 0
-    
-    func getExercises() -> [Exercise] {
-        getExercises_callCount += 1
-        return []
-    }
-    
     var getExercises_conceptIDs_callCount = 0
     
     func getExercises(conceptIDs: [Int]) -> [Exercise] {

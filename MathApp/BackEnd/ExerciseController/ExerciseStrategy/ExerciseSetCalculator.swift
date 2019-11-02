@@ -11,6 +11,7 @@ import Foundation
 protocol ExerciseSetCalculator {
     func getExercisesForConcept(conceptID: Int) -> [Exercise]
     func getExercisesTwoConcepts(concept1_id: Int, concept2_id: Int) -> [Exercise]
+    func getExercises(conceptIDs: [Int]) -> [Exercise]
 }
 
 class ExerciseSetCalculatorImpl: ExerciseSetCalculator {
@@ -142,6 +143,49 @@ class ExerciseSetCalculatorImpl: ExerciseSetCalculator {
         }
     
         return exercises
+    }
+    
+    func getExercises(conceptIDs: [Int]) -> [Exercise] {
+        if conceptIDs.count == 0 {
+            return []
+        }
+        let conceptSelections = randomizationService.setFromRange(min: 0, max: conceptIDs.count - 1, selectionCount: 3)
+        
+        var result = [Exercise]()
+        var index = 0
+        
+        while index < 3 {
+            guard let exercise = getExercise(conceptID: conceptIDs[conceptSelections[index]]) else {
+                continue
+            }
+            if let _ = result.first(where: { $0.id == exercise.id }) {
+                continue
+            } else {
+                result.append(exercise)
+                index += 1
+            }
+        }
+
+        return result
+    }
+    
+    private func getExercise(conceptID: Int) -> Exercise? {
+        //get userconcept.strength
+        guard let userConcept = userConceptRepository.get(conceptID: conceptID) else {
+            return nil
+        }
+        let strength = userConcept.strength
+        
+        //get weight table
+        let weightTable = weightTableForStrength(strength)
+        let difficulty = randomizationService.setFromRange(min: 1, max: 3, selectionCount: 1, weightTable: weightTable)[0]
+        
+        //get exercise pool
+        let exercisePool = exerciseRepository.list(conceptID: conceptID).filter { $0.difficulty == difficulty }
+        
+        //select random per weight table
+        let exerciseIndex = randomizationService.intFromRange(min: 0, max: exercisePool.count - 1)
+        return exercisePool[exerciseIndex]
     }
     
     private func weightTableForStrength(_ strength: Int) -> [Double] {

@@ -33,4 +33,9 @@ class FakeExerciseSetCalculator: ExerciseSetCalculator {
         return [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3]
     }
     
+    
+    func getExercises(conceptIDs: [Int]) -> [Exercise] {
+        return [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3]
+    }
+    
 }

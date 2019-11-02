@@ -16,7 +16,7 @@ class ExerciseControllerTests: XCTestCase {
         let mockExerciseStrategyFactory = FakeExerciseStrategyFactory()
         let controller = ExerciseControllerImpl(userRepository: FakeUserRepository(), exerciseStrategyFactory: mockExerciseStrategyFactory)
         
-        let _ = controller.getExercises()
+        let _ = controller.getExercises(conceptIDs: [1])
         
         XCTAssertEqual(mockExerciseStrategyFactory.createStrategy_callCount, 1)
     }
