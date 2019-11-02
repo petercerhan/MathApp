@@ -10,6 +10,7 @@ import Foundation
 
 protocol ExerciseController {
     func getExercises() -> [Exercise]
+    func getExercises(conceptIDs: [Int]) -> [Exercise]
 }
 
 class ExerciseControllerImpl: ExerciseController {
@@ -33,6 +34,10 @@ class ExerciseControllerImpl: ExerciseController {
     func getExercises() -> [Exercise] {
         let strategy = exerciseStrategyFactory.createStrategy(learningStrategy: .newMaterial)
         return strategy.getExercises()
+    }
+    
+    func getExercises(conceptIDs: [Int]) -> [Exercise] {
+        return getExercises()
     }
     
 }

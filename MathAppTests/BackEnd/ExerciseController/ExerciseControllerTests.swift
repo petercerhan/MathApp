@@ -21,4 +21,13 @@ class ExerciseControllerTests: XCTestCase {
         XCTAssertEqual(mockExerciseStrategyFactory.createStrategy_callCount, 1)
     }
     
+    func test_getExercisesWithIDs_shouldRequestExercisesStrategyFromFactory() {
+        let mockExerciseStrategyFactory = FakeExerciseStrategyFactory()
+        let controller = ExerciseControllerImpl(userRepository: FakeUserRepository(), exerciseStrategyFactory: mockExerciseStrategyFactory)
+        
+        let _ = controller.getExercises(conceptIDs: [1,2])
+        
+        XCTAssertEqual(mockExerciseStrategyFactory.createStrategy_callCount, 1)
+    }
+    
 }

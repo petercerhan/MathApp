@@ -10,4 +10,5 @@ import Foundation
 
 protocol ExerciseStrategy {
     func getExercises() -> [Exercise]
+    func getExercises(conceptIDs: [Int]) -> [Exercise]
 }

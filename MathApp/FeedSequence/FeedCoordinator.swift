@@ -89,7 +89,7 @@ class FeedCoordinator: Coordinator {
         resultsStore.dispatch(action: .setBenchmarks([benchmark]))
         
         exerciseQueue = Queue<Exercise>()
-        exercisesStore.dispatch(action: .refresh)
+        exercisesStore.dispatch(action: .refresh(conceptIDs: [conceptIntro.userConcept.conceptID]))
     }
     
     private func beginPracticeTwoConceptsStep(learningStep: PracticeTwoConceptsLearningStep) {
@@ -101,7 +101,7 @@ class FeedCoordinator: Coordinator {
         resultsStore.dispatch(action: .setBenchmarks([benchmark1, benchmark2]))
         
         exerciseQueue = Queue<Exercise>()
-        exercisesStore.dispatch(action: .refresh)
+        exercisesStore.dispatch(action: .refresh(conceptIDs: [learningStep.concept1ID, learningStep.concept2ID]))
     }
     
     private func showNextFeedScene(animation: TransitionAnimation) {

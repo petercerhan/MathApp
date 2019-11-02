@@ -15,11 +15,13 @@ class FakeFeedExercisesStore: FeedExercisesStore {
     var exercises = Observable<LoadState<[Exercise]>>.just(.noData)
     
     var refresh_callCount = 0
+    var refresh_conceptIDs = [[Int]]()
     
     func dispatch(action: FeedExerciseStoreAction) {
         switch action {
-        case .refresh:
+        case .refresh(let conceptIDs):
             refresh_callCount += 1
+            refresh_conceptIDs.append(conceptIDs)
         }
     }
     

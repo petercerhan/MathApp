@@ -38,5 +38,8 @@ class NewMaterialExerciseStrategy: ExerciseStrategy {
         }
     }
     
+    func getExercises(conceptIDs: [Int]) -> [Exercise] {
+        return exerciseSetCalculator.getExercisesForConcept(conceptID: 1)
+    }
     
 }

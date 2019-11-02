@@ -15,7 +15,7 @@ protocol FeedExercisesStore {
 }
 
 enum FeedExerciseStoreAction {
-    case refresh
+    case refresh(conceptIDs: [Int])
 }
 
 extension FeedExercisesStore where Self: FeedExercisesStoreImpl {
@@ -46,12 +46,12 @@ class FeedExercisesStoreImpl: FeedExercisesStore {
     
     func dispatch(action: FeedExerciseStoreAction) {
         switch action {
-        case .refresh:
-            handle_refresh()
+        case .refresh(let conceptIDs):
+            handle_refresh(conceptIDs: conceptIDs)
         }
     }
     
-    private func handle_refresh() {
+    private func handle_refresh(conceptIDs: [Int]) {
         exercisesSubject.onNext(.loading)
         exerciseExternalDataService.getNext()
             .subscribe(onNext: { [unowned self] exercises in

@@ -28,7 +28,7 @@ class FeedExercisesStoreTests: XCTestCase {
         let mockExerciseEDS = FakeExerciseExternalDataService()
         let store = composeSUT(fakeExerciseEDS: mockExerciseEDS)
         
-        store.dispatch(action: .refresh)
+        store.dispatch(action: .refresh(conceptIDs: [1]))
         
         XCTAssertEqual(mockExerciseEDS.getNext_callCount, 1)
     }
@@ -38,7 +38,7 @@ class FeedExercisesStoreTests: XCTestCase {
         let observer: TestableObserver<LoadState<[Exercise]>> = getNewObserver()
         _ = store.exercises.subscribe(observer)
         
-        store.dispatch(action: .refresh)
+        store.dispatch(action: .refresh(conceptIDs: [1]))
         
         assertSecondEventIsLoadingState(observer: observer)
     }
@@ -48,7 +48,7 @@ class FeedExercisesStoreTests: XCTestCase {
         stubExerciseEDS.stub_exercises = [Exercise.exercise1, Exercise.exercise2]
         let store = composeSUT(fakeExerciseEDS: stubExerciseEDS)
         
-        store.dispatch(action: .refresh)
+        store.dispatch(action: .refresh(conceptIDs: [1]))
         
         guard let exercises = latestValue(of: store.exercises, disposeBag: disposeBag)?.data else {
             XCTFail("could not get exercises")

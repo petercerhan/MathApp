@@ -58,6 +58,19 @@ class FeedCoordinatorTests: XCTestCase {
         coordinator.start()
         
         XCTAssertEqual(mockExerciseStore.refresh_callCount, 1)
+        XCTAssertEqual(mockExerciseStore.refresh_conceptIDs, [[1]])
+    }
+    
+    func test_conceptIntroLearningStepConcept2_shouldRefreshExercises() {
+        let mockExerciseStore = FakeFeedExercisesStore()
+        let coordinator = composeSUT(fakeExerciseStore: mockExerciseStore,
+                                     stubLearningStep: conceptIntroLS2,
+                                     stubExercises: [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3])
+        
+        coordinator.start()
+        
+        XCTAssertEqual(mockExerciseStore.refresh_callCount, 1)
+        XCTAssertEqual(mockExerciseStore.refresh_conceptIDs, [[2]])
     }
     
     func test_conceptIntroRequestsNext_shouldShowExerciseScene() {
@@ -75,7 +88,7 @@ class FeedCoordinatorTests: XCTestCase {
     
     func test_practiceTwoConceptsLearningStep_shouldSetResultBenchmarks() {
         let mockResultsStore = FakeResultsStore()
-        let coordinator = composeSUT(fakeResultsStore: mockResultsStore, stubLearningStep: practiceLS1_2)
+        let coordinator = composeSUT(fakeResultsStore: mockResultsStore, stubLearningStep: practiceLS12)
         
         coordinator.start()
         
@@ -92,6 +105,17 @@ class FeedCoordinatorTests: XCTestCase {
         XCTAssertEqual(benchmarks[1].conceptID, 2)
         XCTAssertEqual(benchmarks[1].correctAnswersRequired, 4)
         XCTAssertEqual(benchmarks[1].correctAnswersOutOf, 6)
+    }
+    
+    func test_practiceTwoConceptsLearningStep_12_shouldRefreshExercises() {
+        let mockExerciseStore = FakeFeedExercisesStore()
+        let coordinator = composeSUT(fakeExerciseStore: mockExerciseStore,
+                                     stubLearningStep: practiceLS12)
+        
+        coordinator.start()
+        
+        XCTAssertEqual(mockExerciseStore.refresh_callCount, 1)
+        XCTAssertEqual(mockExerciseStore.refresh_conceptIDs, [[1,2]])
     }
     
     //MARK: - Practice Intro Delegate
@@ -190,7 +214,7 @@ class FeedCoordinatorTests: XCTestCase {
     
     func test_levelUpRequestsNext_practiceTwoLearningStep_shouldShowPracticeIntro() {
         let mockContainerVC = FakeContainerViewController()
-        let coordinator = composeSUT(fakeContainerViewController: mockContainerVC, stubLearningStep: practiceLS1_2)
+        let coordinator = composeSUT(fakeContainerViewController: mockContainerVC, stubLearningStep: practiceLS12)
         
         coordinator.start()
         coordinator.next(TestLevelUpViewModel())
@@ -202,7 +226,7 @@ class FeedCoordinatorTests: XCTestCase {
     func test_levelUpRequestsNext_practiceTwoLearningStep_shouldRefreshExercises() {
         let mockExerciseStore = FakeFeedExercisesStore()
         let coordinator = composeSUT(fakeExerciseStore: mockExerciseStore,
-                                     stubLearningStep: practiceLS1_2,
+                                     stubLearningStep: practiceLS12,
                                      stubExercises: [Exercise.exercise1, Exercise.exercise2, Exercise.exercise3])
         
         coordinator.start()
@@ -218,6 +242,7 @@ class FeedCoordinatorTests: XCTestCase {
                     fakeExerciseStore: FakeFeedExercisesStore? = nil,
                     fakeResultsStore: FakeResultsStore? = nil,
                     stubLearningStep: LearningStep? = nil,
+                    stubPracticeConcepts: [Int]? = nil,
                     stubExercises: [Exercise]? = nil,
                     stubProgressState: ProgressState? = nil,
                     fakeUserConceptEDS: FakeUserConceptExternalDataService? = nil) -> FeedCoordinator {
@@ -243,6 +268,9 @@ class FeedCoordinatorTests: XCTestCase {
         if let progressState = stubProgressState {
             resultsStore.progressState = Observable.just(progressState)
         }
+        if let stubPracticeConcepts = stubPracticeConcepts {
+            resultsStore.practiceConcepts = Observable.just(stubPracticeConcepts)
+        }
         
         let userConceptEDS = fakeUserConceptEDS ?? FakeUserConceptExternalDataService()
         
@@ -258,8 +286,9 @@ class FeedCoordinatorTests: XCTestCase {
     //MARK: - Stubs
     
     var conceptIntroLS1: ConceptIntroLearningStep = ConceptIntroLearningStep.createWithConceptID(conceptID: 1)
+    var conceptIntroLS2: ConceptIntroLearningStep = ConceptIntroLearningStep.createWithConceptID(conceptID: 2)
     
-    var practiceLS1_2: PracticeTwoConceptsLearningStep = PracticeTwoConceptsLearningStep.createStub(id1: 1, id2: 2)
+    var practiceLS12: PracticeTwoConceptsLearningStep = PracticeTwoConceptsLearningStep.createStub(id1: 1, id2: 2)
     
 }
 
