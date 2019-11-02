@@ -50,6 +50,10 @@ class ResultsStoreImpl: ResultsStore {
     private var results = [ExerciseResult]()
     private var benchmarks = [ResultBenchmark(conceptID: 0, correctAnswersRequired: 5, correctAnswersOutOf: 7)]
     
+    private func resetResults() {
+        results = []
+    }
+    
     //MARK: - ResultsStore Interface
     
     let progressStateSubject = BehaviorSubject<ProgressState>(value: ProgressState(required: 5, correct: 0))
@@ -73,22 +77,12 @@ class ResultsStoreImpl: ResultsStore {
     private func handle_processResult(_ result: ExerciseResult) {
         recordResult(result: result)
         reevaluateProgressState()
+        reevaluatePracticeConcepts()
         reevaluatePoints(result: result)
     }
     
     private func recordResult(result: ExerciseResult) {
         results.insert(result, at: 0)
-    }
-    
-    private func reevaluateProgressState() {
-        let required = benchmarks.reduce(0) { $0 + $1.correctAnswersRequired }
-        
-        let recentResults = Array(results.prefix(7))
-        var correct = recentResults.reduce(0) { $0 + ($1.correct ? 1 : 0) }
-        correct = min(correct, 5)
-        let progressState = ProgressState(required: required, correct: correct)
-        
-        progressStateSubject.onNext(progressState)
     }
     
     private func reevaluatePoints(result: ExerciseResult) {
@@ -105,14 +99,46 @@ class ResultsStoreImpl: ResultsStore {
     }
     
     private func handle_reset() {
-        results = []
+        resetResults()
         reevaluateProgressState()
     }
     
     private func handle_setBenchmarks(_ benchmarks: [ResultBenchmark]) {
         self.benchmarks = benchmarks
+        resetResults()
         reevaluateProgressState()
-        let practiceConcepts = benchmarks.map { $0.conceptID }
+        reevaluatePracticeConcepts()
+    }
+    
+    private func reevaluateProgressState() {
+        let required = benchmarks.reduce(0) { $0 + $1.correctAnswersRequired }
+        
+        var correct = 0
+        
+        for benchmark in benchmarks {
+            let sliceLength = benchmark.correctAnswersOutOf
+            let resultsForConcept = results.filter { $0.conceptID == benchmark.conceptID }
+            let sliceForConcept = resultsForConcept.prefix(sliceLength)
+            let correctForConcept = sliceForConcept.reduce(0) { $0 + ($1.correct ? 1 : 0) }
+            correct += min(correctForConcept, benchmark.correctAnswersRequired)
+        }
+        let progressState = ProgressState(required: required, correct: correct)
+        
+        progressStateSubject.onNext(progressState)
+    }
+    
+    private func reevaluatePracticeConcepts() {
+        var practiceConcepts = [Int]()
+        for benchmark in benchmarks {
+            let sliceLength = benchmark.correctAnswersOutOf
+            let resultsForConcept = results.filter { $0.conceptID == benchmark.conceptID }
+            let sliceForConcept = resultsForConcept.prefix(sliceLength)
+            let correctForConcept = sliceForConcept.reduce(0) { $0 + ($1.correct ? 1 : 0) }
+            if correctForConcept < benchmark.correctAnswersRequired {
+                practiceConcepts.append(benchmark.conceptID)
+            }
+        }
+        
         practiceConceptsSubject.onNext(practiceConcepts)
     }
     

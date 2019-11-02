@@ -87,7 +87,7 @@ class ResultsStoreTests: XCTestCase {
         store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
         store.dispatch(action: .setBenchmarks([ResultBenchmark(conceptID: 1, correctAnswersRequired: 4, correctAnswersOutOf: 6)]))
         
-        assertProgressStateIs(correct: 1, required: 4, complete: false, store: store)
+        assertProgressStateIs(correct: 0, required: 4, complete: false, store: store)
     }
     
     func test_setBenchmarks_oneBenchmark_shouldUpdatePracticeConcepts() {
@@ -111,30 +111,34 @@ class ResultsStoreTests: XCTestCase {
     
     func test_initialState_shouldShow0Of5() {
         let store = composeSUT()
+        store.dispatch(action: .setBenchmarks([ResultBenchmark(conceptID: 1, correctAnswersRequired: 5, correctAnswersOutOf: 7)]))
         
         assertProgressStateIs(correct: 0, required: 5, complete: false, store: store)
     }
     
     //MARK: - Single Benchmark
     
-    func test_5of7_scenario1_shouldShow0of5() {
+    func test_5of7_singleBenchmarkScenario1_shouldShow0of5() {
         let store = composeSUT()
+        store.dispatch(action: .setBenchmarks([ResultBenchmark(conceptID: 1, correctAnswersRequired: 5, correctAnswersOutOf: 7)]))
         
         store.dispatch(action: .processResult(ExerciseResult(correct: false, conceptID: 1)))
         
         assertProgressStateIs(correct: 0, required: 5, complete: false, store: store)
     }
     
-    func test_5of7_scenario2_shouldShow10f5() {
+    func test_5of7_singleBenchmarkScenario2_shouldShow10f5() {
         let store = composeSUT()
+        store.dispatch(action: .setBenchmarks([ResultBenchmark(conceptID: 1, correctAnswersRequired: 5, correctAnswersOutOf: 7)]))
         
         store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
         
         assertProgressStateIs(correct: 1, required: 5, complete: false, store: store)
     }
     
-    func test_5of7_scenario3_shouldShow3Of5() {
+    func test_5of7_singleBenchmarkScenario3_shouldShow3Of5() {
         let store = composeSUT()
+        store.dispatch(action: .setBenchmarks([ResultBenchmark(conceptID: 1, correctAnswersRequired: 5, correctAnswersOutOf: 7)]))
         
         store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
         store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
@@ -145,8 +149,9 @@ class ResultsStoreTests: XCTestCase {
         assertProgressStateIs(correct: 3, required: 5, complete: false, store: store)
     }
     
-    func test_5of7_scenario4_shouldShow5of5() {
+    func test_5of7_singleBenchmarkScenario4_shouldShow5of5() {
         let store = composeSUT()
+        store.dispatch(action: .setBenchmarks([ResultBenchmark(conceptID: 1, correctAnswersRequired: 5, correctAnswersOutOf: 7)]))
         
         store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
         store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
@@ -159,8 +164,9 @@ class ResultsStoreTests: XCTestCase {
         assertProgressStateIs(correct: 5, required: 5, complete: true, store: store)
     }
     
-    func test_5of7_scenario5_shouldShow4of5() {
+    func test_5of7_singleBenchmarkScenario5_shouldShow4of5() {
         let store = composeSUT()
+        store.dispatch(action: .setBenchmarks([ResultBenchmark(conceptID: 1, correctAnswersRequired: 5, correctAnswersOutOf: 7)]))
         
         store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
         store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
@@ -176,8 +182,9 @@ class ResultsStoreTests: XCTestCase {
         assertProgressStateIs(correct: 4, required: 5, complete: false, store: store)
     }
     
-    func test_5of7_scenario6_shouldShow5of5() {
+    func test_5of7_singleBenchmarkScenario6_shouldShow5of5() {
         let store = composeSUT()
+        store.dispatch(action: .setBenchmarks([ResultBenchmark(conceptID: 1, correctAnswersRequired: 5, correctAnswersOutOf: 7)]))
         
         store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
         store.dispatch(action: .processResult(ExerciseResult(correct: false, conceptID: 1)))
@@ -191,6 +198,122 @@ class ResultsStoreTests: XCTestCase {
         store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
         
         assertProgressStateIs(correct: 5, required: 5, complete: true, store: store)
+    }
+    
+    //MARK: - Two Benchmarks
+    
+    func test_twoBenchmarksScenario1_shouldShow1of6() {
+        let store = composeSUT()
+        store.dispatch(action: .setBenchmarks([ResultBenchmark(conceptID: 1, correctAnswersRequired: 3, correctAnswersOutOf: 5),
+                                               ResultBenchmark(conceptID: 2, correctAnswersRequired: 3, correctAnswersOutOf: 5)]))
+        
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 2)))
+        
+        assertProgressStateIs(correct: 1, required: 6, complete: false, store: store)
+    }
+    
+    func test_twoBenchmarksScenario2_shouldShow3of6() {
+        let store = composeSUT()
+        store.dispatch(action: .setBenchmarks([ResultBenchmark(conceptID: 1, correctAnswersRequired: 3, correctAnswersOutOf: 5),
+                                               ResultBenchmark(conceptID: 2, correctAnswersRequired: 3, correctAnswersOutOf: 5)]))
+        
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 2)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 2)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        
+        assertProgressStateIs(correct: 3, required: 6, complete: false, store: store)
+    }
+    
+    func test_twoBenchmarksScenario3_shouldShow3of6() {
+        let store = composeSUT()
+        store.dispatch(action: .setBenchmarks([ResultBenchmark(conceptID: 1, correctAnswersRequired: 3, correctAnswersOutOf: 5),
+                                               ResultBenchmark(conceptID: 2, correctAnswersRequired: 3, correctAnswersOutOf: 5)]))
+        
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 2)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 2)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 2)))
+        
+        assertProgressStateIs(correct: 3, required: 6, complete: false, store: store)
+    }
+    
+    func test_twoBenchmarksScenario3_shouldShowPracticeConcept1() {
+        let store = composeSUT()
+        store.dispatch(action: .setBenchmarks([ResultBenchmark(conceptID: 1, correctAnswersRequired: 3, correctAnswersOutOf: 5),
+                                               ResultBenchmark(conceptID: 2, correctAnswersRequired: 3, correctAnswersOutOf: 5)]))
+        
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 2)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 2)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 2)))
+        
+        XCTAssertEqual(latestValue(of: store.practiceConcepts), [1])
+    }
+    
+    func test_twoBenchmarksScenario4_shouldShow3of6() {
+        let store = composeSUT()
+        store.dispatch(action: .setBenchmarks([ResultBenchmark(conceptID: 1, correctAnswersRequired: 3, correctAnswersOutOf: 5),
+                                               ResultBenchmark(conceptID: 2, correctAnswersRequired: 3, correctAnswersOutOf: 5)]))
+        
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 2)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: false, conceptID: 2)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: false, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 2)))
+        
+        assertProgressStateIs(correct: 3, required: 6, complete: false, store: store)
+    }
+    
+    func test_twoBenchmarksScenario4_shouldShowPracticeConcept12() {
+        let store = composeSUT()
+        store.dispatch(action: .setBenchmarks([ResultBenchmark(conceptID: 1, correctAnswersRequired: 3, correctAnswersOutOf: 5),
+                                               ResultBenchmark(conceptID: 2, correctAnswersRequired: 3, correctAnswersOutOf: 5)]))
+        
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 2)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: false, conceptID: 2)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: false, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 2)))
+        
+        XCTAssertEqual(latestValue(of: store.practiceConcepts), [1, 2])
+    }
+    
+    func test_twoBenchmarksScenario5_shouldShow3of6() {
+        let store = composeSUT()
+        store.dispatch(action: .setBenchmarks([ResultBenchmark(conceptID: 1, correctAnswersRequired: 3, correctAnswersOutOf: 5),
+                                               ResultBenchmark(conceptID: 2, correctAnswersRequired: 3, correctAnswersOutOf: 5)]))
+        
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 2)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: false, conceptID: 2)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 2)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 2)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: false, conceptID: 2)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: false, conceptID: 2)))
+        
+        assertProgressStateIs(correct: 3, required: 6, complete: false, store: store)
+    }
+    
+    func test_twoBenchmarksScenario6_shouldShow6of6() {
+        let store = composeSUT()
+        store.dispatch(action: .setBenchmarks([ResultBenchmark(conceptID: 1, correctAnswersRequired: 3, correctAnswersOutOf: 5),
+                                               ResultBenchmark(conceptID: 2, correctAnswersRequired: 3, correctAnswersOutOf: 5)]))
+        
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 2)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: false, conceptID: 2)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 2)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 2)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: false, conceptID: 2)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 2)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: false, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: false, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: false, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: false, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: false, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
+        
+        assertProgressStateIs(correct: 6, required: 6, complete: true, store: store)
     }
     
     //MARK: - Other Actions
