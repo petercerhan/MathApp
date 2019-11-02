@@ -155,29 +155,27 @@ class FeedCoordinator: Coordinator {
         if let exercise = exerciseQueue.dequeue()  {
             showExerciseScene(exercise, animation: animation)
         } else {
-            reloadExerciseQueue(animation: animation)
+            reloadExerciseQueueAndAdvanceFeed(animation: animation)
         }
     }
     
     private func showExerciseScene(_ exercise: Exercise, animation: TransitionAnimation) {
         let vc = composeExerciseScene(forExercise: exercise)
         containerVC.show(viewController: vc, animation: animation)
-        refreshExercisesIfNeeded()
+        reloadExerciseQueueIfNeeded()
     }
     
-    private func refreshExercisesIfNeeded() {
-        if exerciseQueue.count == 0 {
-            guard let exercises = latestValue(of: exercisesStore.exercises)?.data,
-                let conceptIDs = latestValue(of: resultsStore.practiceConcepts)
-            else {
-                return
-            }
+    private func reloadExerciseQueueIfNeeded() {
+        if exerciseQueue.count == 0,
+            let exercises = latestValue(of: exercisesStore.exercises)?.data,
+            let conceptIDs = latestValue(of: resultsStore.practiceConcepts)
+        {
             exerciseQueue.enqueue(elements: exercises)
             exercisesStore.dispatch(action: .refresh(conceptIDs: conceptIDs))
         }
     }
     
-    private func reloadExerciseQueue(animation: TransitionAnimation) {
+    private func reloadExerciseQueueAndAdvanceFeed(animation: TransitionAnimation) {
         guard let exercises = latestValue(of: exercisesStore.exercises)?.data,
             exercises.count > 0
         else {
