@@ -84,7 +84,7 @@ class FeedCoordinatorTests: XCTestCase {
         mockContainerVC.verifyDidShow(viewControllerType: ExerciseViewController.self)
     }
     
-    //MARK: - Practice Intro Learning Step
+    //MARK: - Practice Two Concepts Learning Step
     
     func test_practiceTwoConceptsLearningStep_shouldSetResultBenchmarks() {
         let mockResultsStore = FakeResultsStore()
@@ -116,6 +116,19 @@ class FeedCoordinatorTests: XCTestCase {
         
         XCTAssertEqual(mockExerciseStore.refresh_callCount, 1)
         XCTAssertEqual(mockExerciseStore.refresh_conceptIDs, [[1,2]])
+    }
+    
+    func test_practiceTwoConceptsComplete_shouldShowDoubleLevelUpScene() {
+        let mockContainer = FakeContainerViewController()
+        let coordinator = composeSUT(fakeContainerViewController: mockContainer, stubLearningStep: practiceLS12, stubProgressState: ProgressState(required: 1, correct: 1))
+        
+        coordinator.start()
+        coordinator.next(TestExerciseViewModel(), correctAnswer: true)
+        
+        guard let _ = mockContainer.show_viewController.last as? DoubleLevelUpViewController else {
+            XCTFail("Double Level up vc not displayed")
+            return
+        }
     }
     
     //MARK: - Practice Intro Delegate

@@ -110,14 +110,26 @@ class FeedCoordinator: Coordinator {
         }
         
         if progressState.complete {
-            showLevelUpScene()
+            showLearningStepCompleteScene()
         } else {
             showNextExerciseScene(animation: animation)
         }
     }
     
-    private func showLevelUpScene() {
+    private func showLearningStepCompleteScene() {
+        guard let currentLearningStep = latestValue(of: resultsStore.learningStep) as? LearningStep else {
+            return
+        }
+        if currentLearningStep is ConceptIntroLearningStep {
+           showLevelUpScene()
+        }
+        else if currentLearningStep is PracticeTwoConceptsLearningStep {
+            showDoubleLevelUpScene()
+        }
         
+    }
+    
+    private func showLevelUpScene() {
         guard let learningStep = latestValue(of: resultsStore.learningStep) else {
             return
         }
@@ -132,18 +144,15 @@ class FeedCoordinator: Coordinator {
             resultsStore.dispatch(action: .reset)
             updateUserConceptLevel(id: concept.id, newStrength: 1)
 
-        } else {
-            
-            //Fall through
-            
-            let levelUpItem = LevelUpItem(concept: Concept.linearRule, previousLevel: 1, newLevel: 2)
-            let vc = compositionRoot.composeLevelUpScene(delegate: self, levelUpItem: levelUpItem)
-            containerVC.show(viewController: vc, animation: .fadeIn)
-            exerciseQueue = Queue<Exercise>()
         }
         
         learningStepStore.dispatch(action: .next)
         
+    }
+    
+    private func showDoubleLevelUpScene() {
+        let vc = compositionRoot.composeDoubleLevelUpScene()
+        containerVC.show(viewController: vc, animation: .fadeIn)
     }
     
     private func updateUserConceptLevel(id: Int, newStrength: Int) {
