@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 protocol ExerciseExternalDataService {
-    func getNext() -> Observable<[Exercise]>
+    func getNext(conceptIDs: [Int]) -> Observable<[Exercise]>
 }
 
 class ExerciseExternalDataServiceImpl: ExerciseExternalDataService {
@@ -27,8 +27,8 @@ class ExerciseExternalDataServiceImpl: ExerciseExternalDataService {
     
     //MARK: - ExerciseExternalDataService Interface
 
-    func getNext() -> Observable<[Exercise]> {
-        let exercises = exerciseController.getExercises()
+    func getNext(conceptIDs: [Int]) -> Observable<[Exercise]> {
+        let exercises = exerciseController.getExercises(conceptIDs: conceptIDs)
         return Observable.just(exercises)
     }
 

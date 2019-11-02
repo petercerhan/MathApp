@@ -15,9 +15,11 @@ class FakeExerciseExternalDataService: ExerciseExternalDataService {
     var stub_exercises = [Exercise]()
     
     var getNext_callCount = 0
+    var getNext_conceptIDs = [[Int]]()
 
-    func getNext() -> Observable<[Exercise]> {
+    func getNext(conceptIDs: [Int]) -> Observable<[Exercise]> {
         getNext_callCount += 1
+        getNext_conceptIDs.append(conceptIDs)
         return Observable.just(stub_exercises)
     }
     

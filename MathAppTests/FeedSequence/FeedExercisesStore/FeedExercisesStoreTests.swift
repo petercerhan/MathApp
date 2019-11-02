@@ -33,6 +33,15 @@ class FeedExercisesStoreTests: XCTestCase {
         XCTAssertEqual(mockExerciseEDS.getNext_callCount, 1)
     }
     
+    func test_refresh_shouldRequestNewExercisesWithProvidedConceptIDs() {
+        let mockExerciseEDS = FakeExerciseExternalDataService()
+        let store = composeSUT(fakeExerciseEDS: mockExerciseEDS)
+        
+        store.dispatch(action: .refresh(conceptIDs: [1,3]))
+        
+        XCTAssertEqual(mockExerciseEDS.getNext_conceptIDs.first, [1,3])
+    }
+    
     func test_refresh_shouldSetStateLoading() {
         let store = composeSUT()
         let observer: TestableObserver<LoadState<[Exercise]>> = getNewObserver()

@@ -53,7 +53,7 @@ class FeedExercisesStoreImpl: FeedExercisesStore {
     
     private func handle_refresh(conceptIDs: [Int]) {
         exercisesSubject.onNext(.loading)
-        exerciseExternalDataService.getNext()
+        exerciseExternalDataService.getNext(conceptIDs: conceptIDs)
             .subscribe(onNext: { [unowned self] exercises in
                 self.exercisesSubject.onNext(.loaded(exercises))
             })

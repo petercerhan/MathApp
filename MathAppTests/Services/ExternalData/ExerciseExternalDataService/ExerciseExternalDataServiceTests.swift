@@ -17,9 +17,9 @@ class ExerciseExternalDataServiceTests: XCTestCase {
         let mockExerciseController = FakeExerciseController()
         let eds = ExerciseExternalDataServiceImpl(exerciseController: mockExerciseController)
         
-        let _ = eds.getNext()
+        let _ = eds.getNext(conceptIDs: [1])
         
-        XCTAssertEqual(mockExerciseController.getExercises_callCount, 1)
+        XCTAssertEqual(mockExerciseController.getExercises_conceptIDs_callCount, 1)
     }
     
 }
