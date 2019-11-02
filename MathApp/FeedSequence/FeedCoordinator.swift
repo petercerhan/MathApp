@@ -118,7 +118,7 @@ class FeedCoordinator: Coordinator {
     
     private func showLevelUpScene() {
         
-        guard let learningStep = latestValue(of: resultsStore.learningStep, disposeBag: disposeBag) else {
+        guard let learningStep = latestValue(of: resultsStore.learningStep) else {
             return
         }
         
@@ -155,29 +155,40 @@ class FeedCoordinator: Coordinator {
         if let exercise = exerciseQueue.dequeue()  {
             showExerciseScene(exercise, animation: animation)
         } else {
-            updateExerciseQueue(animation: animation)
+            reloadExerciseQueue(animation: animation)
         }
     }
     
     private func showExerciseScene(_ exercise: Exercise, animation: TransitionAnimation) {
         let vc = composeExerciseScene(forExercise: exercise)
         containerVC.show(viewController: vc, animation: animation)
-        refreshFeedPackageIfNeeded()
+        refreshExercisesIfNeeded()
     }
     
-    private func refreshFeedPackageIfNeeded() {
-        
+    private func refreshExercisesIfNeeded() {
+        if exerciseQueue.count == 0 {
+            guard let exercises = latestValue(of: exercisesStore.exercises)?.data,
+                let conceptIDs = latestValue(of: resultsStore.practiceConcepts)
+            else {
+                return
+            }
+            exerciseQueue.enqueue(elements: exercises)
+            exercisesStore.dispatch(action: .refresh(conceptIDs: conceptIDs))
+        }
     }
     
-    private func updateExerciseQueue(animation: TransitionAnimation) {
-        guard let exercises = latestValue(of: exercisesStore.exercises, disposeBag: disposeBag)?.data,
+    private func reloadExerciseQueue(animation: TransitionAnimation) {
+        guard let exercises = latestValue(of: exercisesStore.exercises)?.data,
             exercises.count > 0
         else {
-            loadNewExercises()
+            loadNewExercisesScene()
             return
         }
-        
+        guard let conceptIDs = latestValue(of: resultsStore.practiceConcepts) else {
+            return
+        }
         exerciseQueue.enqueue(elements: exercises)
+        exercisesStore.dispatch(action: .refresh(conceptIDs: conceptIDs))
         showNextFeedScene(animation: animation)
     }
     
@@ -190,16 +201,14 @@ class FeedCoordinator: Coordinator {
                                                     choiceConfiguration: choiceConfiguration)
     }
     
-    private func loadNewExercises() {
+    private func loadNewExercisesScene() {
+        //relevant once getting exercises over network
+        
 //        let vc = compositionRoot.composeLoadExercisesScene(delegate: self, feedPackageStore: feedPackageStore)
 //        containerVC.show(viewController: vc, animation: .none)
     }
     
     
-    
-    
-    
-
     
 }
 

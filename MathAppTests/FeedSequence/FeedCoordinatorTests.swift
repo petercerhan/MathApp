@@ -177,6 +177,29 @@ class FeedCoordinatorTests: XCTestCase {
         XCTAssertEqual(mockUserConceptEDS.update_fields.first?["strength"], "1")
     }
     
+    func test_exerciseRequestsNext_exerciseQueueExhausted_shouldRefreshStore() {
+        let mockExerciseStore = FakeFeedExercisesStore()
+        let coordinator = composeSUT(fakeExerciseStore: mockExerciseStore, stubPracticeConcepts: [1,2], stubExercises: [Exercise.exercise1, Exercise.exercise2])
+        
+        coordinator.start()
+        coordinator.next(TestExerciseViewModel(), correctAnswer: true)
+        coordinator.next(TestExerciseViewModel(), correctAnswer: true)
+        
+        XCTAssertEqual(mockExerciseStore.refresh_callCount, 3)
+        XCTAssertEqual(mockExerciseStore.refresh_conceptIDs, [[1],[1,2],[1,2]])
+    }
+    
+    //After moving to first exercise scene, should load store exercises into queue and refresh store a second time
+    func test_showExerciseScene_reloadExercises_shouldRefreshStore() {
+        let mockExerciseStore = FakeFeedExercisesStore()
+        let coordinator = composeSUT(fakeExerciseStore: mockExerciseStore, stubExercises: [Exercise.exercise1, Exercise.exercise2])
+        
+        coordinator.start()
+        coordinator.next(TestExerciseViewModel(), correctAnswer: true)
+        
+        XCTAssertEqual(mockExerciseStore.refresh_callCount, 2)
+    }
+    
     //MARK: - Level Up
     
     func test_levelUp_shouldGetNextLearningStep() {
