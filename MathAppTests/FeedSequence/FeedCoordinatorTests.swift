@@ -84,6 +84,19 @@ class FeedCoordinatorTests: XCTestCase {
         mockContainerVC.verifyDidShow(viewControllerType: ExerciseViewController.self)
     }
     
+    func test_conceptIntroLevelUp_shouldUpdateUserConceptStrength() {
+        let stubProgressState = ProgressState(required: 5, correct: 5)
+        let mockUserConceptEDS = FakeUserConceptExternalDataService()
+        let coordinator = composeSUT(stubProgressState: stubProgressState, fakeUserConceptEDS: mockUserConceptEDS)
+        
+        coordinator.start()
+        coordinator.next(TestExerciseViewModel(), correctAnswer: true)
+        
+        XCTAssertEqual(mockUserConceptEDS.update_callCount, 1)
+        XCTAssertEqual(mockUserConceptEDS.update_id.first, 1)
+        XCTAssertEqual(mockUserConceptEDS.update_fields.first?["strength"], "1")
+    }
+    
     //MARK: - Practice Two Concepts Learning Step
     
     func test_practiceTwoConceptsLearningStep_shouldSetResultBenchmarks() {
@@ -131,6 +144,18 @@ class FeedCoordinatorTests: XCTestCase {
         }
     }
     
+    func test_showDoubleLevelUp_shouldIncrementLevelsOnRemote() {
+        let stubProgressState = ProgressState(required: 5, correct: 5)
+        let mockUserConceptEDS = FakeUserConceptExternalDataService()
+        let coordinator = composeSUT(stubLearningStep: practiceLS12, stubProgressState: stubProgressState, fakeUserConceptEDS: mockUserConceptEDS)
+        
+        coordinator.start()
+        coordinator.next(TestExerciseViewModel(), correctAnswer: true)
+        
+        XCTAssertEqual(mockUserConceptEDS.update_callCount, 2)
+        XCTAssertEqual(mockUserConceptEDS.update_id, [1, 2])
+    }
+    
     //MARK: - Practice Intro Delegate
     
     func test_practiceIntroRequestsNext_shouldShowExerciseScene() {
@@ -175,19 +200,6 @@ class FeedCoordinatorTests: XCTestCase {
         levelUpVC.loadViewIfNeeded()
         XCTAssertEqual(levelUpVC.levelUpLabel.text, "Level *0* to level *1*")
         XCTAssertEqual(levelUpVC.conceptLabel.text, "Stub rule")
-    }
-    
-    func test_exerciseRequestsNext_progressStateComplete_conceptIntroLS1_shouldUpdateUserConceptStrength() {
-        let stubProgressState = ProgressState(required: 5, correct: 5)
-        let mockUserConceptEDS = FakeUserConceptExternalDataService()
-        let coordinator = composeSUT(stubProgressState: stubProgressState, fakeUserConceptEDS: mockUserConceptEDS)
-        
-        coordinator.start()
-        coordinator.next(TestExerciseViewModel(), correctAnswer: true)
-        
-        XCTAssertEqual(mockUserConceptEDS.update_callCount, 1)
-        XCTAssertEqual(mockUserConceptEDS.update_id.first, 1)
-        XCTAssertEqual(mockUserConceptEDS.update_fields.first?["strength"], "1")
     }
     
     func test_exerciseRequestsNext_exerciseQueueExhausted_shouldRefreshStore() {

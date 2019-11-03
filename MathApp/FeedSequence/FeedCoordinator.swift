@@ -123,8 +123,8 @@ class FeedCoordinator: Coordinator {
         if currentLearningStep is ConceptIntroLearningStep {
            showLevelUpScene()
         }
-        else if currentLearningStep is PracticeTwoConceptsLearningStep {
-            showDoubleLevelUpScene()
+        else if let doublePracticeStep = currentLearningStep as? PracticeTwoConceptsLearningStep {
+            showDoubleLevelUpScene(learningStep: doublePracticeStep)
         }
         
     }
@@ -150,9 +150,12 @@ class FeedCoordinator: Coordinator {
         
     }
     
-    private func showDoubleLevelUpScene() {
+    private func showDoubleLevelUpScene(learningStep: PracticeTwoConceptsLearningStep) {
         let vc = compositionRoot.composeDoubleLevelUpScene()
         containerVC.show(viewController: vc, animation: .fadeIn)
+        
+        updateUserConceptLevel(id: learningStep.concept1ID, newStrength: 2)
+        updateUserConceptLevel(id: learningStep.concept2ID, newStrength: 2)
     }
     
     private func updateUserConceptLevel(id: Int, newStrength: Int) {
