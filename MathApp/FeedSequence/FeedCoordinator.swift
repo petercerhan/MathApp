@@ -140,8 +140,6 @@ class FeedCoordinator: Coordinator {
             let vc = compositionRoot.composeLevelUpScene(delegate: self, levelUpItem: levelUpItem)
             containerVC.show(viewController: vc, animation: .fadeIn)
 
-            exerciseQueue = Queue<Exercise>()
-            resultsStore.dispatch(action: .reset)
             updateUserConceptLevel(id: concept.id, newStrength: 1)
         }
         

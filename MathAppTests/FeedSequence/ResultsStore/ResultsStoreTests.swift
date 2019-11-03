@@ -316,17 +316,6 @@ class ResultsStoreTests: XCTestCase {
         assertProgressStateIs(correct: 6, required: 6, complete: true, store: store)
     }
     
-    //MARK: - Other Actions
-    
-    func test_reset_shouldSetCorrectTo0() {
-        let store = composeSUT()
-        
-        store.dispatch(action: .processResult(ExerciseResult(correct: true, conceptID: 1)))
-        store.dispatch(action: .reset)
-        
-        assertProgressStateIs(correct: 0, required: 5, complete: false, store: store)
-    }
-    
     //MARK: - Compose SUT
     
     func composeSUT(fakeDatabaseService: DatabaseService? = nil) -> ResultsStore {

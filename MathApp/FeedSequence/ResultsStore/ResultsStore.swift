@@ -20,7 +20,6 @@ protocol ResultsStore {
 enum ResultsStoreAction {
     case processResult(ExerciseResult)
     case setLearningStep(LearningStep)
-    case reset
     case setBenchmarks([ResultBenchmark])
 }
 
@@ -67,8 +66,6 @@ class ResultsStoreImpl: ResultsStore {
             handle_processResult(result)
         case .setLearningStep(let learningStep):
             handle_setLearningStep(learningStep)
-        case .reset:
-            handle_reset()
         case .setBenchmarks(let benchmarks):
             handle_setBenchmarks(benchmarks)
         }
@@ -96,11 +93,6 @@ class ResultsStoreImpl: ResultsStore {
     
     private func handle_setLearningStep(_ learningStep: LearningStep) {
         learningStepSubject.onNext(learningStep)
-    }
-    
-    private func handle_reset() {
-        resetResults()
-        reevaluateProgressState()
     }
     
     private func handle_setBenchmarks(_ benchmarks: [ResultBenchmark]) {

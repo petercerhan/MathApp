@@ -238,17 +238,6 @@ class FeedCoordinatorTests: XCTestCase {
         XCTAssertEqual(mockLearningStepStore.next_callCount, 1)
     }
     
-    func test_levelUp_shouldResetResultsStore() {
-        let mockResultsStore = FakeResultsStore()
-        let stubProgressState = ProgressState(required: 5, correct: 5)
-        let coordinator = composeSUT(fakeResultsStore: mockResultsStore, stubProgressState: stubProgressState)
-
-        coordinator.start()
-        coordinator.next(TestExerciseViewModel(), correctAnswer: true)
-
-        XCTAssertEqual(mockResultsStore.reset_callCount, 1)
-    }
-    
     func test_levelUpRequestsNext_conceptIntroLearningStep_shouldShowConceptIntro() {
         let mockContainerVC = FakeContainerViewController()
         let coordinator = composeSUT(fakeContainerViewController: mockContainerVC, stubLearningStep: conceptIntroLS1)

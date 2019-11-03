@@ -27,8 +27,6 @@ class FakeResultsStore: ResultsStore {
     var processResult_callCount = 0
     var processResult_result = [ExerciseResult]()
     
-    var reset_callCount = 0
-    
     var setBenchmarks_callCount = 0
     var setBenchmarks_benchmarks = [[ResultBenchmark]]()
     
@@ -39,8 +37,6 @@ class FakeResultsStore: ResultsStore {
         case .processResult(let exerciseResult):
             processResult_callCount += 1
             processResult_result.append(exerciseResult)
-        case .reset:
-            reset_callCount += 1
         case .setBenchmarks(let benchmarks):
             setBenchmarks_callCount += 1
             setBenchmarks_benchmarks.append(benchmarks)
