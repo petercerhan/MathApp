@@ -143,7 +143,6 @@ class FeedCoordinator: Coordinator {
             exerciseQueue = Queue<Exercise>()
             resultsStore.dispatch(action: .reset)
             updateUserConceptLevel(id: concept.id, newStrength: 1)
-
         }
         
         learningStepStore.dispatch(action: .next)

@@ -10,6 +10,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DoubleLevelUpViewController" customModule="MathApp" customModuleProvider="target">
             <connections>
+                <outlet property="rule1Label" destination="Ncv-CZ-FzF" id="DWF-VY-XIh"/>
+                <outlet property="rule1LevelLabel" destination="KT2-A5-QSs" id="euG-HR-YuO"/>
+                <outlet property="rule2Label" destination="dcL-AP-Kdv" id="48A-un-x2M"/>
+                <outlet property="rule2LevelLabel" destination="bHq-MM-TM8" id="lPw-jm-FWx"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -18,17 +22,52 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Double level up" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Yf-Z8-kx1">
-                    <rect key="frame" x="128" y="323" width="118" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level up!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bhQ-aU-kXf">
+                    <rect key="frame" x="16" y="20" width="86" height="26.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rule 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ncv-CZ-FzF">
+                    <rect key="frame" x="16" y="70.5" width="48" height="21.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level 0 to 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KT2-A5-QSs">
+                    <rect key="frame" x="142" y="127" width="91" height="21.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rule 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dcL-AP-Kdv">
+                    <rect key="frame" x="16" y="174" width="50.5" height="22"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level 0 to 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bHq-MM-TM8">
+                    <rect key="frame" x="142" y="231" width="91" height="21.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="KT2-A5-QSs" firstAttribute="top" secondItem="Ncv-CZ-FzF" secondAttribute="bottom" constant="35" id="6kx-Cy-XGs"/>
+                <constraint firstItem="bhQ-aU-kXf" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="IWa-Hf-ZR8"/>
+                <constraint firstItem="bHq-MM-TM8" firstAttribute="top" secondItem="dcL-AP-Kdv" secondAttribute="bottom" constant="35" id="KZx-Gs-5p8"/>
+                <constraint firstItem="Ncv-CZ-FzF" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="KgX-Wr-K9K"/>
+                <constraint firstItem="KT2-A5-QSs" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="T9P-gR-X9L"/>
+                <constraint firstItem="dcL-AP-Kdv" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="eF0-69-q8l"/>
+                <constraint firstItem="bhQ-aU-kXf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="fV2-c7-Gg9"/>
+                <constraint firstItem="bHq-MM-TM8" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="pNq-ul-KPe"/>
+                <constraint firstItem="Ncv-CZ-FzF" firstAttribute="top" secondItem="bhQ-aU-kXf" secondAttribute="bottom" constant="24" id="rEz-VV-soN"/>
+                <constraint firstItem="dcL-AP-Kdv" firstAttribute="top" secondItem="KT2-A5-QSs" secondAttribute="bottom" constant="25.5" id="ymi-8h-vrK"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <point key="canvasLocation" x="132" y="154"/>
+            <point key="canvasLocation" x="132" y="152.47376311844079"/>
         </view>
     </objects>
 </document>

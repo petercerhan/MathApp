@@ -14,6 +14,13 @@ class DoubleLevelUpViewController: UIViewController {
     
     private let viewModel: DoubleLevelUpViewModel
     
+    //MARK: - UI Components
+    
+    @IBOutlet private(set) var rule1Label: UILabel!
+    @IBOutlet private(set) var rule1LevelLabel: UILabel!
+    @IBOutlet private(set) var rule2Label: UILabel!
+    @IBOutlet private(set) var rule2LevelLabel: UILabel!
+    
     //MARK: - Initialization
     
     init(viewModel: DoubleLevelUpViewModel) {
@@ -23,6 +30,13 @@ class DoubleLevelUpViewController: UIViewController {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("cannot initialize with init(coder:)")
+    }
+    
+    //MARK: - UIViewController Interface
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
     }
 
 }
