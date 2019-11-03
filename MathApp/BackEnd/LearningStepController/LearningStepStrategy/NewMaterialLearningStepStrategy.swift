@@ -127,7 +127,8 @@ class NewMaterialLearningStepStrategy: LearningStepStrategy {
     
     private func learningStepForSecondStrength1(userConcept1: UserConcept) -> LearningStep? {
         if userConcept1.strength == 1, let userConcept2 = userConcept2, userConcept2.strength == 1 {
-            return PracticeTwoConceptsLearningStep(concept1ID: userConcept1.conceptID, concept2ID: userConcept2.conceptID)
+            return PracticeTwoConceptsLearningStep(userConcept1: userConcept1,
+                                                   userConcept2: userConcept2)
         } else {
             return nil
         }

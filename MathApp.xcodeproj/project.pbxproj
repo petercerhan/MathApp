@@ -51,6 +51,7 @@
 		6E84161B232B213D0035F381 /* FeedPackageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E84161A232B213D0035F381 /* FeedPackageStore.swift */; };
 		6E86B344236E489E002DCA62 /* DoubleLevelUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E86B342236E489E002DCA62 /* DoubleLevelUpViewController.swift */; };
 		6E86B345236E489E002DCA62 /* DoubleLevelUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E86B343236E489E002DCA62 /* DoubleLevelUpViewController.xib */; };
+		6E86B347236F6851002DCA62 /* DoubleLevelUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E86B346236F6851002DCA62 /* DoubleLevelUpViewModel.swift */; };
 		6E883F97233D92F2004F0D0E /* ConceptIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E883F95233D92F2004F0D0E /* ConceptIntroViewController.swift */; };
 		6E883F98233D92F2004F0D0E /* ConceptIntroViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E883F96233D92F2004F0D0E /* ConceptIntroViewController.xib */; };
 		6E883F9B233D9B96004F0D0E /* ConceptIntroSceneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E883F9A233D9B96004F0D0E /* ConceptIntroSceneTests.swift */; };
@@ -249,6 +250,7 @@
 		6E84161A232B213D0035F381 /* FeedPackageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPackageStore.swift; sourceTree = "<group>"; };
 		6E86B342236E489E002DCA62 /* DoubleLevelUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleLevelUpViewController.swift; sourceTree = "<group>"; };
 		6E86B343236E489E002DCA62 /* DoubleLevelUpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DoubleLevelUpViewController.xib; sourceTree = "<group>"; };
+		6E86B346236F6851002DCA62 /* DoubleLevelUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleLevelUpViewModel.swift; sourceTree = "<group>"; };
 		6E883F95233D92F2004F0D0E /* ConceptIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptIntroViewController.swift; sourceTree = "<group>"; };
 		6E883F96233D92F2004F0D0E /* ConceptIntroViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConceptIntroViewController.xib; sourceTree = "<group>"; };
 		6E883F9A233D9B96004F0D0E /* ConceptIntroSceneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptIntroSceneTests.swift; sourceTree = "<group>"; };
@@ -671,6 +673,7 @@
 			isa = PBXGroup;
 			children = (
 				6E86B342236E489E002DCA62 /* DoubleLevelUpViewController.swift */,
+				6E86B346236F6851002DCA62 /* DoubleLevelUpViewModel.swift */,
 				6E86B343236E489E002DCA62 /* DoubleLevelUpViewController.xib */,
 			);
 			path = DoubleLevelUpScene;
@@ -1579,6 +1582,7 @@
 				6EEEB6612364EE8D008D0FD6 /* UserConceptController.swift in Sources */,
 				6EBD530F233AF7A70057F28A /* ChooseExerciseViewController.swift in Sources */,
 				6EAB210823611E16007186A4 /* ExerciseStrategyFactory.swift in Sources */,
+				6E86B347236F6851002DCA62 /* DoubleLevelUpViewModel.swift in Sources */,
 				6E1CCC62235CEB0600451CD7 /* NewMaterialState.swift in Sources */,
 				6EEEB6692364F176008D0FD6 /* UserConceptExternalDataService.swift in Sources */,
 				6EBA303A230CADCB00E6DC54 /* AnimatedButton.swift in Sources */,

@@ -10,9 +10,14 @@ import UIKit
 
 class DoubleLevelUpViewController: UIViewController {
     
+    //MARK: - Dependencies
+    
+    private let viewModel: DoubleLevelUpViewModel
+    
     //MARK: - Initialization
     
-    init() {
+    init(viewModel: DoubleLevelUpViewModel) {
+        self.viewModel = viewModel
         super.init(nibName: "DoubleLevelUpViewController", bundle: nil)
     }
     

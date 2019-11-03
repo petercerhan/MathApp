@@ -9,6 +9,6 @@
 import Foundation
 
 struct PracticeTwoConceptsLearningStep: LearningStep {
-    let concept1ID: Int
-    let concept2ID: Int
+    let userConcept1: UserConcept
+    let userConcept2: UserConcept
 }

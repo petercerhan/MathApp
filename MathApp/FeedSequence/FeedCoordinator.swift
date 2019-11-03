@@ -96,12 +96,12 @@ class FeedCoordinator: Coordinator {
         let vc = compositionRoot.composePracticeIntroScene(delegate: self)
         containerVC.show(viewController: vc, animation: .fadeIn)
         
-        let benchmark1 = ResultBenchmark(conceptID: learningStep.concept1ID, correctAnswersRequired: 4, correctAnswersOutOf: 6)
-        let benchmark2 = ResultBenchmark(conceptID: learningStep.concept2ID, correctAnswersRequired: 4, correctAnswersOutOf: 6)
+        let benchmark1 = ResultBenchmark(conceptID: learningStep.userConcept1.conceptID, correctAnswersRequired: 4, correctAnswersOutOf: 6)
+        let benchmark2 = ResultBenchmark(conceptID: learningStep.userConcept2.conceptID, correctAnswersRequired: 4, correctAnswersOutOf: 6)
         resultsStore.dispatch(action: .setBenchmarks([benchmark1, benchmark2]))
         
         exerciseQueue = Queue<Exercise>()
-        exercisesStore.dispatch(action: .refresh(conceptIDs: [learningStep.concept1ID, learningStep.concept2ID]))
+        exercisesStore.dispatch(action: .refresh(conceptIDs: [learningStep.userConcept1.conceptID, learningStep.userConcept2.conceptID]))
     }
     
     private func showNextFeedScene(animation: TransitionAnimation) {
@@ -151,11 +151,16 @@ class FeedCoordinator: Coordinator {
     }
     
     private func showDoubleLevelUpScene(learningStep: PracticeTwoConceptsLearningStep) {
-        let vc = compositionRoot.composeDoubleLevelUpScene()
+        let userConcept1 = learningStep.userConcept1
+        let userConcept2 = learningStep.userConcept2
+        let levelUpItem1 = LevelUpItem(concept: userConcept1.concept, previousLevel: userConcept1.strength, newLevel: userConcept1.strength + 1)
+        let levelUpItem2 = LevelUpItem(concept: userConcept2.concept, previousLevel: userConcept2.strength, newLevel: userConcept2.strength + 1)
+        
+        let vc = compositionRoot.composeDoubleLevelUpScene(levelUpItem1: levelUpItem1, levelUpItem2: levelUpItem2)
         containerVC.show(viewController: vc, animation: .fadeIn)
         
-        updateUserConceptLevel(id: learningStep.concept1ID, newStrength: 2)
-        updateUserConceptLevel(id: learningStep.concept2ID, newStrength: 2)
+        updateUserConceptLevel(id: learningStep.userConcept1.conceptID, newStrength: learningStep.userConcept1.strength + 1)
+        updateUserConceptLevel(id: learningStep.userConcept2.conceptID, newStrength: learningStep.userConcept2.strength + 1)
     }
     
     private func updateUserConceptLevel(id: Int, newStrength: Int) {
