@@ -38,8 +38,11 @@ class FeedComposer {
         return LevelUpViewController(viewModel: vm)
     }
     
-    func composeDoubleLevelUpScene(levelUpItem1: LevelUpItem, levelUpItem2: LevelUpItem) -> UIViewController {
-        let viewModel = DoubleLevelUpViewModel(levelUpItem1: levelUpItem1, levelUpItem2: levelUpItem2)
+    func composeDoubleLevelUpScene(delegate: DoubleLevelUpViewModelDelegate,
+                                   levelUpItem1: LevelUpItem,
+                                   levelUpItem2: LevelUpItem) -> UIViewController
+    {
+        let viewModel = DoubleLevelUpViewModel(delegate: delegate, levelUpItem1: levelUpItem1, levelUpItem2: levelUpItem2)
         return DoubleLevelUpViewController(viewModel: viewModel)
     }
     

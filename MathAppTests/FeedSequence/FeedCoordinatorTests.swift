@@ -156,6 +156,17 @@ class FeedCoordinatorTests: XCTestCase {
         XCTAssertEqual(mockUserConceptEDS.update_id, [1, 2])
     }
     
+    func test_doubleLevelUp_next_shouldShowNextLearningStepIntro() {
+        let mockContainerVC = FakeContainerViewController()
+        let coordinator = composeSUT(fakeContainerViewController: mockContainerVC, stubLearningStep: practiceLS12)
+
+        coordinator.start()
+        coordinator.next(TestExerciseViewModel(), correctAnswer: true)
+        coordinator.next(TestDoubleLevelUpViewModel())
+
+        mockContainerVC.verifyDidShow(viewControllerType: PracticeIntroViewController.self)
+    }
+    
     //MARK: - Practice Intro Delegate
     
     func test_practiceIntroRequestsNext_shouldShowExerciseScene() {
@@ -379,5 +390,11 @@ class FeedComposer_DeadLoadScene: FeedComposer {
     override func composeLoadExercisesScene(delegate: LoadExercisesViewModelDelegate) -> UIViewController {
         let vm = LoadExercisesViewModel(delegate: FakeLoadExercisesViewModelDelegate())
         return LoadExercisesViewController(viewModel: vm)
+    }
+}
+
+class TestDoubleLevelUpViewModel: DoubleLevelUpViewModel {
+    init() {
+        super.init(delegate: FakeDoubleLevelUpViewModelDelegate(), levelUpItem1: LevelUpItem.constantRuleItem, levelUpItem2: LevelUpItem.constantRuleItem)
     }
 }

@@ -156,7 +156,7 @@ class FeedCoordinator: Coordinator {
         let levelUpItem1 = LevelUpItem(concept: userConcept1.concept, previousLevel: userConcept1.strength, newLevel: userConcept1.strength + 1)
         let levelUpItem2 = LevelUpItem(concept: userConcept2.concept, previousLevel: userConcept2.strength, newLevel: userConcept2.strength + 1)
         
-        let vc = composer.composeDoubleLevelUpScene(levelUpItem1: levelUpItem1, levelUpItem2: levelUpItem2)
+        let vc = composer.composeDoubleLevelUpScene(delegate: self, levelUpItem1: levelUpItem1, levelUpItem2: levelUpItem2)
         containerVC.show(viewController: vc, animation: .fadeIn)
         
         updateUserConceptLevel(id: learningStep.userConcept1.conceptID, newStrength: learningStep.userConcept1.strength + 1)
@@ -308,5 +308,13 @@ extension FeedCoordinator: LevelUpViewModelDelegate {
 extension FeedCoordinator: PracticeIntroViewModelDelegate {
     func next(_ practiceIntroViewModel: PracticeIntroViewModel) {
         showNextFeedScene(animation: .fadeIn)
+    }
+}
+
+//MARK: - DoubleLevelUpViewModelDelegate
+
+extension FeedCoordinator: DoubleLevelUpViewModelDelegate {
+    func next(_ doubleLevelUpViewModel: DoubleLevelUpViewModel) {
+        beginNextLearningStep()
     }
 }

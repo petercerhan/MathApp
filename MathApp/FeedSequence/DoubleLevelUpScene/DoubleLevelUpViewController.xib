@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DoubleLevelUpViewController" customModule="MathApp" customModuleProvider="target">
             <connections>
+                <outlet property="nextButton" destination="eOa-Pq-P0h" id="kYo-8i-PM0"/>
                 <outlet property="rule1Label" destination="Ncv-CZ-FzF" id="DWF-VY-XIh"/>
                 <outlet property="rule1LevelLabel" destination="KT2-A5-QSs" id="euG-HR-YuO"/>
                 <outlet property="rule2Label" destination="dcL-AP-Kdv" id="48A-un-x2M"/>
@@ -52,6 +53,11 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eOa-Pq-P0h">
+                    <rect key="frame" x="167" y="611" width="41" height="36"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <state key="normal" title="Next"/>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -60,6 +66,8 @@
                 <constraint firstItem="bHq-MM-TM8" firstAttribute="top" secondItem="dcL-AP-Kdv" secondAttribute="bottom" constant="35" id="KZx-Gs-5p8"/>
                 <constraint firstItem="Ncv-CZ-FzF" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="KgX-Wr-K9K"/>
                 <constraint firstItem="KT2-A5-QSs" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="T9P-gR-X9L"/>
+                <constraint firstItem="eOa-Pq-P0h" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="bel-kE-6Sb"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="eOa-Pq-P0h" secondAttribute="bottom" constant="20" id="c4Y-5S-zbq"/>
                 <constraint firstItem="dcL-AP-Kdv" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="eF0-69-q8l"/>
                 <constraint firstItem="bhQ-aU-kXf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="fV2-c7-Gg9"/>
                 <constraint firstItem="bHq-MM-TM8" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="pNq-ul-KPe"/>

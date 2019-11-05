@@ -9,14 +9,23 @@
 import Foundation
 
 protocol DoubleLevelUpViewModelDelegate: class {
-    
+    func next(_ doubleLevelUpViewModel: DoubleLevelUpViewModel)
+}
+
+enum DoubleLevelUpAction {
+    case next
 }
 
 class DoubleLevelUpViewModel {
     
+    //MARK: - Dependencies
+    
+    private weak var delegate: DoubleLevelUpViewModelDelegate?
+    
     //MARK: - Initialization
     
-    init(levelUpItem1: LevelUpItem, levelUpItem2: LevelUpItem) {
+    init(delegate: DoubleLevelUpViewModelDelegate, levelUpItem1: LevelUpItem, levelUpItem2: LevelUpItem) {
+        self.delegate = delegate
         concept1PriorLevel = levelUpItem1.previousLevel
         concept1NewLevel = levelUpItem1.newLevel
         concept1Name = levelUpItem1.concept.name
@@ -34,4 +43,17 @@ class DoubleLevelUpViewModel {
     let concept2NewLevel: Int
     let concept2Name: String
     
+    func dispatch(action: DoubleLevelUpAction) {
+        switch action {
+        case .next:
+            handle_next()
+        }
+    }
+    
+    private func handle_next() {
+        delegate?.next(self)
+    }
+    
 }
+
+

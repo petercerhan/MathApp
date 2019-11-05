@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class DoubleLevelUpViewController: UIViewController {
     
@@ -16,10 +18,15 @@ class DoubleLevelUpViewController: UIViewController {
     
     //MARK: - UI Components
     
+    @IBOutlet private(set) var nextButton: UIButton!
     @IBOutlet private(set) var rule1Label: UILabel!
     @IBOutlet private(set) var rule1LevelLabel: UILabel!
     @IBOutlet private(set) var rule2Label: UILabel!
     @IBOutlet private(set) var rule2LevelLabel: UILabel!
+    
+    //MARK: - Rx
+    
+    private let disposeBag = DisposeBag()
     
     //MARK: - Initialization
     
@@ -37,6 +44,7 @@ class DoubleLevelUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        bindActions()
     }
     
     private func configureUI() {
@@ -44,6 +52,15 @@ class DoubleLevelUpViewController: UIViewController {
         rule1LevelLabel.text = "Level \(viewModel.concept1PriorLevel) to \(viewModel.concept1NewLevel)"
         rule2Label.text = viewModel.concept2Name
         rule2LevelLabel.text = "Level \(viewModel.concept2PriorLevel) to \(viewModel.concept2NewLevel)"
+    }
+    
+    private func bindActions() {
+        nextButton.rx.tap
+            .throttle(.milliseconds(500), latest: false, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in
+                self.viewModel.dispatch(action: .next)
+            })
+        .disposed(by: disposeBag)
     }
 
 }
