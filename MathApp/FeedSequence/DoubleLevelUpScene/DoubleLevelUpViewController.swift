@@ -36,7 +36,14 @@ class DoubleLevelUpViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        configureUI()
+    }
+    
+    private func configureUI() {
+        rule1Label.text = viewModel.concept1Name
+        rule1LevelLabel.text = "Level \(viewModel.concept1PriorLevel) to \(viewModel.concept1NewLevel)"
+        rule2Label.text = viewModel.concept2Name
+        rule2LevelLabel.text = "Level \(viewModel.concept2PriorLevel) to \(viewModel.concept2NewLevel)"
     }
 
 }
