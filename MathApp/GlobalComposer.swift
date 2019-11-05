@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CompositionRoot {
+class GlobalComposer {
     
     //MARK: - Back End
     
@@ -49,7 +49,8 @@ class CompositionRoot {
     //MARK: - Application Base
     
     func composeRootCoordinator() -> Coordinator {
-        return RootCoordinator(compositionRoot: self,
+        return RootCoordinator(globalComposer: self,
+                               rootCoordinatorComposer: self,
                                containerVC: ContainerViewController(),
                                databaseService: databaseService)
     }
@@ -61,63 +62,6 @@ class CompositionRoot {
     func composePrepareFeedScene(delegate: PrepareFeedViewModelDelegate) -> UIViewController {
         let vm = PrepareFeedViewModel(delegate: delegate, learningStepStore: learningStepStore)
         return PrepareFeedViewController(viewModel: vm)
-    }
-    
-    //MARK: - Exercise sequence
-    
-    func composeExerciseCoordinator() -> FeedCoordinator {
-        let resultsStore = ResultsStoreImpl()
-        let exercisesStore = FeedExercisesStoreImpl(exerciseExternalDataService: ExerciseExternalDataServiceImpl(exerciseController: exerciseController))
-        let containerVM = FeedContainerViewModel(delegate: nil, resultsStore: resultsStore)
-        let userConceptEDS = UserConceptExternalDataServiceImpl(userConceptController: userConceptController)
-        return FeedCoordinator(compositionRoot: self,
-                                   containerVC: FeedContainerViewController(viewModel: containerVM),
-                                   randomizationService: RandomizationServiceImpl(),
-                                   resultsStore: resultsStore,
-                                   learningStepStore: learningStepStore,
-                                   exercisesStore: exercisesStore,
-                                   userConceptEDS: userConceptEDS)
-    }
-    
-    func composeExerciseScene(delegate: ExerciseViewModelDelegate,
-                              resultsStore: ResultsStore,
-                              exercise: Exercise,
-                              choiceConfiguration: ExerciseChoiceConfiguration) -> UIViewController {
-        let vm = ExerciseViewModelImpl(delegate: delegate,
-                                       resultsStore: resultsStore,
-                                       exercise: exercise,
-                                       choiceConfiguration: choiceConfiguration)
-        return ExerciseViewController(viewModel: vm)
-    }
-    
-    func composeConceptIntroScene(delegate: ConceptIntroViewModelDelegate, conceptIntro: ConceptIntroLearningStep) -> UIViewController {
-        let vm = ConceptIntroViewModel(delegate: delegate, conceptIntro: conceptIntro)
-        return ConceptIntroViewController(viewModel: vm)
-    }
-    
-    func composePracticeIntroScene(delegate: PracticeIntroViewModelDelegate) -> UIViewController {
-        let vm = PracticeIntroViewModel(delegate: delegate)
-        return PracticeIntroViewController(viewModel: vm)
-    }
-    
-    func composeLevelUpScene(delegate: LevelUpViewModelDelegate, levelUpItem: LevelUpItem) -> UIViewController {
-        let vm = LevelUpViewModel(delegate: delegate, levelUpItem: levelUpItem)
-        return LevelUpViewController(viewModel: vm)
-    }
-    
-    func composeDoubleLevelUpScene(levelUpItem1: LevelUpItem, levelUpItem2: LevelUpItem) -> UIViewController {
-        let viewModel = DoubleLevelUpViewModel(levelUpItem1: levelUpItem1, levelUpItem2: levelUpItem2)
-        return DoubleLevelUpViewController(viewModel: viewModel)
-    }
-    
-    func composeInfoScene(delegate: InfoViewModelDelegate, concept: Concept) -> UIViewController {
-        let vm = InfoViewModelImpl(delegate: delegate, concept: concept)
-        return InfoViewController(viewModel: vm)
-    }
-    
-    func composeLoadExercisesScene(delegate: LoadExercisesViewModelDelegate) -> UIViewController {
-        let vm = LoadExercisesViewModel(delegate: delegate)
-        return LoadExercisesViewController(viewModel: vm)
     }
     
     //MARK: - Menu sequence
@@ -148,20 +92,6 @@ class CompositionRoot {
     private lazy var databaseService: DatabaseService = {
         DatabaseServiceImpl()
     }()
-    
-//    private lazy var feedPackageExternalDataService: FeedPackageExternalDataService = {
-//        let userConceptRepository = UserConceptRepositoryImpl(databaseService: databaseService)
-//        let exerciseRepository = ExerciseRepositoryImpl(databaseService: databaseService)
-//        let exerciseSetCalculator = ExerciseSetCalculatorImpl(randomizationService: RandomizationServiceImpl(),
-//                                                              userConceptRepository: userConceptRepository,
-//                                                              exerciseRepository: exerciseRepository)
-//        let feedPackageCalculator = NewMaterialStandardCalculator(databaseService: databaseService, exerciseSetCalculator: exerciseSetCalculator)
-//        
-//        let feedPackageAPIRouter = FeedPackageAPIRouter(feedPackageCalculator: feedPackageCalculator, databaseService: databaseService)
-//        
-//        return FeedPackageExternalDataServiceImpl(feedPackageAPIRouter: feedPackageAPIRouter,
-//                                                   randomizationService: RandomizationServiceImpl())
-//    }()
     
 }
 

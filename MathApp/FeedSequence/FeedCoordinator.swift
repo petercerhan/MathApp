@@ -13,7 +13,8 @@ class FeedCoordinator: Coordinator {
     
     //MARK: - Dependencies
     
-    private let compositionRoot: CompositionRoot
+    private let composer: FeedComposer
+    private let globalComposer: GlobalComposer_FeedCoordinator
     private let containerVC: ContainerViewController
     private let randomizationService: RandomizationService
     private let resultsStore: ResultsStore
@@ -32,7 +33,8 @@ class FeedCoordinator: Coordinator {
     
     //MARK: - Initialization
     
-    init(compositionRoot: CompositionRoot,
+    init(composer: FeedComposer,
+         globalComposer: GlobalComposer_FeedCoordinator,
          containerVC: ContainerViewController,
          randomizationService: RandomizationService,
          resultsStore: ResultsStore,
@@ -40,7 +42,8 @@ class FeedCoordinator: Coordinator {
          exercisesStore: FeedExercisesStore,
          userConceptEDS: UserConceptExternalDataService)
     {
-        self.compositionRoot = compositionRoot
+        self.composer = composer
+        self.globalComposer = globalComposer
         self.containerVC = containerVC
         self.randomizationService = randomizationService
         self.resultsStore = resultsStore
@@ -82,7 +85,7 @@ class FeedCoordinator: Coordinator {
     }
     
     private func beginConceptIntroStep(conceptIntro: ConceptIntroLearningStep) {
-        let vc = compositionRoot.composeConceptIntroScene(delegate: self, conceptIntro: conceptIntro)
+        let vc = composer.composeConceptIntroScene(delegate: self, conceptIntro: conceptIntro)
         containerVC.show(viewController: vc, animation: .fadeIn)
         
         let benchmark = ResultBenchmark(conceptID: conceptIntro.userConcept.conceptID, correctAnswersRequired: 5, correctAnswersOutOf: 7)
@@ -93,7 +96,7 @@ class FeedCoordinator: Coordinator {
     }
     
     private func beginPracticeTwoConceptsStep(learningStep: PracticeTwoConceptsLearningStep) {
-        let vc = compositionRoot.composePracticeIntroScene(delegate: self)
+        let vc = composer.composePracticeIntroScene(delegate: self)
         containerVC.show(viewController: vc, animation: .fadeIn)
         
         let benchmark1 = ResultBenchmark(conceptID: learningStep.userConcept1.conceptID, correctAnswersRequired: 4, correctAnswersOutOf: 6)
@@ -137,7 +140,7 @@ class FeedCoordinator: Coordinator {
         if let conceptIntroStep = learningStep as? ConceptIntroLearningStep {
             let concept = conceptIntroStep.userConcept.concept
             let levelUpItem = LevelUpItem(concept: concept, previousLevel: 0, newLevel: 1)
-            let vc = compositionRoot.composeLevelUpScene(delegate: self, levelUpItem: levelUpItem)
+            let vc = composer.composeLevelUpScene(delegate: self, levelUpItem: levelUpItem)
             containerVC.show(viewController: vc, animation: .fadeIn)
 
             updateUserConceptLevel(id: concept.id, newStrength: 1)
@@ -153,7 +156,7 @@ class FeedCoordinator: Coordinator {
         let levelUpItem1 = LevelUpItem(concept: userConcept1.concept, previousLevel: userConcept1.strength, newLevel: userConcept1.strength + 1)
         let levelUpItem2 = LevelUpItem(concept: userConcept2.concept, previousLevel: userConcept2.strength, newLevel: userConcept2.strength + 1)
         
-        let vc = compositionRoot.composeDoubleLevelUpScene(levelUpItem1: levelUpItem1, levelUpItem2: levelUpItem2)
+        let vc = composer.composeDoubleLevelUpScene(levelUpItem1: levelUpItem1, levelUpItem2: levelUpItem2)
         containerVC.show(viewController: vc, animation: .fadeIn)
         
         updateUserConceptLevel(id: learningStep.userConcept1.conceptID, newStrength: learningStep.userConcept1.strength + 1)
@@ -207,7 +210,7 @@ class FeedCoordinator: Coordinator {
     private func composeExerciseScene(forExercise exercise: Exercise) -> UIViewController {
         let choiceConfiguration = randomizationService.randomizedExerciseChoiceConfiguration()
         
-        return compositionRoot.composeExerciseScene(delegate: self,
+        return composer.composeExerciseScene(delegate: self,
                                                     resultsStore: resultsStore,
                                                     exercise: exercise,
                                                     choiceConfiguration: choiceConfiguration)
@@ -228,7 +231,7 @@ class FeedCoordinator: Coordinator {
 
 extension FeedCoordinator: FeedContainerViewModelDelegate {
     func menu(_ feedContainerViewModel: FeedContainerViewModel) {
-        let coordinator = compositionRoot.composeMenuCoordinator(delegate: self)
+        let coordinator = globalComposer.composeMenuCoordinator(delegate: self)
         containerVC.presentModal(viewController: coordinator.containerViewController)
         coordinator.start()
         childCoordinator = coordinator
@@ -243,7 +246,7 @@ extension FeedCoordinator: ExerciseViewModelDelegate {
     }
     
     func info(_ exerciseViewModel: ExerciseViewModel, concept: Concept) {
-        let vc = compositionRoot.composeInfoScene(delegate: self, concept: concept)
+        let vc = composer.composeInfoScene(delegate: self, concept: concept)
         containerVC.presentModal(viewController: vc, animation: .fadeIn)
     }
 }

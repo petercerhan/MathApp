@@ -11,15 +11,15 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var compositionRoot: CompositionRoot!
+    var globalComposer: GlobalComposer!
     var rootCoordinator: Coordinator!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        compositionRoot = CompositionRoot()
-        rootCoordinator = compositionRoot.composeRootCoordinator()
+        globalComposer = GlobalComposer()
+        rootCoordinator = globalComposer.composeRootCoordinator()
         rootCoordinator.start()
         
-        window = compositionRoot.composeWindow()
+        window = globalComposer.composeWindow()
         window?.rootViewController = rootCoordinator.containerViewController
         window?.makeKeyAndVisible()
         

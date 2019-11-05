@@ -311,7 +311,8 @@ class FeedCoordinatorTests: XCTestCase {
         
         let userConceptEDS = fakeUserConceptEDS ?? FakeUserConceptExternalDataService()
         
-        return FeedCoordinator(compositionRoot: CompositionRoot(),
+        return FeedCoordinator(composer: FeedComposer_DeadLoadScene(),
+                               globalComposer: GlobalComposer(),
                                    containerVC: containerVC,
                                    randomizationService: RandomizationServiceImpl(),
                                    resultsStore: resultsStore,
@@ -374,7 +375,7 @@ class TestPracticeIntroViewModel: PracticeIntroViewModel {
     }
 }
 
-class CompositionRoot_deadLoadScene: CompositionRoot {
+class FeedComposer_DeadLoadScene: FeedComposer {
     override func composeLoadExercisesScene(delegate: LoadExercisesViewModelDelegate) -> UIViewController {
         let vm = LoadExercisesViewModel(delegate: FakeLoadExercisesViewModelDelegate())
         return LoadExercisesViewController(viewModel: vm)

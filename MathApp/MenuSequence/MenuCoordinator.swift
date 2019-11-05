@@ -20,13 +20,13 @@ class MenuCoordinator: Coordinator {
     
     private weak var delegate: MenuCoordinatorDelegate?
     private let containerVC: ContainerViewController
-    private let compositionRoot: CompositionRoot
+    private let compositionRoot: GlobalComposer
     
     //MARK: - Initialization
     
     init(delegate: MenuCoordinatorDelegate,
          containerVC: ContainerViewController,
-         compositionRoot: CompositionRoot)
+         compositionRoot: GlobalComposer)
     {
         self.delegate = delegate
         self.containerVC = containerVC

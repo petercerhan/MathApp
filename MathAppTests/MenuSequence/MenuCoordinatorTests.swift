@@ -89,7 +89,7 @@ class MenuCoordinatorTests: XCTestCase {
     func composeSUT(fakeDelegate: MenuCoordinatorDelegate? = nil, fakeContainer: FakeContainerViewController? = nil) -> MenuCoordinator {
         let delegate = fakeDelegate ?? FakeMenuCoordinatorDelegate()
         let container = fakeContainer ?? FakeContainerViewController()
-        return MenuCoordinator(delegate: delegate, containerVC: container, compositionRoot: CompositionRoot())
+        return MenuCoordinator(delegate: delegate, containerVC: container, compositionRoot: GlobalComposer())
     }
     
     

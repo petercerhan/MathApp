@@ -11,6 +11,6 @@ import Foundation
 
 class TestMenuCoordinator: MenuCoordinator {
     init() {
-        super.init(delegate: FakeMenuCoordinatorDelegate(), containerVC: FakeContainerViewController(), compositionRoot: CompositionRoot())
+        super.init(delegate: FakeMenuCoordinatorDelegate(), containerVC: FakeContainerViewController(), compositionRoot: GlobalComposer())
     }
 }

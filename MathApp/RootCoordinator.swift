@@ -13,7 +13,8 @@ class RootCoordinator: Coordinator {
     
     //MARK: - Dependencies
     
-    private let compositionRoot: CompositionRoot
+    private let globalComposer: GlobalComposer
+    private let rootCoordinatorComposer: RootCoordinatorComposer
     private let containerVC: ContainerViewController
     private let databaseService: DatabaseService
     
@@ -23,8 +24,13 @@ class RootCoordinator: Coordinator {
     
     //MARK: - Initialization
     
-    init(compositionRoot: CompositionRoot, containerVC: ContainerViewController, databaseService: DatabaseService) {
-        self.compositionRoot = compositionRoot
+    init(globalComposer: GlobalComposer,
+         rootCoordinatorComposer: RootCoordinatorComposer,
+         containerVC: ContainerViewController,
+         databaseService: DatabaseService)
+    {
+        self.globalComposer = globalComposer
+        self.rootCoordinatorComposer = rootCoordinatorComposer
         self.containerVC = containerVC
         self.databaseService = databaseService
     }
@@ -39,7 +45,7 @@ class RootCoordinator: Coordinator {
         databaseService.reset()
         databaseService.setup()
 
-        let vc = compositionRoot.composePrepareFeedScene(delegate: self)
+        let vc = rootCoordinatorComposer.composePrepareFeedScene(delegate: self)
         containerVC.show(viewController: vc, animation: .none)
     }
     
@@ -55,7 +61,7 @@ extension RootCoordinator: PrepareFeedViewModelDelegate {
     }
     
     private func transitionToFeedSquence() {
-        let coordinator = compositionRoot.composeExerciseCoordinator()
+        let coordinator = globalComposer.composeExerciseCoordinator()
         containerVC.show(viewController: coordinator.containerViewController, animation: .none)
         coordinator.start()
         childCoordinator = coordinator

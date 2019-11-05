@@ -50,26 +50,21 @@ class RootCoordinatorTests: XCTestCase {
         let container = fakeContainer ?? FakeContainerViewController()
         let databaseService = fakeDatabaseService ?? FakeDatabaseService()
         
-        return RootCoordinator(compositionRoot: RootCoordinatorFakeCompositionRoot(), containerVC: container, databaseService: databaseService)
+        return RootCoordinator(globalComposer: GlobalComposer(),
+                               rootCoordinatorComposer: FakeRootCoordinatorComposer(),
+                               containerVC: container,
+                               databaseService: databaseService)
     }
     
 }
 
-class RootCoordinatorFakeCompositionRoot: CompositionRoot {
-    override func composeExerciseCoordinator() -> FeedCoordinator {
-        return FeedCoordinator(compositionRoot: CompositionRoot(),
-                                   containerVC: ContainerViewController(),
-                                   randomizationService: RandomizationServiceImpl(),
-                                   resultsStore: FakeResultsStore(),
-                                   learningStepStore: FakeLearningStepStore(),
-                                   exercisesStore: FakeFeedExercisesStore(),
-                                   userConceptEDS: FakeUserConceptExternalDataService())
-    }
-    
-    override func composePrepareFeedScene(delegate: PrepareFeedViewModelDelegate) -> UIViewController {
+class FakeRootCoordinatorComposer: RootCoordinatorComposer {
+    func composePrepareFeedScene(delegate: PrepareFeedViewModelDelegate) -> UIViewController {
         let vm = PrepareFeedViewModel(delegate: delegate, learningStepStore: FakeLearningStepStore())
         return PrepareFeedViewController(viewModel: vm)
     }
+    
+    
 }
 
 class TestPrepareFeedViewModel: PrepareFeedViewModel {
