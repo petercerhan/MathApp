@@ -85,9 +85,8 @@ class FeedCoordinatorTests: XCTestCase {
     }
     
     func test_conceptIntroLevelUp_shouldUpdateUserConceptStrength() {
-        let stubProgressState = ProgressState(required: 5, correct: 5)
         let mockUserConceptEDS = FakeUserConceptExternalDataService()
-        let coordinator = composeSUT(stubProgressState: stubProgressState, fakeUserConceptEDS: mockUserConceptEDS)
+        let coordinator = composeSUT(stubLearningStep: conceptIntroLS1, stubProgressState: ProgressState(required: 5, correct: 5), fakeUserConceptEDS: mockUserConceptEDS)
         
         coordinator.start()
         coordinator.next(TestExerciseViewModel(), correctAnswer: true)
@@ -109,12 +108,59 @@ class FeedCoordinatorTests: XCTestCase {
         mockContainerVC.verifyDidShow(viewControllerType: PracticeIntroViewController.self)
     }
     
-//    func test_practiceOneConceptLearningStep_shouldSetResultBenchmarks() {
-//        let mockResultsStore = FakeResultsStore()
-//
-//
-//
-//    }
+    func test_practiceOneConceptLearningStep_shouldSetResultBenchmarks() {
+        let mockResultsStore = FakeResultsStore()
+        let coordinator = composeSUT(fakeResultsStore: mockResultsStore, stubLearningStep: practiceLS1)
+
+        coordinator.start()
+        
+        XCTAssertEqual(mockResultsStore.setBenchmarks_callCount, 1)
+        guard let benchmarks = mockResultsStore.setBenchmarks_benchmarks.first,
+            benchmarks.count > 0
+        else {
+            XCTFail("benchmarks not set")
+            return
+        }
+        XCTAssertEqual(benchmarks[0].conceptID, 1)
+        XCTAssertEqual(benchmarks[0].correctAnswersRequired, 4)
+        XCTAssertEqual(benchmarks[0].correctAnswersOutOf, 6)
+    }
+    
+    func test_beginPracticeOneConceptLearningStep_shouldRefreshExercises() {
+        let mockExerciseStore = FakeFeedExercisesStore()
+        let coordinator = composeSUT(fakeExerciseStore: mockExerciseStore,
+                                     stubLearningStep: practiceLS1)
+        
+        coordinator.start()
+        
+        XCTAssertEqual(mockExerciseStore.refresh_callCount, 1)
+        XCTAssertEqual(mockExerciseStore.refresh_conceptIDs, [[1]])
+    }
+    
+    func test_practiceOneConceptComplete_shouldShowLevelUpScene() {
+        let mockContainer = FakeContainerViewController()
+        let coordinator = composeSUT(fakeContainerViewController: mockContainer, stubLearningStep: practiceLS1, stubProgressState: ProgressState(required: 1, correct: 1))
+        
+        coordinator.start()
+        coordinator.next(TestExerciseViewModel(), correctAnswer: true)
+        
+        guard let _ = mockContainer.show_viewController.last as? LevelUpViewController else {
+            XCTFail("Level up vc not displayed")
+            return
+        }
+    }
+    
+    func test_practiceOneConceptLevelUp_shouldUpdateUserConceptStrength() {
+        let mockUserConceptEDS = FakeUserConceptExternalDataService()
+        let coordinator = composeSUT(stubLearningStep: practiceLS1, stubProgressState: ProgressState(required: 5, correct: 5), fakeUserConceptEDS: mockUserConceptEDS)
+        
+        coordinator.start()
+        coordinator.next(TestExerciseViewModel(), correctAnswer: true)
+        
+        XCTAssertEqual(mockUserConceptEDS.update_callCount, 1)
+        XCTAssertEqual(mockUserConceptEDS.update_id.first, 1)
+        XCTAssertEqual(mockUserConceptEDS.update_fields.first?["strength"], "2")
+    }
     
     //MARK: - Practice Two Concepts Learning Step
     

@@ -101,6 +101,12 @@ class FeedCoordinator: Coordinator {
     private func beginPracticeOneConceptStep(learningStep: PracticeOneConceptLearningStep) {
         let vc = composer.composePracticeIntroScene(delegate: self)
         containerVC.show(viewController: vc, animation: .fadeIn)
+        
+        let benchmark = ResultBenchmark(conceptID: learningStep.userConcept.conceptID, correctAnswersRequired: 4, correctAnswersOutOf: 6)
+        resultsStore.dispatch(action: .setBenchmarks([benchmark]))
+        
+        exerciseQueue = Queue<Exercise>()
+        exercisesStore.dispatch(action: .refresh(conceptIDs: [learningStep.userConcept.conceptID]))
     }
     
     private func beginPracticeTwoConceptsStep(learningStep: PracticeTwoConceptsLearningStep) {
@@ -131,31 +137,27 @@ class FeedCoordinator: Coordinator {
         guard let currentLearningStep = latestValue(of: resultsStore.learningStep) as? LearningStep else {
             return
         }
-        if currentLearningStep is ConceptIntroLearningStep {
-           showLevelUpScene()
+        if let conceptIntroStep = currentLearningStep as? ConceptIntroLearningStep {
+            let concept = conceptIntroStep.userConcept.concept
+            let levelUpItem = LevelUpItem(concept: concept, previousLevel: 0, newLevel: 1)
+            showLevelUpScene(levelUpItem: levelUpItem)
+        }
+        else if let practiceStep = currentLearningStep as? PracticeOneConceptLearningStep {
+            let concept = practiceStep.userConcept.concept
+            let levelUpItem = LevelUpItem(concept: concept, previousLevel: practiceStep.userConcept.strength, newLevel: practiceStep.userConcept.strength + 1)
+            showLevelUpScene(levelUpItem: levelUpItem)
         }
         else if let doublePracticeStep = currentLearningStep as? PracticeTwoConceptsLearningStep {
             showDoubleLevelUpScene(learningStep: doublePracticeStep)
         }
-        
     }
     
-    private func showLevelUpScene() {
-        guard let learningStep = latestValue(of: resultsStore.learningStep) else {
-            return
-        }
+    private func showLevelUpScene(levelUpItem: LevelUpItem) {
+        let vc = composer.composeLevelUpScene(delegate: self, levelUpItem: levelUpItem)
+        containerVC.show(viewController: vc, animation: .fadeIn)
         
-        if let conceptIntroStep = learningStep as? ConceptIntroLearningStep {
-            let concept = conceptIntroStep.userConcept.concept
-            let levelUpItem = LevelUpItem(concept: concept, previousLevel: 0, newLevel: 1)
-            let vc = composer.composeLevelUpScene(delegate: self, levelUpItem: levelUpItem)
-            containerVC.show(viewController: vc, animation: .fadeIn)
-
-            updateUserConceptLevel(id: concept.id, newStrength: 1)
-        }
-        
+        updateUserConceptLevel(id: levelUpItem.concept.id, newStrength: levelUpItem.newLevel)
         learningStepStore.dispatch(action: .next)
-        
     }
     
     private func showDoubleLevelUpScene(learningStep: PracticeTwoConceptsLearningStep) {
