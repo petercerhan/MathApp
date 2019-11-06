@@ -137,7 +137,7 @@ class NewMaterialLearningStepStrategy: LearningStepStrategy {
     private func practiceFamilyLearningStep() -> LearningStep {
         newMaterialStateRepository.reset()
         userRepository.setLearningStrategy(.practiceFamily)
-        return PracticeFamilyLearningStep()
+        return PracticeFamilyLearningStep(conceptIDs: [1,2,3,4,5])
     }
     
 }

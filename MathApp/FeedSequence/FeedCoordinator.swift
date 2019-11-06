@@ -82,6 +82,9 @@ class FeedCoordinator: Coordinator {
         else if let learningStep = learningStep as? PracticeTwoConceptsLearningStep {
             beginPracticeTwoConceptsStep(learningStep: learningStep)
         }
+        else if let learningStep = learningStep as? PracticeFamilyLearningStep {
+            beginPracticeFamilyStep(learningStep: learningStep)
+        }
         else {
             print("did not recognize learning step type \(learningStep)")
         }
@@ -121,6 +124,17 @@ class FeedCoordinator: Coordinator {
         exercisesStore.dispatch(action: .refresh(conceptIDs: [learningStep.userConcept1.conceptID, learningStep.userConcept2.conceptID]))
     }
     
+    private func beginPracticeFamilyStep(learningStep: PracticeFamilyLearningStep) {
+        let vc = composer.composePracticeIntroScene(delegate: self)
+        containerVC.show(viewController: vc, animation: .fadeIn)
+        
+        let benchmarks = learningStep.conceptIDs.map { ResultBenchmark(conceptID: $0, correctAnswersRequired: 2, correctAnswersOutOf: 3) }
+        resultsStore.dispatch(action: .setBenchmarks(benchmarks))
+        
+        exerciseQueue = Queue<Exercise>()
+        exercisesStore.dispatch(action: .refresh(conceptIDs: learningStep.conceptIDs))
+    }
+    
     private func showNextFeedScene(animation: TransitionAnimation) {
         guard let progressState = latestValue(of: resultsStore.progressState, disposeBag: disposeBag) else {
             return
@@ -150,6 +164,9 @@ class FeedCoordinator: Coordinator {
         else if let doublePracticeStep = currentLearningStep as? PracticeTwoConceptsLearningStep {
             showDoubleLevelUpScene(learningStep: doublePracticeStep)
         }
+        else if let _ = currentLearningStep as? PracticeFamilyLearningStep {
+            showPracticeFamilyCompleteScene()
+        }
     }
     
     private func showLevelUpScene(levelUpItem: LevelUpItem) {
@@ -176,6 +193,11 @@ class FeedCoordinator: Coordinator {
     private func updateUserConceptLevel(id: Int, newStrength: Int) {
         let fields = ["strength": "\(newStrength)"]
         userConceptEDS.update(id: id, fields: fields)
+    }
+    
+    private func showPracticeFamilyCompleteScene() {
+        let vc = composer.composePracticeFamilyCompleteScene()
+        containerVC.show(viewController: vc, animation: .fadeIn)
     }
     
     private func showNextExerciseScene(animation: TransitionAnimation) {

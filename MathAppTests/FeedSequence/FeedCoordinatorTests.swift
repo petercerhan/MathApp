@@ -256,6 +256,55 @@ class FeedCoordinatorTests: XCTestCase {
         mockContainerVC.verifyDidShow(viewControllerType: ExerciseViewController.self)
     }
     
+    //MARK: - Practice Family Learning Step
+    
+    func test_nextLearningStep_practiceFamily_shouldShowPracticeIntro() {
+        let mockContainerVC = FakeContainerViewController()
+        let coordinator = composeSUT(fakeContainerViewController: mockContainerVC, stubLearningStep: practiceFamilyLS)
+        
+        coordinator.start()
+        
+        XCTAssertEqual(mockContainerVC.show_callCount, 1)
+        mockContainerVC.verifyDidShow(viewControllerType: PracticeIntroViewController.self)
+    }
+    
+    func test_practiceFamilyLearningStep_shouldSetResultBenchmarks() {
+        let mockResultsStore = FakeResultsStore()
+        let coordinator = composeSUT(fakeResultsStore: mockResultsStore, stubLearningStep: practiceFamilyLS)
+        
+        coordinator.start()
+        
+        XCTAssertEqual(mockResultsStore.setBenchmarks_callCount, 1)
+        let benchmarks = mockResultsStore.setBenchmarks_benchmarks.first ?? []
+        XCTAssertEqual(benchmarks.map { $0.conceptID }, [1,2,3,4,5])
+        XCTAssertEqual(benchmarks.map { $0.correctAnswersOutOf }, [3,3,3,3,3])
+        XCTAssertEqual(benchmarks.map { $0.correctAnswersRequired }, [2,2,2,2,2])
+    }
+    
+    func test_practiceFamilyLearningStep_shouldRefreshExercises() {
+        let mockExerciseStore = FakeFeedExercisesStore()
+        let coordinator = composeSUT(fakeExerciseStore: mockExerciseStore,
+                                     stubLearningStep: practiceFamilyLS)
+        
+        coordinator.start()
+        
+        XCTAssertEqual(mockExerciseStore.refresh_callCount, 1)
+        XCTAssertEqual(mockExerciseStore.refresh_conceptIDs, [[1,2,3,4,5]])
+    }
+    
+    func test_practiceFamilyLearningStepComplete_shouldShowPracticeFamilyCompleteScene() {
+        let mockContainer = FakeContainerViewController()
+        let coordinator = composeSUT(fakeContainerViewController: mockContainer, stubLearningStep: practiceFamilyLS, stubProgressState: ProgressState(required: 1, correct: 1))
+        
+        coordinator.start()
+        coordinator.next(TestExerciseViewModel(), correctAnswer: true)
+        
+        guard let _ = mockContainer.show_viewController.last as? PracticeFamilyCompleteViewController else {
+            XCTFail("Practice Family Complete vc not displayed")
+            return
+        }
+    }
+    
     //MARK: - Exercises
     
     func test_exerciseRequestsNext_progressStateNotComplete_shouldShowExerciseScene() {
@@ -405,6 +454,8 @@ class FeedCoordinatorTests: XCTestCase {
     var practiceLS1: PracticeOneConceptLearningStep = PracticeOneConceptLearningStep.createStub(concept: Concept.constantRule)
     
     var practiceLS12: PracticeTwoConceptsLearningStep = PracticeTwoConceptsLearningStep.createStub(concept1: Concept.constantRule, concept2: Concept.linearRule)
+    
+    var practiceFamilyLS = PracticeFamilyLearningStep.createStub()
 }
 
 class TestExerciseViewModel: ExerciseViewModelImpl {

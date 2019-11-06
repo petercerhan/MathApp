@@ -9,5 +9,5 @@
 import Foundation
 
 struct PracticeFamilyLearningStep: LearningStep {
-    
+    let conceptIDs: [Int]
 }

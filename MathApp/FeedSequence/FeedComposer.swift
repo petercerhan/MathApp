@@ -56,4 +56,8 @@ class FeedComposer {
         return LoadExercisesViewController(viewModel: vm)
     }
     
+    func composePracticeFamilyCompleteScene() -> UIViewController {
+        return PracticeFamilyCompleteViewController()
+    }
+    
 }
