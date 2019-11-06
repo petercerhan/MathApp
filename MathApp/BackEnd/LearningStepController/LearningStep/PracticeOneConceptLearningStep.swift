@@ -9,5 +9,5 @@
 import Foundation
 
 struct PracticeOneConceptLearningStep: LearningStep {
-    let conceptID: Int
+    let userConcept: UserConcept
 }

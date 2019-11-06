@@ -10,8 +10,8 @@ import Foundation
 @testable import MathApp
 
 extension PracticeTwoConceptsLearningStep {
-    static func createStub(id1: Int = 1, id2: Int = 2) -> PracticeTwoConceptsLearningStep {
-        return PracticeTwoConceptsLearningStep(userConcept1: UserConcept.createStub(concept: Concept.constantRule, strength: 1),
-                                               userConcept2: UserConcept.createStub(concept: Concept.linearRule, strength: 1))
+    static func createStub(concept1: Concept? = nil, concept2: Concept? = nil) -> PracticeTwoConceptsLearningStep {
+        return PracticeTwoConceptsLearningStep(userConcept1: UserConcept.createStub(concept: concept1 ?? Concept.constantRule, strength: 1),
+                                               userConcept2: UserConcept.createStub(concept: concept2 ?? Concept.linearRule, strength: 1))
     }
 }

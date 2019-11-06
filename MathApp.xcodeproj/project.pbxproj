@@ -30,6 +30,7 @@
 		6E3829232370F63B00145E26 /* RootCoordinatorComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3829222370F63B00145E26 /* RootCoordinatorComposer.swift */; };
 		6E3829262371138000145E26 /* DoubleLevelUpSceneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3829252371138000145E26 /* DoubleLevelUpSceneTests.swift */; };
 		6E382928237113F900145E26 /* FakeDoubleLevelUpViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E382927237113F900145E26 /* FakeDoubleLevelUpViewModelDelegate.swift */; };
+		6E38292A23724DDC00145E26 /* PracticeOneConceptLearningStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E38292923724DDC00145E26 /* PracticeOneConceptLearningStep.swift */; };
 		6E3C9EEC235E726B00CD81C9 /* LearningStepExternalDataServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3C9EEB235E726B00CD81C9 /* LearningStepExternalDataServiceTests.swift */; };
 		6E3C9EEE235E75F500CD81C9 /* FakeLearningStepController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3C9EED235E75F500CD81C9 /* FakeLearningStepController.swift */; };
 		6E3C9EF0235E765400CD81C9 /* LearningStepExternalDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3C9EEF235E765400CD81C9 /* LearningStepExternalDataService.swift */; };
@@ -230,6 +231,7 @@
 		6E3829222370F63B00145E26 /* RootCoordinatorComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCoordinatorComposer.swift; sourceTree = "<group>"; };
 		6E3829252371138000145E26 /* DoubleLevelUpSceneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleLevelUpSceneTests.swift; sourceTree = "<group>"; };
 		6E382927237113F900145E26 /* FakeDoubleLevelUpViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeDoubleLevelUpViewModelDelegate.swift; sourceTree = "<group>"; };
+		6E38292923724DDC00145E26 /* PracticeOneConceptLearningStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeOneConceptLearningStep.swift; sourceTree = "<group>"; };
 		6E3C9EEB235E726B00CD81C9 /* LearningStepExternalDataServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningStepExternalDataServiceTests.swift; sourceTree = "<group>"; };
 		6E3C9EED235E75F500CD81C9 /* FakeLearningStepController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeLearningStepController.swift; sourceTree = "<group>"; };
 		6E3C9EEF235E765400CD81C9 /* LearningStepExternalDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningStepExternalDataService.swift; sourceTree = "<group>"; };
@@ -1234,6 +1236,7 @@
 			isa = PBXGroup;
 			children = (
 				6EE1AC3E235FC391008546DB /* ConceptIntroLearningStep+stubs.swift */,
+				6E38292923724DDC00145E26 /* PracticeOneConceptLearningStep.swift */,
 				6EE57090236929E7002C63F8 /* PracticeTwoConceptsLearningStep+stubs.swift */,
 			);
 			path = LearningStep;
@@ -1690,6 +1693,7 @@
 				6EC667222324548B0048068C /* FakeMenuCoordinatorDelegate.swift in Sources */,
 				6EC667332324673F0048068C /* ConceptMapSceneTests.swift in Sources */,
 				6EC66719232451350048068C /* FakeQuitableContainerViewModel.swift in Sources */,
+				6E38292A23724DDC00145E26 /* PracticeOneConceptLearningStep.swift in Sources */,
 				6E3C9EEC235E726B00CD81C9 /* LearningStepExternalDataServiceTests.swift in Sources */,
 				6EBE4E91230A14A70047A880 /* FakeContainerViewController.swift in Sources */,
 				6EAB211E23613B0E007186A4 /* FakeExerciseExternalDataService.swift in Sources */,

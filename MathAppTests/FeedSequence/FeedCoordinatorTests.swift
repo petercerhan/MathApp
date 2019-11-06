@@ -22,6 +22,8 @@ class FeedCoordinatorTests: XCTestCase {
         XCTAssertEqual(mockResultsStore.setLearningStep_callCount, 1)
     }
     
+    //MARK: - Concept Intro Learning Step
+    
     func test_start_conceptIntroLearningStep_shouldShowConceptIntro() {
         let mockContainerVC = FakeContainerViewController()
         let coordinator = composeSUT(fakeContainerViewController: mockContainerVC, stubLearningStep: conceptIntroLS1)
@@ -30,8 +32,6 @@ class FeedCoordinatorTests: XCTestCase {
         
         mockContainerVC.verifyDidShow(viewControllerType: ConceptIntroViewController.self)
     }
-    
-    //MARK: - Concept Intro Learning Step
     
     func test_conceptIntroLearningStep_shouldSetResultBenchmarks() {
         let mockResultsStore = FakeResultsStore()
@@ -97,7 +97,37 @@ class FeedCoordinatorTests: XCTestCase {
         XCTAssertEqual(mockUserConceptEDS.update_fields.first?["strength"], "1")
     }
     
+    //MARK: - Practice One Concept Learning Step
+    
+    func test_nextLearningStep_practiceOneLearningStep_shouldShowPracticeIntro() {
+        let mockContainerVC = FakeContainerViewController()
+        let coordinator = composeSUT(fakeContainerViewController: mockContainerVC, stubLearningStep: practiceLS1)
+        
+        coordinator.start()
+        
+        XCTAssertEqual(mockContainerVC.show_callCount, 1)
+        mockContainerVC.verifyDidShow(viewControllerType: PracticeIntroViewController.self)
+    }
+    
+//    func test_practiceOneConceptLearningStep_shouldSetResultBenchmarks() {
+//        let mockResultsStore = FakeResultsStore()
+//
+//
+//
+//    }
+    
     //MARK: - Practice Two Concepts Learning Step
+    
+    func test_levelUpRequestsNext_practiceTwoLearningStep_shouldShowPracticeIntro() {
+        let mockContainerVC = FakeContainerViewController()
+        let coordinator = composeSUT(fakeContainerViewController: mockContainerVC, stubLearningStep: practiceLS12)
+        
+        coordinator.start()
+        coordinator.next(TestLevelUpViewModel())
+        
+        XCTAssertEqual(mockContainerVC.show_callCount, 2)
+        mockContainerVC.verifyDidShow(viewControllerType: PracticeIntroViewController.self)
+    }
     
     func test_practiceTwoConceptsLearningStep_shouldSetResultBenchmarks() {
         let mockResultsStore = FakeResultsStore()
@@ -260,17 +290,6 @@ class FeedCoordinatorTests: XCTestCase {
         mockContainerVC.verifyDidShow(viewControllerType: ConceptIntroViewController.self)
     }
     
-    func test_levelUpRequestsNext_practiceTwoLearningStep_shouldShowPracticeIntro() {
-        let mockContainerVC = FakeContainerViewController()
-        let coordinator = composeSUT(fakeContainerViewController: mockContainerVC, stubLearningStep: practiceLS12)
-        
-        coordinator.start()
-        coordinator.next(TestLevelUpViewModel())
-        
-        XCTAssertEqual(mockContainerVC.show_callCount, 2)
-        mockContainerVC.verifyDidShow(viewControllerType: PracticeIntroViewController.self)
-    }
-    
     func test_levelUpRequestsNext_practiceTwoLearningStep_shouldRefreshExercises() {
         let mockExerciseStore = FakeFeedExercisesStore()
         let coordinator = composeSUT(fakeExerciseStore: mockExerciseStore,
@@ -337,8 +356,9 @@ class FeedCoordinatorTests: XCTestCase {
     var conceptIntroLS1: ConceptIntroLearningStep = ConceptIntroLearningStep.createWithConceptID(conceptID: 1)
     var conceptIntroLS2: ConceptIntroLearningStep = ConceptIntroLearningStep.createWithConceptID(conceptID: 2)
     
-    var practiceLS12: PracticeTwoConceptsLearningStep = PracticeTwoConceptsLearningStep.createStub(id1: 1, id2: 2)
+    var practiceLS1: PracticeOneConceptLearningStep = PracticeOneConceptLearningStep.createStub(concept: Concept.constantRule)
     
+    var practiceLS12: PracticeTwoConceptsLearningStep = PracticeTwoConceptsLearningStep.createStub(concept1: Concept.constantRule, concept2: Concept.linearRule)
 }
 
 class TestExerciseViewModel: ExerciseViewModelImpl {

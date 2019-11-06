@@ -76,6 +76,9 @@ class FeedCoordinator: Coordinator {
         if let conceptIntroStep = learningStep as? ConceptIntroLearningStep {
             beginConceptIntroStep(conceptIntro: conceptIntroStep)
         }
+        else if let learningStep = learningStep as? PracticeOneConceptLearningStep {
+            beginPracticeOneConceptStep(learningStep: learningStep)
+        }
         else if let learningStep = learningStep as? PracticeTwoConceptsLearningStep {
             beginPracticeTwoConceptsStep(learningStep: learningStep)
         }
@@ -93,6 +96,11 @@ class FeedCoordinator: Coordinator {
         
         exerciseQueue = Queue<Exercise>()
         exercisesStore.dispatch(action: .refresh(conceptIDs: [conceptIntro.userConcept.conceptID]))
+    }
+    
+    private func beginPracticeOneConceptStep(learningStep: PracticeOneConceptLearningStep) {
+        let vc = composer.composePracticeIntroScene(delegate: self)
+        containerVC.show(viewController: vc, animation: .fadeIn)
     }
     
     private func beginPracticeTwoConceptsStep(learningStep: PracticeTwoConceptsLearningStep) {

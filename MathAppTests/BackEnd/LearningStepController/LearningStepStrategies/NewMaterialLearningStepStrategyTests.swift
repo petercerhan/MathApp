@@ -81,7 +81,7 @@ class NewMaterialLearningStepStrategyTests: XCTestCase {
             XCTFail("Learning step is not practice one concept. Is type \(learningStep.self)")
             return
         }
-        XCTAssertEqual(practiceStep.conceptID, 2)
+        XCTAssertEqual(practiceStep.userConcept.conceptID, 2)
     }
     
     func test_scenario3_shouldSetFocus20() {
@@ -105,7 +105,7 @@ class NewMaterialLearningStepStrategyTests: XCTestCase {
             XCTFail("Learning step is not practice one concept. Is type \(learningStep.self)")
             return
         }
-        XCTAssertEqual(practiceStep.conceptID, 2)
+        XCTAssertEqual(practiceStep.userConcept.conceptID, 2)
     }
     
     func test_scenario4_shouldSetFocus20() {

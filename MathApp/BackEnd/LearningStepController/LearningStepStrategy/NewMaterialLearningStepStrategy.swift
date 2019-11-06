@@ -95,7 +95,7 @@ class NewMaterialLearningStepStrategy: LearningStepStrategy {
         if userConcept1.strength == 1,
             userConceptIsContinuedFromTwoConceptPractice(userConcept1, concept2ID: concept2ID)
         {
-            return PracticeOneConceptLearningStep(conceptID: userConcept1.conceptID)
+            return PracticeOneConceptLearningStep(userConcept: userConcept1)
         } else {
             return nil
         }

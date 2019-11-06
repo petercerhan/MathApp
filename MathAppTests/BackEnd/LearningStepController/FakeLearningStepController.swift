@@ -11,7 +11,7 @@ import Foundation
 
 class FakeLearningStepController: LearningStepController {
 
-    var nextLearningStepStub = PracticeOneConceptLearningStep(conceptID: 1)
+    var nextLearningStepStub = PracticeOneConceptLearningStep(userConcept: UserConcept.constantRule)
     
     var nextLearningStep_callCount = 0
     
