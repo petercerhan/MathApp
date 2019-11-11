@@ -66,30 +66,9 @@ class GlobalComposer {
     
     //MARK: - Menu sequence
     
-    func composeMenuCoordinator(delegate: MenuCoordinatorDelegate) -> MenuCoordinator {
-        let quitableContainerVM = QuitableContainerViewModelImpl(delegate: nil)
-        let quitableContainer = QuitableContainerViewController(viewModel: quitableContainerVM)
-        return MenuCoordinator(delegate: delegate, containerVC: quitableContainer, compositionRoot: self)
-    }
-    
-    func composeMenuScene(delegate: MenuViewModelDelegate) -> UIViewController {
-        let vm = MenuViewModel(delegate: delegate, databaseService: databaseService)
-        return MenuViewController(viewModel: vm)
-    }
-    
-    func composeConceptMapScene(delegate: ConceptMapViewModelDelegate) -> UIViewController {
-        let vm = ConceptMapViewModel(delegate: delegate, databaseService: databaseService)
-        return ConceptMapViewController(viewModel: vm)
-    }
-    
-    func composeChooseExerciseScene(delegate: ChooseExerciseViewModelDelegate) -> UIViewController {
-        let vm = ChooseExerciseViewModel(delegate: delegate)
-        return ChooseExerciseViewController(viewModel: vm)
-    }
-    
     //MARK: - Services
     
-    private lazy var databaseService: DatabaseService = {
+    lazy var databaseService: DatabaseService = {
         DatabaseServiceImpl()
     }()
     

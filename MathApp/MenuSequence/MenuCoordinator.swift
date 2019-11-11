@@ -20,17 +20,17 @@ class MenuCoordinator: Coordinator {
     
     private weak var delegate: MenuCoordinatorDelegate?
     private let containerVC: ContainerViewController
-    private let compositionRoot: GlobalComposer
+    private let composer: MenuComposer
     
     //MARK: - Initialization
     
     init(delegate: MenuCoordinatorDelegate,
          containerVC: ContainerViewController,
-         compositionRoot: GlobalComposer)
+         composer: MenuComposer)
     {
         self.delegate = delegate
         self.containerVC = containerVC
-        self.compositionRoot = compositionRoot
+        self.composer = composer
         
         if let quitableContainer = containerVC as? QuitableContainerViewController {
             quitableContainer.viewModel.setDelegate(self)
@@ -45,7 +45,7 @@ class MenuCoordinator: Coordinator {
     
     func start() {
         containerVC.loadViewIfNeeded()
-        let vc = compositionRoot.composeMenuScene(delegate: self)
+        let vc = composer.composeMenuScene(delegate: self)
         containerVC.show(viewController: vc, animation: .none)
     }
     
@@ -63,12 +63,12 @@ extension MenuCoordinator: QuitableContainerViewModelDelegate {
 
 extension MenuCoordinator: MenuViewModelDelegate {
     func conceptMap(_ menuViewModel: MenuViewModel) {
-        let vc = compositionRoot.composeConceptMapScene(delegate: self)
+        let vc = composer.composeConceptMapScene(delegate: self)
         containerVC.show(viewController: vc, animation: .slideFromRight)
     }
     
     func chooseExercise(_ menuViewModel: MenuViewModel) {
-        let vc = compositionRoot.composeChooseExerciseScene(delegate: self)
+        let vc = composer.composeChooseExerciseScene(delegate: self)
         containerVC.show(viewController: vc, animation: .slideFromRight)
     }
 }
@@ -77,7 +77,7 @@ extension MenuCoordinator: MenuViewModelDelegate {
 
 extension MenuCoordinator: ConceptMapViewModelDelegate {
     func back(_ conceptMapViewModel: ConceptMapViewModel) {
-        let vc = compositionRoot.composeMenuScene(delegate: self)
+        let vc = composer.composeMenuScene(delegate: self)
         containerVC.show(viewController: vc, animation: .slideFromLeft)
     }
 }
@@ -86,7 +86,7 @@ extension MenuCoordinator: ConceptMapViewModelDelegate {
 
 extension MenuCoordinator: ChooseExerciseViewModelDelegate {
     func back(_ chooseExerciseViewModel: ChooseExerciseViewModel) {
-        let vc = compositionRoot.composeMenuScene(delegate: self)
+        let vc = composer.composeMenuScene(delegate: self)
         containerVC.show(viewController: vc, animation: .slideFromLeft)
     }
     
