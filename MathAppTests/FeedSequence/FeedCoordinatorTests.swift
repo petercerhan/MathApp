@@ -436,10 +436,10 @@ class FeedCoordinatorTests: XCTestCase {
         
         let userConceptEDS = fakeUserConceptEDS ?? FakeUserConceptExternalDataService()
         
-        return FeedCoordinator(composer: FeedComposer_DeadLoadScene(),
+        return FeedCoordinator(composer: FeedComposer_DeadLoadScene(resultsStore: resultsStore),
                                globalComposer: GlobalComposer(),
-                                   containerVC: containerVC,
-                                   randomizationService: RandomizationServiceImpl(),
+                               containerVC: containerVC,
+                               randomizationService: RandomizationServiceImpl(),
                                    resultsStore: resultsStore,
                                    learningStepStore: learningStepStore,
                                    exercisesStore: exercisesStore,

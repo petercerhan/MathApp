@@ -243,9 +243,8 @@ class FeedCoordinator: Coordinator {
         let choiceConfiguration = randomizationService.randomizedExerciseChoiceConfiguration()
         
         return composer.composeExerciseScene(delegate: self,
-                                                    resultsStore: resultsStore,
-                                                    exercise: exercise,
-                                                    choiceConfiguration: choiceConfiguration)
+                                             exercise: exercise,
+                                             choiceConfiguration: choiceConfiguration)
     }
     
     private func loadNewExercisesScene() {

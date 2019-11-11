@@ -10,10 +10,19 @@ import UIKit
 
 class FeedComposer {
     
+    //MARK: - Initialization
+    
+    init(resultsStore: ResultsStore) {
+        self.resultsStore = resultsStore
+    }
+    
+    //MARK: - Singleton Lifestyle Components
+    
+    private let resultsStore: ResultsStore
+    
     //MARK: - Factories
     
     func composeExerciseScene(delegate: ExerciseViewModelDelegate,
-                              resultsStore: ResultsStore,
                               exercise: Exercise,
                               choiceConfiguration: ExerciseChoiceConfiguration) -> UIViewController {
         let vm = ExerciseViewModelImpl(delegate: delegate,
