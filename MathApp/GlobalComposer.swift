@@ -1,5 +1,5 @@
 //
-//  CompositionRoot.swift
+//  GlobalComposer.swift
 //  MathApp
 //
 //  Created by Peter Cerhan on 8/7/19.

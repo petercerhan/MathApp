@@ -96,6 +96,16 @@ class FeedCoordinatorTests: XCTestCase {
         XCTAssertEqual(mockUserConceptEDS.update_fields.first?["strength"], "1")
     }
     
+    func test_conceptIntroLevelUp_shouldRefreshLearningStep() {
+        let mockLearningStepStore = FakeLearningStepStore()
+        let coordinator = composeSUT(fakeLearningStepStore: mockLearningStepStore, stubLearningStep: conceptIntroLS1, stubProgressState: ProgressState(required: 5, correct: 5))
+        
+        coordinator.start()
+        coordinator.next(TestExerciseViewModel(), correctAnswer: true)
+        
+        XCTAssertEqual(mockLearningStepStore.next_callCount, 1)
+    }
+    
     //MARK: - Practice One Concept Learning Step
     
     func test_nextLearningStep_practiceOneLearningStep_shouldShowPracticeIntro() {
@@ -160,6 +170,16 @@ class FeedCoordinatorTests: XCTestCase {
         XCTAssertEqual(mockUserConceptEDS.update_callCount, 1)
         XCTAssertEqual(mockUserConceptEDS.update_id.first, 1)
         XCTAssertEqual(mockUserConceptEDS.update_fields.first?["strength"], "2")
+    }
+    
+    func test_practiceOneConceptLevelUp_shouldRefreshLearningStep() {
+        let mockLearningStepStore = FakeLearningStepStore()
+        let coordinator = composeSUT(fakeLearningStepStore: mockLearningStepStore, stubLearningStep: practiceLS1, stubProgressState: ProgressState(required: 5, correct: 5))
+        
+        coordinator.start()
+        coordinator.next(TestExerciseViewModel(), correctAnswer: true)
+        
+        XCTAssertEqual(mockLearningStepStore.next_callCount, 1)
     }
     
     //MARK: - Practice Two Concepts Learning Step
@@ -241,6 +261,28 @@ class FeedCoordinatorTests: XCTestCase {
         coordinator.next(TestDoubleLevelUpViewModel())
 
         mockContainerVC.verifyDidShow(viewControllerType: PracticeIntroViewController.self)
+    }
+    
+    func test_doubleLevelUp_next_shouldShowNextLearningStepIntro2() {
+        let mockContainerVC = FakeContainerViewController()
+        let coordinator = composeSUT(fakeContainerViewController: mockContainerVC, stubLearningStep: conceptIntroLS2)
+
+        coordinator.start()
+        coordinator.next(TestExerciseViewModel(), correctAnswer: true)
+        coordinator.next(TestDoubleLevelUpViewModel())
+
+        mockContainerVC.verifyDidShow(viewControllerType: ConceptIntroViewController.self)
+    }
+    
+    func test_doubleLevelUp_shouldRefreshLearningStep() {
+        let stubProgressState = ProgressState(required: 5, correct: 5)
+        let mockLearningStepStore = FakeLearningStepStore()
+        let coordinator = composeSUT(fakeLearningStepStore: mockLearningStepStore, stubLearningStep: practiceLS12, stubProgressState: stubProgressState)
+        
+        coordinator.start()
+        coordinator.next(TestExerciseViewModel(), correctAnswer: true)
+        
+        XCTAssertEqual(mockLearningStepStore.next_callCount, 1)
     }
     
     //MARK: - Practice Intro Delegate

@@ -188,6 +188,7 @@ class FeedCoordinator: Coordinator {
         
         updateUserConceptLevel(id: learningStep.userConcept1.conceptID, newStrength: learningStep.userConcept1.strength + 1)
         updateUserConceptLevel(id: learningStep.userConcept2.conceptID, newStrength: learningStep.userConcept2.strength + 1)
+        learningStepStore.dispatch(action: .next)
     }
     
     private func updateUserConceptLevel(id: Int, newStrength: Int) {
