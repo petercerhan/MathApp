@@ -49,6 +49,7 @@
 		6E713092233443F5009FEFBB /* Exercise+sqlite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E713091233443F5009FEFBB /* Exercise+sqlite.swift */; };
 		6E7191B0237903C100E9B88E /* GlobalComposer+menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7191AF237903C100E9B88E /* GlobalComposer+menu.swift */; };
 		6E7191B22379049200E9B88E /* MenuComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7191B12379049200E9B88E /* MenuComposer.swift */; };
+		6E7191CA237B9B1700E9B88E /* db.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 6E7191C9237B9B1700E9B88E /* db.sqlite3 */; };
 		6E74FD402318A1F500730AEB /* FakeExerciseViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E74FD3F2318A1F500730AEB /* FakeExerciseViewModelDelegate.swift */; };
 		6E74FD422318A2B900730AEB /* TestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E74FD412318A2B900730AEB /* TestUtilities.swift */; };
 		6E74FD442318B0A400730AEB /* GeneralError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E74FD432318B0A400730AEB /* GeneralError.swift */; };
@@ -85,7 +86,6 @@
 		6EAB211C2361387A007186A4 /* FeedExercisesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAB211B2361387A007186A4 /* FeedExercisesStore.swift */; };
 		6EAB211E23613B0E007186A4 /* FakeExerciseExternalDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAB211D23613B0E007186A4 /* FakeExerciseExternalDataService.swift */; };
 		6EAB2120236144AB007186A4 /* FakeFeedExercisesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAB211F236144AB007186A4 /* FakeFeedExercisesStore.swift */; };
-		6EAB212B236260CB007186A4 /* db.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 6EAB212A236260CA007186A4 /* db.sqlite3 */; };
 		6EB0FEE1235BE1D9005F23DE /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB0FEE0235BE1D9005F23DE /* UserRepository.swift */; };
 		6EB0FEE3235BE2F2005F23DE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB0FEE2235BE2F2005F23DE /* User.swift */; };
 		6EB0FEE7235BE561005F23DE /* LearningStepControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB0FEE6235BE561005F23DE /* LearningStepControllerTests.swift */; };
@@ -259,6 +259,7 @@
 		6E713091233443F5009FEFBB /* Exercise+sqlite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exercise+sqlite.swift"; sourceTree = "<group>"; };
 		6E7191AF237903C100E9B88E /* GlobalComposer+menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GlobalComposer+menu.swift"; sourceTree = "<group>"; };
 		6E7191B12379049200E9B88E /* MenuComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuComposer.swift; sourceTree = "<group>"; };
+		6E7191C9237B9B1700E9B88E /* db.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = db.sqlite3; sourceTree = "<group>"; };
 		6E74FD3F2318A1F500730AEB /* FakeExerciseViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeExerciseViewModelDelegate.swift; sourceTree = "<group>"; };
 		6E74FD412318A2B900730AEB /* TestUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtilities.swift; sourceTree = "<group>"; };
 		6E74FD432318B0A400730AEB /* GeneralError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralError.swift; sourceTree = "<group>"; };
@@ -295,7 +296,6 @@
 		6EAB211B2361387A007186A4 /* FeedExercisesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedExercisesStore.swift; sourceTree = "<group>"; };
 		6EAB211D23613B0E007186A4 /* FakeExerciseExternalDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeExerciseExternalDataService.swift; sourceTree = "<group>"; };
 		6EAB211F236144AB007186A4 /* FakeFeedExercisesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeFeedExercisesStore.swift; sourceTree = "<group>"; };
-		6EAB212A236260CA007186A4 /* db.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = db.sqlite3; sourceTree = "<group>"; };
 		6EB0FEE0235BE1D9005F23DE /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		6EB0FEE2235BE2F2005F23DE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		6EB0FEE6235BE561005F23DE /* LearningStepControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningStepControllerTests.swift; sourceTree = "<group>"; };
@@ -954,7 +954,7 @@
 		6EB933B32331CBA900E38B52 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
-				6EAB212A236260CA007186A4 /* db.sqlite3 */,
+				6E7191C9237B9B1700E9B88E /* db.sqlite3 */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -1456,11 +1456,11 @@
 				6E557C2122FB9DCC00270F07 /* LaunchScreen.storyboard in Resources */,
 				6EC6673C232494170048068C /* ConceptMapTableViewCell.xib in Resources */,
 				6EBD5310233AF7A70057F28A /* ChooseExerciseViewController.xib in Resources */,
+				6E7191CA237B9B1700E9B88E /* db.sqlite3 in Resources */,
 				6EC667142324489F0048068C /* MenuViewController.xib in Resources */,
 				6E883F98233D92F2004F0D0E /* ConceptIntroViewController.xib in Resources */,
 				6EE60C602345900900B0322B /* LevelUpViewController.xib in Resources */,
 				6EE5709623692B1D002C63F8 /* PracticeIntroViewController.xib in Resources */,
-				6EAB212B236260CB007186A4 /* db.sqlite3 in Resources */,
 				6E86B345236E489E002DCA62 /* DoubleLevelUpViewController.xib in Resources */,
 				6E557C1E22FB9DCC00270F07 /* Assets.xcassets in Resources */,
 				6EC6671E232451760048068C /* QuitableContainerViewController.xib in Resources */,

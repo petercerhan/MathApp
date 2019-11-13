@@ -15,6 +15,7 @@ extension Concept {
                        name: "Stub rule",
                        description: "This is the default rule",
                        rule: "x + y = z",
-                       example: "1 + 2 = 3")
+                       example: "1 + 2 = 3",
+                       maxDifficulty: 3)
     }
 }

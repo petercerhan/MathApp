@@ -42,7 +42,7 @@ class ExerciseSetCalculatorImpl: ExerciseSetCalculator {
         
         let unfilteredExercises = exerciseRepository.list(conceptID: conceptID)
         
-        let weightTable = weightTableForStrength(userConcept.strength)
+        let weightTable = getWeightTable(strength: userConcept.strength, maxDifficulty: userConcept.concept.maxDifficulty)
         let difficulties = randomizationService.setFromRange(min: 1, max: 3, selectionCount: 3, weightTable: weightTable)
         
         var exercises = [Exercise]()
@@ -79,8 +79,8 @@ class ExerciseSetCalculatorImpl: ExerciseSetCalculator {
         
         //use weighted selection to choose difficulties
         
-        let concept1WeightTable = weightTableForStrength(userConcept1.strength)
-        let concept2WeightTable = weightTableForStrength(userConcept2.strength)
+        let concept1WeightTable = getWeightTable(strength: userConcept1.strength, maxDifficulty: userConcept1.concept.maxDifficulty)
+        let concept2WeightTable = getWeightTable(strength: userConcept2.strength, maxDifficulty: userConcept2.concept.maxDifficulty)
     
         let exercises_concept1 = exerciseRepository.list(conceptID: concept1_id)
         let exercises_concept2 = exerciseRepository.list(conceptID: concept2_id)
@@ -174,11 +174,11 @@ class ExerciseSetCalculatorImpl: ExerciseSetCalculator {
         guard let userConcept = userConceptRepository.get(conceptID: conceptID) else {
             return nil
         }
-        let strength = userConcept.strength
+        let maxDifficulty = userConcept.concept.maxDifficulty
         
         //get weight table
-        let weightTable = weightTableForStrength(strength)
-        let difficulty = randomizationService.setFromRange(min: 1, max: 3, selectionCount: 1, weightTable: weightTable)[0]
+        let weightTable = getWeightTable(strength: userConcept.strength, maxDifficulty: maxDifficulty)
+        let difficulty = randomizationService.setFromRange(min: 1, max: maxDifficulty, selectionCount: 1, weightTable: weightTable)[0]
         
         //get exercise pool
         let exercisePool = exerciseRepository.list(conceptID: conceptID).filter { $0.difficulty == difficulty }
@@ -188,7 +188,15 @@ class ExerciseSetCalculatorImpl: ExerciseSetCalculator {
         return exercisePool[exerciseIndex]
     }
     
-    private func weightTableForStrength(_ strength: Int) -> [Double] {
+    private func getWeightTable(strength: Int, maxDifficulty: Int) -> [Double] {
+        if maxDifficulty == 3 {
+            return weightTableForMaxLevel3(strength: strength)
+        } else {
+            return weightTableForMaxLevel2(strength: strength)
+        }
+    }
+    
+    private func weightTableForMaxLevel3(strength: Int) -> [Double] {
         switch strength {
         case 0:
             return [1.0, 0.0, 0.0]
@@ -200,6 +208,21 @@ class ExerciseSetCalculatorImpl: ExerciseSetCalculator {
             return [0.0, 0.4, 0.6]
         default:
             return [1.0, 0.0, 0.0]
+        }
+    }
+    
+    private func weightTableForMaxLevel2(strength: Int) -> [Double] {
+        switch strength {
+        case 0:
+            return [1.0, 0.0]
+        case 1:
+            return [0.5, 0.5]
+        case 2:
+            return [0.3, 0.7]
+        case 3:
+            return [0.2, 0.8]
+        default:
+            return [1.0, 0.0]
         }
     }
     

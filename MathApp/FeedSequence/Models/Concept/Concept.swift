@@ -14,4 +14,5 @@ struct Concept: Codable {
     let description: String
     let rule: String
     let example: String
+    let maxDifficulty: Int
 }
