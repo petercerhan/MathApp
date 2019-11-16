@@ -59,7 +59,7 @@ class NewMaterialLearningStepStrategy: LearningStepStrategy {
     
     func nextLearningStep() -> LearningStep {
         guard let userConcept1 = userConcept1 else {
-            return practiceFamilyLearningStep()
+            return transitionLearningStep()
         }
         
         if userConcept1.strength == 0 {
@@ -88,7 +88,7 @@ class NewMaterialLearningStepStrategy: LearningStepStrategy {
             return nextStep
         }
         
-        return practiceFamilyLearningStep()
+        return transitionLearningStep()
     }
     
     private func learningStepForContinuedTwoConceptPractice(userConcept1: UserConcept, concept2ID: Int?) -> LearningStep? {
@@ -132,6 +132,18 @@ class NewMaterialLearningStepStrategy: LearningStepStrategy {
         } else {
             return nil
         }
+    }
+    
+    private func transitionLearningStep() -> LearningStep {
+        //get concept group id from new material state
+        //get all concept groups
+        
+        
+        //select next (increment id for now)
+        
+        
+        //return as item in the transition item
+        return TransitionLearningStep(transitionItems: [GroupCompleteTransitionItem()])
     }
     
     private func practiceFamilyLearningStep() -> LearningStep {

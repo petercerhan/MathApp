@@ -144,35 +144,49 @@ class NewMaterialLearningStepStrategyTests: XCTestCase {
         XCTAssertEqual(mockNewMaterialStateRepository.setFocus_concept2ID.first, 2)
     }
     
-    func test_scenario6_shouldReturnPracticeFamilyStart() {
+    func test_scenario6_shouldReturnTransitionWithConceptGroupItem() {
         let strategy = composeSUT(stubUserConcepts: userConceptsWithLevels(2, 2, 2, 2, 2), focus1ID: 1, focus2ID: 0)
         
         let learningStep = strategy.nextLearningStep()
         
-        guard let _ = learningStep as? PracticeFamilyLearningStep else {
-            XCTFail("Learning step is not practice family. Is type \(learningStep.self)")
+        guard let transitionStep = learningStep as? TransitionLearningStep else {
+            XCTFail("Learning step is not transition learning step. Is type \(learningStep.self)")
+            return
+        }
+        guard let _ = transitionStep.transitionItems.first as? GroupCompleteTransitionItem else {
+            XCTFail("Did not find group complete transition step")
             return
         }
     }
     
-    func test_scenario6_shouldResetNewMaterialState() {
-        let mockNewMaterialStateRepository = FakeNewMaterialStateRepository()
-        let strategy = composeSUT(stubUserConcepts: userConceptsWithLevels(2, 2, 2, 2, 2), focus1ID: 1, focus2ID: 0, fakeNewMaterialStateRepository: mockNewMaterialStateRepository)
-        
-        let _ = strategy.nextLearningStep()
-        
-        XCTAssertEqual(mockNewMaterialStateRepository.reset_callCount, 1)
-    }
+    //check that we got concept group item
     
-    func test_scenario6_shouldSetLearningStrategyPracticeFamily() {
-        let mockUserRepository = FakeUserRepository()
-        let strategy = composeSUT(stubUserConcepts: userConceptsWithLevels(2, 2, 2, 2, 2), focus1ID: 1, focus2ID: 0, fakeUserRepository: mockUserRepository)
-        
-        let _ = strategy.nextLearningStep()
-        
-        XCTAssertEqual(mockUserRepository.setLearningStrategy_callCount, 1)
-        XCTAssertEqual(mockUserRepository.setLearningStrategy_strategy.first, .practiceFamily)
-    }
+    //set concept group complete
+    
+    //update new material state Focus IDs, group ID
+    
+    
+    
+//    func test_scenario6_shouldResetNewMaterialState() {
+//        let mockNewMaterialStateRepository = FakeNewMaterialStateRepository()
+//        let strategy = composeSUT(stubUserConcepts: userConceptsWithLevels(2, 2, 2, 2, 2), focus1ID: 1, focus2ID: 0, fakeNewMaterialStateRepository: mockNewMaterialStateRepository)
+//
+//        let _ = strategy.nextLearningStep()
+//
+//        XCTAssertEqual(mockNewMaterialStateRepository.reset_callCount, 1)
+//    }
+//
+//    func test_scenario6_shouldSetLearningStrategyPracticeFamily() {
+//        let mockUserRepository = FakeUserRepository()
+//        let strategy = composeSUT(stubUserConcepts: userConceptsWithLevels(2, 2, 2, 2, 2), focus1ID: 1, focus2ID: 0, fakeUserRepository: mockUserRepository)
+//
+//        let _ = strategy.nextLearningStep()
+//
+//        XCTAssertEqual(mockUserRepository.setLearningStrategy_callCount, 1)
+//        XCTAssertEqual(mockUserRepository.setLearningStrategy_strategy.first, .practiceFamily)
+//    }
+    
+    
     
     func test_scenario7_shouldReturnPracticeFocus1And2() {
         let stubUserConcepts = userConceptsWithLevels(1, 1, 0, 0, 0)
