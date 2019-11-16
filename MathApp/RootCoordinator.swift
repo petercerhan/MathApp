@@ -44,6 +44,10 @@ class RootCoordinator: Coordinator {
     func start() {
 //        databaseService.reset()
         databaseService.setup()
+        
+        let repository = UserConceptGroupRepositoryImpl(databaseService: databaseService)
+        let result = repository.list()
+        print("got result \(result.count)")
 
         let vc = rootCoordinatorComposer.composePrepareFeedScene(delegate: self)
         containerVC.show(viewController: vc, animation: .none)

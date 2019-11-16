@@ -14,6 +14,7 @@ extension UserConceptGroup {
     
     static let column_id = Expression<Int64>("id")
     static let column_completed = Expression<Int64>("completed")
+    static let column_conceptGroupID = Expression<Int64>("concept_group_id")
     
     static func createFromQueryResult(_ row: Row) -> UserConceptGroup? {
         let tableName = UserConceptGroup.table
