@@ -136,10 +136,10 @@ class NewMaterialLearningStepStrategy: LearningStepStrategy {
     
     private func transitionLearningStep() -> LearningStep {
         //get concept group id from new material state
-        //get all concept groups
+        //get all user-concept groups
         
         
-        //select next (increment id for now)
+        //select next (increment id for now + filter completed)
         
         
         //return as item in the transition item
