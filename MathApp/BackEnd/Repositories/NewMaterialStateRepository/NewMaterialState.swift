@@ -11,6 +11,7 @@ import Foundation
 struct NewMaterialState {
     let id: Int
     let userID: Int
+    let conceptGroupID: Int
     let focusConcept1ID: Int
     let focusConcept2ID: Int
 }

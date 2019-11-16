@@ -11,6 +11,6 @@ import Foundation
 
 extension NewMaterialState {
     static func createStub(focusConcept1ID: Int = 0, focusConcept2ID: Int = 0) -> NewMaterialState {
-        return NewMaterialState(id: 1, userID: 1, focusConcept1ID: focusConcept1ID, focusConcept2ID: focusConcept2ID)
+        return NewMaterialState(id: 1, userID: 1, conceptGroupID: 1, focusConcept1ID: focusConcept1ID, focusConcept2ID: focusConcept2ID)
     }
 }

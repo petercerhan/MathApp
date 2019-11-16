@@ -33,7 +33,7 @@ class NewMaterialStateRepositoryImpl: NewMaterialStateRepository {
         let query = NewMaterialState.table.filter(NewMaterialState.column_id == 1)
         
         guard let row = try? databaseService.db.pluck(query) else {
-            return NewMaterialState(id: 1, userID: 1, focusConcept1ID: 0, focusConcept2ID: 0)
+            return NewMaterialState(id: 1, userID: 1, conceptGroupID: 0, focusConcept1ID: 0, focusConcept2ID: 0)
         }
         
         return NewMaterialState.createFromQueryResult(row)
