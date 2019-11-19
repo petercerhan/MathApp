@@ -143,6 +143,7 @@ class FeedCoordinator: Coordinator {
         if let groupCompleteItem = transitionItems.first as? GroupCompleteTransitionItem {
             let vc = composer.composeGroupCompleteScene(groupCompleteItem: groupCompleteItem)
             containerVC.show(viewController: vc, animation: .fadeIn)
+            learningStepStore.dispatch(action: .next)
         }
     }
     

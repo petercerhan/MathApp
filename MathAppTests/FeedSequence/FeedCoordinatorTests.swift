@@ -347,7 +347,7 @@ class FeedCoordinatorTests: XCTestCase {
         }
     }
     
-    //MARK: - ConceptGroupComplete Step
+    //MARK: - Concept Group Complete Step
     
     func test_nextLearningStep_transitionGroup1To2_shouldShowTransitionConceptGroupScene() {
         let mockContainerVC = FakeContainerViewController()
@@ -356,6 +356,15 @@ class FeedCoordinatorTests: XCTestCase {
         coordinator.start()
         
         mockContainerVC.verifyDidShow(viewControllerType: GroupCompleteViewController.self)
+    }
+    
+    func test_transitionGroup1To2_shouldRefreshQueuedLearningStep() {
+        let mockLearningStepStore = FakeLearningStepStore()
+        let coordinator = composeSUT(fakeLearningStepStore: mockLearningStepStore, stubLearningStep: transitionGroup1To2LS)
+        
+        coordinator.start()
+        
+        XCTAssertEqual(mockLearningStepStore.next_callCount, 1)
     }
     
     //MARK: - Exercises
