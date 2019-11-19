@@ -178,6 +178,7 @@
 		6EDBC4D4238390E20082AFA5 /* GroupCompleteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EDBC4D2238390E20082AFA5 /* GroupCompleteViewController.xib */; };
 		6EDBC4D7238395550082AFA5 /* GroupCompleteSceneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC4D6238395550082AFA5 /* GroupCompleteSceneTests.swift */; };
 		6EDBC4D9238396B30082AFA5 /* GroupCompleteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC4D8238396B30082AFA5 /* GroupCompleteViewModel.swift */; };
+		6EDBC4DB23839D6C0082AFA5 /* FakeGroupCompleteViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC4DA23839D6C0082AFA5 /* FakeGroupCompleteViewModelDelegate.swift */; };
 		6EE1AC38235E8996008546DB /* FakeLearningStepStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE1AC37235E8996008546DB /* FakeLearningStepStore.swift */; };
 		6EE1AC3F235FC391008546DB /* ConceptIntroLearningStep+stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE1AC3E235FC391008546DB /* ConceptIntroLearningStep+stubs.swift */; };
 		6EE1AC41235FC410008546DB /* Concept+stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE1AC40235FC410008546DB /* Concept+stubs.swift */; };
@@ -405,6 +406,7 @@
 		6EDBC4D2238390E20082AFA5 /* GroupCompleteViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupCompleteViewController.xib; sourceTree = "<group>"; };
 		6EDBC4D6238395550082AFA5 /* GroupCompleteSceneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCompleteSceneTests.swift; sourceTree = "<group>"; };
 		6EDBC4D8238396B30082AFA5 /* GroupCompleteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCompleteViewModel.swift; sourceTree = "<group>"; };
+		6EDBC4DA23839D6C0082AFA5 /* FakeGroupCompleteViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeGroupCompleteViewModelDelegate.swift; sourceTree = "<group>"; };
 		6EE1AC37235E8996008546DB /* FakeLearningStepStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeLearningStepStore.swift; sourceTree = "<group>"; };
 		6EE1AC3E235FC391008546DB /* ConceptIntroLearningStep+stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConceptIntroLearningStep+stubs.swift"; sourceTree = "<group>"; };
 		6EE1AC40235FC410008546DB /* Concept+stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Concept+stubs.swift"; sourceTree = "<group>"; };
@@ -1317,6 +1319,7 @@
 			isa = PBXGroup;
 			children = (
 				6EDBC4D6238395550082AFA5 /* GroupCompleteSceneTests.swift */,
+				6EDBC4DA23839D6C0082AFA5 /* FakeGroupCompleteViewModelDelegate.swift */,
 			);
 			path = GroupCompleteScene;
 			sourceTree = "<group>";
@@ -1831,6 +1834,7 @@
 				6EEF91E82380AAE00057F73A /* ConceptGroup+stubs.swift in Sources */,
 				6EAB211E23613B0E007186A4 /* FakeExerciseExternalDataService.swift in Sources */,
 				6EE57091236929E7002C63F8 /* PracticeTwoConceptsLearningStep+stubs.swift in Sources */,
+				6EDBC4DB23839D6C0082AFA5 /* FakeGroupCompleteViewModelDelegate.swift in Sources */,
 				6EAB2119236137C2007186A4 /* FeedExercisesStoreTests.swift in Sources */,
 				6EAB21002361185B007186A4 /* ExerciseControllerTests.swift in Sources */,
 				6EEEB6672364F0DD008D0FD6 /* FakeUserConceptController.swift in Sources */,

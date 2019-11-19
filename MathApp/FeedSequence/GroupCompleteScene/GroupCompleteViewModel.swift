@@ -8,11 +8,24 @@
 
 import Foundation
 
+protocol GroupCompleteViewModelDelegate: class {
+    func nextGroup(_ groupCompleteViewModel: GroupCompleteViewModel)
+}
+
+enum GroupCompleteAction {
+    case nextGroup
+}
+
 class GroupCompleteViewModel {
+    
+    //MARK: - Dependencies
+    
+    private weak var delegate: GroupCompleteViewModelDelegate?
     
     //MARK: - Initialization
     
-    init(groupCompleteItem: GroupCompleteTransitionItem) {
+    init(delegate: GroupCompleteViewModelDelegate, groupCompleteItem: GroupCompleteTransitionItem) {
+        self.delegate = delegate
         completedGroupName = groupCompleteItem.completedConceptGroup.name
         nextGroupName = groupCompleteItem.nextConceptGroup.name
     }
@@ -22,6 +35,15 @@ class GroupCompleteViewModel {
     let completedGroupName: String
     let nextGroupName: String
     
+    func dispatch(action: GroupCompleteAction) {
+        switch action {
+        case .nextGroup:
+            handle_nextGroup()
+        }
+    }
     
+    private func handle_nextGroup() {
+        delegate?.nextGroup(self)
+    }
     
 }

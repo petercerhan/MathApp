@@ -14,8 +14,7 @@ import RxSwift
 class GroupCompleteSceneTests: XCTestCase {
     
     func test_group1to2_shouldShowGroup1and2() {
-        let vm = GroupCompleteViewModel(groupCompleteItem: GroupCompleteTransitionItem.createStub())
-        let vc = GroupCompleteViewController(viewModel: vm)
+        let vc = composeSUT()
         
         vc.loadViewIfNeeded()
         
@@ -23,5 +22,21 @@ class GroupCompleteSceneTests: XCTestCase {
         XCTAssertEqual(vc.nextGroupButton.titleLabel?.text, "Next: Stub Concept Group")
     }
     
+    func test_nextGroup_requestsNextGroup() {
+        let mockDelegate = FakeGroupCompleteViewModelDelegate()
+        let vc = composeSUT(fakeDelegate: mockDelegate)
+        
+        vc.loadViewIfNeeded()
+        vc.nextGroupButton.sendActions(for: .touchUpInside)
+        
+        XCTAssertEqual(mockDelegate.nextGroup_callCount, 1)
+    }
     
+    //MARK: - SUT Composition
+    
+    func composeSUT(fakeDelegate: FakeGroupCompleteViewModelDelegate? = nil) -> GroupCompleteViewController {
+        let delegate = fakeDelegate ?? FakeGroupCompleteViewModelDelegate()
+        let vm = GroupCompleteViewModel(delegate: delegate, groupCompleteItem: GroupCompleteTransitionItem.createStub())
+        return GroupCompleteViewController(viewModel: vm)
+    }
 }

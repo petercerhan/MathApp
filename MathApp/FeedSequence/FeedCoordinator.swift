@@ -141,7 +141,7 @@ class FeedCoordinator: Coordinator {
     private func beginTransitionLearningStep(learningStep: TransitionLearningStep) {
         let transitionItems = learningStep.transitionItems
         if let groupCompleteItem = transitionItems.first as? GroupCompleteTransitionItem {
-            let vc = composer.composeGroupCompleteScene(groupCompleteItem: groupCompleteItem)
+            let vc = composer.composeGroupCompleteScene(delegate: self, groupCompleteItem: groupCompleteItem)
             containerVC.show(viewController: vc, animation: .fadeIn)
             learningStepStore.dispatch(action: .next)
         }
@@ -360,5 +360,13 @@ extension FeedCoordinator: PracticeIntroViewModelDelegate {
 extension FeedCoordinator: DoubleLevelUpViewModelDelegate {
     func next(_ doubleLevelUpViewModel: DoubleLevelUpViewModel) {
         beginNextLearningStep()
+    }
+}
+
+//MARK: - GroupCompleteViewModelDelegate
+
+extension FeedCoordinator: GroupCompleteViewModelDelegate {
+    func nextGroup(_ groupCompleteViewModel: GroupCompleteViewModel) {
+        
     }
 }

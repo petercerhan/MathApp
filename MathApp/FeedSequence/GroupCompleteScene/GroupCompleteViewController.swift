@@ -21,6 +21,10 @@ class GroupCompleteViewController: UIViewController {
     @IBOutlet private(set) var messageLabel: UILabel!
     @IBOutlet private(set) var nextGroupButton: UIButton!
     
+    //MARK: - Rx
+    
+    private let disposeBag = DisposeBag()
+    
     //MARK: - Initialization
     
     init(viewModel: GroupCompleteViewModel) {
@@ -37,11 +41,21 @@ class GroupCompleteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        bindActions()
     }
     
     private func configureUI() {
         messageLabel.text = "You've completed: \(viewModel.completedGroupName)"
         nextGroupButton.setTitle("Next: \(viewModel.nextGroupName)", for: .normal)
+    }
+    
+    private func bindActions() {
+        nextGroupButton.rx.tap
+            .throttle(.milliseconds(500), latest: false, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] in
+                self.viewModel.dispatch(action: .nextGroup)
+            })
+            .disposed(by: disposeBag)
     }
 
 }
