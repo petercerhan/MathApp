@@ -15,6 +15,7 @@ class NewMaterialLearningStepStrategy: LearningStepStrategy {
     private let userConceptRepository: UserConceptRepository
     private let newMaterialStateRepository: NewMaterialStateRepository
     private let userRepository: UserRepository
+    private let userConceptGroupRepository: UserConceptGroupRepository
     
     //MARK: - Context
     
@@ -27,11 +28,13 @@ class NewMaterialLearningStepStrategy: LearningStepStrategy {
     
     init(userConceptRepository: UserConceptRepository,
          newMaterialStateRepository: NewMaterialStateRepository,
-         userRepository: UserRepository)
+         userRepository: UserRepository,
+         userConceptGroupRepository: UserConceptGroupRepository)
     {
         self.userConceptRepository = userConceptRepository
         self.newMaterialStateRepository = newMaterialStateRepository
         self.userRepository = userRepository
+        self.userConceptGroupRepository = userConceptGroupRepository
         
         let newMaterialLearningStep = newMaterialStateRepository.get()
         focus1ID = newMaterialLearningStep.focusConcept1ID
@@ -135,15 +138,27 @@ class NewMaterialLearningStepStrategy: LearningStepStrategy {
     }
     
     private func transitionLearningStep() -> LearningStep {
+
         //get concept group id from new material state
+        let newMaterialState = newMaterialStateRepository.get()
+
         //get all user-concept groups
+        let userConceptGroups = userConceptGroupRepository.list().sorted { $0.id < $1.id }
+        let nextConceptGroup = userConceptGroups.first(where: { $0.conceptGroupID > newMaterialState.conceptGroupID && $0.completed == false })
+        let currentConceptGroup = userConceptGroups.first(where: { $0.conceptGroupID == newMaterialState.conceptGroupID })
         
+        print("\n\nuser concept groups: \(userConceptGroups)")
         
         //select next (increment id for now + filter completed)
         
         
         //return as item in the transition item
-        return TransitionLearningStep(transitionItems: [GroupCompleteTransitionItem()])
+        if let nextGroup = nextConceptGroup?.conceptGroup, let currentGroup = currentConceptGroup?.conceptGroup {
+            return TransitionLearningStep(transitionItems: [GroupCompleteTransitionItem(completedConceptGroup: currentGroup,
+                                                                                        nextConceptGroup: nextGroup)])
+        } else {
+            return practiceFamilyLearningStep()
+        }
     }
     
     private func practiceFamilyLearningStep() -> LearningStep {

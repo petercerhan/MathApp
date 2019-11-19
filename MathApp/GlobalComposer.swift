@@ -16,10 +16,12 @@ class GlobalComposer {
         let userConceptRepository = UserConceptRepositoryImpl(databaseService: databaseService)
         let newMaterialStateRepository = NewMaterialStateRepositoryImpl(databaseService: databaseService)
         let userRepository = UserRepositoryImpl(databaseService: databaseService)
+        let userConceptGroupRepository = UserConceptGroupRepositoryImpl(databaseService: databaseService)
         
         return LearningStepControllerImpl(learningStepStrategyFactory: LearningStepStrategyFactoryImpl(userConceptRepository: userConceptRepository,
                                                                                                        newMaterialStateRepository: newMaterialStateRepository,
-                                                                                                       userRepository: userRepository))
+                                                                                                       userRepository: userRepository,
+                                                                                                       userConceptGroupRepository: userConceptGroupRepository))
     }()
     
     private(set) lazy var exerciseController: ExerciseController = {

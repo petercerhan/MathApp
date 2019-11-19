@@ -9,5 +9,6 @@
 import Foundation
 
 struct GroupCompleteTransitionItem: TransitionItem {
-    
+    let completedConceptGroup: ConceptGroup
+    let nextConceptGroup: ConceptGroup
 }

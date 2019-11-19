@@ -12,4 +12,8 @@ struct UserConceptGroup {
     let id: Int
     let completed: Bool
     let conceptGroup: ConceptGroup
+    
+    var conceptGroupID: Int {
+        return conceptGroup.id
+    }
 }

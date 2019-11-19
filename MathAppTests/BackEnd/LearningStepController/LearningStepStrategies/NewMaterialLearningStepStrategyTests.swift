@@ -153,17 +153,63 @@ class NewMaterialLearningStepStrategyTests: XCTestCase {
             XCTFail("Learning step is not transition learning step. Is type \(learningStep.self)")
             return
         }
-        guard let _ = transitionStep.transitionItems.first as? GroupCompleteTransitionItem else {
+        guard let groupCompleteItem = transitionStep.transitionItems.first as? GroupCompleteTransitionItem else {
             XCTFail("Did not find group complete transition step")
             return
         }
+        XCTAssertEqual(groupCompleteItem.completedConceptGroup.id, 1)
     }
-    
-    //check that we got concept group item
     
     //set concept group complete
     
     //update new material state Focus IDs, group ID
+    
+    func test_transitionScenario1_shouldTransitionToConcept2() {
+        let strategy = composeSUT(stubUserConcepts: userConceptsWithLevels(2, 2, 2, 2, 2), focus1ID: 1, focus2ID: 0, conceptGroups: conceptGroups_1000)
+        
+        let learningStep = strategy.nextLearningStep()
+        
+        guard
+            let transitionStep = learningStep as? TransitionLearningStep,
+            let groupCompleteItem = transitionStep.transitionItems.first as? GroupCompleteTransitionItem
+        else {
+            XCTFail("Did not find group complete transition item")
+            return
+        }
+        XCTAssertEqual(groupCompleteItem.nextConceptGroup.id, 2)
+    }
+    
+    func test_transitionScenario2_shouldTransitionFromConcept2ToConcept3() {
+        let strategy = composeSUT(stubUserConcepts: userConceptsWithLevels(2, 2, 2, 2, 2), currentGroup: 2, conceptGroups: conceptGroups_1000)
+        
+        let learningStep = strategy.nextLearningStep()
+        
+        guard
+            let transitionStep = learningStep as? TransitionLearningStep,
+            let groupCompleteItem = transitionStep.transitionItems.first as? GroupCompleteTransitionItem
+        else {
+            XCTFail("Did not find group complete transition item")
+            return
+        }
+        XCTAssertEqual(groupCompleteItem.completedConceptGroup.id, 2)
+        XCTAssertEqual(groupCompleteItem.nextConceptGroup.id, 3)
+    }
+    
+    func test_transitionScenario3_shouldTransitionFromConcept2ToConcept4() {
+        let strategy = composeSUT(stubUserConcepts: userConceptsWithLevels(2, 2, 2, 2, 2), currentGroup: 2, conceptGroups: conceptGroups_1110)
+        
+        let learningStep = strategy.nextLearningStep()
+        
+        guard
+            let transitionStep = learningStep as? TransitionLearningStep,
+            let groupCompleteItem = transitionStep.transitionItems.first as? GroupCompleteTransitionItem
+        else {
+            XCTFail("Did not find group complete transition item")
+            return
+        }
+        XCTAssertEqual(groupCompleteItem.completedConceptGroup.id, 2)
+        XCTAssertEqual(groupCompleteItem.nextConceptGroup.id, 4)
+    }
     
     
     
@@ -210,8 +256,10 @@ class NewMaterialLearningStepStrategyTests: XCTestCase {
     //MARK: - SUT Composition
     
     func composeSUT(stubUserConcepts: [UserConcept],
-                    focus1ID: Int,
-                    focus2ID: Int,
+                    currentGroup: Int = 1,
+                    focus1ID: Int = 1,
+                    focus2ID: Int = 0,
+                    conceptGroups: [UserConceptGroup]? = nil,
                     fakeNewMaterialStateRepository: FakeNewMaterialStateRepository? = nil,
                     fakeUserRepository: FakeUserRepository? = nil) -> NewMaterialLearningStepStrategy
     {
@@ -219,13 +267,17 @@ class NewMaterialLearningStepStrategyTests: XCTestCase {
         stubUserConceptRepository.list_stubUserConcepts = stubUserConcepts
         
         let newMaterialStateRepository = fakeNewMaterialStateRepository ?? FakeNewMaterialStateRepository()
-        newMaterialStateRepository.stubNewMaterialState = NewMaterialState.createStub(focusConcept1ID: focus1ID, focusConcept2ID: focus2ID)
+        newMaterialStateRepository.stubNewMaterialState = NewMaterialState.createStub(conceptGroupID: currentGroup, focusConcept1ID: focus1ID, focusConcept2ID: focus2ID)
         
         let userRepository = fakeUserRepository ?? FakeUserRepository()
         
+        let userConceptGroupRepository = FakeUserConceptGroupRepository()
+        userConceptGroupRepository.list_stubs = conceptGroups ?? conceptGroups_1000
+        
         return NewMaterialLearningStepStrategy(userConceptRepository: stubUserConceptRepository,
                                                newMaterialStateRepository: newMaterialStateRepository,
-                                               userRepository: userRepository)
+                                               userRepository: userRepository,
+                                               userConceptGroupRepository: userConceptGroupRepository)
     }
     
     func userConceptsWithLevels(_ strength1: Int, _ strength2: Int, _ strength3: Int, _ strength4: Int, _ strength5: Int) -> [UserConcept] {
@@ -235,5 +287,17 @@ class NewMaterialLearningStepStrategyTests: XCTestCase {
                 UserConcept.createStub(id: 4, concept: Concept.sumRule, strength: strength4),
                 UserConcept.createStub(id: 5, concept: Concept.differenceRule, strength: strength5)]
     }
+    
+    //MARK: - Stubs
+    
+    private let conceptGroups_1000 = [UserConceptGroup.createStub(conceptGroupID: 1, completed: true),
+                                      UserConceptGroup.createStub(conceptGroupID: 2, completed: false),
+                                      UserConceptGroup.createStub(conceptGroupID: 3, completed: false),
+                                      UserConceptGroup.createStub(conceptGroupID: 4, completed: false)]
+                                      
+    private let conceptGroups_1110 = [UserConceptGroup.createStub(conceptGroupID: 1, completed: true),
+                                        UserConceptGroup.createStub(conceptGroupID: 2, completed: true),
+                                        UserConceptGroup.createStub(conceptGroupID: 3, completed: true),
+                                        UserConceptGroup.createStub(conceptGroupID: 4, completed: false)]
     
 }
