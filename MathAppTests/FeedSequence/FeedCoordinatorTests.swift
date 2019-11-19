@@ -347,6 +347,17 @@ class FeedCoordinatorTests: XCTestCase {
         }
     }
     
+    //MARK: - ConceptGroupComplete Step
+    
+    func test_nextLearningStep_transitionGroup1To2_shouldShowTransitionConceptGroupScene() {
+        let mockContainerVC = FakeContainerViewController()
+        let coordinator = composeSUT(fakeContainerViewController: mockContainerVC, stubLearningStep: transitionGroup1To2LS)
+        
+        coordinator.start()
+        
+        mockContainerVC.verifyDidShow(viewControllerType: GroupCompleteViewController.self)
+    }
+    
     //MARK: - Exercises
     
     func test_exerciseRequestsNext_progressStateNotComplete_shouldShowExerciseScene() {
@@ -498,6 +509,8 @@ class FeedCoordinatorTests: XCTestCase {
     var practiceLS12: PracticeTwoConceptsLearningStep = PracticeTwoConceptsLearningStep.createStub(concept1: Concept.constantRule, concept2: Concept.linearRule)
     
     var practiceFamilyLS = PracticeFamilyLearningStep.createStub()
+    
+    var transitionGroup1To2LS = TransitionLearningStep.transitionGroup1To2
 }
 
 class TestExerciseViewModel: ExerciseViewModelImpl {

@@ -138,21 +138,11 @@ class NewMaterialLearningStepStrategy: LearningStepStrategy {
     }
     
     private func transitionLearningStep() -> LearningStep {
-
-        //get concept group id from new material state
         let newMaterialState = newMaterialStateRepository.get()
-
-        //get all user-concept groups
         let userConceptGroups = userConceptGroupRepository.list().sorted { $0.id < $1.id }
         let nextConceptGroup = userConceptGroups.first(where: { $0.conceptGroupID > newMaterialState.conceptGroupID && $0.completed == false })
         let currentUserConceptGroup = userConceptGroups.first(where: { $0.conceptGroupID == newMaterialState.conceptGroupID })
         
-        
-        
-        //select next (increment id for now + filter completed)
-        
-        
-        //return as item in the transition item
         if let nextGroup = nextConceptGroup?.conceptGroup,
             let currentUserConceptGroup = currentUserConceptGroup
         {

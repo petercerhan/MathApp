@@ -85,6 +85,9 @@ class FeedCoordinator: Coordinator {
         else if let learningStep = learningStep as? PracticeFamilyLearningStep {
             beginPracticeFamilyStep(learningStep: learningStep)
         }
+        else if let learningStep = learningStep as? TransitionLearningStep {
+            beginTransitionLearningStep(learningStep: learningStep)
+        }
         else {
             print("did not recognize learning step type \(learningStep)")
         }
@@ -133,6 +136,14 @@ class FeedCoordinator: Coordinator {
         
         exerciseQueue = Queue<Exercise>()
         exercisesStore.dispatch(action: .refresh(conceptIDs: learningStep.conceptIDs))
+    }
+    
+    private func beginTransitionLearningStep(learningStep: TransitionLearningStep) {
+        let transitionItems = learningStep.transitionItems
+        if let groupCompleteItem = transitionItems.first as? GroupCompleteTransitionItem {
+            let vc = composer.composeGroupCompleteScene()
+            containerVC.show(viewController: vc, animation: .fadeIn)
+        }
     }
     
     private func showNextFeedScene(animation: TransitionAnimation) {
