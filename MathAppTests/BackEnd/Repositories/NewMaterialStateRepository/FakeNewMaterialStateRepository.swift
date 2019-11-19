@@ -27,8 +27,14 @@ class FakeNewMaterialStateRepository: NewMaterialStateRepository {
         setFocus_concept2ID.append(concept2ID)
     }
     
-    var reset_callCount = 0
+    var resetForNewConceptGroup_callCount = 0
+    var resetForNewConceptGroup_conceptGroupID = [Int]()
+    func resetForNewConceptGroup(conceptGroupID: Int) {
+        resetForNewConceptGroup_callCount += 1
+        resetForNewConceptGroup_conceptGroupID.append(conceptGroupID)
+    }
     
+    var reset_callCount = 0
     func reset() {
         reset_callCount += 1
     }

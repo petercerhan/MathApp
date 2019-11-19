@@ -18,4 +18,13 @@ class FakeUserConceptGroupRepository: UserConceptGroupRepository {
         return list_stubs
     }
     
+    var set_callCount = 0
+    var set_id = [Int]()
+    var set_fields = [[String: String]]()
+    
+    func set(id: Int, fields: [String: String]) {
+        set_callCount += 1
+        set_id.append(id)
+        set_fields.append(fields)
+    }
 }

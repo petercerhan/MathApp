@@ -12,6 +12,7 @@ import SQLite
 protocol NewMaterialStateRepository {
     func get() -> NewMaterialState
     func setFocus(concept1ID: Int, concept2ID: Int)
+    func resetForNewConceptGroup(conceptGroupID: Int)
     func reset()
 }
 
@@ -43,10 +44,15 @@ class NewMaterialStateRepositoryImpl: NewMaterialStateRepository {
         let query = NewMaterialState.table.filter(NewMaterialState.column_userID == Int64(1))
         do {
             try databaseService.db.run(query.update(NewMaterialState.column_focusConcept1 <- Int64(concept1ID),
-            NewMaterialState.column_focusConcept2 <- Int64(concept2ID)))
+                                                    NewMaterialState.column_focusConcept2 <- Int64(concept2ID)))
         } catch {
             print("error: \(error)")
         }
+    }
+    
+    func resetForNewConceptGroup(conceptGroupID: Int) {
+        let query = NewMaterialState.table.filter(NewMaterialState.column_userID == Int64(1))
+        _ = try? databaseService.db.run(query.update(NewMaterialState.column_conceptGroupID <- Int64(conceptGroupID)))
     }
     
     func reset() {

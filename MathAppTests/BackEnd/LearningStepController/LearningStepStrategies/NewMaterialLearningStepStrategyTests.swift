@@ -145,7 +145,7 @@ class NewMaterialLearningStepStrategyTests: XCTestCase {
     }
     
     func test_scenario6_shouldReturnTransitionWithConceptGroupItem() {
-        let strategy = composeSUT(stubUserConcepts: userConceptsWithLevels(2, 2, 2, 2, 2), focus1ID: 1, focus2ID: 0)
+        let strategy = composeSUT(stubUserConcepts: userConceptsWithLevels(2, 2, 2, 2, 2))
         
         let learningStep = strategy.nextLearningStep()
         
@@ -160,9 +160,29 @@ class NewMaterialLearningStepStrategyTests: XCTestCase {
         XCTAssertEqual(groupCompleteItem.completedConceptGroup.id, 1)
     }
     
-    //set concept group complete
+    func test_scenario6_shouldSetConceptGroupComplete() {
+        let mockUserConceptGroupRepository = FakeUserConceptGroupRepository()
+        let strategy = composeSUT(stubUserConcepts: userConceptsWithLevels(2, 2, 2, 2, 2), fakeUserConceptGroupRepository: mockUserConceptGroupRepository)
+        
+        let _ = strategy.nextLearningStep()
+        
+        XCTAssertEqual(mockUserConceptGroupRepository.set_callCount, 1)
+        XCTAssertEqual(mockUserConceptGroupRepository.set_id.first, 1)
+        XCTAssertEqual(mockUserConceptGroupRepository.set_fields.first, ["completed": "1"])
+    }
     
-    //update new material state Focus IDs, group ID
+    func test_scenario6_shouldUpdateNewMaterialState() {
+        let mockNewMaterialStateRepository = FakeNewMaterialStateRepository()
+        let strategy = composeSUT(stubUserConcepts: userConceptsWithLevels(2, 2, 2, 2, 2), conceptGroups: conceptGroups_1000, fakeNewMaterialStateRepository: mockNewMaterialStateRepository)
+        
+        let _ = strategy.nextLearningStep()
+        
+        XCTAssertEqual(mockNewMaterialStateRepository.resetForNewConceptGroup_callCount, 1)
+        XCTAssertEqual(mockNewMaterialStateRepository.resetForNewConceptGroup_conceptGroupID.first, 2)
+    }
+    
+    
+    //MARK: - Transition Concept Group Scenarios
     
     func test_transitionScenario1_shouldTransitionToConcept2() {
         let strategy = composeSUT(stubUserConcepts: userConceptsWithLevels(2, 2, 2, 2, 2), focus1ID: 1, focus2ID: 0, conceptGroups: conceptGroups_1000)
@@ -221,16 +241,6 @@ class NewMaterialLearningStepStrategyTests: XCTestCase {
 //
 //        XCTAssertEqual(mockNewMaterialStateRepository.reset_callCount, 1)
 //    }
-//
-//    func test_scenario6_shouldSetLearningStrategyPracticeFamily() {
-//        let mockUserRepository = FakeUserRepository()
-//        let strategy = composeSUT(stubUserConcepts: userConceptsWithLevels(2, 2, 2, 2, 2), focus1ID: 1, focus2ID: 0, fakeUserRepository: mockUserRepository)
-//
-//        let _ = strategy.nextLearningStep()
-//
-//        XCTAssertEqual(mockUserRepository.setLearningStrategy_callCount, 1)
-//        XCTAssertEqual(mockUserRepository.setLearningStrategy_strategy.first, .practiceFamily)
-//    }
     
     
     
@@ -261,7 +271,8 @@ class NewMaterialLearningStepStrategyTests: XCTestCase {
                     focus2ID: Int = 0,
                     conceptGroups: [UserConceptGroup]? = nil,
                     fakeNewMaterialStateRepository: FakeNewMaterialStateRepository? = nil,
-                    fakeUserRepository: FakeUserRepository? = nil) -> NewMaterialLearningStepStrategy
+                    fakeUserRepository: FakeUserRepository? = nil,
+                    fakeUserConceptGroupRepository: FakeUserConceptGroupRepository? = nil) -> NewMaterialLearningStepStrategy
     {
         let stubUserConceptRepository = FakeUserConceptRepository()
         stubUserConceptRepository.list_stubUserConcepts = stubUserConcepts
@@ -271,7 +282,7 @@ class NewMaterialLearningStepStrategyTests: XCTestCase {
         
         let userRepository = fakeUserRepository ?? FakeUserRepository()
         
-        let userConceptGroupRepository = FakeUserConceptGroupRepository()
+        let userConceptGroupRepository = fakeUserConceptGroupRepository ?? FakeUserConceptGroupRepository()
         userConceptGroupRepository.list_stubs = conceptGroups ?? conceptGroups_1000
         
         return NewMaterialLearningStepStrategy(userConceptRepository: stubUserConceptRepository,

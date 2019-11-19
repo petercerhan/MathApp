@@ -11,6 +11,7 @@ import SQLite
 
 protocol UserConceptGroupRepository {
     func list() -> [UserConceptGroup]
+    func set(id: Int, fields: [String: String])
 }
 
 class UserConceptGroupRepositoryImpl: UserConceptGroupRepository {
@@ -34,6 +35,14 @@ class UserConceptGroupRepositoryImpl: UserConceptGroupRepository {
             return UserConceptGroup.createFromQueryResult(row)
         }
         return result ?? [UserConceptGroup]()
+    }
+    
+    func set(id: Int, fields: [String: String]) {
+        let query = UserConceptGroup.table.filter(UserConceptGroup.column_id == Int64(id))
+        
+        if let completedData = fields["completed"], let completed = Int64(completedData) {
+            _ = try? databaseService.db.run(query.update(UserConceptGroup.column_completed <- completed))
+        }
     }
     
     

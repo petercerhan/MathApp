@@ -145,16 +145,21 @@ class NewMaterialLearningStepStrategy: LearningStepStrategy {
         //get all user-concept groups
         let userConceptGroups = userConceptGroupRepository.list().sorted { $0.id < $1.id }
         let nextConceptGroup = userConceptGroups.first(where: { $0.conceptGroupID > newMaterialState.conceptGroupID && $0.completed == false })
-        let currentConceptGroup = userConceptGroups.first(where: { $0.conceptGroupID == newMaterialState.conceptGroupID })
+        let currentUserConceptGroup = userConceptGroups.first(where: { $0.conceptGroupID == newMaterialState.conceptGroupID })
         
-        print("\n\nuser concept groups: \(userConceptGroups)")
+        
         
         //select next (increment id for now + filter completed)
         
         
         //return as item in the transition item
-        if let nextGroup = nextConceptGroup?.conceptGroup, let currentGroup = currentConceptGroup?.conceptGroup {
-            return TransitionLearningStep(transitionItems: [GroupCompleteTransitionItem(completedConceptGroup: currentGroup,
+        if let nextGroup = nextConceptGroup?.conceptGroup,
+            let currentUserConceptGroup = currentUserConceptGroup
+        {
+            userConceptGroupRepository.set(id: currentUserConceptGroup.id, fields: ["completed": "1"])
+            newMaterialStateRepository.resetForNewConceptGroup(conceptGroupID: nextGroup.id)
+
+            return TransitionLearningStep(transitionItems: [GroupCompleteTransitionItem(completedConceptGroup: currentUserConceptGroup.conceptGroup,
                                                                                         nextConceptGroup: nextGroup)])
         } else {
             return practiceFamilyLearningStep()
