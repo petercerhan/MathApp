@@ -7,24 +7,41 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class GroupCompleteViewController: UIViewController {
-
+    
+    //MARK: - Dependencies
+    
+    private let viewModel: GroupCompleteViewModel
+    
+    //MARK: - UI Components
+    
+    @IBOutlet private(set) var messageLabel: UILabel!
+    @IBOutlet private(set) var nextGroupButton: UIButton!
+    
+    //MARK: - Initialization
+    
+    init(viewModel: GroupCompleteViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: "GroupCompleteViewController", bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("cannot initialize with init(coder:)")
+    }
+    
+    //MARK: - UIViewController Interface
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        configureUI()
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    private func configureUI() {
+        messageLabel.text = "You've completed: \(viewModel.completedGroupName)"
+        nextGroupButton.setTitle("Next: \(viewModel.nextGroupName)", for: .normal)
     }
-    */
 
 }

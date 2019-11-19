@@ -69,8 +69,9 @@ class FeedComposer {
         return PracticeFamilyCompleteViewController()
     }
     
-    func composeGroupCompleteScene() -> UIViewController {
-        return GroupCompleteViewController()
+    func composeGroupCompleteScene(groupCompleteItem: GroupCompleteTransitionItem) -> UIViewController {
+        let vm = GroupCompleteViewModel(groupCompleteItem: groupCompleteItem)
+        return GroupCompleteViewController(viewModel: vm)
     }
     
 }

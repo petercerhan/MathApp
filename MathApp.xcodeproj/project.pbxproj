@@ -176,6 +176,8 @@
 		6EDBC4CF23838E230082AFA5 /* GroupCompleteTransitionItem+stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC4CE23838E230082AFA5 /* GroupCompleteTransitionItem+stubs.swift */; };
 		6EDBC4D3238390E20082AFA5 /* GroupCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC4D1238390E20082AFA5 /* GroupCompleteViewController.swift */; };
 		6EDBC4D4238390E20082AFA5 /* GroupCompleteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EDBC4D2238390E20082AFA5 /* GroupCompleteViewController.xib */; };
+		6EDBC4D7238395550082AFA5 /* GroupCompleteSceneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC4D6238395550082AFA5 /* GroupCompleteSceneTests.swift */; };
+		6EDBC4D9238396B30082AFA5 /* GroupCompleteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC4D8238396B30082AFA5 /* GroupCompleteViewModel.swift */; };
 		6EE1AC38235E8996008546DB /* FakeLearningStepStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE1AC37235E8996008546DB /* FakeLearningStepStore.swift */; };
 		6EE1AC3F235FC391008546DB /* ConceptIntroLearningStep+stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE1AC3E235FC391008546DB /* ConceptIntroLearningStep+stubs.swift */; };
 		6EE1AC41235FC410008546DB /* Concept+stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE1AC40235FC410008546DB /* Concept+stubs.swift */; };
@@ -401,6 +403,8 @@
 		6EDBC4CE23838E230082AFA5 /* GroupCompleteTransitionItem+stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GroupCompleteTransitionItem+stubs.swift"; sourceTree = "<group>"; };
 		6EDBC4D1238390E20082AFA5 /* GroupCompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCompleteViewController.swift; sourceTree = "<group>"; };
 		6EDBC4D2238390E20082AFA5 /* GroupCompleteViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupCompleteViewController.xib; sourceTree = "<group>"; };
+		6EDBC4D6238395550082AFA5 /* GroupCompleteSceneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCompleteSceneTests.swift; sourceTree = "<group>"; };
+		6EDBC4D8238396B30082AFA5 /* GroupCompleteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCompleteViewModel.swift; sourceTree = "<group>"; };
 		6EE1AC37235E8996008546DB /* FakeLearningStepStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeLearningStepStore.swift; sourceTree = "<group>"; };
 		6EE1AC3E235FC391008546DB /* ConceptIntroLearningStep+stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConceptIntroLearningStep+stubs.swift"; sourceTree = "<group>"; };
 		6EE1AC40235FC410008546DB /* Concept+stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Concept+stubs.swift"; sourceTree = "<group>"; };
@@ -1073,6 +1077,7 @@
 				6EE5709723692EB0002C63F8 /* PracticeIntroScene */,
 				6EBC1BC22346B6CF00654285 /* LevelUpScene */,
 				6E3829242371136600145E26 /* DoubleLevelUpScene */,
+				6EDBC4D5238395360082AFA5 /* GroupCompleteScene */,
 				6EB933A6233071A800E38B52 /* LoadExercisesSceneTests */,
 				6EC666F4232204170048068C /* InfoScene */,
 			);
@@ -1302,7 +1307,16 @@
 			isa = PBXGroup;
 			children = (
 				6EDBC4D1238390E20082AFA5 /* GroupCompleteViewController.swift */,
+				6EDBC4D8238396B30082AFA5 /* GroupCompleteViewModel.swift */,
 				6EDBC4D2238390E20082AFA5 /* GroupCompleteViewController.xib */,
+			);
+			path = GroupCompleteScene;
+			sourceTree = "<group>";
+		};
+		6EDBC4D5238395360082AFA5 /* GroupCompleteScene */ = {
+			isa = PBXGroup;
+			children = (
+				6EDBC4D6238395550082AFA5 /* GroupCompleteSceneTests.swift */,
 			);
 			path = GroupCompleteScene;
 			sourceTree = "<group>";
@@ -1692,6 +1706,7 @@
 				6EC6670723233A140048068C /* InfoViewContentElement.swift in Sources */,
 				6EE60C502344399900B0322B /* PrepareFeedViewModel.swift in Sources */,
 				6EB0FEF2235BE822005F23DE /* ConceptIntroLearningStep.swift in Sources */,
+				6EDBC4D9238396B30082AFA5 /* GroupCompleteViewModel.swift in Sources */,
 				6E3829302372641900145E26 /* PracticeFamilyCompleteViewController.swift in Sources */,
 				6EC666EE2321DFA60048068C /* Colors.swift in Sources */,
 				6E1E6B3722FFA97800AFB7A0 /* TransitionAnimation.swift in Sources */,
@@ -1808,6 +1823,7 @@
 				6EBE4E97230A1B7C0047A880 /* RootCoordinatorTests.swift in Sources */,
 				6EC667222324548B0048068C /* FakeMenuCoordinatorDelegate.swift in Sources */,
 				6EC667332324673F0048068C /* ConceptMapSceneTests.swift in Sources */,
+				6EDBC4D7238395550082AFA5 /* GroupCompleteSceneTests.swift in Sources */,
 				6EC66719232451350048068C /* FakeQuitableContainerViewModel.swift in Sources */,
 				6E38292A23724DDC00145E26 /* PracticeOneConceptLearningStep.swift in Sources */,
 				6E3C9EEC235E726B00CD81C9 /* LearningStepExternalDataServiceTests.swift in Sources */,

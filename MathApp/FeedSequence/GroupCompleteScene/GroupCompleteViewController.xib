@@ -10,6 +10,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GroupCompleteViewController" customModule="MathApp" customModuleProvider="target">
             <connections>
+                <outlet property="messageLabel" destination="hhS-jC-2n8" id="14S-p8-0we"/>
+                <outlet property="nextGroupButton" destination="X4h-lJ-UNe" id="5YH-1y-LUQ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

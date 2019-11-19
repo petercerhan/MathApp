@@ -141,7 +141,7 @@ class FeedCoordinator: Coordinator {
     private func beginTransitionLearningStep(learningStep: TransitionLearningStep) {
         let transitionItems = learningStep.transitionItems
         if let groupCompleteItem = transitionItems.first as? GroupCompleteTransitionItem {
-            let vc = composer.composeGroupCompleteScene()
+            let vc = composer.composeGroupCompleteScene(groupCompleteItem: groupCompleteItem)
             containerVC.show(viewController: vc, animation: .fadeIn)
         }
     }
