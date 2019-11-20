@@ -13,7 +13,7 @@ class FakeUserConceptRepository: UserConceptRepository {
 
     var list_stubUserConcepts = [UserConcept]()
 
-    func list() -> [UserConcept] {
+    func list(conceptGroupID: Int) -> [UserConcept] {
         return list_stubUserConcepts
     }
     

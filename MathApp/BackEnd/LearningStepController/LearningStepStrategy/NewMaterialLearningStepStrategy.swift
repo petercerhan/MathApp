@@ -18,7 +18,8 @@ class NewMaterialLearningStepStrategy: LearningStepStrategy {
     private let userConceptGroupRepository: UserConceptGroupRepository
     
     //MARK: - Context
-    
+
+    private let conceptGroupID: Int
     private let focus1ID: Int
     private let focus2ID: Int
     private var userConcept1: UserConcept? = nil
@@ -37,13 +38,14 @@ class NewMaterialLearningStepStrategy: LearningStepStrategy {
         self.userConceptGroupRepository = userConceptGroupRepository
         
         let newMaterialLearningStep = newMaterialStateRepository.get()
+        conceptGroupID = newMaterialLearningStep.conceptGroupID
         focus1ID = newMaterialLearningStep.focusConcept1ID
         focus2ID = newMaterialLearningStep.focusConcept2ID
         findNextUserConcepts()
     }
     
     private func findNextUserConcepts() {
-        let userConcepts = userConceptRepository.list()
+        let userConcepts = userConceptRepository.list(conceptGroupID: conceptGroupID)
         
         guard let userConcept1_index = userConcepts.firstIndex(where: { $0.strength == 0 || $0.strength == 1 }) else {
             return

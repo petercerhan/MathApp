@@ -179,6 +179,7 @@
 		6EDBC4D7238395550082AFA5 /* GroupCompleteSceneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC4D6238395550082AFA5 /* GroupCompleteSceneTests.swift */; };
 		6EDBC4D9238396B30082AFA5 /* GroupCompleteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC4D8238396B30082AFA5 /* GroupCompleteViewModel.swift */; };
 		6EDBC4DB23839D6C0082AFA5 /* FakeGroupCompleteViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC4DA23839D6C0082AFA5 /* FakeGroupCompleteViewModelDelegate.swift */; };
+		6EDBC4E82384CEB00082AFA5 /* db.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 6EDBC4E72384CEB00082AFA5 /* db.sqlite3 */; };
 		6EE1AC38235E8996008546DB /* FakeLearningStepStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE1AC37235E8996008546DB /* FakeLearningStepStore.swift */; };
 		6EE1AC3F235FC391008546DB /* ConceptIntroLearningStep+stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE1AC3E235FC391008546DB /* ConceptIntroLearningStep+stubs.swift */; };
 		6EE1AC41235FC410008546DB /* Concept+stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE1AC40235FC410008546DB /* Concept+stubs.swift */; };
@@ -206,7 +207,6 @@
 		6EEEB66B2364F462008D0FD6 /* FakeUserConceptExternalDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEEB66A2364F462008D0FD6 /* FakeUserConceptExternalDataService.swift */; };
 		6EEF91D2238086130057F73A /* TransitionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEF91D1238086130057F73A /* TransitionItem.swift */; };
 		6EEF91D4238086230057F73A /* GroupCompleteTransitionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEF91D3238086230057F73A /* GroupCompleteTransitionItem.swift */; };
-		6EEF91D623809C700057F73A /* db.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 6EEF91D523809C700057F73A /* db.sqlite3 */; };
 		6EEF91D923809CD60057F73A /* ConceptGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEF91D823809CD60057F73A /* ConceptGroup.swift */; };
 		6EEF91DB23809E410057F73A /* ConceptGroup+sqlite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEF91DA23809E410057F73A /* ConceptGroup+sqlite.swift */; };
 		6EEF91DD23809FD50057F73A /* UserConceptGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEF91DC23809FD50057F73A /* UserConceptGroup.swift */; };
@@ -407,6 +407,7 @@
 		6EDBC4D6238395550082AFA5 /* GroupCompleteSceneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCompleteSceneTests.swift; sourceTree = "<group>"; };
 		6EDBC4D8238396B30082AFA5 /* GroupCompleteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCompleteViewModel.swift; sourceTree = "<group>"; };
 		6EDBC4DA23839D6C0082AFA5 /* FakeGroupCompleteViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeGroupCompleteViewModelDelegate.swift; sourceTree = "<group>"; };
+		6EDBC4E72384CEB00082AFA5 /* db.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = db.sqlite3; sourceTree = "<group>"; };
 		6EE1AC37235E8996008546DB /* FakeLearningStepStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeLearningStepStore.swift; sourceTree = "<group>"; };
 		6EE1AC3E235FC391008546DB /* ConceptIntroLearningStep+stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConceptIntroLearningStep+stubs.swift"; sourceTree = "<group>"; };
 		6EE1AC40235FC410008546DB /* Concept+stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Concept+stubs.swift"; sourceTree = "<group>"; };
@@ -434,7 +435,6 @@
 		6EEEB66A2364F462008D0FD6 /* FakeUserConceptExternalDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeUserConceptExternalDataService.swift; sourceTree = "<group>"; };
 		6EEF91D1238086130057F73A /* TransitionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionItem.swift; sourceTree = "<group>"; };
 		6EEF91D3238086230057F73A /* GroupCompleteTransitionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCompleteTransitionItem.swift; sourceTree = "<group>"; };
-		6EEF91D523809C700057F73A /* db.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = db.sqlite3; sourceTree = "<group>"; };
 		6EEF91D823809CD60057F73A /* ConceptGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptGroup.swift; sourceTree = "<group>"; };
 		6EEF91DA23809E410057F73A /* ConceptGroup+sqlite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConceptGroup+sqlite.swift"; sourceTree = "<group>"; };
 		6EEF91DC23809FD50057F73A /* UserConceptGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserConceptGroup.swift; sourceTree = "<group>"; };
@@ -723,6 +723,7 @@
 			isa = PBXGroup;
 			children = (
 				6EC666FD232324F70048068C /* Concept.swift */,
+				6ECC412723287BAE00E8F3E1 /* Concept+sqlite.swift */,
 				6EC666FF232326FA0048068C /* Concept+data.swift */,
 			);
 			path = Concept;
@@ -1003,7 +1004,7 @@
 		6EB933B32331CBA900E38B52 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
-				6EEF91D523809C700057F73A /* db.sqlite3 */,
+				6EDBC4E72384CEB00082AFA5 /* db.sqlite3 */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -1292,7 +1293,6 @@
 			isa = PBXGroup;
 			children = (
 				6EC6674123249C300048068C /* DatabaseService.swift */,
-				6ECC412723287BAE00E8F3E1 /* Concept+sqlite.swift */,
 			);
 			path = DatabaseService;
 			sourceTree = "<group>";
@@ -1550,7 +1550,6 @@
 				6E557C2122FB9DCC00270F07 /* LaunchScreen.storyboard in Resources */,
 				6EC6673C232494170048068C /* ConceptMapTableViewCell.xib in Resources */,
 				6EBD5310233AF7A70057F28A /* ChooseExerciseViewController.xib in Resources */,
-				6EEF91D623809C700057F73A /* db.sqlite3 in Resources */,
 				6EC667142324489F0048068C /* MenuViewController.xib in Resources */,
 				6E883F98233D92F2004F0D0E /* ConceptIntroViewController.xib in Resources */,
 				6EE60C602345900900B0322B /* LevelUpViewController.xib in Resources */,
@@ -1561,6 +1560,7 @@
 				6EDBC4D4238390E20082AFA5 /* GroupCompleteViewController.xib in Resources */,
 				6E74FD53231C87F800730AEB /* FeedContainerViewController.xib in Resources */,
 				6E3829312372641900145E26 /* PracticeFamilyCompleteViewController.xib in Resources */,
+				6EDBC4E82384CEB00082AFA5 /* db.sqlite3 in Resources */,
 				6EB933A52330702C00E38B52 /* LoadExercisesViewController.xib in Resources */,
 				6EC666F32321E64A0048068C /* InfoViewController.xib in Resources */,
 				6EC66730232464B20048068C /* ConceptMapViewController.xib in Resources */,

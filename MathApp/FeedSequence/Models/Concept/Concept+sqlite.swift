@@ -18,13 +18,7 @@ extension Concept {
     static let column_rule = Expression<String>("rule")
     static let column_example = Expression<String>("example")
     static let column_maxDifficulty = Expression<Int64>("maximum_difficulty")
-    
-//    static let createTableStatement: String = Concept.table.create { table in
-//                                                    table.column(Concept.column_id, primaryKey: true)
-//                                                    table.column(Concept.column_name)
-//                                                    table.column(Concept.column_description)
-//                                                    table.column(Concept.column_rule)
-//                                                    table.column(Concept.column_example) }
+    static let column_conceptGroupID = Expression<Int64>("concept_group_id")
     
     static func createFromQueryResult(_ row: Row) -> Concept? {
         let tableName = Concept.table
@@ -41,13 +35,5 @@ extension Concept {
                        rule: concept_rule,
                        example: concept_example,
                        maxDifficulty: Int(concept_maxDifficulty))
-    }
-    
-    var insertStatement: Insert {
-        return Concept.table.insert(Concept.column_id <- Int64(id),
-                             Concept.column_name <- name,
-                             Concept.column_description <- description,
-                             Concept.column_rule <- rule,
-                             Concept.column_example <- example)
     }
 }
