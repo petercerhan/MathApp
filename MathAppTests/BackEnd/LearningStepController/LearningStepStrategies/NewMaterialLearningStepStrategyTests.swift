@@ -288,7 +288,8 @@ class NewMaterialLearningStepStrategyTests: XCTestCase {
         return NewMaterialLearningStepStrategy(userConceptRepository: stubUserConceptRepository,
                                                newMaterialStateRepository: newMaterialStateRepository,
                                                userRepository: userRepository,
-                                               userConceptGroupRepository: userConceptGroupRepository)
+                                               userConceptGroupRepository: userConceptGroupRepository,
+                                               conceptDetailGlyphRepository: FakeConceptDetailGlyphRepository())
     }
     
     func userConceptsWithLevels(_ strength1: Int, _ strength2: Int, _ strength3: Int, _ strength4: Int, _ strength5: Int) -> [UserConcept] {

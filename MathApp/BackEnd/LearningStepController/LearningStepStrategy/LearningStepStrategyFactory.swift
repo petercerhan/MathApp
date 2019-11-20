@@ -20,18 +20,21 @@ class LearningStepStrategyFactoryImpl: LearningStepStrategyFactory {
     private let newMaterialStateRepository: NewMaterialStateRepository
     private let userRepository: UserRepository
     private let userConceptGroupRepository: UserConceptGroupRepository
+    private let conceptDetailGlyphRepository: ConceptDetailGlyphRepository
     
     //MARK: - Initialization
     
     init(userConceptRepository: UserConceptRepository,
          newMaterialStateRepository: NewMaterialStateRepository,
          userRepository: UserRepository,
-         userConceptGroupRepository: UserConceptGroupRepository)
+         userConceptGroupRepository: UserConceptGroupRepository,
+         conceptDetailGlyphRepository: ConceptDetailGlyphRepository)
     {
         self.userConceptRepository = userConceptRepository
         self.newMaterialStateRepository = newMaterialStateRepository
         self.userRepository = userRepository
         self.userConceptGroupRepository = userConceptGroupRepository
+        self.conceptDetailGlyphRepository = conceptDetailGlyphRepository
     }
     
     //MARK: - LearningStepStrategyFactory Interface
@@ -40,7 +43,8 @@ class LearningStepStrategyFactoryImpl: LearningStepStrategyFactory {
         return NewMaterialLearningStepStrategy(userConceptRepository: userConceptRepository,
                                                newMaterialStateRepository: newMaterialStateRepository,
                                                userRepository: userRepository,
-                                               userConceptGroupRepository: userConceptGroupRepository)
+                                               userConceptGroupRepository: userConceptGroupRepository,
+                                               conceptDetailGlyphRepository: conceptDetailGlyphRepository)
     }
     
 }

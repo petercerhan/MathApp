@@ -20,8 +20,6 @@ class ConceptIntroViewController: UIViewController {
     //MARK: - UI Components
     
     @IBOutlet private(set) var conceptNameLabel: UILabel!
-    @IBOutlet private(set) var conceptDescriptionLabel: UILabel!
-    @IBOutlet private(set) var ruleLatexLabel: MTMathUILabel!
     @IBOutlet private(set) var nextButton: UIButton!
     
     //MARK: - Rx
@@ -49,8 +47,6 @@ class ConceptIntroViewController: UIViewController {
     
     private func bindUI() {
         conceptNameLabel.text = viewModel.name
-        conceptDescriptionLabel.text = viewModel.description
-        ruleLatexLabel.latex = viewModel.ruleLatex
     }
     
     private func bindActions() {

@@ -58,7 +58,6 @@
 		6E74FD4E231C86FC00730AEB /* FeedContainerViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E74FD4D231C86FC00730AEB /* FeedContainerViewControllerTests.swift */; };
 		6E74FD52231C87F800730AEB /* FeedContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E74FD50231C87F800730AEB /* FeedContainerViewController.swift */; };
 		6E74FD53231C87F800730AEB /* FeedContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E74FD51231C87F800730AEB /* FeedContainerViewController.xib */; };
-		6E84161B232B213D0035F381 /* FeedPackageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E84161A232B213D0035F381 /* FeedPackageStore.swift */; };
 		6E86B344236E489E002DCA62 /* DoubleLevelUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E86B342236E489E002DCA62 /* DoubleLevelUpViewController.swift */; };
 		6E86B345236E489E002DCA62 /* DoubleLevelUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E86B343236E489E002DCA62 /* DoubleLevelUpViewController.xib */; };
 		6E86B347236F6851002DCA62 /* DoubleLevelUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E86B346236F6851002DCA62 /* DoubleLevelUpViewModel.swift */; };
@@ -179,7 +178,12 @@
 		6EDBC4D7238395550082AFA5 /* GroupCompleteSceneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC4D6238395550082AFA5 /* GroupCompleteSceneTests.swift */; };
 		6EDBC4D9238396B30082AFA5 /* GroupCompleteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC4D8238396B30082AFA5 /* GroupCompleteViewModel.swift */; };
 		6EDBC4DB23839D6C0082AFA5 /* FakeGroupCompleteViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC4DA23839D6C0082AFA5 /* FakeGroupCompleteViewModelDelegate.swift */; };
-		6EDBC4E82384CEB00082AFA5 /* db.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 6EDBC4E72384CEB00082AFA5 /* db.sqlite3 */; };
+		6EDBC4EB2384E2600082AFA5 /* ConceptDetailGlyph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC4EA2384E2600082AFA5 /* ConceptDetailGlyph.swift */; };
+		6EDBC4ED2384E3070082AFA5 /* FormulaConceptDetailGlyph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC4EC2384E3070082AFA5 /* FormulaConceptDetailGlyph.swift */; };
+		6EDBC4F02384E70F0082AFA5 /* ConceptDetailGlyphRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC4EF2384E70F0082AFA5 /* ConceptDetailGlyphRepository.swift */; };
+		6EDBC4F22384EA690082AFA5 /* ConceptDetailGlyphType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC4F12384EA690082AFA5 /* ConceptDetailGlyphType.swift */; };
+		6EDBC4F52384EE3B0082AFA5 /* FakeConceptDetailGlyphRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC4F42384EE3B0082AFA5 /* FakeConceptDetailGlyphRepository.swift */; };
+		6EDBC4F72384EED20082AFA5 /* db.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 6EDBC4F62384EED20082AFA5 /* db.sqlite3 */; };
 		6EE1AC38235E8996008546DB /* FakeLearningStepStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE1AC37235E8996008546DB /* FakeLearningStepStore.swift */; };
 		6EE1AC3F235FC391008546DB /* ConceptIntroLearningStep+stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE1AC3E235FC391008546DB /* ConceptIntroLearningStep+stubs.swift */; };
 		6EE1AC41235FC410008546DB /* Concept+stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE1AC40235FC410008546DB /* Concept+stubs.swift */; };
@@ -286,7 +290,6 @@
 		6E74FD4D231C86FC00730AEB /* FeedContainerViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedContainerViewControllerTests.swift; sourceTree = "<group>"; };
 		6E74FD50231C87F800730AEB /* FeedContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedContainerViewController.swift; sourceTree = "<group>"; };
 		6E74FD51231C87F800730AEB /* FeedContainerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedContainerViewController.xib; sourceTree = "<group>"; };
-		6E84161A232B213D0035F381 /* FeedPackageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPackageStore.swift; sourceTree = "<group>"; };
 		6E86B342236E489E002DCA62 /* DoubleLevelUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleLevelUpViewController.swift; sourceTree = "<group>"; };
 		6E86B343236E489E002DCA62 /* DoubleLevelUpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DoubleLevelUpViewController.xib; sourceTree = "<group>"; };
 		6E86B346236F6851002DCA62 /* DoubleLevelUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleLevelUpViewModel.swift; sourceTree = "<group>"; };
@@ -407,7 +410,12 @@
 		6EDBC4D6238395550082AFA5 /* GroupCompleteSceneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCompleteSceneTests.swift; sourceTree = "<group>"; };
 		6EDBC4D8238396B30082AFA5 /* GroupCompleteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCompleteViewModel.swift; sourceTree = "<group>"; };
 		6EDBC4DA23839D6C0082AFA5 /* FakeGroupCompleteViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeGroupCompleteViewModelDelegate.swift; sourceTree = "<group>"; };
-		6EDBC4E72384CEB00082AFA5 /* db.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = db.sqlite3; sourceTree = "<group>"; };
+		6EDBC4EA2384E2600082AFA5 /* ConceptDetailGlyph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptDetailGlyph.swift; sourceTree = "<group>"; };
+		6EDBC4EC2384E3070082AFA5 /* FormulaConceptDetailGlyph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaConceptDetailGlyph.swift; sourceTree = "<group>"; };
+		6EDBC4EF2384E70F0082AFA5 /* ConceptDetailGlyphRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptDetailGlyphRepository.swift; sourceTree = "<group>"; };
+		6EDBC4F12384EA690082AFA5 /* ConceptDetailGlyphType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptDetailGlyphType.swift; sourceTree = "<group>"; };
+		6EDBC4F42384EE3B0082AFA5 /* FakeConceptDetailGlyphRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeConceptDetailGlyphRepository.swift; sourceTree = "<group>"; };
+		6EDBC4F62384EED20082AFA5 /* db.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = db.sqlite3; sourceTree = "<group>"; };
 		6EE1AC37235E8996008546DB /* FakeLearningStepStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeLearningStepStore.swift; sourceTree = "<group>"; };
 		6EE1AC3E235FC391008546DB /* ConceptIntroLearningStep+stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConceptIntroLearningStep+stubs.swift"; sourceTree = "<group>"; };
 		6EE1AC40235FC410008546DB /* Concept+stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Concept+stubs.swift"; sourceTree = "<group>"; };
@@ -591,6 +599,7 @@
 		6E51E29F235E6EDD00DA920E /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				6EDBC4EE2384E6ED0082AFA5 /* ConceptDetailGlyphRepository */,
 				6EE1AC45235FE78D008546DB /* ExerciseRepository */,
 				6E1CCC5E235CEAB100451CD7 /* NewMaterialStateRepository */,
 				6EB0FEFE235BF293005F23DE /* UserConceptRepository */,
@@ -727,14 +736,6 @@
 				6EC666FF232326FA0048068C /* Concept+data.swift */,
 			);
 			path = Concept;
-			sourceTree = "<group>";
-		};
-		6E841619232B212D0035F381 /* FeedPackageStore */ = {
-			isa = PBXGroup;
-			children = (
-				6E84161A232B213D0035F381 /* FeedPackageStore.swift */,
-			);
-			path = FeedPackageStore;
 			sourceTree = "<group>";
 		};
 		6E84161E232B22E10035F381 /* ExternalData */ = {
@@ -973,6 +974,7 @@
 		6EB0FF01235BF447005F23DE /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				6EDBC4F32384EE1C0082AFA5 /* ConceptDetailGlyphRepository */,
 				6E1CCC6F235D542900451CD7 /* UserRepository */,
 				6E1CCC6E235D541900451CD7 /* NewMaterialStateRepository */,
 				6E1CCC6D235D540C00451CD7 /* UserConceptRepository */,
@@ -1004,7 +1006,7 @@
 		6EB933B32331CBA900E38B52 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
-				6EDBC4E72384CEB00082AFA5 /* db.sqlite3 */,
+				6EDBC4F62384EED20082AFA5 /* db.sqlite3 */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -1096,7 +1098,6 @@
 				6E74FD4F231C87DA00730AEB /* FeedContainerViewController */,
 				6EBE4EA0230B663F0047A880 /* Models */,
 				6E927E7F231CA80700822EBA /* ResultsStore */,
-				6E841619232B212D0035F381 /* FeedPackageStore */,
 				6EAB211A23613865007186A4 /* FeedExercisesStore */,
 				6E3C9EF8235E7C4F00CD81C9 /* LearningStepStore */,
 				6EBE4E98230B60F00047A880 /* ExerciseScene */,
@@ -1322,6 +1323,33 @@
 				6EDBC4DA23839D6C0082AFA5 /* FakeGroupCompleteViewModelDelegate.swift */,
 			);
 			path = GroupCompleteScene;
+			sourceTree = "<group>";
+		};
+		6EDBC4E92384E2500082AFA5 /* ConceptDetailGlyph */ = {
+			isa = PBXGroup;
+			children = (
+				6EDBC4EA2384E2600082AFA5 /* ConceptDetailGlyph.swift */,
+				6EDBC4F12384EA690082AFA5 /* ConceptDetailGlyphType.swift */,
+				6EDBC4EC2384E3070082AFA5 /* FormulaConceptDetailGlyph.swift */,
+			);
+			path = ConceptDetailGlyph;
+			sourceTree = "<group>";
+		};
+		6EDBC4EE2384E6ED0082AFA5 /* ConceptDetailGlyphRepository */ = {
+			isa = PBXGroup;
+			children = (
+				6EDBC4EF2384E70F0082AFA5 /* ConceptDetailGlyphRepository.swift */,
+				6EDBC4E92384E2500082AFA5 /* ConceptDetailGlyph */,
+			);
+			path = ConceptDetailGlyphRepository;
+			sourceTree = "<group>";
+		};
+		6EDBC4F32384EE1C0082AFA5 /* ConceptDetailGlyphRepository */ = {
+			isa = PBXGroup;
+			children = (
+				6EDBC4F42384EE3B0082AFA5 /* FakeConceptDetailGlyphRepository.swift */,
+			);
+			path = ConceptDetailGlyphRepository;
 			sourceTree = "<group>";
 		};
 		6EE1AC3D235FC375008546DB /* LearningStep */ = {
@@ -1560,7 +1588,7 @@
 				6EDBC4D4238390E20082AFA5 /* GroupCompleteViewController.xib in Resources */,
 				6E74FD53231C87F800730AEB /* FeedContainerViewController.xib in Resources */,
 				6E3829312372641900145E26 /* PracticeFamilyCompleteViewController.xib in Resources */,
-				6EDBC4E82384CEB00082AFA5 /* db.sqlite3 in Resources */,
+				6EDBC4F72384EED20082AFA5 /* db.sqlite3 in Resources */,
 				6EB933A52330702C00E38B52 /* LoadExercisesViewController.xib in Resources */,
 				6EC666F32321E64A0048068C /* InfoViewController.xib in Resources */,
 				6EC66730232464B20048068C /* ConceptMapViewController.xib in Resources */,
@@ -1668,6 +1696,7 @@
 				6EBA303C230CAED200E6DC54 /* UIView+addShadow.swift in Sources */,
 				6EC667132324489F0048068C /* MenuViewController.swift in Sources */,
 				6E883F9D233D9E5D004F0D0E /* ConceptIntroViewModel.swift in Sources */,
+				6EDBC4F02384E70F0082AFA5 /* ConceptDetailGlyphRepository.swift in Sources */,
 				6EC66720232451820048068C /* QuitableContainerViewModel.swift in Sources */,
 				6EAB210523611A01007186A4 /* ExerciseController.swift in Sources */,
 				6EBE4E94230A16170047A880 /* FeedCoordinator.swift in Sources */,
@@ -1677,7 +1706,6 @@
 				6E74FD52231C87F800730AEB /* FeedContainerViewController.swift in Sources */,
 				6E1CCC5D235CE73000451CD7 /* PracticeOneConceptLearningStep.swift in Sources */,
 				6E557C3B22FBA0DC00270F07 /* RootCoordinator.swift in Sources */,
-				6E84161B232B213D0035F381 /* FeedPackageStore.swift in Sources */,
 				6EE5709D23692F09002C63F8 /* PracticeIntroViewModel.swift in Sources */,
 				6EC666F8232208FA0048068C /* InfoViewModelImpl.swift in Sources */,
 				6EB0FEF5235BE9A0005F23DE /* LearningStepStrategy.swift in Sources */,
@@ -1727,9 +1755,11 @@
 				6EBE4EA4230B675B0047A880 /* Exercise+data.swift in Sources */,
 				6E1CCC6C235D37D300451CD7 /* NewMaterialState+sqlite.swift in Sources */,
 				6EEF91DF2380A0110057F73A /* UserConceptGroup+sqlite.swift in Sources */,
+				6EDBC4ED2384E3070082AFA5 /* FormulaConceptDetailGlyph.swift in Sources */,
 				6E1CCC6A235D0AC400451CD7 /* PracticeFamilyLearningStep.swift in Sources */,
 				6EBE4E9B230B614B0047A880 /* ExerciseViewController.swift in Sources */,
 				6EEF91E12380A1E10057F73A /* UserConceptGroupRepository.swift in Sources */,
+				6EDBC4F22384EA690082AFA5 /* ConceptDetailGlyphType.swift in Sources */,
 				6EAB211623613468007186A4 /* ExerciseExternalDataService.swift in Sources */,
 				6EE5709523692B1D002C63F8 /* PracticeIntroViewController.swift in Sources */,
 				6EC6670A23243B870048068C /* MenuCoordinator.swift in Sources */,
@@ -1747,6 +1777,7 @@
 				6E74FD4B2318CBAC00730AEB /* RandomizationService.swift in Sources */,
 				6EE60C492344347A00B0322B /* PrepareFeedViewController.swift in Sources */,
 				6E1CCC60235CEADD00451CD7 /* NewMaterialStateRepository.swift in Sources */,
+				6EDBC4EB2384E2600082AFA5 /* ConceptDetailGlyph.swift in Sources */,
 				6EC667372324682A0048068C /* ConceptMapViewModel.swift in Sources */,
 				6EB0FEE3235BE2F2005F23DE /* User.swift in Sources */,
 				6EDBC4D3238390E20082AFA5 /* GroupCompleteViewController.swift in Sources */,
@@ -1832,6 +1863,7 @@
 				6E3C9EEC235E726B00CD81C9 /* LearningStepExternalDataServiceTests.swift in Sources */,
 				6EBE4E91230A14A70047A880 /* FakeContainerViewController.swift in Sources */,
 				6EEF91E82380AAE00057F73A /* ConceptGroup+stubs.swift in Sources */,
+				6EDBC4F52384EE3B0082AFA5 /* FakeConceptDetailGlyphRepository.swift in Sources */,
 				6EAB211E23613B0E007186A4 /* FakeExerciseExternalDataService.swift in Sources */,
 				6EE57091236929E7002C63F8 /* PracticeTwoConceptsLearningStep+stubs.swift in Sources */,
 				6EDBC4DB23839D6C0082AFA5 /* FakeGroupCompleteViewModelDelegate.swift in Sources */,

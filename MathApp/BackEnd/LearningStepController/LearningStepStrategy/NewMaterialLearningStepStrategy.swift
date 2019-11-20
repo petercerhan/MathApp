@@ -16,6 +16,7 @@ class NewMaterialLearningStepStrategy: LearningStepStrategy {
     private let newMaterialStateRepository: NewMaterialStateRepository
     private let userRepository: UserRepository
     private let userConceptGroupRepository: UserConceptGroupRepository
+    private let conceptDetailGlyphRepository: ConceptDetailGlyphRepository
     
     //MARK: - Context
 
@@ -30,12 +31,14 @@ class NewMaterialLearningStepStrategy: LearningStepStrategy {
     init(userConceptRepository: UserConceptRepository,
          newMaterialStateRepository: NewMaterialStateRepository,
          userRepository: UserRepository,
-         userConceptGroupRepository: UserConceptGroupRepository)
+         userConceptGroupRepository: UserConceptGroupRepository,
+         conceptDetailGlyphRepository: ConceptDetailGlyphRepository)
     {
         self.userConceptRepository = userConceptRepository
         self.newMaterialStateRepository = newMaterialStateRepository
         self.userRepository = userRepository
         self.userConceptGroupRepository = userConceptGroupRepository
+        self.conceptDetailGlyphRepository = conceptDetailGlyphRepository
         
         let newMaterialLearningStep = newMaterialStateRepository.get()
         conceptGroupID = newMaterialLearningStep.conceptGroupID
@@ -68,26 +71,27 @@ class NewMaterialLearningStepStrategy: LearningStepStrategy {
         }
         
         if userConcept1.strength == 0 {
-            print("first concept strength 0")
             newMaterialStateRepository.setFocus(concept1ID: userConcept1.conceptID, concept2ID: 0)
+            
+            //Add glyphs to Concept here
+            let conceptDetailGlyphs = conceptDetailGlyphRepository.list(conceptID: userConcept1.conceptID)
+            print("got glyph count \(conceptDetailGlyphs.count)")
+            
             return ConceptIntroLearningStep(userConcept: userConcept1)
         }
         
         if let nextStep = learningStepForContinuedTwoConceptPractice(userConcept1: userConcept1, concept2ID: userConcept2?.conceptID) {
-            print("continued two step practice")
             newMaterialStateRepository.setFocus(concept1ID: userConcept1.conceptID, concept2ID: 0)
             return nextStep
         }
         
         if let nextStep = learningStepForSecondStrength0(userConcept1: userConcept1) {
-            print("second strength zero")
             let conceptID = userConcept2?.conceptID ?? 0
             newMaterialStateRepository.setFocus(concept1ID: conceptID, concept2ID: 0)
             return nextStep
         }
         
         if let nextStep = learningStepForSecondStrength1(userConcept1: userConcept1) {
-            print("second strength 1")
             let concept2ID = userConcept2?.conceptID ?? 0
             newMaterialStateRepository.setFocus(concept1ID: userConcept1.conceptID, concept2ID: concept2ID)
             return nextStep

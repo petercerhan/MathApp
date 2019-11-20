@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ConceptIntroViewController" customModule="MathApp" customModuleProvider="target">
             <connections>
-                <outlet property="conceptDescriptionLabel" destination="iZt-DQ-zEr" id="BLD-8T-iXl"/>
                 <outlet property="conceptNameLabel" destination="cnB-k0-Fah" id="p9s-bG-hVN"/>
                 <outlet property="nextButton" destination="9ic-po-nua" id="Ile-g8-eIA"/>
-                <outlet property="ruleLatexLabel" destination="inp-cQ-H4m" id="FfS-cc-lgA"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -22,34 +20,12 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Concept" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Grz-3a-jGx">
-                    <rect key="frame" x="128" y="50" width="119" height="24"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Concept" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cnB-k0-Fah">
-                    <rect key="frame" x="24" y="116" width="119" height="24"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <rect key="frame" x="122.5" y="20" width="130.5" height="26.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iZt-DQ-zEr">
-                    <rect key="frame" x="24" y="162" width="327" height="21.5"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="inp-cQ-H4m" customClass="MTMathUILabel">
-                    <rect key="frame" x="151.5" y="223" width="72" height="19.5"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="latex" value="x = y"/>
-                        <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
-                            <real key="value" value="30"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ic-po-nua">
                     <rect key="frame" x="171.5" y="617" width="32" height="30"/>
                     <state key="normal" title="Next"/>
@@ -57,20 +33,13 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="Grz-3a-jGx" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="39f-y3-u6g"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="9ic-po-nua" secondAttribute="bottom" constant="20" id="5Pa-Fv-04b"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="iZt-DQ-zEr" secondAttribute="trailing" constant="24" id="7IY-PJ-gu7"/>
-                <constraint firstItem="iZt-DQ-zEr" firstAttribute="top" secondItem="cnB-k0-Fah" secondAttribute="bottom" constant="22" id="AWF-3l-av7"/>
-                <constraint firstItem="inp-cQ-H4m" firstAttribute="top" secondItem="iZt-DQ-zEr" secondAttribute="bottom" constant="39.5" id="Iwq-ne-89r"/>
                 <constraint firstItem="9ic-po-nua" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Sdo-wL-cbJ"/>
-                <constraint firstItem="iZt-DQ-zEr" firstAttribute="leading" secondItem="cnB-k0-Fah" secondAttribute="leading" id="etF-1H-Kv2"/>
-                <constraint firstItem="cnB-k0-Fah" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="kEb-Cb-hef"/>
-                <constraint firstItem="cnB-k0-Fah" firstAttribute="top" secondItem="Grz-3a-jGx" secondAttribute="bottom" constant="42" id="sdX-uS-SHV"/>
-                <constraint firstItem="inp-cQ-H4m" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="uhe-P5-3pz"/>
-                <constraint firstItem="Grz-3a-jGx" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="50" id="yRL-Uu-KgK"/>
+                <constraint firstItem="cnB-k0-Fah" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="eAj-fD-b00"/>
+                <constraint firstItem="cnB-k0-Fah" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="sD6-XA-v89"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <point key="canvasLocation" x="134" y="155"/>
+            <point key="canvasLocation" x="133.59999999999999" y="154.27286356821591"/>
         </view>
     </objects>
 </document>

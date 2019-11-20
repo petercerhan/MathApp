@@ -21,7 +21,8 @@ class FakeLearningStepStrategyFactory: LearningStepStrategyFactory {
         return NewMaterialLearningStepStrategy(userConceptRepository: FakeUserConceptRepository(),
                                                newMaterialStateRepository: FakeNewMaterialStateRepository(),
                                                userRepository: FakeUserRepository(),
-                                               userConceptGroupRepository: FakeUserConceptGroupRepository())
+                                               userConceptGroupRepository: FakeUserConceptGroupRepository(),
+                                               conceptDetailGlyphRepository: FakeConceptDetailGlyphRepository())
     }
     
 }

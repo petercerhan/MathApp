@@ -29,15 +29,11 @@ class ConceptIntroViewModel {
         
         let concept = conceptIntro.userConcept.concept
         name = concept.name
-        description = concept.description
-        ruleLatex = concept.rule
     }
     
     //MARK: - ConceptIntroViewModel Interface
     
     let name: String
-    let description: String
-    let ruleLatex: String
     
     func dispatch(action: ConceptIntroAction) {
         switch action {

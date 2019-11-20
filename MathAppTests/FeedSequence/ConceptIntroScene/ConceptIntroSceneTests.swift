@@ -21,8 +21,6 @@ class ConceptIntroSceneTests: XCTestCase {
         vc.loadViewIfNeeded()
         
         XCTAssertEqual(vc.conceptNameLabel.text, conceptIntro.userConcept.concept.name)
-        XCTAssertEqual(vc.conceptDescriptionLabel.text, conceptIntro.userConcept.concept.description)
-        XCTAssertEqual(vc.ruleLatexLabel.latex, conceptIntro.userConcept.concept.rule)
     }
     
     func test_nextButton_shouldRequestNext() {
