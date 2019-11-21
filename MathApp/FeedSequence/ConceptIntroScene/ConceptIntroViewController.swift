@@ -52,7 +52,7 @@ class ConceptIntroViewController: UIViewController, UITableViewDataSource {
     }
     
     private func setupTableView() {
-        tableView.register(ConceptDetailFormulaTableViewCell.self, forCellReuseIdentifier: "ConceptDetailFormulaTableViewCell")
+        tableView.register(UINib(nibName:"ConceptDetailFormulaTableViewCell", bundle: nil), forCellReuseIdentifier: "ConceptDetailFormulaTableViewCell")
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
         
@@ -92,10 +92,9 @@ class ConceptIntroViewController: UIViewController, UITableViewDataSource {
         
         if let formulaItem = item as? ConceptDetailFormulaItem {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ConceptDetailFormulaTableViewCell") as! ConceptDetailFormulaTableViewCell
+
             print("set latex: \(formulaItem.latex)")
             cell.formulaLabel.latex = formulaItem.latex
-            
-            cell.backgroundColor = UIColor.blue
             
             return cell
         }

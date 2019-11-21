@@ -184,11 +184,12 @@
 		6EDBC4F22384EA690082AFA5 /* ConceptDetailGlyphType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC4F12384EA690082AFA5 /* ConceptDetailGlyphType.swift */; };
 		6EDBC4F52384EE3B0082AFA5 /* FakeConceptDetailGlyphRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC4F42384EE3B0082AFA5 /* FakeConceptDetailGlyphRepository.swift */; };
 		6EDBC4F72384EED20082AFA5 /* db.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 6EDBC4F62384EED20082AFA5 /* db.sqlite3 */; };
-		6EDBC4FD2386163D0082AFA5 /* ConceptDetailFormulaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC4FB2386163D0082AFA5 /* ConceptDetailFormulaTableViewCell.swift */; };
 		6EDBC50023861B300082AFA5 /* ConceptDetailFormulaTableViewCell+utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC4FF23861B300082AFA5 /* ConceptDetailFormulaTableViewCell+utilities.swift */; };
 		6EDBC50223861D050082AFA5 /* FormulaConceptDetailGlyph+stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC50123861D050082AFA5 /* FormulaConceptDetailGlyph+stubs.swift */; };
 		6EDBC50423861E980082AFA5 /* ConceptDetailFormulaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC50323861E980082AFA5 /* ConceptDetailFormulaItem.swift */; };
 		6EDBC50623861EB50082AFA5 /* ConceptDetailItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC50523861EB50082AFA5 /* ConceptDetailItem.swift */; };
+		6EDBC509238628AD0082AFA5 /* ConceptDetailFormulaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC507238628AD0082AFA5 /* ConceptDetailFormulaTableViewCell.swift */; };
+		6EDBC50A238628AD0082AFA5 /* ConceptDetailFormulaTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EDBC508238628AD0082AFA5 /* ConceptDetailFormulaTableViewCell.xib */; };
 		6EE1AC38235E8996008546DB /* FakeLearningStepStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE1AC37235E8996008546DB /* FakeLearningStepStore.swift */; };
 		6EE1AC3F235FC391008546DB /* ConceptIntroLearningStep+stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE1AC3E235FC391008546DB /* ConceptIntroLearningStep+stubs.swift */; };
 		6EE1AC41235FC410008546DB /* Concept+stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE1AC40235FC410008546DB /* Concept+stubs.swift */; };
@@ -421,11 +422,12 @@
 		6EDBC4F12384EA690082AFA5 /* ConceptDetailGlyphType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptDetailGlyphType.swift; sourceTree = "<group>"; };
 		6EDBC4F42384EE3B0082AFA5 /* FakeConceptDetailGlyphRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeConceptDetailGlyphRepository.swift; sourceTree = "<group>"; };
 		6EDBC4F62384EED20082AFA5 /* db.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = db.sqlite3; sourceTree = "<group>"; };
-		6EDBC4FB2386163D0082AFA5 /* ConceptDetailFormulaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptDetailFormulaTableViewCell.swift; sourceTree = "<group>"; };
 		6EDBC4FF23861B300082AFA5 /* ConceptDetailFormulaTableViewCell+utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConceptDetailFormulaTableViewCell+utilities.swift"; sourceTree = "<group>"; };
 		6EDBC50123861D050082AFA5 /* FormulaConceptDetailGlyph+stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FormulaConceptDetailGlyph+stubs.swift"; sourceTree = "<group>"; };
 		6EDBC50323861E980082AFA5 /* ConceptDetailFormulaItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptDetailFormulaItem.swift; sourceTree = "<group>"; };
 		6EDBC50523861EB50082AFA5 /* ConceptDetailItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptDetailItem.swift; sourceTree = "<group>"; };
+		6EDBC507238628AD0082AFA5 /* ConceptDetailFormulaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptDetailFormulaTableViewCell.swift; sourceTree = "<group>"; };
+		6EDBC508238628AD0082AFA5 /* ConceptDetailFormulaTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConceptDetailFormulaTableViewCell.xib; sourceTree = "<group>"; };
 		6EE1AC37235E8996008546DB /* FakeLearningStepStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeLearningStepStore.swift; sourceTree = "<group>"; };
 		6EE1AC3E235FC391008546DB /* ConceptIntroLearningStep+stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConceptIntroLearningStep+stubs.swift"; sourceTree = "<group>"; };
 		6EE1AC40235FC410008546DB /* Concept+stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Concept+stubs.swift"; sourceTree = "<group>"; };
@@ -1368,7 +1370,8 @@
 		6EDBC4FA238615F80082AFA5 /* ConceptDetailLatexCell */ = {
 			isa = PBXGroup;
 			children = (
-				6EDBC4FB2386163D0082AFA5 /* ConceptDetailFormulaTableViewCell.swift */,
+				6EDBC507238628AD0082AFA5 /* ConceptDetailFormulaTableViewCell.swift */,
+				6EDBC508238628AD0082AFA5 /* ConceptDetailFormulaTableViewCell.xib */,
 				6EDBC50523861EB50082AFA5 /* ConceptDetailItem.swift */,
 				6EDBC50323861E980082AFA5 /* ConceptDetailFormulaItem.swift */,
 			);
@@ -1604,6 +1607,7 @@
 				6EC667142324489F0048068C /* MenuViewController.xib in Resources */,
 				6E883F98233D92F2004F0D0E /* ConceptIntroViewController.xib in Resources */,
 				6EE60C602345900900B0322B /* LevelUpViewController.xib in Resources */,
+				6EDBC50A238628AD0082AFA5 /* ConceptDetailFormulaTableViewCell.xib in Resources */,
 				6EE5709623692B1D002C63F8 /* PracticeIntroViewController.xib in Resources */,
 				6E86B345236E489E002DCA62 /* DoubleLevelUpViewController.xib in Resources */,
 				6E557C1E22FB9DCC00270F07 /* Assets.xcassets in Resources */,
@@ -1738,6 +1742,7 @@
 				6ECC412C23288BC500E8F3E1 /* UserConcept+data.swift in Sources */,
 				6EC666E2232099860048068C /* FeedContainerViewModel.swift in Sources */,
 				6E3829232370F63B00145E26 /* RootCoordinatorComposer.swift in Sources */,
+				6EDBC509238628AD0082AFA5 /* ConceptDetailFormulaTableViewCell.swift in Sources */,
 				6E713092233443F5009FEFBB /* Exercise+sqlite.swift in Sources */,
 				6EC6671D232451760048068C /* QuitableContainerViewController.swift in Sources */,
 				6EBA305E231098F600E6DC54 /* ExerciseChoiceConfiguration.swift in Sources */,
@@ -1748,7 +1753,6 @@
 				6EC6673B232494170048068C /* ConceptMapTableViewCell.swift in Sources */,
 				6EB0FF00235BF2A9005F23DE /* UserConceptRepository.swift in Sources */,
 				6E86B34F236F9D91002DCA62 /* GlobalComposer+Feed.swift in Sources */,
-				6EDBC4FD2386163D0082AFA5 /* ConceptDetailFormulaTableViewCell.swift in Sources */,
 				6EB0FEF7235BE9B5005F23DE /* NewMaterialLearningStepStrategy.swift in Sources */,
 				6EB0FEE9235BE676005F23DE /* LearningStepStrategyFactory.swift in Sources */,
 				6EE1AC47235FE7A0008546DB /* ExerciseRepository.swift in Sources */,
