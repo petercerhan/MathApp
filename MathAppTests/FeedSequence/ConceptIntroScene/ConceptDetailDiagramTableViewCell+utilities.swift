@@ -13,7 +13,7 @@ import XCTest
 extension ConceptDetailDiagramTableViewCell {
     static func assertCellAtRowIsDiagram(_ row: Int, inTable table: UITableView, file: StaticString = #file, line: UInt = #line) {
         let assertion = {
-            guard let cell = table.cellForRow(at: IndexPath(row: row, section: 0)) as? ConceptDetailDiagramTableViewCell else {
+            guard let _ = table.cellForRow(at: IndexPath(row: row, section: 0)) as? ConceptDetailDiagramTableViewCell else {
                 XCTFail("Could not get cell or cell is not diagram", file: file, line: line)
                 return
             }

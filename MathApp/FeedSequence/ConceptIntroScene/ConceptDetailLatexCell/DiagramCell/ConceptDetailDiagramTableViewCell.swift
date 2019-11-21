@@ -9,5 +9,5 @@
 import UIKit
 
 class ConceptDetailDiagramTableViewCell: UITableViewCell {
-    
+    @IBOutlet private(set) var diagramView: UIImageView!
 }
