@@ -52,6 +52,17 @@ class ConceptIntroSceneTests: XCTestCase {
         ConceptDetailDiagramTableViewCell.assertCellAtRowIsDiagram(1, inTable: vc.tableView)
     }
     
+    func test_thirdDetailCellText_shouldShowText() {
+        var stubConcept = Concept.constantRule
+        stubConcept.detailGlyphs = [FormulaConceptDetailGlyph.createStub(), DiagramConceptDetailGlyph.createStub(), TextConceptDetailGlyph.createStub()]
+        let stubConceptIntro = ConceptIntroLearningStep.createWithConcept(concept: stubConcept)
+        let vc = composeSUT(stubConceptIntro: stubConceptIntro)
+        
+        vc.loadViewIfNeeded()
+        
+        ConceptDetailTextTableViewCell.assertCellAtRow(2, inTable: vc.tableView, containsText: "Test text")
+    }
+    
     func test_nextButton_shouldRequestNext() {
         let mockDelegate = FakeConceptIntroViewModelDelegate()
         let vc = composeSUT(fakeDelegate: mockDelegate)

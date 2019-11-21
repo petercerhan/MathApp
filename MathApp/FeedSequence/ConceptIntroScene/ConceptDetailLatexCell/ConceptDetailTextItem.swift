@@ -1,13 +1,13 @@
 //
-//  ConceptDetailDiagramTableViewCell.swift
+//  ConceptDetailTextItem.swift
 //  MathApp
 //
 //  Created by Peter Cerhan on 11/20/19.
 //  Copyright © 2019 Peter Cerhan. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-class ConceptDetailDiagramTableViewCell: UITableViewCell {
-    
+struct ConceptDetailTextItem: ConceptDetailItem {
+    let text: String
 }

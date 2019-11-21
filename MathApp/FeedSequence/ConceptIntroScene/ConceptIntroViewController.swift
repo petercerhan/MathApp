@@ -54,15 +54,13 @@ class ConceptIntroViewController: UIViewController, UITableViewDataSource {
     private func setupTableView() {
         tableView.register(UINib(nibName:"ConceptDetailFormulaTableViewCell", bundle: nil), forCellReuseIdentifier: "ConceptDetailFormulaTableViewCell")
         tableView.register(UINib(nibName:"ConceptDetailDiagramTableViewCell", bundle: nil), forCellReuseIdentifier: "ConceptDetailDiagramTableViewCell")
+        tableView.register(UINib(nibName:"ConceptDetailTextTableViewCell", bundle: nil), forCellReuseIdentifier: "ConceptDetailTextTableViewCell")
 //        tableView.rowHeight = UITableView.automaticDimension
 //        tableView.estimatedRowHeight = 44
         
         viewModel.detailItems
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [unowned self] detailItems in
-                
-                print("got details \(detailItems.count)")
-                
                 self.detailItems = detailItems
                 self.tableView.reloadData()
             })
@@ -97,8 +95,12 @@ class ConceptIntroViewController: UIViewController, UITableViewDataSource {
             return cell
         }
         else if let diagramItem = item as? ConceptDetailDiagramItem {
-            print("Got Diagram Item")
             let cell = tableView.dequeueReusableCell(withIdentifier: "ConceptDetailDiagramTableViewCell") as! ConceptDetailDiagramTableViewCell
+            return cell
+        }
+        else if let textItem = item as? ConceptDetailTextItem {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ConceptDetailTextTableViewCell") as! ConceptDetailTextTableViewCell
+            cell.customTextLabel.text = textItem.text
             return cell
         }
         else {

@@ -57,8 +57,10 @@ class ConceptIntroViewModelImpl: ConceptIntroViewModel {
                 return ConceptDetailFormulaItem(latex: formulaGlyph.latex)
             }
             else if let diagramGlyph = glyph as? DiagramConceptDetailGlyph {
-                print("got diagram glyph")
                 return ConceptDetailDiagramItem(diagramCode: diagramGlyph.diagramCode)
+            }
+            else if let textGlyph = glyph as? TextConceptDetailGlyph {
+                return ConceptDetailTextItem(text: textGlyph.text)
             }
             else {
                 return ConceptDetailFormulaItem(latex: "")
