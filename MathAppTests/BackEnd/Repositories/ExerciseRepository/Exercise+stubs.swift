@@ -1,12 +1,13 @@
 //
-//  Exercise+data.swift
-//  MathApp
+//  Exercise+stubs.swift
+//  MathAppTests
 //
-//  Created by Peter Cerhan on 8/19/19.
+//  Created by Peter Cerhan on 11/21/19.
 //  Copyright © 2019 Peter Cerhan. All rights reserved.
 //
 
 import Foundation
+@testable import MathApp
 
 extension Exercise {
     
@@ -230,6 +231,7 @@ extension Exercise {
                         difficulty: 1)
     }
 }
+
 
 
 
