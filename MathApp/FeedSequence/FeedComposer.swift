@@ -33,7 +33,7 @@ class FeedComposer {
     }
     
     func composeConceptIntroScene(delegate: ConceptIntroViewModelDelegate, conceptIntro: ConceptIntroLearningStep) -> UIViewController {
-        let vm = ConceptIntroViewModel(delegate: delegate, conceptIntro: conceptIntro)
+        let vm = ConceptIntroViewModelImpl(delegate: delegate, conceptIntro: conceptIntro)
         return ConceptIntroViewController(viewModel: vm)
     }
     

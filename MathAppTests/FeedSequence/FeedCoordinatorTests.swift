@@ -549,7 +549,7 @@ class TestLoadExercisesViewModel: LoadExercisesViewModel {
     }
 }
 
-class TestConceptIntroViewModel: ConceptIntroViewModel {
+class TestConceptIntroViewModel: ConceptIntroViewModelImpl {
     init() {
         super.init(delegate: FakeConceptIntroViewModelDelegate(), conceptIntro: ConceptIntroLearningStep.createStub())
     }

@@ -12,6 +12,7 @@
             <connections>
                 <outlet property="conceptNameLabel" destination="cnB-k0-Fah" id="p9s-bG-hVN"/>
                 <outlet property="nextButton" destination="9ic-po-nua" id="Ile-g8-eIA"/>
+                <outlet property="tableView" destination="iIW-8d-wZr" id="PH7-c9-RgD"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -30,10 +31,21 @@
                     <rect key="frame" x="171.5" y="617" width="32" height="30"/>
                     <state key="normal" title="Next"/>
                 </button>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iIW-8d-wZr">
+                    <rect key="frame" x="24" y="70.5" width="327" height="522.5"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="XGA-bn-h5D"/>
+                    </connections>
+                </tableView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="9ic-po-nua" secondAttribute="bottom" constant="20" id="5Pa-Fv-04b"/>
+                <constraint firstItem="9ic-po-nua" firstAttribute="top" secondItem="iIW-8d-wZr" secondAttribute="bottom" constant="24" id="Dpp-UT-WWm"/>
+                <constraint firstItem="iIW-8d-wZr" firstAttribute="top" secondItem="cnB-k0-Fah" secondAttribute="bottom" constant="24" id="G2R-Zt-qln"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="iIW-8d-wZr" secondAttribute="trailing" constant="24" id="Igf-gB-mub"/>
+                <constraint firstItem="iIW-8d-wZr" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="R14-Q4-9LQ"/>
                 <constraint firstItem="9ic-po-nua" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Sdo-wL-cbJ"/>
                 <constraint firstItem="cnB-k0-Fah" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="eAj-fD-b00"/>
                 <constraint firstItem="cnB-k0-Fah" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="sD6-XA-v89"/>

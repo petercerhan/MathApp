@@ -10,7 +10,7 @@ import Foundation
 
 struct UserConcept {
     let id: Int
-    let concept: Concept
+    var concept: Concept
     let strength: Int
     
     var conceptID: Int {

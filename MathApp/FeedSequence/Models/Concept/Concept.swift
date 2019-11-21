@@ -8,11 +8,13 @@
 
 import Foundation
 
-struct Concept: Codable {
+struct Concept {
     let id: Int
     let name: String
     let description: String
     let rule: String
     let example: String
     let maxDifficulty: Int
+    
+    var detailGlyphs: [ConceptDetailGlyph] = []
 }

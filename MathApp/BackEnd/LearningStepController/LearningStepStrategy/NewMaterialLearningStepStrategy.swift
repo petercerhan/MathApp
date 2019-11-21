@@ -45,6 +45,7 @@ class NewMaterialLearningStepStrategy: LearningStepStrategy {
         focus1ID = newMaterialLearningStep.focusConcept1ID
         focus2ID = newMaterialLearningStep.focusConcept2ID
         findNextUserConcepts()
+        addGlyphsToUserConcepts()
     }
     
     private func findNextUserConcepts() {
@@ -60,7 +61,15 @@ class NewMaterialLearningStepStrategy: LearningStepStrategy {
         if searchUserConcept2.count > 0 {
             userConcept2 = searchUserConcept2.first(where: { $0.strength == 0 || $0.strength == 1 })
         }
-        
+    }
+    
+    private func addGlyphsToUserConcepts() {
+        if let conceptID = userConcept1?.conceptID {
+            userConcept1?.concept.detailGlyphs = conceptDetailGlyphRepository.list(conceptID: conceptID)
+        }
+        if let conceptID = userConcept2?.conceptID {
+            userConcept2?.concept.detailGlyphs = conceptDetailGlyphRepository.list(conceptID: conceptID)
+        }
     }
     
     //MARK: - LearningStepStrategy Interface
@@ -72,11 +81,6 @@ class NewMaterialLearningStepStrategy: LearningStepStrategy {
         
         if userConcept1.strength == 0 {
             newMaterialStateRepository.setFocus(concept1ID: userConcept1.conceptID, concept2ID: 0)
-            
-            //Add glyphs to Concept here
-            let conceptDetailGlyphs = conceptDetailGlyphRepository.list(conceptID: userConcept1.conceptID)
-            print("got glyph count \(conceptDetailGlyphs.count)")
-            
             return ConceptIntroLearningStep(userConcept: userConcept1)
         }
         

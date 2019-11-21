@@ -11,7 +11,7 @@ import iosMath
 import RxSwift
 import RxCocoa
 
-class ConceptIntroViewController: UIViewController {
+class ConceptIntroViewController: UIViewController, UITableViewDataSource {
     
     //MARK: - Dependencies
     
@@ -20,7 +20,12 @@ class ConceptIntroViewController: UIViewController {
     //MARK: - UI Components
     
     @IBOutlet private(set) var conceptNameLabel: UILabel!
+    @IBOutlet private(set) var tableView: UITableView!
     @IBOutlet private(set) var nextButton: UIButton!
+    
+    //MARK: - State
+    
+    private var detailItems = [ConceptDetailItem]()
     
     //MARK: - Rx
     
@@ -41,8 +46,26 @@ class ConceptIntroViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTableView()
         bindUI()
         bindActions()
+    }
+    
+    private func setupTableView() {
+        tableView.register(ConceptDetailFormulaTableViewCell.self, forCellReuseIdentifier: "ConceptDetailFormulaTableViewCell")
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 44
+        
+        viewModel.detailItems
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] detailItems in
+                
+                print("got details \(detailItems.count)")
+                
+                self.detailItems = detailItems
+                self.tableView.reloadData()
+            })
+            .disposed(by: disposeBag)
     }
     
     private func bindUI() {
@@ -56,6 +79,30 @@ class ConceptIntroViewController: UIViewController {
                 self.viewModel.dispatch(action: .next)
             })
             .disposed(by: disposeBag)
+    }
+    
+    //MARK: - UITableViewDataSource
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return detailItems.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let item = detailItems[indexPath.row]
+        
+        if let formulaItem = item as? ConceptDetailFormulaItem {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ConceptDetailFormulaTableViewCell") as! ConceptDetailFormulaTableViewCell
+            print("set latex: \(formulaItem.latex)")
+            cell.formulaLabel.latex = formulaItem.latex
+            
+            cell.backgroundColor = UIColor.blue
+            
+            return cell
+        }
+        else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ConceptDetailFormulaTableViewCell") as! ConceptDetailFormulaTableViewCell
+            return cell
+        }
     }
 
 }
