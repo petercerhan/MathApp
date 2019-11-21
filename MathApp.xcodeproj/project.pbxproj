@@ -183,13 +183,20 @@
 		6EDBC4F02384E70F0082AFA5 /* ConceptDetailGlyphRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC4EF2384E70F0082AFA5 /* ConceptDetailGlyphRepository.swift */; };
 		6EDBC4F22384EA690082AFA5 /* ConceptDetailGlyphType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC4F12384EA690082AFA5 /* ConceptDetailGlyphType.swift */; };
 		6EDBC4F52384EE3B0082AFA5 /* FakeConceptDetailGlyphRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC4F42384EE3B0082AFA5 /* FakeConceptDetailGlyphRepository.swift */; };
-		6EDBC4F72384EED20082AFA5 /* db.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 6EDBC4F62384EED20082AFA5 /* db.sqlite3 */; };
 		6EDBC50023861B300082AFA5 /* ConceptDetailFormulaTableViewCell+utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC4FF23861B300082AFA5 /* ConceptDetailFormulaTableViewCell+utilities.swift */; };
 		6EDBC50223861D050082AFA5 /* FormulaConceptDetailGlyph+stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC50123861D050082AFA5 /* FormulaConceptDetailGlyph+stubs.swift */; };
 		6EDBC50423861E980082AFA5 /* ConceptDetailFormulaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC50323861E980082AFA5 /* ConceptDetailFormulaItem.swift */; };
 		6EDBC50623861EB50082AFA5 /* ConceptDetailItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC50523861EB50082AFA5 /* ConceptDetailItem.swift */; };
 		6EDBC509238628AD0082AFA5 /* ConceptDetailFormulaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC507238628AD0082AFA5 /* ConceptDetailFormulaTableViewCell.swift */; };
 		6EDBC50A238628AD0082AFA5 /* ConceptDetailFormulaTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EDBC508238628AD0082AFA5 /* ConceptDetailFormulaTableViewCell.xib */; };
+		6EDBC50C23862D860082AFA5 /* db.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 6EDBC50B23862D860082AFA5 /* db.sqlite3 */; };
+		6EDBC50E23862DB40082AFA5 /* DiagramConceptDetailGlyph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC50D23862DB40082AFA5 /* DiagramConceptDetailGlyph.swift */; };
+		6EDBC51023862DE50082AFA5 /* TextConceptDetailGlyph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC50F23862DE50082AFA5 /* TextConceptDetailGlyph.swift */; };
+		6EDBC51323862FC40082AFA5 /* ConceptDetailDiagramItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC51223862FC40082AFA5 /* ConceptDetailDiagramItem.swift */; };
+		6EDBC517238630020082AFA5 /* ConceptDetailDiagramTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC515238630020082AFA5 /* ConceptDetailDiagramTableViewCell.swift */; };
+		6EDBC518238630020082AFA5 /* ConceptDetailDiagramTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EDBC516238630020082AFA5 /* ConceptDetailDiagramTableViewCell.xib */; };
+		6EDBC51A2386305E0082AFA5 /* DiagramConceptDetailGlyph+stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC5192386305E0082AFA5 /* DiagramConceptDetailGlyph+stubs.swift */; };
+		6EDBC51C238630BF0082AFA5 /* ConceptDetailDiagramTableViewCell+utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC51B238630BF0082AFA5 /* ConceptDetailDiagramTableViewCell+utilities.swift */; };
 		6EE1AC38235E8996008546DB /* FakeLearningStepStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE1AC37235E8996008546DB /* FakeLearningStepStore.swift */; };
 		6EE1AC3F235FC391008546DB /* ConceptIntroLearningStep+stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE1AC3E235FC391008546DB /* ConceptIntroLearningStep+stubs.swift */; };
 		6EE1AC41235FC410008546DB /* Concept+stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE1AC40235FC410008546DB /* Concept+stubs.swift */; };
@@ -421,13 +428,20 @@
 		6EDBC4EF2384E70F0082AFA5 /* ConceptDetailGlyphRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptDetailGlyphRepository.swift; sourceTree = "<group>"; };
 		6EDBC4F12384EA690082AFA5 /* ConceptDetailGlyphType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptDetailGlyphType.swift; sourceTree = "<group>"; };
 		6EDBC4F42384EE3B0082AFA5 /* FakeConceptDetailGlyphRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeConceptDetailGlyphRepository.swift; sourceTree = "<group>"; };
-		6EDBC4F62384EED20082AFA5 /* db.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = db.sqlite3; sourceTree = "<group>"; };
 		6EDBC4FF23861B300082AFA5 /* ConceptDetailFormulaTableViewCell+utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConceptDetailFormulaTableViewCell+utilities.swift"; sourceTree = "<group>"; };
 		6EDBC50123861D050082AFA5 /* FormulaConceptDetailGlyph+stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FormulaConceptDetailGlyph+stubs.swift"; sourceTree = "<group>"; };
 		6EDBC50323861E980082AFA5 /* ConceptDetailFormulaItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptDetailFormulaItem.swift; sourceTree = "<group>"; };
 		6EDBC50523861EB50082AFA5 /* ConceptDetailItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptDetailItem.swift; sourceTree = "<group>"; };
 		6EDBC507238628AD0082AFA5 /* ConceptDetailFormulaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptDetailFormulaTableViewCell.swift; sourceTree = "<group>"; };
 		6EDBC508238628AD0082AFA5 /* ConceptDetailFormulaTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConceptDetailFormulaTableViewCell.xib; sourceTree = "<group>"; };
+		6EDBC50B23862D860082AFA5 /* db.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = db.sqlite3; sourceTree = "<group>"; };
+		6EDBC50D23862DB40082AFA5 /* DiagramConceptDetailGlyph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagramConceptDetailGlyph.swift; sourceTree = "<group>"; };
+		6EDBC50F23862DE50082AFA5 /* TextConceptDetailGlyph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextConceptDetailGlyph.swift; sourceTree = "<group>"; };
+		6EDBC51223862FC40082AFA5 /* ConceptDetailDiagramItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptDetailDiagramItem.swift; sourceTree = "<group>"; };
+		6EDBC515238630020082AFA5 /* ConceptDetailDiagramTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptDetailDiagramTableViewCell.swift; sourceTree = "<group>"; };
+		6EDBC516238630020082AFA5 /* ConceptDetailDiagramTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConceptDetailDiagramTableViewCell.xib; sourceTree = "<group>"; };
+		6EDBC5192386305E0082AFA5 /* DiagramConceptDetailGlyph+stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiagramConceptDetailGlyph+stubs.swift"; sourceTree = "<group>"; };
+		6EDBC51B238630BF0082AFA5 /* ConceptDetailDiagramTableViewCell+utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConceptDetailDiagramTableViewCell+utilities.swift"; sourceTree = "<group>"; };
 		6EE1AC37235E8996008546DB /* FakeLearningStepStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeLearningStepStore.swift; sourceTree = "<group>"; };
 		6EE1AC3E235FC391008546DB /* ConceptIntroLearningStep+stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConceptIntroLearningStep+stubs.swift"; sourceTree = "<group>"; };
 		6EE1AC40235FC410008546DB /* Concept+stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Concept+stubs.swift"; sourceTree = "<group>"; };
@@ -796,6 +810,7 @@
 			children = (
 				6E883F9A233D9B96004F0D0E /* ConceptIntroSceneTests.swift */,
 				6EDBC4FF23861B300082AFA5 /* ConceptDetailFormulaTableViewCell+utilities.swift */,
+				6EDBC51B238630BF0082AFA5 /* ConceptDetailDiagramTableViewCell+utilities.swift */,
 				6E883F9E233DA2DE004F0D0E /* FakeConceptIntroViewModelDelegate.swift */,
 			);
 			path = ConceptIntroScene;
@@ -1020,7 +1035,7 @@
 		6EB933B32331CBA900E38B52 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
-				6EDBC4F62384EED20082AFA5 /* db.sqlite3 */,
+				6EDBC50B23862D860082AFA5 /* db.sqlite3 */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -1345,6 +1360,8 @@
 				6EDBC4EA2384E2600082AFA5 /* ConceptDetailGlyph.swift */,
 				6EDBC4F12384EA690082AFA5 /* ConceptDetailGlyphType.swift */,
 				6EDBC4EC2384E3070082AFA5 /* FormulaConceptDetailGlyph.swift */,
+				6EDBC50D23862DB40082AFA5 /* DiagramConceptDetailGlyph.swift */,
+				6EDBC50F23862DE50082AFA5 /* TextConceptDetailGlyph.swift */,
 			);
 			path = ConceptDetailGlyph;
 			sourceTree = "<group>";
@@ -1363,6 +1380,7 @@
 			children = (
 				6EDBC4F42384EE3B0082AFA5 /* FakeConceptDetailGlyphRepository.swift */,
 				6EDBC50123861D050082AFA5 /* FormulaConceptDetailGlyph+stubs.swift */,
+				6EDBC5192386305E0082AFA5 /* DiagramConceptDetailGlyph+stubs.swift */,
 			);
 			path = ConceptDetailGlyphRepository;
 			sourceTree = "<group>";
@@ -1370,12 +1388,31 @@
 		6EDBC4FA238615F80082AFA5 /* ConceptDetailLatexCell */ = {
 			isa = PBXGroup;
 			children = (
-				6EDBC507238628AD0082AFA5 /* ConceptDetailFormulaTableViewCell.swift */,
-				6EDBC508238628AD0082AFA5 /* ConceptDetailFormulaTableViewCell.xib */,
+				6EDBC51423862FE70082AFA5 /* DiagramCell */,
+				6EDBC51123862FA30082AFA5 /* FormulaCell */,
 				6EDBC50523861EB50082AFA5 /* ConceptDetailItem.swift */,
 				6EDBC50323861E980082AFA5 /* ConceptDetailFormulaItem.swift */,
+				6EDBC51223862FC40082AFA5 /* ConceptDetailDiagramItem.swift */,
 			);
 			path = ConceptDetailLatexCell;
+			sourceTree = "<group>";
+		};
+		6EDBC51123862FA30082AFA5 /* FormulaCell */ = {
+			isa = PBXGroup;
+			children = (
+				6EDBC507238628AD0082AFA5 /* ConceptDetailFormulaTableViewCell.swift */,
+				6EDBC508238628AD0082AFA5 /* ConceptDetailFormulaTableViewCell.xib */,
+			);
+			path = FormulaCell;
+			sourceTree = "<group>";
+		};
+		6EDBC51423862FE70082AFA5 /* DiagramCell */ = {
+			isa = PBXGroup;
+			children = (
+				6EDBC515238630020082AFA5 /* ConceptDetailDiagramTableViewCell.swift */,
+				6EDBC516238630020082AFA5 /* ConceptDetailDiagramTableViewCell.xib */,
+			);
+			path = DiagramCell;
 			sourceTree = "<group>";
 		};
 		6EE1AC3D235FC375008546DB /* LearningStep */ = {
@@ -1609,13 +1646,14 @@
 				6EE60C602345900900B0322B /* LevelUpViewController.xib in Resources */,
 				6EDBC50A238628AD0082AFA5 /* ConceptDetailFormulaTableViewCell.xib in Resources */,
 				6EE5709623692B1D002C63F8 /* PracticeIntroViewController.xib in Resources */,
+				6EDBC518238630020082AFA5 /* ConceptDetailDiagramTableViewCell.xib in Resources */,
 				6E86B345236E489E002DCA62 /* DoubleLevelUpViewController.xib in Resources */,
 				6E557C1E22FB9DCC00270F07 /* Assets.xcassets in Resources */,
 				6EC6671E232451760048068C /* QuitableContainerViewController.xib in Resources */,
+				6EDBC50C23862D860082AFA5 /* db.sqlite3 in Resources */,
 				6EDBC4D4238390E20082AFA5 /* GroupCompleteViewController.xib in Resources */,
 				6E74FD53231C87F800730AEB /* FeedContainerViewController.xib in Resources */,
 				6E3829312372641900145E26 /* PracticeFamilyCompleteViewController.xib in Resources */,
-				6EDBC4F72384EED20082AFA5 /* db.sqlite3 in Resources */,
 				6EB933A52330702C00E38B52 /* LoadExercisesViewController.xib in Resources */,
 				6EC666F32321E64A0048068C /* InfoViewController.xib in Resources */,
 				6EC66730232464B20048068C /* ConceptMapViewController.xib in Resources */,
@@ -1750,6 +1788,7 @@
 				6E557C1722FB9DCB00270F07 /* AppDelegate.swift in Sources */,
 				6E883F97233D92F2004F0D0E /* ConceptIntroViewController.swift in Sources */,
 				6EB0FEF0235BE80A005F23DE /* LearningStep.swift in Sources */,
+				6EDBC51023862DE50082AFA5 /* TextConceptDetailGlyph.swift in Sources */,
 				6EC6673B232494170048068C /* ConceptMapTableViewCell.swift in Sources */,
 				6EB0FF00235BF2A9005F23DE /* UserConceptRepository.swift in Sources */,
 				6E86B34F236F9D91002DCA62 /* GlobalComposer+Feed.swift in Sources */,
@@ -1779,6 +1818,7 @@
 				6E2CB5AA236BADA800162147 /* ResultBenchmark.swift in Sources */,
 				6EC666FE232324F70048068C /* Concept.swift in Sources */,
 				6EC6674723249D850048068C /* UserConcept.swift in Sources */,
+				6EDBC517238630020082AFA5 /* ConceptDetailDiagramTableViewCell.swift in Sources */,
 				6EC6674223249C300048068C /* DatabaseService.swift in Sources */,
 				6EE60C5B23458DBD00B0322B /* LevelUpItem.swift in Sources */,
 				6EBE4EA4230B675B0047A880 /* Exercise+data.swift in Sources */,
@@ -1801,6 +1841,7 @@
 				6EEEB6692364F176008D0FD6 /* UserConceptExternalDataService.swift in Sources */,
 				6EBA303A230CADCB00E6DC54 /* AnimatedButton.swift in Sources */,
 				6E927E81231CA88600822EBA /* ResultsStore.swift in Sources */,
+				6EDBC50E23862DB40082AFA5 /* DiagramConceptDetailGlyph.swift in Sources */,
 				6EC6672B2324627E0048068C /* MenuViewModel.swift in Sources */,
 				6E3C9EFA235E7C6100CD81C9 /* LearningStepStore.swift in Sources */,
 				6E74FD4B2318CBAC00730AEB /* RandomizationService.swift in Sources */,
@@ -1812,6 +1853,7 @@
 				6EDBC4D3238390E20082AFA5 /* GroupCompleteViewController.swift in Sources */,
 				6EBA304F230E07AE00E6DC54 /* CheckmarkImageView.swift in Sources */,
 				6EDBC50623861EB50082AFA5 /* ConceptDetailItem.swift in Sources */,
+				6EDBC51323862FC40082AFA5 /* ConceptDetailDiagramItem.swift in Sources */,
 				6EC666F22321E64A0048068C /* InfoViewController.swift in Sources */,
 				6E3C9EF0235E765400CD81C9 /* LearningStepExternalDataService.swift in Sources */,
 				6EAB210A23611F43007186A4 /* ExerciseStrategy.swift in Sources */,
@@ -1870,6 +1912,7 @@
 				6E1CCC66235CEC2200451CD7 /* NewMaterialState+stubs.swift in Sources */,
 				6EC6670F232447C40048068C /* MenuCoordinatorTests.swift in Sources */,
 				6E74FD402318A1F500730AEB /* FakeExerciseViewModelDelegate.swift in Sources */,
+				6EDBC51A2386305E0082AFA5 /* DiagramConceptDetailGlyph+stubs.swift in Sources */,
 				6EE60C5523456DCF00B0322B /* FakePrepareFeedViewModelDelegate.swift in Sources */,
 				6EC66717232451080048068C /* QuitableContainerViewControllerTests.swift in Sources */,
 				6EC66735232467840048068C /* FakeConceptMapViewModelDelegate.swift in Sources */,
@@ -1918,6 +1961,7 @@
 				6EEF91E42380A7E70057F73A /* FakeUserConceptGroupRepository.swift in Sources */,
 				6EC6672423245D730048068C /* TestMenuCoordinator.swift in Sources */,
 				6EDBC50223861D050082AFA5 /* FormulaConceptDetailGlyph+stubs.swift in Sources */,
+				6EDBC51C238630BF0082AFA5 /* ConceptDetailDiagramTableViewCell+utilities.swift in Sources */,
 				6E01F084234ECD0600371D0C /* TestingAppDelegate.swift in Sources */,
 				6E0ADF48234A98C7004B4348 /* FakeExerciseSetCalculator.swift in Sources */,
 				6E883F9F233DA2DE004F0D0E /* FakeConceptIntroViewModelDelegate.swift in Sources */,

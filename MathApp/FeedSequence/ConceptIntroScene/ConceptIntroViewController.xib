@@ -31,7 +31,7 @@
                     <rect key="frame" x="171.5" y="617" width="32" height="30"/>
                     <state key="normal" title="Next"/>
                 </button>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iIW-8d-wZr">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iIW-8d-wZr">
                     <rect key="frame" x="24" y="70.5" width="327" height="522.5"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <connections>

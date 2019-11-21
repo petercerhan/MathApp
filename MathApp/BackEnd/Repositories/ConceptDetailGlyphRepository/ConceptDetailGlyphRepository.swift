@@ -39,12 +39,21 @@ class ConceptDetailGlyphRepositoryImpl: ConceptDetailGlyphRepository {
         }
         switch type {
         case .text:
-            return nil
+            return textGlyph(fromRow: row)
         case .formula:
             return formulaGlyph(fromRow: row)
         case .diagram:
+            return diagramGlyph(fromRow: row)
+        }
+    }
+    
+    private func textGlyph(fromRow row: Row) -> ConceptDetailGlyph? {
+        guard let text = row[column_text] else {
             return nil
         }
+        let sequence = Int(row[column_sequence])
+        let displayGroup = Int(row[column_displayGroup])
+        return TextConceptDetailGlyph(text: text, sequence: sequence, displayGroup: displayGroup)
     }
     
     private func formulaGlyph(fromRow row: Row) -> ConceptDetailGlyph? {
@@ -54,6 +63,15 @@ class ConceptDetailGlyphRepositoryImpl: ConceptDetailGlyphRepository {
         let sequence = Int(row[column_sequence])
         let displayGroup = Int(row[column_displayGroup])
         return FormulaConceptDetailGlyph(latex: latex, sequence: sequence, displayGroup: displayGroup)
+    }
+    
+    private func diagramGlyph(fromRow row: Row) -> ConceptDetailGlyph? {
+        guard let diagramCode = row[column_diagram] else {
+            return nil
+        }
+        let sequence = Int(row[column_sequence])
+        let displayGroup = Int(row[column_displayGroup])
+        return DiagramConceptDetailGlyph(diagramCode: diagramCode, sequence: sequence, displayGroup: displayGroup)
     }
     
     //MARK: - SQLite Constants

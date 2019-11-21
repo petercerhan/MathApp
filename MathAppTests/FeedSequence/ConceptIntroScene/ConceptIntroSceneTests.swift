@@ -41,6 +41,17 @@ class ConceptIntroSceneTests: XCTestCase {
         ConceptDetailFormulaTableViewCell.assertCellAtRow(0, inTable: vc.tableView, containsFormula: "x + y = z")
     }
     
+    func test_secondDetailCellDiagram_shouldShowDiagram() {
+        var stubConcept = Concept.constantRule
+        stubConcept.detailGlyphs = [FormulaConceptDetailGlyph.createStub(), DiagramConceptDetailGlyph.createStub()]
+        let stubConceptIntro = ConceptIntroLearningStep.createWithConcept(concept: stubConcept)
+        let vc = composeSUT(stubConceptIntro: stubConceptIntro)
+        
+        vc.loadViewIfNeeded()
+        
+        ConceptDetailDiagramTableViewCell.assertCellAtRowIsDiagram(1, inTable: vc.tableView)
+    }
+    
     func test_nextButton_shouldRequestNext() {
         let mockDelegate = FakeConceptIntroViewModelDelegate()
         let vc = composeSUT(fakeDelegate: mockDelegate)

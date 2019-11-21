@@ -55,7 +55,12 @@ class ConceptIntroViewModelImpl: ConceptIntroViewModel {
         let detailItems = concept.detailGlyphs.map { glyph -> ConceptDetailItem in
             if let formulaGlyph = glyph as? FormulaConceptDetailGlyph {
                 return ConceptDetailFormulaItem(latex: formulaGlyph.latex)
-            } else {
+            }
+            else if let diagramGlyph = glyph as? DiagramConceptDetailGlyph {
+                print("got diagram glyph")
+                return ConceptDetailDiagramItem(diagramCode: diagramGlyph.diagramCode)
+            }
+            else {
                 return ConceptDetailFormulaItem(latex: "")
             }
         }
