@@ -11,7 +11,7 @@ import RxSwift
 
 protocol ExerciseViewModel {
     var question: Observable<String> { get }
-    var questionLatex: Observable<String> { get }
+    var equationLatex: Observable<String> { get }
     var choice1: Observable<String> { get }
     var choice2: Observable<String> { get }
     var choice3: Observable<String> { get }
@@ -102,7 +102,7 @@ class ExerciseViewModelImpl: ExerciseViewModel {
         Observable.just(exercise.questionText ?? "")
     }()
     
-    private(set) lazy var questionLatex: Observable<String> = {
+    private(set) lazy var equationLatex: Observable<String> = {
         Observable.just(exercise.equationLatex)
     }()
     

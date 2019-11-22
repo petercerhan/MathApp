@@ -103,7 +103,7 @@ class ExerciseViewController: UIViewController {
     
     private func bindUI() {
         bindQuestionText()
-        bindQuestionLatex()
+        bindEquationLatex()
         bindChoice1()
         bindChoice2()
         bindChoice3()
@@ -120,8 +120,8 @@ class ExerciseViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    private func bindQuestionLatex() {
-        viewModel.questionLatex
+    private func bindEquationLatex() {
+        viewModel.equationLatex
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [unowned self] text in
                 self.equationLabel.latex = text
