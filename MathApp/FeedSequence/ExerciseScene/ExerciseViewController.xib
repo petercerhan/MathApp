@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -26,11 +24,12 @@
                 <outlet property="choice3Label" destination="bz7-39-x30" id="Lte-Q5-t8P"/>
                 <outlet property="correctFrame" destination="Phy-8J-YXb" id="hGm-s5-erL"/>
                 <outlet property="correctFrameBottomSpace" destination="4mn-aR-XyL" id="akz-In-jZn"/>
+                <outlet property="equationLabel" destination="KZH-gX-XGC" id="Lde-ey-JWO"/>
                 <outlet property="infoButton" destination="SOC-af-M79" id="xj1-gP-YFE"/>
                 <outlet property="nextButton" destination="5eq-Kp-SoS" id="0ub-E5-xRs"/>
                 <outlet property="nextButtonCenter" destination="WT9-uj-3mZ" id="1Ge-Jd-oyK"/>
+                <outlet property="questionBodyFrame" destination="fBP-vm-RCi" id="jFz-pE-Oyv"/>
                 <outlet property="questionLabel" destination="cTR-iQ-8gP" id="j6n-eD-sSO"/>
-                <outlet property="questionLatexLabel" destination="KZH-gX-XGC" id="Lde-ey-JWO"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -40,16 +39,16 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cTR-iQ-8gP">
-                    <rect key="frame" x="146" y="55" width="83" height="25.5"/>
+                    <rect key="frame" x="146" y="35" width="83" height="25.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="21"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fBP-vm-RCi" userLabel="QuestionLatexFrame">
-                    <rect key="frame" x="0.0" y="80.5" width="375" height="326.5"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fBP-vm-RCi" userLabel="QuestionBodyFrame">
+                    <rect key="frame" x="0.0" y="60.5" width="375" height="346.5"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KZH-gX-XGC" customClass="MTMathUILabel">
-                            <rect key="frame" x="151.5" y="153.5" width="72" height="19.5"/>
+                            <rect key="frame" x="151.5" y="163.5" width="72" height="19.5"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="latex" value="x = y"/>

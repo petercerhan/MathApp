@@ -25,7 +25,9 @@ class ExerciseViewController: UIViewController {
     //MARK: - UI Components
     
     @IBOutlet private(set) var questionLabel: UILabel!
-    @IBOutlet private(set) var questionLatexLabel: MTMathUILabel!
+    @IBOutlet private(set) var equationLabel: MTMathUILabel!
+    
+    @IBOutlet private(set) var questionBodyFrame: UIView!
     
     @IBOutlet private(set) var choice1Button: UIButton!
     @IBOutlet private(set) var choice1Label: MTMathUILabel!
@@ -122,7 +124,7 @@ class ExerciseViewController: UIViewController {
         viewModel.questionLatex
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [unowned self] text in
-                self.questionLatexLabel.latex = text
+                self.equationLabel.latex = text
             })
             .disposed(by: disposeBag)
     }

@@ -8,23 +8,44 @@
 
 import UIKit
 
-class DiagramExerciseViewController: UIViewController {
+class DiagramExerciseViewController: ExerciseViewController {
+    
+    //MARK: - Dependencies
+    
+    private let viewModel: DiagramExerciseViewModel
+    
+    //MARK: - UI Components
+    
+    let imageView = UIImageView()
+    
+    //MARK: - Initialization
+    
+    init(viewModel: DiagramExerciseViewModel & ExerciseViewModel) {
+        self.viewModel = viewModel
+        super.init(viewModel: viewModel)
+    }
 
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("cannot initialize with init(coder:)")
+    }
+    
+    //MARK: - UIViewController Interface
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        configureUI()
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    private func configureUI() {
+        equationLabel.removeFromSuperview()
+        
+        view.addSubview(imageView)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.centerXAnchor.constraint(equalTo: questionBodyFrame.centerXAnchor).isActive = true
+        imageView.centerYAnchor.constraint(equalTo: questionBodyFrame.centerYAnchor).isActive = true
+        imageView.heightAnchor.constraint(equalTo: questionBodyFrame.heightAnchor, multiplier: 0.75).isActive = true
+        imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor).isActive = true
+        imageView.image = UIImage(named: "TestDiagram")
     }
-    */
 
 }

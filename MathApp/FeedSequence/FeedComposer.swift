@@ -24,16 +24,28 @@ class FeedComposer {
     
     func composeExerciseScene(delegate: ExerciseViewModelDelegate,
                               exercise: Exercise,
-                              choiceConfiguration: ExerciseChoiceConfiguration) -> UIViewController {
+                              choiceConfiguration: ExerciseChoiceConfiguration) -> UIViewController
+    {
         let vm = ExerciseViewModelImpl(delegate: delegate,
                                        resultsStore: resultsStore,
                                        exercise: exercise,
                                        choiceConfiguration: choiceConfiguration)
+        
         return ExerciseViewController(viewModel: vm)
     }
     
-    func composeDiagramExerciseScene() -> UIViewController {
-        return DiagramExerciseViewController()
+    func composeDiagramExerciseScene(delegate: ExerciseViewModelDelegate,
+                                     exercise: Exercise,
+                                     diagram: String,
+                                     choiceConfiguration: ExerciseChoiceConfiguration) -> UIViewController
+    {
+        let vm = DiagramExerciseViewModelImpl(delegate: delegate,
+                                               resultsStore: resultsStore,
+                                               exercise: exercise,
+                                               diagram: diagram,
+                                               choiceConfiguration: choiceConfiguration)
+        
+        return DiagramExerciseViewController(viewModel: vm)
     }
     
     func composeConceptIntroScene(delegate: ConceptIntroViewModelDelegate, conceptIntro: ConceptIntroLearningStep) -> UIViewController {

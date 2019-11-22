@@ -256,7 +256,10 @@ class FeedCoordinator: Coordinator {
         let choiceConfiguration = randomizationService.randomizedExerciseChoiceConfiguration()
         
         if let diagram = exercise.diagram {
-            return composer.composeDiagramExerciseScene()
+            return composer.composeDiagramExerciseScene(delegate: self,
+                                                        exercise: exercise,
+                                                        diagram: diagram,
+                                                        choiceConfiguration: choiceConfiguration)
         } else {
             return composer.composeExerciseScene(delegate: self,
                                                  exercise: exercise,

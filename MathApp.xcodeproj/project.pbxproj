@@ -203,7 +203,8 @@
 		6EDBC529238758100082AFA5 /* Exercise+stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC528238758100082AFA5 /* Exercise+stubs.swift */; };
 		6EDBC52D23875CB20082AFA5 /* db.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 6EDBC52C23875CB20082AFA5 /* db.sqlite3 */; };
 		6EDBC53123875F610082AFA5 /* DiagramExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC52F23875F610082AFA5 /* DiagramExerciseViewController.swift */; };
-		6EDBC53223875F610082AFA5 /* DiagramExerciseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EDBC53023875F610082AFA5 /* DiagramExerciseViewController.xib */; };
+		6EDBC535238761AD0082AFA5 /* DiagramExerciseSceneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC534238761AD0082AFA5 /* DiagramExerciseSceneTests.swift */; };
+		6EDBC53723876C6C0082AFA5 /* DiagramExerciseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBC53623876C6C0082AFA5 /* DiagramExerciseViewModel.swift */; };
 		6EE1AC38235E8996008546DB /* FakeLearningStepStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE1AC37235E8996008546DB /* FakeLearningStepStore.swift */; };
 		6EE1AC3F235FC391008546DB /* ConceptIntroLearningStep+stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE1AC3E235FC391008546DB /* ConceptIntroLearningStep+stubs.swift */; };
 		6EE1AC41235FC410008546DB /* Concept+stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE1AC40235FC410008546DB /* Concept+stubs.swift */; };
@@ -455,7 +456,8 @@
 		6EDBC528238758100082AFA5 /* Exercise+stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exercise+stubs.swift"; sourceTree = "<group>"; };
 		6EDBC52C23875CB20082AFA5 /* db.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = db.sqlite3; sourceTree = "<group>"; };
 		6EDBC52F23875F610082AFA5 /* DiagramExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagramExerciseViewController.swift; sourceTree = "<group>"; };
-		6EDBC53023875F610082AFA5 /* DiagramExerciseViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DiagramExerciseViewController.xib; sourceTree = "<group>"; };
+		6EDBC534238761AD0082AFA5 /* DiagramExerciseSceneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagramExerciseSceneTests.swift; sourceTree = "<group>"; };
+		6EDBC53623876C6C0082AFA5 /* DiagramExerciseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagramExerciseViewModel.swift; sourceTree = "<group>"; };
 		6EE1AC37235E8996008546DB /* FakeLearningStepStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeLearningStepStore.swift; sourceTree = "<group>"; };
 		6EE1AC3E235FC391008546DB /* ConceptIntroLearningStep+stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConceptIntroLearningStep+stubs.swift"; sourceTree = "<group>"; };
 		6EE1AC40235FC410008546DB /* Concept+stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Concept+stubs.swift"; sourceTree = "<group>"; };
@@ -1122,6 +1124,7 @@
 				6E3C9EF3235E7A2100CD81C9 /* LearningStepStore */,
 				6E74FD452318B52F00730AEB /* Models */,
 				6EBE4E9D230B64240047A880 /* ExerciseScene */,
+				6EDBC533238761950082AFA5 /* DiagramExerciseScene */,
 				6E883F99233D9B7B004F0D0E /* ConceptIntroScene */,
 				6EE5709723692EB0002C63F8 /* PracticeIntroScene */,
 				6EBC1BC22346B6CF00654285 /* LevelUpScene */,
@@ -1447,7 +1450,15 @@
 			isa = PBXGroup;
 			children = (
 				6EDBC52F23875F610082AFA5 /* DiagramExerciseViewController.swift */,
-				6EDBC53023875F610082AFA5 /* DiagramExerciseViewController.xib */,
+				6EDBC53623876C6C0082AFA5 /* DiagramExerciseViewModel.swift */,
+			);
+			path = DiagramExerciseScene;
+			sourceTree = "<group>";
+		};
+		6EDBC533238761950082AFA5 /* DiagramExerciseScene */ = {
+			isa = PBXGroup;
+			children = (
+				6EDBC534238761AD0082AFA5 /* DiagramExerciseSceneTests.swift */,
 			);
 			path = DiagramExerciseScene;
 			sourceTree = "<group>";
@@ -1689,7 +1700,6 @@
 				6EC6671E232451760048068C /* QuitableContainerViewController.xib in Resources */,
 				6EDBC4D4238390E20082AFA5 /* GroupCompleteViewController.xib in Resources */,
 				6E74FD53231C87F800730AEB /* FeedContainerViewController.xib in Resources */,
-				6EDBC53223875F610082AFA5 /* DiagramExerciseViewController.xib in Resources */,
 				6E3829312372641900145E26 /* PracticeFamilyCompleteViewController.xib in Resources */,
 				6EDBC52D23875CB20082AFA5 /* db.sqlite3 in Resources */,
 				6EB933A52330702C00E38B52 /* LoadExercisesViewController.xib in Resources */,
@@ -1914,6 +1924,7 @@
 				6E7191B22379049200E9B88E /* MenuComposer.swift in Sources */,
 				6E74FD442318B0A400730AEB /* GeneralError.swift in Sources */,
 				6EEF91D2238086130057F73A /* TransitionItem.swift in Sources */,
+				6EDBC53723876C6C0082AFA5 /* DiagramExerciseViewModel.swift in Sources */,
 				6EBD5317233AFAB00057F28A /* ChooseExerciseViewModel.swift in Sources */,
 				6EE60C5F2345900900B0322B /* LevelUpViewController.swift in Sources */,
 			);
@@ -1991,6 +2002,7 @@
 				6EEF91E62380AAB30057F73A /* UserConceptGroup+stubs.swift in Sources */,
 				6EBD5315233AF9E20057F28A /* FakeChooseExerciseViewModelDelegate.swift in Sources */,
 				6E3C9EF7235E7BC200CD81C9 /* FakeLearningStepExternalDataService.swift in Sources */,
+				6EDBC535238761AD0082AFA5 /* DiagramExerciseSceneTests.swift in Sources */,
 				6EB933AC233076E500E38B52 /* FakeLoadExercisesViewModelDelegate.swift in Sources */,
 				6EC666F62322042F0048068C /* InfoSceneTests.swift in Sources */,
 				6EAB2114236133E8007186A4 /* FakeExerciseController.swift in Sources */,

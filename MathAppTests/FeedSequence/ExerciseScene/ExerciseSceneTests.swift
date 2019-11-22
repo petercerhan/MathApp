@@ -17,7 +17,7 @@ class ExerciseSceneTests: XCTestCase {
         vc.loadViewIfNeeded()
         
         XCTAssertNotNil(vc.questionLabel)
-        XCTAssertNotNil(vc.questionLatexLabel)
+        XCTAssertNotNil(vc.equationLabel)
         XCTAssertNotNil(vc.choice1Button)
         XCTAssertNotNil(vc.choice2Button)
         XCTAssertNotNil(vc.choice3Button)
@@ -44,7 +44,7 @@ class ExerciseSceneTests: XCTestCase {
         vc.loadViewIfNeeded()
         
         XCTAssertEqual(vc.questionLabel.text, "Find the derivative:")
-        XCTAssertEqual(vc.questionLatexLabel.latex, "\\frac{d}{dx}(1)")
+        XCTAssertEqual(vc.equationLabel.latex, "\\frac{d}{dx}(1)")
         XCTAssertEqual(vc.choice1Label.latex, "0")
         XCTAssertEqual(vc.choice2Label.latex, "x")
         XCTAssertEqual(vc.choice3Label.latex, "1")
