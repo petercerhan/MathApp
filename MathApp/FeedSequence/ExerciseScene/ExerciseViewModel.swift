@@ -103,7 +103,7 @@ class ExerciseViewModelImpl: ExerciseViewModel {
     }()
     
     private(set) lazy var questionLatex: Observable<String> = {
-        Observable.just(exercise.questionLatex)
+        Observable.just(exercise.equationLatex)
     }()
     
     private(set) lazy var choice1: Observable<String> = {
