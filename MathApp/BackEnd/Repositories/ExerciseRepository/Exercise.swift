@@ -18,4 +18,5 @@ struct Exercise {
     let falseAnswer3: String
     let concept: Concept
     let difficulty: Int
+    let diagram: String?
 }

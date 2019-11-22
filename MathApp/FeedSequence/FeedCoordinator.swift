@@ -255,9 +255,13 @@ class FeedCoordinator: Coordinator {
     private func composeExerciseScene(forExercise exercise: Exercise) -> UIViewController {
         let choiceConfiguration = randomizationService.randomizedExerciseChoiceConfiguration()
         
-        return composer.composeExerciseScene(delegate: self,
-                                             exercise: exercise,
-                                             choiceConfiguration: choiceConfiguration)
+        if let diagram = exercise.diagram {
+            return composer.composeDiagramExerciseScene()
+        } else {
+            return composer.composeExerciseScene(delegate: self,
+                                                 exercise: exercise,
+                                                 choiceConfiguration: choiceConfiguration)
+        }
     }
     
     private func loadNewExercisesScene() {

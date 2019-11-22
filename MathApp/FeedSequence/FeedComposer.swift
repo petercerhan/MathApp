@@ -32,6 +32,10 @@ class FeedComposer {
         return ExerciseViewController(viewModel: vm)
     }
     
+    func composeDiagramExerciseScene() -> UIViewController {
+        return DiagramExerciseViewController()
+    }
+    
     func composeConceptIntroScene(delegate: ConceptIntroViewModelDelegate, conceptIntro: ConceptIntroLearningStep) -> UIViewController {
         let vm = ConceptIntroViewModelImpl(delegate: delegate, conceptIntro: conceptIntro)
         return ConceptIntroViewController(viewModel: vm)

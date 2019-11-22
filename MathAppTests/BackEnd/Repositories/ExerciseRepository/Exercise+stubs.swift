@@ -11,28 +11,17 @@ import Foundation
 
 extension Exercise {
     
-    static func getByID(_ id: Int) -> Exercise {
-        switch id {
-        case 1:
-            return linearRule_exercise1
-        case 2:
-            return linearRule_exercise2
-        case 3:
-            return linearRule_exercise3
-        case 4:
-            return linearRule_exercise4
-        case 5:
-            return linearRule_exercise5
-        case 6:
-            return linearRule_exercise6
-        case 7:
-            return linearRule_exercise7
-        case 8:
-            return linearRule_exercise8
-            
-        default:
-            return exercise1
-        }
+    static func createStub(diagram: String? = nil) -> Exercise {
+        return Exercise(id: 1,
+                        questionText: "Find the derivative:",
+                        questionLatex: "\\frac{d}{dx}(1)",
+                        answer: "0",
+                        falseAnswer1: "x",
+                        falseAnswer2: "1",
+                        falseAnswer3: "dx",
+                        concept: Concept.constantRule,
+                        difficulty: 1,
+                        diagram: diagram)
     }
     
     //MARK: - Constant rule
@@ -46,7 +35,8 @@ extension Exercise {
                         falseAnswer2: "1",
                         falseAnswer3: "dx",
                         concept: Concept.constantRule,
-                        difficulty: 1)
+                        difficulty: 1,
+                        diagram: nil)
     }
     
     static var exercise2: Exercise {
@@ -58,7 +48,8 @@ extension Exercise {
                         falseAnswer2: "2",
                         falseAnswer3: "x",
                         concept: Concept.constantRule,
-                        difficulty: 1)
+                        difficulty: 1,
+                        diagram: nil)
     }
     
     static var exercise3: Exercise {
@@ -70,7 +61,8 @@ extension Exercise {
                         falseAnswer2: "3",
                         falseAnswer3: "x",
                         concept: Concept.constantRule,
-                        difficulty: 1)
+                        difficulty: 1,
+                        diagram: nil)
     }
     
     static var exercise4: Exercise {
@@ -82,7 +74,8 @@ extension Exercise {
                         falseAnswer2: "10",
                         falseAnswer3: "-1",
                         concept: Concept.constantRule,
-                        difficulty: 1)
+                        difficulty: 1,
+                        diagram: nil)
     }
     
     static var exercise5: Exercise {
@@ -94,7 +87,8 @@ extension Exercise {
                         falseAnswer2: "dx",
                         falseAnswer3: "-1",
                         concept: Concept.constantRule,
-                        difficulty: 1)
+                        difficulty: 1,
+                        diagram: nil)
     }
     
     static var exercise6: Exercise {
@@ -106,7 +100,8 @@ extension Exercise {
                         falseAnswer2: "1.5",
                         falseAnswer3: "-1",
                         concept: Concept.constantRule,
-                        difficulty: 1)
+                        difficulty: 1,
+                        diagram: nil)
     }
     
     static var exercise7: Exercise {
@@ -118,7 +113,8 @@ extension Exercise {
                         falseAnswer2: "1",
                         falseAnswer3: "-1",
                         concept: Concept.constantRule,
-                        difficulty: 1)
+                        difficulty: 1,
+                        diagram: nil)
     }
     
     static var exercise8: Exercise {
@@ -130,7 +126,8 @@ extension Exercise {
                         falseAnswer2: "1",
                         falseAnswer3: "-1",
                         concept: Concept.constantRule,
-                        difficulty: 1)
+                        difficulty: 1,
+                        diagram: nil)
     }
     
     //MARK: - Linear Rule
@@ -144,7 +141,8 @@ extension Exercise {
                         falseAnswer2: "2x",
                         falseAnswer3: "x",
                         concept: Concept.linearRule,
-                        difficulty: 1)
+                        difficulty: 1,
+                        diagram: nil)
     }
     
     static var linearRule_exercise2: Exercise {
@@ -156,7 +154,8 @@ extension Exercise {
                         falseAnswer2: "0",
                         falseAnswer3: "x",
                         concept: Concept.linearRule,
-                        difficulty: 1)
+                        difficulty: 1,
+                        diagram: nil)
     }
     
     static var linearRule_exercise3: Exercise {
@@ -168,7 +167,8 @@ extension Exercise {
                         falseAnswer2: "0",
                         falseAnswer3: "x",
                         concept: Concept.linearRule,
-                        difficulty: 1)
+                        difficulty: 1,
+                        diagram: nil)
     }
     
     static var linearRule_exercise4: Exercise {
@@ -180,7 +180,8 @@ extension Exercise {
                         falseAnswer2: "\\frac{1}{2}x",
                         falseAnswer3: "x",
                         concept: Concept.linearRule,
-                        difficulty: 1)
+                        difficulty: 1,
+                        diagram: nil)
     }
     
     static var linearRule_exercise5: Exercise {
@@ -192,7 +193,8 @@ extension Exercise {
                         falseAnswer2: "-2x",
                         falseAnswer3: "\\frac{1}{2}x^2",
                         concept: Concept.linearRule,
-                        difficulty: 1)
+                        difficulty: 1,
+                        diagram: nil)
     }
     
     static var linearRule_exercise6: Exercise {
@@ -204,7 +206,8 @@ extension Exercise {
                         falseAnswer2: "3x",
                         falseAnswer3: "0",
                         concept: Concept.linearRule,
-                        difficulty: 1)
+                        difficulty: 1,
+                        diagram: nil)
     }
     
     static var linearRule_exercise7: Exercise {
@@ -216,7 +219,8 @@ extension Exercise {
                         falseAnswer2: "a^2",
                         falseAnswer3: "1",
                         concept: Concept.linearRule,
-                        difficulty: 1)
+                        difficulty: 1,
+                        diagram: nil)
     }
     
     static var linearRule_exercise8: Exercise {
@@ -228,7 +232,8 @@ extension Exercise {
                         falseAnswer2: "0",
                         falseAnswer3: "x",
                         concept: Concept.linearRule,
-                        difficulty: 1)
+                        difficulty: 1,
+                        diagram: nil)
     }
 }
 

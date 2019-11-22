@@ -21,6 +21,7 @@ extension Exercise {
     static let column_falseAnswer3 = Expression<String>("false_answer_3")
     static let column_conceptID = Expression<Int64>("concept_id")
     static let column_difficulty = Expression<Int64>("difficulty")
+    static let column_diagram = Expression<String?>("diagram")
     
     static func createFromQueryResult(_ row: Row) -> Exercise? {
         let tableName = Exercise.table
@@ -32,6 +33,7 @@ extension Exercise {
         let falseAnswer2 = row[tableName[Exercise.column_falseAnswer2]]
         let falseAnswer3 = row[tableName[Exercise.column_falseAnswer3]]
         let difficulty = Int(row[tableName[Exercise.column_difficulty]])
+        let diagram = row[tableName[Exercise.column_diagram]]
         
         guard let concept = Concept.createFromQueryResult(row) else {
             return nil
@@ -45,9 +47,8 @@ extension Exercise {
                         falseAnswer2: falseAnswer2,
                         falseAnswer3: falseAnswer3,
                         concept: concept,
-                        difficulty: difficulty)
+                        difficulty: difficulty,
+                        diagram: diagram)
     }
-    
-    
     
 }

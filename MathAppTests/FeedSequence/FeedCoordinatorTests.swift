@@ -423,6 +423,16 @@ class FeedCoordinatorTests: XCTestCase {
         XCTAssertEqual(mockExerciseStore.refresh_callCount, 2)
     }
     
+    func test_diagramExercise_shouldShowDiagramExerciseScene() {
+        let mockContainerVC = FakeContainerViewController()
+        let coordinator = composeSUT(fakeContainerViewController: mockContainerVC, stubExercises: [Exercise.createStub(diagram: "TestDiagram")])
+        
+        coordinator.start()
+        coordinator.next(TestExerciseViewModel(), correctAnswer: true)
+        
+        mockContainerVC.verifyDidShow(viewControllerType: DiagramExerciseViewController.self)
+    }
+    
     //MARK: - Level Up
     
     func test_levelUp_shouldGetNextLearningStep() {
