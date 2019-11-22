@@ -24,6 +24,8 @@ class ExerciseViewController: UIViewController {
     
     //MARK: - UI Components
     
+    @IBOutlet private(set) var questionTextFrame: UIView!
+    let questionLatexLabel = MTMathUILabel()
     @IBOutlet private(set) var questionLabel: UILabel!
     @IBOutlet private(set) var equationLabel: MTMathUILabel!
     
@@ -85,8 +87,18 @@ class ExerciseViewController: UIViewController {
     }
     
     private func configureUI() {
+        addQuestionLatexLabel()
         configureChoiceLabels()
         configureInfoButton()
+    }
+    
+    private func addQuestionLatexLabel() {
+        questionTextFrame.addSubview(questionLatexLabel)
+        questionLatexLabel.translatesAutoresizingMaskIntoConstraints = false
+        questionLatexLabel.leftAnchor.constraint(equalTo: questionLabel.rightAnchor).isActive = true
+        questionLatexLabel.rightAnchor.constraint(equalTo: questionTextFrame.rightAnchor).isActive = true
+        questionLatexLabel.centerYAnchor.constraint(equalTo: questionTextFrame.centerYAnchor).isActive = true
+        questionLatexLabel.fontSize = 24.0
     }
     
     private func configureChoiceLabels() {
@@ -115,8 +127,12 @@ class ExerciseViewController: UIViewController {
     
     private func bindQuestionText() {
         viewModel.question
+            .withLatestFrom(viewModel.questionLatex) { ($0, $1) }
             .observeOn(MainScheduler.instance)
-            .bind(to: questionLabel.rx.text)
+            .subscribe(onNext: { [unowned self] text, latex in
+                self.questionLabel.text = text
+                self.questionLatexLabel.latex = latex
+            })
             .disposed(by: disposeBag)
     }
     
