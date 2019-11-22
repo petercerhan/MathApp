@@ -14,6 +14,7 @@ extension Exercise {
     
     static let column_id = Expression<Int64>("id")
     static let column_questionText = Expression<String>("question_text")
+    static let column_questionLatex = Expression<String?>("question_latex")
     static let column_equationLatex = Expression<String>("equation_latex")
     static let column_answer = Expression<String>("answer")
     static let column_falseAnswer1 = Expression<String>("false_answer_1")
@@ -27,6 +28,7 @@ extension Exercise {
         let tableName = Exercise.table
         let id = Int(row[tableName[Exercise.column_id]])
         let questionText = row[tableName[Exercise.column_questionText]]
+        let questionLatex = row[tableName[Exercise.column_questionLatex]]
         let equationLatex = row[tableName[Exercise.column_equationLatex]]
         let answer = row[tableName[Exercise.column_answer]]
         let falseAnswer1 = row[tableName[Exercise.column_falseAnswer1]]
@@ -41,6 +43,7 @@ extension Exercise {
         
         return Exercise(id: id,
                         questionText: questionText,
+                        questionLatex: questionLatex,
                         equationLatex: equationLatex,
                         answer: answer,
                         falseAnswer1: falseAnswer1,

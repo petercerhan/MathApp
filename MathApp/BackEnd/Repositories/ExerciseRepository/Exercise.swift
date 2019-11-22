@@ -11,6 +11,7 @@ import Foundation
 struct Exercise {
     let id: Int
     let questionText: String?
+    let questionLatex: String?
     let equationLatex: String
     let answer: String
     let falseAnswer1: String
