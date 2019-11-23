@@ -45,7 +45,7 @@ class DiagramExerciseViewController: ExerciseViewController {
         imageView.centerYAnchor.constraint(equalTo: questionBodyFrame.centerYAnchor).isActive = true
         imageView.heightAnchor.constraint(equalTo: questionBodyFrame.heightAnchor, multiplier: 0.75).isActive = true
         imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor).isActive = true
-        imageView.image = UIImage(named: "TestDiagram")
+        imageView.image = UIImage(named: viewModel.diagramCode)
     }
 
 }

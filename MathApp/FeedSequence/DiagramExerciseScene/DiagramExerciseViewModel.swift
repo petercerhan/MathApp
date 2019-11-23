@@ -9,7 +9,7 @@
 import Foundation
 
 protocol DiagramExerciseViewModel {
-    
+    var diagramCode: String { get }
 }
 
 class DiagramExerciseViewModelImpl: ExerciseViewModelImpl, DiagramExerciseViewModel {
