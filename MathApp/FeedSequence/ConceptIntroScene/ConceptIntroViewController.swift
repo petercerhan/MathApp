@@ -20,6 +20,7 @@ class ConceptIntroViewController: UIViewController, UITableViewDataSource {
     //MARK: - UI Components
     
     @IBOutlet private(set) var conceptNameLabel: UILabel!
+    @IBOutlet private(set) var conceptNameContainer: UIView!
     @IBOutlet private(set) var tableView: UITableView!
     @IBOutlet private(set) var nextButton: UIButton!
     
@@ -46,17 +47,22 @@ class ConceptIntroViewController: UIViewController, UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureUI()
         setupTableView()
         bindUI()
         bindActions()
+    }
+    
+    private func configureUI() {
+        conceptNameContainer.layer.borderColor = UIColor.systemBlue.cgColor
+        conceptNameContainer.layer.cornerRadius = 8.0
+        conceptNameContainer.layer.borderWidth = 1.0
     }
     
     private func setupTableView() {
         tableView.register(UINib(nibName:"ConceptDetailFormulaTableViewCell", bundle: nil), forCellReuseIdentifier: "ConceptDetailFormulaTableViewCell")
         tableView.register(UINib(nibName:"ConceptDetailDiagramTableViewCell", bundle: nil), forCellReuseIdentifier: "ConceptDetailDiagramTableViewCell")
         tableView.register(UINib(nibName:"ConceptDetailTextTableViewCell", bundle: nil), forCellReuseIdentifier: "ConceptDetailTextTableViewCell")
-//        tableView.rowHeight = UITableView.automaticDimension
-//        tableView.estimatedRowHeight = 44
         
         viewModel.detailItems
             .observeOn(MainScheduler.instance)
