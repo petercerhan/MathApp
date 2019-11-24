@@ -102,7 +102,7 @@ class ConceptIntroViewController: UIViewController, UITableViewDataSource {
         }
         else if let diagramItem = item as? ConceptDetailDiagramItem {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ConceptDetailDiagramTableViewCell") as! ConceptDetailDiagramTableViewCell
-            cell.diagramView.image = UIImage(named: "TestDiagram")
+            cell.diagramView.image = UIImage(named: diagramItem.diagramCode)
             return cell
         }
         else if let textItem = item as? ConceptDetailTextItem {
