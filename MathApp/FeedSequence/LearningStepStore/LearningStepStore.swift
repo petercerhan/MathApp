@@ -38,6 +38,13 @@ class LearningStepStoreImpl: LearningStepStore {
     
     init(learningStepExternalDataService: LearningStepExternalDataService) {
         self.learningStepExternalDataService = learningStepExternalDataService
+        
+        learningStep
+            .compactMap { $0.data }
+            .subscribe(onNext: { [unowned self] learningStep in
+                print("next learning step:\n\(learningStep)")
+            })
+            .disposed(by: disposeBag)
     }
     
     //MARK: - LearningStepStore Interface

@@ -79,9 +79,16 @@ class NewMaterialLearningStepStrategy: LearningStepStrategy {
             return transitionLearningStep()
         }
         
+        print("evaluate step for userConcept1: \(userConcept1.conceptID); second concept: \(userConcept2?.conceptID)")
+        
         if userConcept1.strength == 0 {
             newMaterialStateRepository.setFocus(concept1ID: userConcept1.conceptID, concept2ID: 0)
             return ConceptIntroLearningStep(userConcept: userConcept1)
+        }
+        
+        if userConcept1.strength == 1, userConcept2 == nil {
+            newMaterialStateRepository.setFocus(concept1ID: userConcept1.conceptID, concept2ID: 0)
+            return PracticeOneConceptLearningStep(userConcept: userConcept1)
         }
         
         if let nextStep = learningStepForContinuedTwoConceptPractice(userConcept1: userConcept1, concept2ID: userConcept2?.conceptID) {
@@ -139,7 +146,10 @@ class NewMaterialLearningStepStrategy: LearningStepStrategy {
     }
     
     private func learningStepForSecondStrength1(userConcept1: UserConcept) -> LearningStep? {
-        if userConcept1.strength == 1, let userConcept2 = userConcept2, userConcept2.strength == 1 {
+        if userConcept1.strength == 1,
+            let userConcept2 = userConcept2,
+            userConcept2.strength == 1
+        {
             return PracticeTwoConceptsLearningStep(userConcept1: userConcept1,
                                                    userConcept2: userConcept2)
         } else {

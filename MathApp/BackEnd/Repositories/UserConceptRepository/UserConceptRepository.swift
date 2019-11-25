@@ -30,11 +30,17 @@ class UserConceptRepositoryImpl: UserConceptRepository {
     //MARK: - UserConceptRepository Interface
     
     func list(conceptGroupID: Int) -> [UserConcept] {
+        
+        print("list with concept group: \(conceptGroupID)")
+        
         let query = Concept.table.join(UserConcept.table, on: UserConcept.column_conceptID == Concept.table[Concept.column_id])
                             .filter(Concept.column_conceptGroupID == Int64(conceptGroupID))
         let result: [UserConcept]? = try? databaseService.db.prepare(query).compactMap { row -> UserConcept? in
             return UserConcept.createFromQueryResult(row)
         }
+        
+        print("result: \(result!)")
+        
         return result ?? [UserConcept]()
     }
     

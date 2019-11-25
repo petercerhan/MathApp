@@ -36,6 +36,31 @@ class NewMaterialLearningStepStrategyTests: XCTestCase {
         XCTAssertEqual(mockNewMaterialStateRepository.setFocus_concept2ID.first, 0)
     }
     
+    func test_1RemainingConceptAtLevel1_shouldReturnSingleFocus() {
+        let stubUserConcepts = [UserConcept.createStub(id: 1, strength: 1)]
+        let strategy = composeSUT(stubUserConcepts: stubUserConcepts, focus1ID: 1, focus2ID: 0)
+        
+        let learningStep = strategy.nextLearningStep()
+        
+        guard let practiceStep = learningStep as? PracticeOneConceptLearningStep else {
+            XCTFail("Learning step is not practice one concept. Is type \(learningStep.self)")
+            return
+        }
+        XCTAssertEqual(practiceStep.userConcept.conceptID, 1)
+    }
+    
+    func test_1RemainingConceptAtLevel1_shouldSetFocusAs10() {
+        let mockNewMaterialStateRepository = FakeNewMaterialStateRepository()
+        let stubUserConcepts = [UserConcept.createStub(id: 1, strength: 1)]
+        let strategy = composeSUT(stubUserConcepts: stubUserConcepts, focus1ID: 1, focus2ID: 0, fakeNewMaterialStateRepository: mockNewMaterialStateRepository)
+
+        let _ = strategy.nextLearningStep()
+
+        XCTAssertEqual(mockNewMaterialStateRepository.setFocus_callCount, 1)
+        XCTAssertEqual(mockNewMaterialStateRepository.setFocus_concept1ID.first, 1)
+        XCTAssertEqual(mockNewMaterialStateRepository.setFocus_concept2ID.first, 0)
+    }
+    
     func test_scenario2_shouldReturnConceptIntro2() {
         let strategy = composeSUT(stubUserConcepts: userConceptsWithLevels(1, 0, 0, 0, 0), focus1ID: 0, focus2ID: 0)
         
