@@ -95,7 +95,7 @@ class ExerciseViewController: UIViewController {
     private func addQuestionLatexLabel() {
         questionTextFrame.addSubview(questionLatexLabel)
         questionLatexLabel.translatesAutoresizingMaskIntoConstraints = false
-        questionLatexLabel.leftAnchor.constraint(equalTo: questionLabel.rightAnchor).isActive = true
+        questionLatexLabel.leftAnchor.constraint(equalTo: questionLabel.rightAnchor, constant: 5.0).isActive = true
         questionLatexLabel.rightAnchor.constraint(equalTo: questionTextFrame.rightAnchor).isActive = true
         questionLatexLabel.centerYAnchor.constraint(equalTo: questionTextFrame.centerYAnchor).isActive = true
         questionLatexLabel.fontSize = 24.0
