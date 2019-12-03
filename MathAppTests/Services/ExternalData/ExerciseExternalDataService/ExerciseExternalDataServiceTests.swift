@@ -22,4 +22,14 @@ class ExerciseExternalDataServiceTests: XCTestCase {
         XCTAssertEqual(mockExerciseController.getExercises_conceptIDs_callCount, 1)
     }
     
+    func test_getExercise_shouldRequestExerciseFromController() {
+        let mockExerciseController = FakeExerciseController()
+        let eds = ExerciseExternalDataServiceImpl(exerciseController: mockExerciseController)
+        
+        let _ = eds.get(id: 2)
+        
+        XCTAssertEqual(mockExerciseController.getExercise_callCount, 1)
+        XCTAssertEqual(mockExerciseController.getExercise_id.first, 2)
+    }
+    
 }

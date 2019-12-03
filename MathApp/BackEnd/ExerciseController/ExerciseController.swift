@@ -10,6 +10,7 @@ import Foundation
 
 protocol ExerciseController {
     func getExercises(conceptIDs: [Int]) -> [Exercise]
+    func getExercise(id: Int) -> Exercise?
 }
 
 class ExerciseControllerImpl: ExerciseController {
@@ -18,14 +19,17 @@ class ExerciseControllerImpl: ExerciseController {
     
     private let userRepository: UserRepository
     private let exerciseStrategyFactory: ExerciseStrategyFactory
+    private let exerciseRepository: ExerciseRepository
     
     //MARK: - Initialization
     
     init(userRepository: UserRepository,
-         exerciseStrategyFactory: ExerciseStrategyFactory)
+         exerciseStrategyFactory: ExerciseStrategyFactory,
+         exerciseRepository: ExerciseRepository)
     {
         self.userRepository = userRepository
         self.exerciseStrategyFactory = exerciseStrategyFactory
+        self.exerciseRepository = exerciseRepository
     }
     
     //MARK: - ExerciseController Interface
@@ -33,6 +37,10 @@ class ExerciseControllerImpl: ExerciseController {
     func getExercises(conceptIDs: [Int]) -> [Exercise] {
         let strategy = exerciseStrategyFactory.createStrategy(learningStrategy: .newMaterial)
         return strategy.getExercises(conceptIDs: conceptIDs)
+    }
+    
+    func getExercise(id: Int) -> Exercise? {
+        return exerciseRepository.get(id: id)
     }
     
 }

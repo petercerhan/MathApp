@@ -468,6 +468,34 @@ class FeedCoordinatorTests: XCTestCase {
         XCTAssertEqual(mockExerciseStore.refresh_callCount, 1)
     }
     
+    //MARK: - Show Exercise
+    
+    func test_showExerciseByID_shouldFetchExercise() {
+        let mockExerciseEDS = FakeExerciseExternalDataService()
+        mockExerciseEDS.stubExercise = Exercise.exercise2
+        let coordinator = composeSUT(stubLearningStep: conceptIntroLS1, fakeExerciseEDS: mockExerciseEDS)
+        
+        coordinator.start()
+        coordinator.loadExercise(TestMenuCoordinator(), withID: 2)
+        
+        XCTAssertEqual(mockExerciseEDS.get_callCount, 1)
+    }
+    
+    func test_showExerciseByID_shouldShowExerciseScene() {
+        let mockContainerVC = FakeContainerViewController()
+        let stubExerciseEDS = FakeExerciseExternalDataService()
+        stubExerciseEDS.stubExercise = Exercise.exercise2
+        let coordinator = composeSUT(fakeContainerViewController: mockContainerVC,
+                                     stubLearningStep: conceptIntroLS1,
+                                     fakeExerciseEDS: stubExerciseEDS)
+        
+        coordinator.start()
+        coordinator.loadExercise(TestMenuCoordinator(), withID: 2)
+        
+        XCTAssertEqual(mockContainerVC.show_callCount, 2)
+        mockContainerVC.verifyDidShow(viewControllerType: ExerciseViewController.self)
+    }
+    
     
     //MARK: - SUT Composition
     
@@ -479,7 +507,8 @@ class FeedCoordinatorTests: XCTestCase {
                     stubPracticeConcepts: [Int]? = nil,
                     stubExercises: [Exercise]? = nil,
                     stubProgressState: ProgressState? = nil,
-                    fakeUserConceptEDS: FakeUserConceptExternalDataService? = nil) -> FeedCoordinator {
+                    fakeUserConceptEDS: FakeUserConceptExternalDataService? = nil,
+                    fakeExerciseEDS: FakeExerciseExternalDataService? = nil) -> FeedCoordinator {
         
         let containerVC = fakeContainerViewController ?? FakeContainerViewController()
         
@@ -507,6 +536,7 @@ class FeedCoordinatorTests: XCTestCase {
         }
         
         let userConceptEDS = fakeUserConceptEDS ?? FakeUserConceptExternalDataService()
+        let exerciseEDS = fakeExerciseEDS ?? FakeExerciseExternalDataService()
         
         return FeedCoordinator(composer: FeedComposer_DeadLoadScene(resultsStore: resultsStore),
                                globalComposer: GlobalComposer(),
@@ -515,7 +545,8 @@ class FeedCoordinatorTests: XCTestCase {
                                    resultsStore: resultsStore,
                                    learningStepStore: learningStepStore,
                                    exercisesStore: exercisesStore,
-                                   userConceptEDS: userConceptEDS)
+                                   userConceptEDS: userConceptEDS,
+                                   exerciseEDS: exerciseEDS)
     }
     
     //MARK: - Stubs

@@ -18,7 +18,11 @@ class FakeExerciseRepository: ExerciseRepository {
         return []
     }
     
+    
+    var get_callCount = 0
+    
     func get(id: Int) -> Exercise? {
+        get_callCount += 1
         return nil
     }
     

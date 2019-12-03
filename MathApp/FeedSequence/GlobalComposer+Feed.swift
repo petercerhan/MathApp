@@ -15,15 +15,18 @@ extension GlobalComposer {
         let exercisesStore = FeedExercisesStoreImpl(exerciseExternalDataService: ExerciseExternalDataServiceImpl(exerciseController: exerciseController))
         let containerVM = FeedContainerViewModel(delegate: nil, resultsStore: resultsStore)
         let userConceptEDS = UserConceptExternalDataServiceImpl(userConceptController: userConceptController)
+        let exerciseEDS = ExerciseExternalDataServiceImpl(exerciseController: exerciseController)
+        
         let composer = FeedComposer(resultsStore: resultsStore)
         return FeedCoordinator(composer: composer,
                                globalComposer: self,
                                containerVC: FeedContainerViewController(viewModel: containerVM),
-                                   randomizationService: RandomizationServiceImpl(),
-                                   resultsStore: resultsStore,
-                                   learningStepStore: learningStepStore,
-                                   exercisesStore: exercisesStore,
-                                   userConceptEDS: userConceptEDS)
+                               randomizationService: RandomizationServiceImpl(),
+                               resultsStore: resultsStore,
+                               learningStepStore: learningStepStore,
+                               exercisesStore: exercisesStore,
+                               userConceptEDS: userConceptEDS,
+                               exerciseEDS: exerciseEDS)
     }
     
 }

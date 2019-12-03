@@ -78,9 +78,7 @@ class NewMaterialLearningStepStrategy: LearningStepStrategy {
         guard let userConcept1 = userConcept1 else {
             return transitionLearningStep()
         }
-        
-        print("evaluate step for userConcept1: \(userConcept1.conceptID); second concept: \(userConcept2?.conceptID)")
-        
+
         if userConcept1.strength == 0 {
             newMaterialStateRepository.setFocus(concept1ID: userConcept1.conceptID, concept2ID: 0)
             return ConceptIntroLearningStep(userConcept: userConcept1)

@@ -14,20 +14,38 @@ class ExerciseControllerTests: XCTestCase {
     
     func test_getExercises_shouldRequestExercisesStrategyFromFactory() {
         let mockExerciseStrategyFactory = FakeExerciseStrategyFactory()
-        let controller = ExerciseControllerImpl(userRepository: FakeUserRepository(), exerciseStrategyFactory: mockExerciseStrategyFactory)
+        let controller = composeSUT(fakeExerciseStrategyFactory: mockExerciseStrategyFactory)
         
         let _ = controller.getExercises(conceptIDs: [1])
         
         XCTAssertEqual(mockExerciseStrategyFactory.createStrategy_callCount, 1)
     }
     
-    func test_getExercisesWithIDs_shouldRequestExercisesStrategyFromFactory() {
+    func test_getExercisesWithConceptIDs_shouldRequestExercisesStrategyFromFactory() {
         let mockExerciseStrategyFactory = FakeExerciseStrategyFactory()
-        let controller = ExerciseControllerImpl(userRepository: FakeUserRepository(), exerciseStrategyFactory: mockExerciseStrategyFactory)
+        let controller = composeSUT(fakeExerciseStrategyFactory: mockExerciseStrategyFactory)
         
         let _ = controller.getExercises(conceptIDs: [1,2])
         
         XCTAssertEqual(mockExerciseStrategyFactory.createStrategy_callCount, 1)
+    }
+    
+    func test_getExerciseByID_shouldGetExerciseFromRepository() {
+        let mockRepository = FakeExerciseRepository()
+        let controller = composeSUT(fakeExerciseRepository: mockRepository)
+        
+        let _ = controller.getExercise(id: 1)
+        
+        XCTAssertEqual(mockRepository.get_callCount, 1)
+    }
+    
+    private func composeSUT(fakeUserRepository: FakeUserRepository = FakeUserRepository(),
+                            fakeExerciseStrategyFactory: FakeExerciseStrategyFactory = FakeExerciseStrategyFactory(),
+                            fakeExerciseRepository: FakeExerciseRepository = FakeExerciseRepository()) -> ExerciseController
+    {
+        return ExerciseControllerImpl(userRepository: fakeUserRepository,
+                                      exerciseStrategyFactory: fakeExerciseStrategyFactory,
+                                      exerciseRepository: fakeExerciseRepository)
     }
     
 }

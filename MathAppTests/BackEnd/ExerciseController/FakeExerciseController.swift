@@ -17,4 +17,14 @@ class FakeExerciseController: ExerciseController {
         getExercises_conceptIDs_callCount += 1
         return []
     }
+    
+    var getExercise_callCount = 0
+    var getExercise_id = [Int]()
+    
+    func getExercise(id: Int) -> Exercise? {
+        getExercise_callCount += 1
+        getExercise_id.append(id)
+        return nil
+    }
+    
 }

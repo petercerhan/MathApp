@@ -21,6 +21,7 @@ class FeedCoordinator: Coordinator {
     private let learningStepStore: LearningStepStore
     private let exercisesStore: FeedExercisesStore
     private let userConceptEDS: UserConceptExternalDataService
+    private let exerciseEDS: ExerciseExternalDataService
     
     //MARK: - State
     
@@ -40,7 +41,8 @@ class FeedCoordinator: Coordinator {
          resultsStore: ResultsStore,
          learningStepStore: LearningStepStore,
          exercisesStore: FeedExercisesStore,
-         userConceptEDS: UserConceptExternalDataService)
+         userConceptEDS: UserConceptExternalDataService,
+         exerciseEDS: ExerciseExternalDataService)
     {
         self.composer = composer
         self.globalComposer = globalComposer
@@ -50,6 +52,7 @@ class FeedCoordinator: Coordinator {
         self.learningStepStore = learningStepStore
         self.exercisesStore = exercisesStore
         self.userConceptEDS = userConceptEDS
+        self.exerciseEDS = exerciseEDS
         
         if let feedContainer = containerVC as? FeedContainerViewController {
             feedContainer.viewModel.setDelegate(self)
@@ -318,13 +321,20 @@ extension FeedCoordinator: MenuCoordinatorDelegate {
     }
     
     func loadExercise(_ menuCoordinator: MenuCoordinator, withID id: Int) {
-//        feedPackageExternalDataService.getExercise(id: id)
-//            .observeOn(MainScheduler.instance)
-//            .subscribe(onNext: { [unowned self] exercise in
-//                self.containerVC.dismissModal()
-//                self.showExerciseScene(exercise, animation: .fadeIn)
-//            })
-//            .disposed(by: disposeBag)
+        exerciseEDS.get(id: id)
+            .take(1)
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] exercise in
+                if let exercise = exercise {
+                    self.showCustomLoadedExercise(exercise: exercise)
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func showCustomLoadedExercise(exercise: Exercise) {
+        let vc = composeExerciseScene(forExercise: exercise)
+        containerVC.show(viewController: vc, animation: .fadeIn)
     }
 }
 

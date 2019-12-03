@@ -36,7 +36,9 @@ class GlobalComposer {
                                                               exerciseRepository: exerciseRepository)
         
         let exerciseStrategyFactory = ExerciseStrategyFactoryImpl(exerciseSetCalculator: exerciseSetCalculator, newMaterialStateRepository: newMaterialStateRepository)
-        return ExerciseControllerImpl(userRepository: userRepository, exerciseStrategyFactory: exerciseStrategyFactory)
+        return ExerciseControllerImpl(userRepository: userRepository,
+                                      exerciseStrategyFactory: exerciseStrategyFactory,
+                                      exerciseRepository: exerciseRepository)
     }()
     
     private(set) lazy var userConceptController: UserConceptController = {

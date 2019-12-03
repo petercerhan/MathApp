@@ -11,7 +11,7 @@ import RxSwift
 @testable import MathApp
 
 class FakeExerciseExternalDataService: ExerciseExternalDataService {
-
+    
     var stub_exercises = [Exercise]()
     
     var getNext_callCount = 0
@@ -22,5 +22,15 @@ class FakeExerciseExternalDataService: ExerciseExternalDataService {
         getNext_conceptIDs.append(conceptIDs)
         return Observable.just(stub_exercises)
     }
+    
+    var stubExercise: Exercise? = nil
+    var get_callCount = 0
+    
+    func get(id: Int) -> Observable<Exercise?> {
+        get_callCount += 1
+        return Observable.just(stubExercise)
+    }
+    
+
     
 }
