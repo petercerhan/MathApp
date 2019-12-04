@@ -11,6 +11,7 @@ import SQLite
 
 protocol UserConceptRepository {
     func list(conceptGroupID: Int) -> [UserConcept]
+    func list(chapterID: Int) -> [UserConcept]
     func get(conceptID: Int) -> UserConcept?
     func set(id: Int, fields: [String: String])
 }
@@ -30,16 +31,24 @@ class UserConceptRepositoryImpl: UserConceptRepository {
     //MARK: - UserConceptRepository Interface
     
     func list(conceptGroupID: Int) -> [UserConcept] {
-        
-        print("list with concept group: \(conceptGroupID)")
-        
         let query = Concept.table.join(UserConcept.table, on: UserConcept.column_conceptID == Concept.table[Concept.column_id])
                             .filter(Concept.column_conceptGroupID == Int64(conceptGroupID))
         let result: [UserConcept]? = try? databaseService.db.prepare(query).compactMap { row -> UserConcept? in
             return UserConcept.createFromQueryResult(row)
         }
         
-        print("result: \(result!)")
+        return result ?? [UserConcept]()
+    }
+    
+    func list(chapterID: Int) -> [UserConcept] {
+        let query = Concept.table
+                            .join(UserConcept.table, on: UserConcept.column_conceptID == Concept.table[Concept.column_id])
+                            .join(ConceptGroup.table, on: ConceptGroup.table[ConceptGroup.column_id] == Concept.column_conceptGroupID)
+                            .filter(ConceptGroup.column_chapterID == Int64(chapterID))
+
+        let result: [UserConcept]? = try? databaseService.db.prepare(query).compactMap { row -> UserConcept? in
+            return UserConcept.createFromQueryResult(row)
+        }
         
         return result ?? [UserConcept]()
     }

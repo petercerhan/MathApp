@@ -7,9 +7,18 @@
 //
 
 import Foundation
+import RxSwift
 @testable import MathApp
 
 class FakeUserConceptExternalDataService: UserConceptExternalDataService {
+    
+    var stubUserConcepts = [UserConcept]()
+    var list_chapterID_callCount = 0
+    
+    func list(chapterID: Int) -> Observable<[UserConcept]> {
+        list_chapterID_callCount += 1
+        return Observable.just(stubUserConcepts)
+    }
 
     var update_callCount = 0
     var update_id = [Int]()

@@ -21,5 +21,13 @@ class UserConceptControllerTests: XCTestCase {
         XCTAssertEqual(mockUserConceptRepository.set_callCount, 1)
     }
     
+    func test_listByChapter_shouldRequestListByChapter() {
+        let mockUserConceptRepository = FakeUserConceptRepository()
+        let userConceptController = UserConceptControllerImpl(userConceptRepository: mockUserConceptRepository)
+        
+        let _ = userConceptController.list(chapterID: 1)
+        
+        XCTAssertEqual(mockUserConceptRepository.list_chapterID_callCount, 1)
+    }
     
 }

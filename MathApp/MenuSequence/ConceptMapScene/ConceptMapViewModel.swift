@@ -23,20 +23,26 @@ class ConceptMapViewModel {
     
     private weak var delegate: ConceptMapViewModelDelegate?
     private let databaseService: DatabaseService
+    private let userConceptEDS: UserConceptExternalDataService
     
     //MARK: - Initialization
     
-    init(delegate: ConceptMapViewModelDelegate, databaseService: DatabaseService) {
+    init(delegate: ConceptMapViewModelDelegate, databaseService: DatabaseService, userConceptEDS: UserConceptExternalDataService) {
         self.delegate = delegate
         self.databaseService = databaseService
+        self.userConceptEDS = userConceptEDS
     }
     
     //MARK: - ConceptMapViewModel Interface
     
     private(set) lazy var conceptMapElements: Observable<[ConceptMapElement]> = {
-        let userConcepts = databaseService.getUserConcepts()
-        let elements = userConcepts.map { ConceptMapElement(name: $0.concept.name, strength: $0.strength) }
-        return Observable.just(elements)
+//        let userConcepts = databaseService.getUserConcepts()
+        userConceptEDS.list(chapterID: 2)
+            .map { $0.map { ConceptMapElement(name: $0.concept.name, strength: $0.strength) } }
+            .share(replay: 1)
+
+//        let elements = userConcepts.map { ConceptMapElement(name: $0.concept.name, strength: $0.strength) }
+//        return Observable.just(elements)
     }()
     
     func dispatch(action: ConceptMapAction) {

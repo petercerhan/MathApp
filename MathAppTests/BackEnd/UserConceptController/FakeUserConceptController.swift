@@ -11,6 +11,13 @@ import Foundation
 
 class FakeUserConceptController: UserConceptController {
     
+    var list_chapterID_callCount = 0
+    
+    func list(chapterID: Int) -> [UserConcept] {
+        list_chapterID_callCount += 1
+        return []
+    }
+    
     var update_callCount = 0
     
     func update(id: Int, fields: [String: String]) {

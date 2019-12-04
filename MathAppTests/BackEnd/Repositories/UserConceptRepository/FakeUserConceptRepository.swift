@@ -17,6 +17,14 @@ class FakeUserConceptRepository: UserConceptRepository {
         return list_stubUserConcepts
     }
     
+    var list_chapterID_callCount = 0
+    
+    func list(chapterID: Int) -> [UserConcept] {
+        list_chapterID_callCount += 1
+        return list_stubUserConcepts
+    }
+    
+    
     func get(conceptID: Int) -> UserConcept? {
         return nil
     }

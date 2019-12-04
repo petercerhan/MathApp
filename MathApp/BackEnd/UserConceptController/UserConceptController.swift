@@ -10,6 +10,7 @@ import Foundation
 
 protocol UserConceptController {
     func update(id: Int, fields: [String: String])
+    func list(chapterID: Int) -> [UserConcept]
 }
 
 class UserConceptControllerImpl: UserConceptController {
@@ -28,6 +29,10 @@ class UserConceptControllerImpl: UserConceptController {
     
     func update(id: Int, fields: [String: String]) {
         userConceptRepository.set(id: id, fields: fields)
+    }
+    
+    func list(chapterID: Int) -> [UserConcept] {
+        return userConceptRepository.list(chapterID: chapterID)
     }
     
 }

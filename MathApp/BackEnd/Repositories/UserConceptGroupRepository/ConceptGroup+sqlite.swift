@@ -14,6 +14,7 @@ extension ConceptGroup {
     
     static let column_id = Expression<Int64>("id")
     static let column_name = Expression<String>("name")
+    static let column_chapterID = Expression<Int64>("chapter")
     
     static func createFromQueryResult(_ row: Row) -> ConceptGroup? {
         let tableName = ConceptGroup.table

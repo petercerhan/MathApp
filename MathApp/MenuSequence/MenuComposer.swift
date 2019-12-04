@@ -29,8 +29,9 @@ class MenuComposer {
     }
     
     func composeConceptMapScene(delegate: ConceptMapViewModelDelegate) -> UIViewController {
+        let userConceptEDS = UserConceptExternalDataServiceImpl(userConceptController: globalComposer.userConceptController)
         let vm = ConceptMapViewModel(delegate: delegate,
-                                     databaseService: globalComposer.databaseService)
+                                     databaseService: globalComposer.databaseService, userConceptEDS: userConceptEDS)
         return ConceptMapViewController(viewModel: vm)
     }
     

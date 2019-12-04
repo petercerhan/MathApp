@@ -30,6 +30,15 @@ class ConceptMapSceneTests: XCTestCase {
         XCTAssertNotNil(vc.tableView.dataSource)
     }
     
+    func test_sceneComposed_shouldRequestUserConceptsByChapter() {
+        let mockUserConceptEDS = FakeUserConceptExternalDataService()
+        let vc = composeSUT(fakeUserConceptEDS: mockUserConceptEDS)
+        
+        vc.loadViewIfNeeded()
+        
+        XCTAssertEqual(mockUserConceptEDS.list_chapterID_callCount, 1)
+    }
+    
     func test_oneConcept_shouldDisplayOneConcept() {
         let stubData = [UserConcept(id: 1, concept: Concept.constantRule, strength: 1)]
         let vc = composeSUT(stubUserConcepts: stubData)
@@ -53,12 +62,22 @@ class ConceptMapSceneTests: XCTestCase {
     
     //MARK: - SUT Composition
     
-    func composeSUT(fakeDelegate: ConceptMapViewModelDelegate? = nil, stubUserConcepts: [UserConcept]? = nil) -> ConceptMapViewController {
+    func composeSUT(fakeDelegate: ConceptMapViewModelDelegate? = nil,
+                    fakeUserConceptEDS: FakeUserConceptExternalDataService? = nil,
+                    stubUserConcepts: [UserConcept]? = nil) -> ConceptMapViewController
+    {
         let delegate = fakeDelegate ?? FakeConceptMapViewModelDelegate()
+        
+        let userConceptEDS = fakeUserConceptEDS ?? FakeUserConceptExternalDataService()
+        if let stubUserConcepts = stubUserConcepts {
+            userConceptEDS.stubUserConcepts = stubUserConcepts
+        }
+        
         let userConcepts = stubUserConcepts ?? [UserConcept(id: 1, concept: Concept.constantRule, strength: 1)]
         let databaseService = FakeDatabaseService()
         databaseService.stubUserConcepts = userConcepts
-        let vm = ConceptMapViewModel(delegate: delegate, databaseService: databaseService)
+        
+        let vm = ConceptMapViewModel(delegate: delegate, databaseService: databaseService, userConceptEDS: userConceptEDS)
         return ConceptMapViewController(viewModel: vm)
     }
     
