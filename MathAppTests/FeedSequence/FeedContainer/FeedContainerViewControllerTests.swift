@@ -19,16 +19,6 @@ class FeedContainerViewControllerTests: XCTestCase {
         vc.loadViewIfNeeded()
         
         XCTAssertNotNil(vc.menuButton)
-        XCTAssertNotNil(vc.pointsLabel)
-    }
-    
-    func test_correctDisplay_1CorrectAnswer_shows1Correct() {
-        let stubStore = stubStore_oneCorrect()
-        let vc = composeSUT(fakeStore: stubStore)
-        
-        vc.loadViewIfNeeded()
-        
-        XCTAssertEqual(vc.pointsLabel.text, "1")
     }
     
     func test_menuPressed_requestsMenu() {
@@ -41,13 +31,39 @@ class FeedContainerViewControllerTests: XCTestCase {
         XCTAssertEqual(mockDelegate.menu_callCount, 1)
     }
     
+    func test_progressState3of5_shouldShow60PercentProgress() {
+        let mockResultsStore = FakeResultsStore()
+        mockResultsStore.progressState = Observable.just(ProgressState(required: 5, correct: 3))
+        let vc = composeSUT(fakeStore: mockResultsStore)
+        
+        vc.loadViewIfNeeded()
+        
+        XCTAssertEqual(roundToTwoDigits(vc.progressWidth.multiplier), 0.60)
+    }
+    
+    func test_progressState5of5_shouldShow0PercentProgress() {
+        let mockResultsStore = FakeResultsStore()
+        mockResultsStore.progressState = Observable.just(ProgressState(required: 5, correct: 5))
+        let vc = composeSUT(fakeStore: mockResultsStore)
+        
+        vc.loadViewIfNeeded()
+        
+        XCTAssertEqual(roundToTwoDigits(vc.progressWidth.multiplier), 1.0)
+    }
+    
+    private func roundToTwoDigits(_ number: CGFloat) -> Double {
+        print("round number \(number)")
+        
+        return round(Double(number) * 100) / 100
+    }
+    
     //MARK: - SUT Composition
     
     func composeSUT(fakeDelegate: FakeFeedContainerViewModelDelegate? = nil, fakeStore: ResultsStore? = nil) -> FeedContainerViewController {
         let delegate = fakeDelegate ?? FakeFeedContainerViewModelDelegate()
         let resultsStore = fakeStore ?? FakeResultsStore()
         let vm = FeedContainerViewModel(delegate: delegate, resultsStore: resultsStore)
-        return FeedContainerViewController(viewModel: vm)
+        return FeedContainerViewController(viewModel: vm, resultsStore: resultsStore)
     }
     
     func stubStore_oneCorrect() -> ResultsStore {

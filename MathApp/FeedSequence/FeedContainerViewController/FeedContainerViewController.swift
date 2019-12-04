@@ -15,12 +15,16 @@ class FeedContainerViewController: ContainerViewController {
     //MARK: - Dependencies
     
     let viewModel: FeedContainerViewModel
+    private let resultsStore: ResultsStore
     
     //MARK: - UI Components
     
     @IBOutlet private(set) var containerContentView: UIView!
     @IBOutlet private(set) var menuButton: UIButton!
-    @IBOutlet private(set) var pointsLabel: UILabel!
+    @IBOutlet private(set) var progressView: UIView!
+    @IBOutlet private(set) var progressViewOutline: UIView!
+    
+    @IBOutlet private(set) var progressWidth: NSLayoutConstraint!
     
     override var contentView: UIView {
         return containerContentView
@@ -32,8 +36,9 @@ class FeedContainerViewController: ContainerViewController {
     
     //MARK: - Initialization
     
-    init(viewModel: FeedContainerViewModel) {
+    init(viewModel: FeedContainerViewModel, resultsStore: ResultsStore) {
         self.viewModel = viewModel
+        self.resultsStore = resultsStore
         super.init(nibName: "FeedContainerViewController", bundle: nil)
     }
     
@@ -45,16 +50,54 @@ class FeedContainerViewController: ContainerViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureUI()
         bindUI()
         bindActions()
     }
-
+    
+    private func configureUI() {
+        progressView.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
     private func bindUI() {
-        viewModel.points
+        viewModel.progressRatio
+            .take(1)
             .observeOn(MainScheduler.instance)
-            .map { "\($0)" }
-            .bind(to: pointsLabel.rx.text)
+            .subscribe(onNext: { [unowned self] progressRatio in
+                self.updateProgressView(progressRatio: progressRatio)
+            })
             .disposed(by: disposeBag)
+        
+        viewModel.progressRatio
+            .skip(1)
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] progressRatio in
+                self.updateProgressViewAnimated(progressRatio: progressRatio)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func updateProgressView(progressRatio: Double) {
+        progressWidth.isActive = false
+        progressWidth = progressView.widthAnchor.constraint(equalTo: progressViewOutline.widthAnchor, multiplier: CGFloat(progressRatio))
+        progressWidth.isActive = true
+    }
+    
+    private func updateProgressViewAnimated(progressRatio: Double) {
+        let priorRatio = Double(progressWidth.multiplier)
+        
+        progressWidth.isActive = false
+        
+        progressWidth = progressView.widthAnchor.constraint(equalTo: progressViewOutline.widthAnchor, multiplier: CGFloat(progressRatio))
+        progressWidth.isActive = true
+        
+        if priorRatio == 1, progressRatio == 0 {
+            return
+        }
+        
+        UIView.animate(withDuration: 0.25) { [unowned self] in
+            self.view.layoutIfNeeded()
+        }
     }
     
     private func bindActions() {

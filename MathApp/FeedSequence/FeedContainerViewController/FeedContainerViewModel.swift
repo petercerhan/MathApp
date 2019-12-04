@@ -33,6 +33,18 @@ class FeedContainerViewModel {
     
     //MARK: - FeedContainerViewModel Interface
     
+    private(set) lazy var progressRatio: Observable<Double> = {
+        resultsStore.progressState
+            .map { progressState -> Double in
+                if progressState.required == 0 {
+                    return 0
+                } else {
+                    return Double(progressState.correct) / Double(progressState.required)
+                }
+            }
+            .share(replay: 1)
+    }()
+    
     private(set) lazy var points: Observable<Int> = {
         resultsStore.points
             .share(replay: 1)

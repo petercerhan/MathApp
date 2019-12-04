@@ -20,7 +20,7 @@ extension GlobalComposer {
         let composer = FeedComposer(resultsStore: resultsStore)
         return FeedCoordinator(composer: composer,
                                globalComposer: self,
-                               containerVC: FeedContainerViewController(viewModel: containerVM),
+                               containerVC: FeedContainerViewController(viewModel: containerVM, resultsStore: resultsStore),
                                randomizationService: RandomizationServiceImpl(),
                                resultsStore: resultsStore,
                                learningStepStore: learningStepStore,
