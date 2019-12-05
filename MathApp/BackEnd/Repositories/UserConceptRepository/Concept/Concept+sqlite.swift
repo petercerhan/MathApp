@@ -28,12 +28,14 @@ extension Concept {
         let concept_rule = row[tableName[Concept.column_rule]]
         let concept_example = row[tableName[Concept.column_example]]
         let concept_maxDifficulty = row[tableName[Concept.column_maxDifficulty]]
+        let concept_groupID = row[tableName[Concept.column_conceptGroupID]]
         
         return Concept(id: Int(concept_id),
                        name: concept_name,
                        description: concept_description,
                        rule: concept_rule,
                        example: concept_example,
-                       maxDifficulty: Int(concept_maxDifficulty))
+                       maxDifficulty: Int(concept_maxDifficulty),
+                       groupID: Int(concept_groupID))
     }
 }

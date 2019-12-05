@@ -39,42 +39,45 @@ class ConceptMapSceneTests: XCTestCase {
         XCTAssertEqual(mockUserConceptEDS.list_chapterID_callCount, 1)
     }
     
-//    func test_sceneComposed_shouldRequestUserConceptGroupsByChapter() {
-//        let mockUserConceptGroupEDS = FakeUserConceptGroupExternalDataService()
-//        let vc = composeSUT(fakeUserConceptGroupEDS: mockUserConceptGroupEDS)
-//        
-//        vc.loadViewIfNeeded()
-//        
-//        XCTAssertEqual(mockUserConceptGroupEDS.listByChapter_callCount, 1)
-//    }
-    
-    func test_oneConcept_shouldDisplayOneConcept() {
-        let stubData = [UserConcept(id: 1, concept: Concept.constantRule, strength: 1)]
-        let vc = composeSUT(stubUserConcepts: stubData)
+    func test_sceneComposed_shouldRequestUserConceptGroupsByChapter() {
+        let mockUserConceptGroupEDS = FakeUserConceptGroupExternalDataService()
+        let vc = composeSUT(fakeUserConceptGroupEDS: mockUserConceptGroupEDS)
         
         vc.loadViewIfNeeded()
         
-        XCTAssertEqual(vc.tableView.dataSource?.tableView(vc.tableView, numberOfRowsInSection: 0), 1)
-        ConceptMapTableViewCell.assertCellAtRow(0, inTable: vc.tableView, containsConceptNamed: "Constant Rule", strength: 1)
+        XCTAssertEqual(mockUserConceptGroupEDS.listByChapter_callCount, 1)
     }
     
-    func test_twoConcepts_shouldDisplayTwoConcepts() {
-        let stubData = [UserConcept(id: 1, concept: Concept.constantRule, strength: 1),
-                        UserConcept(id: 2, concept: Concept.linearRule, strength: 2)]
-        let vc = composeSUT(stubUserConcepts: stubData)
+    func test_oneConceptOneGroup_shouldDisplayOneConceptOneGroup() {
+        let stubConcepts = [UserConcept(id: 1, concept: Concept.constantRule, strength: 1)]
+        let stubGroups = [UserConceptGroup.createStub(id: 1, conceptGroupID: 1, completed: false)]
+        let vc = composeSUT(stubUserConcepts: stubConcepts, stubUserConceptGroups: stubGroups)
         
         vc.loadViewIfNeeded()
         
         XCTAssertEqual(vc.tableView.dataSource?.tableView(vc.tableView, numberOfRowsInSection: 0), 2)
-        ConceptMapTableViewCell.assertCellAtRow(1, inTable: vc.tableView, containsConceptNamed: "Linear Rule", strength: 2)
+        ConceptGroupTableViewCell.assertCellAtRow(0, inTable: vc.tableView, showsName: "Derivatives")
+        ConceptTableViewCell.assertCellAtRow(1, inTable: vc.tableView, showsName: "Constant Rule")
     }
+    
+//    func test_twoConcepts_shouldDisplayTwoConcepts() {
+//        let stubConcepts = [UserConcept(id: 1, concept: Concept.constantRule, strength: 1),
+//                            UserConcept(id: 2, concept: Concept.linearRule, strength: 2)]
+//        let vc = composeSUT(stubUserConcepts: stubConcepts)
+//
+//        vc.loadViewIfNeeded()
+//
+//        XCTAssertEqual(vc.tableView.dataSource?.tableView(vc.tableView, numberOfRowsInSection: 0), 2)
+//        ConceptMapTableViewCell.assertCellAtRow(1, inTable: vc.tableView, containsConceptNamed: "Linear Rule", strength: 2)
+//    }
     
     //MARK: - SUT Composition
     
     func composeSUT(fakeDelegate: ConceptMapViewModelDelegate? = nil,
                     fakeUserConceptEDS: FakeUserConceptExternalDataService? = nil,
                     fakeUserConceptGroupEDS: FakeUserConceptGroupExternalDataService? = nil,
-                    stubUserConcepts: [UserConcept]? = nil) -> ConceptMapViewController
+                    stubUserConcepts: [UserConcept]? = nil,
+                    stubUserConceptGroups: [UserConceptGroup] = []) -> ConceptMapViewController
     {
         let delegate = fakeDelegate ?? FakeConceptMapViewModelDelegate()
         
@@ -83,6 +86,7 @@ class ConceptMapSceneTests: XCTestCase {
         userConceptEDS.stubUserConcepts = userConcepts
         
         let userConceptGroupEDS = fakeUserConceptGroupEDS ?? FakeUserConceptGroupExternalDataService()
+        userConceptGroupEDS.stubUserConceptGroups = stubUserConceptGroups
         
         let vm = ConceptMapViewModel(delegate: delegate,
                                      userConceptEDS: userConceptEDS,

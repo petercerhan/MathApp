@@ -64,6 +64,15 @@
 		6E7C20DC23988D9C0057F191 /* UserConceptGroupExternalDataServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7C20DB23988D9C0057F191 /* UserConceptGroupExternalDataServiceTests.swift */; };
 		6E7C20DE23988DDC0057F191 /* FakeUserConceptGroupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7C20DD23988DDC0057F191 /* FakeUserConceptGroupController.swift */; };
 		6E7C20E023988EF00057F191 /* FakeUserConceptGroupExternalDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7C20DF23988EF00057F191 /* FakeUserConceptGroupExternalDataService.swift */; };
+		6E7C20E423989B060057F191 /* ConceptTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7C20E223989B060057F191 /* ConceptTableViewCell.swift */; };
+		6E7C20E523989B060057F191 /* ConceptTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E7C20E323989B060057F191 /* ConceptTableViewCell.xib */; };
+		6E7C20E923989B290057F191 /* ConceptGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7C20E723989B290057F191 /* ConceptGroupTableViewCell.swift */; };
+		6E7C20EA23989B290057F191 /* ConceptGroupTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E7C20E823989B290057F191 /* ConceptGroupTableViewCell.xib */; };
+		6E7C20EC23989B580057F191 /* ConceptTableViewCell+utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7C20EB23989B580057F191 /* ConceptTableViewCell+utilities.swift */; };
+		6E7C20EE23989B9B0057F191 /* ConceptGroupTableViewCell+utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7C20ED23989B9B0057F191 /* ConceptGroupTableViewCell+utilities.swift */; };
+		6E7C20F223989FE80057F191 /* ConceptMapElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7C20F123989FE80057F191 /* ConceptMapElement.swift */; };
+		6E7C20F42398A00C0057F191 /* ContentConceptMapElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7C20F32398A00C0057F191 /* ContentConceptMapElement.swift */; };
+		6E7C20F62398A0240057F191 /* GroupConceptMapElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7C20F52398A0240057F191 /* GroupConceptMapElement.swift */; };
 		6E86B344236E489E002DCA62 /* DoubleLevelUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E86B342236E489E002DCA62 /* DoubleLevelUpViewController.swift */; };
 		6E86B345236E489E002DCA62 /* DoubleLevelUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E86B343236E489E002DCA62 /* DoubleLevelUpViewController.xib */; };
 		6E86B347236F6851002DCA62 /* DoubleLevelUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E86B346236F6851002DCA62 /* DoubleLevelUpViewModel.swift */; };
@@ -168,7 +177,7 @@
 		6EC667372324682A0048068C /* ConceptMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC667362324682A0048068C /* ConceptMapViewModel.swift */; };
 		6EC6673B232494170048068C /* ConceptMapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC66739232494170048068C /* ConceptMapTableViewCell.swift */; };
 		6EC6673C232494170048068C /* ConceptMapTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EC6673A232494170048068C /* ConceptMapTableViewCell.xib */; };
-		6EC6673E2324942A0048068C /* ConceptMapElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC6673D2324942A0048068C /* ConceptMapElement.swift */; };
+		6EC6673E2324942A0048068C /* ConceptMapElement_prior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC6673D2324942A0048068C /* ConceptMapElement_prior.swift */; };
 		6EC6674223249C300048068C /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC6674123249C300048068C /* DatabaseService.swift */; };
 		6EC6674723249D850048068C /* UserConcept.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC6674623249D850048068C /* UserConcept.swift */; };
 		6EC667492324A08D0048068C /* FakeDatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC667482324A08D0048068C /* FakeDatabaseService.swift */; };
@@ -323,6 +332,15 @@
 		6E7C20DB23988D9C0057F191 /* UserConceptGroupExternalDataServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserConceptGroupExternalDataServiceTests.swift; sourceTree = "<group>"; };
 		6E7C20DD23988DDC0057F191 /* FakeUserConceptGroupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeUserConceptGroupController.swift; sourceTree = "<group>"; };
 		6E7C20DF23988EF00057F191 /* FakeUserConceptGroupExternalDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeUserConceptGroupExternalDataService.swift; sourceTree = "<group>"; };
+		6E7C20E223989B060057F191 /* ConceptTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptTableViewCell.swift; sourceTree = "<group>"; };
+		6E7C20E323989B060057F191 /* ConceptTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConceptTableViewCell.xib; sourceTree = "<group>"; };
+		6E7C20E723989B290057F191 /* ConceptGroupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptGroupTableViewCell.swift; sourceTree = "<group>"; };
+		6E7C20E823989B290057F191 /* ConceptGroupTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConceptGroupTableViewCell.xib; sourceTree = "<group>"; };
+		6E7C20EB23989B580057F191 /* ConceptTableViewCell+utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConceptTableViewCell+utilities.swift"; sourceTree = "<group>"; };
+		6E7C20ED23989B9B0057F191 /* ConceptGroupTableViewCell+utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConceptGroupTableViewCell+utilities.swift"; sourceTree = "<group>"; };
+		6E7C20F123989FE80057F191 /* ConceptMapElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptMapElement.swift; sourceTree = "<group>"; };
+		6E7C20F32398A00C0057F191 /* ContentConceptMapElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentConceptMapElement.swift; sourceTree = "<group>"; };
+		6E7C20F52398A0240057F191 /* GroupConceptMapElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupConceptMapElement.swift; sourceTree = "<group>"; };
 		6E86B342236E489E002DCA62 /* DoubleLevelUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleLevelUpViewController.swift; sourceTree = "<group>"; };
 		6E86B343236E489E002DCA62 /* DoubleLevelUpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DoubleLevelUpViewController.xib; sourceTree = "<group>"; };
 		6E86B346236F6851002DCA62 /* DoubleLevelUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleLevelUpViewModel.swift; sourceTree = "<group>"; };
@@ -427,7 +445,7 @@
 		6EC667362324682A0048068C /* ConceptMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptMapViewModel.swift; sourceTree = "<group>"; };
 		6EC66739232494170048068C /* ConceptMapTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptMapTableViewCell.swift; sourceTree = "<group>"; };
 		6EC6673A232494170048068C /* ConceptMapTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConceptMapTableViewCell.xib; sourceTree = "<group>"; };
-		6EC6673D2324942A0048068C /* ConceptMapElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptMapElement.swift; sourceTree = "<group>"; };
+		6EC6673D2324942A0048068C /* ConceptMapElement_prior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptMapElement_prior.swift; sourceTree = "<group>"; };
 		6EC6674123249C300048068C /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
 		6EC6674623249D850048068C /* UserConcept.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserConcept.swift; sourceTree = "<group>"; };
 		6EC667482324A08D0048068C /* FakeDatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeDatabaseService.swift; sourceTree = "<group>"; };
@@ -808,6 +826,34 @@
 			path = UserConceptGroupExternalDataService;
 			sourceTree = "<group>";
 		};
+		6E7C20E123989AD30057F191 /* ConceptTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				6E7C20E223989B060057F191 /* ConceptTableViewCell.swift */,
+				6E7C20E323989B060057F191 /* ConceptTableViewCell.xib */,
+			);
+			path = ConceptTableViewCell;
+			sourceTree = "<group>";
+		};
+		6E7C20E623989B0A0057F191 /* ConceptGroupTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				6E7C20E723989B290057F191 /* ConceptGroupTableViewCell.swift */,
+				6E7C20E823989B290057F191 /* ConceptGroupTableViewCell.xib */,
+			);
+			path = ConceptGroupTableViewCell;
+			sourceTree = "<group>";
+		};
+		6E7C20F023989DD20057F191 /* ConceptMapElement */ = {
+			isa = PBXGroup;
+			children = (
+				6E7C20F123989FE80057F191 /* ConceptMapElement.swift */,
+				6E7C20F32398A00C0057F191 /* ContentConceptMapElement.swift */,
+				6E7C20F52398A0240057F191 /* GroupConceptMapElement.swift */,
+			);
+			path = ConceptMapElement;
+			sourceTree = "<group>";
+		};
 		6E84160A2329BD740035F381 /* Concept */ = {
 			isa = PBXGroup;
 			children = (
@@ -1052,6 +1098,7 @@
 			isa = PBXGroup;
 			children = (
 				6EB0FEFF235BF2A9005F23DE /* UserConceptRepository.swift */,
+				6E84160A2329BD740035F381 /* Concept */,
 				6EC6674623249D850048068C /* UserConcept.swift */,
 				6ECC41292328842A00E8F3E1 /* UserConcept+sqlite.swift */,
 				6ECC412B23288BC500E8F3E1 /* UserConcept+data.swift */,
@@ -1185,7 +1232,6 @@
 				6E86B34E236F9D91002DCA62 /* GlobalComposer+Feed.swift */,
 				6E86B350236F9E0E002DCA62 /* FeedComposer.swift */,
 				6E74FD4F231C87DA00730AEB /* FeedContainerViewController */,
-				6EBE4EA0230B663F0047A880 /* Models */,
 				6E927E7F231CA80700822EBA /* ResultsStore */,
 				6EAB211A23613865007186A4 /* FeedExercisesStore */,
 				6E3C9EF8235E7C4F00CD81C9 /* LearningStepStore */,
@@ -1230,14 +1276,6 @@
 				6E74FD3F2318A1F500730AEB /* FakeExerciseViewModelDelegate.swift */,
 			);
 			path = ExerciseScene;
-			sourceTree = "<group>";
-		};
-		6EBE4EA0230B663F0047A880 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				6E84160A2329BD740035F381 /* Concept */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		6EC666EC2321DF990048068C /* Styles */ = {
@@ -1346,6 +1384,9 @@
 				6EC6672D232464B20048068C /* ConceptMapViewController.swift */,
 				6EC667362324682A0048068C /* ConceptMapViewModel.swift */,
 				6EC6672E232464B20048068C /* ConceptMapViewController.xib */,
+				6E7C20F023989DD20057F191 /* ConceptMapElement */,
+				6E7C20E123989AD30057F191 /* ConceptTableViewCell */,
+				6E7C20E623989B0A0057F191 /* ConceptGroupTableViewCell */,
 				6EC66738232493F50048068C /* ConceptMapCell */,
 			);
 			path = ConceptMapScene;
@@ -1355,6 +1396,8 @@
 			isa = PBXGroup;
 			children = (
 				6EC667322324673F0048068C /* ConceptMapSceneTests.swift */,
+				6E7C20EB23989B580057F191 /* ConceptTableViewCell+utilities.swift */,
+				6E7C20ED23989B9B0057F191 /* ConceptGroupTableViewCell+utilities.swift */,
 				6EC6674A2324A40C0048068C /* ConceptMapTableViewCell+utilites.swift */,
 				6EC66734232467840048068C /* FakeConceptMapViewModelDelegate.swift */,
 			);
@@ -1364,7 +1407,7 @@
 		6EC66738232493F50048068C /* ConceptMapCell */ = {
 			isa = PBXGroup;
 			children = (
-				6EC6673D2324942A0048068C /* ConceptMapElement.swift */,
+				6EC6673D2324942A0048068C /* ConceptMapElement_prior.swift */,
 				6EC66739232494170048068C /* ConceptMapTableViewCell.swift */,
 				6EC6673A232494170048068C /* ConceptMapTableViewCell.xib */,
 			);
@@ -1732,11 +1775,13 @@
 				6EC6673C232494170048068C /* ConceptMapTableViewCell.xib in Resources */,
 				6EBD5310233AF7A70057F28A /* ChooseExerciseViewController.xib in Resources */,
 				6EC667142324489F0048068C /* MenuViewController.xib in Resources */,
+				6E7C20E523989B060057F191 /* ConceptTableViewCell.xib in Resources */,
 				6E883F98233D92F2004F0D0E /* ConceptIntroViewController.xib in Resources */,
 				6EE60C602345900900B0322B /* LevelUpViewController.xib in Resources */,
 				6EDBC50A238628AD0082AFA5 /* ConceptDetailFormulaTableViewCell.xib in Resources */,
 				6EE5709623692B1D002C63F8 /* PracticeIntroViewController.xib in Resources */,
 				6EDBC518238630020082AFA5 /* ConceptDetailDiagramTableViewCell.xib in Resources */,
+				6E7C20EA23989B290057F191 /* ConceptGroupTableViewCell.xib in Resources */,
 				6E86B345236E489E002DCA62 /* DoubleLevelUpViewController.xib in Resources */,
 				6E557C1E22FB9DCC00270F07 /* Assets.xcassets in Resources */,
 				6EC6671E232451760048068C /* QuitableContainerViewController.xib in Resources */,
@@ -1856,6 +1901,7 @@
 				6EC66720232451820048068C /* QuitableContainerViewModel.swift in Sources */,
 				6EAB210523611A01007186A4 /* ExerciseController.swift in Sources */,
 				6EBE4E94230A16170047A880 /* FeedCoordinator.swift in Sources */,
+				6E7C20F223989FE80057F191 /* ConceptMapElement.swift in Sources */,
 				6E557C3922FBA0AE00270F07 /* Coordinator.swift in Sources */,
 				6EEF91D923809CD60057F73A /* ConceptGroup.swift in Sources */,
 				6EEF91DD23809FD50057F73A /* UserConceptGroup.swift in Sources */,
@@ -1891,22 +1937,25 @@
 				6EBE4EA2230B66CD0047A880 /* Exercise.swift in Sources */,
 				6E01F086234ECD9B00371D0C /* main.swift in Sources */,
 				6EBE4EA6230B68720047A880 /* ExerciseViewModel.swift in Sources */,
-				6EC6673E2324942A0048068C /* ConceptMapElement.swift in Sources */,
+				6EC6673E2324942A0048068C /* ConceptMapElement_prior.swift in Sources */,
 				6E1E6B3522FFA95100AFB7A0 /* ContainerViewController.swift in Sources */,
 				6EBA306A2314D3F800E6DC54 /* RxLatestValue.swift in Sources */,
 				6EC6670723233A140048068C /* InfoViewContentElement.swift in Sources */,
 				6EE60C502344399900B0322B /* PrepareFeedViewModel.swift in Sources */,
+				6E7C20E423989B060057F191 /* ConceptTableViewCell.swift in Sources */,
 				6EB0FEF2235BE822005F23DE /* ConceptIntroLearningStep.swift in Sources */,
 				6EDBC523238633D80082AFA5 /* ConceptDetailTextItem.swift in Sources */,
 				6EDBC4D9238396B30082AFA5 /* GroupCompleteViewModel.swift in Sources */,
 				6E3829302372641900145E26 /* PracticeFamilyCompleteViewController.swift in Sources */,
 				6EC666EE2321DFA60048068C /* Colors.swift in Sources */,
 				6E1E6B3722FFA97800AFB7A0 /* TransitionAnimation.swift in Sources */,
+				6E7C20F62398A0240057F191 /* GroupConceptMapElement.swift in Sources */,
 				6EC6672F232464B20048068C /* ConceptMapViewController.swift in Sources */,
 				6EB933AA233073C700E38B52 /* LoadExercisesViewModel.swift in Sources */,
 				6EB0FEE1235BE1D9005F23DE /* UserRepository.swift in Sources */,
 				6EE60C4123441C3700B0322B /* User+sqlite.swift in Sources */,
 				6E86B351236F9E0E002DCA62 /* FeedComposer.swift in Sources */,
+				6E7C20F42398A00C0057F191 /* ContentConceptMapElement.swift in Sources */,
 				6EB933A42330702C00E38B52 /* LoadExercisesViewController.swift in Sources */,
 				6E2CB5AA236BADA800162147 /* ResultBenchmark.swift in Sources */,
 				6EC666FE232324F70048068C /* Concept.swift in Sources */,
@@ -1969,6 +2018,7 @@
 				6E74FD442318B0A400730AEB /* GeneralError.swift in Sources */,
 				6EEF91D2238086130057F73A /* TransitionItem.swift in Sources */,
 				6EDBC53723876C6C0082AFA5 /* DiagramExerciseViewModel.swift in Sources */,
+				6E7C20E923989B290057F191 /* ConceptGroupTableViewCell.swift in Sources */,
 				6EBD5317233AFAB00057F28A /* ChooseExerciseViewModel.swift in Sources */,
 				6EE60C5F2345900900B0322B /* LevelUpViewController.swift in Sources */,
 			);
@@ -2049,6 +2099,8 @@
 				6EEF91E62380AAB30057F73A /* UserConceptGroup+stubs.swift in Sources */,
 				6EBD5315233AF9E20057F28A /* FakeChooseExerciseViewModelDelegate.swift in Sources */,
 				6E3C9EF7235E7BC200CD81C9 /* FakeLearningStepExternalDataService.swift in Sources */,
+				6E7C20EE23989B9B0057F191 /* ConceptGroupTableViewCell+utilities.swift in Sources */,
+				6E7C20EC23989B580057F191 /* ConceptTableViewCell+utilities.swift in Sources */,
 				6EDBC535238761AD0082AFA5 /* DiagramExerciseSceneTests.swift in Sources */,
 				6EB933AC233076E500E38B52 /* FakeLoadExercisesViewModelDelegate.swift in Sources */,
 				6E7C20E023988EF00057F191 /* FakeUserConceptGroupExternalDataService.swift in Sources */,

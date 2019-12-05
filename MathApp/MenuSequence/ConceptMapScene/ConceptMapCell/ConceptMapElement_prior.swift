@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ConceptMapElement {
+struct ConceptMapElement_prior {
     let name: String
     let strength: Int
 }

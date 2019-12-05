@@ -15,6 +15,7 @@ struct Concept {
     let rule: String
     let example: String
     let maxDifficulty: Int
+    let groupID: Int
     
     var detailGlyphs: [ConceptDetailGlyph] = []
 }

@@ -50,17 +50,16 @@ class ConceptMapViewController: UIViewController, UITableViewDataSource {
     }
     
     private func configureTableView() {
-        tableView.register(UINib(nibName:"ConceptMapTableViewCell", bundle: nil), forCellReuseIdentifier: "ConceptMapTableViewCell")
+        tableView.register(UINib(nibName:"ConceptTableViewCell", bundle: nil), forCellReuseIdentifier: "ConceptTableViewCell")
+        tableView.register(UINib(nibName:"ConceptGroupTableViewCell", bundle: nil), forCellReuseIdentifier: "ConceptGroupTableViewCell")
     }
     
     private func bindUI() {
         bindTableView()
-        
-        viewModel.conceptGroups.subscribe().disposed(by: disposeBag)
     }
     
     private func bindTableView() {
-        viewModel.conceptMapElements
+        viewModel.mapElements
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [unowned self] elements in
                 self.elements = elements
@@ -86,10 +85,17 @@ class ConceptMapViewController: UIViewController, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let element = elements[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ConceptMapTableViewCell") as! ConceptMapTableViewCell
-        cell.nameLabel.text = element.name
-        cell.strengthLabel.text = "\(element.strength)/3"
+        if let groupElement = element as? GroupConceptMapElement {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ConceptGroupTableViewCell") as! ConceptGroupTableViewCell
+            return cell
+        }
+        else if let conceptElement = element as? ContentConceptMapElement {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ConceptTableViewCell") as! ConceptTableViewCell
+            return cell
+        }
         
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ConceptTableViewCell") as! ConceptTableViewCell
         return cell
     }
     
