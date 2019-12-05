@@ -18,7 +18,7 @@ extension ConceptTableViewCell {
                 XCTFail("Could not get cell", file: file, line: line)
                 return
             }
-//            XCTAssertEqual(cell.nameLabel.text, name, file: file, line: line)
+            XCTAssertEqual(cell.nameLabel.text, name, file: file, line: line)
         }
         XCTestCase().delayedAssertion(assertion)
     }

@@ -56,20 +56,23 @@ class ConceptMapSceneTests: XCTestCase {
         vc.loadViewIfNeeded()
         
         XCTAssertEqual(vc.tableView.dataSource?.tableView(vc.tableView, numberOfRowsInSection: 0), 2)
-        ConceptGroupTableViewCell.assertCellAtRow(0, inTable: vc.tableView, showsName: "Derivatives")
+        ConceptGroupTableViewCell.assertCellAtRow(0, inTable: vc.tableView, showsName: "Stub Concept Group")
         ConceptTableViewCell.assertCellAtRow(1, inTable: vc.tableView, showsName: "Constant Rule")
     }
     
-//    func test_twoConcepts_shouldDisplayTwoConcepts() {
-//        let stubConcepts = [UserConcept(id: 1, concept: Concept.constantRule, strength: 1),
-//                            UserConcept(id: 2, concept: Concept.linearRule, strength: 2)]
-//        let vc = composeSUT(stubUserConcepts: stubConcepts)
-//
-//        vc.loadViewIfNeeded()
-//
-//        XCTAssertEqual(vc.tableView.dataSource?.tableView(vc.tableView, numberOfRowsInSection: 0), 2)
-//        ConceptMapTableViewCell.assertCellAtRow(1, inTable: vc.tableView, containsConceptNamed: "Linear Rule", strength: 2)
-//    }
+    func test_twoConceptsOneGroup_shouldDisplayTwoConceptsOneGroup() {
+        let stubConcepts = [UserConcept(id: 1, concept: Concept.constantRule, strength: 1),
+                            UserConcept(id: 2, concept: Concept.linearRule, strength: 2)]
+        let stubGroups = [UserConceptGroup.createStub(id: 1, conceptGroupID: 1, completed: false)]
+        let vc = composeSUT(stubUserConcepts: stubConcepts, stubUserConceptGroups: stubGroups)
+
+        vc.loadViewIfNeeded()
+
+        XCTAssertEqual(vc.tableView.dataSource?.tableView(vc.tableView, numberOfRowsInSection: 0), 3)
+        ConceptGroupTableViewCell.assertCellAtRow(0, inTable: vc.tableView, showsName: "Stub Concept Group")
+        ConceptTableViewCell.assertCellAtRow(1, inTable: vc.tableView, showsName: "Constant Rule")
+        ConceptTableViewCell.assertCellAtRow(2, inTable: vc.tableView, showsName: "Linear Rule")
+    }
     
     //MARK: - SUT Composition
     
