@@ -22,19 +22,16 @@ class ConceptMapViewModel {
     //MARK: - Dependencies
     
     private weak var delegate: ConceptMapViewModelDelegate?
-    private let databaseService: DatabaseService
     private let userConceptEDS: UserConceptExternalDataService
     private let userConceptGroupEDS: UserConceptGroupExternalDataService
     
     //MARK: - Initialization
     
     init(delegate: ConceptMapViewModelDelegate,
-         databaseService: DatabaseService,
          userConceptEDS: UserConceptExternalDataService,
          userConceptGroupEDS: UserConceptGroupExternalDataService)
     {
         self.delegate = delegate
-        self.databaseService = databaseService
         self.userConceptEDS = userConceptEDS
         self.userConceptGroupEDS = userConceptGroupEDS
     }

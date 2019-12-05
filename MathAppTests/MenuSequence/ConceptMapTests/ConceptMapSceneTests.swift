@@ -79,18 +79,12 @@ class ConceptMapSceneTests: XCTestCase {
         let delegate = fakeDelegate ?? FakeConceptMapViewModelDelegate()
         
         let userConceptEDS = fakeUserConceptEDS ?? FakeUserConceptExternalDataService()
-        if let stubUserConcepts = stubUserConcepts {
-            userConceptEDS.stubUserConcepts = stubUserConcepts
-        }
+        let userConcepts = stubUserConcepts ?? [UserConcept(id: 1, concept: Concept.constantRule, strength: 1)]
+        userConceptEDS.stubUserConcepts = userConcepts
         
         let userConceptGroupEDS = fakeUserConceptGroupEDS ?? FakeUserConceptGroupExternalDataService()
         
-        let userConcepts = stubUserConcepts ?? [UserConcept(id: 1, concept: Concept.constantRule, strength: 1)]
-        let databaseService = FakeDatabaseService()
-        databaseService.stubUserConcepts = userConcepts
-        
         let vm = ConceptMapViewModel(delegate: delegate,
-                                     databaseService: databaseService,
                                      userConceptEDS: userConceptEDS,
                                      userConceptGroupEDS: userConceptGroupEDS)
         return ConceptMapViewController(viewModel: vm)

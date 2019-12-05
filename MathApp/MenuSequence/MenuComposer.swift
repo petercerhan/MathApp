@@ -32,7 +32,6 @@ class MenuComposer {
         let userConceptEDS = UserConceptExternalDataServiceImpl(userConceptController: globalComposer.userConceptController)
         let userConceptGroupEDS = UserConceptGroupExternalDataServiceImpl(userConceptGroupController: globalComposer.userConceptGroupController)
         let vm = ConceptMapViewModel(delegate: delegate,
-                                     databaseService: globalComposer.databaseService,
                                      userConceptEDS: userConceptEDS,
                                      userConceptGroupEDS: userConceptGroupEDS)
         return ConceptMapViewController(viewModel: vm)
