@@ -55,6 +55,8 @@ class ConceptMapViewController: UIViewController, UITableViewDataSource {
     
     private func bindUI() {
         bindTableView()
+        
+        viewModel.conceptGroups.subscribe().disposed(by: disposeBag)
     }
     
     private func bindTableView() {

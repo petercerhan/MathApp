@@ -41,14 +41,19 @@ class GlobalComposer {
                                       exerciseRepository: exerciseRepository)
     }()
     
+    private(set) lazy var learningStepStore: LearningStepStore = {
+        let learningStepEDS = LearningStepExternalDataServiceImpl(learningStepController: learningStepController)
+        return LearningStepStoreImpl(learningStepExternalDataService: learningStepEDS)
+    }()
+    
     private(set) lazy var userConceptController: UserConceptController = {
         let userConceptRepository = UserConceptRepositoryImpl(databaseService: databaseService)
         return UserConceptControllerImpl(userConceptRepository: userConceptRepository)
     }()
     
-    private(set) lazy var learningStepStore: LearningStepStore = {
-        let learningStepEDS = LearningStepExternalDataServiceImpl(learningStepController: learningStepController)
-        return LearningStepStoreImpl(learningStepExternalDataService: learningStepEDS)
+    private(set) lazy var userConceptGroupController: UserConceptGroupController = {
+        let userConceptGroupRepository = UserConceptGroupRepositoryImpl(databaseService: databaseService)
+        return UserConceptGroupControllerImpl(userConceptGroupRepository: userConceptGroupRepository)
     }()
     
     

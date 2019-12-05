@@ -39,6 +39,15 @@ class ConceptMapSceneTests: XCTestCase {
         XCTAssertEqual(mockUserConceptEDS.list_chapterID_callCount, 1)
     }
     
+//    func test_sceneComposed_shouldRequestUserConceptGroupsByChapter() {
+//        let mockUserConceptGroupEDS = FakeUserConceptGroupExternalDataService()
+//        let vc = composeSUT(fakeUserConceptGroupEDS: mockUserConceptGroupEDS)
+//        
+//        vc.loadViewIfNeeded()
+//        
+//        XCTAssertEqual(mockUserConceptGroupEDS.listByChapter_callCount, 1)
+//    }
+    
     func test_oneConcept_shouldDisplayOneConcept() {
         let stubData = [UserConcept(id: 1, concept: Concept.constantRule, strength: 1)]
         let vc = composeSUT(stubUserConcepts: stubData)
@@ -64,6 +73,7 @@ class ConceptMapSceneTests: XCTestCase {
     
     func composeSUT(fakeDelegate: ConceptMapViewModelDelegate? = nil,
                     fakeUserConceptEDS: FakeUserConceptExternalDataService? = nil,
+                    fakeUserConceptGroupEDS: FakeUserConceptGroupExternalDataService? = nil,
                     stubUserConcepts: [UserConcept]? = nil) -> ConceptMapViewController
     {
         let delegate = fakeDelegate ?? FakeConceptMapViewModelDelegate()
@@ -73,11 +83,16 @@ class ConceptMapSceneTests: XCTestCase {
             userConceptEDS.stubUserConcepts = stubUserConcepts
         }
         
+        let userConceptGroupEDS = fakeUserConceptGroupEDS ?? FakeUserConceptGroupExternalDataService()
+        
         let userConcepts = stubUserConcepts ?? [UserConcept(id: 1, concept: Concept.constantRule, strength: 1)]
         let databaseService = FakeDatabaseService()
         databaseService.stubUserConcepts = userConcepts
         
-        let vm = ConceptMapViewModel(delegate: delegate, databaseService: databaseService, userConceptEDS: userConceptEDS)
+        let vm = ConceptMapViewModel(delegate: delegate,
+                                     databaseService: databaseService,
+                                     userConceptEDS: userConceptEDS,
+                                     userConceptGroupEDS: userConceptGroupEDS)
         return ConceptMapViewController(viewModel: vm)
     }
     

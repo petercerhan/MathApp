@@ -11,6 +11,7 @@ import SQLite
 
 protocol UserConceptGroupRepository {
     func list() -> [UserConceptGroup]
+    func list(chapterID: Int) -> [UserConceptGroup]
     func set(id: Int, fields: [String: String])
 }
 
@@ -30,6 +31,16 @@ class UserConceptGroupRepositoryImpl: UserConceptGroupRepository {
     
     func list() -> [UserConceptGroup] {
         let query = UserConceptGroup.table.join(ConceptGroup.table, on: UserConceptGroup.column_conceptGroupID == ConceptGroup.table[ConceptGroup.column_id])
+
+        let result: [UserConceptGroup]? = try? databaseService.db.prepare(query).compactMap { row -> UserConceptGroup? in
+            return UserConceptGroup.createFromQueryResult(row)
+        }
+        return result ?? [UserConceptGroup]()
+    }
+    
+    func list(chapterID: Int) -> [UserConceptGroup] {
+        let query = UserConceptGroup.table.join(ConceptGroup.table, on: UserConceptGroup.column_conceptGroupID == ConceptGroup.table[ConceptGroup.column_id])
+                                            .filter(ConceptGroup.column_chapterID == Int64(chapterID))
 
         let result: [UserConceptGroup]? = try? databaseService.db.prepare(query).compactMap { row -> UserConceptGroup? in
             return UserConceptGroup.createFromQueryResult(row)
