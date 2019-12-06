@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -12,6 +12,7 @@
             <connections>
                 <outlet property="conceptNameContainer" destination="yVw-gr-wJZ" id="Y0F-K3-4en"/>
                 <outlet property="conceptNameLabel" destination="cnB-k0-Fah" id="p9s-bG-hVN"/>
+                <outlet property="iconImageView" destination="iXa-bQ-4el" id="jvX-0v-bRh"/>
                 <outlet property="nextButton" destination="9ic-po-nua" id="Ile-g8-eIA"/>
                 <outlet property="tableView" destination="iIW-8d-wZr" id="PH7-c9-RgD"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -95,6 +96,6 @@
         </view>
     </objects>
     <resources>
-        <image name="sine_icon" width="86" height="86"/>
+        <image name="sine_icon" width="88" height="88"/>
     </resources>
 </document>

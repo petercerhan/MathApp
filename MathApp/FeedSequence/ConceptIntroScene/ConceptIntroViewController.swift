@@ -19,6 +19,7 @@ class ConceptIntroViewController: UIViewController, UITableViewDataSource {
     
     //MARK: - UI Components
     
+    @IBOutlet private(set) var iconImageView: UIImageView!
     @IBOutlet private(set) var conceptNameLabel: UILabel!
     @IBOutlet private(set) var conceptNameContainer: UIView!
     @IBOutlet private(set) var tableView: UITableView!
@@ -57,6 +58,8 @@ class ConceptIntroViewController: UIViewController, UITableViewDataSource {
         conceptNameContainer.layer.borderColor = UIColor.systemBlue.cgColor
         conceptNameContainer.layer.cornerRadius = 8.0
         conceptNameContainer.layer.borderWidth = 1.0
+        
+        iconImageView.image = UIImage(named: viewModel.icon)
     }
     
     private func setupTableView() {

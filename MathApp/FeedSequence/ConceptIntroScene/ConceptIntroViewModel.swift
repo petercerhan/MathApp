@@ -16,6 +16,7 @@ protocol ConceptIntroViewModelDelegate: class {
 protocol ConceptIntroViewModel {
     var detailItems: Observable<[ConceptDetailItem]> { get }
     var name: String { get }
+    var icon: String { get }
     func dispatch(action: ConceptIntroAction)
 }
 
@@ -47,6 +48,7 @@ class ConceptIntroViewModelImpl: ConceptIntroViewModel {
         
         let concept = conceptIntro.userConcept.concept
         name = concept.name
+        icon = concept.icon
         
         updateDetailItems()
     }
@@ -75,6 +77,8 @@ class ConceptIntroViewModelImpl: ConceptIntroViewModel {
     let detailItemsSubject = BehaviorSubject<[ConceptDetailItem]>(value: [])
     
     let name: String
+    
+    let icon: String
     
     func dispatch(action: ConceptIntroAction) {
         switch action {
