@@ -67,38 +67,40 @@ class FeedCoordinator: Coordinator {
     
     func start() {
         containerVC.loadViewIfNeeded()
-        beginNextLearningStep()
+        beginNextLearningStep(initialLoad: true)
     }
     
-    func beginNextLearningStep() {
+    func beginNextLearningStep(initialLoad: Bool = false) {
         guard let learningStep = latestValue(of: learningStepStore.learningStep, disposeBag: disposeBag)?.data else {
             //load learning step scene
             return
         }
+        let animation: TransitionAnimation = initialLoad ? .none : .slideFromRight_fast
+        
         resultsStore.dispatch(action: .setLearningStep(learningStep))
         if let conceptIntroStep = learningStep as? ConceptIntroLearningStep {
-            beginConceptIntroStep(conceptIntro: conceptIntroStep)
+            beginConceptIntroStep(conceptIntro: conceptIntroStep, animation: animation)
         }
         else if let learningStep = learningStep as? PracticeOneConceptLearningStep {
-            beginPracticeOneConceptStep(learningStep: learningStep)
+            beginPracticeOneConceptStep(learningStep: learningStep, animation: animation)
         }
         else if let learningStep = learningStep as? PracticeTwoConceptsLearningStep {
-            beginPracticeTwoConceptsStep(learningStep: learningStep)
+            beginPracticeTwoConceptsStep(learningStep: learningStep, animation: animation)
         }
         else if let learningStep = learningStep as? PracticeFamilyLearningStep {
-            beginPracticeFamilyStep(learningStep: learningStep)
+            beginPracticeFamilyStep(learningStep: learningStep, animation: animation)
         }
         else if let learningStep = learningStep as? TransitionLearningStep {
-            beginTransitionLearningStep(learningStep: learningStep)
+            beginTransitionLearningStep(learningStep: learningStep, animation: animation)
         }
         else {
             print("did not recognize learning step type \(learningStep)")
         }
     }
     
-    private func beginConceptIntroStep(conceptIntro: ConceptIntroLearningStep) {
+    private func beginConceptIntroStep(conceptIntro: ConceptIntroLearningStep, animation: TransitionAnimation) {
         let vc = composer.composeConceptIntroScene(delegate: self, conceptIntro: conceptIntro)
-        containerVC.show(viewController: vc, animation: .fadeIn)
+        containerVC.show(viewController: vc, animation: animation)
         
         let benchmark = ResultBenchmark(conceptID: conceptIntro.userConcept.conceptID, correctAnswersRequired: 5, correctAnswersOutOf: 7)
         resultsStore.dispatch(action: .setBenchmarks([benchmark]))
@@ -107,9 +109,9 @@ class FeedCoordinator: Coordinator {
         exercisesStore.dispatch(action: .refresh(conceptIDs: [conceptIntro.userConcept.conceptID]))
     }
     
-    private func beginPracticeOneConceptStep(learningStep: PracticeOneConceptLearningStep) {
+    private func beginPracticeOneConceptStep(learningStep: PracticeOneConceptLearningStep, animation: TransitionAnimation) {
         let vc = composer.composePracticeIntroScene(delegate: self)
-        containerVC.show(viewController: vc, animation: .fadeIn)
+        containerVC.show(viewController: vc, animation: animation)
         
         let benchmark = ResultBenchmark(conceptID: learningStep.userConcept.conceptID, correctAnswersRequired: 4, correctAnswersOutOf: 6)
         resultsStore.dispatch(action: .setBenchmarks([benchmark]))
@@ -118,9 +120,9 @@ class FeedCoordinator: Coordinator {
         exercisesStore.dispatch(action: .refresh(conceptIDs: [learningStep.userConcept.conceptID]))
     }
     
-    private func beginPracticeTwoConceptsStep(learningStep: PracticeTwoConceptsLearningStep) {
+    private func beginPracticeTwoConceptsStep(learningStep: PracticeTwoConceptsLearningStep, animation: TransitionAnimation) {
         let vc = composer.composePracticeIntroScene(delegate: self)
-        containerVC.show(viewController: vc, animation: .fadeIn)
+        containerVC.show(viewController: vc, animation: animation)
         
         let benchmark1 = ResultBenchmark(conceptID: learningStep.userConcept1.conceptID, correctAnswersRequired: 4, correctAnswersOutOf: 6)
         let benchmark2 = ResultBenchmark(conceptID: learningStep.userConcept2.conceptID, correctAnswersRequired: 4, correctAnswersOutOf: 6)
@@ -130,9 +132,9 @@ class FeedCoordinator: Coordinator {
         exercisesStore.dispatch(action: .refresh(conceptIDs: [learningStep.userConcept1.conceptID, learningStep.userConcept2.conceptID]))
     }
     
-    private func beginPracticeFamilyStep(learningStep: PracticeFamilyLearningStep) {
+    private func beginPracticeFamilyStep(learningStep: PracticeFamilyLearningStep, animation: TransitionAnimation) {
         let vc = composer.composePracticeIntroScene(delegate: self)
-        containerVC.show(viewController: vc, animation: .fadeIn)
+        containerVC.show(viewController: vc, animation: animation)
         
         let benchmarks = learningStep.conceptIDs.map { ResultBenchmark(conceptID: $0, correctAnswersRequired: 2, correctAnswersOutOf: 3) }
         resultsStore.dispatch(action: .setBenchmarks(benchmarks))
@@ -141,11 +143,11 @@ class FeedCoordinator: Coordinator {
         exercisesStore.dispatch(action: .refresh(conceptIDs: learningStep.conceptIDs))
     }
     
-    private func beginTransitionLearningStep(learningStep: TransitionLearningStep) {
+    private func beginTransitionLearningStep(learningStep: TransitionLearningStep, animation: TransitionAnimation) {
         let transitionItems = learningStep.transitionItems
         if let groupCompleteItem = transitionItems.first as? GroupCompleteTransitionItem {
             let vc = composer.composeGroupCompleteScene(delegate: self, groupCompleteItem: groupCompleteItem)
-            containerVC.show(viewController: vc, animation: .fadeIn)
+            containerVC.show(viewController: vc, animation: animation)
             learningStepStore.dispatch(action: .next)
         }
     }
@@ -186,7 +188,7 @@ class FeedCoordinator: Coordinator {
     
     private func showLevelUpScene(levelUpItem: LevelUpItem) {
         let vc = composer.composeLevelUpScene(delegate: self, levelUpItem: levelUpItem)
-        containerVC.show(viewController: vc, animation: .fadeIn)
+        containerVC.show(viewController: vc, animation: .slideFromRight_fast)
         
         updateUserConceptLevel(id: levelUpItem.concept.id, newStrength: levelUpItem.newLevel)
         learningStepStore.dispatch(action: .next)
@@ -199,7 +201,7 @@ class FeedCoordinator: Coordinator {
         let levelUpItem2 = LevelUpItem(concept: userConcept2.concept, previousLevel: userConcept2.strength, newLevel: userConcept2.strength + 1)
         
         let vc = composer.composeDoubleLevelUpScene(delegate: self, levelUpItem1: levelUpItem1, levelUpItem2: levelUpItem2)
-        containerVC.show(viewController: vc, animation: .fadeIn)
+        containerVC.show(viewController: vc, animation: .slideFromRight_fast)
         
         updateUserConceptLevel(id: learningStep.userConcept1.conceptID, newStrength: learningStep.userConcept1.strength + 1)
         updateUserConceptLevel(id: learningStep.userConcept2.conceptID, newStrength: learningStep.userConcept2.strength + 1)
@@ -213,7 +215,7 @@ class FeedCoordinator: Coordinator {
     
     private func showPracticeFamilyCompleteScene() {
         let vc = composer.composePracticeFamilyCompleteScene()
-        containerVC.show(viewController: vc, animation: .fadeIn)
+        containerVC.show(viewController: vc, animation: .slideFromRight_fast)
     }
     
     private func showNextExerciseScene(animation: TransitionAnimation) {
@@ -296,7 +298,7 @@ extension FeedCoordinator: FeedContainerViewModelDelegate {
 
 extension FeedCoordinator: ExerciseViewModelDelegate {
     func next(_ exerciseViewModel: ExerciseViewModel, correctAnswer: Bool) {
-        showNextFeedScene(animation: .fadeIn)
+        showNextFeedScene(animation: .slideFromRight_fast)
     }
     
     func info(_ exerciseViewModel: ExerciseViewModel, concept: Concept) {
@@ -352,7 +354,7 @@ extension FeedCoordinator: LoadExercisesViewModelDelegate {
 
 extension FeedCoordinator: ConceptIntroViewModelDelegate {
     func next(_ conceptIntroViewModel: ConceptIntroViewModel) {
-        showNextFeedScene(animation: .fadeIn)
+        showNextFeedScene(animation: .slideFromRight_fast)
     }
 }
 
@@ -368,7 +370,7 @@ extension FeedCoordinator: LevelUpViewModelDelegate {
 
 extension FeedCoordinator: PracticeIntroViewModelDelegate {
     func next(_ practiceIntroViewModel: PracticeIntroViewModel) {
-        showNextFeedScene(animation: .fadeIn)
+        showNextFeedScene(animation: .slideFromRight_fast)
     }
 }
 

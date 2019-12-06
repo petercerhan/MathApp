@@ -16,6 +16,7 @@ typealias TransitionAnimationExecutable = (_ containerViewController: UIViewCont
 enum TransitionAnimation {
     case none
     case slideFromRight
+    case slideFromRight_fast
     case slideFromLeft
     case slideFromBottom
     case slideFromTop
@@ -46,6 +47,19 @@ enum TransitionAnimation {
                 newViewController.view.alpha = 1
                 
                 UIView.animate(withDuration: 0.5, animations: {
+                    newViewController.view.center.x -= containerViewController.view.frame.width
+                    priorViewController.view.center.x -= containerViewController.view.frame.width
+                }, completion: { _ in
+                    completion()
+                })
+            }
+            
+        case .slideFromRight_fast:
+            return { containerViewController, priorViewController, newViewController, completion in
+                newViewController.view.center.x += containerViewController.view.frame.width
+                newViewController.view.alpha = 1
+                
+                UIView.animate(withDuration: 0.25, animations: {
                     newViewController.view.center.x -= containerViewController.view.frame.width
                     priorViewController.view.center.x -= containerViewController.view.frame.width
                 }, completion: { _ in
