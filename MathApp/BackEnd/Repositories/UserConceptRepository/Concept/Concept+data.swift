@@ -16,7 +16,8 @@ extension Concept {
                        rule: "\\frac{d}{dx}(c) = 0",
                        example: "\\frac{d}{dx}(5) = 0",
                        maxDifficulty: 3,
-                       groupID: 1)
+                       groupID: 1,
+                       icon: "default")
     }
     
     static var linearRule: Concept {
@@ -25,7 +26,8 @@ extension Concept {
                        rule: "\\frac{d}{dx}(cx) = c",
                        example: "\\frac{d}{dx}(3x) = 3",
                        maxDifficulty: 3,
-                       groupID: 1)
+                       groupID: 1,
+                       icon: "default")
     }
     
     static var powerRule: Concept {
@@ -34,7 +36,8 @@ extension Concept {
                        rule: "\\frac{d}{dx}(cx) = c",
                        example: "\\frac{d}{dx}(3x) = 3",
                        maxDifficulty: 2,
-                       groupID: 1)
+                       groupID: 1,
+                       icon: "default")
     }
     
     static var sumRule: Concept {
@@ -43,7 +46,8 @@ extension Concept {
                        rule: "\\frac{d}{dx}(cx) = c",
                        example: "\\frac{d}{dx}(3x) = 3",
                        maxDifficulty: 2,
-                       groupID: 1)
+                       groupID: 1,
+                       icon: "default")
     }
     
     static var differenceRule: Concept {
@@ -52,7 +56,8 @@ extension Concept {
                        rule: "\\frac{d}{dx}(cx) = c",
                        example: "\\frac{d}{dx}(3x) = 3",
                        maxDifficulty: 2,
-                       groupID: 1)
+                       groupID: 1,
+                       icon: "default")
     }
     
 }

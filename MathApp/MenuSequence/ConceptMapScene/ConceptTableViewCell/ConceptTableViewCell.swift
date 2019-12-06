@@ -10,6 +10,7 @@ import UIKit
 
 class ConceptTableViewCell: UITableViewCell {
     
+    @IBOutlet private(set) var iconImageView: UIImageView!
     @IBOutlet private(set) var nameLabel: UILabel!
     @IBOutlet private(set) var level1Bar: UIView!
     @IBOutlet private(set) var level2Bar: UIView!

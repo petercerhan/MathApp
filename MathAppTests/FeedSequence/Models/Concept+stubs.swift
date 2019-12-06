@@ -17,6 +17,7 @@ extension Concept {
                        rule: "x + y = z",
                        example: "1 + 2 = 3",
                        maxDifficulty: 3,
-                       groupID: 1)
+                       groupID: 1,
+                       icon: "default")
     }
 }

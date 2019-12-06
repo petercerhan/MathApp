@@ -78,6 +78,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="iconImageView" destination="P2h-gp-CuV" id="jva-te-ot6"/>
                 <outlet property="level1Bar" destination="NIr-EL-G5y" id="5Hs-hI-pWF"/>
                 <outlet property="level2Bar" destination="SQ7-Ze-jtu" id="b3z-lM-DoU"/>
                 <outlet property="level3Bar" destination="etC-6D-hPa" id="8hq-od-Nc8"/>
@@ -87,6 +88,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="sine_icon" width="86" height="86"/>
+        <image name="sine_icon" width="88" height="88"/>
     </resources>
 </document>

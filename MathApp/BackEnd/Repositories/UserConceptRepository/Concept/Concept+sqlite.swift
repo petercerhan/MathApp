@@ -19,6 +19,7 @@ extension Concept {
     static let column_example = Expression<String>("example")
     static let column_maxDifficulty = Expression<Int64>("maximum_difficulty")
     static let column_conceptGroupID = Expression<Int64>("concept_group_id")
+    static let column_icon = Expression<String>("icon")
     
     static func createFromQueryResult(_ row: Row) -> Concept? {
         let tableName = Concept.table
@@ -29,6 +30,7 @@ extension Concept {
         let concept_example = row[tableName[Concept.column_example]]
         let concept_maxDifficulty = row[tableName[Concept.column_maxDifficulty]]
         let concept_groupID = row[tableName[Concept.column_conceptGroupID]]
+        let concept_icon = row[tableName[Concept.column_icon]]
         
         return Concept(id: Int(concept_id),
                        name: concept_name,
@@ -36,6 +38,7 @@ extension Concept {
                        rule: concept_rule,
                        example: concept_example,
                        maxDifficulty: Int(concept_maxDifficulty),
-                       groupID: Int(concept_groupID))
+                       groupID: Int(concept_groupID),
+                       icon: concept_icon)
     }
 }

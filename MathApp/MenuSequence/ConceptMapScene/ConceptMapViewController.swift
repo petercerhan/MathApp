@@ -94,6 +94,7 @@ class ConceptMapViewController: UIViewController, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ConceptTableViewCell") as! ConceptTableViewCell
             cell.nameLabel.text = conceptElement.name
             cell.setUIForStrength(conceptElement.strength)
+            cell.iconImageView.image = UIImage(named: conceptElement.icon)
             return cell
         }
         
