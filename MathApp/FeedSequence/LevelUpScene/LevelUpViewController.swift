@@ -107,7 +107,7 @@ class LevelUpViewController: UIViewController {
     private func newStrengthBar() -> UIView {
         if viewModel.newLevel == 1 {
             return strength1Bar
-        } else if viewModel.newLevel == 2{
+        } else if viewModel.newLevel == 2 {
             return strength2Bar
         } else {
             return strength3Bar

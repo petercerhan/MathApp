@@ -29,9 +29,12 @@ class DoubleLevelUpViewModel {
         concept1PriorLevel = levelUpItem1.previousLevel
         concept1NewLevel = levelUpItem1.newLevel
         concept1Name = levelUpItem1.concept.name
+        concept1Icon = levelUpItem1.concept.icon
+        
         concept2PriorLevel = levelUpItem2.previousLevel
         concept2NewLevel = levelUpItem2.newLevel
         concept2Name = levelUpItem2.concept.name
+        concept2Icon = levelUpItem2.concept.icon
     }
     
     //MARK: - DoubleLevelUpViewModel Interface
@@ -39,9 +42,12 @@ class DoubleLevelUpViewModel {
     let concept1PriorLevel: Int
     let concept1NewLevel: Int
     let concept1Name: String
+    let concept1Icon: String
+
     let concept2PriorLevel: Int
     let concept2NewLevel: Int
     let concept2Name: String
+    let concept2Icon: String
     
     func dispatch(action: DoubleLevelUpAction) {
         switch action {
