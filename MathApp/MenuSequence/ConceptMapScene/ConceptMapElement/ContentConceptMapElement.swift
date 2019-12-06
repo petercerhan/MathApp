@@ -10,4 +10,5 @@ import Foundation
 
 struct ContentConceptMapElement: ConceptMapElement {
     let name: String
+    let strength: Int
 }

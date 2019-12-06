@@ -93,6 +93,7 @@ class ConceptMapViewController: UIViewController, UITableViewDataSource {
         else if let conceptElement = element as? ContentConceptMapElement {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ConceptTableViewCell") as! ConceptTableViewCell
             cell.nameLabel.text = conceptElement.name
+            cell.setUIForStrength(conceptElement.strength)
             return cell
         }
         

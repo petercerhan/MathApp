@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -26,14 +24,14 @@
                     <rect key="frame" x="16" y="617" width="34" height="30"/>
                     <state key="normal" title="Back"/>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Concept Map" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t16-4r-xIB">
-                    <rect key="frame" x="128.5" y="62" width="118" height="24"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trigonometry" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t16-4r-xIB">
+                    <rect key="frame" x="108" y="42" width="159.5" height="33.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="28"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="be4-te-Fic">
-                    <rect key="frame" x="24" y="118" width="327" height="475"/>
+                    <rect key="frame" x="0.0" y="107.5" width="375" height="485.5"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="IIU-C0-mda"/>
@@ -44,9 +42,9 @@
             <constraints>
                 <constraint firstItem="uqN-o9-yXL" firstAttribute="top" secondItem="be4-te-Fic" secondAttribute="bottom" constant="24" id="22N-5w-sag"/>
                 <constraint firstItem="t16-4r-xIB" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="42" id="AfC-F7-FKd"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="be4-te-Fic" secondAttribute="trailing" constant="24" id="RKj-yd-0QO"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="be4-te-Fic" secondAttribute="trailing" id="RKj-yd-0QO"/>
                 <constraint firstItem="be4-te-Fic" firstAttribute="top" secondItem="t16-4r-xIB" secondAttribute="bottom" constant="32" id="aFD-gj-3Se"/>
-                <constraint firstItem="be4-te-Fic" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="ebK-W7-XuZ"/>
+                <constraint firstItem="be4-te-Fic" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ebK-W7-XuZ"/>
                 <constraint firstItem="uqN-o9-yXL" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="grk-a4-vi6"/>
                 <constraint firstItem="t16-4r-xIB" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="hBh-ge-buD"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="uqN-o9-yXL" secondAttribute="bottom" constant="20" id="u0b-IK-5xf"/>

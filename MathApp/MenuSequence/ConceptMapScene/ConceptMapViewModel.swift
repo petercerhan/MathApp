@@ -66,7 +66,7 @@ class ConceptMapViewModel {
         }
         
         for userConcept in userConcepts {
-            let mapElement = ContentConceptMapElement(name: userConcept.concept.name)
+            let mapElement = ContentConceptMapElement(name: userConcept.concept.name, strength: userConcept.strength)
             let bridgeItem = MapBridgeItem(mapElement: mapElement, userConcept: userConcept)
             if let sectionIndex = sectionedResult.firstIndex(where: { ($0.group.userConceptGroup?.conceptGroup.id ?? 0) == userConcept.concept.groupID} ) {
                 sectionedResult[sectionIndex].concepts.append(bridgeItem)
