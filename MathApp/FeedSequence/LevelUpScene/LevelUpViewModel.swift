@@ -24,9 +24,12 @@ class LevelUpViewModel {
     
     //MARK: - Initialization
     
-    init(delegate: LevelUpViewModelDelegate, levelUpItem: LevelUpItem) {
+    init(delegate: LevelUpViewModelDelegate,
+         levelUpItem: LevelUpItem)
+    {
         self.delegate = delegate
         conceptName = levelUpItem.concept.name
+        icon = levelUpItem.concept.icon
         previousLevel = levelUpItem.previousLevel
         newLevel = levelUpItem.newLevel
     }
@@ -34,6 +37,7 @@ class LevelUpViewModel {
     //MARK: - LevelUpViewModel Interface
     
     let conceptName: String
+    let icon: String
     let previousLevel: Int
     let newLevel: Int
     

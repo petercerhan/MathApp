@@ -19,8 +19,8 @@ class ConceptIntroViewController: UIViewController, UITableViewDataSource {
     
     //MARK: - UI Components
     
-    @IBOutlet private(set) var iconImageView: UIImageView!
     @IBOutlet private(set) var conceptNameLabel: UILabel!
+    @IBOutlet private(set) var iconImageView: UIImageView!
     @IBOutlet private(set) var conceptNameContainer: UIView!
     @IBOutlet private(set) var tableView: UITableView!
     @IBOutlet private(set) var nextButton: UIButton!

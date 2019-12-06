@@ -396,7 +396,6 @@ class FeedCoordinatorTests: XCTestCase {
             return
         }
         levelUpVC.loadViewIfNeeded()
-        XCTAssertEqual(levelUpVC.levelUpLabel.text, "Level *0* to level *1*")
         XCTAssertEqual(levelUpVC.conceptLabel.text, "Stub rule")
     }
     

@@ -16,15 +16,6 @@ class LevelUpSceneTests: XCTestCase {
         
     }
     
-    func test_level0To1_shouldShow0to1Transition() {
-        let stubLevelUpItem = LevelUpItem(concept: Concept.constantRule, previousLevel: 0, newLevel: 1)
-        let vc = composeSUT(stubLevelUpItem: stubLevelUpItem)
-        
-        vc.loadViewIfNeeded()
-        
-        XCTAssertEqual(vc.levelUpLabel.text, "Level *0* to level *1*")
-    }
-    
     func test_constantRule_shouldShowConstantRuleInTitle() {
         let stubLevelUpItem = LevelUpItem(concept: Concept.constantRule, previousLevel: 0, newLevel: 1)
         let vc = composeSUT(stubLevelUpItem: stubLevelUpItem)
